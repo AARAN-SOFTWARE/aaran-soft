@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Audit\SalesTrack\Track;
+namespace App\Livewire\Audit\SalesTrack\Common\Track;
 
 use Aaran\Audit\Models\Client;
 use Aaran\Audit\Models\SalesTrack\TrackItems;

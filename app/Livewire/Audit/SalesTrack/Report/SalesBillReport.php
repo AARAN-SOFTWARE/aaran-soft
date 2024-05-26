@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Audit\SalesTrack;
+namespace App\Livewire\Audit\SalesTrack\Report;
 
 use Aaran\Audit\Models\SalesTrack\SalesBill;
 use Aaran\Audit\Models\SalesTrack\SalesBillItem;
@@ -80,7 +80,7 @@ class SalesBillReport extends Component
 
         $salesBill = SalesBillItem::
         join('sales_bills', 'sales_bills.id', '=', 'sales_bill_items.sales_bill_id')
-            ->join('tracks', 'tracks.id', '=', 'sales_bills.track_id')
+            ->join('sales-track', 'sales-track.id', '=', 'sales_bills.track_id')
             ->join('track_items', 'track_items.id', '=', 'sales_bills.track_item_id')
             ->join('products', 'products.id', '=', 'sales_bill_items.product_id')
             ->join('hsncodes', 'hsncodes.id', '=', 'products.hsncode_id')

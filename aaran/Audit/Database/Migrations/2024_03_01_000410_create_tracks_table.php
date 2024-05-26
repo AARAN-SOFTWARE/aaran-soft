@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('tracks', function (Blueprint $table) {
+        Schema::create('sales-track', function (Blueprint $table) {
             $table->id();
             $table->string('vname')->unique();
             $table->smallInteger('active_id')->nullable();

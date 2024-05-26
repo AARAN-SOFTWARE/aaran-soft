@@ -1,9 +1,9 @@
 <div>
-    <x-slot name="header">Track</x-slot>
+    <x-slot name="header">Sales Track Items</x-slot>
     <x-forms.m-panel>
 
         <div>
-            <a href="{{route('tracks')}}">Track</a>
+            <a href="{{route('salesTracks')}}">Sales Track</a>
         </div>
 
         <div class="flex w-full">

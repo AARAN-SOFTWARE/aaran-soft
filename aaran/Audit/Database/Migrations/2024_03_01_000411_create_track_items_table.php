@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('track_items', function (Blueprint $table) {
             $table->id();
             $table->string('serial')->nullable();
-            $table->foreignId('track_id')->references('id')->on('tracks');
+            $table->foreignId('track_id')->references('id')->on('sales-track');
             $table->foreignId('client_id')->references('id')->on('clients');
             $table->smallInteger('active_id')->nullable();
             $table->foreignId('user_id')->references('id')->on('users');

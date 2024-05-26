@@ -29,7 +29,7 @@ class Index extends Component
         $this->vdate = $this->salesTrackIitem->vdate;
 //        $this->track_item_id = $salesTrackIitem_id;
 //        $this->track_id = $track_id;
-//        $this->tracks=Track::find($track_id);
+//        $this->sales-track=Track::find($track_id);
     }
     #endregion
 
@@ -37,7 +37,7 @@ class Index extends Component
     #region[create]
     public function create(): void
     {
-        $this->redirect(route('salesTrack.billItems', ['id'=>'0']));
+        $this->redirect(route('salesTracks.billItems', ['id'=>'0']));
     }
     #endregion
 
@@ -84,7 +84,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.audit.sales-track.sales-bill-list')->with([
+        return view('livewire.audit.sales-track.bills.index')->with([
             'list' => $this->getList()
         ]);
     }

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Livewire\Audit\SalesTrack;
+namespace App\Livewire\Audit\SalesTrack\SalesTrack;
 
 use Aaran\Audit\Models\SalesTrack\SalesTrack;
-use Aaran\Audit\Models\SalesTrack\Smonth;
 use Aaran\Audit\Models\SalesTrack\Track;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 
-class TrackList extends Component
+class Index extends Component
 {
 
     #region[property]
@@ -94,7 +93,7 @@ class TrackList extends Component
 #region[render]
     public function render()
     {
-        return view('livewire.audit.sales-track.track-list')->with([
+        return view('livewire.audit.sales-track.sales-track.index')->with([
             'list' => $this->getList()
         ]);
     }

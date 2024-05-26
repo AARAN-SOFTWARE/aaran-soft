@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('serial')->nullable();
             $table->date('vdate')->nullable();
-            $table->foreignId('track_id')->references('id')->on('tracks');
+            $table->foreignId('track_id')->references('id')->on('sales-track');
             $table->foreignId('sales_track_id')->references('id')->on('sales_tracks');
             $table->foreignId('client_id')->references('id')->on('clients');
             $table->smallInteger('status')->nullable();

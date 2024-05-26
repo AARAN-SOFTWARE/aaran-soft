@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Livewire\Audit\SalesTrack;
+namespace App\Livewire\Audit\SalesTrack\SalesTrack;
 
 use Aaran\Audit\Models\Client;
 use Aaran\Audit\Models\SalesTrack\SalesTrack;
 use Aaran\Audit\Models\SalesTrack\SalesTrackItem;
-use Aaran\Audit\Models\SalesTrack\Track;
 use Aaran\Audit\Models\SalesTrack\TrackItems;
 use App\Enums\Active;
 use App\Livewire\Trait\CommonTrait;
-use Illuminate\Support\Carbon;
 use Livewire\Component;
 
-class TrackItem extends Component
+class Items extends Component
 {
     #region[property]
     use CommonTrait;
@@ -149,7 +147,7 @@ class TrackItem extends Component
 
     public function render()
     {
-        return view('livewire.audit.sales-track.track-item')->with([
+        return view('livewire.audit.sales-track.sales-track.items')->with([
             'list' => $this->getList()
         ]);
     }

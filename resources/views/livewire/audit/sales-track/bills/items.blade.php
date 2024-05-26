@@ -1,8 +1,34 @@
 <div>
     <x-slot name="header">Sales Bill Items</x-slot>
 
+
+    <div class="inline-flex gap-3 py-3">
+        <a href="{{route('salesTracks')}}" class="text-gray-400">Sales Track</a>
+
+        <x-icons.icon :icon="'double-arrow-right'"
+                      class="text-gray-500 hover:text-white  hover:rounded-sm  h-4 w-auto block mt-2"/>
+
+        @if($salesBill)
+            <a href="{{route('salesTracks.Bills',[$salesBill->id])}}" class="text-gray-400">Sales Bills</a>
+        @endif
+
+        <x-icons.icon :icon="'double-arrow-right'"
+                      class="text-gray-500 hover:text-white  hover:rounded-sm  h-4 w-auto block mt-2"/>
+
+        @if($salesBill)
+            <a href="{{route('salesTracks.Bills',[$salesBill->id])}}" class="text-gray-500">Sales Bills</a>
+        @endif
+    </div>
+
     <x-forms.m-panel>
+
+
+
+
         <div class="flex w-full gap-3">
+
+
+
 
             <!-- Sales From-------------------------------------------------------------------------------------------->
             <div class="w-full">
@@ -12,7 +38,7 @@
                     <label for="Sales From"
                            class="w-[10rem] text-zinc-500 tracking-wide py-2">Sales From</label>
                     <label class="w-[10rem]  tracking-wide text-lg text-semibold py-2">
-                    {{\Aaran\Audit\Models\Client::getName($sales_from)}}</label>
+{{--                    {{\Aaran\Audit\Models\Client::getName($sales_from)}}</label>--}}
                 </div>
 
                 <!--Invoice No----------------------------------------------------------------------------------------->
@@ -91,7 +117,7 @@
                     <label for="Sales From"
                            class="w-[10rem] text-zinc-500 tracking-wide py-2">Bill To</label>
                     <label class="w-[10rem]  tracking-wide text-lg text-semibold py-2">
-                        {{\Aaran\Audit\Models\Client::getName($client_id)}}</label>
+{{--                        {{\Aaran\Audit\Models\Client::getName($client_id)}}</label>--}}
                 </div>
             </div>
 

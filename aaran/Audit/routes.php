@@ -17,19 +17,19 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('clientBankBalances', App\Livewire\Audit\ClientBank\Balance::class)->name('clientBankBalances');
 
-    Route::get('smonth', App\Livewire\Audit\SalesTrack\SmonthList::class)->name('smonth');
-    Route::get('vehicle', App\Livewire\Audit\SalesTrack\Vehicle\Index::class)->name('vehicle');
+    Route::get('smonth', \App\Livewire\Audit\SalesTrack\Common\SmonthList::class)->name('smonth');
+    Route::get('vehicle', \App\Livewire\Audit\SalesTrack\Common\Vehicle\Index::class)->name('vehicle');
 
-    Route::get('tracks', App\Livewire\Audit\SalesTrack\Track\Index::class)->name('tracks');
-    Route::get('tracks/{id}/items', App\Livewire\Audit\SalesTrack\Track\Items::class)->name('tracks.items');
+    Route::get('sales-track', \App\Livewire\Audit\SalesTrack\Common\Track\Index::class)->name('sales-track');
+    Route::get('sales-track/{id}/items', \App\Livewire\Audit\SalesTrack\Common\Track\Items::class)->name('sales-track.items');
 
-    Route::get('salesTracks', App\Livewire\Audit\SalesTrack\TrackList::class)->name('salesTracks');
-    Route::get('salesTracks/{id}/items', App\Livewire\Audit\SalesTrack\TrackItem::class)->name('salesTracks.items');
+    Route::get('salesTracks', \App\Livewire\Audit\SalesTrack\SalesTrack\Index::class)->name('salesTracks');
+    Route::get('salesTracks/{id}/items', \App\Livewire\Audit\SalesTrack\SalesTrack\Items::class)->name('salesTracks.items');
 
     Route::get('salesTracks/{id}/Bills', App\Livewire\Audit\SalesTrack\Bills\Index::class)->name('salesTracks.Bills');
-    Route::get('salesTracks/{id}/billItems', App\Livewire\Audit\SalesTrack\SalesBillItemList::class)->name('salesTracks.billItems');
+    Route::get('salesTracks/{id}/billItems', App\Livewire\Audit\SalesTrack\Bills\Items::class)->name('salesTracks.billItems');
 
-    Route::get('trackReport', App\Livewire\Audit\SalesTrack\SalesBillReport::class)->name('trackReport');
+    Route::get('trackReport', \App\Livewire\Audit\SalesTrack\Report\SalesBillReport::class)->name('trackReport');
 
     Route::get('discourse', App\Livewire\Audit\Discourse\Index::class)->name('discourse');
     Route::get('discourses{id}show', App\Livewire\Audit\Discourse\Show::class)->name('discourse.show');

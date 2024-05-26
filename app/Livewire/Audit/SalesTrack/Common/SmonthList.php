@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Audit\SalesTrack;
+namespace App\Livewire\Audit\SalesTrack\Common;
 
 use Aaran\Audit\Models\SalesTrack\Smonth;
 use App\Livewire\Trait\CommonTrait;

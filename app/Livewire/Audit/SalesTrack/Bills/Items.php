@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Livewire\Audit\SalesTrack;
+namespace App\Livewire\Audit\SalesTrack\Bills;
 
 use Aaran\Audit\Models\Common\Vehicle;
 use Aaran\Audit\Models\SalesTrack\SalesBill;
 use Aaran\Audit\Models\SalesTrack\SalesBillItem;
-use Aaran\Audit\Models\SalesTrack\TrackItems;
 use Aaran\Common\Models\Colour;
 use Aaran\Common\Models\Ledger;
 use Aaran\Common\Models\Size;
@@ -13,12 +12,11 @@ use Aaran\Master\Models\Product;
 use App\Enums\Active;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class SalesBillItemList extends Component
+class Items extends Component
 {
     #region[property]
     use CommonTrait;
@@ -26,18 +24,18 @@ class SalesBillItemList extends Component
     public mixed $serial = '';
     public mixed $sales_from = '';
     public mixed $sales_track_bill_id;
-    public mixed $qty='';
+    public mixed $qty = '';
     public mixed $price;
-    public mixed $description='';
+    public mixed $description = '';
     public $status;
     public mixed $showEditModal_1 = false;
 
     public mixed $products;
     public $category_id = '';
 
-    public mixed $track_item_id;
+    public mixed $salesBill;
     public mixed $vno = '';
-    public mixed $vdate='';
+    public mixed $vdate = '';
     public mixed $client_id = '';
     public mixed $additional = '';
     public mixed $vehicle = '';
@@ -56,7 +54,7 @@ class SalesBillItemList extends Component
     public mixed $grandtotalBeforeRound;
     public mixed $rout;
     public mixed $track_id;
-    public  $trackItems;
+    public $trackItems;
     #endregion
 
     #region[save]
@@ -66,8 +64,8 @@ class SalesBillItemList extends Component
             if ($this->vid == "") {
                 $obj = SalesBill::create([
                     'serial' => $this->serial ?: 0,
-                    'track_id'=>$this->track_id,
-                    'track_item_id' => $this->track_item_id,
+                    'track_id' => $this->track_id,
+                    'track_item_id' => $this->salesBill,
                     'vno' => $this->vno ?: 0,
                     'vdate' => $this->vdate,
                     'sales_from' => $this->sales_from,
@@ -92,19 +90,19 @@ class SalesBillItemList extends Component
                 $obj = SalesBill::find($this->vid);
                 $obj->serial = $this->serial;
                 $obj->track_id = $this->track_id;
-                $obj->track_item_id = $this->track_item_id;
+                $obj->track_item_id = $this->salesBill;
                 $obj->vno = $this->vno;
                 $obj->vdate = $this->vdate;
                 $obj->sales_from = $this->sales_from;
                 $obj->client_id = $this->client_id;
-                $obj->taxable=$this->total_taxable;
-                $obj->total_qty=$this->total_qty;
-                $obj->gst=$this->total_gst;
+                $obj->taxable = $this->total_taxable;
+                $obj->total_qty = $this->total_qty;
+                $obj->gst = $this->total_gst;
                 $obj->bundle = $this->bundle;
                 $obj->ledger_id = $this->ledger_id;
                 $obj->additional = $this->additional;
-                $obj->round_off=$this->round_off;
-                $obj->grand_total=$this->grand_total;
+                $obj->round_off = $this->round_off;
+                $obj->grand_total = $this->grand_total;
                 $obj->vehicle_id = $this->vehicle_id ?: '';
                 $obj->active_id = $this->active_id;
                 $obj->save();
@@ -112,7 +110,7 @@ class SalesBillItemList extends Component
                 $this->saveItem($obj->id);
                 $message = "Updated";
             }
-            $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
             $this->getRoute();
         }
 
@@ -242,14 +240,15 @@ class SalesBillItemList extends Component
     public function mount($id)
     {
 //        $this->rout = url()->previous();
-////        $this->track_item_id = $salesTrackIitem_id;
-////        $this->track_id=$track_id;
-//        $this->trackItems=TrackItems::where('id','>',$this->track_item_id)->orderby('id')->first();
-//        if ($track_id) {
-//            $obj = TrackItems::find($this->track_item_id);
-//            $this->sales_from = $obj->client_id;
-//            $this->vno=SalesBill::nextNo($this->sales_from);
-//        }
+
+        if ($id != 0) {
+            $this->salesBill = SalesBill::find($id);
+        }
+
+//        $this->track_id=$this->salesBill->track_id;
+
+//        $this->trackItems=TrackItems::where('id','>',$this->salesBill)->orderby('id')->first();
+//
 //
 //        if ($id != 0) {
 //            $data = SalesBill::find($id);
@@ -334,7 +333,7 @@ class SalesBillItemList extends Component
         $obj->active_id = Active::NOTACTIVE;
         $obj->save();
 
-        $this->redirect(route('track.salesBills', ['salesTrackIitem_id'=>$this->sales_track_bill_id,'track_id'=>$this->track_id]));
+        $this->redirect(route('track.salesBills', ['salesTrackIitem_id' => $this->sales_track_bill_id, 'track_id' => $this->track_id]));
 
     }
     #endregion
@@ -503,11 +502,11 @@ class SalesBillItemList extends Component
 
     public function colourSave($name)
     {
-        $obj= Colour::create([
+        $obj = Colour::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v=['name'=>$name,'id'=>$obj->id];
+        $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshColour($v);
     }
 
@@ -572,13 +571,14 @@ class SalesBillItemList extends Component
         $this->sizeTyped = false;
 
     }
+
     public function sizeSave($name)
     {
-        $obj= Size::create([
+        $obj = Size::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v=['name'=>$name,'id'=>$obj->id];
+        $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshSize($v);
     }
 
@@ -708,19 +708,19 @@ class SalesBillItemList extends Component
 
     public function vehicleSave($name)
     {
-        $obj= Vehicle::create([
-            'client_id'=>$this->sales_from,
+        $obj = Vehicle::create([
+            'client_id' => $this->sales_from,
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v=['name'=>$name,'id'=>$obj->id];
+        $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshVehicle($v);
     }
 
     public function getVehicleList(): void
     {
         $this->vehicleCollection = $this->vehicle_name ? Vehicle::search(trim($this->vehicle_name))
-            ->get() : Vehicle::where('client_id','=',$this->sales_from)->get();
+            ->get() : Vehicle::where('client_id', '=', $this->sales_from)->get();
     }
 
     #endregion
@@ -733,7 +733,7 @@ class SalesBillItemList extends Component
         $this->getProductList();
         $this->getVehicleList();
         $this->getSizeList();
-        return view('livewire.audit.sales-track.sales-bill-item-list');
+        return view('livewire.audit.sales-track.bills.items');
     }
 
     public function getRoute(): void
