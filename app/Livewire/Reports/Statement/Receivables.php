@@ -1,0 +1,130 @@
+<?php
+
+namespace App\Livewire\Reports\Statement;
+
+use Aaran\Entries\Models\Receipt;
+use Aaran\Entries\Models\Sale;
+use Aaran\Master\Models\Contact;
+use Aaran\Master\Models\Order;
+use App\Livewire\Trait\CommonTrait;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Livewire\Component;
+
+class Receivables extends Component
+{
+    use CommonTrait;
+
+    #region[properties]
+    public Collection $contacts;
+    public $byParty;
+    public $byOrder;
+    public $start_date;
+    public $end_date;
+    public mixed $opening_balance = '0';
+    public mixed $sale_total = 0;
+    public mixed $receipt_total = 0;
+    public mixed $invoiceDate_first = '';
+    #endregion
+
+    #region[Contact]
+    public function getContact()
+    {
+        $this->contacts = Contact::where('company_id', '=', session()->get('company_id'))->get();
+    }
+    #endregion
+
+    #region[opening_balance]
+
+    public function opening_Balance()
+    {
+        if ($this->byParty) {
+            $obj = Contact::find($this->byParty);
+            $this->opening_balance = $obj->opening_balance;
+
+            $sale = Sale::where('contact_id', '=', $this->byParty)
+                ->where('acyear', '=',  session()->get('acyear'))
+                ->firstOrFail();
+            $this->invoiceDate_first = $sale->invoice_date?:Carbon::now()->format('Y-m-d');
+
+//            if ($this->start_date) {
+
+                $this->sale_total = Sale::whereDate('invoice_date', '<', $this->start_date?:$this->invoiceDate_first)
+                    ->sum('grand_total');
+
+                $this->receipt_total = Receipt::whereDate('vdate', '<', $this->start_date?:$this->invoiceDate_first)
+                    ->sum('receipt_amount');
+
+                $this->opening_balance = $this->opening_balance + $this->sale_total - $this->receipt_total;
+//            }
+        }
+        return $this->opening_balance;
+    }
+    #endregion
+
+
+    #region[List]
+
+    public function getList()
+    {
+        $this->opening_Balance();
+
+        $sales = Receipt::select([
+            'receipts.company_id',
+            'receipts.contact_id',
+            DB::raw("'receipt' as mode"),
+            "receipts.id as vno",
+            'receipts.vdate as vdate',
+            DB::raw("'' as grand_total"),
+            'receipts.receipt_amount',
+        ])
+            ->where('active_id', '=', $this->activeRecord)
+            ->where('contact_id', '=', $this->byParty)
+            ->whereDate('vdate', '>=', $this->start_date ?: $this->invoiceDate_first)
+            ->whereDate('vdate', '<=', $this->end_date ?: carbon::now()->format('Y-m-d'))
+            ->where('company_id', '=', session()->get('company_id'));
+
+
+        return Sale::select([
+            'sales.company_id',
+            'sales.contact_id',
+            DB::raw("'invoice' as mode"),
+            "sales.invoice_no as vno",
+            'sales.invoice_date as vdate',
+            'sales.grand_total',
+            DB::raw("'' as receipt_amount"),
+        ])
+            ->where('active_id', '=', $this->activeRecord)
+            ->where('contact_id', '=', $this->byParty)
+            ->whereDate('invoice_date', '>=', $this->start_date ?: $this->invoiceDate_first)
+            ->whereDate('invoice_date', '<=', $this->end_date ?: carbon::now()->format('Y-m-d'))
+            ->where('company_id', '=', session()->get('company_id'))
+            ->union($sales)
+            ->orderBy('vdate')
+            ->orderBy('mode')->paginate($this->perPage);
+    }
+
+    #endregion
+    public function print()
+    {
+
+        if ($this->byParty != null) {
+            $this->redirect(route('receviables.print',
+                [
+                    'party' => $this->byParty, 'start_date' => $this->start_date ?: $this->invoiceDate_first,
+                    'end_date' => $this->end_date ?: Carbon::now()->format('Y-m-d'),
+                ]));
+        }
+    }
+
+    #region[Render]
+    public function render()
+    {
+        $this->getContact();
+        return view('livewire.reports.statement.receviables')->with([
+            'list' => $this->getList()
+        ]);
+    }
+    #endregion
+}
