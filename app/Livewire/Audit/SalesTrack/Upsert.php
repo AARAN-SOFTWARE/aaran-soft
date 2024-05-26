@@ -3,20 +3,21 @@
 namespace App\Livewire\Audit\SalesTrack;
 
 use Aaran\Audit\Models\Client;
-use Aaran\Audit\Models\SalesTrack\SalesTrackItem;
+use Aaran\Audit\Models\SalesTrack\TrackItems;
 use App\Livewire\Trait\CommonTrait;
 use Livewire\Component;
 
 class Upsert extends Component
 {
     #region[property]
+
     use CommonTrait;
 
-    public mixed $sales_track_id;
-    public mixed $client_id;
+    public string $track_id = '';
+    public string $client_id = '';
     public mixed $serial;
     public mixed $clients;
-    public string $status='';
+    public string $status = '';
     public mixed $total_count = 0;
     public mixed $total_value = 0;
     #endregion
@@ -25,7 +26,7 @@ class Upsert extends Component
     public function mount($id)
     {
         $this->clients = Client::where('active_id', '=', '1')->get();
-        $this->sales_track_id = $id;
+        $this->track_id = $id;
     }
     #endregion
 
@@ -34,9 +35,9 @@ class Upsert extends Component
     {
         if ($this->client_id != '') {
             if ($this->vid == "") {
-                SalesTrackItem::create([
-                    'serial'=>$this->serial,
-                    'sales_track_id' => $this->sales_track_id,
+                TrackItems::create([
+                    'serial' => $this->serial,
+                    'track_id' => $this->track_id,
                     'client_id' => $this->client_id,
                     'total_count' => $this->total_count ?: '0',
                     'total_value' => $this->total_value ?: '0',
@@ -45,13 +46,13 @@ class Upsert extends Component
                 ]);
 
             } else {
-                $obj = SalesTrackItem::find($this->vid);
+                $obj = TrackItems::find($this->vid);
                 $obj->serial = $this->serial;
-                $obj->sales_track_id = $this->sales_track_id;
+                $obj->track_id = $this->track_id;
                 $obj->client_id = $this->client_id;
                 $obj->total_count = $this->total_count ?: '0';
                 $obj->total_value = $this->total_value ?: '0';
-                $obj->status = $this->status?:1;
+                $obj->status = $this->status ?: 1;
                 $obj->active_id = $this->active_id;
                 $obj->save();
             }
@@ -61,14 +62,14 @@ class Upsert extends Component
     #endregion
 
     #region[getObj]
-    public function clearFields():void
+    public function clearFields(): void
     {
-        $this->serial='';
+        $this->serial = '';
         $this->client_id = '';
         $this->total_count = '';
         $this->total_value = '';
         $this->vname = '';
-        $this->status='';
+        $this->status = '';
         $this->active_id = '1';
     }
     #endregion
@@ -77,10 +78,10 @@ class Upsert extends Component
     public function getObj($id)
     {
         if ($id) {
-            $obj = SalesTrackItem::find($id);
+            $obj = TrackItems::find($id);
             $this->vid = $obj->id;
             $this->serial = $obj->serial;
-            $this->sales_track_id = $obj->sales_track_id;
+            $this->track_id = $obj->track_id;
             $this->client_id = $obj->client_id;
             $this->total_count = $obj->total_count;
             $this->total_value = $obj->total_value;
@@ -97,8 +98,8 @@ class Upsert extends Component
     {
         $this->sortField = 'serial';
 
-        return SalesTrackItem::search($this->searches)
-            ->where('sales_track_id', '=', $this->sales_track_id)
+        return TrackItems::search($this->searches)
+            ->where('track_id', '=', $this->track_id)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);

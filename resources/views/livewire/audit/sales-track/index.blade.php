@@ -1,5 +1,5 @@
 <div>
-    <x-slot name="header">Sales Track</x-slot>
+    <x-slot name="header">Track</x-slot>
 
     <x-forms.m-panel>
 
@@ -10,7 +10,7 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Sales Track</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Track</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -20,13 +20,13 @@
 
                     <x-table.row>
                         <x-table.cell-text center>
-                            <a href="{{route('salesTrack.upsert',[$row->id])}}">
+                            <a href="{{route('tracks.items',[$row->id])}}">
                             {{ $index + 1 }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('salesTrack.upsert',[$row->id])}}">
+                            <a href="{{route('tracks.items',[$row->id])}}">
                             {{ $row->vname}}
                             </a>
                         </x-table.cell-text>
@@ -48,7 +48,7 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
-            <x-input.model-text wire:model="vname" :label="'Sales Track'"/>
+            <x-input.model-text wire:model="vname" :label="'Track Name'"/>
         </x-forms.create>
 
     </x-forms.m-panel>

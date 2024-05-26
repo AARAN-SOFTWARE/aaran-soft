@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Audit\SalesTrack;
 
-use Aaran\Audit\Models\SalesTrack\SalesTrack;
+use Aaran\Audit\Models\SalesTrack\Track;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -16,14 +16,14 @@ class Index extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
-                Salestrack::create([
+                Track::create([
                     'vname' => Str::ucfirst($this->vname),
                     'active_id' => $this->active_id,
                 ]);
                 $message = "Saved";
 
             } else {
-                $obj = Salestrack::find($this->vid);
+                $obj = Track::find($this->vid);
                 $obj->vname = Str::ucfirst($this->vname);
                 $obj->active_id = $this->active_id;
                 $obj->save();
@@ -39,7 +39,7 @@ class Index extends Component
     public function getObj($id)
     {
         if ($id) {
-            $obj = Salestrack::find($id);
+            $obj = Track::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
             $this->active_id = $obj->active_id;
@@ -52,7 +52,7 @@ class Index extends Component
     #region[list]
     public function getList()
     {
-        return Salestrack::search($this->searches)
+        return Track::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -60,11 +60,6 @@ class Index extends Component
     #endregion
 
     #region[render]
-    public function reRender(): void
-    {
-        $this->render()->render();
-    }
-
     public function render()
     {
         return view('livewire.audit.sales-track.index')->with([

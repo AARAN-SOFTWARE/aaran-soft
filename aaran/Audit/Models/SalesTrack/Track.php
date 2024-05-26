@@ -10,12 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Track extends Model
 {
     use HasFactory;
-    protected $guarded = [];
-    public $timestamps = false;
 
-    protected static function newFactory(): TrackFactory
+    protected $guarded = [];
+
+    public static function search(string $searches)
     {
-        return new TrackFactory();
+        return empty($searches) ? static::query()
+            : static::where('vname', 'like', '%' . $searches . '%');
     }
 
     public function smonth(): BelongsTo
@@ -23,9 +24,9 @@ class Track extends Model
         return $this->belongsTo(Smonth::class);
     }
 
-    public function salesTrack(): BelongsTo
+    protected static function newFactory(): TrackFactory
     {
-        return $this->belongsTo(SalesTrack::class);
+        return new TrackFactory();
     }
 
 }

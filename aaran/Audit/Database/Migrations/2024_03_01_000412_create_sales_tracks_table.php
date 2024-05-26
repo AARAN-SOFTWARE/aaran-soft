@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('sales_tracks', function (Blueprint $table) {
             $table->id();
-            $table->string('vname')->unique();
-            $table->smallInteger('active_id')->nullable();
-            $table->timestamps();
+            $table->date('vdate')->nullable();
+            $table->foreignId('smonth_id')->references('id')->on('smonths');
+            $table->foreignId('sales_track_id')->references('id')->on('sales_tracks');
+            $table->string('active_id',3)->nullable();
         });
     }
 

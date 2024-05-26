@@ -6,15 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('sales_track_items', function (Blueprint $table) {
+        Schema::create('track_items', function (Blueprint $table) {
             $table->id();
             $table->string('serial')->nullable();
-            $table->foreignId('sales_track_id')->references('id')->on('sales_tracks');
+            $table->foreignId('track_id')->references('id')->on('tracks');
             $table->foreignId('client_id')->references('id')->on('clients');
             $table->integer('total_count')->nullable();
             $table->decimal('total_value',13,2)->nullable();
@@ -24,11 +21,8 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('sales_track_items');
+        Schema::dropIfExists('track_items');
     }
 };

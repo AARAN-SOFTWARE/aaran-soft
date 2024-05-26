@@ -68,22 +68,14 @@
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
             <x-input.model-text wire:model="serial" :label="'Serial'"/>
+
             <x-input.model-select wire:model="client_id" :label="'Client'">
                 <option class="text-gray-400"> choose ..</option>
                 @foreach($clients as $client)
                     <option value="{{$client->id}}">{{$client->vname}}</option>
                 @endforeach
             </x-input.model-select>
-{{--            <x-input.model-text wire:model="total_count" :label="'Total Count'"/>--}}
-{{--            <x-input.model-text wire:model="total_value" :label="'Total Value'"/>--}}
-{{--            @admin--}}
-{{--            <x-input.model-select wire:model="status" :label="'Status'">--}}
-{{--                <option class="text-gray-400"> choose ..</option>--}}
-{{--                @foreach(\App\Enums\Status::cases() as $obj)--}}
-{{--                    <option value="{{$obj->value}}">{{ $obj->getName() }}</option>--}}
-{{--                @endforeach--}}
-{{--            </x-input.model-select>--}}
-{{--            @endadmin--}}
+
         </x-forms.create>
     </x-forms.m-panel>
 </div>
