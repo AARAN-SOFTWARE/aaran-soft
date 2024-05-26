@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('sales_bill_id')->references('id')->on('sales_bills')->onDelete('cascade');
             $table->foreignId('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->string('vno')->nullable();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('checked')->nullable();
         });
     }

@@ -3,15 +3,15 @@
     <x-forms.m-panel>
 
         <div class="inline-flex gap-3">
-            <a href="{{route('track')}}">Track</a>
+            <a href="{{route('salesTracks')}}">Sales Track</a>
             <x-icons.icon :icon="'double-arrow-right'"
                           class="text-black hover:text-white  hover:rounded-sm  h-4 w-auto block mt-2"/>
-            <a href="{{route('track.trackItem',['salesTrack_id'=>$track_item_id,'track_id'=>$track_id])}}">Track-Item</a>
+            <a href="{{route('salesTracks.items',[$salesTrackIitem->id])}}">Sales Track-Item</a>
         </div>
 
         <div class="flex w-full">
             <div class="text-xl font-bold w-full">
-                {{$tracks->salesTrack->vname."  -  ".date('d-m-Y', strtotime($tracks->vdate))}}
+                {{$salesTrackIitem->track->vname."  -  ".date('d-m-Y', strtotime($salesTrackIitem->salesTrack->vdate))}}
             </div>
 
             <div class="flex gap-3 justify-end text-right w-full">
@@ -50,37 +50,37 @@
 
                     <x-table.row>
                         <x-table.cell-text center>
-                            <a href="{{route('salesTrack.billItems',['id'=>$row->id,'salesTrackIitem_id'=>$row->track_item_id,'track_id'=>$row->track_id,])}}">
+                            <a href="{{route('salesTracks.billItems',[$row->id])}}">
                                 {{ $index + 1 }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('salesTrack.billItems',['id'=>$row->id,'salesTrackIitem_id'=>$row->track_item_id,'track_id'=>$row->track_id,])}}">
+                            <a href="{{route('salesTracks.billItems',[$row->id])}}">
                                 {{  $row->client->vname }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('salesTrack.billItems',['id'=>$row->id,'salesTrackIitem_id'=>$row->track_item_id,'track_id'=>$row->track_id,])}}">
+                            <a href="{{route('salesTracks.billItems',[$row->id])}}">
                                 {{  $row->vno }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('salesTrack.billItems',['id'=>$row->id,'salesTrackIitem_id'=>$row->track_item_id,'track_id'=>$row->track_id,])}}">
+                            <a href="{{route('salesTracks.billItems',[$row->id])}}">
                                 {{  $row->vdate }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('salesTrack.billItems',['id'=>$row->id,'salesTrackIitem_id'=>$row->track_item_id,'track_id'=>$row->track_id,])}}">
+                            <a href="{{route('salesTracks.billItems',[$row->id])}}">
                                 {{  $row->vehicle->vname }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('salesTrack.billItems',['id'=>$row->id,'salesTrackIitem_id'=>$row->track_item_id,'track_id'=>$row->track_id,])}}">
+                            <a href="{{route('salesTracks.billItems',[$row->id])}}">
                                 <div
                                     class="text-gray-600 truncate text-xl text-center px-2 {{ \App\Enums\Status::tryFrom($row->status)->getStyle() }}">
                                     {{ \App\Enums\Status::tryFrom($row->status)->getName() }}
@@ -89,7 +89,7 @@
                         </x-table.cell-text>
                         <x-table.cell-text>
                         <div class="w-full flex justify-center gap-3">
-                            <a href="{{ route('salesTrack.billItems',['id'=>$row->id,'salesTrackIitem_id'=>$row->track_item_id,'track_id'=>$row->track_id,]) }}">
+                            <a href="{{route('salesTracks.billItems',[$row->id])}}">
                                 <div
                                     class="absolute hidden group-hover:block pr-0.5 whitespace-nowrap top-1 w-full">
                                     <div class="flex flex-col justify-start items-center -translate-y-full">

@@ -13,10 +13,8 @@ return new class extends Migration
             $table->string('serial')->nullable();
             $table->foreignId('track_id')->references('id')->on('tracks');
             $table->foreignId('client_id')->references('id')->on('clients');
-            $table->integer('total_count')->nullable();
-            $table->decimal('total_value',13,2)->nullable();
-            $table->smallInteger('status')->nullable();
             $table->smallInteger('active_id')->nullable();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

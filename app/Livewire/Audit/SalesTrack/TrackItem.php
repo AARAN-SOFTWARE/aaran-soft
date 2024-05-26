@@ -3,9 +3,11 @@
 namespace App\Livewire\Audit\SalesTrack;
 
 use Aaran\Audit\Models\Client;
+use Aaran\Audit\Models\SalesTrack\SalesTrack;
 use Aaran\Audit\Models\SalesTrack\SalesTrackItem;
 use Aaran\Audit\Models\SalesTrack\Track;
 use Aaran\Audit\Models\SalesTrack\TrackItems;
+use App\Enums\Active;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
@@ -14,27 +16,28 @@ class TrackItem extends Component
 {
     #region[property]
     use CommonTrait;
+
     public $sales_track_id;
     public $track_id;
-    public $tracks;
     public $vdate;
 
     public mixed $client_id;
     public mixed $serial;
     public mixed $clients;
-    public string $status='';
+    public string $status = '';
     public mixed $total_count = 0;
-    public mixed $total_value = 0;
+    public mixed $sales_track;
 
     #endregion
 
     #region[mount]
-    public function mount($salesTrack_id, $track_id)
+    public function mount($id)
     {
-        $this->sales_track_id = $salesTrack_id;
-        $this->track_id = $track_id;
-        $this->tracks=Track::find($track_id);
+        $this->sales_track = SalesTrack::find($id);
+
         $this->clients = Client::where('active_id', '=', '1')->get();
+
+        $this->vdate = $this->sales_track->vdate;
     }
     #endregion
 
@@ -44,8 +47,8 @@ class TrackItem extends Component
         if ($this->client_id != '') {
             if ($this->vid == "") {
                 TrackItems::create([
-                    'serial'=>$this->serial,
-                    'vdate'=>$this->vdate,
+                    'serial' => $this->serial,
+                    'vdate' => $this->vdate,
                     'sales_track_id' => $this->sales_track_id,
                     'client_id' => $this->client_id,
                     'total_count' => $this->total_count ?: '0',
@@ -63,7 +66,7 @@ class TrackItem extends Component
                 $obj->client_id = $this->client_id;
                 $obj->total_count = $this->total_count ?: '0';
                 $obj->total_value = $this->total_value ?: '0';
-                $obj->status = $this->status?:1;
+                $obj->status = $this->status ?: 1;
                 $obj->track_id = $this->track_id;
                 $obj->active_id = $this->active_id;
                 $obj->save();
@@ -74,15 +77,15 @@ class TrackItem extends Component
     #endregion
 
     #region[getObj]
-    public function clearFields():void
+    public function clearFields(): void
     {
-        $this->serial='';
+        $this->serial = '';
         $this->client_id = '';
         $this->total_count = '';
         $this->total_value = '';
-        $this->vdate='';
+        $this->vdate = '';
         $this->vname = '';
-        $this->status='';
+        $this->status = '';
         $this->active_id = '1';
     }
     #endregion
@@ -100,7 +103,7 @@ class TrackItem extends Component
             $this->total_count = $obj->total_count;
             $this->total_value = $obj->total_value;
             $this->status = $obj->status;
-            $this->track_id=$obj->track_id;
+            $this->track_id = $obj->track_id;
             $this->active_id = $obj->active_id;
             return $obj;
         }
@@ -111,17 +114,9 @@ class TrackItem extends Component
     #region[getList]
     public function getList()
     {
-        $this->sortField = 'serial';
-
-        return TrackItems::search($this->searches)
-            ->where('vdate', '=', $this->vdate?:$this->tracks->vdate)
-            ->when($this->status,function ($query,$status){
-                return $query->where('status', '=', $status);
-            })
-            ->where('sales_track_id', '=', $this->sales_track_id)
-            ->where('track_id', '=', $this->track_id)
-            ->where('active_id', '=', $this->activeRecord)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+        return SalesTrackItem::search($this->searches)
+            ->where('sales_track_id', '=', $this->sales_track->id)
+            ->orderBy('serial', $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
     #endregion
@@ -129,30 +124,19 @@ class TrackItem extends Component
     #region[generate]
     public function generate()
     {
-        $salesTrackItems=SalesTrackItem::where('sales_track_id', '=', $this->sales_track_id)->get();
+        $trackItems = TrackItems::where('track_id', '=', $this->sales_track->track_id)->get();
 
-        foreach ($salesTrackItems as $salesTrackItem) {
-
-            $trackItem=TrackItems::where('track_id', '=', $this->track_id)
-                     ->where('sales_track_id','=',$this->sales_track_id)
-                    ->where('serial', '=', $salesTrackItem->serial)
-                ->where('vdate', '=', $this->vdate)
-                    ->get();
-
-            if ($trackItem->count() == 0)
-            {
-                TrackItems::create([
-                    'serial'=>$salesTrackItem->serial,
-                    'vdate'=>$this->vdate,
-                    'sales_track_id' => $salesTrackItem->sales_track_id,
-                    'client_id' => $salesTrackItem->client_id,
-                    'total_count' => $salesTrackItem->total_count ?: '0',
-                    'total_value' => $salesTrackItem->total_value ?: '0',
-                    'status' => '1',
-                    'track_id' => $this->track_id,
-                    'active_id' => $salesTrackItem->active_id ?: '0',
-                ]);
-            }
+        foreach ($trackItems as $index => $row) {
+            SalesTrackItem::create([
+                'serial' => $index + 1,
+                'vdate' => $this->vdate,
+                'track_id' => $this->sales_track->track_id,
+                'sales_track_id' => $this->sales_track->id,
+                'client_id' => $row->client_id,
+                'status' => '1',
+                'active_id' => Active::ACTIVE,
+                'user_id' => auth()->id()
+            ]);
         }
     }
     #endregion

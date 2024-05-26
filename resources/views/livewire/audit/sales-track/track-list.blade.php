@@ -21,20 +21,20 @@
 
                     <x-table.row>
                         <x-table.cell-text center>
-                            <a href="{{route('track.trackItem',['salesTrack_id'=>$row->sales_track_id,'track_id'=>$row->id])}}">
+                            <a href="{{route('salesTracks.items',[$row->id])}}">
                                 {{ $index + 1 }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('track.trackItem',['salesTrack_id'=>$row->sales_track_id,'track_id'=>$row->id])}}">
+                            <a href="{{route('salesTracks.items',[$row->id])}}">
                            {{date('d-m-Y', strtotime($row->vdate))}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('track.trackItem',['salesTrack_id'=>$row->sales_track_id,'track_id'=>$row->id])}}">
-                                {{ $row->salesTrack->vname}}
+                            <a href="{{route('salesTracks.items',[$row->id])}}">
+                                {{ $row->track->vname}}
                             </a>
                         </x-table.cell-text>
 
@@ -56,20 +56,14 @@
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
             <x-input.model-date wire:model="vdate" :label="'Date'"/>
-            <x-input.model-select wire:model="smonth_id" :label="'Month'">
+
+            <x-input.model-select wire:model="track_id" :label="'Track'">
                 <option class="text-gray-400"> choose ..</option>
-                @foreach($smonths as $month)
-                    <option value="{{$month->id}}">
-                        {{\App\Enums\Months::tryFrom($month->month)->getName().' - '.$month->year}}
-                    </option>
-                @endforeach
-            </x-input.model-select>
-            <x-input.model-select wire:model="sales_track_id" :label="'Track'">
-                <option class="text-gray-400"> choose ..</option>
-                @foreach($sales_tracks as $tack)
+                @foreach($tracks as $tack)
                     <option value="{{$tack->id}}">{{$tack->vname}}</option>
                 @endforeach
             </x-input.model-select>
+
         </x-forms.create>
 
     </x-forms.m-panel>

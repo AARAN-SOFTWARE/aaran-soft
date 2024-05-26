@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('vname')->unique();
             $table->smallInteger('active_id')->nullable();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -3,12 +3,12 @@
     <x-forms.m-panel>
 
         <div>
-            <a href="{{route('track')}}">Track</a>
+            <a href="{{route('tracks')}}">Track</a>
         </div>
 
         <div class="flex w-full">
             <div class="text-xl font-bold w-full">
-                {{$tracks->salesTrack->vname."  -  ".date('d-m-Y', strtotime($tracks->vdate))}}
+                {{$sales_track->track->vname."  -  ".date('d-m-Y', strtotime($sales_track->vdate))}}
             </div>
 
             <div class="flex gap-3 justify-end text-right w-full">
@@ -46,37 +46,37 @@
 
                     <x-table.row>
                         <x-table.cell-text center>
-                            <a href="{{route('track.salesBills',['salesTrackIitem_id'=>$row->id,'track_id'=>$track_id])}}">
+                            <a href="{{route('salesTracks.Bills',[$row->id])}}">
                                 {{ $row->serial }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            <a href="{{route('track.salesBills',['salesTrackIitem_id'=>$row->id,'track_id'=>$track_id])}}">
+                            <a href="{{route('salesTracks.Bills',[$row->id])}}">
                                 {{  \App\Helper\ConvertTo::dateString($row->vdate) }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('track.salesBills',['salesTrackIitem_id'=>$row->id,'track_id'=>$track_id])}}">
+                            <a href="{{route('salesTracks.Bills',[$row->id])}}">
                                 {{  $row->client->vname }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('track.salesBills',['salesTrackIitem_id'=>$row->id,'track_id'=>$track_id])}}">
+                            <a href="{{route('salesTracks.Bills',[$row->id])}}">
                                 {{  $row->total_count }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('track.salesBills',['salesTrackIitem_id'=>$row->id,'track_id'=>$track_id])}}">
+                            <a href="{{route('salesTracks.Bills',[$row->id])}}">
                                 {{  $row->total_value }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('track.salesBills',['salesTrackIitem_id'=>$row->id,'track_id'=>$track_id])}}">
+                            <a href="{{route('salesTracks.Bills',[$row->id])}}">
                                 <div
                                     class="text-gray-600 truncate text-xl text-center px-2 {{ \App\Enums\Status::tryFrom($row->status)->getStyle() }}">
                                     {{ \App\Enums\Status::tryFrom($row->status)->getName() }}

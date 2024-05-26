@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\AuditCommon;
+namespace App\Livewire\Audit\SalesTrack\Vehicle;
 
 use Aaran\Audit\Models\Client;
 use Aaran\Audit\Models\Common\Vehicle;
@@ -8,7 +8,7 @@ use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-class VehicleList extends Component
+class Index extends Component
 {
 
     #region[property]
@@ -26,6 +26,7 @@ class VehicleList extends Component
                     'client_id' => $this->client_id,
                     'vname' => Str::upper($this->vname),
                     'active_id' => $this->active_id,
+                    'user_id' => auth()->id(),
                 ]);
                 $message = "Saved";
 
@@ -34,6 +35,7 @@ class VehicleList extends Component
                 $obj->client_id = $this->client_id;
                 $obj->vname = Str::upper($this->vname);
                 $obj->active_id = $this->active_id;
+                $obj->user_id = auth()->id();
                 $obj->save();
                 $message = "Updated";
             }
@@ -93,7 +95,7 @@ class VehicleList extends Component
     public function render()
     {
         $this->clients();
-        return view('livewire.audit-common.vehicle-list')->with([
+        return view('livewire.audit.sales-track.vehicle.index')->with([
             'list' => $this->getList()
         ]);
     }

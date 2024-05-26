@@ -6,23 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('sales_tracks', function (Blueprint $table) {
             $table->id();
             $table->date('vdate')->nullable();
-            $table->foreignId('smonth_id')->references('id')->on('smonths');
-            $table->foreignId('sales_track_id')->references('id')->on('sales_tracks');
+            $table->foreignId('track_id')->references('id')->on('tracks');
             $table->string('active_id',3)->nullable();
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('sales_tracks');

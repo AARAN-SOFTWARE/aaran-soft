@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('sales_track_items', function (Blueprint $table) {
@@ -18,17 +15,13 @@ return new class extends Migration
             $table->foreignId('track_id')->references('id')->on('tracks');
             $table->foreignId('sales_track_id')->references('id')->on('sales_tracks');
             $table->foreignId('client_id')->references('id')->on('clients');
-            $table->integer('total_count')->nullable();
-            $table->decimal('total_value',13,2)->nullable();
             $table->smallInteger('status')->nullable();
             $table->smallInteger('active_id')->nullable();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('sales_track_items');

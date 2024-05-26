@@ -18,15 +18,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('clientBankBalances', App\Livewire\Audit\ClientBank\Balance::class)->name('clientBankBalances');
 
     Route::get('smonth', App\Livewire\Audit\SalesTrack\SmonthList::class)->name('smonth');
-    Route::get('vehicle', App\Livewire\AuditCommon\VehicleList::class)->name('vehicle');
+    Route::get('vehicle', App\Livewire\Audit\SalesTrack\Vehicle\Index::class)->name('vehicle');
 
-    Route::get('tracks', \App\Livewire\Audit\SalesTrack\Track\Index::class)->name('tracks');
-    Route::get('tracks/{id}/items', \App\Livewire\Audit\SalesTrack\Track\Items::class)->name('tracks.items');
+    Route::get('tracks', App\Livewire\Audit\SalesTrack\Track\Index::class)->name('tracks');
+    Route::get('tracks/{id}/items', App\Livewire\Audit\SalesTrack\Track\Items::class)->name('tracks.items');
 
-    Route::get('salesTracks', App\Livewire\Audit\SalesTrack\TrackList::class)->name('track');
-    Route::get('salesTracks/{salesTrack_id}/{track_id}/trackItem', App\Livewire\Audit\SalesTrack\TrackItem::class)->name('salesTracks.trackItem');
-    Route::get('salesTracks/{salesTrackIitem_id}/{track_id}/salesBills', App\Livewire\Audit\SalesTrack\SalesBillList::class)->name('salesTracks.salesBills');
-    Route::get('salesTracks/{id}/{salesTrackIitem_id}/{track_id}/billItems', App\Livewire\Audit\SalesTrack\SalesBillItemList::class)->name('salesTracks.billItems');
+    Route::get('salesTracks', App\Livewire\Audit\SalesTrack\TrackList::class)->name('salesTracks');
+    Route::get('salesTracks/{id}/items', App\Livewire\Audit\SalesTrack\TrackItem::class)->name('salesTracks.items');
+
+    Route::get('salesTracks/{id}/Bills', App\Livewire\Audit\SalesTrack\Bills\Index::class)->name('salesTracks.Bills');
+    Route::get('salesTracks/{id}/billItems', App\Livewire\Audit\SalesTrack\SalesBillItemList::class)->name('salesTracks.billItems');
 
     Route::get('trackReport', App\Livewire\Audit\SalesTrack\SalesBillReport::class)->name('trackReport');
 

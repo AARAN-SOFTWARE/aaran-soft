@@ -13,13 +13,11 @@ class Items extends Component
 
     use CommonTrait;
 
+    public mixed $serial;
     public string $track_id = '';
     public string $client_id = '';
-    public mixed $serial;
+
     public mixed $clients;
-    public string $status = '';
-    public mixed $total_count = 0;
-    public mixed $total_value = 0;
     #endregion
 
     #region[mount]
@@ -39,10 +37,8 @@ class Items extends Component
                     'serial' => $this->serial,
                     'track_id' => $this->track_id,
                     'client_id' => $this->client_id,
-                    'total_count' => $this->total_count ?: '0',
-                    'total_value' => $this->total_value ?: '0',
-                    'status' => '1',
                     'active_id' => $this->active_id ?: '0',
+                    'user_id' => auth()->id(),
                 ]);
 
             } else {
@@ -50,10 +46,8 @@ class Items extends Component
                 $obj->serial = $this->serial;
                 $obj->track_id = $this->track_id;
                 $obj->client_id = $this->client_id;
-                $obj->total_count = $this->total_count ?: '0';
-                $obj->total_value = $this->total_value ?: '0';
-                $obj->status = $this->status ?: 1;
                 $obj->active_id = $this->active_id;
+                $obj->user_id = auth()->id();
                 $obj->save();
             }
             $this->clearFields();
@@ -66,10 +60,8 @@ class Items extends Component
     {
         $this->serial = '';
         $this->client_id = '';
-        $this->total_count = '';
-        $this->total_value = '';
+        $this->vid = '';
         $this->vname = '';
-        $this->status = '';
         $this->active_id = '1';
     }
     #endregion

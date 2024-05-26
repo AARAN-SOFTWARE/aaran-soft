@@ -20,4 +20,9 @@ class SalesTrack extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
+    public function track():BelongsTo
+    {
+        return $this->belongsTo(Track::class);
+    }
 }

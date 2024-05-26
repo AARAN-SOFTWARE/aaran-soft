@@ -19,6 +19,7 @@ class Index extends Component
                 Track::create([
                     'vname' => Str::ucfirst($this->vname),
                     'active_id' => $this->active_id,
+                    'user_id' => auth()->id(),
                 ]);
                 $message = "Saved";
 
@@ -26,6 +27,7 @@ class Index extends Component
                 $obj = Track::find($this->vid);
                 $obj->vname = Str::ucfirst($this->vname);
                 $obj->active_id = $this->active_id;
+                $obj->user_id = auth()->id();
                 $obj->save();
                 $message = "Updated";
             }

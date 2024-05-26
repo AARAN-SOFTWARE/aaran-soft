@@ -23,6 +23,7 @@ return new class extends Migration
             $table->decimal('qty',13,3);
             $table->decimal('price');
             $table->smallInteger('active_id')->nullable();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

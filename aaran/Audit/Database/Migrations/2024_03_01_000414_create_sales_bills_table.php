@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('serial')->nullable();
             $table->foreignId('track_id')->references('id')->on('tracks');
-            $table->foreignId('track_item_id')->references('id')->on('track_items');
+            $table->foreignId('sales_track_item_id')->references('id')->on('sales_track_items');
+
             $table->string('vno')->nullable();
             $table->date('vdate')->nullable();
             $table->foreignId('sales_from')->references('id')->on('clients');
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->foreignId('vehicle_id')->references('id')->on('vehicles');
             $table->decimal('status')->nullable();
             $table->smallInteger('active_id')->nullable();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

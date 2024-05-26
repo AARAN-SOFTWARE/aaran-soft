@@ -25,4 +25,9 @@ class SalesTrackItem extends Model
     {
         return $this->belongsTo(SalesTrack::class);
     }
+
+    public function track(): BelongsTo
+    {
+        return $this->belongsTo(track::class);
+    }
 }
