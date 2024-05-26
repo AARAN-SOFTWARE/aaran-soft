@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Audit\SalesTrack;
+namespace App\Livewire\Audit\SalesTrack\Track;
 
 use Aaran\Audit\Models\Client;
 use Aaran\Audit\Models\SalesTrack\TrackItems;
 use App\Livewire\Trait\CommonTrait;
 use Livewire\Component;
 
-class Upsert extends Component
+class Items extends Component
 {
     #region[property]
 
@@ -96,25 +96,18 @@ class Upsert extends Component
     #region[getList]
     public function getList()
     {
-        $this->sortField = 'serial';
-
         return TrackItems::search($this->searches)
             ->where('track_id', '=', $this->track_id)
             ->where('active_id', '=', $this->activeRecord)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+            ->orderBy('serial', $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
     #endregion
 
     #region[render]
-    public function reRender(): void
-    {
-        $this->render()->render();
-    }
-
     public function render()
     {
-        return view('livewire.audit.sales-track.upsert')->with([
+        return view('livewire.audit.sales-track.track.items')->with([
             'list' => $this->getList()
         ]);
     }

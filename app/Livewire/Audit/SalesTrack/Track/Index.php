@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Audit\SalesTrack;
+namespace App\Livewire\Audit\SalesTrack\Track;
 
 use Aaran\Audit\Models\SalesTrack\Track;
 use App\Livewire\Trait\CommonTrait;
@@ -62,7 +62,7 @@ class Index extends Component
     #region[render]
     public function render()
     {
-        return view('livewire.audit.sales-track.index')->with([
+        return view('livewire.audit.sales-track.track.index')->with([
             'list' => $this->getList()
         ]);
     }
