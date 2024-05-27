@@ -1,5 +1,6 @@
 <div>
     <x-slot name="header">Test - Review</x-slot>
+
     <div class="w-full border-t-2 border-gray-400 rounded-md shadow-lg bg-opacity-5">
         <div class="p-6 pt-12 pb-6 bg-white rounded-md space-y-4">
 
@@ -81,7 +82,7 @@
                                     <button wire:click="fullview({{ $row->id }})">
                                         <img
                                             class="justify-items-start h-40 w-40 transition duration-500 max-w-xs ease-in-out hover:scale-110 "
-                                            src="{{ \Illuminate\Support\Facades\Storage::url($row->image) }}"></button>
+                                            src="{{ \Illuminate\Support\Facades\Storage::url($row->image) }}" alt=""></button>
                                 </div>
                             @empty
 

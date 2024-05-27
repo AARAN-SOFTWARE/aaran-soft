@@ -117,8 +117,8 @@
                 <div class="flex flex-col gap-3">
                     <x-input.model-text wire:model="title" :label="'Title'"/>
 
-{{--                    <x-input.rich-text wire:model="body" :placeholder="'write your code'"/>--}}
-                    <x-input.mde wire:model="body" :placeholder="'write your code'"/>
+                    <x-input.rich-text wire:model="body" :placeholder="'write your code'"/>
+{{--                    <x-input.mde wire:model="body" :placeholder="'write your code'"/>--}}
 
                     <x-input.model-select wire:model="channel" :label="'Channel'">
                         <option class="text-gray-400"> choose ..</option>
