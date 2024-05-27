@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sales_bills', function (Blueprint $table) {
             $table->id();
             $table->integer('serial')->nullable();
-            $table->foreignId('track_id')->references('id')->on('sales-track');
+            $table->foreignId('track_id')->references('id')->on('tracks')->onDelete('cascade');
             $table->foreignId('sales_track_item_id')->references('id')->on('sales_track_items');
 
             $table->string('vno')->nullable();
