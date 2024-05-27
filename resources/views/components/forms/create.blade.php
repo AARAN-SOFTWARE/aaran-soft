@@ -2,7 +2,7 @@
     'id'
 ])
 
-<form wire:submit.prevent="save">
+<form wire:submit.prevent="save" wire:keydown.enter="save">
     <div class="w-full">
         <x-jet.modal wire:model.defer="showEditModal">
             <div class="px-6  pt-4">

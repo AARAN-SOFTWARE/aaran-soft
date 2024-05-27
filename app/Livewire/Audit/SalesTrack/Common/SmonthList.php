@@ -98,7 +98,7 @@ class SmonthList extends Component
     #region[render]
     public function render()
     {
-        return view('livewire.audit.sales-track.smonth-list')->with([
+        return view('livewire.audit.sales-track.common.smonth-list')->with([
             'list' => $this->getList()
         ]);
     }
