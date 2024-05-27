@@ -38,7 +38,7 @@
                     <label for="Sales From"
                            class="w-[10rem] text-zinc-500 tracking-wide py-2">Sales From</label>
                     <label class="w-[10rem]  tracking-wide text-lg text-semibold py-2">
-{{--                    {{\Aaran\Audit\Models\Client::getName($sales_from)}}</label>--}}
+                    {{\Aaran\Audit\Models\Client::getName($sales_from)}}</label>
                 </div>
 
                 <!--Invoice No----------------------------------------------------------------------------------------->
@@ -117,7 +117,7 @@
                     <label for="Sales From"
                            class="w-[10rem] text-zinc-500 tracking-wide py-2">Bill To</label>
                     <label class="w-[10rem]  tracking-wide text-lg text-semibold py-2">
-{{--                        {{\Aaran\Audit\Models\Client::getName($client_id)}}</label>--}}
+                        {{\Aaran\Audit\Models\Client::getName($client_id)}}</label>
                 </div>
             </div>
 

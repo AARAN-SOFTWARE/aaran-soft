@@ -5,6 +5,8 @@ namespace App\Livewire\Audit\SalesTrack\Bills;
 use Aaran\Audit\Models\Common\Vehicle;
 use Aaran\Audit\Models\SalesTrack\SalesBill;
 use Aaran\Audit\Models\SalesTrack\SalesBillItem;
+use Aaran\Audit\Models\SalesTrack\SalesTrackItem;
+use Aaran\Audit\Models\SalesTrack\TrackItems;
 use Aaran\Common\Models\Colour;
 use Aaran\Common\Models\Ledger;
 use Aaran\Common\Models\Size;
@@ -12,6 +14,7 @@ use Aaran\Master\Models\Product;
 use App\Enums\Active;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -53,11 +56,44 @@ class Items extends Component
     public mixed $gst_percent = '';
     public mixed $grandtotalBeforeRound;
     public mixed $rout;
-    public mixed $track_id;
+    public mixed $track_id = '';
     public $trackItems;
     #endregion
 
     #region[save]
+    public mixed $salesTrackItems;
+
+
+    #region[mount]
+    public function mount($id)
+    {
+
+//        $this->rout = url()->previous();
+
+        $this->salesTrackItems = SalesTrackItem::find($id);
+
+        $this->sales_from = $this->salesTrackItems->client_id;
+
+        $this->trackItems = TrackItems::where('id', '>', $this->salesTrackItems->track_id)->orderby('id')->first();
+
+        $this->vno = SalesBill::nextNo($this->sales_from);
+
+        $this->vdate = Carbon::now()->format('Y-m-d');
+        $this->status = 1;
+        $this->additional = 0;
+        $this->client_id = $this->trackItems->client_id;
+        $this->grand_total = 0;
+        $this->total_taxable = 0;
+        $this->round_off = 0;
+        $this->total_gst = 0;
+        $this->active_id = true;
+
+        $this->calculateTotal();
+    }
+
+    #endregion
+
+
     public function save(): void
     {
         if ($this->client_id != '') {
@@ -236,86 +272,6 @@ class Items extends Component
     }
     #endregion
 
-    #region[mount]
-    public function mount($id)
-    {
-//        $this->rout = url()->previous();
-
-        if ($id != 0) {
-            $this->salesBill = SalesBill::find($id);
-        }
-
-//        $this->track_id=$this->salesBill->track_id;
-
-//        $this->trackItems=TrackItems::where('id','>',$this->salesBill)->orderby('id')->first();
-//
-//
-//        if ($id != 0) {
-//            $data = SalesBill::find($id);
-//            $this->vid = $data->id;
-//            $this->sales_track_bill_id=$data->id;
-//            $this->track_id=$data->track_id;
-//            $this->vdate = $data->vdate;
-//            $this->vno=$data->vno;
-//            $this->client_id = $data->client_id;
-//            $this->total_taxable = $data->taxable;
-//            $this->total_qty = $data->total_qty;
-//            $this->total_gst = $data->gst;
-//            $this->round_off = $data->round_off;
-//            $this->grand_total = $data->grand_total;
-//            $this->bundle = $data->bundle;
-//            $this->vehicle_id = $data->vehicle_id;
-//            $this->vehicle_name = $data->vehicle->vname;
-//            $this->ledger_id = $data->ledger_id;
-//            $this->ledger_name = $data->ledger->vname;
-//            $this->additional = $data->additional;
-//            $this->status = $data->status;
-//            $this->active_id = $data->active_id;
-//            $this->serial = $data->serial;
-//
-//            $item = DB::table('sales_bill_items')->select('sales_bill_items.*',
-//                'products.vname as product_name',
-//                'products.gst_percent as gst_percent',
-//                'colours.vname as colour_name',
-//                'sizes.vname as size_name',
-//            )->join('products', 'products.id', '=', 'sales_bill_items.product_id')
-//                ->join('colours', 'colours.id', '=', 'sales_bill_items.colour_id')
-//                ->join('sizes', 'sizes.id', '=', 'sales_bill_items.size_id')
-//                ->where('sales_bill_id', '=',
-//                    $id)->get()->transform(function ($item) {
-//                    return [
-//                        'product_name' => $item->product_name,
-//                        'product_id' => $item->product_id,
-//                        'description' => $item->description,
-//                        'colour_name' => $item->colour_name,
-//                        'colour_id' => $item->colour_id,
-//                        'size_name' => $item->size_name,
-//                        'size_id' => $item->size_id,
-//                        'qty' => $item->qty,
-//                        'price' => $item->price,
-//                        'gst_percent' => $item->gst_percent,
-//                        'taxable' => $item->qty * $item->price,
-//                        'gst_amount' => ($item->qty * $item->price) * ($item->gst_percent) / 100,
-//                        'subtotal' => $item->qty * $item->price + (($item->qty * $item->price) * $item->gst_percent / 100),
-//                    ];
-//                });
-//            $this->itemList = $item;
-//
-//        } else {
-//            $this->vdate = Carbon::now()->format('Y-m-d');
-//            $this->status=1;
-//            $this->additional=0;
-//            $this->client_id=$this->trackItems->client_id;
-//            $this->grand_total = 0;
-//            $this->total_taxable = 0;
-//            $this->round_off = 0;
-//            $this->total_gst = 0;
-//            $this->active_id = true;
-//
-//        }
-//        $this->calculateTotal();
-    }
-    #endregion
 
     #region[mark as entered]
     public function markAsEntered()

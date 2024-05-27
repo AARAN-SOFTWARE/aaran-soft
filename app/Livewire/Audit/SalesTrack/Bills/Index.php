@@ -37,7 +37,7 @@ class Index extends Component
     #region[create]
     public function create(): void
     {
-        $this->redirect(route('salesTracks.billItems', ['id'=>'0']));
+        $this->redirect(route('salesTracks.billItems', ['id'=> $this->salesTrackIitem->id]));
     }
     #endregion
 

@@ -1,5 +1,6 @@
  <div>
     <x-slot name="header">Sales Bills</x-slot>
+
     <x-forms.m-panel>
 
         <div class="inline-flex gap-3">
@@ -27,7 +28,9 @@
                     <x-input.model-date wire:model.live="vdate" :label="'Date'"/>
                 </div>
                 <div class=" lg:w-15 inline-flex">
+
                     <x-button.new/>
+
                 </div>
             </div>
 
