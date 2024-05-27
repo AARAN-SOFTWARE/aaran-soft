@@ -9,7 +9,7 @@
 
             <div class="shadow-secondary-1 dark:bg-surface-dark text-surface block rounded-lg dark:text-white  ">
 
-                <div class="p-3 py-2 border border-e-emerald-200 rounded-lg mx-auto w-[65rem] my-10">
+                <div class="p-3 py-2 border border-e-emerald-200 rounded-lg mx-auto w-[65rem] my-10 ">
                     <div class="inline-flex h-[25rem] gap-3">
 
                         <!-- Image ------------------------------------------------------------------------------------>
@@ -66,7 +66,8 @@
                                                       class="h-5 w-auto block text-blue-500 hover:scale-110"/>
                                     </a>
                                 </div>
-                                <div class="flex pt-2 justify-between border-t border-gray-200">
+
+                                <div class="flex pt-2 justify-between rounded-md border-t border-gray-200 ">
 
                                     <div class="flex gap-3">
 
@@ -76,7 +77,7 @@
 
                                         <div class="">
                                             <a href="{{ route('ui-task.show',[$row->id]) }}"
-                                               class=" text-sm text-gray-800 px-4 rounded-br-lg bg-gray-200">
+                                               class=" text-sm text-gray-800 px-4 rounded-br-lg bg-gray-200 ">
                                                 {{ \Aaran\Developer\Models\UiTask::allocated($row->allocated) }}
                                             </a>
                                         </div>
