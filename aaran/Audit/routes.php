@@ -20,8 +20,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('smonth', \App\Livewire\Audit\SalesTrack\Common\SmonthList::class)->name('smonth');
     Route::get('vehicle', \App\Livewire\Audit\SalesTrack\Common\Vehicle\Index::class)->name('vehicle');
 
-    Route::get('sales-track', \App\Livewire\Audit\SalesTrack\Common\Track\Index::class)->name('sales-track');
-    Route::get('sales-track/{id}/items', \App\Livewire\Audit\SalesTrack\Common\Track\Items::class)->name('sales-track.items');
+    Route::get('tracks', \App\Livewire\Audit\SalesTrack\Common\Track\Index::class)->name('tracks');
+    Route::get('tracks/{id}/items', \App\Livewire\Audit\SalesTrack\Common\Track\Items::class)->name('tracks.items');
 
     Route::get('salesTracks', \App\Livewire\Audit\SalesTrack\SalesTrack\Index::class)->name('salesTracks');
     Route::get('salesTracks/{id}/items', \App\Livewire\Audit\SalesTrack\SalesTrack\Items::class)->name('salesTracks.items');

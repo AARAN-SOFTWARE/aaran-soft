@@ -64,7 +64,7 @@ class Index extends Component
     #region[render]
     public function render()
     {
-        return view('livewire.audit.sales-track.sales-track.index')->with([
+        return view('livewire.audit.sales-track.common.track.index')->with([
             'list' => $this->getList()
         ]);
     }

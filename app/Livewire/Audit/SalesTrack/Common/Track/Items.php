@@ -99,7 +99,7 @@ class Items extends Component
     #region[render]
     public function render()
     {
-        return view('livewire.audit.sales-track.track.items')->with([
+        return view('livewire.audit.sales-track.common.track.items')->with([
             'list' => $this->getList()
         ]);
     }
