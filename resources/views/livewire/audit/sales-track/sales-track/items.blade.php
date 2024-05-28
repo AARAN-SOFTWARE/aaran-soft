@@ -32,11 +32,7 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial/>
-                <x-table.header-text center>Date</x-table.header-text>
                 <x-table.header-text center>Client</x-table.header-text>
-                <x-table.header-text center>Total count</x-table.header-text>
-                <x-table.header-text center>Total Value</x-table.header-text>
-                <x-table.header-text center>Status</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -51,36 +47,9 @@
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text center>
-                            <a href="{{route('salesTracks.Bills',[$row->id])}}">
-                                {{  \App\Helper\ConvertTo::dateString($row->vdate) }}
-                            </a>
-                        </x-table.cell-text>
-
                         <x-table.cell-text>
                             <a href="{{route('salesTracks.Bills',[$row->id])}}">
                                 {{  $row->client->vname }}
-                            </a>
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
-                            <a href="{{route('salesTracks.Bills',[$row->id])}}">
-                                {{  $row->total_count }}
-                            </a>
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
-                            <a href="{{route('salesTracks.Bills',[$row->id])}}">
-                                {{  $row->total_value }}
-                            </a>
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
-                            <a href="{{route('salesTracks.Bills',[$row->id])}}">
-                                <div
-                                    class="text-gray-600 truncate text-xl text-center px-2 {{ \App\Enums\Status::tryFrom($row->status)->getStyle() }}">
-                                    {{ \App\Enums\Status::tryFrom($row->status)->getName() }}
-                                </div>
                             </a>
                         </x-table.cell-text>
 

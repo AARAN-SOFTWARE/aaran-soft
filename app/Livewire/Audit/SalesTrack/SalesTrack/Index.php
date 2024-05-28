@@ -76,6 +76,7 @@ class Index extends Component
     {
         $this->vdate = carbon::now()->format('Y-m-d');
         $this->track_id = '';
+        $this->vid = '';
         $this->active_id=true;
 
     }
