@@ -33,7 +33,6 @@
             {{ $slot }}
         </main>
 
-
     </div>
 </div>
 <x-notify/>

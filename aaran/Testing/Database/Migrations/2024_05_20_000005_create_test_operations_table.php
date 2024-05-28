@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('actions_id')->nullable();
             $table->foreignId('modals_id')->nullable();
             $table->date('vdate');
-            $table->string('vname')->nullable();
+            $table->string('vname')->unique();
             $table->longText('body');
             $table->foreignId('assignee')->references('id')->on('users')->onDelete('cascade');
             $table->string('status',3)->nullable();

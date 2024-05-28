@@ -28,6 +28,7 @@
 </div>
 
 
+
 {{--<div--}}
 {{--    wire:ignore.self--}}
 {{--    class="rounded-md shadow-sm"--}}
@@ -50,4 +51,26 @@
 {{--                    border-gray-200 py-2 px-3 bg-white text-zinc-700--}}
 {{--                    placeholder-gray-400 text-base focus:outline-none--}}
 {{--                    focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-150 ease-in-out"></trix-editor>--}}
+{{--</div>--}}
+
+
+{{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/1.11/simplemde.min.css">--}}
+{{--<script src="https://cdn.jsdelivr.net/simplemde/1.11/simplemde.min.js"></script>--}}
+
+{{--<div--}}
+{{--    x-data="{--}}
+{{--        value: '# Write Some Markdown...',--}}
+{{--        init() {--}}
+{{--            let editor = new SimpleMDE({ element: this.$refs.editor })--}}
+
+{{--            editor.value(this.value)--}}
+
+{{--            editor.codemirror.on('change', () => {--}}
+{{--                this.value = editor.value()--}}
+{{--            })--}}
+{{--        },--}}
+{{--    }"--}}
+{{--    class="prose w-full"--}}
+{{-->--}}
+{{--    <textarea x-ref="editor"></textarea>--}}
 {{--</div>--}}

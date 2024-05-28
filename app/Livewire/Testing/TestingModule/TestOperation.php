@@ -35,6 +35,7 @@ class TestOperation extends Component
     public $verified ='';
 
     public $image;
+    public $images;
 //    public $isUploaded = false;
     public array $photos = [];
     public array $old_photos = [];
@@ -158,7 +159,7 @@ class TestOperation extends Component
         $this->sortField = 'id';
         $this->vdate = \Illuminate\Support\Carbon::now()->format('Y-m-d');
 
-        return \Aaran\Testing\Models\TestOperation::search($this->searches)
+        $data= TestImage::join('test_operations','test_operations.id','=','test_images.operations_id')
             ->where('active_id', '=', $this->activeRecord)
             ->where('actions_id', '=', $this->actions_id)
             ->where('modals_id', '=', $this->modals_id)
@@ -167,8 +168,9 @@ class TestOperation extends Component
             ->where('verified', '=',$this->verified)
             ->where('status', '!=', 100)
             ->with('user',)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-            ->paginate($this->perPage);
+            ->get();
+        $this->images=$data;
+        return $data->unique('vname');
     }
 
 #endregion
