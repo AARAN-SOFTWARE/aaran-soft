@@ -24,5 +24,5 @@ Route::get('/surfing/{id}/comments', App\Livewire\Developer\Surfing\Comments::cl
 Route::get('/demo-requests', App\Livewire\Webs\DemoRequest\Index::class)->name('demo-requests');
 Route::get('/demo-requests/upsert', App\Livewire\Webs\DemoRequest\Upsert::class)->name('demo-requests.upsert');
 
-Route::get('/ui-task', App\Livewire\Developer\UITask\Index::class)->name('ui-task');
-Route::get('/ui-task/{id}/show', App\Livewire\Developer\UITask\UiShow::class)->name('ui-task.show');
+Route::get('/ui-task', \App\Livewire\Developer\UiTask\Index::class)->name('ui-task');
+Route::get('/ui-task/{id}/show', \App\Livewire\Developer\UiTask\UiShow::class)->name('ui-task.show');
