@@ -49,7 +49,7 @@ class Index extends Component
                     'status' => $this->status ?: '1',
                     'priority' => $this->priority ?: Priority::NORMAL->value,
                     'verify' => $this->verify,
-                    'user_id' => \Auth::user()->id,
+                    'user_id' => auth()->id(),
                     'active_id' => $this->active_id ? 1 : 0,
                     'ui_pic' => $this->saveImage()
                 ]);

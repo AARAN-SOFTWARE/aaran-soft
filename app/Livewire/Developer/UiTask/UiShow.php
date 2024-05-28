@@ -79,7 +79,7 @@ class UiShow extends Component
                 $reply->verified_on = $this->verified_on;
                 $reply->image = $this->saveImage();
 
-                if ($reply->user_id == \Auth::id()) {
+                if ($reply->user_id == auth()->id()) {
                     $reply->save();
                 }
             }
