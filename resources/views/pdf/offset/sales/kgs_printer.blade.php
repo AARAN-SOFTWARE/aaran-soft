@@ -16,7 +16,7 @@
             border-collapse: collapse;
         }
         .table-1{
-            border: none;
+            border: 1px solid darkgray;
         }
 
         .page-break {
@@ -27,7 +27,7 @@
             font-size: 40px;
             font-weight: bold;
             line-height: 1;
-            font-family: sans-serif;
+            font-family: "Times New Roman";
         }
         .comp-details {
             font-size: 12px;
@@ -36,7 +36,8 @@
         }
         .comp-logo {
             position: fixed;
-            margin-left: 20px;
+            margin: 5px 0 0 20px;
+
         }
 
         /*  company Invoice header, address, no. and date.    */
@@ -45,7 +46,7 @@
             border-bottom: none;
         }
         .inv-header {
-            background-color: dimgray;
+            background-color: darkgray;
             text-align: center;
             color: white;
             font-size: 18px;
@@ -205,6 +206,11 @@
             font-size: 12px;
             text-align: center;
         }
+        .auth_comp {
+            font-family: "Times New Roman";
+            vertical-align: top;
+            font-weight: bold;
+        }
         .pageBreak {
             font-size: 10px;
             text-align: center;
@@ -226,7 +232,8 @@
             <td class="comp-details">
                 <span class="comp-name">{{$cmp->get('company_name')}}</span>
                 <span class="comp-address">
-                    <p>{{$cmp->get('address_1')}}, {{$cmp->get('address_2')}}</p>
+                    <p>{{$cmp->get('address_1')}}, {{$cmp->get('address_2')}}, </p>
+                    <p>{{$cmp->get('city')}}, {{$cmp->get('state')}} </p>
                     <p>{{$cmp->get('contact')}} - {{$cmp->get('email')}}</p>
                     <p>{{$cmp->get('gstin')}}</p>
                 </span>
@@ -265,7 +272,7 @@
             <th width="auto">Particulars</th>
             <th width="4.33%">Quantity</th>
             <th width="8.33%">Price</th>
-            <th width="8.33%">Taxable Amnt</th>
+            <th width="8.33%">Taxable Amount</th>
             <th width="4.33%">%</th>
             <th width="16.66">GST</th>
             <th width="16.66">sub Total</th>
@@ -482,7 +489,7 @@
         @endif
         <tr >
             <td colspan="7" class="sign-col1"  >Receiver Sign</td>
-            <td colspan="4"  class="sign-col2" width="250px"  style="vertical-align: top">for&nbsp;<b>{{$cmp->get('company_name')}}</b></td>
+            <td colspan="4"  class="sign-col2" width="250px"  style="vertical-align: top;">for&nbsp;<span class="auth_comp" >{{$cmp->get('company_name')}}</span></td>
         </tr>
         <tr>
             <td colspan="7"><div></div></td>
@@ -498,13 +505,14 @@
 <table class="table-1">
     <tr>
         <td>
-            <img style="position: fixed;margin-left: 20px;padding-top: 5px;height: 100px;width: auto;" src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="90px" class="comp-logo"/>
+            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="100px" class="comp-logo"/>
             {{--  if you change the image width,then change the inline width of 3rd col(td - empty div) to be same as well --}}
         </td>
         <td class="comp-details">
             <span class="comp-name">{{$cmp->get('company_name')}}</span>
             <span class="comp-address">
-                    <p>{{$cmp->get('address_1')}}, {{$cmp->get('address_2')}}</p>
+                    <p>{{$cmp->get('address_1')}}, {{$cmp->get('address_2')}}, </p>
+                    <p>{{$cmp->get('city')}}, {{$cmp->get('state')}} </p>
                     <p>{{$cmp->get('contact')}} - {{$cmp->get('email')}}</p>
                     <p>{{$cmp->get('gstin')}}</p>
                 </span>
@@ -543,7 +551,7 @@
         <th width="auto">Particulars</th>
         <th width="4.33%">Quantity</th>
         <th width="8.33%">Price</th>
-        <th width="8.33%">Taxable Amnt</th>
+        <th width="8.33%">Taxable Amount</th>
         <th width="4.33%">%</th>
         <th width="16.66">GST</th>
         <th width="16.66">sub Total</th>
@@ -760,7 +768,7 @@
     @endif
     <tr >
         <td colspan="7" class="sign-col1"  >Receiver Sign</td>
-        <td colspan="4"  class="sign-col2" width="250px"  style="vertical-align: top">for&nbsp;<b>{{$cmp->get('company_name')}}</b></td>
+        <td colspan="4"  class="sign-col2" width="250px"  style="vertical-align: top;">for&nbsp;<span class="auth_comp" >{{$cmp->get('company_name')}}</span></td>
     </tr>
     <tr>
         <td colspan="7"><div></div></td>
@@ -776,13 +784,14 @@
 <table class="table-1">
     <tr>
         <td>
-            <img style="position: fixed;margin-left: 20px;padding-top: 5px;height: 100px;width: auto;" src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="90px" class="comp-logo"/>
+            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="100px" class="comp-logo"/>
             {{--  if you change the image width,then change the inline width of 3rd col(td - empty div) to be same as well --}}
         </td>
         <td class="comp-details">
             <span class="comp-name">{{$cmp->get('company_name')}}</span>
             <span class="comp-address">
-                    <p>{{$cmp->get('address_1')}}, {{$cmp->get('address_2')}}</p>
+                    <p>{{$cmp->get('address_1')}}, {{$cmp->get('address_2')}}, </p>
+                    <p>{{$cmp->get('city')}}, {{$cmp->get('state')}} </p>
                     <p>{{$cmp->get('contact')}} - {{$cmp->get('email')}}</p>
                     <p>{{$cmp->get('gstin')}}</p>
                 </span>
@@ -821,7 +830,7 @@
         <th width="auto">Particulars</th>
         <th width="4.33%">Quantity</th>
         <th width="8.33%">Price</th>
-        <th width="8.33%">Taxable Amnt</th>
+        <th width="8.33%">Taxable Amount</th>
         <th width="4.33%">%</th>
         <th width="16.66">GST</th>
         <th width="16.66">sub Total</th>
@@ -1038,7 +1047,7 @@
     @endif
     <tr >
         <td colspan="7" class="sign-col1"  >Receiver Sign</td>
-        <td colspan="4"  class="sign-col2" width="250px"  style="vertical-align: top">for&nbsp;<b>{{$cmp->get('company_name')}}</b></td>
+        <td colspan="4"  class="sign-col2" width="250px"  style="vertical-align: top;">for&nbsp;<span class="auth_comp" >{{$cmp->get('company_name')}}</span></td>
     </tr>
     <tr>
         <td colspan="7"><div></div></td>

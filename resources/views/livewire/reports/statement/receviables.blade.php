@@ -52,7 +52,7 @@
 
                         <x-table.cell colspan="1">
                             <div class="text-right font-bold">
-                                {{ $opening_balance }}
+                                {{ $opening_balance}}
                             </div>
                         </x-table.cell>
                     @endif
