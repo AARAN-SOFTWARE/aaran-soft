@@ -34,6 +34,7 @@ class Company extends Model
             'address_1' => $obj->address_1,
             'address_2' => $obj->address_2,
             'city' =>  $obj->city->vname . ' - ' . $obj->pincode->vname,
+            'state' => $obj->state->vname.' - '.$obj->state->state_code,
             'contact'=> ' Contact : ' . $obj->mobile,
             'email'=> 'Email : ' . $obj->email ,
             'gstin'=> 'GST : ' . $obj->gstin ,
