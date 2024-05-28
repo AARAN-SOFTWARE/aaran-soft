@@ -8,6 +8,7 @@ use App\Enums\Active;
 use App\Enums\Status;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -27,6 +28,7 @@ class UiShow extends Component
     public int $actives;
     public $updated_at;
     public $ui_replies;
+    public $ui_reply_id;
     public $commentsCount;
     public string $ui_reply;
     public $verified;
@@ -35,6 +37,8 @@ class UiShow extends Component
     public $showEditModal_1 = false;
     public string $changeStatus = '';
     public $image;
+    public $old_image;
+
     public $route;
     #endregion
 
@@ -43,7 +47,7 @@ class UiShow extends Component
     public function mount($id): void
     {
         $this->route = url()->previous();
-        $this->getObj($id);
+        $this->getData($id);
 
         $this->ui_replies = UiReply::where('ui_task_id', $id)->get();
         $this->commentsCount = UiReply::where('ui_task_id', $id)->count();
@@ -57,10 +61,10 @@ class UiShow extends Component
             'ui_reply' => 'required',
         ]);
 
-        if ($this->ui_reply) {
-            if ($this->ui_task_id) {
+        if ($this->ui_reply != '') {
+            if ($this->vid == "") {
 
-                UiReply::create([
+                $obj = UiReply::create([
                     'ui_task_id' => $this->ui_task_id,
                     'vname' => $this->ui_reply,
                     'verified' => $this->verified,
@@ -68,7 +72,16 @@ class UiShow extends Component
                     'user_id' => Auth::user()->id,
                     'image' => $this->saveImage()
                 ]);
+            } else {
+                $reply = UiReply::find($this->vid);
+                $reply->vname = $this->vname;
+                $reply->verified = $this->verified;
+                $reply->verified_on = $this->verified_on;
+                $reply->image = $this->saveImage();
 
+                if ($reply->user_id == \Auth::id()) {
+                    $reply->save();
+                }
             }
         }
         redirect()->to(route('ui-task.show', [$this->ui_task_id]));
@@ -78,7 +91,7 @@ class UiShow extends Component
     #endregion
 
     #region[Obj]
-    public function getObj($id)
+    public function getData($id)
     {
         if ($id) {
 
@@ -98,7 +111,22 @@ class UiShow extends Component
         }
         return null;
     }
+
     #endregion
+
+    public function getObj($id)
+    {
+        if ($id) {
+            $obj = UiReply::find($id);
+
+            $this->ui_reply_id = $obj->id;
+            $this->vname = $obj->vname;
+            $this->verified = $obj->verified;
+            $this->verified_on = $obj->verified_on;
+            $this->old_image = $obj->image;
+        }
+        return $obj;
+    }
 
     #region[ClearFields]
     public function clearFields()
@@ -107,6 +135,7 @@ class UiShow extends Component
         $this->verified_on = '';
         $this->verified = '';
         $this->image = '';
+        $this->old_image = '';
 
     }
     #endregion
@@ -139,20 +168,32 @@ class UiShow extends Component
             $image = $this->image;
             $filename = $this->image->getClientOriginalName();
 
+            if (Storage::disk('public')->exists(Storage::path('public/images/' . $this->old_image))) {
+                Storage::disk('public')->delete(Storage::path('public/images/' . $this->old_image));
+            }
             $image->storeAs('public/images', $filename);
             return $filename;
 
         } else {
-            return $this->image = 'empty';
+            if ($this->old_image) {
+                return $this->old_image;
+            } else {
+
+                return $this->image = 'empty';
+            }
         }
-
     }
-    #endregion
 
-    #region[FullView]
-    public $full_image;
 
-    public function fullView($id)
+
+#endregion
+
+#region[FullView]
+    public
+        $full_image;
+
+    public
+    function fullView($id)
     {
         $this->showEditModal_1 = true;
         $data = UiReply::find($id);
@@ -160,21 +201,25 @@ class UiShow extends Component
 
     }
 
-    public function fullImage()
+    public
+    function fullImage()
     {
         $this->showEditModal_1 = true;
         $this->full_image = $this->ui_pic;
     }
-    #endregion
 
-    #region[Route]
-    public function getRoute(): void
+#endregion
+
+#region[Route]
+    public
+    function getRoute(): void
     {
         $this->redirect($this->route);
     }
-    #endregion
 
-    #region[Render]
+#endregion
+
+#region[Render]
     public function reRender(): void
     {
         $this->render();
@@ -185,5 +230,5 @@ class UiShow extends Component
     {
         return view('livewire.developer.ui-task.ui-show');
     }
-    #endregion
+#endregion
 }
