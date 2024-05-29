@@ -6,15 +6,14 @@
         <a href="{{route('salesTracks')}}" class="text-gray-400">Sales Track</a>
     </div>
 
-
     <x-forms.m-panel>
-
-        <div class="flex w-full">
+        <div class="flex w-full items-center">
             <div class="text-xl font-bold w-full">
-                {{$sales_track->track->vname."  -  ".date('d-m-Y', strtotime($sales_track->vdate))}}
+                {{$sales_track->vcode."  -  ".date('d-m-Y', strtotime($sales_track->vdate))."  -  ".$sales_track->rootline->vname}}
             </div>
 
-            <div class="flex gap-3 justify-end text-right w-full">
+            <div class="flex gap-3 justify-end items-center text-right w-full">
+
                 <div class="font-bold w-2/4">
                     <x-input.model-select wire:model.live="status" :label="'Filter'">
                         <option class="text-gray-400" value=""> choose ..</option>
@@ -23,15 +22,20 @@
                         @endforeach
                     </x-input.model-select>
                 </div>
+
                 <div class="lg:w-2/4">
                     <x-input.model-date wire:model.live="vdate" :label="'Date'"/>
                 </div>
-                <div class=" lg:w-15 inline-flex py-5">
-                    <x-button.primary wire:click="generate">Generate</x-button.primary>
+
+                <div class="flex gap-3 items-center">
+                    <x-button.primary class="h-10" wire:click.prevent="generate">Generate</x-button.primary>
+                    <x-button.new>New</x-button.new>
                 </div>
+
             </div>
 
         </div>
+
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial/>
