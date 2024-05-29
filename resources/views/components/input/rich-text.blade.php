@@ -2,9 +2,6 @@
     'height'=>'h-64',
     'placeholder'
 ])
-<link rel="stylesheet" href="https://unpkg.com/trix@2.0.0-alpha.1/dist/trix.css"></link>
-<script src="https://unpkg.com/trix@2.0.0-alpha.1/dist/trix.umd.js"></script>
-<style>[data-trix-button-group="file-tools"] { display: none !important; }</style>
 
 <div
     wire:ignore.self
@@ -23,11 +20,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
     <input id="x" class="hidden">
     <trix-editor x-ref="trix" input="x" placeholder="{{$placeholder}}"
-                 class="overflow-y-scroll text-ellipsis form-textarea block w-[40rem] text
+                 class="overflow-auto text-ellipsis form-textarea block w-full text
                     rounded-lg appearance-none border-2 {{$height}}
                     border-gray-200 py-2 px-3 bg-white text-zinc-700
                     placeholder-gray-400 text-base focus:outline-none
                     focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-150 ease-in-out"></trix-editor>
 </div>
-
-
