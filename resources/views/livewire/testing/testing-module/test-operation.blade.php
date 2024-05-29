@@ -9,7 +9,7 @@
         @forelse ($list as $row)
 {{--            {{dd($list)}}--}}
             <div class="w-full flex justify-center">
-                <div class="w-3/4 bg-zinc-200 rounded-xl mt-10">
+                <div class="w-3/4 bg-gray-100 rounded-xl mt-10">
                     <div class="flex justify-between p-5">
                         <a href="{{route('operation.reply',[$row->id])}}">
                             <div class="text-2xl font-mono font-bold">{{ $row->actions->vname ?: " "}} - {{ $row->vname }}</div>
@@ -17,7 +17,7 @@
                         <div class="w-1/4 flex justify-between">
                             <div class="text-gray-500 text-sm font-bold">{{ $row->vdate }}</div>
                             <div class="font-mono">By : <span class="font-mono font-bold"> {{ $row->user->name }}</span></div>
-                            <div >
+                            <div>
                                 <button wire:click="edit({{ $row->id }})"
                                         class="">
                                     <x-icons.icon :icon="'pencil'" class="h-4 w-auto block text-blue-500 hover:scale-110"/>
@@ -25,8 +25,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex px-5">
-                        <div class=" w-96 h-80 p-3 rounded bg-white overflow-y-scroll">
+                    <div class="flex px-5 gap-x-4">
+                        <div class=" w-96 h-60 p-3 rounded bg-white overflow-y-auto">
+                            <a href="{{route('operation.reply',[$row->id])}}">
                             <div class="grid grid-cols-1 gap-2 justify-evenly ">
                                 @foreach($images as $img)
                                     @if($img->vname==$row->vname)
@@ -34,10 +35,13 @@
                                     @endif
                                 @endforeach
                             </div>
+                            </a>
                         </div>
 
-                        <div class="w-3/4 h-80 bg-gray-700 text-white rounded p-4">
-                            <div class="w-full h-72 overflow-y-scroll grid grid-cols-1 gap-2 ">{!! $row->body !!}</div>
+                        <div class="w-3/4 h-60 bg-gray-600 text-white rounded p-4">
+                            <a href="{{route('operation.reply',[$row->id])}}">
+                            <div class="w-full h-60 flex-col break-words overflow-y-auto">{!! $row->body !!}</div>
+                            </a>
                         </div>
                     </div>
                     <div class="flex justify-between p-5">
@@ -131,13 +135,15 @@
 {{--                </div>--}}
 {{--            </div>--}}
 
-            <!-- Create Record ---------------------------------------------------------------------------------------->
 
         @empty
             <div class="flex justify-center items-center space-x-2">
                 <x-table.empty/>
             </div>
         @endforelse
+
+        <!-- Create Record ---------------------------------------------------------------------------------------->
+
 
         <x-forms.create-new :id="$vid">
             <div class="flex space-x-5">
@@ -152,13 +158,17 @@
 {{--                        @endforeach--}}
 {{--                    </x-input.model-select>--}}
 
+
                     <x-input.model-date wire:model="vdate" :label="'Date'"/>
                     <x-input.model-text wire:model="vname" :label="'Title'"/>
 
-                    <div class="px-1 py-4">
-                        <x-input.rich-text wire:model="body" :placeholder="''"/>
+                    <div class="">
+                        <x-input.rich-text wire:model="body" :placeholder="''" />
                     </div>
+
                 </div>
+
+
 
                 <div>
                     <x-input.model-select wire:model="assignee" :label="'Assign To'">
@@ -203,7 +213,9 @@
                         <button wire:click.prevent="save_image"></button>
                     </div>
                 </div>
+
             </div>
+
         </x-forms.create-new>
     </x-forms.m-panel>
 

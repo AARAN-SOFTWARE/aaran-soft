@@ -9,11 +9,14 @@ use App\Enums\Active;
 use App\Enums\Status;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class TestReply extends Component
 {
     use CommonTrait;
+    use WithFileUploads;
     #region[properties]
     public string $actions_id;
     public string $body;
@@ -35,6 +38,8 @@ class TestReply extends Component
     public $verified;
     public $images;
     public $route;
+    public $mdCode;
+
     #endregion
 
     #region[Mount]
@@ -47,6 +52,7 @@ class TestReply extends Component
         $this->images = TestImage::where('operations_id','=', $id)->get();
     }
     #endregion
+
 
     #region[Save]
     public function getSave(): string
@@ -74,6 +80,10 @@ class TestReply extends Component
         $this->clearFields();
         return '';
     }
+    #endregion
+
+    #region[markdown]
+
     #endregion
 
     #region[get Obj]
@@ -134,6 +144,16 @@ class TestReply extends Component
         $data=TestImage::find($id);
         $this->full_image=$data->image;
 
+    }
+    #endregion
+
+    #region[Render]
+    public function getFile()
+    {
+        if ($this->mdCode!=""){
+            $html = Str::markdown($this->mdCode);
+            dd($html);
+        }
     }
     #endregion
 

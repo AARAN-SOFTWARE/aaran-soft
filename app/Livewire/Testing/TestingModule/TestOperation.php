@@ -26,13 +26,9 @@ class TestOperation extends Component
     public mixed $model;
     public string $assignee;
     public string $status;
-
-    public $tags;
-    public $users;
+    public mixed $users;
+    public $verified;
     public $actions;
-    public $modals;
-    public $commentsCount;
-    public $verified ='';
 
     public $image;
     public $images;
@@ -178,6 +174,7 @@ class TestOperation extends Component
     #region[Clear Field]
     public function clearFields(): void
     {
+        $this->vid = '';
         $this->vname = '';
         $this->vdate = '';
         $this->body = '';
