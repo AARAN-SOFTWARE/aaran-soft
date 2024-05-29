@@ -19,7 +19,7 @@
                             </div>
 
                             <div
-                                class="w-40 h-8 lg:flex rounded-xl items-center justify-center text-lg {{  \App\Enums\Status::tryFrom($status)->getStyle() }}">
+                                    class="w-40 h-8 lg:flex rounded-xl items-center justify-center text-lg {{  \App\Enums\Status::tryFrom($status)->getStyle() }}">
                                 {{  \App\Enums\Status::tryFrom($status)->getName() }}
                             </div>
                         </div>
@@ -29,9 +29,9 @@
                                 <div>
                                     <button wire:click="fullImage()">
                                         <img
-                                            class="w-[35rem] h-80 transition duration-300 ease-in-out bg-no-repeat hover:scale-110"
-                                            src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$ui_pic)) }}"
-                                            alt="">
+                                                class="w-[35rem] h-80 transition duration-300 ease-in-out bg-no-repeat hover:scale-110"
+                                                src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$ui_pic)) }}"
+                                                alt="">
                                     </button>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                             <div>
                                 <span class=" text-sm py-0.5 text-gray-500">Assign To :</span>
                                 <span
-                                    class=" text-md text-gray-600">{{\Aaran\Developer\Models\UiTask::allocated($allocated) }}</span>
+                                        class=" text-md text-gray-600">{{\Aaran\Developer\Models\UiTask::allocated($allocated) }}</span>
                             </div>
                         </div>
 
@@ -64,12 +64,14 @@
                             <div class="border-b border-gray-200 p-5 flex hover:bg-gray-100 rounded-lg">
 
                                 <div class="h-20 w-20 mt-0.5 relative overflow-hidden bg-cover bg-no-repeat">
-                                    <button wire:click="fullView('{{$row->id}}')">
-                                        <img
-                                            class="  h-20 w-20 transition duration-300 ease-in-out hover:scale-110 "
-                                            src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->image)) }}"
-                                            alt="">
-                                    </button>
+                                    @if($row->image !='empty')
+                                        <button wire:click="fullView('{{$row->id}}')">
+                                            <img
+                                                    class="  h-20 w-20 transition duration-300 ease-in-out hover:scale-110 "
+                                                    src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->image)) }}"
+                                                    alt="">
+                                        </button>
+                                    @endif
                                 </div>
 
                                 <div class="w-full flex justify-between">
@@ -103,9 +105,8 @@
 
                 <div>
                     <div class="flex flex-col gap-3 py-3">
-                        <label for="reply"
-                               class="w-[8rem] font-bold text-zinc-400 tracking-wide py-2">Write on</label>
                         <textarea rows="5" id="reply" wire:model="ui_reply" autocomplete="off" autofocus
+                                  placeholder="Add Your Comments here"
                                   class="appearance-none rounded-lg
                                                   py-2 px-2 bg-white text-gray-800 w-2/4
                                                  placeholder-gray-400 shadow-md text-base focus:outline-none
