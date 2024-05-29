@@ -1,5 +1,5 @@
 <div>
-    <x-slot name="header">Track Items</x-slot>
+    <x-slot name="header">Root line Items</x-slot>
     <x-forms.m-panel>
         <x-forms.top-controls :show-filters="$showFilters"/>
         <x-forms.table :list="$list">
