@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sales_bill_items', function (Blueprint $table) {
             $table->id();
             $table->integer('serial')->nullable();
-            $table->foreignId('sales_bill_id')->references('id')->on('sales_bills');
+            $table->foreignId('sales_track_bill_id')->references('id')->on('sales_bills');
             $table->foreignId('category_id')->references('id')->on('categories');
             $table->foreignId('product_id')->references('id')->on('products');
             $table->string('description')->nullable();
