@@ -74,9 +74,9 @@ class DatabaseSeeder extends Seeder
 
         //AUDIT
 
-        ClientSeeder::run();
-        RootlineSeeder::run();
-        RootlineItemsSeeder::run();
+//        ClientSeeder::run();
+//        RootlineSeeder::run();
+//        RootlineItemsSeeder::run();
 
     }
 

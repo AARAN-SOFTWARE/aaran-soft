@@ -8,7 +8,7 @@
         <x-icons.icon :icon="'double-arrow-right'"
                       class="text-gray-500 hover:text-white  hover:rounded-sm  h-4 w-auto block mt-2"/>
 
-            <a href="{{route('salesTracks.items',[$salesTrackItems->sales_track_id])}}" class="text-gray-400">Sales Track Item</a>
+            <a href="{{route('salesTracks.items',[$rootline_id])}}" class="text-gray-400">Sales Bills</a>
 
         <x-icons.icon :icon="'double-arrow-right'"
                       class="text-gray-500 hover:text-white  hover:rounded-sm  h-4 w-auto block mt-2"/>
@@ -34,7 +34,7 @@
                     <label for="Sales From"
                            class="w-[10rem] text-zinc-500 tracking-wide py-2">Sales From</label>
                     <label class="w-[10rem]  tracking-wide text-lg text-semibold py-2">
-                    {{\Aaran\Audit\Models\Client::getName($sales_from)}}</label>
+                        {{\Aaran\Audit\Models\Client::getName($sales_from)}}</label>
                 </div>
 
                 <!--Invoice No----------------------------------------------------------------------------------------->
@@ -117,7 +117,6 @@
                 </div>
                 <!--group----------------------------------------------------------------------------------------->
                 <x-input.model-text wire:model="group" :label="'Group'"/>
-
             </div>
 
         </div>
@@ -324,7 +323,7 @@
 
         </section>
 
-            <!-- Table Bottom ------------------------------------------------------------------------------------->
+        <!-- Table Bottom ------------------------------------------------------------------------------------->
         <x-forms.table>
 
             <x-slot name="table_header">
@@ -524,6 +523,16 @@
                 <x-button.save/>
                 <x-button.back/>
             </div>
+
+            @if($vid)
+                <div>
+                    <button wire:click.prevent="markAsEntered"
+                            class="bg-green-400 text-white tracking-wider px-4 py-1 rounded-md flex items-center hover:bg-red-500">
+                        <x-icons.icon :icon="'annotation'" class="h-8 px-3 w-auto inline-block items-center"/>
+                        Mark as Entered
+                    </button>
+                </div>
+            @endif
         </div>
 
     </x-forms.m-panel>

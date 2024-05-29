@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class Items extends Component
+class Upsert extends Component
 {
     #region[property]
     use CommonTrait;
@@ -53,41 +53,71 @@ class Items extends Component
     public mixed $grandtotalBeforeRound;
     public mixed $rout;
     public mixed $rootline_id = '';
-    public mixed $salesTrackItems;
-    public $rootlineItems;
+    public $unique_no;
     public $group;
     #endregion
+
+
+
 
     #region[mount]
     public function mount($id)
     {
-        $this->sales_track_item_id=$id;
+        if ($id != 0) {
+            $data = SalesBill::find($id);
+            $this->vid = $data->id;
+            $this->sales_track_bill_id=$data->id;
+            $this->rootline_id=$data->rootline_id;
+            $this->sales_track_item_id=$data->sales_track_item_id;
+            $this->unique_no=$data->unique_no;
+            $this->group=$data->group;
+            $this->vdate = $data->vdate;
+            $this->vno=$data->vno;
+            $this->sales_from=$data->sales_from;
+            $this->client_id = $data->client_id;
+            $this->total_taxable = $data->taxable;
+            $this->total_qty = $data->total_qty;
+            $this->total_gst = $data->gst;
+            $this->round_off = $data->round_off;
+            $this->grand_total = $data->grand_total;
+            $this->bundle = $data->bundle;
+            $this->vehicle_id = $data->vehicle_id;
+            $this->vehicle_name = $data->vehicle->vname;
+            $this->ledger_id = $data->ledger_id;
+            $this->ledger_name = $data->ledger->vname;
+            $this->additional = $data->additional;
+            $this->status = $data->status;
+            $this->active_id = $data->active_id;
+            $this->serial = $data->serial;
 
-        $this->salesTrackItems = SalesTrackItem::find($id);
-
-        $this->rootline_id=$this->salesTrackItems->rootline_id;
-
-        $this->sales_from = $this->salesTrackItems->client_id;
-
-        $this->rootlineItems = RootlineItems::where('rootline_id', '=',$this->rootline_id)->where('id', '>', $this->salesTrackItems->id)->orderby('id')->first();
-
-
-        $this->vno = SalesBill::nextNo($this->sales_from);
-        $this->group = SalesBill::gruopNo($id);
-
-        $this->vdate = Carbon::now()->format('Y-m-d');
-        $this->status = 1;
-        $this->additional = 0;
-
-        $obj=RootlineItems::where('rootline_id', '=',$this->rootline_id)->orderby('id')->first();
-        $this->client_id = $this->rootlineItems->client_id ?? $obj->client_id;
-
-        $this->grand_total = 0;
-        $this->total_taxable = 0;
-        $this->round_off = 0;
-        $this->total_gst = 0;
-        $this->active_id = true;
-
+            $item = DB::table('sales_bill_items')->select('sales_bill_items.*',
+                'products.vname as product_name',
+                'products.gst_percent as gst_percent',
+                'colours.vname as colour_name',
+                'sizes.vname as size_name',
+            )->join('products', 'products.id', '=', 'sales_bill_items.product_id')
+                ->join('colours', 'colours.id', '=', 'sales_bill_items.colour_id')
+                ->join('sizes', 'sizes.id', '=', 'sales_bill_items.size_id')
+                ->where('sales_track_bill_id', '=',
+                    $id)->get()->transform(function ($item) {
+                    return [
+                        'product_name' => $item->product_name,
+                        'product_id' => $item->product_id,
+                        'description' => $item->description,
+                        'colour_name' => $item->colour_name,
+                        'colour_id' => $item->colour_id,
+                        'size_name' => $item->size_name,
+                        'size_id' => $item->size_id,
+                        'qty' => $item->qty,
+                        'price' => $item->price,
+                        'gst_percent' => $item->gst_percent,
+                        'taxable' => $item->qty * $item->price,
+                        'gst_amount' => ($item->qty * $item->price) * ($item->gst_percent) / 100,
+                        'subtotal' => $item->qty * $item->price + (($item->qty * $item->price) * $item->gst_percent / 100),
+                    ];
+                });
+            $this->itemList = $item;
+        }
 
         $this->calculateTotal();
     }
@@ -103,8 +133,8 @@ class Items extends Component
                     'serial' => $this->serial ?: 0,
                     'rootline_id' => $this->rootline_id,
                     'sales_track_item_id' => $this->sales_track_item_id,
-                    'unique_no'=>$this->sales_from.'~'.$this->vno,
-                    'group'=>$this->group,
+                    'unique_no' => $this->sales_from.'~'.$this->vno,
+                    'group' =>$this->group,
                     'vno' => $this->vno ?: 0,
                     'vdate' => $this->vdate,
                     'sales_from' => $this->sales_from,
@@ -131,9 +161,8 @@ class Items extends Component
                 $obj->serial = $this->serial;
                 $obj->rootline_id = $this->rootline_id;
                 $obj->sales_track_item_id = $this->sales_track_item_id;
-                $obj->vno = $this->vno;
-                $obj->unique_no = $this->unique_no;
-                $obj->group = $this->group;
+                $obj->unique_no = $this->unique_no;;
+                $obj->group = $this->group;;
                 $obj->vdate = $this->vdate;
                 $obj->sales_from = $this->sales_from;
                 $obj->client_id = $this->client_id;
@@ -149,7 +178,7 @@ class Items extends Component
                 $obj->active_id = $this->active_id;
                 $obj->user_id = auth()->id();
                 $obj->save();
-                DB::table('sales_bill_items')->where('sales_bill_id', '=', $obj->id)->delete();
+                DB::table('sales_bill_items')->where('sales_track_bill_id', '=', $obj->id)->delete();
                 $this->saveItem($obj->id);
                 $message = "Updated";
             }
@@ -280,12 +309,35 @@ class Items extends Component
     }
     #endregion
 
+
+    #region[mark as entered]
+    public function markAsEntered()
+    {
+        $bill = SalesBillItem::search($this->searches)
+            ->where('sales_track_bill_id', '=', $this->sales_track_bill_id)->get();
+
+        foreach ($bill as $row) {
+            $obj = SalesBillItem::find($row->id);
+            $obj->active_id = Active::NOTACTIVE;
+            $obj->save();
+        }
+
+        $obj = SalesBill::find($this->sales_track_bill_id);
+        $obj->active_id = Active::NOTACTIVE;
+        $obj->save();
+
+        $this->redirect(route('salesTracks.Bills', [$this->sales_track_item_id]));
+
+    }
+    #endregion
+
     #region[re-render]
     public function reRender()
     {
         $this->render();
     }
     #endregion
+
 
     #region[Calculate total]
 
@@ -652,8 +704,7 @@ class Items extends Component
         $obj = Vehicle::create([
             'client_id' => $this->sales_from,
             'vname' => $name,
-            'active_id' => '1',
-            'user_id'=>auth()->id()
+            'active_id' => '1'
         ]);
         $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshVehicle($v);
@@ -670,14 +721,14 @@ class Items extends Component
     #region[render]
     public function render()
     {
+
         $this->getColourList();
         $this->getLedgerList();
         $this->getProductList();
         $this->getVehicleList();
         $this->getSizeList();
-        return view('livewire.audit.sales-track.bills.items');
+        return view('livewire.audit.sales-track.bills.upsert');
     }
-
     public function getRoute(): void
     {
         $this->redirect(route('salesTracks.Bills',[$this->sales_track_item_id]));

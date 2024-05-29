@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('rootline_items', function (Blueprint $table) {
             $table->id();
-            $table->string('serial')->nullable();
+            $table->integer('serial')->nullable();
             $table->foreignId('rootline_id')->references('id')->on('rootlines');
             $table->foreignId('client_id')->references('id')->on('clients');
             $table->smallInteger('active_id')->nullable();

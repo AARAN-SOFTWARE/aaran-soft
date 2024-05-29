@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Audit\SalesTrack\Report;
 
+use Aaran\Audit\Models\SalesTrack\Rootline;
+use Aaran\Audit\Models\SalesTrack\RootlineItems;
 use Aaran\Audit\Models\SalesTrack\SalesBill;
 use Aaran\Audit\Models\SalesTrack\SalesBillItem;
 use Aaran\Audit\Models\SalesTrack\SalesTrack;
 use Aaran\Audit\Models\SalesTrack\SalesTrackItem;
-use Aaran\Audit\Models\SalesTrack\Track;
 use Aaran\Audit\Models\SalesTrack\TrackReport;
 use App\Livewire\Trait\CommonTrait;
 use Livewire\Component;
@@ -17,12 +18,15 @@ class SalesBillReport extends Component
     #region[property]
     use CommonTrait;
 
-    public $tracks;
+    public $rootLine_id;
+    public $rootLines;
+
     public $salesTracks;
-    public $track_id;
     public $salesTrack_id;
-    public $trackItem_id;
-    public $trackItems = [];
+    public $salesTrackItems;
+    public $salesTrackItem_id;
+
+    public $group;
     public $salesBillitem;
     public $checked;
     public $sales_bill_id;
@@ -30,39 +34,37 @@ class SalesBillReport extends Component
     #endregion
 
     #region[mount]
-    public function mount()
+    public function mount(): void
     {
-        $this->salesTracks = SalesTrack::all();
+        $this->rootLines = Rootline::all();
     }
     #endregion
 
-    #region[track Item]
-    public function track_item()
+    #region[salesTrack]
+    public function salesTrack(): void
     {
-        $this->trackItems = SalesTrackItem::where('sales_track_id', '=', $this->salesTrack_id)
+        $this->salesTracks = SalesTrack::where('rootline_id', '=', $this->rootLine_id)
             ->get();
     }
     #endregion
 
-    #region[track Item]
-    public function track()
+    #region[salesTrackItem]
+    public function salesTrackItem()
     {
-        $this->tracks = Track::where('sales_track_id', '=', $this->salesTrack_id)
-            ->get();
+        $this->salesTrackItems = SalesTrackItem::where('sales_track_id', '=', $this->salesTrack_id)->get();
     }
     #endregion
+
 
     #region[getChecked]
     public function getChecked($id)
     {
-        $this->sales_bill_id=$id;
-        $obj=SalesBill::find($id);
-        if($this->sales_bill_id){
+        $obj = SalesBill::find($id);
+        if ($id) {
             TrackReport::create([
-                'track_id'=>$this->track_id,
-                'sales_bill_id' => $this->sales_bill_id,
-                'client_id'=>$obj->sales_from,
-                'vno'=>$obj->vno,
+                'sales_bill_id' => $id,
+                'unique_no' => $obj->unique_no,
+                'user_id' => auth()->id(),
                 'checked' => '1',
             ]);
         }
@@ -72,28 +74,34 @@ class SalesBillReport extends Component
     #region[list]
     public function getList()
     {
-        $this->sortField='vno';
-        $this->track_item();
-        $this->track();
+        $this->sortField = 'vno';
+        $this->salesTrack();
+        $this->salesTrackItem();
 
-        $this->trackReport=TrackReport::where('track_id', '=', $this->track_id)->get();
+        $this->trackReport = TrackReport::all();
 
-        $salesBill = SalesBillItem::
-        join('sales_bills', 'sales_bills.id', '=', 'sales_bill_items.sales_bill_id')
-            ->join('track', 'track.id', '=', 'sales_bills.track_id')
-            ->join('track_items', 'track_items.id', '=', 'sales_bills.track_item_id')
+        $salesBill = SalesBillItem::join('sales_bills', 'sales_bills.id', '=', 'sales_bill_items.sales_track_bill_id')
+
+//            ->join('sales_track_items', 'sales_track_items.id', '=', 'sales_bills.sales_track_item_id')
+//
+//            ->join('sales_tracks', 'sales_tracks.id', '=', 'sales_track_items.sales_track_id')
+
             ->join('products', 'products.id', '=', 'sales_bill_items.product_id')
             ->join('hsncodes', 'hsncodes.id', '=', 'products.hsncode_id')
-                ->where('sales_bills.track_id', '=', $this->track_id)
-            ->when($this->trackItem_id,function ($query,$trackItem_id){
-                return $query->where('sales_bills.track_item_id', '=', $trackItem_id);
+            ->where('sales_bills.rootline_id', '=', $this->rootLine_id)
+
+            ->when($this->group, function ($query, $group) {
+                return $query->where('sales_bills.group', '=', $group);
             })
 
-            ->when($this->start_date,function ($query,$start_date){
-                return $query->whereDate('sales_bills.vdate','>=',$start_date);
+            ->when($this->salesTrackItem_id, function ($query, $salesTrackItem_id) {
+                return $query->where('sales_bills.sales_track_item_id', '=', $salesTrackItem_id);
             })
-            ->when($this->end_date,function ($query,$end_date){
-                return $query->whereDate('sales_bills.vdate','<=',$end_date);
+            ->when($this->start_date, function ($query, $start_date) {
+                return $query->whereDate('sales_bills.vdate', '>=', $start_date);
+            })
+            ->when($this->end_date, function ($query, $end_date) {
+                return $query->whereDate('sales_bills.vdate', '<=', $end_date);
             })
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->where('sales_bills.active_id', '=', $this->activeRecord)
@@ -102,14 +110,14 @@ class SalesBillReport extends Component
 
 
         return $salesBill
-        ->unique('vno');
+            ->unique('unique_no');
     }
     #endregion
 
     #region[render]
     public function render()
     {
-        return view('livewire.audit.track.sales-bill-report')->with([
+        return view('livewire.audit.sales-track.report.sales-bill-report')->with([
             'list' => $this->getList()
         ]);
     }
