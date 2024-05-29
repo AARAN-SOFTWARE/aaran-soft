@@ -1,6 +1,6 @@
 <div>
 
-    <x-slot name="header">UiTask - Show</x-slot>
+    <x-slot name="header">UiTask -{{$title}} </x-slot>
     <div class="max-w-6xl mx-auto  border-gray-400 rounded-md  ">
         <div class=" p-6 pt-12 pb-6  rounded-md space-y-4">
 
@@ -55,7 +55,7 @@
                     <!-- Replies  ----------------------------------------------------------------------------------------->
 
 
-                    <div class="text-left text-xl font-serif border-t border-gray-200 h-4 py-5">REPLIES</div>
+                    <div class="text-left text-xl font-serif border-t border-gray-200 h-4 py-5">Comments</div>
 
                     <div class="ml-24 px-2 border-b border-gray-200  ">
 
@@ -67,7 +67,8 @@
                                     <button wire:click="fullView('{{$row->id}}')">
                                         <img
                                             class="  h-20 w-20 transition duration-300 ease-in-out hover:scale-110 "
-                                            src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->image)) }}">
+                                            src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->image)) }}"
+                                            alt="">
                                     </button>
                                 </div>
 
@@ -92,7 +93,7 @@
                             </div>
 
                         @empty
-
+                            <div>&nbsp;</div>
                         @endforelse
                     </div>
                 </div>
@@ -103,7 +104,7 @@
                 <div>
                     <div class="flex flex-col gap-3 py-3">
                         <label for="reply"
-                               class="w-[8rem] font-bold text-zinc-700 tracking-wide py-2">Comments</label>
+                               class="w-[8rem] font-bold text-zinc-400 tracking-wide py-2">Write on</label>
                         <textarea rows="5" id="reply" wire:model="ui_reply" autocomplete="off" autofocus
                                   class="appearance-none rounded-lg
                                                   py-2 px-2 bg-white text-gray-800 w-2/4
@@ -156,7 +157,7 @@
                 <x-jet.modal :maxWidth="'6xl'" wire:model.defer="showEditModal_1">
                     <div class="px-6 pt-4">
                         <img class="rounded-xl justify-items-start h-full w-full"
-                             src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$full_image)) }}">
+                             src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$full_image)) }}" alt="">
                     </div>
                     <div class="px-6 py-3 bg-gray-100 text-right">
                         <div class="w-full flex justify-end gap-3">

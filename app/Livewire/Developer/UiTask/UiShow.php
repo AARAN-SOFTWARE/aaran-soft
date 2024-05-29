@@ -18,6 +18,7 @@ class UiShow extends Component
     use WithFileUploads;
 
     #region[Properties]
+    public $title = '';
     public $ui_task_id;
     public string $body;
     public string $allocated;
@@ -107,7 +108,10 @@ class UiShow extends Component
             $this->actives = $obj->actives ? 0 : 1;
             $this->ui_pic = $obj->ui_pic;
             $this->updated_at = $obj->updated_at;
+
+            $this->title = $obj->vname;
             return $obj;
+
         }
         return null;
     }
