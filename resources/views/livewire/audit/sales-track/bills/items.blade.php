@@ -116,7 +116,10 @@
                         {{\Aaran\Audit\Models\Client::getName($client_id)}}</label>
                 </div>
                 <!--group----------------------------------------------------------------------------------------->
+
+
                 <x-input.model-text wire:model="group" :label="'Group'"/>
+
 
             </div>
 

@@ -34,20 +34,15 @@
                     @endforeach
                 </x-input.model-select>
             </div>
-            @php
-                $groups=10;
-//             if($rootLine_id){
-//                 $groups=$list->unique('group')->count();
-//             }
-            @endphp
+
             <div class="w-full">
                 <x-input.model-select wire:model.live="group" wire:change="getList" :label="'Group'">
                     <option value="">Choose....</option>
-                    @if($rootLine_id)
-                        @for($i=1;$i<=$groups;$i++)
-                            <option value="{{$i}}">{{$i}}</option>
-                        @endfor
-                    @endif
+                    @foreach($groups as $group)
+                        <option value="{{$group->group}}">
+                            {{$group->group}}
+                        </option>
+                    @endforeach
                 </x-input.model-select>
             </div>
 
@@ -160,7 +155,7 @@
                         </x-table.cell-text>
 
 
-                        @forelse ($salesBillitem as $index =>  $items)
+                        @forelse ($salesBillItem as $index =>  $items)
 
                             @if($row->unique_no === $items->unique_no)
                                 <x-table.row>

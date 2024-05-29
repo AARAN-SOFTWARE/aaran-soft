@@ -10,6 +10,7 @@ use Aaran\Audit\Models\SalesTrack\SalesTrack;
 use Aaran\Audit\Models\SalesTrack\SalesTrackItem;
 use Aaran\Audit\Models\SalesTrack\TrackReport;
 use App\Livewire\Trait\CommonTrait;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class SalesBillReport extends Component
@@ -27,7 +28,8 @@ class SalesBillReport extends Component
     public $salesTrackItem_id;
 
     public $group;
-    public $salesBillitem;
+    public $groups = [];
+    public $salesBillItem;
     public $checked;
     public $sales_bill_id;
     public $trackReport;
@@ -38,7 +40,20 @@ class SalesBillReport extends Component
     {
         $this->rootLines = Rootline::all();
     }
+
     #endregion
+
+    public function loadGroup()
+    {
+        if ($this->rootLine_id) {
+            $this->groups = DB::table('sales_bills')
+                ->select('sales_bills.group')
+                ->where('rootline_id', $this->rootLine_id)
+                ->distinct()
+                ->get();
+        }
+    }
+
 
     #region[salesTrack]
     public function salesTrack(): void
@@ -77,6 +92,7 @@ class SalesBillReport extends Component
         $this->sortField = 'vno';
         $this->salesTrack();
         $this->salesTrackItem();
+        $this->loadGroup();
 
         $this->trackReport = TrackReport::all();
 
@@ -89,11 +105,9 @@ class SalesBillReport extends Component
             ->join('products', 'products.id', '=', 'sales_bill_items.product_id')
             ->join('hsncodes', 'hsncodes.id', '=', 'products.hsncode_id')
             ->where('sales_bills.rootline_id', '=', $this->rootLine_id)
-
             ->when($this->group, function ($query, $group) {
                 return $query->where('sales_bills.group', '=', $group);
             })
-
             ->when($this->salesTrackItem_id, function ($query, $salesTrackItem_id) {
                 return $query->where('sales_bills.sales_track_item_id', '=', $salesTrackItem_id);
             })
@@ -106,11 +120,13 @@ class SalesBillReport extends Component
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->where('sales_bills.active_id', '=', $this->activeRecord)
             ->get();
-        $this->salesBillitem = $salesBill;
+        $this->salesBillItem = $salesBill;
 
 
         return $salesBill
             ->unique('unique_no');
+
+
     }
     #endregion
 
