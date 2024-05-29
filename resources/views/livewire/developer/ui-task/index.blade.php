@@ -120,8 +120,8 @@
                     <x-input.model-text wire:model="vname" :label="'Title'"/>
 
                     <div class="px-1 py-4">
-{{--                        <x-input.rich-text wire:model="body" :placeholder="'Assign task here'"/>--}}
-                        <x-editor.simpleMDE wire:model="body"/>
+                        <x-input.rich-text wire:model="body" :placeholder="'Assign task here'"/>
+{{--                        <x-editor.simpleMDE wire:model="body"/>--}}
 
 
                     </div>
