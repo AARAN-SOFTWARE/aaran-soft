@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('track_reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rootline_id')->references('id')->on('rootlines')->cascadeOnDelete();
             $table->foreignId('sales_bill_id')->references('id')->on('sales_bills')->onDelete('cascade');
-            $table->foreignId('client_id')->references('id')->on('clients')->onDelete('cascade');
-            $table->string('vno')->nullable();
+            $table->string('unique_no')->nullable();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('checked')->nullable();
         });

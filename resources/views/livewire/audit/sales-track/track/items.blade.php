@@ -14,15 +14,6 @@
 
             <div class="flex gap-3 justify-end items-center text-right w-full">
 
-                <div class="font-bold w-2/4">
-                    <x-input.model-select wire:model.live="status" :label="'Filter'">
-                        <option class="text-gray-400" value=""> choose ..</option>
-                        @foreach(\App\Enums\Status::cases() as $status)
-                            <option value="{{$status->value}}">{{$status->getName()}}</option>
-                        @endforeach
-                    </x-input.model-select>
-                </div>
-
                 <div class="lg:w-2/4">
                     <x-input.model-date wire:model.live="vdate" :label="'Date'"/>
                 </div>

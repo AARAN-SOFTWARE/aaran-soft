@@ -70,6 +70,7 @@ class Index extends Component
     public function getList()
     {
         return SalesBill::search($this->searches)
+            ->where('active_id', '=', 1)
             ->where('sales_track_item_id', '=', $this->salesTrackIitem->id)
             ->orderBy('vdate', $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
