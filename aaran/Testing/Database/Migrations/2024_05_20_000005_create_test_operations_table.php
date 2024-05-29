@@ -18,7 +18,6 @@ return new class extends Migration
             $table->date('vdate');
             $table->string('vname')->unique();
             $table->longText('body');
-
             $table->foreignId('assignee')->references('id')->on('users')->onDelete('cascade');
             $table->string('status',3)->nullable();
             $table->boolean('verified')->nullable();

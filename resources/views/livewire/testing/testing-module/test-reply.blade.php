@@ -71,7 +71,6 @@
                     </div>
                 </div>
 
-
                 <!-- Image  ------------------------------------------------------------------------------------------->
 
                 <div class="flex w-full justify-between">
@@ -246,17 +245,4 @@
             </div>
         </div>
     </div>
-
-    <div  class="w-ful mt-10">
-        <div class="flex justify-center gap-2">
-            <div >
-                    <label for="">Markdown Sheet</label>
-                    <x-input.mde wire:model="mdCode" :placeholder="''"/>
-                    <button wire:click="getFile">Save</button>
-            </div>
-            <div class="w-96 h-96 border-2"></div>
-        </div>
-    </div>
-
-
 </div>
