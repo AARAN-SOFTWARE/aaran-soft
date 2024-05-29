@@ -559,3 +559,7 @@
     color: #fff;
     text-decoration: none;
 }
+
+.prose{
+    width: 100% !important;
+}
