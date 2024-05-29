@@ -1,10 +1,13 @@
 <div>
     <x-slot name="header">Sales Track Items</x-slot>
-    <x-forms.m-panel>
 
-        <div>
-            <a href="{{route('salesTracks')}}">Sales Track</a>
-        </div>
+
+    <div class="py-3">
+        <a href="{{route('salesTracks')}}" class="text-gray-400">Sales Track</a>
+    </div>
+
+
+    <x-forms.m-panel>
 
         <div class="flex w-full">
             <div class="text-xl font-bold w-full">

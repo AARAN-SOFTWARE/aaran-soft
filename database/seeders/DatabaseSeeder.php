@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use Aaran\Audit\Database\Seeders\ClientSeeder;
+use Aaran\Audit\Database\Seeders\RootlineItemsSeeder;
+use Aaran\Audit\Database\Seeders\RootlineSeeder;
 use Aaran\Common\Database\Seeders\BankSeeder;
 use Aaran\Common\Database\Seeders\S101_CitySeeder;
 use Aaran\Common\Database\Seeders\S102_StateSeeder;
@@ -67,6 +70,14 @@ class DatabaseSeeder extends Seeder
 
 //testing
         TestFileSeeder::run();
+
+
+        //AUDIT
+
+        ClientSeeder::run();
+        RootlineSeeder::run();
+        RootlineItemsSeeder::run();
+
     }
 
 }

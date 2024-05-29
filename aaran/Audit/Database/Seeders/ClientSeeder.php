@@ -10,22 +10,43 @@ class ClientSeeder extends Seeder
     public static function run(): void
     {
         Client::create([
-            'vname' => 'test',
-            'group'=>'01',
-            'payable'=>'1',
+            'vname' => 'SK ENTERPRISES',
+            'group' => 'SUNDAR',
+            'payable' => '1',
             'active_id' => '1',
-            'company_id'=>'2',
-            'user_id'=>'3'
+            'user_id' => '1'
         ]);
+
         Client::create([
-            'vname' => 'fun',
-            'group'=>'01',
-            'payable'=>'1',
+            'vname' => 'AARAN INDIA FASHION',
+            'group' => 'SUNDAR',
+            'payable' => '1',
             'active_id' => '1',
-            'company_id'=>'1',
-            'user_id'=>'1'
+            'user_id' => '1'
         ]);
 
+        Client::create([
+            'vname' => 'PRAPTHI IMPEX',
+            'group' => 'SUNDAR',
+            'payable' => '1',
+            'active_id' => '1',
+            'user_id' => '1'
+        ]);
 
+        Client::create([
+            'vname' => 'FASHION FABRICS',
+            'group' => 'SUNDAR',
+            'payable' => '1',
+            'active_id' => '1',
+            'user_id' => '1'
+        ]);
+
+        Client::create([
+            'vname' => 'SHONA EXPORTS',
+            'group' => 'SUNDAR',
+            'payable' => '1',
+            'active_id' => '1',
+            'user_id' => '1'
+        ]);
     }
 }

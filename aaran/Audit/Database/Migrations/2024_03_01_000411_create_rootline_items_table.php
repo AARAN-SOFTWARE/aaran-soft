@@ -8,9 +8,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('tracks', function (Blueprint $table) {
+        Schema::create('rootline_items', function (Blueprint $table) {
             $table->id();
-            $table->string('vname')->unique();
+            $table->string('serial')->nullable();
+            $table->foreignId('rootline_id')->references('id')->on('rootlines');
+            $table->foreignId('client_id')->references('id')->on('clients');
             $table->smallInteger('active_id')->nullable();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
@@ -19,6 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('tracks');
+        Schema::dropIfExists('track_items');
     }
 };
