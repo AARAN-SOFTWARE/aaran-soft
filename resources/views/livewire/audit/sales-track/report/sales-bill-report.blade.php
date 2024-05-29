@@ -1,42 +1,53 @@
 <div>
     <x-slot name="header">Sales Bill Report</x-slot>
-{{--        @if($this->track_id)--}}
-
-{{--            {{dd($list)}}--}}
-{{--        @endif--}}
-
 
     <x-forms.m-panel>
 
         <div class="flex justify-between gap-5 w-full">
             <div class="w-full">
-                <x-input.model-select wire:model.live="salesTrack_id" wire:change="getList" :label="'Track'">
-                    <option>Choose....</option>
+                <x-input.model-select wire:model.live="rootLine_id" wire:change="getList" :label="'Root Line'">
+                    <option value="">Choose....</option>
+                    @foreach($rootLines as $rootLine)
+                        <option value="{{$rootLine->id}}">
+                            {{ $rootLine->vname }}
+                        </option>
+                    @endforeach
+                </x-input.model-select>
+            </div>
+
+            <div class="w-full">
+                <x-input.model-select wire:model.live="salesTrack_id" wire:change="getList" :label="'Sales Track'">
+                    <option value="">Choose....</option>
                     @foreach($salesTracks as $salesTrack)
                         <option value="{{$salesTrack->id}}">
-                            {{ $salesTrack->vname }}
+                            {{$salesTrack->rootline->vname.'~'.$salesTrack->vcode}}
                         </option>
                     @endforeach
                 </x-input.model-select>
             </div>
 
             <div class="w-full">
-                <x-input.model-select wire:model.live="track_id" wire:change="getList" :label="'Track'">
-                    <option>Choose....</option>
-                    @foreach($tracks as $track)
-                        <option value="{{$track->id}}">
-                            {{$track->salesTrack->vname.' - '.\App\Enums\Months::tryFrom($track->smonth->month)->getName().'-'.$track->smonth->year }}
-                        </option>
+                <x-input.model-select wire:model.live="salesTrackItem_id" wire:change="getList" :label="'TrackItem'">
+                    <option value="">Choose....</option>
+                    @foreach($salesTrackItems as $salesTrackItem)
+                        <option value="{{$salesTrackItem->id}}">{{$salesTrackItem->client->vname}}</option>
                     @endforeach
                 </x-input.model-select>
             </div>
-
+            @php
+                $groups=10;
+//             if($rootLine_id){
+//                 $groups=$list->unique('group')->count();
+//             }
+            @endphp
             <div class="w-full">
-                <x-input.model-select wire:model.live="trackItem_id" wire:change="getList" :label="'Sales From'">
-                    <option>Choose....</option>
-                    @foreach($trackItems as $item)
-                        <option value="{{$item->id}}">{{$item->client->vname}}</option>
-                    @endforeach
+                <x-input.model-select wire:model.live="group" wire:change="getList" :label="'Group'">
+                    <option value="">Choose....</option>
+                    @if($rootLine_id)
+                        @for($i=1;$i<=$groups;$i++)
+                            <option value="{{$i}}">{{$i}}</option>
+                        @endfor
+                    @endif
                 </x-input.model-select>
             </div>
 
@@ -86,10 +97,11 @@
 
                         <x-table.cell-text right>
                             @forelse($trackReport as $trackreport)
-                                {{$row->id.$trackreport->sales_bill_id}}
-                            <input type="checkbox" @if($row->vno===$trackreport->vno && $row->sales_from===$trackreport->client_id)  checked @endif class="text-green-600">
-                                @empty
-                            <input wire:click="getChecked({{$row->id}})"   type="checkbox" class="text-green-600">
+                                <input type="checkbox" @if($row->unique_no===$trackreport->unique_no)  checked
+                                       @endif class="text-green-600">
+                            @empty
+                                <input wire:click="getChecked({{$row->sales_track_bill_id}})" type="checkbox"
+                                       class="text-green-600">
                             @endforelse
                         </x-table.cell-text>
 
@@ -99,19 +111,19 @@
 
                         <x-table.cell-text center>
                             <div class="text-purple-500 font-semibold text-lg">
-                            {{ $row->vno }}
+                                {{ $row->vno }}
                             </div>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
                             <div class="text-purple-500 font-semibold text-lg">
-                            {{date('d-m-Y', strtotime($row->vdate))}}
+                                {{date('d-m-Y', strtotime($row->vdate))}}
                             </div>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
                             <div class="text-purple-500 font-semibold text-lg">
-                            {{ $row->client->vname ??'' }}
+                                {{  \Aaran\Audit\Models\Client::getName($row->client_id) ?? '' }}
                             </div>
                         </x-table.cell-text>
 
@@ -121,7 +133,7 @@
 
                         <x-table.cell-text center>
                             <div class="text-purple-500 font-semibold text-lg">
-                            {{ $row->total_qty }}
+                                {{ $row->total_qty }}
                             </div>
                         </x-table.cell-text>
 
@@ -131,26 +143,26 @@
 
                         <x-table.cell-text right>
                             <div class="text-purple-500 font-semibold text-lg">
-                            {{ $row->taxable+0 }}
+                                {{ $row->taxable+0 }}
                             </div>
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
                             <div class="text-purple-500 font-semibold text-lg">
-                            {{ $row->gst+0 }}
+                                {{ $row->gst+0 }}
                             </div>
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
                             <div class="text-purple-500 font-semibold text-lg">
-                            {{ $row->grand_total+0 }}
+                                {{ $row->grand_total+0 }}
                             </div>
                         </x-table.cell-text>
 
 
                         @forelse ($salesBillitem as $index =>  $items)
 
-                            @if($row->vno === $items->vno)
+                            @if($row->unique_no === $items->unique_no)
                                 <x-table.row>
                                     <x-table.cell-text colspan="3">
                                         &nbsp;
@@ -163,7 +175,7 @@
 
                                     <x-table.cell-text center>
                                         <div class="text-gray-500 text-sm">
-                                        {{ $items->description }}
+                                            {{ $items->description }}
                                         </div>
                                     </x-table.cell-text>
 

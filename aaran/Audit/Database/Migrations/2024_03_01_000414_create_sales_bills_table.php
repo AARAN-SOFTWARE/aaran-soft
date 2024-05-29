@@ -16,7 +16,8 @@ return new class extends Migration
             $table->integer('serial')->nullable();
             $table->foreignId('rootline_id')->references('id')->on('rootlines')->cascadeOnDelete();
             $table->foreignId('sales_track_item_id')->references('id')->on('sales_track_items');
-
+            $table->string('unique_no')->unique();
+            $table->integer('group');
             $table->string('vno')->nullable();
             $table->date('vdate')->nullable();
             $table->foreignId('sales_from')->references('id')->on('clients');

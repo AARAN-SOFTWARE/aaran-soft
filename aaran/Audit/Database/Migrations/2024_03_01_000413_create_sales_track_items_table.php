@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('sales_track_items', function (Blueprint $table) {
             $table->id();
-            $table->string('serial')->nullable();
+            $table->integer('serial')->nullable();
             $table->date('vdate')->nullable();
             $table->foreignId('rootline_id')->references('id')->on('rootlines')->cascadeOnDelete();
             $table->foreignId('sales_track_id')->references('id')->on('sales_tracks');

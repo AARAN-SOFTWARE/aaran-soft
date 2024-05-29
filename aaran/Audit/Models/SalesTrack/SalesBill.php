@@ -29,6 +29,12 @@ class SalesBill extends Model
                 ->max('vno') + 1;
     }
 
+    public static function gruopNo($id)
+    {
+        return  static::where('sales_track_item_id', '=',$id)
+                ->max('group') + 1;
+    }
+
 
 
     public function client(): BelongsTo
