@@ -2,7 +2,7 @@
 
 namespace Aaran\Audit\Database\Factories;
 
-use Aaran\Audit\Models\Common\Vehicle;
+use Aaran\Audit\Models\Vehicle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VehicleFactory extends Factory

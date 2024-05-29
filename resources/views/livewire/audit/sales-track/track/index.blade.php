@@ -10,6 +10,7 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vdate')"/>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>VCode</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Date</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Track</x-table.header-text>
                 <x-table.header-action/>
@@ -26,15 +27,21 @@
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             <a href="{{route('salesTracks.items',[$row->id])}}">
-                           {{date('d-m-Y', strtotime($row->vdate))}}
+                                {{  $row->vcode }}
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             <a href="{{route('salesTracks.items',[$row->id])}}">
-                                {{ $row->track->vname}}
+                                {{date('d-m-Y', strtotime($row->vdate))}}
+                            </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text center>
+                            <a href="{{route('salesTracks.items',[$row->id])}}">
+                                {{ $row->rootline->vname}}
                             </a>
                         </x-table.cell-text>
 
@@ -55,12 +62,15 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
+
+            <x-input.model-text wire:model="vcode" :label="'VCode'"/>
+
             <x-input.model-date wire:model="vdate" :label="'Date'"/>
 
-            <x-input.model-select wire:model="track_id" :label="'Track'">
+            <x-input.model-select wire:model="rootline_id" :label="'Root line'">
                 <option class="text-gray-400"> choose ..</option>
-                @foreach($tracks as $tack)
-                    <option value="{{$tack->id}}">{{$tack->vname}}</option>
+                @foreach($rootlines as $rootline)
+                    <option value="{{$rootline->id}}">{{$rootline->vname}}</option>
                 @endforeach
             </x-input.model-select>
 

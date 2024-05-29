@@ -23,8 +23,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('rootlines', \App\Livewire\Audit\SalesTrack\Rootline\Index::class)->name('rootlines');
     Route::get('rootlines/{id}/items', \App\Livewire\Audit\SalesTrack\Rootline\Items::class)->name('rootlines.items');
 
-    Route::get('salesTracks', \App\Livewire\Audit\SalesTrack\SalesTrack\Index::class)->name('salesTracks');
-    Route::get('salesTracks/{id}/items', \App\Livewire\Audit\SalesTrack\SalesTrack\Items::class)->name('salesTracks.items');
+    Route::get('salesTracks', \App\Livewire\Audit\SalesTrack\Track\Index::class)->name('salesTracks');
+    Route::get('salesTracks/{id}/items', \App\Livewire\Audit\SalesTrack\Track\Items::class)->name('salesTracks.items');
 
     Route::get('salesTracks/{id}/Bills', App\Livewire\Audit\SalesTrack\Bills\Index::class)->name('salesTracks.Bills');
     Route::get('salesTracks/{id}/billItems', App\Livewire\Audit\SalesTrack\Bills\Items::class)->name('salesTracks.billItems');

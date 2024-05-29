@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Livewire\Audit\SalesTrack\SalesTrack;
+namespace App\Livewire\Audit\SalesTrack\Track;
 
+use Aaran\Audit\Models\SalesTrack\Rootline;
 use Aaran\Audit\Models\SalesTrack\SalesTrack;
-use Aaran\Audit\Models\SalesTrack\Track;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
@@ -15,27 +15,29 @@ class Index extends Component
 
     use CommonTrait;
 
-    public $vdate;
-    public $track_id;
+    public string $vcode = '';
+    public string $vdate = '';
+    public string $rootline_id = '';
 
-    public $tracks;
+    public mixed $rootlines;
     #endregion
 
     #region[mount]
     public function mount()
     {
-        $this->tracks = Track::where('active_id', '=', 1)->get();
+        $this->rootlines = Rootline::where('active_id', '=', 1)->get();
     }
     #endregion
 
     #region[getSave]
     public function getSave(): void
     {
-        if ($this->track_id != '') {
+        if ($this->rootline_id != '') {
             if ($this->vid == "") {
                 SalesTrack::create([
+                    'vcode' => $this->vcode,
                     'vdate' => $this->vdate,
-                    'track_id' => $this->track_id,
+                    'rootline_id' => $this->rootline_id,
                     'active_id' => $this->active_id,
                     'user_id' => auth()->id(),
                 ]);
@@ -43,14 +45,15 @@ class Index extends Component
 
             } else {
                 $obj = SalesTrack::find($this->vid);
+                $obj->vcode = $this->vcode;
                 $obj->vdate = $this->vdate;
-                $obj->track_id = $this->track_id;
+                $obj->rootline_id = $this->rootline_id;
                 $obj->active_id = $this->active_id;
                 $obj->user_id = auth()->id();
                 $obj->save();
                 $message = "Updated";
             }
-            $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
 
@@ -62,8 +65,9 @@ class Index extends Component
         if ($id) {
             $obj = SalesTrack::find($id);
             $this->vid = $obj->id;
+            $this->vcode = $obj->vcode;
             $this->vdate = $obj->vdate;
-            $this->track_id = $obj->track_id;
+            $this->rootline_id = $obj->rootline_id;
             $this->active_id = $obj->active_id;
             return $obj;
         }
@@ -75,9 +79,10 @@ class Index extends Component
     public function clearFields()
     {
         $this->vdate = carbon::now()->format('Y-m-d');
-        $this->track_id = '';
+        $this->rootline_id = '';
+        $this->vcode = '';
         $this->vid = '';
-        $this->active_id=true;
+        $this->active_id = true;
 
     }
     #endregion
@@ -94,7 +99,7 @@ class Index extends Component
 #region[render]
     public function render()
     {
-        return view('livewire.audit.sales-track.sales-track.index')->with([
+        return view('livewire.audit.sales-track.track.index')->with([
             'list' => $this->getList()
         ]);
     }

@@ -3,7 +3,7 @@
 namespace Aaran\Audit\Models\SalesTrack;
 
 use Aaran\Audit\Models\Client;
-use Aaran\Audit\Models\Common\Vehicle;
+use Aaran\Audit\Models\Vehicle;
 use Aaran\Common\Models\Colour;
 use Aaran\Common\Models\Ledger;
 use Aaran\Common\Models\Size;

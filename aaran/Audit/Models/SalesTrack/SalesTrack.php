@@ -21,8 +21,8 @@ class SalesTrack extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function track():BelongsTo
+    public function rootline():BelongsTo
     {
-        return $this->belongsTo(Track::class);
+        return $this->belongsTo(Rootline::class);
     }
 }

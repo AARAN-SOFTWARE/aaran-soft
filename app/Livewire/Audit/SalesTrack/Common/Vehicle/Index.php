@@ -3,7 +3,7 @@
 namespace App\Livewire\Audit\SalesTrack\Common\Vehicle;
 
 use Aaran\Audit\Models\Client;
-use Aaran\Audit\Models\Common\Vehicle;
+use Aaran\Audit\Models\Vehicle;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Str;
 use Livewire\Component;

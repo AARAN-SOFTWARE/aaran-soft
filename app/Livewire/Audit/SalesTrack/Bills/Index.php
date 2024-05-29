@@ -29,7 +29,7 @@ class Index extends Component
         $this->vdate = $this->salesTrackIitem->vdate;
 //        $this->track_item_id = $salesTrackIitem_id;
 //        $this->track_id = $track_id;
-//        $this->sales-track=Track::find($track_id);
+//        $this->track=Track::find($track_id);
     }
     #endregion
 

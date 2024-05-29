@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Audit\SalesTrack\Bills;
 
-use Aaran\Audit\Models\Common\Vehicle;
 use Aaran\Audit\Models\SalesTrack\SalesBill;
 use Aaran\Audit\Models\SalesTrack\SalesBillItem;
 use Aaran\Audit\Models\SalesTrack\SalesTrackItem;
 use Aaran\Audit\Models\SalesTrack\TrackItems;
+use Aaran\Audit\Models\Vehicle;
 use Aaran\Common\Models\Colour;
 use Aaran\Common\Models\Ledger;
 use Aaran\Common\Models\Size;

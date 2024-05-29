@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Audit\SalesTrack\SalesTrack;
+namespace App\Livewire\Audit\SalesTrack\Track;
 
 use Aaran\Audit\Models\Client;
 use Aaran\Audit\Models\SalesTrack\SalesTrack;
@@ -147,7 +147,7 @@ class Items extends Component
 
     public function render()
     {
-        return view('livewire.audit.sales-track.sales-track.items')->with([
+        return view('livewire.audit.sales-track.track.items')->with([
             'list' => $this->getList()
         ]);
     }
