@@ -5,10 +5,12 @@ namespace App\Livewire\Taskmanager\Task;
 use Aaran\Audit\Models\Client;
 use Aaran\Taskmanager\Models\Task;
 use App\Enums\Active;
+use App\Enums\Channels;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\Image;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -58,7 +60,7 @@ class Mytask extends Component
                     'client_id' => $this->client_id,
                     'title' => $this->vname,
                     'body' => $this->body,
-                    'channel' => $this->channel,
+                    'channel' => $this->channel ?: Channels::ALL->value,
                     'allocated' => $this->allocated,
                     'status' => 1,
                     'verified' => $this->verified,
@@ -154,6 +156,7 @@ class Mytask extends Component
         $this->allocated = '';
         $this->photos = [];
         $this->isUploaded = false;
+        $this->active_id = '1';
 
     }
     #endregion

@@ -98,9 +98,12 @@
                     <!-- Replies  ------------------------------------------------------------------------------------->
 
                     <div class="w-2/4 mt-2 border-l-2 px-2">
+
                         @forelse ($replies as $row)
-                            <div class="p-3 lg:flex flex-row justify-between border-b border-gray-200  ">
-                                <div class="px-5 ">
+
+                            <div class="p-3 w-full lg:flex justify-between border-b border-gray-200  ">
+
+                                <div class="px-5 w-2/3 ">
                                     {{$row->vname}}
                                 </div>
 
