@@ -2,13 +2,13 @@
 <li class="flex align-center flex-col cursor-pointer">
 
     <div
-            @click="selected !== 666 ? selected = 666 : selected = null"
-            class="relative flex flex-row justify-between items-center h-11 focus:outline-none hover:bg-gray-700
+        @click="selected !== 666 ? selected = 666 : selected = null"
+        class="relative flex flex-row justify-between items-center h-11 focus:outline-none hover:bg-gray-700
                                 text-gray-500 hover:text-gray-200 border-l-4 border-transparent hover:border-blue-500 pr-3">
 
                         <span class="inline-flex justify-center items-center ml-4">
-                            <x-icons.icon :icon="'calender-1'" class="w-5 h-auto block"/>
-                             <x-menu.header>Audit Common</x-menu.header>
+                            <x-icons.icon :icon="'list-bullet'" class="w-5 h-auto block"/>
+                             <x-menu.header>Sales Track</x-menu.header>
                         </span>
 
         <span class="inline-flex justify-center items-center">
@@ -27,7 +27,7 @@
 
         <ul class="grid-cols-1 grid bg-gray-800">
 
-            @include('components.menu.items.audit-common-menu')
+            @include('components.menu.items.sales-track-menu')
             <li class="bg-gray-900 mt-0.5"></li>
         </ul>
     </div>

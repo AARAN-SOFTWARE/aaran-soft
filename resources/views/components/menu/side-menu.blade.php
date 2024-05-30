@@ -35,9 +35,8 @@
 
             @if(Aaran\Aadmin\Src\MainMenu::hasAudit())
                 <x-menu.sub.audit/>
-                <x-menu.sub.audit-common/>
+                <x-menu.sub.sales-track/>
             @endif
-
 
             @if(Aaran\Aadmin\Src\MainMenu::hasSundar())
                 <x-menu.sub.sundar/>
