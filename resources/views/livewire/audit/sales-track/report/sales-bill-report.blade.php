@@ -198,9 +198,11 @@
                                         {{ $items->qty * $items->price * $items->product->gst_percent/100 }}
                                     </x-table.cell-text>
 
-                                    {{--                                <x-table.cell-text right>--}}
-                                    {{--                                    {{ $items->qty * $items->price+($items->qty * $items->price * $items->product->gst_percent/100) }}--}}
-                                    {{--                                </x-table.cell-text>--}}
+                                    <x-table.cell-text right>
+                                            <a href="{{route('salesTracks.upsert',[$items->sales_track_bill_id])}}">
+                                                <x-table.edit/>
+                                            </a>
+                                    </x-table.cell-text>
                                 </x-table.row>
                             @endif
                         @empty
