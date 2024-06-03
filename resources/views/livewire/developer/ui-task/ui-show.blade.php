@@ -14,12 +14,12 @@
 
                             <div class="h-32">
                                 <a class="cursor-pointer capitalize font-serif text-3xl px-2 hover:underline underline-offset-8">
-                                    {{ $vname }}
+                                   {{$title}}
                                 </a>
                             </div>
 
                             <div
-                                    class="w-40 h-8 lg:flex rounded-xl items-center justify-center text-lg {{  \App\Enums\Status::tryFrom($status)->getStyle() }}">
+                                class="w-40 h-8 lg:flex rounded-xl items-center justify-center text-lg {{  \App\Enums\Status::tryFrom($status)->getStyle() }}">
                                 {{  \App\Enums\Status::tryFrom($status)->getName() }}
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                             <div>
                                 <span class=" text-sm py-0.5 text-gray-500">Assign To :</span>
                                 <span
-                                        class=" text-md text-gray-600">{{\Aaran\Developer\Models\UiTask::allocated($allocated) }}</span>
+                                    class=" text-md text-gray-600">{{\Aaran\Developer\Models\UiTask::allocated($allocated) }}</span>
                             </div>
                         </div>
 
@@ -57,27 +57,27 @@
 
                     <div class="text-left text-xl font-serif border-t border-gray-200 h-4 py-5">Comments</div>
 
-                    <div class="ml-24 px-2 border-b border-gray-200  ">
+                    <div class="ml-24 px-2 border-b border-gray-200 ">
 
                         @forelse ($ui_replies as $row)
 
-                            <div class="border-b border-gray-200 p-5 flex hover:bg-gray-100 rounded-lg">
+                            <div class="border-b border-gray-200 p-5 flex hover:bg-gray-100 rounded-lg  group relative">
 
                                 <div class="h-20 w-20 mt-0.5 relative overflow-hidden bg-cover bg-no-repeat">
                                     @if($row->image !='empty')
                                         <button wire:click="fullView('{{$row->id}}')">
                                             <img
-                                                    class="  h-20 w-20 transition duration-300 ease-in-out hover:scale-110 "
-                                                    src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->image)) }}"
-                                                    alt="">
+                                                class=" h-20 w-20 transition duration-300 ease-in-out hover:scale-110 "
+                                                src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->image)) }}"
+                                                alt="">
                                         </button>
                                     @endif
                                 </div>
 
-                                <div class="w-full flex justify-between">
-                                    <div class="px-5 ">
-                                        &nbsp; {{$row->vname}}
-                                        <div class="text-sm text-gray-500 ">
+                                <div class="w-3/4 flex justify-between">
+                                    <div class="px-5 overflow-auto w-full text-wrap">
+                                        &nbsp; {{$row->ui_reply}}
+                                        <div class="text-sm text-gray-500 mt-0.5 ml-2 ">
                                             {{$row->user->name}}
                                             &nbsp; @&nbsp;{{date('d-m-Y h:i a', strtotime($row->updated_at))}}
                                         </div>
@@ -85,11 +85,16 @@
 
                                 </div>
 
-                                <div class="">
+                                <div class="inline-flex gap-3 ">
                                     <button wire:click="edit({{ $row->id }})"
                                             class=" px-1.5 rounded-md  ">
                                         <x-icons.icon :icon="'pencil'"
-                                                      class="h-5 w-auto block text-blue-500 hover:scale-110"/>
+                                                      class="h-5 w-auto block text-blue-500 hover:scale-110 invisible group-hover:visible"/>
+                                    </button>
+                                    <button wire:click="getDelete({{ $row->id }})"
+                                            class=" px-1.5 rounded-md  ">
+                                        <x-icons.icon :icon="'trash'"
+                                                      class="h-5 w-auto block text-red-500 hover:scale-110 invisible group-hover:visible"/>
                                     </button>
                                 </div>
                             </div>
@@ -99,6 +104,7 @@
                         @endforelse
                     </div>
                 </div>
+                <x-modal.delete/>
 
 
                 <!-- Comments ------------------------------------------------------------------------------------------------->
