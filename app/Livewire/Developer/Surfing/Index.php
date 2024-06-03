@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Developer\Surfing;
 
-use Aaran\Developer\Models\surfing;
+use Aaran\Developer\Models\Surfing;
 use Aaran\Developer\Models\SurfingCategory;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Collection;
@@ -23,7 +23,7 @@ class Index extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
-                surfing::create([
+                Surfing::create([
                     'vname' => Str::ucfirst($this->vname),
                     'webpage'=>$this->webpage,
                     'surfing_category_id'=>$this->surfing_category_id,
@@ -32,7 +32,7 @@ class Index extends Component
                 $message = "Saved";
 
             } else {
-                $obj = surfing::find($this->vid);
+                $obj = Surfing::find($this->vid);
                 $obj->vname = Str::ucfirst($this->vname);
                 $obj->webpage = $this->webpage;
                 $obj->surfing_category_id=$this->surfing_category_id;
@@ -50,7 +50,7 @@ class Index extends Component
     public function getObj($id)
     {
         if ($id) {
-            $obj = surfing::find($id);
+            $obj = Surfing::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
             $this->webpage = $obj->webpage;
@@ -66,7 +66,7 @@ class Index extends Component
     #region[list]
     public function getList()
     {
-        return surfing::search($this->searches)
+        return Surfing::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
