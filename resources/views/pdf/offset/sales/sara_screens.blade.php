@@ -26,7 +26,7 @@
                 line-height: 1;
                 font-family: SansSerif;
             }
-            .comp-details {
+            .comp-address {
                 font-size: 10px;
                 line-height: .5;
                 text-align: center;
@@ -199,8 +199,7 @@
                     <img src="{{ public_path('images/sara_screen.png')}}" alt="logo" width=""/>
                 </span>
                 <span class="comp-address">
-                    <p>{{$cmp->get('address_1')}}</p>
-                    <p>{{$cmp->get('address_2')}},{{$cmp->get('city')}}</p>
+                    <p>{{$cmp->get('address_1')}}, {{$cmp->get('address_2')}},{{$cmp->get('city')}}</p>
                     <p>{{$cmp->get('contact')}} - {{$cmp->get('email')}}</p>
                     <p>{{$cmp->get('gstin')}}&nbsp;-&nbsp;{{$cmp->get('msme')}}</p>
                 </span>
