@@ -116,17 +116,22 @@ class Items extends Component
     {
         $rootlineItems = RootlineItems::where('rootline_id', '=', $this->sales_track->rootline_id)->get();
 
+        $data = SalesTrackItem::where('sales_track_id', '=', $this->sales_track->id)
+            ->where('vdate', '=', $this->vdate)->get();
+
         foreach ($rootlineItems as $index => $row) {
-            SalesTrackItem::create([
-                'serial' => $index + 1,
-                'vdate' => $this->vdate,
-                'rootline_id' => $this->sales_track->rootline_id,
-                'sales_track_id' => $this->sales_track->id,
-                'client_id' => $row->client_id,
-                'status' => '1',
-                'active_id' => Active::ACTIVE,
-                'user_id' => auth()->id()
-            ]);
+            if ($data->count() == 0) {
+                SalesTrackItem::create([
+                    'serial' => $index + 1,
+                    'vdate' => $this->vdate,
+                    'rootline_id' => $this->sales_track->rootline_id,
+                    'sales_track_id' => $this->sales_track->id,
+                    'client_id' => $row->client_id,
+                    'status' => '1',
+                    'active_id' => Active::ACTIVE,
+                    'user_id' => auth()->id()
+                ]);
+            }
         }
     }
     #endregion
