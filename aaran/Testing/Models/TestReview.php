@@ -23,4 +23,14 @@ class TestReview extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function code(): BelongsTo
+    {
+        return $this->belongsTo(Code::class);
+    }
+
+    public function codes($str)
+    {
+        return code::find($str)->content;
+    }
 }

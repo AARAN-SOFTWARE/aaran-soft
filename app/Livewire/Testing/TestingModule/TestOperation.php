@@ -124,12 +124,6 @@ class TestOperation extends Component
     }
     #endregion
 
-    #region[image]
-//    public function testImage(): void
-//    {
-//        $this->isUploaded = true;
-//    }
-
     public function save_item($id, $images)
     {
         foreach ($images as $image) {
