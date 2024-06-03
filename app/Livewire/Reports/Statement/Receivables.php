@@ -43,21 +43,17 @@ class Receivables extends Component
             $obj = Contact::find($this->byParty);
             $this->opening_balance = $obj->opening_balance;
 
-            $sale = Sale::where('contact_id', '=', $this->byParty)
-                ->where('acyear', '=',  session()->get('acyear'))
-                ->firstOrFail();
-            $this->invoiceDate_first = $sale->invoice_date?:Carbon::now()->format('Y-m-d');
-
-//            if ($this->start_date) {
+            $this->invoiceDate_first = Carbon::now()->subYear()->format('Y-m-d');
 
                 $this->sale_total = Sale::whereDate('invoice_date', '<', $this->start_date?:$this->invoiceDate_first)
+                    ->where('contact_id','=',$this->byParty)
                     ->sum('grand_total');
 
                 $this->receipt_total = Receipt::whereDate('vdate', '<', $this->start_date?:$this->invoiceDate_first)
+                    ->where('contact_id','=',$this->byParty)
                     ->sum('receipt_amount');
 
                 $this->opening_balance = $this->opening_balance + $this->sale_total - $this->receipt_total;
-//            }
         }
         return $this->opening_balance;
     }
