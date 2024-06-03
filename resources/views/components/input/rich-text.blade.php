@@ -21,7 +21,7 @@
     <style>[data-trix-button-group="file-tools"] { display: none !important; }</style>
     <input id="x" class="hidden">
     <trix-editor x-ref="trix" input="x" placeholder="{{$placeholder}}"
-                 class="overflow-auto text-ellipsis form-textarea block w-full text
+                 class="overflow-y-auto text-ellipsis form-textarea block w-[40rem] text
                     rounded-lg appearance-none border-2 {{$height}}
                     border-gray-200 py-2 px-3 bg-white text-zinc-700
                     placeholder-gray-400 text-base focus:outline-none

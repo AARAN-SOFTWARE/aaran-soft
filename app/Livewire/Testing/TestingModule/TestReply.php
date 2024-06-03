@@ -9,11 +9,15 @@ use App\Enums\Active;
 use App\Enums\Status;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class TestReply extends Component
 {
     use CommonTrait;
+    use WithFileUploads;
+
     #region[properties]
     public string $actions_id;
     public string $body;
@@ -70,7 +74,6 @@ class TestReply extends Component
             }
         }
         redirect()->to(route('operation.reply', [$this->operations_id]));
-
         $this->clearFields();
         return '';
     }
@@ -136,6 +139,31 @@ class TestReply extends Component
 
     }
     #endregion
+
+//    #region[replyImage]
+//    public function saveImage()
+//    {
+//        if ($this->image) {
+//
+//            $image = $this->image;
+//            $filename = $this->image->getClientOriginalName();
+//
+//            if (Storage::disk('public')->exists(Storage::path('public/images/' . $this->old_image))) {
+//                Storage::disk('public')->delete(Storage::path('public/images/' . $this->old_image));
+//            }
+//            $image->storeAs('public/images', $filename);
+//            return $filename;
+//
+//        } else {
+//            if ($this->old_image) {
+//                return $this->old_image;
+//            } else {
+//
+//                return $this->image = 'empty';
+//            }
+//        }
+//    }
+//    #endregion
 
     #region[Render]
     public function getRoute(): void

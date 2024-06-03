@@ -9,43 +9,55 @@
         @forelse ($list as $row)
 {{--            {{dd($list)}}--}}
             <div class="w-full flex justify-center">
-                <div class="w-3/4 bg-zinc-200 rounded-xl mt-10">
+                <div class="w-3/4 bg-zinc-50 rounded-xl mt-10">
                     <div class="flex justify-between p-5">
                         <a href="{{route('operation.reply',[$row->id])}}">
-                            <div class="text-2xl font-mono font-bold">{{ $row->actions->vname ?: " "}} - {{ $row->vname }}</div>
+                            <div class="text-lg font-sans font-semibold">{{ $row->actions->vname ?: " "}} - {{ $row->vname }}</div>
                         </a>
                         <div class="w-1/4 flex justify-between">
-                            <div class="text-gray-500 text-sm font-bold">{{ $row->vdate }}</div>
-                            <div class="font-mono">By : <span class="font-mono font-bold"> {{ $row->user->name }}</span></div>
-                            <div >
+                            <div class="text-gray-500 text-xs pt-1.5 font-semibold">{{ $row->vdate }}</div>
+                            <div class="font-sans text-sm">By : <span class="font-sans font-bold"> {{ $row->user->name }}</span></div>
+                            <div>
                                 <button wire:click="edit({{ $row->id }})"
                                         class="">
                                     <x-icons.icon :icon="'pencil'" class="h-4 w-auto block text-blue-500 hover:scale-110"/>
                                 </button>
+                                <x-button.link wire:click="getDelete({{$row->id}})">&nbsp;
+                                    <x-icons.icon :icon="'trash'"
+                                                  class="text-red-600 h-4 w-auto block"/>
+                                </x-button.link>
+                                <x-modal.delete/>
                             </div>
                         </div>
                     </div>
                     <div class="flex px-5">
-                        <div class=" w-96 h-80 p-3 rounded bg-white overflow-y-scroll">
+                        <div class=" w-96 h-80 p-3 rounded bg-white overflow-y-auto">
                             <div class="grid grid-cols-1 gap-2 justify-evenly ">
                                 @foreach($images as $img)
                                     @if($img->vname==$row->vname)
+                                        <a href="{{route('operation.reply',[$row->id])}}">
                                         <img src="{{ URL(\Illuminate\Support\Facades\Storage::url($img->image)) }}" alt="" class="w-96 h-auto rounded-xl ">
+                                        </a>
                                     @endif
                                 @endforeach
                             </div>
                         </div>
 
-                        <div class="w-3/4 h-80 bg-gray-700 text-white rounded p-4">
-                            <div class="w-full h-72 overflow-y-scroll grid grid-cols-1 gap-2 ">{!! $row->body !!}</div>
+                        <div class="w-3/4 h-80 bg-stone-100 text-gray-500 font-serif rounded p-4">
+                            <div class=" h-72 grid grid-cols-1 gap-2 ">
+                                <a class="overflow-y-auto text-wrap  " href="{{route('operation.reply',[$row->id])}}">
+
+                                {!! $row->body !!}
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="flex justify-between p-5">
-                        <div><span class="font-mono">Assignee  :  </span><span class="font-mono font-semibold">{{ \Aaran\Testing\Models\TestOperation::assign($row->assignee) }}</span></div>
+                        <div class="text-sm"><span class="font-sans">Assignee  :  </span><span class="font-sans font-semibold">{{ \Aaran\Testing\Models\TestOperation::assign($row->assignee) }}</span></div>
                         <div class="flex-col">
-                            <div class="text-center rounded {{ \App\Enums\Status::tryFrom($row->status)->getStyle() }}">{{ \App\Enums\Status::tryFrom($row->status)->getName() }}</div>
+                            <div class="text-center font-serif rounded {{ \App\Enums\Status::tryFrom($row->status)->getStyle() }}">{{ \App\Enums\Status::tryFrom($row->status)->getName() }}</div>
                             <div class="flex">
-                                <div class="text-gray-500 text-sm font-bold">{{ \App\Helper\ConvertTo::dateTime($row->updated_at)}} </div>
+                                <div class="text-gray-500 pt-2 text-xs font-bold">{{ \App\Helper\ConvertTo::dateTime($row->updated_at)}} </div>
                                 <div class="w-4 h-4 {{\App\Enums\Active::tryFrom($row->active_id)->getName()}}"></div>
                             </div>
                         </div>
@@ -53,83 +65,7 @@
                     </div>
                 </div>
             </div>
-{{--            <div class="border border-gray-400 w-full lg:flex h-44">--}}
 
-{{--                <!------ Id and Status -------------------------------------------------------------------------------->--}}
-{{--                <div class="w-1/12 lg:flex-col">--}}
-
-
-{{--                    <div class="h-3/4 border border-gray-400 ">--}}
-{{--                        <a href="{{route('operation.reply',[$row->id])}}"--}}
-{{--                           class="cursor-pointer text-2xl h-3/4 lg:flex items-center justify-center ">--}}
-{{--                            {{ $row->id}}--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-
-{{--                    <div--}}
-{{--                        class="lg:flex items-center justify-center h-1/4 border border-gray-400  {{ \App\Enums\Status::tryFrom($row->status)->getStyle() }}">--}}
-{{--                        {{ \App\Enums\Status::tryFrom($row->status)->getName() }}--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-{{--                <!------ content -------------------------------------------------------------------------------------->--}}
-
-{{--                <div class="flex-col w-full p-5">--}}
-
-{{--                    <div class="h-1/4 lg:flex justify-between ">--}}
-{{--                        <div class="w-full">--}}
-{{--                            <a href="{{route('operation.reply',[$row->id])}}"--}}
-{{--                               class="cursor-pointer w-full text-2xl text-left px-2 hover:underline underline-offset-8">--}}
-
-{{--                                {{ $row->actions->vname ?: " "}}&nbsp;&nbsp;-&nbsp;&nbsp;--}}
-{{--                                {{ $row->vname }}--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-{{--                        <div class="w-full">--}}
-{{--                                {{ $row->vdate }}--}}
-{{--                        </div>--}}
-
-{{--                        <div class="w-full flex gap-3 items-end justify-end my-auto ">--}}
-
-{{--                            <a class="cursor-pointer">By : {{ $row->user->name }}</a>--}}
-
-{{--                            <button wire:click="edit({{ $row->id }})"--}}
-{{--                                    class=" px-1.5 rounded-md  mr-3 inline-flex gap-3">--}}
-{{--                                <x-icons.icon :icon="'pencil'" class="h-5 w-auto block px-1.5 text-blue-500 hover:scale-110"/>--}}
-
-{{--                            </button>--}}
-
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-{{--                    <div class="h-2/4 p-3 ml-5 overflow-hidden w-3/4 text-gray-600 ">--}}
-{{--                        {!! $row->body !!}--}}
-{{--                    </div>--}}
-
-{{--                    <div class="h-1/4 ">--}}
-{{--                        <div class="flex flex-row justify-between ">--}}
-
-{{--                            <div class="px-3 flex flex-row justify-between ">--}}
-
-{{--                                <div class="flex flex-row gap-2 mt-2 ">--}}
-{{--                                    <span class=" text-sm py-0.5 text-gray-500">Assignee :</span>--}}
-{{--                                    <span--}}
-{{--                                        class=" text-md text-gray-600">{{ \Aaran\Testing\Models\TestOperation::assign($row->assignee) }}</span>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-
-{{--                            <div class="px-3 py-1 flex flex-row gap-3 items-center">--}}
-{{--                                {{ \App\Helper\ConvertTo::dateTime($row->updated_at)}}--}}
-{{--                                <div--}}
-{{--                                    class="text-center flex items-center w-4 h-4 mr-2 text-sm rounded-full {{\App\Enums\Active::tryFrom($row->active_id)->getStyle()}}">--}}
-{{--                                    &nbsp;--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
 
             <!-- Create Record ---------------------------------------------------------------------------------------->
 
@@ -145,13 +81,6 @@
                     <div class="xl:flex flex-row gap-3 py-3">
                     <label class="w-[10rem] text-zinc-500 tracking-wide ">Action</label>
                     <label class="text-lg font-bold">{{Aaran\Testing\Models\TestOperation::action($actions_id)}}</label></div>
-{{--                    <x-input.model-select wire:model="actions_id" :label="'action'">--}}
-{{--                        <option class="text-gray-400"> choose ..</option>--}}
-{{--                        @foreach($actions as $action)--}}
-{{--                            <option value="{{$action->id}}">{{$action->vname}}</option>--}}
-{{--                        @endforeach--}}
-{{--                    </x-input.model-select>--}}
-
                     <x-input.model-date wire:model="vdate" :label="'Date'"/>
                     <x-input.model-text wire:model="vname" :label="'Title'"/>
 
