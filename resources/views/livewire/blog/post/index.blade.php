@@ -33,8 +33,8 @@
                                         </div>
 
                                         <div>
-                                            <h1 class="text-3xl text-left capitalize">
-                                                {{ $row->title }}
+                                            <h1 class="text-3xl h-16 overflow-hidden hover:underline underline-offset-8 text-left capitalize ">
+                                                {{ $row->title,50 }}
                                             </h1>
 
                                             <div class=" text-lg mt-3 text-ellipsis overflow-hidden  space-y-4">

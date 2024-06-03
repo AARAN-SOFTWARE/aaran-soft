@@ -67,21 +67,18 @@ class UiShow extends Component
 
                 $obj = UiReply::create([
                     'ui_task_id' => $this->ui_task_id,
-                    'vname' => $this->ui_reply,
-                    'verified' => $this->verified,
-                    'verified_on' => $this->verified_on,
-                    'user_id' => Auth::user()->id,
+                    'ui_reply' => $this->ui_reply,
+                    'user_id' => \Auth::id(),
                     'image' => $this->saveImage()
                 ]);
             } else {
-                $reply = UiReply::find($this->vid);
-                $reply->vname = $this->vname;
-                $reply->verified = $this->verified;
-                $reply->verified_on = $this->verified_on;
-                $reply->image = $this->saveImage();
+                $obj = UiReply::find($this->vid);
+                $obj->ui_reply = $this->ui_reply;
+                $obj->user_id = \Auth::id();
+                $obj->image = $this->saveImage();
 
-                if ($reply->user_id == auth()->id()) {
-                    $reply->save();
+                if ($obj->user_id == auth()->id()) {
+                    $obj->save();
                 }
             }
         }
@@ -89,7 +86,21 @@ class UiShow extends Component
         $this->clearFields();
         return '';
     }
+
     #endregion
+
+    public function delete(): void
+    {
+
+        if ($this->vid) {
+            $obj = $this->getObj($this->vid);
+            $obj->delete();
+            $this->showDeleteModal = false;
+            $this->clearFields();
+            redirect()->to(route('ui-task.show', [$this->ui_task_id]));
+        }
+    }
+
 
     #region[Obj]
     public function getData($id)
@@ -99,7 +110,7 @@ class UiShow extends Component
             $obj = UiTask::find($id);
 
             $this->ui_task_id = $obj->id;
-            $this->vname = $obj->vname;
+            $this->title = $obj->vname;
             $this->body = $obj->body;
             $this->allocated = $obj->allocated;
             $this->status = $obj->status;
@@ -109,12 +120,13 @@ class UiShow extends Component
             $this->ui_pic = $obj->ui_pic;
             $this->updated_at = $obj->updated_at;
 
-            $this->title = $obj->vname;
+//            $this->title = $obj->vname;
             return $obj;
 
         }
         return null;
     }
+
 
     #endregion
 
@@ -122,25 +134,22 @@ class UiShow extends Component
     {
         if ($id) {
             $obj = UiReply::find($id);
-
+            $this->vid = $obj->id;
             $this->ui_reply_id = $obj->id;
-            $this->vname = $obj->vname;
-            $this->verified = $obj->verified;
-            $this->verified_on = $obj->verified_on;
+            $this->ui_reply = $obj->ui_reply;
             $this->old_image = $obj->image;
         }
         return $obj;
     }
 
+
     #region[ClearFields]
     public function clearFields()
     {
+        $this->vid = '';
         $this->ui_reply = '';
-        $this->verified_on = '';
-        $this->verified = '';
         $this->image = '';
         $this->old_image = '';
-
     }
     #endregion
 

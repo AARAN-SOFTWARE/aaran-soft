@@ -80,7 +80,7 @@
                 <!-- Comments ----------------------------------------------------------------------------------------->
 
                 @foreach($list as $row)
-                    <div class="mt-4 rounded-lg my-2 w-full text-lg text-ellipsis space-y-2">
+                    <div class="mt-4 rounded-lg my-2 w-full text-lg text-ellipsis space-y-2  group relative">
                         <div>
                             <span class="opacity-65 text-right capitalize w-full">&nbsp;{!!($row->user->name)!!}</span>
                         </div>
@@ -92,9 +92,9 @@
 
                             <div class="flex">
                                 <x-icons.icon :icon="'pencil'" wire:click="editComment({{ $row->id }})"
-                                              class="text-gray-400 h-5 hover:cursor-pointer hover:text-black px-0.5 py-0.5 hover:rounded-sm inline-flex"/>
+                                              class="text-gray-400 h-5 hover:cursor-pointer hover:text-black px-0.5 py-0.5 hover:rounded-sm inline-flex invisible group-hover:visible "/>
                                 <x-icons.icon :icon="'trash'" wire:click="deleteComment({{ $row->id }})"
-                                              class="text-gray-400 h-5 hover:cursor-pointer hover:text-black px-0.5 py-0.5 hover:rounded-sm inline-flex"/>
+                                              class="text-gray-400 h-5 hover:cursor-pointer hover:text-black px-0.5 py-0.5 hover:rounded-sm inline-flex invisible group-hover:visible"/>
                             </div>
                         </div>
                     </div>
