@@ -13,7 +13,7 @@
                         <div class="flex justify-between mt-5">
 
                             <div class="h-32">
-                                <a class="cursor-pointer capitalize font-serif text-3xl px-2 hover:underline underline-offset-8">
+                                <a class="cursor-pointer capitalize font-serif text-3xl  hover:underline underline-offset-8">
                                    {{$title}}
                                 </a>
                             </div>
@@ -76,7 +76,7 @@
 
                                 <div class="w-3/4 flex justify-between">
                                     <div class="px-5 overflow-auto w-full text-wrap">
-                                        &nbsp; {{$row->ui_reply}}
+                                        &nbsp; {{$row->vname}}
                                         <div class="text-sm text-gray-500 mt-0.5 ml-2 ">
                                             {{$row->user->name}}
                                             &nbsp; @&nbsp;{{date('d-m-Y h:i a', strtotime($row->updated_at))}}
@@ -138,9 +138,8 @@
                                  src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_image))}}"
                                  alt="">
                         @else
-                            <div class="h-48 w-full justify-center flex items-center">
-                                Select image
-                            </div>
+
+
                         @endif
                     </div>
 
