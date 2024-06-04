@@ -35,6 +35,7 @@ class TestReply extends Component
     public $tags;
     public $users;
     public $replies;
+    public $reply_id;
     public $commentsCount;
     public $verified;
     public $images;
@@ -45,7 +46,7 @@ class TestReply extends Component
     public function mount($id): void
     {
         $this->route = url()->previous();
-        $this->getObj($id);
+        $this->getData($id);
         $this->replies = TestReview::where('operations_id', $id)->get();
         $this->commentsCount = TestReview::where('operations_id', $id)->count();
         $this->images = TestImage::where('operations_id','=', $id)->get();
@@ -60,7 +61,7 @@ class TestReply extends Component
             'reply' => 'required',
         ]);
         if ($this->reply) {
-            if ($this->operations_id) {
+            if ($this->vid == "") {
 
                 TestReview::create([
                     'operations_id' => $this->operations_id,
@@ -68,9 +69,13 @@ class TestReply extends Component
                     'verified' => $this->verified,
                     'user_id' => Auth::user()->id,
                 ]);
-
-                $this->reply = '';
-                $this->verified = '';
+            } else {
+                $obj = TestReview::find($this->vid);
+                $obj->vname = $this->reply;
+                $obj->user_id = Auth::user()->id;
+                if ($obj->user_id == auth()->id()) {
+                    $obj->save();
+                }
             }
         }
         redirect()->to(route('operation.reply', [$this->operations_id]));
@@ -79,8 +84,21 @@ class TestReply extends Component
     }
     #endregion
 
+    #region[delete]
+    public function delete(): void
+    {
+        if ($this->vid) {
+            $obj = $this->getObj($this->vid);
+            $obj->delete();
+            $this->showDeleteModal = false;
+            $this->clearFields();
+            redirect()->to(route('operation.reply', [$this->operations_id]));
+        }
+    }
+    #endregion
+
     #region[get Obj]
-    public function getObj($id)
+    public function getData($id)
     {
         if ($id) {
 
@@ -102,9 +120,24 @@ class TestReply extends Component
     }
     #endregion
 
+    #region[get obj]
+    public function getObj($id)
+    {
+        if ($id) {
+            $obj = TestReview::find($id);
+            $this->vid = $obj->id;
+            $this->reply_id = $obj->id;
+            $this->reply = $obj->vname;
+        }
+        return $obj;
+    }
+    #endregion
+
     public function clearFields():void
     {
+        $this->vid = '';
         $this->vname='';
+        $this->reply='';
     }
 
     #region[Update]

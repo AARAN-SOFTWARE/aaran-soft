@@ -11,13 +11,50 @@
             <div class="w-full flex justify-center">
                 <div class="w-3/4 bg-zinc-50 rounded-xl mt-10">
                     <div class="flex justify-between p-5">
-                        <a href="{{route('operation.reply',[$row->id])}}">
-                            <div class="text-lg font-sans font-semibold">{{ $row->actions->vname ?: " "}} - {{ $row->vname }}</div>
-                        </a>
-                        <div class="w-1/4 flex justify-between">
-                            <div class="text-gray-500 text-xs pt-1.5 font-semibold">{{ $row->vdate }}</div>
-                            <div class="font-sans text-sm">By : <span class="font-sans font-bold"> {{ $row->user->name }}</span></div>
+                        <div class="flex-col">
                             <div>
+                                <a href="{{route('operation.reply',[$row->id])}}">
+                                    <div class="text-lg font-sans font-semibold">{{ $row->actions->vname ?: " "}} - {{ $row->vname }}</div>
+                                </a>
+                            </div>
+                            <div class="flex">
+                                <div class="text-gray-500 pt-2 text-xs font-bold"> <time>{{ $row->created_at->diffForHumans() }}</time></div> &nbsp;
+{{--                                <div class="text-gray-500 text-xs pt-2 font-semibold">{{ $row->vdate }}</div>--}}
+                            </div>
+
+                        </div>
+
+                        <div class="w-[15rem] h-6 flex justify-between">
+                            <div class="font-sans text-sm text-gray-600 font-semibold flex"><div class=""> <x-icons.icon icon="user" class="w-6 h-6 pt-0.5" /> </div> <div>  {{ $row->user->name }}</div></div>
+                            <div class="w-28 text-center font-serif rounded {{ \App\Enums\Status::tryFrom($row->status)->getStyle() }}">{{ \App\Enums\Status::tryFrom($row->status)->getName() }}</div>
+                        </div>
+                    </div>
+                    <div class="flex px-5">
+                        <div class=" w-1/3 h-80 p-3 rounded bg-white overflow-y-auto">
+                            <div class="flex justify-center">
+                                @foreach($images as $img)
+                                    @if($img->vname==$row->vname)
+                                        <a href="{{route('operation.reply',[$row->id])}}">
+                                        <img src="{{ URL(\Illuminate\Support\Facades\Storage::url($img->image)) }}" alt="" class="w-[25rem] h-auto rounded-xl ">
+                                        </a>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="w-2/3 h-80 bg-stone-100 text-gray-500 font-serif rounded p-4">
+                            <div class=" h-72 grid grid-cols-1 gap-2 ">
+                                <a class="overflow-y-auto text-wrap  " href="{{route('operation.reply',[$row->id])}}">
+
+                                {!! $row->body !!}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="  w-[25rem] text-sm ml-10 pt-2 text-end"><span class="font-sans">Assignee  :  </span><span class="font-sans font-semibold">{{ \Aaran\Testing\Models\TestOperation::assign($row->assignee) }}</span></div>
+                        <div class="flex-col">
+                            <div class=" mr-5 pt-2">
                                 <button wire:click="edit({{ $row->id }})"
                                         class="">
                                     <x-icons.icon :icon="'pencil'" class="h-4 w-auto block text-blue-500 hover:scale-110"/>
@@ -28,36 +65,7 @@
                                 </x-button.link>
                                 <x-modal.delete/>
                             </div>
-                        </div>
-                    </div>
-                    <div class="flex px-5">
-                        <div class=" w-96 h-80 p-3 rounded bg-white overflow-y-auto">
-                            <div class="grid grid-cols-1 gap-2 justify-evenly ">
-                                @foreach($images as $img)
-                                    @if($img->vname==$row->vname)
-                                        <a href="{{route('operation.reply',[$row->id])}}">
-                                        <img src="{{ URL(\Illuminate\Support\Facades\Storage::url($img->image)) }}" alt="" class="w-96 h-auto rounded-xl ">
-                                        </a>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="w-3/4 h-80 bg-stone-100 text-gray-500 font-serif rounded p-4">
-                            <div class=" h-72 grid grid-cols-1 gap-2 ">
-                                <a class="overflow-y-auto text-wrap  " href="{{route('operation.reply',[$row->id])}}">
-
-                                {!! $row->body !!}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between p-5">
-                        <div class="text-sm"><span class="font-sans">Assignee  :  </span><span class="font-sans font-semibold">{{ \Aaran\Testing\Models\TestOperation::assign($row->assignee) }}</span></div>
-                        <div class="flex-col">
-                            <div class="text-center font-serif rounded {{ \App\Enums\Status::tryFrom($row->status)->getStyle() }}">{{ \App\Enums\Status::tryFrom($row->status)->getName() }}</div>
                             <div class="flex">
-                                <div class="text-gray-500 pt-2 text-xs font-bold">{{ \App\Helper\ConvertTo::dateTime($row->updated_at)}} </div>
                                 <div class="w-4 h-4 {{\App\Enums\Active::tryFrom($row->active_id)->getName()}}"></div>
                             </div>
                         </div>

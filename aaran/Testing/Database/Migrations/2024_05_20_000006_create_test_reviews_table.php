@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('vname')->nullable();
             $table->string('verified')->nullable();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->longText('image');
             $table->timestamps();
         });
     }
