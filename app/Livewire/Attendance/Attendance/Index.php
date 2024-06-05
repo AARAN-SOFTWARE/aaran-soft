@@ -34,12 +34,12 @@ class Index extends Component
     #region[Save]
     public function save()
     {
-        $this->validate(['uniqueno'=>'unique:attendances,uniqueno']);
         if ($this->vid == "") {
+            $this->validate(['uniqueno' => 'unique:attendances,uniqueno']);
             Attendance::create([
                 'user_id' => Auth::id(),
                 'vdate' => $this->vdate,
-                'uniqueno'=> $this->uniqueno,
+                'uniqueno' => $this->uniqueno,
                 'in_time' => $this->in_time,
                 'out_time' => $this->out_time,
                 'amount' => $this->amount,
@@ -62,21 +62,22 @@ class Index extends Component
     #region[List]
     public function getlist()
     {
-        return Attendance::all()->whereBetween('vdate', [
-            Carbon::now()->startOfMonth()->format('Y-m-d'),
-            Carbon::now()->endOfMonth()->format('Y-m-d')
-        ])->where('company_id', '=', session()->get('company_id'))->where('user_id', Auth::id());
+        return Attendance::where('user_id','=',auth()->id())
+            ->where('vdate','=',Carbon::now()->format('Y-m-d'))
+            ->where('company_id', '=', session()->get('company_id'))->get();
     }
+
     public function getlist_1()
     {
-        $this->data=User::all();
+        $this->data = User::all();
     }
+
     public function getdays()
     {
-        $this->present=Attendance::all()
+        $this->present = Attendance::all()
             ->when($this->days, function ($query, $days) {
-            return $query->where('user_id', $days);
-        });
+                return $query->where('user_id', $days);
+            });
     }
     #endregion
     #region[get Obj]
@@ -103,7 +104,7 @@ class Index extends Component
         if ($this->vid == "") {
             $this->in_time = Carbon::now()->format('g:i:s');
             $this->vdate = Carbon::parse(Carbon::now());
-            $this->uniqueno=Carbon::now()->format('Y-m-d').'~'.Auth::id();
+            $this->uniqueno = Carbon::now()->format('Y-m-d').'~'.Auth::id();
             $this->out_time = '';
             $this->save();
         }

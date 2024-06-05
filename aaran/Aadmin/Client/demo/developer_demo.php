@@ -7,7 +7,8 @@ use Aaran\Aadmin\Src\SaleEntry;
 return [
 
     'features' => [
-        Customise::todoList()
+        Customise::todoList(),
+        Customise::attendance()
     ],
 
     'customise' => [
