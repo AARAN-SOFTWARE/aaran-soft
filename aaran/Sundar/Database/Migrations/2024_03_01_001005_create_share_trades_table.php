@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('vdate')->nullable();
             $table->decimal('opening_balance')->nullable();
             $table->decimal('deposit',13,2)->nullable();
+            $table->decimal('profit',13,2)->nullable();
             $table->decimal('loosed',13,2)->nullable();
             $table->decimal('withdraw',13,2)->nullable();
             $table->decimal('charges',13,2)->nullable();

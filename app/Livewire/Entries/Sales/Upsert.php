@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
-use mysql_xdevapi\Exception;
 
 class Upsert extends Component
 {
