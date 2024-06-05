@@ -2,19 +2,22 @@
 
 namespace App\Livewire\Audit\SalesTrack\Bills;
 
-use Aaran\Audit\Models\SalesTrack\RootlineItems;
+use Aaran\Audit\Models\Client;
 use Aaran\Audit\Models\SalesTrack\SalesBill;
 use Aaran\Audit\Models\SalesTrack\SalesBillItem;
-use Aaran\Audit\Models\SalesTrack\SalesTrackItem;
 use Aaran\Audit\Models\Vehicle;
 use Aaran\Common\Models\Colour;
 use Aaran\Common\Models\Ledger;
 use Aaran\Common\Models\Size;
+use Aaran\Entries\Models\Sale;
+use Aaran\Entries\Models\Saleitem;
+use Aaran\Master\Models\Company;
+use Aaran\Master\Models\Contact_detail;
 use Aaran\Master\Models\Product;
 use App\Enums\Active;
 use App\Livewire\Trait\CommonTrait;
+use Aaran\Master\Models\Contact;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -34,7 +37,7 @@ class Upsert extends Component
     public mixed $showEditModal_1 = false;
     public mixed $products;
     public $category_id = '';
-    public mixed $sales_track_item_id='';
+    public mixed $sales_track_item_id = '';
     public mixed $vno = '';
     public mixed $vdate = '';
     public mixed $client_id = '';
@@ -58,22 +61,20 @@ class Upsert extends Component
     #endregion
 
 
-
-
     #region[mount]
     public function mount($id)
     {
         if ($id != 0) {
             $data = SalesBill::find($id);
             $this->vid = $data->id;
-            $this->sales_track_bill_id=$data->id;
-            $this->rootline_id=$data->rootline_id;
-            $this->sales_track_item_id=$data->sales_track_item_id;
-            $this->unique_no=$data->unique_no;
-            $this->group=$data->group;
+            $this->sales_track_bill_id = $data->id;
+            $this->rootline_id = $data->rootline_id;
+            $this->sales_track_item_id = $data->sales_track_item_id;
+            $this->unique_no = $data->unique_no;
+            $this->group = $data->group;
             $this->vdate = $data->vdate;
-            $this->vno=$data->vno;
-            $this->sales_from=$data->sales_from;
+            $this->vno = $data->vno;
+            $this->sales_from = $data->sales_from;
             $this->client_id = $data->client_id;
             $this->total_taxable = $data->taxable;
             $this->total_qty = $data->total_qty;
@@ -134,7 +135,7 @@ class Upsert extends Component
                     'rootline_id' => $this->rootline_id,
                     'sales_track_item_id' => $this->sales_track_item_id,
                     'unique_no' => $this->sales_from.'~'.$this->vno,
-                    'group' =>$this->group,
+                    'group' => $this->group,
                     'vno' => $this->vno ?: 0,
                     'vdate' => $this->vdate,
                     'sales_from' => $this->sales_from,
@@ -150,7 +151,7 @@ class Upsert extends Component
                     'vehicle_id' => $this->vehicle_id ?: '1',
                     'status' => '1',
                     'active_id' => $this->active_id ?: '0',
-                    'user_id'=>auth()->id(),
+                    'user_id' => auth()->id(),
                 ]);
                 $this->saveItem($obj->id);
                 $message = "Saved";
@@ -182,7 +183,7 @@ class Upsert extends Component
                 $this->saveItem($obj->id);
                 $message = "Updated";
             }
-            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
             $this->getRoute();
         }
 
@@ -203,7 +204,7 @@ class Upsert extends Component
                 'qty' => $sub['qty'],
                 'price' => $sub['price'],
                 'active_id' => '1',
-                'user_id'=>auth()->id(),
+                'user_id' => auth()->id(),
 
 
             ]);
@@ -313,6 +314,7 @@ class Upsert extends Component
     #region[mark as entered]
     public function markAsEntered()
     {
+        $this->salesEntry();
         $bill = SalesBillItem::search($this->searches)
             ->where('sales_track_bill_id', '=', $this->sales_track_bill_id)->get();
 
@@ -328,6 +330,80 @@ class Upsert extends Component
 
         $this->redirect(route('salesTracks.Bills', [$this->sales_track_item_id]));
 
+    }
+    #endregion
+    #region[sales Entry]
+    public $company_id;
+    public $contact_id;
+    public $order_id;
+    public mixed $billing_id = '';
+    public mixed $shipping_id = '';
+    public mixed $job_no = '';
+    public string $sales_type = '';
+    public string $destination = '';    
+    public string $style_id = '';
+    public string $despatch_id = '';
+    public string $transport_id = '';
+    public string $uniqueno = '';
+    public $po_no;
+    public $dc_no;
+    public $no_of_roll;
+
+    public function salesEntry()
+    {
+        $this->company_id = Company::where('vname', '=', Client::getName($this->sales_from))->first()->id;
+        $this->contact_id = Contact::where('vname', '=', Client::getName($this->client_id))->first()->id;
+        $this->uniqueno = "{$this->contact_id}~{$this->vno}~{$this->vdate}";
+        if ($this->uniqueno != '') {
+            $obj = Sale::create([
+                'uniqueno' => $this->company_id.'~'.session()->get('acyear').'~'.$this->vno,
+                'acyear' => session()->get('acyear'),
+                'company_id' => $this->company_id,
+                'contact_id' => $this->contact_id,
+                'invoice_no' => $this->vno,
+                'invoice_date' => $this->vdate,
+                'order_id' => $this->order_id ?: 1,
+                'billing_id' => $this->billing_id ?: Contact_detail::getId($this->contact_id),
+                'shipping_id' => $this->shipping_id ?: Contact_detail::getId($this->contact_id),
+                'style_id' => $this->style_id ?: 1,
+                'despatch_id' => $this->despatch_id ?: 1,
+                'job_no' => $this->job_no,
+                'sales_type' => $this->sales_type,
+                'transport_id' => $this->transport_id ?: 1,
+                'destination' => $this->destination,
+                'bundle' => $this->bundle,
+                'total_qty' => $this->total_qty,
+                'total_taxable' => $this->total_taxable,
+                'total_gst' => $this->total_gst,
+                'ledger_id' => $this->ledger_id ?: 1,
+                'additional' => $this->additional,
+                'round_off' => $this->round_off,
+                'grand_total' => $this->grand_total,
+                'active_id' => $this->active_id,
+            ]);
+            $this->saveSalesItem($obj->id);
+            $message = "Saved";
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
+        }
+    }
+
+    public function saveSalesItem($id): void
+    {
+        foreach ($this->itemList as $sub) {
+            Saleitem::create([
+                'sale_id' => $id,
+                'po_no' => $this->po_no,
+                'dc_no' => $this->dc_no,
+                'no_of_roll' => $this->no_of_roll,
+                'product_id' => $sub['product_id'],
+                'colour_id' => $sub['colour_id'] ?: '1',
+                'size_id' => $sub['size_id'] ?: '1',
+                'qty' => $sub['qty'],
+                'price' => $sub['price'],
+                'gst_percent' => $sub['gst_percent'],
+                'description' => $sub['description'],
+            ]);
+        }
     }
     #endregion
 
@@ -729,9 +805,10 @@ class Upsert extends Component
         $this->getSizeList();
         return view('livewire.audit.sales-track.bills.upsert');
     }
+
     public function getRoute(): void
     {
-        $this->redirect(route('salesTracks.Bills',[$this->sales_track_item_id]));
+        $this->redirect(route('salesTracks.Bills', [$this->sales_track_item_id]));
     }
     #endregion
 }

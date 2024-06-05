@@ -12,5 +12,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('socials', App\Livewire\Admin\Social\Index::class)->name('socials');
 
+    Route::get('sharetrades', App\Livewire\Admin\Trading\ShareTradeList::class)->name('sharetrades');
+
 
 });
