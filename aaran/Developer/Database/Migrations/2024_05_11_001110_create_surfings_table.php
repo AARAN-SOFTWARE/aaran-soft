@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('surfings', function (Blueprint $table) {
             $table->id();
             $table->string('vname')->unique();
-            $table->string('webpage')->nullable();
+            $table->longText('webpage')->nullable();
             $table->foreignId('surfing_category_id')->references('id')->on('surfing_categories');
             $table->smallInteger('active_id')->nullable();
         });
