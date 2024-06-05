@@ -44,6 +44,16 @@ class User extends Authenticatable
         ];
     }
 
+
+    public function isSundar(): bool
+    {
+        return in_array($this->email, [
+            'sundar@sundar.com',
+            'sundar@codexsun.com',
+        ]);
+    }
+
+
     public function isAdmin(): bool
     {
         return in_array($this->email, [
