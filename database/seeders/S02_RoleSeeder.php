@@ -11,7 +11,7 @@ class S02_RoleSeeder extends Seeder
     public static function run(): void
     {
         Role::create([
-            'vname' => 'admin',
+            'vname' => 'sundar',
             'active_id' => '1'
         ]);
     }

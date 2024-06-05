@@ -201,7 +201,7 @@ class MainMenu
     }
 
     /**
-     * Admin
+     * Sundar
      * @return bool
      */
     public static function hasAdmin(): bool
@@ -211,7 +211,7 @@ class MainMenu
 
     public static function admin(): string
     {
-        return 'admin';
+        return 'sundar';
     }
 
 

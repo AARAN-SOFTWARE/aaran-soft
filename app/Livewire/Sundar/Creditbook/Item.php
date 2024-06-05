@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Creditbook;
+namespace App\Livewire\Sundar\Creditbook;
 
 use Aaran\Sundar\Models\CreditBook;
 use Aaran\Sundar\Models\CreditBookItem;

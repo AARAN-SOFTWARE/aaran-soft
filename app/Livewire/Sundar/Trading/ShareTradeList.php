@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Trading;
+namespace App\Livewire\Sundar\Trading;
 
 use Aaran\Sundar\Models\ShareTrades;
 use App\Livewire\Trait\CommonTrait;

@@ -1,58 +1,61 @@
 <?php
 
-namespace App\Livewire\Admin\Creditbook;
+namespace App\Livewire\Sundar\Social;
 
-use Aaran\Sundar\Models\CreditBook;
+use Aaran\Sundar\Models\Mailid;
 use App\Livewire\Trait\CommonTrait;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Livewire\Component;
-use function Symfony\Component\Translation\t;
 
 class Index extends Component
 {
     use CommonTrait;
 
-    public string $closing = '';
+    #region[Cashbook properties]
+    public $category;
+    public $email_id;
+    public $password;
+    #endregion
 
     #region[Save]
     public function getSave(): string
     {
-        $this->validate(['closing'=>'required|numeric']);
-
-        if ($this->vname !== '') {
+        if ($this->category != '') {
             if ($this->vid == "") {
-                CreditBook::create([
-                    'vname' => Str::upper($this->vname),
-                    'closing' => $this->closing,
+                Mailid::create([
+                    'category' => $this->category,
+                    'email_id' => $this->email_id?:'-',
+                    'vname' => $this->vname?:'-',
+                    'password' => $this->password,
                     'active_id' => $this->active_id,
-                    'company_id' => session()->get('company_id'),
-                    'user_id' => Auth::id(),
                 ]);
                 $message = "Saved";
 
             } else {
-                $obj = CreditBook::find($this->vid);
-                $obj->vname = Str::upper($this->vname);
-                $obj->closing = $this->closing;
+                $obj = Mailid::find($this->vid);
+                $obj->category = $this->category;
+                $obj->email_id =$this->email_id;
+                $obj->vname =$this->vname;
+                $obj->password =$this->password;
                 $obj->active_id = $this->active_id;
-                $obj->company_id = session()->get('company_id');
-                $obj->user_id = Auth::id();
                 $obj->save();
                 $message = "Updated";
             }
-            $this->closing = '';
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
         return '';
     }
+    #endregion
 
+    #region[Clear]
     public function clearFields(): void
     {
-        $this->vname='';
-        $this->closing = '';
-        $this->active_id=true;
-
+        $this->vid = '';
+        $this->vname = '';
+        $this->category = '';
+        $this->searches = '';
+        $this->email_id='';
+        $this->password='';
+        $this->active_id = '1';
     }
     #endregion
 
@@ -60,10 +63,12 @@ class Index extends Component
     public function getObj($id)
     {
         if ($id) {
-            $obj = CreditBook::find($id);
+            $obj = Mailid::find($id);
             $this->vid = $obj->id;
+            $this->category = $obj->category;
+            $this->email_id = $obj->email_id;
             $this->vname = $obj->vname;
-            $this->closing = $obj->closing;
+            $this->password = $obj->password;
             $this->active_id = $obj->active_id;
             return $obj;
         }
@@ -74,11 +79,8 @@ class Index extends Component
     #region[List]
     public function getList()
     {
-        $this->sortField = 'id';
-
-        return CreditBook::search($this->searches)
+        return Mailid::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
-            ->where('company_id', '=', session()->get('company_id'))
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
@@ -87,14 +89,14 @@ class Index extends Component
     #region[Render]
     public function reRender(): void
     {
-        $this->render();
+        $this->render()->render();
     }
 
     public function render()
     {
-        return view('livewire.admin.creditbook.index')->with([
+        return view('livewire.admin.social.index')->with([
             'list' => $this->getList()
         ]);
     }
-        #endregion
+    #endregion
 }

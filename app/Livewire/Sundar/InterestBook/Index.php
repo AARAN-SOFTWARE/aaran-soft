@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\InterestBook;
+namespace App\Livewire\Sundar\InterestBook;
 
 use Aaran\Sundar\Models\CreditBook;
 use Aaran\Sundar\Models\InterestBook;
