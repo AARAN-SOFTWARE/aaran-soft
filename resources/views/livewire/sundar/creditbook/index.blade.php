@@ -28,19 +28,19 @@
                     <x-table.row>
 
                         <x-table.cell-text>
-                            <a href="{{route('creditbooks.items',[$row->id])}}">
+                            <a href="{{route('creditBooks.items',[$row->id])}}">
                                 {{ $index + 1 }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('creditbooks.items',[$row->id])}}">
+                            <a href="{{route('creditBooks.items',[$row->id])}}">
                                     {{ $row->vname }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
-                            <a href="{{route('creditbooks.items',[$row->id])}}">
+                            <a href="{{route('creditBooks.items',[$row->id])}}">
                                 {{ $row->closing }}
                             </a>
                         </x-table.cell-text>

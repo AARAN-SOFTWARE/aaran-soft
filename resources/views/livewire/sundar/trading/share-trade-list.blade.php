@@ -30,31 +30,31 @@
                             {{ $index + 1 }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
-                            {{ $row->vdate }}
+                        <x-table.cell-text center>
+                            {{date('d-m-Y', strtotime($row->vdate))}}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             {{ $row->opening_balance }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             {{ $row->deposit }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             {{ $row->loosed }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             {{ $row->withdraw }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             {{ $row->charges }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             {{ $row->balance }}
                         </x-table.cell-text>
 
