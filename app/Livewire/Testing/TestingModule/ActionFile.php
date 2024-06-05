@@ -14,11 +14,9 @@ class ActionFile extends Component
     #region[save]
     public function getSave(): void
     {
-
-
         if ($this->vname != '') {
             if ($this->vid == "") {
-                $this->validate(['vname' => 'required|unique:cities,vname']);
+                $this->validate(['vname' => 'required|unique:vname']);
                 TestFile::create([
                     'vname' => Str::ucfirst($this->vname),
                     'active_id' => $this->active_id,
@@ -32,7 +30,6 @@ class ActionFile extends Component
                 $obj->save();
                 $message = "Updated";
             }
-
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }

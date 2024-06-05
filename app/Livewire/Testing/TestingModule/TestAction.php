@@ -5,6 +5,7 @@ namespace App\Livewire\Testing\TestingModule;
 use Aaran\Testing\Models\Actions;
 use Aaran\Testing\Models\TestFile;
 use App\Livewire\Trait\CommonTrait;
+use Illuminate\Notifications\Action;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -18,6 +19,29 @@ class TestAction extends Component
     public function mount($id)
     {
         $this->modal_id = $id;
+    }
+
+    public function getSave(): void
+    {
+        if ($this->vname != '') {
+            if ($this->vid == "") {
+//                $this->validate(['vname' => 'required|unique:vname']);
+                TestFile::create([
+                    'vname' => Str::ucfirst($this->vname),
+                    'active_id' => $this->active_id,
+                ]);
+                $message = "Saved";
+
+            } else {
+                $obj = TestFile::find($this->vid);
+                $obj->vname = Str::ucfirst($this->vname);
+                $obj->active_id = $this->active_id;
+                $obj->save();
+                $message = "Updated";
+            }
+            $this->generate();
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+        }
     }
 
     public function generate()
@@ -37,47 +61,21 @@ class TestAction extends Component
             }
         }
     }
-    #region[save]
-//    public function getSave(): void
-//    {
-//        if ($this->vname != '') {
-//            if ($this->vid == "") {
-//                $this->validate(['vname' => 'required']);
-//                Actions::create([
-//                    'vname' => Str::ucfirst($this->vname),
-//                    'modals_id' => $this->modal_id,
-//                    'active_id' => $this->active_id,
-//                ]);
-//                $message = "Saved";
-//
-//            } else {
-//                $obj = Actions::find($this->vid);
-//                $obj->vname = Str::ucfirst($this->vname);
-//                $obj->modal_id = $this->modal_id;
-//                $obj->active_id = $this->active_id;
-//                $obj->save();
-//                $message = "Updated";
-//            }
-//
-//            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
-//        }
-//    }
+
+    #region[obj]
+    public function getObj($id)
+    {
+        if ($id) {
+            $obj = Actions::find($id);
+            $this->vid = $obj->id;
+            $this->vname = $obj->vname;
+            $this->active_id = $obj->active_id;
+            return $obj;
+        }
+        return null;
+    }
     #endregion
 
-//    #region[obj]
-//    public function getObj($id)
-//    {
-//        if ($id) {
-//            $obj = Actions::find($id);
-//            $this->vid = $obj->id;
-//            $this->modal_id = $obj->modal_id;
-//            $this->vname = $obj->vname;
-//            $this->active_id = $obj->active_id;
-//            return $obj;
-//        }
-//        return null;
-//    }
-//    #endregion
 
     #region[list]
     public function getList()

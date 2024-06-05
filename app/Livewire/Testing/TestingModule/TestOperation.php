@@ -117,7 +117,6 @@ class TestOperation extends Component
             foreach ($data as $row) {
                 array_push($this->old_photos, $row->image);
             }
-
             return $obj;
         }
         return null;
