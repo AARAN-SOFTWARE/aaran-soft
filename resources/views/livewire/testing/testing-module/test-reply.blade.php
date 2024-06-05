@@ -36,7 +36,7 @@
                             <div>
                                 <button wire:click="fullview({{ $row->id }})">
                                     <img
-                                        class="w-[40rem] h-80"
+                                        class="w-[40rem] h-80  rounded-md"
                                         src="{{ \Illuminate\Support\Facades\Storage::url($row->image) }}" alt=""></button>
                             </div>
                         @empty
@@ -76,7 +76,8 @@
 
                     <button wire:click.prevent="updateStatus"
 
-                            class="relative inline-flex items-center h-6 w-5 mt-2 justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-blue-900 rounded-lg group">
+                            class="relative inline-flex items-center h-6 w-5 mt-2 justify-center px-10 py-4 overflow-hidden
+                            font-mono font-medium tracking-tighter text-white bg-blue-900 rounded-lg group">
                         <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-lime-700 rounded-full group-hover:w-56 group-hover:h-56"></span>
                         <span class="relative">Update</span>
 
@@ -85,7 +86,8 @@
                     @admin
                     <button wire:click.prevent="adminCloseTask"
 
-                            class="relative inline-flex items-center h-6 w-5 mt-2 justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-neutral-500 rounded-lg group">
+                            class="relative inline-flex items-center h-6 w-5 mt-2 justify-center px-10 py-4 overflow-hidden
+                            font-mono font-medium tracking-tighter text-white bg-neutral-500 rounded-lg group">
                         <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-red-900 rounded-full group-hover:w-56 group-hover:h-56"></span>
                         <span class="relative">Close</span>
 
@@ -121,7 +123,8 @@
                                                  placeholder-gray-400 shadow-md text-base focus:outline-none
                                                  focus:ring-2 focus:ring-purple-500 focus:border-transparent
                                                  form-textarea block transition duration-150 ease-in-out sm:text-sm
-                                                 sm:leading-5 @error('reply')?rounded-lg border border-gray-300 :border-red-500 border-opacity-100 hover:border-opacity-5 rounded-xl @enderror"></textarea>
+                                                 sm:leading-5 @error('reply')?rounded-lg border border-gray-300 :border-red-500 border-opacity-100
+                                                 hover:border-opacity-5 rounded-xl @enderror"></textarea>
                 </div>
 
                 @error('reply')
@@ -132,16 +135,16 @@
                 <div class="w-2/3 mx-auto flex justify-between gap-3">
                     <div class="flex gap-2">
                         <button type="submit" wire:click.prevent="save"
-                                class="bg-gradient-to-r from-red-400 to-red-600  text-white h-10 px-6 rounded-xl
-                                hover:bg-gradient-to-r hover:from-red-600 hover:to-red-400 hover:text-white
-                                hover:shadow-md hover:shadow-gray-400">Reply</button>
+                                class="bg-gradient-to-r from-purple-400 to-purple-600  text-white h-10 px-6 rounded-xl
+                                hover:bg-gradient-to-r hover:from-purple-600 hover:to-purple-400 hover:text-white
+                                hover:shadow-md hover:shadow-gray-400">Send</button>
                     </div>
 
                 </div>
 
                 <div class="mt-10">
                     @forelse ($replies as $row)
-                        <div class="w-2/3  h-auto mx-auto flex-col border-b border-gray-200 ">
+                        <div class="w-2/3  h-auto mx-auto flex-col border-b border-gray-200">
                             <div class="flex justify-between">
                                 <div class="flex mt-2">
                                     <div class="w-6 h-6 bg-zinc-100 rounded-full flex justify-center">
