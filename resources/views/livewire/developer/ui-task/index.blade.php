@@ -33,7 +33,8 @@
                                     </a>
                                 </div>
 
-                                <div class="rounded-lg outline outline-1 h-6 px-2 outline-blue-400 bg-blue-100 w-40 text-center">
+                                <div
+                                    class="rounded-lg outline outline-1 h-6 px-2 outline-blue-400 bg-blue-100 w-40 text-center">
                                     <a href="{{ route('ui-task.show',[$row->id]) }}"
                                        class="cursor-pointer ">
                                         {{ \App\Enums\Priority::tryFrom($row->priority)->getName() }}
@@ -121,13 +122,10 @@
 
                     <div class="px-1 py-4">
                         <x-input.rich-text wire:model="body" :placeholder="'Assign task here'"/>
-{{--                        <x-editor.simpleMDE wire:model="body"/>--}}
+                        {{--                        <x-editor.simpleMDE wire:model="body"/>--}}
 
 
                     </div>
-                </div>
-
-                <div>
                     <x-input.model-select wire:model="allocated" :label="'Assign To'">
                         <option class="text-gray-400"> choose ..</option>
                         @foreach($users as $user)
@@ -135,6 +133,9 @@
                         @endforeach
                     </x-input.model-select>
 
+                </div>
+
+                <div>
                     <x-input.model-select wire:model="status" :label="'Status'">
                         <option class="text-gray-400"> choose ..</option>
                         @foreach(\App\Enums\Status::cases() as $status)
@@ -157,7 +158,7 @@
 
                     <label class="w-[10rem] text-zinc-500 tracking-wide py-2"></label>
 
-                    <div class="grid grid-cols-2 flex-shrink-0 h-80 w-80 mr-4">
+                    <div class="grid grid-cols-2 flex-shrink-0 h-60 w-80 py-5 mr-4">
                         <div>
                             @if($ui_pic)
                                 <img class="h-48 w-full" src="{{ $ui_pic->temporaryUrl() }}"

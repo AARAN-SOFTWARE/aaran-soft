@@ -67,13 +67,13 @@ class UiShow extends Component
 
                 $obj = UiReply::create([
                     'ui_task_id' => $this->ui_task_id,
-                    'ui_reply' => $this->ui_reply,
+                    'vname' => $this->ui_reply,
                     'user_id' => \Auth::id(),
                     'image' => $this->saveImage()
                 ]);
             } else {
                 $obj = UiReply::find($this->vid);
-                $obj->ui_reply = $this->ui_reply;
+                $obj->vname = $this->ui_reply;
                 $obj->user_id = \Auth::id();
                 $obj->image = $this->saveImage();
 
@@ -136,7 +136,7 @@ class UiShow extends Component
             $obj = UiReply::find($id);
             $this->vid = $obj->id;
             $this->ui_reply_id = $obj->id;
-            $this->ui_reply = $obj->ui_reply;
+            $this->ui_reply = $obj->vname ;
             $this->old_image = $obj->image;
         }
         return $obj;
