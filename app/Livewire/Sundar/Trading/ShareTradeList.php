@@ -10,6 +10,7 @@ class ShareTradeList extends Component
 {
     #region[property]
     use CommonTrait;
+
     public $vdate;
     public mixed $opening_balance;
     public mixed $deposit;
@@ -116,7 +117,7 @@ class ShareTradeList extends Component
     #region[render]
     public function render()
     {
-        return view('livewire.admin.trading.share-trade-list')->with([
+        return view('livewire.sundar.trading.share-trade-list')->with([
             'list' => $this->getList()
         ]);
     }

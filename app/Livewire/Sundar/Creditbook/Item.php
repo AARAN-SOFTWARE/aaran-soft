@@ -146,7 +146,7 @@ class Item extends Component
 
     public function render()
     {
-        return view('livewire.admin.creditbook.item')->with([
+        return view('livewire.sundar.creditbook.item')->with([
             'list' => $this->getList()
         ]);
     }

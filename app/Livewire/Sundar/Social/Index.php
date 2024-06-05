@@ -94,7 +94,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.admin.social.index')->with([
+        return view('livewire.sundar.social.index')->with([
             'list' => $this->getList()
         ]);
     }

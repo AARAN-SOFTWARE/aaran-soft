@@ -92,7 +92,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.admin.creditbook.index')->with([
+        return view('livewire.sundar.creditbook.index')->with([
             'list' => $this->getList()
         ]);
     }
