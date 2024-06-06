@@ -31,10 +31,10 @@
 
             <div class="flex-col justify-center w-5/6 h-96 pt-2 mx-auto">
                 <div class="flex">
-                    <div class="w-[40rem] h-auto mx-auto overflow-y-auto">
+                    <div class="flex w-3/4 h-[22rem] mx-auto overflow-x-auto">
                         @forelse ($images as $row)
-                            <div>
-                                <button wire:click="fullview({{ $row->id }})">
+                            <div class="w-[40rem] mr-1.5">
+                                <button class="w-[40rem]" wire:click="fullview({{ $row->id }})">
                                     <img
                                         class="w-[40rem] h-80  rounded-md"
                                         src="{{ \Illuminate\Support\Facades\Storage::url($row->image) }}" alt=""></button>
@@ -53,7 +53,7 @@
 
         </div>
         <div class="w-11/12 h-auto mx-auto flex justify-center rounded-xl">
-            <div class="w-full  h-auto overflow-y-auto  p-5 border-2 border-white rounded-xl bg-white text-gray-600 font-serif">{!! $body !!}</div>
+            <div class="w-full  h-auto overflow-y-auto p-5 border-2 border-white rounded-xl bg-white text-gray-600 font-serif">{!! $body !!}</div>
 
         </div>
        <!-- Status  -->
