@@ -26,10 +26,18 @@ class TestAction extends Component
         if ($this->vname != '') {
             if ($this->vid == "") {
 //                $this->validate(['vname' => 'required|unique:vname']);
-                TestFile::create([
+               $obj= TestFile::create([
                     'vname' => Str::ucfirst($this->vname),
                     'active_id' => $this->active_id,
                 ]);
+
+                Actions::create([
+                    'test_file_id' => $obj->id,
+                    'modals_id' => $this->modal_id,
+                    'vname'=>$obj->vname,
+                    'active_id'=>'1',
+                ]);
+
                 $message = "Saved";
 
             } else {
@@ -39,7 +47,6 @@ class TestAction extends Component
                 $obj->save();
                 $message = "Updated";
             }
-            $this->generate();
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
