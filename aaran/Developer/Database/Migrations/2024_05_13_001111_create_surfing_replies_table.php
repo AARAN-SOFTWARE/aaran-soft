@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('surfing_replies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('surfing_id')->references('id')->on('surfings')->onDelete('cascade');
-            $table->text('vname');
+            $table->longText('vname');
             $table->string('verified')->nullable();
             $table->string('verified_on')->nullable();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -17,6 +17,8 @@ class AadminServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../Client/demo/aaran_erp.php', 'aaran_erp');
 
         $this->mergeConfigFrom(__DIR__ . '/../Client/sundar/neot.php', 'neot');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/finance/bmvikaas.php', 'bmvikaas');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/finance/aaran_capitals.php', 'aaran_capitals');
         $this->mergeConfigFrom(__DIR__ . '/../Client/audit/aaran_associates.php', 'aaran_associates');
 
         $this->mergeConfigFrom(__DIR__ . '/../Client/sundar/sk_enterprises.php', 'sk_enterprises');

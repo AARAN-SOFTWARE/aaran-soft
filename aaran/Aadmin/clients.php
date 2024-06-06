@@ -14,6 +14,8 @@ return [
     'SRI_GANAPATHI_PRINTING_PRESS' => '105',
     'AARAN_INFO_TECH' => '106',
     'NEOT' => '109',
+    'BMVIKAAS' => '110',
+    'AARAN_CAPITALS' => '110',
 
     'PRAPTHIIMPEX' => '107',
     'SMSUPVC' => '108',
