@@ -3,7 +3,7 @@
 
 
 
-    <div class="w-3/5 h-auto grid grid-cols-1 gap-8 bg-zinc-50 mx-auto pt-10 pb-10 mb-10">
+    <div class="lg:w-3/5 h-auto grid grid-cols-1 gap-8 bg-zinc-50 mx-auto pt-10 pb-10 mb-10 sm:w-full">
         <div class="w-11/12  h-auto mx-auto bg-white rounded">
             <div class="flex justify-between">
                 <div class="ml-5">
@@ -268,6 +268,11 @@
             </div>
 
         </div>
+
+    </div>
+
+    <div>
+
 
     </div>
 </div>
