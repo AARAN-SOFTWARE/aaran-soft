@@ -174,6 +174,7 @@ class Index extends Component
         }
         return PaymentSlip::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
+            ->orderBy('group', $this->sortAsc ? 'asc' : 'desc')
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }

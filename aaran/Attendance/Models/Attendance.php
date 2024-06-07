@@ -19,4 +19,10 @@ class Attendance extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public static function allocated($str)
+    {
+        if ($str) {
+            return User::find($str)->name;
+        } else return '';
+    }
 }
