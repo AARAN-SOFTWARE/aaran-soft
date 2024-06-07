@@ -73,34 +73,19 @@
                     </x-table.row>
 
                     <x-table.row>
-                        <x-table.cell-text>
+                        <x-table.cell-text class="tracking-wider font-semibold text-md {{$row->profit - $row->loosed > 0 ?'text-green-500':'text-red-500'}}">
                             <a href="{{route('shareTrades.profits')}}">
-                                Trade Profit
+                                Trade P&L
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text right>
+                        <x-table.cell-text right class="tracking-wider font-semibold text-md {{$row->profit - $row->loosed > 0 ?'text-green-500':'text-red-500'}}">
                             <a href="{{route('shareTrades.profits')}}">
-                                {{ $row->profit }}
+                                {{ $row->profit - $row->loosed }}
                             </a>
 
-                        </x-table.cell-text>
-                    </x-table.row>
-
-                    <x-table.row>
-                        <x-table.cell-text>
-                            <a href="{{route('shareTrades.profits')}}">
-                                Trade Loose
-                            </a>
-                        </x-table.cell-text>
-
-                        <x-table.cell-text right>
-                            <a href="{{route('shareTrades.profits')}}">
-                                {{ $row->loosed }}
-                            </a>
                         </x-table.cell-text>
                     </x-table.row>
-
 
                     <x-table.row>
                         <x-table.cell-text>

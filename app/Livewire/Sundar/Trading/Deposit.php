@@ -111,6 +111,7 @@ class Deposit extends Component
         return ShareTrades::where('user_id', '=', $this->k_id?:auth()->id())
             ->where('active_id', '=', $this->activeRecord)
             ->where('deposit', '>', 0)
+            ->orWhere('withdraw', '>', 0)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
