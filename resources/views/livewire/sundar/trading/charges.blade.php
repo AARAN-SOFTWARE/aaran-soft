@@ -11,6 +11,10 @@
                 @endforeach
             </select>
 
+            <div>{{ \App\Models\User::getName($k_id?: auth()->id())}}</div>
+            <div>&nbsp;</div>
+
+
             <x-button.new/>
 
         </div>

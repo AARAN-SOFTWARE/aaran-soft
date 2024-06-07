@@ -73,6 +73,13 @@ class User extends Authenticatable
         ]);
     }
 
+    public static function getName($id)
+    {
+        if($id){
+        return self::find($id)->name;
+        }
+    }
+
     protected static function booted(): void
     {
         static::addGlobalScope(new TenantScope);

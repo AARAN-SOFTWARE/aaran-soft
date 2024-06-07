@@ -5,12 +5,16 @@
     <x-forms.m-panel>
 
         <div class="flex justify-between items-center">
-            <select wire:model="k_id" :label="'User'" class="w-[30rem] purple-textbox" wire:change.prevent="reRender">
+            <select wire:model.live="k_id" :label="'User'" class="w-[30rem] purple-textbox">
                 <option class="text-gray-400"> choose ..</option>
-                @foreach(\App\Models\User::all() as $user)
+                @foreach($users as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
                 @endforeach
             </select>
+
+            <div>{{ \App\Models\User::getName($k_id?: auth()->id())}}</div>
+            <div>&nbsp;</div>
+
         </div>
 
         <!-- Header --------------------------------------------------------------------------------------------------->
@@ -119,14 +123,14 @@
                     <x-table.row>
                         <x-table.cell-text>
                             <div
-                                class="tracking-wider font-semibold text-md {{$totalBalance > 0 ?'text-green-500':'text-red-500'}}">
+                                    class="tracking-wider font-semibold text-md {{$totalBalance > 0 ?'text-green-500':'text-red-500'}}">
                                 Capitals
                             </div>
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
                             <div
-                                class="tracking-wider font-semibold text-md text-right {{$totalBalance > 0 ?'text-green-500':'text-red-500'}}">
+                                    class="tracking-wider font-semibold text-md text-right {{$totalBalance > 0 ?'text-green-500':'text-red-500'}}">
                                 {{$totalBalance}}
                             </div>
                         </x-table.cell-text>

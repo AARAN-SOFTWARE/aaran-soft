@@ -6,6 +6,7 @@ use Aaran\Sundar\Models\ShareTrades;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -24,11 +25,12 @@ class Index extends Component
     public mixed $charges;
     public mixed $balance;
     public $remarks = '';
-    public mixed $k_id = '';
+    public $k_id = '';
 
     public $users;
 
     #endregion
+    public string $user_name = '';
 
     public function mount(): void
     {
@@ -100,6 +102,8 @@ class Index extends Component
     #region[getList]
     public function getList()
     {
+        $this->user_name =Auth::user()->name;
+
         return ShareTrades::select(
             DB::raw("SUM(opening_balance) as opening_balance"),
             DB::raw("SUM(deposit) as deposit"),
@@ -107,7 +111,7 @@ class Index extends Component
             DB::raw("SUM(profit) as profit"),
             DB::raw("SUM(loosed) as loosed"),
             DB::raw("SUM(charges) as charges")
-        )->where("user_id", $this->k_id?:auth()->id())
+        )->where("user_id", $this->k_id ?: auth()->id())
             ->get();
     }
     #endregion
@@ -115,7 +119,7 @@ class Index extends Component
     #region[clearFields]
     public function clearFields(): void
     {
-        $this->vid='';
+        $this->vid = '';
         $this->vdate = '';
         $this->opening_balance = '';
         $this->deposit = '';
@@ -126,13 +130,6 @@ class Index extends Component
         $this->balance = '';
         $this->remarks = '';
         $this->active_id = '1';
-    }
-    #endregion
-
-    #region[reRender]
-    public function reRender(): void
-    {
-            $this->render()->render();
     }
     #endregion
 
