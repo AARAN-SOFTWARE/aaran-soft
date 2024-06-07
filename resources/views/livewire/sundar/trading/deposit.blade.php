@@ -6,7 +6,7 @@
         <div class="flex justify-between items-center">
             <select wire:model="k_id" :label="'User'" class="w-[30rem] purple-textbox" wire:change.prevent="reRender">
                 <option class="text-gray-400"> choose ..</option>
-                @foreach($users as $user)
+                @foreach(App\Models\User::all() as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
                 @endforeach
             </select>
