@@ -12,7 +12,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('socials', App\Livewire\Sundar\Social\Index::class)->name('socials');
 
-    Route::get('shareTrades', App\Livewire\Sundar\Trading\ShareTradeList::class)->name('shareTrades');
+    Route::get('shareTrades', App\Livewire\Sundar\Trading\Index::class)->name('shareTrades');
+    Route::get('shareTrades/deposits', App\Livewire\Sundar\Trading\Deposit::class)->name('shareTrades.deposits');
+    Route::get('shareTrades/profits', App\Livewire\Sundar\Trading\Profit::class)->name('shareTrades.profits');
+    Route::get('shareTrades/charges', App\Livewire\Sundar\Trading\Charges::class)->name('shareTrades.charges');
+    Route::get('shareTrades/summary', App\Livewire\Sundar\Trading\ShareTradeList::class)->name('shareTrades.summary');
 
 
 });
