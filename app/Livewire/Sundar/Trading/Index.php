@@ -30,7 +30,7 @@ class Index extends Component
 
     #endregion
 
-    public function mount()
+    public function mount(): void
     {
         $this->users = User::all();
     }
@@ -131,7 +131,7 @@ class Index extends Component
     #region[reRender]
     public function reRender(): void
     {
-        $this->render()->render();
+            $this->render()->render();
     }
     #endregion
 
