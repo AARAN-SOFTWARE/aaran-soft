@@ -15,7 +15,7 @@ class Index extends Component
     public function mount()
     {
         $this->greetings = Core::greetings();
-        $this->slogans = Slogan::facts();
+        $this->slogans = Slogan::getRandomQuote();
     }
 
 

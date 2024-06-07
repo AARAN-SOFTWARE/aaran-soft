@@ -3,48 +3,59 @@
 
 namespace App\Helper;
 
-use Carbon\Carbon;
-use NumberFormatter;
+use Illuminate\Support\Collection;
 
 class Slogan
 {
-    public static function facts(): string
+    public static function quotes()
     {
-        date_default_timezone_set("Asia/Kolkata");
+        return [
+            [
+                'quote' => 'When there is no desire, all things are at peace.'
+            ],
+            [
+                'quote' => 'Simplicity is the ultimate sophistication.'
+            ],
+            [
+                'quote' => 'Simplicity is the essence of happiness.'
+            ], [
+                'quote' => 'Smile, breathe, and go slowly.'
+            ], [
+                'quote' => 'Simplicity is an acquired taste.'
+            ], [
+                'quote' => 'Well begun is half done.'
+            ], [
+                'quote' => 'He who is contented is rich.'
+            ], [
+                'quote' => 'Very little is needed to make a happy life.'
+            ], [
+                'quote' => 'It is quality rather than quantity that matters.'
+            ], [
+                'quote' => 'Genius is one percent inspiration and ninety-nine percent perspiration.'
+            ], [
+                'quote' => 'Computer science is no more about computers than astronomy is about telescopes.'
+            ], [
+                'quote' => 'It always seems impossible until it is done.'
+            ], [
+                'quote' => 'Act only according to that maxim whereby you can, at the same time, will that it should become a universal law.'
+            ], [
+                'quote' => 'Don’t judge each day by the harvest you reap but by the seeds that you plant.'
+            ], [
+                'quote' => 'Write it on your heart that every day is the best day in the year.'
+            ], [
+                'quote' => 'Every moment is a fresh beginning.'
+            ], [
+                'quote' => 'Without His love I can do nothing, with His love there is nothing I cannot do.'
+            ], [
+                'quote' => 'Everything you’ve ever wanted is on the other side of fear.'
+            ], [
+                'quote' => 'Begin at the beginning... and go on till you come to the end: then stop.'
+            ],
+        ];
+    }
 
-        $day = Carbon::now()->format('d');
-        if ($day = "1") {
-            return "Success is not final; failure is not fatal: it is the courage to continue that counts.";
-        } else
-
-
-            if ($day >= "2") {
-                return "Business opportunities are like buses, there’s always another one coming.";
-            } else
-
-
-                if ($day >= "3") {
-                    return "Success usually comes to those who are too busy to be looking for it.";
-                } else
-
-
-                    if ($day >= "4") {
-                        return "If you really look closely, most overnight successes took a long time.";
-                    }  else
-
-                        if ($day >= "5") {
-                            return "I owe my success to having listened respectfully to the very best advice, and then going away and doing the exact opposite.";
-                        }  else
-
-                            if ($day >= "6") {
-                                return "Even if you are on the right track, you’ll get run over if you just sit there.";
-                            }  else
-
-                                if ($day >= "7") {
-                                    return " The way to get started is to quit talking and begin doing.";
-                                }  else
-
-
-        return "Welcome, Have a nice day";
+    public static function getRandomQuote()
+    {
+        return Collection::make(self::quotes())->random();
     }
 }
