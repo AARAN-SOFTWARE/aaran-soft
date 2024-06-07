@@ -40,7 +40,7 @@ class Charges extends Component
     {
         if ($this->vid == "") {
             ShareTrades::create([
-                'user_id' => $this->user_id,
+                'user_id' => $this->user_id?:auth()->id(),
                 'vdate' => $this->vdate ?: Carbon::now()->format('Y-m-d'),
                 'opening_balance' => $this->opening_balance ?: 0,
                 'deposit' => $this->deposit ?: 0,
@@ -106,8 +106,9 @@ class Charges extends Component
     {
         $this->sortField = 'vdate';
 
-        return ShareTrades::search($this->searches)
+        return ShareTrades::where('user_id', '=', $this->k_id?:auth()->id())
             ->where('active_id', '=', $this->activeRecord)
+            ->where('charges', '>', 0)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
@@ -116,6 +117,7 @@ class Charges extends Component
     #region[clearFields]
     public function clearFields(): void
     {
+        $this->vid='';
         $this->user_id = '';
         $this->vdate = '';
         $this->opening_balance = '';
