@@ -107,7 +107,7 @@ class Index extends Component
             DB::raw("SUM(profit) as profit"),
             DB::raw("SUM(loosed) as loosed"),
             DB::raw("SUM(charges) as charges")
-        )->where("user_id", $this->k_id)
+        )->where("user_id", $this->k_id?:auth()->id())
             ->get();
     }
     #endregion
@@ -115,6 +115,7 @@ class Index extends Component
     #region[clearFields]
     public function clearFields(): void
     {
+        $this->vid='';
         $this->vdate = '';
         $this->opening_balance = '';
         $this->deposit = '';

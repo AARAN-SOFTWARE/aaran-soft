@@ -4,7 +4,7 @@
     <x-forms.m-panel>
 
         <div class="flex justify-between items-center">
-            <select wire:model="k_id" :label="'User'" class="w-[30rem] purple-textbox" wire:change.prevent="reRender">
+            <select wire:model.live="k_id" :label="'User'" class="w-[30rem] purple-textbox">
                 <option class="text-gray-400"> choose ..</option>
                 @foreach($users as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
@@ -19,7 +19,8 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vdate')"/>
-                <x-table.header-text wire:click.prevent="sortBy('vdate')" class="w-[10rem]" center>Date</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" class="w-[10rem]" center>Date
+                </x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Profit</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Loosed</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Remarks</x-table.header-text>
@@ -36,30 +37,29 @@
             <x-slot name="table_body">
                 @forelse ($list as $index =>  $row)
 
-                    <x-table.row>
-                        <x-table.cell-text center>
-                            {{ $index + 1 }}
-                        </x-table.cell-text>
+                        <x-table.row>
+                            <x-table.cell-text center>
+                                {{ $index + 1 }}
+                            </x-table.cell-text>
 
-                        <x-table.cell-text center>
-                            {{date('d-m-Y', strtotime($row->vdate))}}
-                        </x-table.cell-text>
+                            <x-table.cell-text center>
+                                {{date('d-m-Y', strtotime($row->vdate))}}
+                            </x-table.cell-text>
 
-                        <x-table.cell-text right>
-                            {{ $row->profit }}
-                        </x-table.cell-text>
+                            <x-table.cell-text right>
+                                {{ $row->profit }}
+                            </x-table.cell-text>
 
-                        <x-table.cell-text right>
-                            {{ $row->loosed }}
-                        </x-table.cell-text>
+                            <x-table.cell-text right>
+                                {{ $row->loosed }}
+                            </x-table.cell-text>
 
-                        <x-table.cell-text>
-                            {{ $row->remarks }}
-                        </x-table.cell-text>
+                            <x-table.cell-text>
+                                {{ $row->remarks }}
+                            </x-table.cell-text>
 
-                        <x-table.cell-action id="{{$row->id}}"/>
-                    </x-table.row>
-
+                            <x-table.cell-action id="{{$row->id}}"/>
+                        </x-table.row>
                     @php
                         $totalProfit  += floatval($row->profit);
                         $totalLoosed  += floatval($row->loosed);
