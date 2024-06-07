@@ -26,3 +26,5 @@ Route::get('/demo-requests/upsert', App\Livewire\Webs\DemoRequest\Upsert::class)
 
 Route::get('/ui-task', \App\Livewire\Developer\UiTask\Index::class)->name('ui-task');
 Route::get('/ui-task/{id}/show', \App\Livewire\Developer\UiTask\UiShow::class)->name('ui-task.show');
+
+Route::get('/fora', App\Livewire\Developer\Forum\Fora::class)->name('fora');

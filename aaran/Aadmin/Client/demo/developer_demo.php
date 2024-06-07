@@ -8,7 +8,7 @@ return [
 
     'features' => [
         Customise::todoList(),
-        Customise::attendance()
+//        Customise::attendance()
     ],
 
     'customise' => [
