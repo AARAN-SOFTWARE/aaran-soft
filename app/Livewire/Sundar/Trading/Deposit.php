@@ -42,7 +42,7 @@ class Deposit extends Component
     {
         if ($this->vid == "") {
             ShareTrades::create([
-                'user_id' => $this->user_id,
+                'user_id' => $this->user_id?:auth()->id(),
                 'vdate' => $this->vdate ?: Carbon::now()->format('Y-m-d'),
                 'opening_balance' => $this->opening_balance ?: 0,
                 'deposit' => $this->deposit ?: 0,
@@ -107,11 +107,10 @@ class Deposit extends Component
     public function getList()
     {
         $this->sortField = 'vdate';
-        $this->k_id = '1';
 
-        return ShareTrades::search($this->searches)
+        return ShareTrades::where('user_id', '=', $this->k_id?:auth()->id())
             ->where('active_id', '=', $this->activeRecord)
-            ->where('user_id', '=', $this->k_id)
+            ->where('deposit', '>', 0)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
@@ -120,6 +119,7 @@ class Deposit extends Component
     #region[clearFields]
     public function clearFields(): void
     {
+        $this->vid='';
         $this->user_id = '';
         $this->vdate = '';
         $this->opening_balance = '';

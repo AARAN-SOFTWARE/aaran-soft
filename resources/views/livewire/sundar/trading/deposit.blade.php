@@ -4,9 +4,9 @@
     <x-forms.m-panel>
 
         <div class="flex justify-between items-center">
-            <select wire:model="k_id" :label="'User'" class="w-[30rem] purple-textbox" wire:change.prevent="reRender">
-                <option class="text-gray-400"> choose ..</option>
-                @foreach(App\Models\User::all() as $user)
+            <select wire:model.live="k_id" :label="'User'" class="w-[30rem] purple-textbox" >
+                <option class="text-gray-400" value=""> choose ..</option>
+                @foreach($users as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
                 @endforeach
             </select>
