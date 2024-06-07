@@ -3,8 +3,17 @@
 
     <x-forms.m-panel>
 
-        <!-- Top Controls --------------------------------------------------------------------------------------------->
-        <x-forms.top-controls :show-filters="$showFilters"/>
+        <div class="flex justify-between items-center">
+            <select wire:model="k_id" :label="'User'" class="w-[30rem] purple-textbox" wire:change.prevent="reRender">
+                <option class="text-gray-400"> choose ..</option>
+                @foreach($users as $user)
+                    <option value="{{$user->id}}">{{$user->name}}</option>
+                @endforeach
+            </select>
+
+            <x-button.new/>
+
+        </div>
 
         <!-- Header --------------------------------------------------------------------------------------------------->
         <x-forms.table :list="$list">

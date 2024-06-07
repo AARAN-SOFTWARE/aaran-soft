@@ -4,6 +4,7 @@ namespace App\Livewire\Sundar\Trading;
 
 use Aaran\Sundar\Models\ShareTrades;
 use App\Livewire\Trait\CommonTrait;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -23,7 +24,17 @@ class Index extends Component
     public mixed $charges;
     public mixed $balance;
     public $remarks = '';
+    public mixed $k_id = '';
+
+    public mixed $users;
+
     #endregion
+
+    public function mount()
+    {
+        $this->users = User::all();
+    }
+
 
     #region[save]
     public function getSave(): string

@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('share_trades', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable();
             $table->string('vdate')->nullable();
             $table->decimal('opening_balance')->nullable();
             $table->decimal('deposit',13,2)->nullable();
