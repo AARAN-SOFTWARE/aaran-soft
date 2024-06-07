@@ -13,7 +13,7 @@
                     <div class="flex justify-between p-5">
                         <div class="flex-col">
                             <div>
-                                <a href="{{route('operation.reply',[$row->id])}}">
+                                <a class="overflow-y-auto text-wrap  " href="{{route('operation.reply',[$row->id])}}">
                                     <div class="text-lg font-sans font-semibold">{{ $row->actions->vname ?: " "}} - {{ $row->vname }}</div>
                                 </a>
                             </div>
@@ -30,16 +30,16 @@
                         </div>
                     </div>
                     <div class="flex px-5">
-                        <div class=" w-1/3 h-80 p-3 rounded bg-white overflow-y-auto">
-                            <div class="flex justify-center">
+                        <div class="flex w-1/3 h-80 p-3 rounded bg-white ">
+                            <a class="overflow-y-auto text-wrap  " href="{{route('operation.reply',[$row->id])}}">
+                            <div class="flex w-[26rem] justify-center overflow-x-auto">
                                 @foreach($images as $img)
                                     @if($img->vname==$row->vname)
-                                        <a href="{{route('operation.reply',[$row->id])}}">
-                                        <img src="{{ URL(\Illuminate\Support\Facades\Storage::url($img->image)) }}" alt="" class="w-[25rem] h-auto rounded-xl ">
-                                        </a>
+                                                <img src="{{ URL(\Illuminate\Support\Facades\Storage::url($img->image)) }}" alt="" class="w-[30rem] h-[17rem] rounded-xl mt-1 mr-1">
                                     @endif
                                 @endforeach
                             </div>
+                            </a>
                         </div>
 
                         <div class="w-2/3 h-80 bg-stone-100 text-gray-500 font-serif rounded p-4">
