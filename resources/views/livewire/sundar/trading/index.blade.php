@@ -7,17 +7,14 @@
         <div class="flex justify-between items-center">
             <select wire:model="k_id" :label="'User'" class="w-[30rem] purple-textbox" wire:change.prevent="reRender">
                 <option class="text-gray-400"> choose ..</option>
-                @foreach($users as $user)
+                @foreach(\App\Models\User::all() as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
                 @endforeach
             </select>
-
-            <x-button.new/>
-
         </div>
 
         <!-- Header --------------------------------------------------------------------------------------------------->
-        <x-forms.table :list="$list">
+        <x-forms.table>
             <x-slot name="table_header">
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Particulars</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Amount</x-table.header-text>
@@ -141,22 +138,6 @@
             </x-slot>
 
         </x-forms.table>
-        <x-modal.delete/>
-
-        <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
-        <x-forms.create :id="$vid">
-            <x-input.model-date wire:model="vdate" :label="'Date'"/>
-            <x-input.model-text wire:model="opening_balance" :label="'Opening Balance'"/>
-            <x-input.model-text wire:model="deposit" :label="'Deposit'"/>
-            <x-input.model-text wire:model="profit" :label="'Profit'"/>
-            <x-input.model-text wire:model="loosed" :label="'Loosed'"/>
-            <x-input.model-text wire:model="withdraw" :label="'Withdraw'"/>
-            <x-input.model-text wire:model="charges" :label="'Charges'"/>
-            <x-input.model-text wire:model="balance" :label="'Balance'"/>
-            <x-input.model-text wire:model="remarks" :label="'Remarks'"/>
-        </x-forms.create>
-
-
     </x-forms.m-panel>
 
 </div>

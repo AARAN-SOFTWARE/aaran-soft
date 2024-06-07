@@ -26,7 +26,7 @@ class Index extends Component
     public $remarks = '';
     public mixed $k_id = '';
 
-    public mixed $users;
+    public $users;
 
     #endregion
 
@@ -107,12 +107,13 @@ class Index extends Component
             DB::raw("SUM(profit) as profit"),
             DB::raw("SUM(loosed) as loosed"),
             DB::raw("SUM(charges) as charges")
-        )->get();
+        )->where("user_id", $this->k_id)
+            ->get();
     }
     #endregion
 
     #region[clearFields]
-    public function clearFields()
+    public function clearFields(): void
     {
         $this->vdate = '';
         $this->opening_balance = '';
@@ -124,6 +125,13 @@ class Index extends Component
         $this->balance = '';
         $this->remarks = '';
         $this->active_id = '1';
+    }
+    #endregion
+
+    #region[reRender]
+    public function reRender(): void
+    {
+        $this->render()->render();
     }
     #endregion
 

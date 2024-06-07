@@ -5,7 +5,7 @@
         <div>
             <div
                 class="h-20 bg-gradient-to-r from-violet-600 to-indigo-600 text-3xl text-white tracking-widest px-5 py-3 rounded-lg">
-                {{$greetings}}&nbsp;{{Auth::user()->name}}&nbsp;&nbsp;
+                {{$greetings}},&nbsp;{{Auth::user()->name}}&nbsp;👋
             </div>
 
         </div>
