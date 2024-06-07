@@ -4,5 +4,6 @@
 <x-menu.base.li-menuitem :routes="'test-action-file'" :label="'Action File'"/>
 <x-menu.base.li-menuitem :routes="'testing'" :label="'Testing'"/>
 <x-menu.base.li-menuitem :routes="'ui-task'" :label="'Ui-Task'"/>
+<x-menu.base.li-menuitem :routes="'fora'" :label="'Fora'"/>
 
 
