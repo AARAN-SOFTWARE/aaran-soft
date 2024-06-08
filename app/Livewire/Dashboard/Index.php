@@ -6,6 +6,7 @@ use Aaran\Entries\Models\Payment;
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Receipt;
 use Aaran\Entries\Models\Sale;
+use App\Helper\ConvertTo;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -75,14 +76,14 @@ class Index extends Component
 
 
         return Collection::make([
-            'total_sales' => $total_sales->grand_total,
-            'month_sales' => $month_sales->grand_total,
-            'total_purchase' => $total_purchase->grand_total,
-            'month_purchase' => $month_purchase->grand_total,
-            'total_receivable' => $total_receivable->receipt_amount,
-            'month_receivable' => $month_receivable->receipt_amount,
-            'total_payable' => $total_payable->payment_amount,
-            'month_payable' => $month_payable->payment_amount,
+            'total_sales' => ConvertTo::rupeesFormat($total_sales->grand_total),
+            'month_sales' => ConvertTo::rupeesFormat($month_sales->grand_total),
+            'total_purchase' => ConvertTo::rupeesFormat($total_purchase->grand_total),
+            'month_purchase' => ConvertTo::rupeesFormat($month_purchase->grand_total),
+            'total_receivable' => ConvertTo::rupeesFormat($total_receivable->receipt_amount),
+            'month_receivable' => ConvertTo::rupeesFormat($month_receivable->receipt_amount),
+            'total_payable' => ConvertTo::rupeesFormat($total_payable->payment_amount),
+            'month_payable' => ConvertTo::rupeesFormat($month_payable->payment_amount),
         ]);
     }
 
