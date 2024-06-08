@@ -43,7 +43,7 @@
                     <x-icons.icon :icon="'job-responsibility-bag-hand'" class="h-10 text-amber-500  w-auto block"/>
                 </h3>
                 <p class="mt-2 text-gray-500 dark:text-neutral-400">
-                    Total Turnover : {{$transaction['total_purchase']}}
+                    Total Purchase : {{$transaction['total_purchase']}}
                 </p>
 
                 <p class="mt-2 text-gray-500 dark:text-neutral-400">
@@ -69,7 +69,7 @@
                     <x-icons.icon :icon="'performance-tablet-increase'" class="h-10 text-green-500  w-auto block"/>
                 </h3>
                 <p class="mt-2 text-gray-500 dark:text-neutral-400">
-                    Total Turnover : {{$transaction['total_receivable']}}
+                    Total Receipts : {{$transaction['total_receivable']}}
                 </p>
 
                 <p class="mt-2 text-gray-500 dark:text-neutral-400">
@@ -95,7 +95,7 @@
                     <x-icons.icon :icon="'business-contract-give'" class="h-10 text-purple-500  w-auto block"/>
                 </h3>
                 <p class="mt-2 text-gray-500 dark:text-neutral-400">
-                    Total Turnover : {{$transaction['total_payable']}}
+                    Total Payments : {{$transaction['total_payable']}}
                 </p>
 
                 <p class="mt-2 text-gray-500 dark:text-neutral-400">
