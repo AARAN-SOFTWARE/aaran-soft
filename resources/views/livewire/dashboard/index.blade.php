@@ -1,6 +1,6 @@
 <div class="">
     <x-slot name="header">Dashboard</x-slot>
-    <div class="h-screen rounded-2xl mx-auto">
+    <div class="h-screen rounded-2xl mx-auto p-2">
 
 
         <x-dashboard.greetings/>

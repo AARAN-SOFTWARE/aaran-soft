@@ -2,7 +2,7 @@
 'transaction' => [],
 ])
 
-<div class="w-full p-2 mt-5">
+<div class="w-full mt-5">
     <div class="flex flex-row gap-4 w-full">
 
         <div
