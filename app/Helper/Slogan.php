@@ -56,6 +56,7 @@ class Slogan
 
     public static function getRandomQuote()
     {
-        return Collection::make(self::quotes())->random();
+        $quote = Collection::make(self::quotes())->random();
+        return  $quote['quote'];
     }
 }

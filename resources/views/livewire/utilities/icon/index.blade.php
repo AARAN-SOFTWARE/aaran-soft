@@ -208,6 +208,7 @@
                 <x-icons.utilities :icon="'message-round'"/>
                 <x-icons.utilities :icon="'login-key'"/>
                 <x-icons.utilities :icon="'u-turn-left2'"/>
+                <x-icons.utilities :icon="'performance'"/>
 
 
 
