@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Index extends Component
+class  Index extends Component
 {
 
     public $transaction;
@@ -29,7 +29,9 @@ class Index extends Component
 
         $total_sales = Sale::select(
             DB::raw("SUM(grand_total) as grand_total"),
-        )->where('acyear', '=', session()->get('acyear'))
+        )
+            ->where('acyear', '=', session()->get('acyear'))
+            ->where('company_id', '=', session()->get('company_id'))
             ->firstOrFail();
 
 
@@ -37,17 +39,20 @@ class Index extends Component
             DB::raw("SUM(grand_total) as grand_total"),
         )->where('acyear', '=', session()->get('acyear'))
             ->WhereBetween('invoice_date', [$first, $last])
+            ->where('company_id', '=', session()->get('company_id'))
             ->firstOrFail();
 
 
         $total_purchase = Purchase::select(
             DB::raw("SUM(grand_total) as grand_total"),
         )->where('acyear', '=', session()->get('acyear'))
+            ->where('company_id', '=', session()->get('company_id'))
             ->firstOrFail();
 
         $month_purchase = Purchase::select(
             DB::raw("SUM(grand_total) as grand_total"),
         )->where('acyear', '=', session()->get('acyear'))
+            ->where('company_id', '=', session()->get('company_id'))
             ->WhereBetween('purchase_date', [$first, $last])
             ->firstOrFail();
 
@@ -55,22 +60,26 @@ class Index extends Component
         $total_receivable = Receipt::select(
             DB::raw("SUM(receipt_amount) as receipt_amount"),
         )->where('acyear', '=', session()->get('acyear'))
+            ->where('company_id', '=', session()->get('company_id'))
             ->firstOrFail();
 
         $month_receivable = Receipt::select(
             DB::raw("SUM(receipt_amount) as receipt_amount"),
         )->where('acyear', '=', session()->get('acyear'))
             ->WhereBetween('vdate', [$first, $last])
+            ->where('company_id', '=', session()->get('company_id'))
             ->firstOrFail();
 
         $total_payable = Payment::select(
             DB::raw("SUM(payment_amount) as payment_amount"),
         )->where('acyear', '=', session()->get('acyear'))
+            ->where('company_id', '=', session()->get('company_id'))
             ->firstOrFail();
 
         $month_payable = Payment::select(
             DB::raw("SUM(payment_amount) as payment_amount"),
         )->where('acyear', '=', session()->get('acyear'))
+            ->where('company_id', '=', session()->get('company_id'))
             ->WhereBetween('vdate', [$first, $last])
             ->firstOrFail();
 
