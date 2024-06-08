@@ -15,6 +15,9 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                Don:[ "Donegal One", "serif"],
+                gab:[ "Gabriela", "serif"],
+                Ram:["Ramaraja", "serif"]
             },
         },
     },
