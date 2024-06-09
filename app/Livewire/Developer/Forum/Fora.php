@@ -27,6 +27,7 @@ class Fora extends Component
     public $users;
     public $ui_pic;
     public $old_ui_pic;
+    public mixed $firstFora='';
     #endregion
 
     #region[Mount]
@@ -137,11 +138,13 @@ class Fora extends Component
     {
         $this->sortField = 'id';
 
-        return UiTask::search($this->searches)
+        $data=UiTask::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->where('status', '!=', 100)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
+        $this->firstFora=$data[0];
+        return $data;
     }
     #endregion
 

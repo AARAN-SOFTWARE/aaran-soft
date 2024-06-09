@@ -209,6 +209,7 @@
                 <x-icons.utilities :icon="'login-key'"/>
                 <x-icons.utilities :icon="'u-turn-left2'"/>
                 <x-icons.utilities :icon="'performance'"/>
+                <x-icons.utilities :icon="'right-long-arrow'"/>
 
 
 

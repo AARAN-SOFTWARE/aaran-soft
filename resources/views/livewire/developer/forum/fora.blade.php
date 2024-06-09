@@ -1,10 +1,12 @@
 <div>
     <x-slot name="header">Fora</x-slot>
+
     <div style="background:url('../../../../images/ui-pic/simple-pink.jpg')  no-repeat center;background-size:cover"
          class="py-52 px-1 md:px-8 text-center relative text-white font-bold text-2xl md:text-3xl overflow-auto  opacity-65">
-        <h1 class="pb-4 text-black">Search Here</h1>
+
         <div class="w-11/12 md:w-3/4 lg:max-w-3xl m-auto">
-            <div class="relative z-30 text-base  text-black"><input type="text" value="" placeholder="Keyword"
+            <div class="relative z-30 text-base  text-black">
+                <input type="text" wire:model.live="searches" value="" placeholder="Find easily !"
                                                                     class="mt-2 shadow-md focus:outline-none rounded-2xl py-3 px-6 block w-full">
                 <button type="submit">
                     <svg class="text-teal-400 h-5 w-5 absolute top-3.5 right-8 fill-current dark:text-teal-300"
@@ -23,86 +25,226 @@
         </div>
     </div>
 
-    @forelse ($list as $row)
-        <section>
-            <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24">
-                <div class="flex flex-wrap items-center mx-auto max-w-7xl border border-gray-400 rounded-lg">
+    <section>
+        <div class="py-12 mx-auto w-9/12 sm:px-6 md:px-12 lg:px-24 lg:py-24 ">
+            <div class="flex justify-end w-full">
+                <x-button.new/>
+            </div>
 
-                    <div
-                        class="flex flex-col items-start mt-8 mb-10 text-left lg:flex-grow lg:w-1/2 lg:pl-6 xl:pl-24 md:mb-0 xl:mt-0">
+            <div class="flex rounded-lg border border-gray-100 hover:shadow-xl hover:shadow-gray-200 ">
 
-                        <span
-                            class="mb-8 text-xs font-bold tracking-widest text-blue-600 uppercase"> Your tagline </span>
+                <div
+                    class="flex flex-col items-start mt-8 mb-10 text-left lg:flex-grow lg:w-1/2 lg:pl-6 xl:pl-24 md:mb-0 xl:mt-0 ">
 
-                        <div class="flex gap-3 tracking-widest font-bold text-blue-600 uppercase mb-5">
+                    <div class="flex gap-3 tracking-widest font-bold text-blue-600 uppercase mb-5 mt-8">
+                        <div>
+                            <a href="{{ route('ui-task.show',[$firstFora->id]) }}"
+                               class="cursor-pointer text-xs">
+                                {{ \App\Enums\Priority::tryFrom($firstFora->priority)->getName() }}
+                            </a>
+                        </div>
+
+                        <div class="border-l-2">
+                            <a href="{{ route('ui-task.show',[$firstFora->id]) }}"
+                               class="ml-2 text-xs ">
+                                {{ \Aaran\Developer\Models\UiTask::allocated($firstFora->allocated) }}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="w-full h-20 overflow-hidden mb-2 ">
+                        <a href="{{ route('ui-task.show',[$firstFora->id]) }}"
+                           class="font-Ram text-2xl capitalize leading-none  text-neutral-900 md:text-7xl lg:text-3xl overflow-hidden"> {{ $firstFora->vname }}
+                        </a>
+                    </div>
+
+                    <div>
+                        <div class="h-32 w-[25rem]">
+                            <a href="{{ route('ui-task.show',[$firstFora->id]) }}">
+                                <div
+                                    class="mb-5 font-gab  text-lg tracking-wider leading-relaxed text-left text-gray-800 h-20 overflow-hidden">{!! $firstFora->body !!}</div>
+                            </a>
+                        </div>
+                        <a href="{{ route('ui-task.show',[$firstFora->id]) }}">
+                        <div class="flex hover:text-blue-500 font-serif tracking-wider">
+
+                            <div>continue reading </div>&nbsp;&nbsp;<div> <x-icons.icon icon="right-long-arrow" class="w-6 h-6 pt-1"/></div>
+                        </div>
+                        </a>
+
+                    </div>
+
+
+                    <div class="lg:flex gap-3 mb-0 mt-0 lg:my-auto max-w-7xl sm:flex">
+
+                        <div class="text-xl text-gray-700 tracking-wide ">
+                            <img class="h-16 w-16 p-1 rounded-full border border-gray-200 object-cover"
+                                 src="{{ $firstFora->user->profile_photo_url }}" alt="{{ Auth::user()->name }}"/>
+                        </div>
+
+                        <div>
+                            <div class=" px-2 uppercase text-lg ">{{ $firstFora->user->name }}</div>
+
+                            <div class=" text-gray-400 text-xs px-2">
+                                <time>{{ $firstFora->created_at->diffForHumans() }}</time>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="">
+                    <img class="rounded-r-lg bg-cover object-cover  h-[30rem]" alt="{{$firstFora->ui_pic}}"
+                         src="{{URL(\Illuminate\Support\Facades\Storage::url('/images/'.$firstFora->ui_pic))}}">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="py-12 mx-auto w-9/12 sm:px-6 md:px-12 lg:px-24 lg:py-24 ">
+
+        <div class="lg:grid grid-cols-3 gap-7 gap-y-10 h-auto ">
+
+            @foreach($list->skip(1) as $row)
+
+                <div class="rounded-lg border flex-col border-gray-100 hover:shadow-xl hover:shadow-gray-200 duration-200 bg-zinc-50 hover:bg-white">
+
+                    <div>
+                        <img class="bg-cover rounded-t-lg h-64 w-full" alt="{{$row->ui_pic}}"
+                             src="{{URL(\Illuminate\Support\Facades\Storage::url('/images/'.$row->ui_pic))}}">
+                    </div>
+
+                    <div class="flex-col justify-evenly p-5">
+
+                        <div class="flex gap-3 text-gray-500 uppercase mb-5">
                             <div>
                                 <a href="{{ route('ui-task.show',[$row->id]) }}"
-                                   class="cursor-pointer text-xs">
+                                   class="cursor-pointer text-sm ">
                                     {{ \App\Enums\Priority::tryFrom($row->priority)->getName() }}
                                 </a>
                             </div>
 
-                            <div class="border-l-2 border-gray-200">
+                            <div class="border-l-2">
                                 <a href="{{ route('ui-task.show',[$row->id]) }}"
-                                   class="ml-2 text-xs ">
+                                   class="ml-2 text-sm ">
                                     {{ \Aaran\Developer\Models\UiTask::allocated($row->allocated) }}
                                 </a>
                             </div>
                         </div>
 
-                        <div class="w-full h-28 overflow-hidden mb-6">
+                        <div class="w-full h-16 my-auto overflow-hidden mb-6">
                             <a href="{{ route('ui-task.show',[$row->id]) }}"
-                               class=" text-xl tracking-widest capitalize leading-none  text-neutral-900 md:text-7xl lg:text-3xl overflow-hidden"> {{ $row->vname }}
+                               class="font-Ram text-lg hover:text-blue-700 capitalize
+                               text-neutral-900 lg:text-2xl overflow-hidden"> {{ $row->vname }}
                             </a>
                         </div>
 
-                        <div class="h-32 w-[25rem] ">
+                        <div class="w-full my-auto overflow-hidden ">
                             <a href="{{ route('ui-task.show',[$row->id]) }}">
                                 <div
-                                    class="mb-5 text-lg tracking-wider leading-relaxed text-left text-gray-800 h-20 overflow-hidden">{!! $row->body !!}</div>
+                                    class="font-gab mb-8 text-lg tracking-wider leading-relaxed text-left
+                                 text-gray-800 h-20 overflow-hidden">{!! $row->body !!}&nbsp; <a class="hover:text-blue-500 font-serif tracking-wider" href="{{ route('ui-task.show',[$row->id]) }}">read more...</a></div>
                             </a>
                         </div>
 
-                        <div class="flex-col mt-0 lg:mt-6 max-w-7xl sm:flex">
 
-                            <div class="flex text-xl text-gray-700 tracking-wide">
-                                <x-icons.icon :icon="'logo'"
-                                              class="h-14 w-auto "/>
+                        <div class="lg:flex gap-3 mb-0 mt-0 lg:my-auto max-w-7xl sm:flex">
+
+                            <div class="text-xl text-gray-700 tracking-wide ">
+                                <img class="h-12 w-12 p-1 rounded-full border border-gray-200 object-cover"
+                                     src="{{ $row->user->profile_photo_url }}" alt="{{ Auth::user()->name }}"/>
                             </div>
 
                             <div>
-                                <div class=" px-2">{{ $row->user->name }}</div>
+                                <div class=" px-2 uppercase tracking-tight text-lg ">{{ $row->user->name }}</div>
 
-                                <div class="mt-1.5 text-gray-400 text-xs">
+                                <div class=" text-gray-400 text-xs px-2">
                                     <time>{{ $row->created_at->diffForHumans() }}</time>
                                 </div>
                             </div>
 
-                            <div>
 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="w-full lg:max-w-lg lg:w-1/2 rounded-xl">
-                        <div>
-                            <div class="relative w-full max-w-lg">
-                                <div
-                                    class="absolute top-0 rounded-full bg-violet-300 -left-4 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-
-                                <div
-                                    class="absolute rounded-full bg-fuchsia-300 -bottom-24 right-20 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-                                <div class="relative">
-                                    <img class="object-cover object-center mx-auto rounded-lg shadow-2xl" alt="hero"
-                                         src="/assets/images/placeholders/squareCard.png">
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
+            @endforeach
+        </div>
+
+    </div>
+
+    <!-- Create Record -------------------------------------------------------------------------------------------->
+
+    <x-forms.create-new :id="$vid">
+        <div class="lg:flex space-x-5">
+
+            <div>
+                <x-input.model-text wire:model="vname" :label="'Title'"/>
+
+                <div class="px-1 py-4">
+                    <x-input.rich-text wire:model="body" :placeholder="'Assign task here'"/>
+                    {{--                        <x-editor.simpleMDE wire:model="body"/>--}}
+
+
+                </div>
+                <x-input.model-select wire:model="allocated" :label="'Assign To'">
+                    <option class="text-gray-400"> choose ..</option>
+                    @foreach($users as $user)
+                        <option value="{{$user->id}}">{{$user->name}}</option>
+                    @endforeach
+                </x-input.model-select>
+
             </div>
-        </section>
-    @empty
-    @endforelse
+
+            <div>
+                <x-input.model-select wire:model="status" :label="'Status'">
+                    <option class="text-gray-400"> choose ..</option>
+                    @foreach(\App\Enums\Status::cases() as $status)
+                        <option value="{{$status->value}}">{{$status->getName()}}</option>
+                    @endforeach
+                </x-input.model-select>
+
+                <x-input.model-select wire:model="priority" :label="'Priority'">
+                    <option class="text-gray-400"> choose ..</option>
+                    @foreach(\App\Enums\Priority::cases() as $priority)
+                        <option value="{{$priority->value}}">{{$priority->getName()}}</option>
+                    @endforeach
+                </x-input.model-select>
+
+                @admin
+                <x-input.model-text wire:model="verify" :label="'Verified'"/>
+                @endadmin
+
+                <!-- Image  --------------------------------------------------------------------------------------->
+
+                <label class="w-[10rem] text-zinc-500 tracking-wide py-2"></label>
+
+                <div class="grid grid-cols-2 flex-shrink-0 h-60 w-80 py-5 mr-4">
+                    <div>
+                        @if($ui_pic)
+                            <img class="h-48 w-full" src="{{ $ui_pic->temporaryUrl() }}"
+                                 alt="{{$ui_pic?:''}}"/>
+                        @endif
+
+                        @if(!$ui_pic && isset($old_ui_pic))
+                            <img class="h-48 w-full"
+                                 src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_ui_pic))}}"
+                                 alt="">
+                        @else
+                            <div class="h-48 w-full justify-center flex items-center">
+                                Select image
+                            </div>
+
+                        @endif
+                    </div>
+                </div>
+
+                <div>
+                    <input type="file" wire:model="ui_pic">
+                    <button wire:click.prevent="save_image"></button>
+                </div>
+            </div>
+
+        </div>
+    </x-forms.create-new>
 
 </div>
