@@ -18,6 +18,7 @@ class SaleEntry
             config('clients.KGS_PRINTERS') => in_array($feature, config('kgs_printers.customise', [])),
             config('clients.THIRUMURUGAN_PRINTERS') => in_array($feature, config('thirumurugan_printing.customise', [])),
             config('clients.BEST_PRINT') => in_array($feature, config('best_print.customise', [])),
+            config('clients.VIP_GRAPHIICS') => in_array($feature, config('vip_graphiics.customise', [])),
             config('clients.SAIRF_SOURCING') => in_array($feature, config('sairfsourcing.customise', [])),
 
             config('clients.SK_ENTERPRISES') => in_array($feature, config('sk_enterprises.customise', [])),

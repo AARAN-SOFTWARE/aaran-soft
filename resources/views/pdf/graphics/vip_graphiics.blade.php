@@ -181,32 +181,8 @@
             text-align: center;
         }
 
-        /* table data condition two  */
-        .inv-tableData2 {
-            font-size: 11px;
-            font-weight: bold;
-            text-align: justify-all;
-            vertical-align: top;
-        }
 
-        .inv-tableData2 > td {
-            height: 40px;
-            padding-left: 5px;
-        }
-
-        .inv-tableData2 .items-r {
-            text-align: right;
-        }
-
-        .inv-tableData2 .items-l, .inv-tableTotal .items-l {
-            text-align: left;
-        }
-
-        .inv-tableData2 .items-c {
-            text-align: center;
-        }
-
-        .inv-tableHeader > th, .inv-tableData1 > td, .inv-tableData2 > td, .inv-tableSpace > td {
+        .inv-tableHeader > th, .inv-tableData1 > td, .inv-tableSpace > td {
             border-right: 1px solid black;
         }
 
@@ -400,7 +376,6 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-        @if(strlen($row['hsncode'])<=8 && strlen($row['product_name']) && strlen($row['description'])<=38)
             <tr class="inv-tableData1">
                 <td class="items-c">{{$index+1}} </td>
                 <td class="items-c">{{$row['dc_no']}} </td>
@@ -419,26 +394,6 @@
                 <td class="items-r">{{number_format($row['gst_amount'],2,'.','')}}</td>
                 <td class="items-r">{{number_format($row['sub_total'],2,'.','')}}</td>
             </tr>
-        @else
-            <tr class="inv-tableData2">
-                <td class="items-c">{{$index+1}} </td>
-                <td class="items-c">{{$row['dc_no']}} </td>
-                <td class="items-c">{{$row['hsncode']}}</td>
-                <td class="items-l" style="">
-                    @if($row['description'])
-                        {{$row['product_name'].' - '.$row['description']}}
-                    @else
-                        {{$row['product_name']}}
-                    @endif
-                </td>
-                <td class="items-c">{{$row['qty']+0}}</td>
-                <td class="items-r">{{number_format($row['price'],2,'.','')}}</td>
-                <td class="items-r">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
-                <td class="items-c">{{$row['gst_percent']*2}}</td>
-                <td class="items-r">{{number_format($row['gst_amount'],2,'.','')}}</td>
-                <td class="items-r">{{number_format($row['sub_total'],2,'.','')}}</td>
-            </tr>
-        @endif
         @php
             $gstPercent = $row['gst_percent'];
         @endphp
@@ -507,7 +462,7 @@
         $totalGst_24=0;
         $gst_percent_24=0;
     @endphp
-    @foreach($list as $index => $row)
+    @foreach($list->unique('hsncode') as $index => $row)
         @if(($row['gst_percent']*2)==5)
             {{$hsncode = $hsncode.' '.$row['hsncode']}}
             {{$qty += $row['qty']}}

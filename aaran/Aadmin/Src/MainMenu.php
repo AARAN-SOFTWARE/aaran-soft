@@ -18,6 +18,7 @@ class MainMenu
             config('clients.KGS_PRINTERS') => in_array($feature, config('kgs_printers.menus', [])),
             config('clients.THIRUMURUGAN_PRINTERS') => in_array($feature, config('thirumurugan_printing.menus', [])),
             config('clients.BEST_PRINT') => in_array($feature, config('best_print.menus', [])),
+            config('clients.VIP_GRAPHIICS') => in_array($feature, config('vip_graphiics.menus', [])),
             config('clients.SAIRF_SOURCING') => in_array($feature, config('sairfsourcing.menus', [])),
 
             config('clients.SK_ENTERPRISES') => in_array($feature, config('sk_enterprises.menus', [])),

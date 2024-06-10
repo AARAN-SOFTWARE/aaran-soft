@@ -79,33 +79,35 @@
         /* Invoice table data and Total */
         .inv-tableHeader {
             background-color: transparent;
-            border: 1px solid darkgray;
-            font-size: 9px;
+            font-size: 10px;
             line-height: 1.5;
             margin-bottom: 15px;
+            border-bottom: 1px solid darkgray;
         }
-
-        /* table data */
-        .inv-tableData {
+        /* table data condition one */
+        .inv-tableData1 {
             font-size: 11px;
             text-align: justify-all;
             vertical-align: top;
         }
-        .inv-tableData > td {
+        .inv-tableData1 > td {
             height: 40px;
             padding-left: 5px;
         }
-        .inv-tableData .items-r {
+        .inv-tableData1 .items-r {
             text-align: right;
         }
-        .inv-tableData .items-l, .inv-tableTotal .items-l{
+        .inv-tableData1 .items-l {
             text-align: left;
+
         }
-        .inv-tableData .items-c {
+        .inv-tableData1 .items-c {
             text-align: center;
         }
 
-        .inv-tableHeader > th, .inv-tableData > td,  .inv-tableSpace > td {
+
+
+        .inv-tableHeader > th, .inv-tableData1 > td, .inv-tableSpace > td {
             border-right: 1px solid darkgray;
         }
 
@@ -113,6 +115,7 @@
         .inv-tableSpace {
             line-height: 2.5;
         }
+
         .inv-tableTotal, .total-r {
             border: 1px solid darkgray;
             font-size: 12px;
@@ -158,9 +161,10 @@
             line-height: 1.5;
         }
         .rupees {
-            font-size: 10px;
+            font-size: 12px;
             padding-left: 3px;
         }
+
         /* Signature */
         .sign-col1 {
             vertical-align: top;
@@ -172,6 +176,10 @@
         .sign-col2 {
             font-size: 12px;
             text-align: center;
+        }
+        .auth {
+            font-family: "Times New Roman";
+            font-weight: bold;
         }
         .pageBreak {
             font-size: 10px;
@@ -193,8 +201,7 @@
                     <img src="{{ public_path('images/client_logo/bestprint_black.png')}}" alt="logo" width="60%" height="35px"/>
                 </span>
             <span class="comp-address">
-                    <p>{{$cmp->get('address_1')}}</p>
-                    <p>{{$cmp->get('address_2')}},{{$cmp->get('city')}}</p>
+                    <p>{{$cmp->get('address_1')}}, {{$cmp->get('address_2')}}</p>
                     <p>{{$cmp->get('contact')}} - {{$cmp->get('email')}}</p>
                     <p>{{$cmp->get('gstin')}}&nbsp;-&nbsp;{{$cmp->get('msme')}}</p>
                 </span>
@@ -242,25 +249,25 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-            <tr class="inv-tableData">
-                <td class="items-c">{{$index+1}} </td>
-                <td class="items-l">{{$row['po_no']}}</td>
-                <td class="items-c">{{$row['dc_no']}} </td>
-                <td class="items-c">{{$row['hsncode']}}</td>
-                <td class="items-l" style="">
-                    @if($row['description'])
-                        {{$row['product_name'].' - '.$row['description']}}
-                    @else
-                        {{$row['product_name']}}
-                    @endif
-                </td>
-                <td class="items-c">{{$row['qty']+0}}</td>
-                <td class="items-r">{{number_format($row['price'],2,'.','')}}</td>
-                <td class="items-r">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
-                <td class="items-c">{{$row['gst_percent']*2}}</td>
-                <td class="items-r">{{number_format($row['gst_amount'],2,'.','')}}</td>
-                <td class="items-r">{{number_format($row['sub_total'],2,'.','')}}</td>
-            </tr>
+        <tr class="inv-tableData1">
+            <td class="items-c">{{$index+1}} </td>
+            <td class="items-l">{{$row['po_no']}}</td>
+            <td class="items-c">{{$row['dc_no']}} </td>
+            <td class="items-c">{{$row['hsncode']}}</td>
+            <td class="items-l" style="">
+                @if($row['description'])
+                    {{$row['product_name'].' - '.$row['description']}}
+                @else
+                    {{$row['product_name']}}
+                @endif
+            </td>
+            <td class="items-c">{{$row['qty']+0}}</td>
+            <td class="items-r">{{number_format($row['price'],2,'.','')}}</td>
+            <td class="items-r">{{number_format($row['qty']*$row['price'],2,'.','')}}</td>
+            <td class="items-c">{{$row['gst_percent']*2}}</td>
+            <td class="items-r">{{number_format($row['gst_amount'],2,'.','')}}</td>
+            <td class="items-r">{{number_format($row['sub_total'],2,'.','')}}</td>
+        </tr>
         @php
             $gstPercent = $row['gst_percent'];
         @endphp
@@ -299,7 +306,7 @@
     @if($obj->sales_type==0)
         {{--        SGST and CGST Description and total gst and grand total--}}
         <tr>
-            <td rowspan="2" colspan="6" class="description-1">
+            <td rowspan="2" colspan="5" class="description-1">
                             <span>We hereby certify that our registration under the GST Act 2017 is in force on
                                 the date on which sale of the goods specified in this invoice is made by us
                                 and the transaction of sale is covered by this invoice has been effected by
@@ -307,25 +314,25 @@
                                 Tirupur Jurisdiction Only.
                             </span>
             </td>
-            <td class="total-col-1" colspan="2">Taxable Value</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_taxable,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">Taxable Value</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
         </tr>
         <tr>
-            <td class="total-col-1" colspan="2">CGST&nbsp;@&nbsp;{{$gstPercent}}%</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_gst/2,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}%</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         </tr>
         <tr>
-            <td colspan="6" class="description-2">
+            <td colspan="5" class="description-2">
                 <div>* Goods once sold cannot be return back or exchanged</div>
                 <div>* Seller cannot be responsible for any damage/mistakes.</div>
             </td>
-            <td class="total-col-1" colspan="2">SGST&nbsp;@&nbsp;{{$gstPercent}}%</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_gst/2,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}%</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         </tr>
         <tr>
-            <td colspan="6"><div></div></td>
-            <td class="total-col-1" colspan="2">Total GST</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_gst,2,'.','')}}</td>
+            <td colspan="5"><div></div></td>
+            <td class="total-col-1" colspan="4">Total GST</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
         </tr>
         <tr>
             <td class="bankDetails" rowspan="2" colspan="3" width="100px">
@@ -334,36 +341,36 @@
                 <div>BANK NAME</div>
                 <div>BRANCH </div>
             </td>
-            <td rowspan="2" colspan="3" class="bankDetails">
+            <td rowspan="2" colspan="2" class="bankDetails">
                 <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
                 <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
                 <div>:&nbsp;{{$cmp->get('bank')}}</div>
                 <div>:&nbsp;{{$cmp->get('branch')}}</div>
             </td>
             @if($obj->additional!=0)
-                <td  class="total-col-1" colspan="2">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
+                <td  class="total-col-1" colspan="4">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
                 </td>
-                <td  class="total-col-2" colspan="3">{{ number_format($obj->additional,2,'.','') }}</td>
+                <td  class="total-col-2" colspan="2">{{ number_format($obj->additional,2,'.','') }}</td>
             @else
-                <td class="total-col-1" colspan="2">&nbsp;</td>
-                <td  class="total-col-2" colspan="3">&nbsp;</td>
+                <td class="total-col-1" colspan="4">&nbsp;</td>
+                <td  class="total-col-2" colspan="2">&nbsp;</td>
             @endif
         </tr>
         <tr>
-            <td class="total-col-1" colspan="2">Round Off</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->round_off,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">Round Off</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->round_off,2,'.','')}}</td>
         </tr>
         <tr class="amount">
-            <td colspan="6">
+            <td colspan="5">
                 <div class="rupees">Amount (in words)</div>
                 <div class="rupees"><b>{{$rupees}}Only</b></div>
             </td>
-            <td class="total-col-1 total" colspan="2"><b>GRAND TOTAL</b></td>
-            <td class="total-col-2 total" colspan="3"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
+            <td class="total-col-1 total" colspan="4"><b>GRAND TOTAL</b></td>
+            <td class="total-col-2 total" colspan="2"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
         </tr>
     @else
         <tr>
-            <td rowspan="2" colspan="6" class="description-1">
+            <td rowspan="2" colspan="5" class="description-1">
                     <span>We hereby certify that our registration under the GST Act 2017 is in force on
                         the date on which sale of the goods specified in this invoice is made by us
                         and the transaction of sale is covered by this invoice has been effected by
@@ -371,24 +378,24 @@
                         Tirupur Jurisdiction Only.
                     </span>
             </td>
-            <td class="total-col-1" colspan="2">Taxable Value</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_taxable,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">Taxable Value</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
         </tr>
         <tr>
-            <td class="total-col-1" colspan="2"><div></div></td>
-            <td class="total-col-2" colspan="3"><div></div></td>
+            <td class="total-col-1" colspan="4"><div></div></td>
+            <td class="total-col-2" colspan="2"><div></div></td>
         </tr>
         <tr>
-            <td colspan="6" class="description-2">
+            <td colspan="5" class="description-2">
                 <div>* Goods once sold cannot be return back or exchanged</div>
                 <div>* Seller cannot be responsible for any damage/mistakes.</div>
             </td>
-            <td class="total-col-1" colspan="2">IGST&nbsp;@&nbsp;{{$gstPercent*2}}%</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_gst,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">IGST&nbsp;@&nbsp;{{$gstPercent*2}}%</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
         </tr>
         <tr>
             <td colspan="6"><div></div></td>
-            <td class="total-col-1" colspan="2">Total GST</td>
+            <td class="total-col-1" colspan="4">Total GST</td>
             <td class="total-col-2" colspan="3">{{number_format($obj->total_gst,2,'.','')}}</td>
         </tr>
         <tr>
@@ -398,37 +405,37 @@
                 <div>BANK NAME</div>
                 <div>BRANCH </div>
             </td>
-            <td rowspan="2" colspan="3" class="bankDetails">
+            <td rowspan="2" colspan="2" class="bankDetails">
                 <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
                 <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
                 <div>:&nbsp;{{$cmp->get('bank')}}</div>
                 <div>:&nbsp;{{$cmp->get('branch')}}</div>
             </td>
             @if($obj->additional!=0)
-                <td  class="total-col-1" colspan="2">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
+                <td  class="total-col-1" colspan="4">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
                 </td>
-                <td  class="total-col-2" colspan="3">{{ number_format($obj->additional,2,'.','') }}</td>
+                <td  class="total-col-2" colspan="2">{{ number_format($obj->additional,2,'.','') }}</td>
             @else
-                <td class="total-col-1" colspan="2">&nbsp;</td>
-                <td  class="total-col-2" colspan="3">&nbsp;</td>
+                <td class="total-col-1" colspan="4">&nbsp;</td>
+                <td  class="total-col-2" colspan="2">&nbsp;</td>
             @endif
         </tr>
         <tr>
-            <td class="total-col-1" colspan="2">Round Off</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->round_off,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">Round Off</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->round_off,2,'.','')}}</td>
         </tr>
         <tr class="amount">
-            <td colspan="6">
+            <td colspan="5">
                 <div class="rupees">Amount (in words)</div>
                 <div class="rupees"><b>{{$rupees}}Only</b></div>
             </td>
-            <td class="total-col-1 total" colspan="2"><b>GRAND TOTAL</b></td>
-            <td class="total-col-2 total" colspan="3"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
+            <td class="total-col-1 total" colspan="4"><b>GRAND TOTAL</b></td>
+            <td class="total-col-2 total" colspan="2"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
         </tr>
     @endif
     <tr >
         <td colspan="7" class="sign-col1"  >Receiver Sign</td>
-        <td colspan="4"  class="sign-col2" width="250px"  style="vertical-align: top">for&nbsp;<b>{{$cmp->get('company_name')}}</b></td>
+        <td colspan="4"  class="sign-col2" width="250px"  style="vertical-align: top; ">for&nbsp;<span class="auth">{{$cmp->get('company_name')}}</span></td>
     </tr>
     <tr>
         <td colspan="7"><div></div></td>
@@ -497,7 +504,7 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-        <tr class="inv-tableData">
+        <tr class="inv-tableData1">
             <td class="items-c">{{$index+1}} </td>
             <td class="items-l">{{$row['po_no']}}</td>
             <td class="items-c">{{$row['dc_no']}} </td>
@@ -554,7 +561,7 @@
     @if($obj->sales_type==0)
         {{--        SGST and CGST Description and total gst and grand total--}}
         <tr>
-            <td rowspan="2" colspan="6" class="description-1">
+            <td rowspan="2" colspan="5" class="description-1">
                             <span>We hereby certify that our registration under the GST Act 2017 is in force on
                                 the date on which sale of the goods specified in this invoice is made by us
                                 and the transaction of sale is covered by this invoice has been effected by
@@ -562,25 +569,25 @@
                                 Tirupur Jurisdiction Only.
                             </span>
             </td>
-            <td class="total-col-1" colspan="2">Taxable Value</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_taxable,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">Taxable Value</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
         </tr>
         <tr>
-            <td class="total-col-1" colspan="2">CGST&nbsp;@&nbsp;{{$gstPercent}}%</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_gst/2,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}%</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         </tr>
         <tr>
-            <td colspan="6" class="description-2">
+            <td colspan="5" class="description-2">
                 <div>* Goods once sold cannot be return back or exchanged</div>
                 <div>* Seller cannot be responsible for any damage/mistakes.</div>
             </td>
-            <td class="total-col-1" colspan="2">SGST&nbsp;@&nbsp;{{$gstPercent}}%</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_gst/2,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}%</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         </tr>
         <tr>
-            <td colspan="6"><div></div></td>
-            <td class="total-col-1" colspan="2">Total GST</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_gst,2,'.','')}}</td>
+            <td colspan="5"><div></div></td>
+            <td class="total-col-1" colspan="4">Total GST</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
         </tr>
         <tr>
             <td class="bankDetails" rowspan="2" colspan="3" width="100px">
@@ -589,36 +596,36 @@
                 <div>BANK NAME</div>
                 <div>BRANCH </div>
             </td>
-            <td rowspan="2" colspan="3" class="bankDetails">
+            <td rowspan="2" colspan="2" class="bankDetails">
                 <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
                 <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
                 <div>:&nbsp;{{$cmp->get('bank')}}</div>
                 <div>:&nbsp;{{$cmp->get('branch')}}</div>
             </td>
             @if($obj->additional!=0)
-                <td  class="total-col-1" colspan="2">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
+                <td  class="total-col-1" colspan="4">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
                 </td>
-                <td  class="total-col-2" colspan="3">{{ number_format($obj->additional,2,'.','') }}</td>
+                <td  class="total-col-2" colspan="2">{{ number_format($obj->additional,2,'.','') }}</td>
             @else
-                <td class="total-col-1" colspan="2">&nbsp;</td>
-                <td  class="total-col-2" colspan="3">&nbsp;</td>
+                <td class="total-col-1" colspan="4">&nbsp;</td>
+                <td  class="total-col-2" colspan="2">&nbsp;</td>
             @endif
         </tr>
         <tr>
-            <td class="total-col-1" colspan="2">Round Off</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->round_off,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">Round Off</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->round_off,2,'.','')}}</td>
         </tr>
         <tr class="amount">
-            <td colspan="6">
+            <td colspan="5">
                 <div class="rupees">Amount (in words)</div>
                 <div class="rupees"><b>{{$rupees}}Only</b></div>
             </td>
-            <td class="total-col-1 total" colspan="2"><b>GRAND TOTAL</b></td>
-            <td class="total-col-2 total" colspan="3"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
+            <td class="total-col-1 total" colspan="4"><b>GRAND TOTAL</b></td>
+            <td class="total-col-2 total" colspan="2"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
         </tr>
     @else
         <tr>
-            <td rowspan="2" colspan="6" class="description-1">
+            <td rowspan="2" colspan="5" class="description-1">
                     <span>We hereby certify that our registration under the GST Act 2017 is in force on
                         the date on which sale of the goods specified in this invoice is made by us
                         and the transaction of sale is covered by this invoice has been effected by
@@ -626,24 +633,24 @@
                         Tirupur Jurisdiction Only.
                     </span>
             </td>
-            <td class="total-col-1" colspan="2">Taxable Value</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_taxable,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">Taxable Value</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
         </tr>
         <tr>
-            <td class="total-col-1" colspan="2"><div></div></td>
-            <td class="total-col-2" colspan="3"><div></div></td>
+            <td class="total-col-1" colspan="4"><div></div></td>
+            <td class="total-col-2" colspan="2"><div></div></td>
         </tr>
         <tr>
-            <td colspan="6" class="description-2">
+            <td colspan="5" class="description-2">
                 <div>* Goods once sold cannot be return back or exchanged</div>
                 <div>* Seller cannot be responsible for any damage/mistakes.</div>
             </td>
-            <td class="total-col-1" colspan="2">IGST&nbsp;@&nbsp;{{$gstPercent*2}}%</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_gst,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">IGST&nbsp;@&nbsp;{{$gstPercent*2}}%</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
         </tr>
         <tr>
             <td colspan="6"><div></div></td>
-            <td class="total-col-1" colspan="2">Total GST</td>
+            <td class="total-col-1" colspan="4">Total GST</td>
             <td class="total-col-2" colspan="3">{{number_format($obj->total_gst,2,'.','')}}</td>
         </tr>
         <tr>
@@ -653,37 +660,37 @@
                 <div>BANK NAME</div>
                 <div>BRANCH </div>
             </td>
-            <td rowspan="2" colspan="3" class="bankDetails">
+            <td rowspan="2" colspan="2" class="bankDetails">
                 <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
                 <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
                 <div>:&nbsp;{{$cmp->get('bank')}}</div>
                 <div>:&nbsp;{{$cmp->get('branch')}}</div>
             </td>
             @if($obj->additional!=0)
-                <td  class="total-col-1" colspan="2">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
+                <td  class="total-col-1" colspan="4">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
                 </td>
-                <td  class="total-col-2" colspan="3">{{ number_format($obj->additional,2,'.','') }}</td>
+                <td  class="total-col-2" colspan="2">{{ number_format($obj->additional,2,'.','') }}</td>
             @else
-                <td class="total-col-1" colspan="2">&nbsp;</td>
-                <td  class="total-col-2" colspan="3">&nbsp;</td>
+                <td class="total-col-1" colspan="4">&nbsp;</td>
+                <td  class="total-col-2" colspan="2">&nbsp;</td>
             @endif
         </tr>
         <tr>
-            <td class="total-col-1" colspan="2">Round Off</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->round_off,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">Round Off</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->round_off,2,'.','')}}</td>
         </tr>
         <tr class="amount">
-            <td colspan="6">
+            <td colspan="5">
                 <div class="rupees">Amount (in words)</div>
                 <div class="rupees"><b>{{$rupees}}Only</b></div>
             </td>
-            <td class="total-col-1 total" colspan="2"><b>GRAND TOTAL</b></td>
-            <td class="total-col-2 total" colspan="3"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
+            <td class="total-col-1 total" colspan="4"><b>GRAND TOTAL</b></td>
+            <td class="total-col-2 total" colspan="2"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
         </tr>
     @endif
     <tr >
         <td colspan="7" class="sign-col1"  >Receiver Sign</td>
-        <td colspan="4"  class="sign-col2" width="250px"  style="vertical-align: top">for&nbsp;<b>{{$cmp->get('company_name')}}</b></td>
+        <td colspan="4"  class="sign-col2" width="250px"  style="vertical-align: top; ">for&nbsp;<span class="auth">{{$cmp->get('company_name')}}</span></td>
     </tr>
     <tr>
         <td colspan="7"><div></div></td>
@@ -752,7 +759,7 @@
         $gstPercent = 0;
     @endphp
     @foreach($list as $index => $row)
-        <tr class="inv-tableData">
+        <tr class="inv-tableData1">
             <td class="items-c">{{$index+1}} </td>
             <td class="items-l">{{$row['po_no']}}</td>
             <td class="items-c">{{$row['dc_no']}} </td>
@@ -809,7 +816,7 @@
     @if($obj->sales_type==0)
         {{--        SGST and CGST Description and total gst and grand total--}}
         <tr>
-            <td rowspan="2" colspan="6" class="description-1">
+            <td rowspan="2" colspan="5" class="description-1">
                             <span>We hereby certify that our registration under the GST Act 2017 is in force on
                                 the date on which sale of the goods specified in this invoice is made by us
                                 and the transaction of sale is covered by this invoice has been effected by
@@ -817,25 +824,25 @@
                                 Tirupur Jurisdiction Only.
                             </span>
             </td>
-            <td class="total-col-1" colspan="2">Taxable Value</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_taxable,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">Taxable Value</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
         </tr>
         <tr>
-            <td class="total-col-1" colspan="2">CGST&nbsp;@&nbsp;{{$gstPercent}}%</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_gst/2,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">CGST&nbsp;@&nbsp;{{$gstPercent}}%</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         </tr>
         <tr>
-            <td colspan="6" class="description-2">
+            <td colspan="5" class="description-2">
                 <div>* Goods once sold cannot be return back or exchanged</div>
                 <div>* Seller cannot be responsible for any damage/mistakes.</div>
             </td>
-            <td class="total-col-1" colspan="2">SGST&nbsp;@&nbsp;{{$gstPercent}}%</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_gst/2,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">SGST&nbsp;@&nbsp;{{$gstPercent}}%</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         </tr>
         <tr>
-            <td colspan="6"><div></div></td>
-            <td class="total-col-1" colspan="2">Total GST</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_gst,2,'.','')}}</td>
+            <td colspan="5"><div></div></td>
+            <td class="total-col-1" colspan="4">Total GST</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
         </tr>
         <tr>
             <td class="bankDetails" rowspan="2" colspan="3" width="100px">
@@ -844,36 +851,36 @@
                 <div>BANK NAME</div>
                 <div>BRANCH </div>
             </td>
-            <td rowspan="2" colspan="3" class="bankDetails">
+            <td rowspan="2" colspan="2" class="bankDetails">
                 <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
                 <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
                 <div>:&nbsp;{{$cmp->get('bank')}}</div>
                 <div>:&nbsp;{{$cmp->get('branch')}}</div>
             </td>
             @if($obj->additional!=0)
-                <td  class="total-col-1" colspan="2">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
+                <td  class="total-col-1" colspan="4">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
                 </td>
-                <td  class="total-col-2" colspan="3">{{ number_format($obj->additional,2,'.','') }}</td>
+                <td  class="total-col-2" colspan="2">{{ number_format($obj->additional,2,'.','') }}</td>
             @else
-                <td class="total-col-1" colspan="2">&nbsp;</td>
-                <td  class="total-col-2" colspan="3">&nbsp;</td>
+                <td class="total-col-1" colspan="4">&nbsp;</td>
+                <td  class="total-col-2" colspan="2">&nbsp;</td>
             @endif
         </tr>
         <tr>
-            <td class="total-col-1" colspan="2">Round Off</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->round_off,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">Round Off</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->round_off,2,'.','')}}</td>
         </tr>
         <tr class="amount">
-            <td colspan="6">
+            <td colspan="5">
                 <div class="rupees">Amount (in words)</div>
                 <div class="rupees"><b>{{$rupees}}Only</b></div>
             </td>
-            <td class="total-col-1 total" colspan="2"><b>GRAND TOTAL</b></td>
-            <td class="total-col-2 total" colspan="3"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
+            <td class="total-col-1 total" colspan="4"><b>GRAND TOTAL</b></td>
+            <td class="total-col-2 total" colspan="2"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
         </tr>
     @else
         <tr>
-            <td rowspan="2" colspan="6" class="description-1">
+            <td rowspan="2" colspan="5" class="description-1">
                     <span>We hereby certify that our registration under the GST Act 2017 is in force on
                         the date on which sale of the goods specified in this invoice is made by us
                         and the transaction of sale is covered by this invoice has been effected by
@@ -881,24 +888,24 @@
                         Tirupur Jurisdiction Only.
                     </span>
             </td>
-            <td class="total-col-1" colspan="2">Taxable Value</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_taxable,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">Taxable Value</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_taxable,2,'.','')}}</td>
         </tr>
         <tr>
-            <td class="total-col-1" colspan="2"><div></div></td>
-            <td class="total-col-2" colspan="3"><div></div></td>
+            <td class="total-col-1" colspan="4"><div></div></td>
+            <td class="total-col-2" colspan="2"><div></div></td>
         </tr>
         <tr>
-            <td colspan="6" class="description-2">
+            <td colspan="5" class="description-2">
                 <div>* Goods once sold cannot be return back or exchanged</div>
                 <div>* Seller cannot be responsible for any damage/mistakes.</div>
             </td>
-            <td class="total-col-1" colspan="2">IGST&nbsp;@&nbsp;{{$gstPercent*2}}%</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->total_gst,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">IGST&nbsp;@&nbsp;{{$gstPercent*2}}%</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
         </tr>
         <tr>
             <td colspan="6"><div></div></td>
-            <td class="total-col-1" colspan="2">Total GST</td>
+            <td class="total-col-1" colspan="4">Total GST</td>
             <td class="total-col-2" colspan="3">{{number_format($obj->total_gst,2,'.','')}}</td>
         </tr>
         <tr>
@@ -908,37 +915,37 @@
                 <div>BANK NAME</div>
                 <div>BRANCH </div>
             </td>
-            <td rowspan="2" colspan="3" class="bankDetails">
+            <td rowspan="2" colspan="2" class="bankDetails">
                 <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
                 <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
                 <div>:&nbsp;{{$cmp->get('bank')}}</div>
                 <div>:&nbsp;{{$cmp->get('branch')}}</div>
             </td>
             @if($obj->additional!=0)
-                <td  class="total-col-1" colspan="2">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
+                <td  class="total-col-1" colspan="4">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
                 </td>
-                <td  class="total-col-2" colspan="3">{{ number_format($obj->additional,2,'.','') }}</td>
+                <td  class="total-col-2" colspan="2">{{ number_format($obj->additional,2,'.','') }}</td>
             @else
-                <td class="total-col-1" colspan="2">&nbsp;</td>
-                <td  class="total-col-2" colspan="3">&nbsp;</td>
+                <td class="total-col-1" colspan="4">&nbsp;</td>
+                <td  class="total-col-2" colspan="2">&nbsp;</td>
             @endif
         </tr>
         <tr>
-            <td class="total-col-1" colspan="2">Round Off</td>
-            <td class="total-col-2" colspan="3">{{number_format($obj->round_off,2,'.','')}}</td>
+            <td class="total-col-1" colspan="4">Round Off</td>
+            <td class="total-col-2" colspan="2">{{number_format($obj->round_off,2,'.','')}}</td>
         </tr>
         <tr class="amount">
-            <td colspan="6">
+            <td colspan="5">
                 <div class="rupees">Amount (in words)</div>
                 <div class="rupees"><b>{{$rupees}}Only</b></div>
             </td>
-            <td class="total-col-1 total" colspan="2"><b>GRAND TOTAL</b></td>
-            <td class="total-col-2 total" colspan="3"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
+            <td class="total-col-1 total" colspan="4"><b>GRAND TOTAL</b></td>
+            <td class="total-col-2 total" colspan="2"><b>{{number_format($obj->grand_total,2,'.','')}}</b></td>
         </tr>
     @endif
     <tr >
         <td colspan="7" class="sign-col1"  >Receiver Sign</td>
-        <td colspan="4"  class="sign-col2" width="250px"  style="vertical-align: top">for&nbsp;<b>{{$cmp->get('company_name')}}</b></td>
+        <td colspan="4"  class="sign-col2" width="250px"  style="vertical-align: top; ">for&nbsp;<span class="auth">{{$cmp->get('company_name')}}</span></td>
     </tr>
     <tr>
         <td colspan="7"><div></div></td>
