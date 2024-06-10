@@ -574,7 +574,7 @@
 
             Tax Invoice
         </td>
-        <td colspan="1" style="text-align: right; margin-top: 2px; border-left: none">Transport&nbsp;Copy&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td colspan="1" style="text-align: right; margin-top: 2px; border-left: none">Duplicate&nbsp;Copy&nbsp;&nbsp;&nbsp;&nbsp;</td>
     </tr>
 
     <tr>
@@ -584,8 +584,8 @@
         </td>
         <td rowspan="4" width="40%" style="border-left: none;border-bottom: none;">
             <p style="line-height: .2;font-size: 20px;font-weight: bold;">{{$cmp->get('company_name')}}</p>
-            <p style="line-height: 1.5;">{{$cmp->get('address_1')}},{{$cmp->get('address_2')}}</p>
-            <p style="line-height: .5;">{{$cmp->get('city')}}</p>
+            <p style="line-height: .5;">{{$cmp->get('address_1')}}</p>
+            <p style="line-height: .5;">{{$cmp->get('address_2')}}</p>
             <p style="line-height: .5;">{{$cmp->get('contact')}}</p>
             <p style="line-height: .5;">{{$cmp->get('email')}}</p>
             <p style="line-height: .5;">{{$cmp->get('gstin')}}</p>
@@ -844,7 +844,7 @@
 
             </td>
             <td colspan="2" style="text-align: center;">
-                <div>State Tax</div>
+                <div>Sale Tax</div>
             </td>
         </tr>
         <tr>
@@ -1109,8 +1109,8 @@
         </td>
         <td rowspan="4" width="40%" style="border-left: none;border-bottom: none;">
             <p style="line-height: .2;font-size: 20px;font-weight: bold;">{{$cmp->get('company_name')}}</p>
-            <p style="line-height: 1.5;">{{$cmp->get('address_1')}},{{$cmp->get('address_2')}}</p>
-            <p style="line-height: .5;">{{$cmp->get('city')}}</p>
+            <p style="line-height: .5;">{{$cmp->get('address_1')}}</p>
+            <p style="line-height: .5;">{{$cmp->get('address_2')}}</p>
             <p style="line-height: .5;">{{$cmp->get('contact')}}</p>
             <p style="line-height: .5;">{{$cmp->get('email')}}</p>
             <p style="line-height: .5;">{{$cmp->get('gstin')}}</p>
@@ -1369,7 +1369,7 @@
 
             </td>
             <td colspan="2" style="text-align: center;">
-                <div>State Tax</div>
+                <div>Sale Tax</div>
             </td>
         </tr>
         <tr>

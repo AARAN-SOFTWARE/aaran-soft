@@ -8,6 +8,9 @@ class MainMenu
     {
         return match (config('aadmin.app_type')) {
             config('clients.VIJAY_GARMENTS') => in_array($feature, config('vijayGarments.menus', [])),
+            config('clients.AMAL_TEX') => in_array($feature, config('amal_tex.menus', [])),
+            config('clients.KATHIR_PRINTERS') => in_array($feature, config('kathir_printers.menus', [])),
+            config('clients.AJ_PRINTING') => in_array($feature, config('aj_printers.menus', [])),
             config('clients.NEETHU_INDUSTRIES') => in_array($feature, config('neethuIndustries.menus', [])),
             config('clients.SK_PRINTERS') => in_array($feature, config('sk_printers.menus', [])),
             config('clients.AARAN_ASSOCIATES') => in_array($feature, config('aaran_associates.menus', [])),

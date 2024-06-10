@@ -10,6 +10,9 @@ class Customise
 
         return match (config('aadmin.app_type')) {
             config('clients.VIJAY_GARMENTS') => in_array($feature, config('vijayGarments.features', [])),
+            config('clients.AMAL_TEX') => in_array($feature, config('amal_tex.features', [])),
+            config('clients.KATHIR_PRINTERS') => in_array($feature, config('kathir_printers.features', [])),
+            config('clients.AJ_PRINTING') => in_array($feature, config('aj_printers.features', [])),
             config('clients.NEETHU_INDUSTRIES') => in_array($feature, config('neethuIndustries.features', [])),
             config('clients.SK_PRINTERS') => in_array($feature, config('sk_printers.features', [])),
             config('clients.AARAN_ASSOCIATES') => in_array($feature, config('aaran_associates.features', [])),

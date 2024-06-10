@@ -36,7 +36,7 @@
         }
         .comp-logo {
             position: fixed;
-            margin:10px 0  0 20px;
+            margin:15px 0  0 20px;
         }
 
         /*  company Invoice header, address, no. and date.    */
@@ -176,7 +176,7 @@
         /* Signature */
         .sign-col1 {
             vertical-align: top;
-            height: 60px;
+            height: 55px;
             font-size: 12px;
             padding-left: 5px;
             border-top: 1px solid dimgray;
@@ -193,7 +193,6 @@
         .pageBreak {
             font-size: 10px;
             text-align: center;
-            padding-top: 5px;
         }
 
     </style>
@@ -205,7 +204,7 @@
 <table class="table-1">
     <tr>
         <td>
-            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="120px" class="comp-logo"/>
+            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="110px" class="comp-logo"/>
             {{--  if you change the image width,then change the inline width of 3rd col(td - empty div) to be same as well --}}
         </td>
         <td class="comp-details">
@@ -286,7 +285,7 @@
     @endforeach
 
     {{-- Spacing  --}}
-    @for($i = 0; $i < 8-$list->count(); $i++)
+    @for($i = 0; $i < 9-$list->count(); $i++)
         <tr class="inv-tableSpace">
 
             <td >&nbsp;</td>
@@ -462,7 +461,7 @@
 <table class="table-1">
     <tr>
         <td>
-            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="120px" class="comp-logo"/>
+            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="110px" class="comp-logo"/>
             {{--  if you change the image width,then change the inline width of 3rd col(td - empty div) to be same as well --}}
         </td>
         <td class="comp-details">
@@ -543,7 +542,7 @@
     @endforeach
 
     {{-- Spacing  --}}
-    @for($i = 0; $i < 8-$list->count(); $i++)
+    @for($i = 0; $i < 9-$list->count(); $i++)
         <tr class="inv-tableSpace">
 
             <td >&nbsp;</td>
@@ -719,7 +718,7 @@
 <table class="table-1">
     <tr>
         <td>
-            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="120px" class="comp-logo"/>
+            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="110px" class="comp-logo"/>
             {{--  if you change the image width,then change the inline width of 3rd col(td - empty div) to be same as well --}}
         </td>
         <td class="comp-details">
@@ -800,7 +799,7 @@
     @endforeach
 
     {{-- Spacing  --}}
-    @for($i = 0; $i < 8-$list->count(); $i++)
+    @for($i = 0; $i < 9-$list->count(); $i++)
         <tr class="inv-tableSpace">
 
             <td >&nbsp;</td>

@@ -8,6 +8,9 @@ class SaleEntry
     {
         return match (config('aadmin.app_type')) {
             config('clients.VIJAY_GARMENTS') => in_array($feature, config('vijayGarments.customise', [])),
+            config('clients.AMAL_TEX') => in_array($feature, config('amal_tex.customise', [])),
+            config('clients.KATHIR_PRINTERS') => in_array($feature, config('kathir_printers.customise', [])),
+            config('clients.AJ_PRINTING') => in_array($feature, config('aj_printers.customise', [])),
             config('clients.NEETHU_INDUSTRIES') => in_array($feature, config('neethuIndustries.customise', [])),
             config('clients.SK_PRINTERS') => in_array($feature, config('sk_printers.customise', [])),
             config('clients.AARAN_ASSOCIATES') => in_array($feature, config('aaran_associates.customise', [])),
