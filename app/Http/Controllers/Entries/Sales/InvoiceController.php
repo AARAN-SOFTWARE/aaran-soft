@@ -125,6 +125,7 @@ class InvoiceController extends Controller
 
             config('clients.PRAPTHIIMPEX') =>  'pdf.sundar.prapthi_impex',
             config('clients.SMSUPVC') =>  'pdf.sundar.smsupvc',
+            config('clients.VNINFOTECH') =>  'pdf.infotech.vninfotech',
 
             config('clients.SARA_SCREENS') =>  'pdf.offset.sales.sara_screens',
             config('clients.COLOURS_PRINTING') =>  'pdf.offset.sales.colours_printing',
@@ -142,13 +143,13 @@ class InvoiceController extends Controller
             config('clients.ESSA_KNITTING') =>  'pdf.Knitting.essa_knitting',
             config('clients.ESSA_KNITTING_GARMENT') =>  'pdf.garments.sales.essa_knitting_garments',
             config('clients.FASHION_FABRICS') =>  'pdf.Knitting.fashion_fabrics',
-            config('clients.A1_IMPEX') =>  'pdf.garments.sales.a1_impex',
-            config('clients.SATHYANARAYANA_GARMENTS') =>  'pdf.garments.sales.sathyanarayana_garments',
+            config('clients.A1_IMPEX') =>  'pdf.offset.sales.a1_impex',
             config('clients.NEETHU_INDUSTRIES') =>  'pdf.suresh.neethu_industries',
-            config('clients.MARK_INTERNATIONAL') =>  'pdf.garments.sales.mark_international',
-            config('clients.SRI_VENKATESWARA_TEXMART') =>  'pdf.garments.sales.sri_venkateswara_texmart',
             config('clients.VETRIVEL_GARMENTS') =>  'pdf.garments.sales.vetrivel_garments',
             config('clients.ASHWIN_TEX') =>  'pdf.garments.sales.ashwin_tex',
+            config('clients.MARK_INTERNATIONAL') =>  'pdf.suresh.mark_international',
+            config('clients.SRI_VENKATESWARA_TEXMART') =>  'pdf.suresh.sri_venkateswara_texmart',
+            config('clients.SATHYANARAYANA_GARMENTS') =>  'pdf.garments.sales.satyanarayana',
 
 
             default =>'pdf.garments.letterpad_withoutbank' ,

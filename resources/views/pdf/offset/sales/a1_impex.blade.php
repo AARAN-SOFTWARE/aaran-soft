@@ -24,14 +24,14 @@
         }
         /* company logo , name and address  */
         .comp-name {
-            font-size: 30px;
+            font-size: 45px;
             font-weight: bold;
             line-height: 1;
             font-family: "Times New Roman", serif;
         }
         .comp-details {
-            font-size: 11px;
-            line-height: .5;
+            font-size: 12px;
+            line-height: .3;
             text-align: center;
         }
         .comp-logo {
@@ -207,7 +207,7 @@
 <table class="table-1">
     <tr>
         <td>
-            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="95px" class="comp-logo"/>
+            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="110px" class="comp-logo"/>
             {{--  if you change the image width,then change the inline width of 3rd col(td - empty div) to be same as well --}}
         </td>
         <td class="comp-details">
@@ -462,7 +462,7 @@
 <table class="table-1">
     <tr>
         <td>
-            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="95px" class="comp-logo"/>
+            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="110px" class="comp-logo"/>
             {{--  if you change the image width,then change the inline width of 3rd col(td - empty div) to be same as well --}}
         </td>
         <td class="comp-details">
@@ -719,7 +719,7 @@
 <table class="table-1">
     <tr>
         <td>
-            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="95px" class="comp-logo"/>
+            <img src="{{ public_path('/storage/'.$cmp->get('logo'))}}" alt="company logo" width="110px" class="comp-logo"/>
             {{--  if you change the image width,then change the inline width of 3rd col(td - empty div) to be same as well --}}
         </td>
         <td class="comp-details">
