@@ -1,11 +1,11 @@
 <div>
-    <x-slot name="header">Profit & Lose</x-slot>
+    <x-slot name="header">Opening Balance</x-slot>
 
     <x-forms.m-panel>
 
         <div class="flex justify-between items-center">
             <select wire:model.live="k_id" :label="'User'" class="w-[30rem] purple-textbox">
-                <option class="text-gray-400"> choose ..</option>
+                <option class="text-gray-400" value=""> choose ..</option>
                 @foreach($users as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
                 @endforeach
@@ -23,50 +23,38 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vdate')"/>
-                <x-table.header-text wire:click.prevent="sortBy('vdate')" class="w-[10rem]" center>Date
-                </x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Profit</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Loosed</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Remarks</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" class="w-[10rem]" center>Date</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Opening Balance</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
             <!-- Table Body ------------------------------------------------------------------------------------------->
 
             @php
-                $totalProfit = 0;
-                $totalLoosed = 0;
+                $totalOpeningBalance = 0;
             @endphp
 
             <x-slot name="table_body">
                 @forelse ($list as $index =>  $row)
 
-                        <x-table.row>
-                            <x-table.cell-text center>
-                                {{ $index + 1 }}
-                            </x-table.cell-text>
+                    <x-table.row>
+                        <x-table.cell-text center>
+                            {{ $index + 1 }}
+                        </x-table.cell-text>
 
-                            <x-table.cell-text center>
-                                {{date('d-m-Y', strtotime($row->vdate))}}
-                            </x-table.cell-text>
+                        <x-table.cell-text center>
+                            {{date('d-m-Y', strtotime($row->vdate))}}
+                        </x-table.cell-text>
 
-                            <x-table.cell-text right>
-                                {{ $row->profit }}
-                            </x-table.cell-text>
+                        <x-table.cell-text right>
+                            {{ $row->opening_balance }}
+                        </x-table.cell-text>
 
-                            <x-table.cell-text right>
-                                {{ $row->loosed }}
-                            </x-table.cell-text>
+                        <x-table.cell-action id="{{$row->id}}"/>
+                    </x-table.row>
 
-                            <x-table.cell-text>
-                                {{ $row->remarks }}
-                            </x-table.cell-text>
-
-                            <x-table.cell-action id="{{$row->id}}"/>
-                        </x-table.row>
                     @php
-                        $totalProfit  += floatval($row->profit);
-                        $totalLoosed  += floatval($row->loosed);
+                        $totalOpeningBalance  += floatval($row->opening_balance);
                     @endphp
 
                 @empty
@@ -78,11 +66,7 @@
 
                     <x-table.cell-text right
                                        :class="'text-blue-600 font-semibold'">
-                        {{ \App\Helper\ConvertTo::decimal2($totalProfit)}}</x-table.cell-text>
-
-                    <x-table.cell-text right
-                                       :class="'text-blue-600 font-semibold'">
-                        {{ \App\Helper\ConvertTo::decimal2($totalLoosed)}}</x-table.cell-text>
+                        {{ \App\Helper\ConvertTo::decimal2($totalOpeningBalance)}}</x-table.cell-text>
 
                 </x-table.row>
 
@@ -103,13 +87,12 @@
                 @endforeach
             </x-input.model-select>
             <x-input.model-date wire:model="vdate" :label="'Date'"/>
-            <x-input.model-text wire:model="profit" :label="'Profit'"/>
-            <x-input.model-text wire:model="loosed" :label="'Loosed'"/>
-            <x-input.model-text wire:model="remarks" :label="'Remarks'"/>
+            <x-input.model-text wire:model="opening_balance" :label="'Opening Balance'"/>
         </x-forms.create>
 
         <div>
             <x-button.back/>
         </div>
+
     </x-forms.m-panel>
 </div>
