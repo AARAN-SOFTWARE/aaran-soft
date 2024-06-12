@@ -46,6 +46,18 @@ class Customise
             config('clients.ESSA_KNITTING') => in_array($feature, config('essa_knitting.features', [])),
             config('clients.ESSA_KNITTING_GARMENT') => in_array($feature, config('essa_knitting_garments.features', [])),
 
+            config('clients.SUKRAA_GARMENTS') => in_array($feature, config('sukraa_garments.features', [])),
+            config('clients.UGAN_APPARELS') => in_array($feature, config('ugan_apparels.features', [])),
+            config('clients.SEYON_FASHION') => in_array($feature, config('seyon_fashion.features', [])),
+            config('clients.SRI_SENTHUR_TEX') => in_array($feature, config('sri_senthur_tex.features', [])),
+            config('clients.SK_INTERNATIONAL') => in_array($feature, config('sk_international.features', [])),
+            config('clients.SHONA_EXPORTS') => in_array($feature, config('shona_exports.features', [])),
+            config('clients.MODE_CREATIONS') => in_array($feature, config('mode_creations.features', [])),
+            config('clients.KARUNAAMBIKAA_EXPORT') => in_array($feature, config('karunaambikaa_export.features', [])),
+            config('clients.BOYANCE_INDIA') => in_array($feature, config('boyance_india.features', [])),
+            config('clients.ASWATH_APPARELS') => in_array($feature, config('aswath_apparels.features', [])),
+            config('clients.ATO_TEXTILES') => in_array($feature, config('ato_textiles.features', [])),
+
         };
     }
 

@@ -50,6 +50,18 @@ class AadminServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../Client/garments/vetrivel_garments.php', 'vetrivel-garments');
         $this->mergeConfigFrom(__DIR__ . '/../Client/garments/ashwin_tex.php', 'ashwin_text');
 
+        $this->mergeConfigFrom(__DIR__ . '/../Client/garments/sukraa_garments.php', 'sukraa_garments');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/garments/ugan_apparels.php', 'ugan_apparels');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/garments/seyon_fashion.php', 'seyon_fashion');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/garments/sri_senthur_tex.php', 'sri_senthur_tex');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/garments/sk_international.php', 'sk_international');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/garments/shona_exports.php', 'shona_exports');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/garments/mode_creations.php', 'mode_creations');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/garments/karunaambikaa_export.php', 'karunaambikaa_export');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/garments/boyance_india.php', 'boyance_india');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/garments/aswath_apparels.php', 'aswath_apparels');
+        $this->mergeConfigFrom(__DIR__ . '/../Client/garments/ato_textiles.php', 'ato_textiles');
+
         $this->mergeConfigFrom(__DIR__ . '/../Client/suresh/neethuIndustries.php', 'neethuIndustries');
         $this->mergeConfigFrom(__DIR__ . '/../Client/suresh/mark_international.php', 'mark_international');
         $this->mergeConfigFrom(__DIR__ . '/../Client/suresh/sri_venkateswara_texmart.php', 'sri_venkateswara_texmart');

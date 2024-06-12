@@ -152,6 +152,18 @@ class InvoiceController extends Controller
             config('clients.SATHYANARAYANA_GARMENTS') =>  'pdf.garments.sales.satyanarayana',
 
 
+            config('clients.SUKRAA_GARMENTS') =>  'pdf.garments.sales.invoice_1',
+            config('clients.UGAN_APPARELS') =>  'pdf.garments.sales.invoice_1',
+            config('clients.SEYON_FASHION') =>  'pdf.garments.sales.invoice_1',
+            config('clients.SRI_SENTHUR_TEX') =>  'pdf.garments.sales.invoice_1',
+            config('clients.SK_INTERNATIONAL') =>  'pdf.garments.sales.invoice_1',
+            config('clients.SHONA_EXPORTS') =>  'pdf.garments.sales.invoice_1',
+            config('clients.MODE_CREATIONS') =>  'pdf.garments.sales.invoice_1',
+            config('clients.KARUNAAMBIKAA_EXPORT') =>  'pdf.garments.sales.invoice_1',
+            config('clients.BOYANCE_INDIA') =>  'pdf.garments.sales.invoice_1',
+            config('clients.ASWATH_APPARELS') =>  'pdf.garments.sales.invoice_1',
+            config('clients.ATO_TEXTILES') =>  'pdf.garments.sales.invoice_1',
+
             default =>'pdf.garments.letterpad_withoutbank' ,
         };
 //        view('pdf.offset.sales.best_print')
