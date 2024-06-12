@@ -8,9 +8,20 @@ class SaleEntry
     {
         return match (config('aadmin.app_type')) {
             config('clients.VIJAY_GARMENTS') => in_array($feature, config('vijayGarments.customise', [])),
+            config('clients.AMAL_TEX') => in_array($feature, config('amal_tex.customise', [])),
+            config('clients.KATHIR_PRINTERS') => in_array($feature, config('kathir_printers.customise', [])),
+            config('clients.AJ_PRINTING') => in_array($feature, config('aj_printers.customise', [])),
+            config('clients.VETRIVEL_GARMENTS') => in_array($feature, config('vetrivel_garments.customise', [])),
+            config('clients.ASHWIN_TEX') => in_array($feature, config('ashwin_tex.customise', [])),
+            config('clients.MARK_INTERNATIONAL') => in_array($feature, config('mark_international.customise', [])),
             config('clients.NEETHU_INDUSTRIES') => in_array($feature, config('neethuIndustries.customise', [])),
+            config('clients.SRI_VENKATESWARA_TEXMART') => in_array($feature, config('sri_venkateswara_texmart.customise', [])),
+            config('clients.A1_IMPEX') => in_array($feature, config('a1_impex.customise', [])),
+            config('clients.SATHYANARAYANA_GARMENTS') => in_array($feature, config('satyanarayana.customise', [])),
+            config('clients.FASHION_FABRICS') => in_array($feature, config('fashion_fabrics.customise', [])),
             config('clients.SK_PRINTERS') => in_array($feature, config('sk_printers.customise', [])),
             config('clients.AARAN_ASSOCIATES') => in_array($feature, config('aaran_associates.customise', [])),
+            config('clients.VNINFOTECH') => in_array($feature, config('vninfotech.customise', [])),
 
             config('clients.SARA_SCREENS') => in_array($feature, config('sara_screens.customise', [])),
             config('clients.COLOURS_PRINTING') => in_array($feature, config('colours_printers.customise', [])),
@@ -18,6 +29,7 @@ class SaleEntry
             config('clients.KGS_PRINTERS') => in_array($feature, config('kgs_printers.customise', [])),
             config('clients.THIRUMURUGAN_PRINTERS') => in_array($feature, config('thirumurugan_printing.customise', [])),
             config('clients.BEST_PRINT') => in_array($feature, config('best_print.customise', [])),
+            config('clients.VIP_GRAPHIICS') => in_array($feature, config('vip_graphiics.customise', [])),
             config('clients.SAIRF_SOURCING') => in_array($feature, config('sairfsourcing.customise', [])),
 
             config('clients.SK_ENTERPRISES') => in_array($feature, config('sk_enterprises.customise', [])),
