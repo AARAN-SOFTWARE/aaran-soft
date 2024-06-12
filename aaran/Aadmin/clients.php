@@ -47,4 +47,16 @@ return [
     'FASHION_FABRICS' => '312',
 
     'VNINFOTECH' => '315',
+
+    'SUKRAA_GARMENTS' => '316',
+    'UGAN_APPARELS' => '317',
+    'SEYON_FASHION' => '318',
+    'SRI_SENTHUR_TEX' => '319',
+    'SK_INTERNATIONAL' => '320',
+    'SHONA_EXPORTS' => '321',
+    'MODE_CREATIONS' => '322',
+    'KARUNAAMBIKAA_EXPORT' => '323',
+    'BOYANCE_INDIA' => '324',
+    'ASWATH_APPARELS' => '325',
+    'ATO_TEXTILES' => '326',
 ];
