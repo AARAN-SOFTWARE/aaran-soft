@@ -32,9 +32,10 @@
                             <a href="{{route('mgClubs.loan',[$row->id])}}"
                                class="flex flex-col px-3">
                                 <div class="text-gray-600 truncate text-xl text-left">
-                                    <img class="h-10 w-auto"
-                                         src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->photo))}}"
-                                         alt="img">
+                                    <img class="h-10 w-auto" src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->photo)}}" alt="logo"/>
+{{--                                    <img class="h-10 w-auto"--}}
+{{--                                         src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->photo))}}"--}}
+{{--                                         alt="img">--}}
 {{--                                    {{ $row->photo }}--}}
                                 </div>
                             </a>
