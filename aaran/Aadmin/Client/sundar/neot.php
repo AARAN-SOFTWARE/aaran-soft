@@ -15,11 +15,15 @@ return [
     ],
 
     'menus'=>[
+        MainMenu::entries(),
+        MainMenu::books(),
+        MainMenu::audit(),
         MainMenu::sundar(),
         MainMenu::accounts(),
         MainMenu::master(),
         MainMenu::common(),
         MainMenu::magalir(),
         MainMenu::task(),
+        MainMenu::developer(),
     ]
 ];
