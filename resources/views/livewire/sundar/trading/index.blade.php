@@ -35,11 +35,15 @@
 
                     <x-table.row>
                         <x-table.cell-text>
-                            Opening balance
+                            <a href="{{route('shareTrades.openingBalance')}}">
+                                Opening balance
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
-                            {{ $row->opening_balance }}
+                            <a href="{{route('shareTrades.openingBalance')}}">
+                                {{ $row->opening_balance }}
+                            </a>
                         </x-table.cell-text>
                     </x-table.row>
 
@@ -73,13 +77,15 @@
                     </x-table.row>
 
                     <x-table.row>
-                        <x-table.cell-text class="tracking-wider font-semibold text-md {{$row->profit - $row->loosed > 0 ?'text-green-500':'text-red-500'}}">
+                        <x-table.cell-text
+                            class="tracking-wider font-semibold text-md {{$row->profit - $row->loosed > 0 ?'text-green-500':'text-red-500'}}">
                             <a href="{{route('shareTrades.profits')}}">
                                 Trade P&L
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text right class="tracking-wider font-semibold text-md {{$row->profit - $row->loosed > 0 ?'text-green-500':'text-red-500'}}">
+                        <x-table.cell-text right
+                                           class="tracking-wider font-semibold text-md {{$row->profit - $row->loosed > 0 ?'text-green-500':'text-red-500'}}">
                             <a href="{{route('shareTrades.profits')}}">
                                 {{ $row->profit - $row->loosed }}
                             </a>
@@ -108,14 +114,14 @@
                     <x-table.row>
                         <x-table.cell-text>
                             <div
-                                    class="tracking-wider font-semibold text-md {{$totalBalance > 0 ?'text-green-500':'text-red-500'}}">
+                                class="tracking-wider font-semibold text-md {{$totalBalance > 0 ?'text-green-500':'text-red-500'}}">
                                 Capitals
                             </div>
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
                             <div
-                                    class="tracking-wider font-semibold text-md text-right {{$totalBalance > 0 ?'text-green-500':'text-red-500'}}">
+                                class="tracking-wider font-semibold text-md text-right {{$totalBalance > 0 ?'text-green-500':'text-red-500'}}">
                                 {{$totalBalance}}
                             </div>
                         </x-table.cell-text>
