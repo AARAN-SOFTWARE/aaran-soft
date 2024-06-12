@@ -106,7 +106,7 @@ class Charges extends Component
     {
         $this->sortField = 'vdate';
 
-        return ShareTrades::where('user_id', '=', $this->k_id?:auth()->id())
+        return ShareTrades::search($this->searches)->where('user_id', '=', $this->k_id?:auth()->id())
             ->where('active_id', '=', $this->activeRecord)
             ->where('charges', '>', 0)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')

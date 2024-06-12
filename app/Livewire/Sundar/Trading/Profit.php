@@ -106,10 +106,12 @@ class Profit extends Component
     {
         $this->sortField = 'vdate';
 
-        return ShareTrades::where("user_id", $this->k_id?:auth()->id())
+        return ShareTrades::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->where('profit', '>', 0)
+            ->where("user_id", $this->k_id?:auth()->id())
             ->orwhere('loosed', '>', 0)
+            ->where("user_id", $this->k_id?:auth()->id())
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }

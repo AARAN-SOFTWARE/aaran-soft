@@ -6,10 +6,9 @@ use Aaran\Sundar\Models\ShareTrades;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Deposit extends Component
+class OpeningBalance extends Component
 {
     #region[property]
     use CommonTrait;
@@ -23,7 +22,6 @@ class Deposit extends Component
     public mixed $charges;
     public mixed $balance;
     public mixed $user_id = '';
-
     public $remarks = '';
     public mixed $k_id = '';
 
@@ -108,12 +106,9 @@ class Deposit extends Component
     {
         $this->sortField = 'vdate';
 
-        return ShareTrades::search($this->searches)
+        return ShareTrades::search($this->searches)->where('user_id', '=', $this->k_id?:auth()->id())
             ->where('active_id', '=', $this->activeRecord)
-            ->where('deposit', '>', 0)
-            ->where('user_id', '=', $this->k_id?:auth()->id())
-            ->orWhere('withdraw', '>', 0)
-            ->where('user_id', '=', $this->k_id?:auth()->id())
+            ->where('opening_balance', '>', 0)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
@@ -144,17 +139,10 @@ class Deposit extends Component
     }
     #endregion
 
-    #region[reRender]
-    public function reRender(): void
-    {
-        $this->render()->render();
-    }
-    #endregion
-
     #region[render]
     public function render()
     {
-        return view('livewire.sundar.trading.deposit')->with([
+        return view('livewire.sundar.trading.opening-balance')->with([
             'list' => $this->getList()
         ]);
     }

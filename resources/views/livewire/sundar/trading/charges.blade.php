@@ -85,6 +85,12 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
+            <x-input.model-select wire:model="user_id" :label="'User'">
+                <option class="text-gray-400"> choose ..</option>
+                @foreach($users as $user)
+                    <option value="{{$user->id}}">{{$user->name}}</option>
+                @endforeach
+            </x-input.model-select>
             <x-input.model-date wire:model="vdate" :label="'Date'"/>
             <x-input.model-text wire:model="charges" :label="'Charges'"/>
             <x-input.model-text wire:model="remarks" :label="'Remarks'"/>
