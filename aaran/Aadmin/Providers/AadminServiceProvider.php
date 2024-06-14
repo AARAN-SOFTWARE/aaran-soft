@@ -10,7 +10,13 @@ class AadminServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->mergeConfigFrom(__DIR__ . '/../config.php', 'aadmin');
+        $this->mergeConfigFrom(__DIR__ . '/../software.php', 'software');
         $this->mergeConfigFrom(__DIR__ . '/../clients.php', 'clients');
+
+        $this->mergeConfigFrom(__DIR__ . '/../Softwares/garments.php', 'garment');
+        $this->mergeConfigFrom(__DIR__ . '/../Softwares/offset.php', 'offset');
+        $this->mergeConfigFrom(__DIR__ . '/../Softwares/sundar.php', 'sundar');
+
 
         $this->mergeConfigFrom(__DIR__ . '/../Client/demo/garment_demo.php', 'garment_demo');
         $this->mergeConfigFrom(__DIR__ . '/../Client/demo/offset_demo.php', 'offset_demo');

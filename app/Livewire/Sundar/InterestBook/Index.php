@@ -2,12 +2,10 @@
 
 namespace App\Livewire\Sundar\InterestBook;
 
-use Aaran\Sundar\Models\CreditBook;
-use Aaran\Sundar\Models\InterestBook;
+use Aaran\Sundar\Models\Credit\CreditBook;
+use Aaran\Sundar\Models\Credit\CreditInterest;
 use App\Livewire\Trait\CommonTrait;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Index extends Component
@@ -49,7 +47,7 @@ class Index extends Component
     {
 
         if ($this->vid == "") {
-            InterestBook::create([
+            CreditInterest::create([
                 'credit_book_id' => $this->creditBook_id,
                 'vdate' => $this->vdate,
                'interest' => $this->interest,
@@ -61,7 +59,7 @@ class Index extends Component
             ]);
             $message = "Saved";
         } else {
-            $obj = InterestBook::find($this->vid);
+            $obj = CreditInterest::find($this->vid);
             $obj->credit_book_id = $this->creditBook->id;
             $obj->vdate = $this->vdate;
             $obj->interest = $this->interest;
@@ -94,7 +92,7 @@ class Index extends Component
     public function getObj($id)
     {
         if ($id) {
-            $obj = InterestBook::find($id);
+            $obj = CreditInterest::find($id);
             $this->vid = $obj->id;
             $this->vdate = $obj->vdate;
             $this->interest = $obj->interest;
@@ -112,7 +110,7 @@ class Index extends Component
     {
         $this->sortField = 'id';
 
-        return InterestBook::search($this->searches)
+        return CreditInterest::search($this->searches)
             ->where('credit_book_id', '=', $this->creditBook->id)
             ->where('company_id', '=', session()->get('company_id'))
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')

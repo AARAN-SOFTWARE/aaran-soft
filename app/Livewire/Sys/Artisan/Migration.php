@@ -82,7 +82,7 @@ class Migration extends Component
     }
 
 
-    #region[Migration]
+    #region[DbMigration]
     public function clearView(): void
     {
         Artisan::call('view:clear');

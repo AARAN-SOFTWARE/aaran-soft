@@ -106,7 +106,7 @@
         </x-forms.create>
 
         <div class="mt-5">
-            <a href="{{route('creditbooks.items',[$creditBook->id])}}" class="mt-5 bg-gray-400 text-white tracking-wider px-4 py-1
+            <a href="{{route('creditBooks.items',[$creditBook->id])}}" class="mt-5 bg-gray-400 text-white tracking-wider px-4 py-1
                 rounded-md flex items-center w-24 hover:bg-gray-500">
                 <x-icons.icon :icon="'chevrons-left'" class="h-8 w-auto inline-block items-center"/>
                 Back

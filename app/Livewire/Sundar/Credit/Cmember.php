@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Sundar\Creditbook;
+namespace App\Livewire\Sundar\Credit;
 
 use Aaran\Sundar\Models\Credit\CreditBook;
 use App\Livewire\Trait\CommonTrait;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-class Index extends Component
+class Cmember extends Component
 {
     use CommonTrait;
 

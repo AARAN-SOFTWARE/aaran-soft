@@ -12,6 +12,8 @@ return [
 
     'app_type' => env('APP_TYPE', '1'),
 
+    'app_code' => env('APP_CODE', '1'),
+
     'gstPercentDefault' => env('GST_PERCENT', '5'),
 
     'unitsDefault' => env('UNITS', '2'),
