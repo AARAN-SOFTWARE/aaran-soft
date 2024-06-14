@@ -153,6 +153,7 @@ class InvoiceController extends Controller
 
 
             config('clients.SUKRAA_GARMENTS') =>  'pdf.garments.sales.sukra_garments',
+//            config('clients.SUKRAA_GARMENTS') =>  'pdf.garments.sales.invoice_1',
             config('clients.UGAN_APPARELS') =>  'pdf.garments.sales.ugan_apparels',
             config('clients.SEYON_FASHION') =>  'pdf.garments.sales.seyon_fashion',
             config('clients.SRI_SENTHUR_TEX') =>  'pdf.garments.sales.sri_senthur_tex',

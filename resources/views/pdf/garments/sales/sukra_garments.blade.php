@@ -243,7 +243,8 @@
 <table class="table-3" width="100%">
     <tr class="inv-tableHeader">
         <th width="4.33%">S.No</th>
-        <th colspan="3" width="auto">Particulars</th>
+        <th width="8.66%">HSN Code</th>
+        <th colspan="2" width="auto">Particulars</th>
         <th width="6.33%">Size</th>
         <th width="4.66%">Quantity</th>
         <th width="8.66%">Price</th>
@@ -258,7 +259,8 @@
     @foreach($list as $index => $row)
         <tr class="inv-tableData1">
             <td class="items-c">{{$index+1}} </td>
-            <td colspan="3" class="items-l" style="">
+            <td>{{$row['hsncode']}}</td>
+            <td colspan="2" class="items-l" style="">
                 @if($row['description'])
                     {{$row['product_name'].' - '.$row['description']}}
                 @else
@@ -282,7 +284,8 @@
     @for($i = 0; $i < 9-$list->count(); $i++)
         <tr class="inv-tableSpace">
             <td >&nbsp;</td>
-            <td colspan="3">&nbsp;</td>
+            <td >&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
@@ -490,7 +493,8 @@
 <table class="table-3" width="100%">
     <tr class="inv-tableHeader">
         <th width="4.33%">S.No</th>
-        <th colspan="3" width="auto">Particulars</th>
+        <th width="8.66%">HSN Code</th>
+        <th colspan="2" width="auto">Particulars</th>
         <th width="6.33%">Size</th>
         <th width="4.66%">Quantity</th>
         <th width="8.66%">Price</th>
@@ -505,7 +509,8 @@
     @foreach($list as $index => $row)
         <tr class="inv-tableData1">
             <td class="items-c">{{$index+1}} </td>
-            <td colspan="3" class="items-l" style="">
+            <td>{{$row['hsncode']}}</td>
+            <td colspan="2" class="items-l" style="">
                 @if($row['description'])
                     {{$row['product_name'].' - '.$row['description']}}
                 @else
@@ -529,7 +534,8 @@
     @for($i = 0; $i < 9-$list->count(); $i++)
         <tr class="inv-tableSpace">
             <td >&nbsp;</td>
-            <td colspan="3">&nbsp;</td>
+            <td >&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
@@ -739,7 +745,8 @@
 <table class="table-3" width="100%">
     <tr class="inv-tableHeader">
         <th width="4.33%">S.No</th>
-        <th colspan="3" width="auto">Particulars</th>
+        <th width="8.66%">HSN Code</th>
+        <th colspan="2" width="auto">Particulars</th>
         <th width="6.33%">Size</th>
         <th width="4.66%">Quantity</th>
         <th width="8.66%">Price</th>
@@ -754,7 +761,8 @@
     @foreach($list as $index => $row)
         <tr class="inv-tableData1">
             <td class="items-c">{{$index+1}} </td>
-            <td colspan="3" class="items-l" style="">
+            <td>{{$row['hsncode']}}</td>
+            <td colspan="2" class="items-l" style="">
                 @if($row['description'])
                     {{$row['product_name'].' - '.$row['description']}}
                 @else
@@ -778,7 +786,8 @@
     @for($i = 0; $i < 9-$list->count(); $i++)
         <tr class="inv-tableSpace">
             <td >&nbsp;</td>
-            <td colspan="3">&nbsp;</td>
+            <td >&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
