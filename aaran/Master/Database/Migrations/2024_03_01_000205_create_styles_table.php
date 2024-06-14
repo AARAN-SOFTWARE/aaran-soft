@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('styles', function (Blueprint $table) {
             $table->id();
             $table->string('vname')->unique();
@@ -16,7 +17,7 @@ return new class extends Migration
             $table->string('active_id', 3)->nullable();
             $table->timestamps();
         });
-    }
+    }}
 
     public function down(): void
     {

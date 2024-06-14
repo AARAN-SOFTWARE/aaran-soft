@@ -9,6 +9,7 @@ return new class extends Migration
 
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('vname')->unique();
@@ -16,7 +17,7 @@ return new class extends Migration
             $table->foreignId('company_id')->references('id')->on('companies');
             $table->smallInteger('active_id')->nullable();
         });
-    }
+    }}
 
 
     public function down(): void

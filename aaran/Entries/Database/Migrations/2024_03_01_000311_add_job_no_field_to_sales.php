@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::table('sales', function (Blueprint $table) {
             $table->string('job_no')->nullable()->after('despatch_id');
         });
+    }
     }
 
     /**

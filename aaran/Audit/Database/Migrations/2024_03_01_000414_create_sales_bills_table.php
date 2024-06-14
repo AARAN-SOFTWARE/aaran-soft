@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('sales_bills', function (Blueprint $table) {
             $table->id();
             $table->integer('serial')->nullable();
@@ -36,6 +37,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
+    }
     }
 
     /**

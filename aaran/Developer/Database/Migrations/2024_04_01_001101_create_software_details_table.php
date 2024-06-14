@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('software_details', function (Blueprint $table) {
             $table->id();
             $table->string('sub_domain')->unique();
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->string('db_version')->nullable();
             $table->smallInteger('active_id')->nullable();
         });
+    }
     }
 
     /**

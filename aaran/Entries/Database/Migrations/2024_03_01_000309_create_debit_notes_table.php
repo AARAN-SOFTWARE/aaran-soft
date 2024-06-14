@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('debit_notes', function (Blueprint $table) {
             $table->id();
             $table->string('uniqueno')->unique();
@@ -30,6 +31,7 @@ return new class extends Migration
             $table->string('active_id',10)->nullable();
             $table->timestamps();
         });
+    }
     }
 
     public function down()

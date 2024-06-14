@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('surfings', function (Blueprint $table) {
             $table->id();
             $table->string('vname')->unique();
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->foreignId('surfing_category_id')->references('id')->on('surfing_categories');
             $table->smallInteger('active_id')->nullable();
         });
+    }
     }
 
     /**

@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('test_reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignId('operations_id')->references('id')->on('test_operations')->onDelete('cascade');
@@ -19,7 +20,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
-    }
+    }}
 
     /**
      * Reverse the migrations.

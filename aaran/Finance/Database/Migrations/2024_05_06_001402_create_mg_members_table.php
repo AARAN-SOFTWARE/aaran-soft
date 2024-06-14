@@ -1,7 +1,5 @@
 <?php
 
-namespace Aaran\Finance\Magalir\Database\Migrations;
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,6 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('mg_members', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mg_club_id')->references('id')->on('mg_clubs');
@@ -45,7 +44,7 @@ return new class extends Migration {
             $table->timestamps();
 //            $table->unique(['vname', 'father', 'mother','aadhaar']);
         });
-    }
+    }}
 
     /**
      * Reverse the migrations.

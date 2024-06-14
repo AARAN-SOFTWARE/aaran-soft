@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('purchaseitems', function (Blueprint $table) {
             $table->id();
             $table->foreignId('purchase_id')->references('id')->on('purchases');
@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('price');
             $table->string('gst_percent')->nullable();
         });
+    }
     }
 
     public function down()

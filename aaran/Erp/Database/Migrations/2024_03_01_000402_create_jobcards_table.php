@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('jobcards', function (Blueprint $table) {
             $table->id();
             $table->integer('vno');
@@ -35,7 +36,7 @@ return new class extends Migration
             $table->decimal('se_in_qty',11,3);
             $table->string('active_id', 3)->nullable();
         });
-    }
+    }}
 
     public function down(): void
     {

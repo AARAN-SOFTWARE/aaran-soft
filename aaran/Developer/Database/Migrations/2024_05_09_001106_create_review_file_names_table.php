@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('review_file_names', function (Blueprint $table) {
             $table->id();
             $table->string('vname')->unique();
             $table->smallInteger('active_id');
             $table->timestamps();
         });
+    }
     }
 
     /**

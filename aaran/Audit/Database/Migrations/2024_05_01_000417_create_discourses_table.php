@@ -9,6 +9,7 @@ return new class extends Migration
 
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('discourses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->references('id')->on('clients');
@@ -40,6 +41,7 @@ return new class extends Migration
         });
 
 
+    }
     }
 
 

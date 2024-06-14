@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
             Schema::create('companies', function (Blueprint $table) {
                 $table->id();
                 $table->string('vname')->unique();
@@ -38,7 +39,7 @@ return new class extends Migration
                 $table->longText('logo')->nullable();
                 $table->timestamps();
         });
-    }
+    }}
 
     /**
      * Reverse the migrations.

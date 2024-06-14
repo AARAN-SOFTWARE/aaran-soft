@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('gstcredits', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->references('id')->on('clients')->onDelete('cascade');
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
+    }
     }
 
     public function down(): void

@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('review_lists', function (Blueprint $table) {
             $table->id();
             $table->foreignId('review_filename_id')->references('id')->on('review_file_names')->onDelete('cascade');
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->smallInteger('completed')->default(0);
             $table->timestamps();
         });
+    }
     }
     /**
      * Reverse the migrations.

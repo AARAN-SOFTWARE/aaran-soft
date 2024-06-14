@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('contact_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('contact_id')->references('id')->on('contacts');
@@ -22,7 +23,7 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-    }
+    }}
 
     public function down(): void
     {

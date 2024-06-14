@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
             $table->string('uniqueno')->unique();
@@ -32,6 +33,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
+    }
     }
 
     public function down()

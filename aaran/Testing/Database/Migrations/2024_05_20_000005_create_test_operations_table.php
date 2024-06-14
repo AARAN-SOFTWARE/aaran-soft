@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('test_operations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('actions_id')->nullable();
@@ -25,7 +26,7 @@ return new class extends Migration
             $table->string('active_id', 3)->nullable();
             $table->timestamps();
         });
-    }
+    }}
 
     /**
      * Reverse the migrations.

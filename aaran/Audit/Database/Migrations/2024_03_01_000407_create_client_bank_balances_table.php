@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('client_bank_balances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_bank_id')->references('id')->on('client_banks')->onDelete('cascade');
@@ -17,6 +18,7 @@ return new class extends Migration
 //            $table->foreignId('company_id')->references('id')->on('companies');
             $table->timestamps();
         });
+    }
     }
 
     public function down(): void

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('vname');
@@ -17,6 +18,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
+    }
     }
 
     public function down(): void

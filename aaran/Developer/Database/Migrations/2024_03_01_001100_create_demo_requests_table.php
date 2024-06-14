@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('demo_requests', function (Blueprint $table) {
             $table->id();
             $table->string('company_name')->nullable();
@@ -21,6 +22,7 @@ return new class extends Migration {
             $table->string('reminder')->nullable();
             $table->timestamps();
         });
+    }
     }
 
     public function down(): void

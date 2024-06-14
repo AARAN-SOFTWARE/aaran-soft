@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('headers', function (Blueprint $table) {
             $table->id();
             $table->string('vname');
             $table->smallInteger('active_id')->nullable();
             $table->timestamps();
         });
-    }
+    }}
 
     /**
      * Reverse the migrations.

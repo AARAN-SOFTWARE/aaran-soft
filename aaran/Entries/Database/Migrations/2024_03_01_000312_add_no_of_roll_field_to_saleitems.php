@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::table('saleitems', function (Blueprint $table) {
             $table->string('no_of_roll')->nullable()->after('dc_no');
         });
+    }
     }
 
     /**

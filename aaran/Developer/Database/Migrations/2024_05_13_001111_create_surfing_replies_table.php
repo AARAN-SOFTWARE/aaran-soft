@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('surfing_replies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('surfing_id')->references('id')->on('surfings')->onDelete('cascade');
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
+    }
     }
 
     /**

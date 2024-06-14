@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('receipts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->references('id')->on('companies');
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->decimal('vamount',11,2)->nullable();
             $table->decimal('ramount',11,2)->nullable();
         });
+    }
     }
 
     public function down()

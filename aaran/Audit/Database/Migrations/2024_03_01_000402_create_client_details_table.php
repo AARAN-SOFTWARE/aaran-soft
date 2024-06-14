@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('client_details', function (Blueprint $table) {
             $table->id();
 
@@ -45,6 +46,7 @@ return new class extends Migration
 
             $table->timestamps();
         });
+    }
     }
 
     public function down(): void

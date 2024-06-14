@@ -8,6 +8,7 @@ return new class extends Migration {
 
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('task_id')->references('id')->on('tasks')->onDelete('cascade');
@@ -17,7 +18,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
-    }
+    }}
 
     public function down(): void
     {

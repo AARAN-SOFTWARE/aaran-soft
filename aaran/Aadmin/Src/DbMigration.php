@@ -12,6 +12,18 @@ class DbMigration
             config('software.SUNDAR') => in_array($feature, config('sundar.migrations', [])),
         };
     }
+    #region[Demo]
+    public static function hasDemo(): bool
+    {
+        return static::enabled(static::demo());
+    }
+
+    public static function demo(): string
+    {
+        return 'demo';
+    }
+
+    #endregion
 
     #region[CashBook]
     public static function hasCashBook(): bool

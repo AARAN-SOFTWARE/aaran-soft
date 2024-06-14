@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('codes', function (Blueprint $table) {
             $table->id();
             $table->longText('content');
             $table->timestamps();
         });
-    }
+    }}
 
     /**
      * Reverse the migrations.

@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('project_tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->longText('task_pic')->nullable();
             $table->timestamps();
         });
+    }
     }
 
     public function down(): void
