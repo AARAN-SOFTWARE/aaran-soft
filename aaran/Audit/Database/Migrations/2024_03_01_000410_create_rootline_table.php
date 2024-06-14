@@ -4,19 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
-        Schema::create('rootlines', function (Blueprint $table) {
-            $table->id();
-            $table->string('vname')->unique();
-            $table->smallInteger('active_id')->nullable();
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->timestamps();
-        });
-    }
+        if (Aaran\Aadmin\Src\DbMigration::hasAudit()) {
+
+            Schema::create('rootlines', function (Blueprint $table) {
+                $table->id();
+                $table->string('vname')->unique();
+                $table->smallInteger('active_id')->nullable();
+                $table->foreignId('user_id')->references('id')->on('users');
+                $table->timestamps();
+            });
+        }
     }
 
     public function down(): void

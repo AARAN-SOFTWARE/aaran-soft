@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasAttendance()) {
         Schema::table('attendances', function (Blueprint $table) {
             $table->string('uniqueno')->unique()->after('id');
             $table->date('vdate')->unique(false)->change();

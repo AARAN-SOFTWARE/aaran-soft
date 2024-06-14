@@ -9,8 +9,9 @@ class DbMigration
         return match (config('aadmin.app_type')) {
 
             config('software.GARMENT') => in_array($feature, config('garment.migrations', [])),
+            config('software.OFFSET') => in_array($feature, config('offset.migrations', [])),
             config('software.SUNDAR') => in_array($feature, config('sundar.migrations', [])),
-            config('software.DEVELOPER') => in_array($feature, config('sundar.migrations', [])),
+            config('software.DEVELOPER') => in_array($feature, config('developer.migrations', [])),
         };
     }
     #region[Demo]
@@ -22,6 +23,32 @@ class DbMigration
     public static function demo(): string
     {
         return 'demo';
+    }
+
+    #endregion
+
+    #region[Attendance]
+    public static function hasAttendance(): bool
+    {
+        return static::enabled(static::demo());
+    }
+
+    public static function attendance(): string
+    {
+        return 'attendance';
+    }
+
+    #endregion
+
+    #region[Audit]
+    public static function hasAudit(): bool
+    {
+        return static::enabled(static::audit());
+    }
+
+    public static function audit(): string
+    {
+        return 'audit';
     }
 
     #endregion
