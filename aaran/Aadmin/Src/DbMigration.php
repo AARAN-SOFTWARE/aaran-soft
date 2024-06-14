@@ -10,6 +10,7 @@ class DbMigration
 
             config('software.GARMENT') => in_array($feature, config('garment.migrations', [])),
             config('software.SUNDAR') => in_array($feature, config('sundar.migrations', [])),
+            config('software.DEVELOPER') => in_array($feature, config('sundar.migrations', [])),
         };
     }
     #region[Demo]

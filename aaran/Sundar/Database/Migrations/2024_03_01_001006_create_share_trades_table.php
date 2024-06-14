@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::shareTrades()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasshareTrades()) {
 
             Schema::create('share_trades', function (Blueprint $table) {
                 $table->id();

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -34,7 +35,7 @@ return new class extends Migration {
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
-    }
+    }}
 
     public function down(): void
     {

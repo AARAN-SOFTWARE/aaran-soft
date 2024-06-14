@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'SUNDAR' => '0',
+    'SUNDAR' => '1',
     'DEVELOPER' => '100',
 
-    'GARMENT' => '1',
+    'GARMENT' => '7',
     'OFFSET' => '2',
     'MAGALIR_CLUB' => '3',
     'SPORTS_CLUB' => '4',

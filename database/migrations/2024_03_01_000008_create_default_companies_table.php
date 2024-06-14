@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('default_companies', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('company_id')->nullable();
-            $table->unsignedBigInteger('tenant_id')->nullable();
-            $table->integer('acyear');
-        });
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+            Schema::create('default_companies', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('company_id')->nullable();
+                $table->unsignedBigInteger('tenant_id')->nullable();
+                $table->integer('acyear');
+            });
+        }
     }
 
     public function down(): void

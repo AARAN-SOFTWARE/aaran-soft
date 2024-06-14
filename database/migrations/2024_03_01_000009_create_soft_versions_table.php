@@ -7,14 +7,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('soft_versions', function (Blueprint $table) {
-            $table->id();
-            $table->string('soft_version');
-            $table->string('db_version');
-            $table->string('title')->nullable();
-            $table->longText('body')->nullable();
-            $table->timestamps();
-        });
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+            Schema::create('soft_versions', function (Blueprint $table) {
+                $table->id();
+                $table->string('soft_version');
+                $table->string('db_version');
+                $table->string('title')->nullable();
+                $table->longText('body')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     public function down(): void

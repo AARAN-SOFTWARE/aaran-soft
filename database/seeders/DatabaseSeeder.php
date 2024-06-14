@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use Aaran\Aadmin\Src\DbMigration;
 use Aaran\Audit\Database\Seeders\ClientSeeder;
 use Aaran\Audit\Database\Seeders\RootlineItemsSeeder;
 use Aaran\Audit\Database\Seeders\RootlineSeeder;
-use Aaran\Common\Database\Seeders\BankSeeder;
+//use Aaran\Common\Database\Seeders\BankSeeder;
 use Aaran\Common\Database\Seeders\S101_CitySeeder;
 use Aaran\Common\Database\Seeders\S102_StateSeeder;
 use Aaran\Common\Database\Seeders\S103_PincodeSeeder;
@@ -29,6 +30,7 @@ use Aaran\Master\Database\Seeders\S202_ContactSeeder;
 use Aaran\Master\Database\Seeders\S203_ProductSeeder;
 use Aaran\Master\Database\Seeders\S204_OrderSeeder;
 use Aaran\Master\Database\Seeders\S205_StyleSeeder;
+
 //use Aaran\Orders\Database\Seeders\OrderSeeder;
 //use Aaran\Orders\Database\Seeders\StyleSeeder;
 use Aaran\Testing\Database\Seeders\TestFileSeeder;
@@ -38,46 +40,49 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+
+        if (DbMigration::hasDemo()) {
 //sys
-        S01_TenantSeeder::run();
-        S02_RoleSeeder::run();
-        S03_UserSeeder::run();
-        S04_DefaultCompanySeeder::run();
-        S05_SoftVersionSeeder::run();
+            S01_TenantSeeder::run();
+            S02_RoleSeeder::run();
+            S03_UserSeeder::run();
+            S04_DefaultCompanySeeder::run();
+            S05_SoftVersionSeeder::run();
 
 //common
-        S101_CitySeeder::run();
-        S102_StateSeeder::run();
-        S103_PincodeSeeder::run();
-        S104_CountrySeeder::run();
-        S105_HsncodeSeeder::run();
-        S106_ColourSeeder::run();
-        S107_SizeSeeder::run();
-        S108_TransportSeeder::run();
-        S109_LedgerSeeder::run();
-        S110_BankSeeder::run();
-        S111_ReceipttypeSeeder::run();
-        S112_DepartmentSeeder::run();
-        S113_CategorySeeder::run();
-        S114_DespatcheSeeder::run();
+            S101_CitySeeder::run();
+            S102_StateSeeder::run();
+            S103_PincodeSeeder::run();
+            S104_CountrySeeder::run();
+            S105_HsncodeSeeder::run();
+            S106_ColourSeeder::run();
+            S107_SizeSeeder::run();
+            S108_TransportSeeder::run();
+            S109_LedgerSeeder::run();
+            S110_BankSeeder::run();
+            S111_ReceipttypeSeeder::run();
+            S112_DepartmentSeeder::run();
+            S113_CategorySeeder::run();
+            S114_DespatcheSeeder::run();
 
 //master
-        S201_CompanySeeder::run();
-        S202_ContactSeeder::run();
-        S203_ProductSeeder::run();
-        S204_OrderSeeder::run();
-        S205_StyleSeeder::run();
+            S201_CompanySeeder::run();
+            S202_ContactSeeder::run();
+            S203_ProductSeeder::run();
+            S204_OrderSeeder::run();
+            S205_StyleSeeder::run();
 
 //testing
-        TestFileSeeder::run();
+            TestFileSeeder::run();
 
 
-        //AUDIT
+            //AUDIT
 
 //        ClientSeeder::run();
 //        RootlineSeeder::run();
 //        RootlineItemsSeeder::run();
 
+        }
     }
 
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::create('cache', function (Blueprint $table) {
             $table->string('key')->primary();
             $table->mediumText('value');
@@ -18,7 +19,7 @@ return new class extends Migration {
             $table->string('owner');
             $table->integer('expiration');
         });
-    }
+    }}
 
     public function down(): void
     {

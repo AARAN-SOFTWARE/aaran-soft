@@ -39,6 +39,7 @@ return [
     ],
 
     'migrations' => [
+        MainMenu::books(),
     ]
 
 ];

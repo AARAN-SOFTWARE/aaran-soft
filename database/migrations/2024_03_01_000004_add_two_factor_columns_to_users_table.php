@@ -8,6 +8,7 @@ use Laravel\Fortify\Fortify;
 return new class extends Migration {
     public function up(): void
     {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
         Schema::table('users', function (Blueprint $table) {
             $table->text('two_factor_secret')
                 ->after('password')
@@ -23,7 +24,7 @@ return new class extends Migration {
                     ->nullable();
             }
         });
-    }
+    }}
 
     public function down(): void
     {
