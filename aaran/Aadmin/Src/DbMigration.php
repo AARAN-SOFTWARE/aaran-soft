@@ -14,6 +14,7 @@ class DbMigration
             config('software.DEVELOPER') => in_array($feature, config('developer.migrations', [])),
         };
     }
+
     #region[Demo]
     public static function hasDemo(): bool
     {
@@ -23,6 +24,19 @@ class DbMigration
     public static function demo(): string
     {
         return 'demo';
+    }
+
+    #endregion
+
+    #region[Blog]
+    public static function hasBlog(): bool
+    {
+        return static::enabled(static::blog());
+    }
+
+    public static function blog(): string
+    {
+        return 'blog';
     }
 
     #endregion
