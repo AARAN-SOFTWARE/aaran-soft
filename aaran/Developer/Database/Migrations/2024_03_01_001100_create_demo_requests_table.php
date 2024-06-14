@@ -1,6 +1,5 @@
 <?php
 
-namespace Aaran\Developer\Demo\Database\Migrations;
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
