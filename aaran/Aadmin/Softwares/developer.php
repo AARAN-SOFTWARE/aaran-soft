@@ -40,6 +40,8 @@ return [
 
     'migrations'=>[
         DbMigration::hasCreditBooks(),
+        DbMigration::hasMailids(),
+        DbMigration::hasShareTrades(),
     ]
 
 

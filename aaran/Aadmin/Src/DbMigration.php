@@ -13,6 +13,32 @@ class DbMigration
         };
     }
 
+    #region[CashBook]
+    public static function hasCashBook(): bool
+    {
+        return static::enabled(static::cashBook());
+    }
+
+    public static function cashBook(): string
+    {
+        return 'cashBook';
+    }
+
+    #endregion
+
+    #region[BankBook]
+    public static function hasBankBook(): bool
+    {
+        return static::enabled(static::bankBook());
+    }
+
+    public static function bankBook(): string
+    {
+        return 'bankBook';
+    }
+
+    #endregion
+
     #region[Credit Books]
     public static function hasCreditBooks(): bool
     {
