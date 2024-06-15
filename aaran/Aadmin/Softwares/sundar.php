@@ -39,7 +39,19 @@ return [
     ],
 
     'migrations' => [
-        MainMenu::books(),
+        DbMigration::demo(),
+        DbMigration::creditBooks(),
+        DbMigration::shareTrades(),
+        DbMigration::city(),
+        DbMigration::state(),
+        DbMigration::developer(),
+        DbMigration::magalir(),
+        DbMigration::blog(),
+        DbMigration::bankBook(),
+        DbMigration::cashBook(),
+        DbMigration::audit(),
+        DbMigration::attendance(),
+        DbMigration::mailids(),
     ]
 
 ];
