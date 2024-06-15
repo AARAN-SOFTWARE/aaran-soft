@@ -23,6 +23,7 @@ return new class extends Migration
             $table->decimal('spread', 15, 2)->nullable();
             $table->decimal('shares', 15, 2)->nullable();
             $table->decimal('profit', 15, 2)->nullable();
+            $table->decimal('loosed', 15, 2)->nullable();
             $table->decimal('commission', 15, 2)->nullable();
             $table->foreignId('share_trade_id')->references('id')->on('share_trades')->cascadeOnDelete();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();

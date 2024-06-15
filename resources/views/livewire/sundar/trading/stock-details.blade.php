@@ -24,16 +24,17 @@
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Spread</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Share</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Profit</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Loosed</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Commission</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
             <!-- Table Body ------------------------------------------------------------------------------------------->
 
-{{--            @php--}}
-{{--                $totalProfit = 0;--}}
-{{--                $totalLoosed = 0;--}}
-{{--            @endphp--}}
+            @php
+                $totalProfit = 0;
+                $totalLoosed = 0;
+            @endphp
 
             <x-slot name="table_body">
                 @forelse ($list as $index =>  $row)
@@ -84,32 +85,36 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
+                            {{ $row->loosed }}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right>
                             {{ $row->commission }}
                         </x-table.cell-text>
 
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
-{{--                    @php--}}
-{{--                        $totalProfit  += floatval($row->profit);--}}
-{{--                        $totalLoosed  += floatval($row->loosed);--}}
-{{--                    @endphp--}}
+                    @php
+                        $totalProfit  += floatval($row->profit);
+                        $totalLoosed  += floatval($row->loosed);
+                    @endphp
 
                 @empty
                     <x-table.empty/>
                 @endforelse
 
-{{--                <x-table.row>--}}
-{{--                    <x-table.cell-text :colspan="2" :class="'text-blue-600 font-semibold'" right>&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</x-table.cell-text>--}}
+                <x-table.row>
+                    <x-table.cell-text :colspan="10" :class="'text-blue-600 font-semibold'" right>&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</x-table.cell-text>
 
-{{--                    <x-table.cell-text right--}}
-{{--                                       :class="'text-blue-600 font-semibold'">--}}
-{{--                        {{ \App\Helper\ConvertTo::decimal2($totalProfit)}}</x-table.cell-text>--}}
+                    <x-table.cell-text right
+                                       :class="'text-blue-600 font-semibold'">
+                        {{ \App\Helper\ConvertTo::decimal2($totalProfit)}}</x-table.cell-text>
 
-{{--                    <x-table.cell-text right--}}
-{{--                                       :class="'text-blue-600 font-semibold'">--}}
-{{--                        {{ \App\Helper\ConvertTo::decimal2($totalLoosed)}}</x-table.cell-text>--}}
+                    <x-table.cell-text right
+                                       :class="'text-blue-600 font-semibold'">
+                        {{ \App\Helper\ConvertTo::decimal2($totalLoosed)}}</x-table.cell-text>
 
-{{--                </x-table.row>--}}
+                </x-table.row>
 
             </x-slot>
 
@@ -129,13 +134,13 @@
             </x-input.model-select>
             <x-input.model-text wire:model="serial" :label="'Serial'"/>
             <x-input.model-date wire:model="vdate" :label="'Date'"/>
-            <x-input.model-select wire:model="trade_type" :label="'User'">
+            <x-input.model-select wire:model="trade_type" :label="'Trade Type'">
                 <option class="text-gray-400"> choose ..</option>
                     <option value="Delivery">Delivery</option>
                     <option value="Options">Options</option>
             </x-input.model-select>
             <x-input.model-text wire:model="stock_name" :label="'Stock Name'"/>
-            <x-input.model-select wire:model="option_type" :label="'User'">
+            <x-input.model-select wire:model="option_type" :label="'Option Type'">
                 <option class="text-gray-400"> choose ..</option>
                 <option value="call">call</option>
                 <option value="Put">Put</option>
@@ -145,6 +150,7 @@
             <x-input.model-text wire:model="spread" :label="'Spread'"/>
             <x-input.model-text wire:model="shares" :label="'Shares'"/>
             <x-input.model-text wire:model="profit" :label="'Profit'"/>
+            <x-input.model-text wire:model="loosed" :label="'Loosed'"/>
             <x-input.model-text wire:model="commission" :label="'Commission'"/>
         </x-forms.create>
 

@@ -250,9 +250,12 @@ class DbMigration
     {
         $currentVersion = SoftVersion::find(1);
 
-        if (config(['aadmin.db_version'] == $currentVersion->db_version)) {
-            return static::enabled(static::currentVersion());
+        if ($currentVersion != null) {
+            if (config(['aadmin.db_version'] == $currentVersion->db_version)) {
+                return static::enabled(static::currentVersion());
+            }
         }
+        return false;
     }
 
     public static function currentVersion(): string
