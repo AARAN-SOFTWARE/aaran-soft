@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasErp()) {
             Schema::create('section_outwards', function (Blueprint $table) {
                 $table->id();
                 $table->integer('vno');

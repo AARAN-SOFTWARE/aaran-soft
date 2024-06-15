@@ -33,6 +33,35 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_03_01_000103_create_pincodes_table');
             RefactorMigrationTable::clear('2024_03_01_000104_create_countries_table');
         }
+        if (!DbMigration::hasEntry()) {
+            RefactorMigrationTable::clear('2024_03_01_000301_create_sales_table');
+            RefactorMigrationTable::clear('2024_03_01_000302_create_saleitems_table');
+            RefactorMigrationTable::clear('2024_03_01_000303_create_purchases_table');
+            RefactorMigrationTable::clear('2024_03_01_000304_create_purchaseitems_table');
+            RefactorMigrationTable::clear('2024_03_01_000305_create_receipts_table');
+            RefactorMigrationTable::clear('2024_03_01_000306_create_payments_table');
+        }
+
+        if (!DbMigration::hasDebitNote()) {
+            RefactorMigrationTable::clear('2024_03_01_000309_create_debit_notes_table');
+            RefactorMigrationTable::clear('2024_03_01_000310_create_debit_noteitems_table');
+        }
+
+        if (!DbMigration::hasCreditNote()) {
+            RefactorMigrationTable::clear('2024_03_01_000307_create_credit_notes_table');
+            RefactorMigrationTable::clear('2024_03_01_000308_create_credit_noteitems_table');
+        }
+
+        if (!DbMigration::hasErp()) {
+            RefactorMigrationTable::clear('2024_03_01_000401_create_fabric_lots_table');
+            RefactorMigrationTable::clear('2024_03_01_000402_create_jobcards_table');
+            RefactorMigrationTable::clear('2024_03_01_000403_create_cuttings_table');
+            RefactorMigrationTable::clear('2024_03_01_000404_create_pe_outwards_table');
+            RefactorMigrationTable::clear('2024_03_01_000405_create_pe_inwards_table');
+            RefactorMigrationTable::clear('2024_03_01_000406_create_section_outwards_table');
+            RefactorMigrationTable::clear('2024_03_01_000407_create_section_inwards_table');
+            RefactorMigrationTable::clear('2024_03_01_000408_create_ironings_table');
+        }
 
     }
 }
