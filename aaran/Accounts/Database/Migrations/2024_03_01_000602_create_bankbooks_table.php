@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up()
+    public function up(): void
     {
 
         if (Aaran\Aadmin\Src\DbMigration::hasBankBook()) {
@@ -32,7 +32,7 @@ return new class extends Migration {
         }
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('bankbooks');
     }
