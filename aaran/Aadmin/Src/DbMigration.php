@@ -175,6 +175,19 @@ class DbMigration
 
     #endregion
 
+    #region[Magalir]
+    public static function hasMagalir(): bool
+    {
+        return static::enabled(static::magalir());
+    }
+
+    public static function magalir(): string
+    {
+        return 'magalir';
+    }
+
+    #endregion
+
 }
 
 
