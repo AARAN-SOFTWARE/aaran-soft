@@ -44,23 +44,26 @@ class DbMigration
     #endregion
 
 
-    #region[Blog]
-    public static function hasBlog(): bool
+
+
+    #region[Attendance]
+    public static function hasAccounts(): bool
     {
-        return static::enabled(static::blog());
+        return static::enabled(static::accounts());
     }
 
-    public static function blog(): string
+    public static function accounts(): string
     {
-        return 'blog';
+        return 'accounts';
     }
 
     #endregion
 
+
     #region[Attendance]
     public static function hasAttendance(): bool
     {
-        return static::enabled(static::demo());
+        return static::enabled(static::attendance());
     }
 
     public static function attendance(): string
@@ -82,6 +85,103 @@ class DbMigration
     }
 
     #endregion
+
+    #region[Blog]
+    public static function hasBlog(): bool
+    {
+        return static::enabled(static::blog());
+    }
+
+    public static function blog(): string
+    {
+        return 'blog';
+    }
+
+    #endregion
+
+    #region[Developer]
+    public static function hasDeveloper(): bool
+    {
+        return static::enabled(static::developer());
+    }
+
+    public static function developer(): string
+    {
+        return 'developer';
+    }
+
+    #endregion
+
+
+
+    #region[Magalir]
+    public static function hasMagalir(): bool
+    {
+        return static::enabled(static::magalir());
+    }
+
+    public static function magalir(): string
+    {
+        return 'magalir';
+    }
+
+    #endregion
+
+    #region[Master]
+    public static function hasMaster(): bool
+    {
+        return static::enabled(static::master());
+    }
+
+    public static function master(): string
+    {
+        return 'master';
+    }
+
+    #endregion
+
+    #region[Products]
+    public static function hasProduct(): bool
+    {
+        return static::enabled(static::product());
+    }
+
+    public static function product(): string
+    {
+        return 'product';
+    }
+
+    #endregion
+
+
+    #region[Orders]
+    public static function hasOrder(): bool
+    {
+        return static::enabled(static::order());
+    }
+
+    public static function order(): string
+    {
+        return 'order';
+    }
+
+    #endregion
+
+
+
+    #region[Styles]
+    public static function hasStyle(): bool
+    {
+        return static::enabled(static::style());
+    }
+
+    public static function style(): string
+    {
+        return 'style';
+    }
+
+    #endregion
+
 
     #region[CashBook]
     public static function hasCashBook(): bool
@@ -164,33 +264,24 @@ class DbMigration
 
     #endregion
 
-    #endregion
-
-    #region[Developer]
-    public static function hasDeveloper(): bool
+    #region[TaskManger]
+     public static function hasTaskManager(): bool
     {
-        return static::enabled(static::developer());
+        return static::enabled(static::taskManager());
     }
 
-    public static function developer(): string
+    public static function taskManager(): string
     {
-        return 'developer';
-    }
-
-    #endregion
-
-    #region[Magalir]
-    public static function hasMagalir(): bool
-    {
-        return static::enabled(static::magalir());
-    }
-
-    public static function magalir(): string
-    {
-        return 'magalir';
+        return 'location';
     }
 
     #endregion
+
+
+
+
+
+
 
 
     #region[Current Version]

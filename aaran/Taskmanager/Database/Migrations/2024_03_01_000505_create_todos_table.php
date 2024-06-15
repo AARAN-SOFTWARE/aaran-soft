@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasTaskManager()) {
             Schema::create('todos', function (Blueprint $table) {
                 $table->id();
                 $table->integer('slno')->nullable();

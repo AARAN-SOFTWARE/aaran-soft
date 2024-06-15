@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasMaster()) {
         Schema::create('contact_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('contact_id')->references('id')->on('contacts');
