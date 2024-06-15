@@ -61,6 +61,7 @@ return [
         DbMigration::mailids(),
         DbMigration::shareTrades(),
 
+        DbMigration::taskManager(),
 
         DbMigration::creditBooks(),
         DbMigration::shareTrades(),

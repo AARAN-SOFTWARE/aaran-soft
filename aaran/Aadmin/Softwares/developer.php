@@ -50,7 +50,14 @@ return [
 
         DbMigration::developer(),
         DbMigration::magalir(),
+
         DbMigration::master(),
+        DbMigration::product(),
+        DbMigration::order(),
+        DbMigration::style(),
+
+        DbMigration::taskManager(),
+
         DbMigration::cashBook(),
         DbMigration::mailids(),
         DbMigration::shareTrades(),
