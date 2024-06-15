@@ -131,6 +131,50 @@ class DbMigration
     }
 
     #endregion
+
+    #region[Common]
+
+    #region[City]
+    public static function hasCity(): bool
+    {
+        return static::enabled(static::city());
+    }
+
+    public static function city(): string
+    {
+        return 'city';
+    }
+
+    #endregion
+
+    #region[State]
+    public static function hasState(): bool
+    {
+        return static::enabled(static::state());
+    }
+
+    public static function state(): string
+    {
+        return 'state';
+    }
+
+    #endregion
+
+    #endregion
+
+    #region[Developer]
+    public static function hasDeveloper(): bool
+    {
+        return static::enabled(static::developer());
+    }
+
+    public static function developer(): string
+    {
+        return 'developer';
+    }
+
+    #endregion
+
 }
 
 
