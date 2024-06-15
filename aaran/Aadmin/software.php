@@ -4,11 +4,14 @@ return [
     'SUNDAR' => '1',
     'DEVELOPER' => '100',
 
-    'GARMENT' => '7',
-    'OFFSET' => '2',
-    'MAGALIR_CLUB' => '3',
-    'SPORTS_CLUB' => '4',
-    'UPVC' => '5',
-    'FINANCE' => '6',
+    'GARMENT' => '201',
+    'UPVC' => '202',
 
+    'OFFSET' => '301',
+
+    'MAGALIR_CLUB' => '401',
+
+    'SPORTS_CLUB' => '402',
+
+    'FINANCE' => '501',
 ];
