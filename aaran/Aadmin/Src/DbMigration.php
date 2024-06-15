@@ -2,6 +2,8 @@
 
 namespace Aaran\Aadmin\Src;
 
+use App\Models\SoftVersion;
+
 class DbMigration
 {
     public static function enabled(string $feature): bool
@@ -27,6 +29,20 @@ class DbMigration
     }
 
     #endregion
+
+    #region[Core]
+    public static function hasCore(): bool
+    {
+        return static::enabled(static::core());
+    }
+
+    public static function core(): string
+    {
+        return 'core';
+    }
+
+    #endregion
+
 
     #region[Blog]
     public static function hasBlog(): bool
@@ -134,28 +150,16 @@ class DbMigration
 
     #region[Common]
 
-    #region[City]
-    public static function hasCity(): bool
+    #region[Location]
+    //city , state , pincode , country
+    public static function hasLocation(): bool
     {
-        return static::enabled(static::city());
+        return static::enabled(static::location());
     }
 
-    public static function city(): string
+    public static function location(): string
     {
-        return 'city';
-    }
-
-    #endregion
-
-    #region[State]
-    public static function hasState(): bool
-    {
-        return static::enabled(static::state());
-    }
-
-    public static function state(): string
-    {
-        return 'state';
+        return 'location';
     }
 
     #endregion
@@ -184,6 +188,24 @@ class DbMigration
     public static function magalir(): string
     {
         return 'magalir';
+    }
+
+    #endregion
+
+
+    #region[Current Version]
+    public static function hasCurrentVersion(): bool
+    {
+        $currentVersion = SoftVersion::find(1);
+
+        if (config(['aadmin.db_version'] == $currentVersion->db_version)) {
+            return static::enabled(static::currentVersion());
+        }
+    }
+
+    public static function currentVersion(): string
+    {
+        return 'currentVersion';
     }
 
     #endregion

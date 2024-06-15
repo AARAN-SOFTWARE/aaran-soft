@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasCore()) {
+
             Schema::create('soft_versions', function (Blueprint $table) {
                 $table->id();
                 $table->string('soft_version');

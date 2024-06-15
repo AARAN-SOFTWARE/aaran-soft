@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasCore()) {
+
             Schema::create('default_companies', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('company_id')->nullable();

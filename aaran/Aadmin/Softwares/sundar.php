@@ -39,11 +39,13 @@ return [
     ],
 
     'migrations' => [
-        DbMigration::demo(),
+
+        DbMigration::Core(),
+
+        DbMigration::location(),
+
         DbMigration::creditBooks(),
         DbMigration::shareTrades(),
-        DbMigration::city(),
-        DbMigration::state(),
         DbMigration::developer(),
         DbMigration::magalir(),
         DbMigration::blog(),

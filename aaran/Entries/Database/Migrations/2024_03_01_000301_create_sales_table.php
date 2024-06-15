@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->foreignId('shipping_id')->references('id')->on('contact_details');
             $table->foreignId('style_id')->references('id')->on('styles');
             $table->foreignId('despatch_id')->references('id')->on('despatches');
+            $table->string('job_no')->nullable();
             $table->foreignId('transport_id')->references('id')->on('transports');
             $table->string('destination')->nullable();
             $table->string('bundle')->nullable();

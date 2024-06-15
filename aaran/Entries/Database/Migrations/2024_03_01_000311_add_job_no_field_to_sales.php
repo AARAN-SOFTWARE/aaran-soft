@@ -4,23 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
-        Schema::table('sales', function (Blueprint $table) {
-            $table->string('job_no')->nullable()->after('despatch_id');
-        });
-    }
+        if (!Aaran\Aadmin\Src\DbMigration::hasCurrentVersion()) {
+            Schema::table('sales', function (Blueprint $table) {
+                $table->string('job_no')->nullable()->after('despatch_id');
+            });
+        }
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('sales', function (Blueprint $table) {

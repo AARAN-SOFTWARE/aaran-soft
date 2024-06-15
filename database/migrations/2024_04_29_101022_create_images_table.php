@@ -8,7 +8,8 @@ return new class extends Migration {
 
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasCore()) {
+
             Schema::create('images', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('task_id')->references('id')->on('tasks');

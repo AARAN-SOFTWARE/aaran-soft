@@ -2,13 +2,13 @@
 
 return [
 
-    'soft_version' => '1.0.0',
+    'soft_version' => '1.0.1',
 
-    'db_version' => '1.0.0',
+    'db_version' => '1.0.1',
 
     'git_version' => '#394',
 
-    'current_acyear'=> \App\Enums\AcYear::AY_2024_25,
+    'current_acyear' => \App\Enums\AcYear::AY_2024_25,
 
     'app_type' => env('APP_TYPE', '1'),
 
