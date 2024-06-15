@@ -210,6 +210,152 @@ class DbMigration
 
     #endregion
 
+    #region[HsnCode]
+    public static function hasHsnCode(): bool
+    {
+        return static::enabled(static::hsnCode());
+    }
+
+    public static function hsnCode(): string
+    {
+        return 'hsnCode';
+    }
+
+    #endregion
+
+    #region[Category]
+    public static function hasCategory(): bool
+    {
+        return static::enabled(static::category());
+    }
+
+    public static function category(): string
+    {
+        return 'category';
+    }
+
+    #endregion
+
+    #region[Colour]
+    public static function hasColour(): bool
+    {
+        return static::enabled(static::colour());
+    }
+
+    public static function colour(): string
+    {
+        return 'colour';
+    }
+
+    #endregion
+
+    #region[Size]
+    public static function hasSize(): bool
+    {
+        return static::enabled(static::size());
+    }
+
+    public static function size(): string
+    {
+        return 'size';
+    }
+
+    #endregion
+
+    #region[Department]
+    public static function hasDepartment(): bool
+    {
+        return static::enabled(static::department());
+    }
+
+    public static function department(): string
+    {
+        return 'department';
+    }
+
+    #endregion
+
+    #region[Ledger]
+    public static function hasLedger(): bool
+    {
+        return static::enabled(static::ledger());
+    }
+
+    public static function ledger(): string
+    {
+        return 'ledger';
+    }
+
+    #endregion
+
+    #region[Transport]
+    public static function hasTransport(): bool
+    {
+        return static::enabled(static::transport());
+    }
+
+    public static function transport(): string
+    {
+        return 'transport';
+    }
+
+    #endregion
+
+    #region[Bank]
+    public static function hasBank(): bool
+    {
+        return static::enabled(static::bank());
+    }
+
+    public static function bank(): string
+    {
+        return 'bank';
+    }
+
+    #endregion
+
+    #region[ReceiptType]
+    public static function hasReceiptType(): bool
+    {
+        return static::enabled(static::receiptType());
+    }
+
+    public static function receiptType(): string
+    {
+        return 'receiptType';
+    }
+
+    #endregion
+
+    #region[Despatch]
+    public static function hasDespatch(): bool
+    {
+        return static::enabled(static::despatch());
+    }
+
+    public static function despatch(): string
+    {
+        return 'despatch';
+    }
+
+    #endregion
+
+
+    #region[Test]
+    //test-files , header , modal , action , test-operation , test-review , test-image , code
+    public static function hasTest(): bool
+    {
+        return static::enabled(static::test());
+    }
+
+    public static function test(): string
+    {
+        return 'test';
+    }
+
+    #endregion
+
+
 }
 
 

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasCity()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasLocation()) {
 
             Schema::create('cities', function (Blueprint $table) {
                 $table->id();
