@@ -329,7 +329,18 @@ class DbMigration
 
     #endregion
 
+    #region[No Of Roll]
+    public static function hasNoOfRoll(): bool
+    {
+        return static::enabled(static::noOfRoll());
+    }
 
+    public static function noOfRoll(): string
+    {
+        return 'noOfRoll';
+    }
+
+    #endregion
 
 
 

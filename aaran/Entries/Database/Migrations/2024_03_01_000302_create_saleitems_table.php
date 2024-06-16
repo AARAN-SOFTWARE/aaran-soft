@@ -13,6 +13,10 @@ return new class extends Migration {
                 $table->foreignId('sale_id')->references('id')->on('sales');
                 $table->string('po_no')->nullable();
                 $table->string('dc_no')->nullable();
+
+                if (Aaran\Aadmin\Src\DbMigration::hasNoOfRoll()) {
+                    $table->string('no_of_roll')->nullable();
+                }
                 $table->foreignId('product_id')->references('id')->on('products');
                 $table->string('description')->nullable();
                 $table->foreignId('colour_id')->references('id')->on('colours');

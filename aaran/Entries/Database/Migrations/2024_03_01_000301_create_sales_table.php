@@ -8,6 +8,7 @@ return new class extends Migration {
     public function up()
     {
         if (Aaran\Aadmin\Src\DbMigration::hasEntry()) {
+
             Schema::create('sales', function (Blueprint $table) {
                 $table->id();
                 $table->string('uniqueno')->unique();
