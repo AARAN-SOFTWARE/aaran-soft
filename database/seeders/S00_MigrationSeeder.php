@@ -82,7 +82,6 @@ class S00_MigrationSeeder extends Seeder
 
         if (!DbMigration::hasAttendance()) {
             RefactorMigrationTable::clear('2024_03_01_001301_create_attendances_table');
-            RefactorMigrationTable::clear('2024_03_01_001302_add_uniqueno_field_to_attendances');
         }
 
         if (!DbMigration::hasAudit()) {

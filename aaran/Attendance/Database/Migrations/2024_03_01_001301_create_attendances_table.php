@@ -8,6 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         if (Aaran\Aadmin\Src\DbMigration::hasAttendance()) {
+
             Schema::create('attendances', function (Blueprint $table) {
                 $table->id();
                 $table->string('uniqueno')->unique();

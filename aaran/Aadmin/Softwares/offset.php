@@ -45,6 +45,7 @@ return [
         DbMigration::order(),
         DbMigration::style(),
         DbMigration::entry(),
+        DbMigration::attendance(),
     ]
 
 ];
