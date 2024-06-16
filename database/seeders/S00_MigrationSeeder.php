@@ -10,10 +10,6 @@ class S00_MigrationSeeder extends Seeder
 {
     public static function run(): void
     {
-        if (!DbMigration::hasDemo()) {
-
-            RefactorMigrationTable::clear('2024_03_01_000101_create_cities_table');
-        }
 
         if (!DbMigration::hasCore()) {
             RefactorMigrationTable::clear('2024_03_01_000001_create_tenants_table');
@@ -27,8 +23,11 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_03_01_000009_create_soft_versions_table');
         }
 
-
         if (!DbMigration::hasCommon()) {
+            RefactorMigrationTable::clear('2024_03_01_000101_create_cities_table');
+            RefactorMigrationTable::clear('2024_03_01_000102_create_states_table');
+            RefactorMigrationTable::clear('2024_03_01_000103_create_pincodes_table');
+            RefactorMigrationTable::clear('2024_03_01_000104_create_countries_table');
             RefactorMigrationTable::clear('2024_03_01_000105_create_hsncodes_table');
             RefactorMigrationTable::clear('2024_03_01_000106_create_categories_table');
             RefactorMigrationTable::clear('2024_03_01_000107_create_colours_table');
@@ -46,9 +45,15 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_03_01_000201_create_companies_table');
             RefactorMigrationTable::clear('2024_03_01_000202_create_contacts_table');
             RefactorMigrationTable::clear('2024_03_01_000203_create_contact_details_table');
-        }
-        if (!DbMigration::hasProduct()) {
             RefactorMigrationTable::clear('2024_03_01_000203_create_products_table');
+        }
+
+        if (!DbMigration::hasOrder()) {
+            RefactorMigrationTable::clear('2024_03_01_000204_create_orders_table');
+        }
+
+        if (!DbMigration::hasStyle()) {
+            RefactorMigrationTable::clear('2024_03_01_000205_create_styles_table');
 
         }
 
@@ -97,15 +102,6 @@ class S00_MigrationSeeder extends Seeder
         }
 
 
-        if (!DbMigration::hasOrder()) {
-            RefactorMigrationTable::clear('2024_03_01_000204_create_orders_table');
-        }
-        if (!DbMigration::hasStyle()) {
-            RefactorMigrationTable::clear('2024_03_01_000205_create_styles_table');
-
-        }
-
-
         if (!DbMigration::hasMagalir()) {
             RefactorMigrationTable::clear('2024_05_06_001401_create_mg_clubs_table');
             RefactorMigrationTable::clear('2024_05_06_001402_create_mg_members_table');
@@ -136,12 +132,6 @@ class S00_MigrationSeeder extends Seeder
         }
 
 
-        if (!DbMigration::hasLocation()) {
-            RefactorMigrationTable::clear('2024_03_01_000101_create_cities_table');
-            RefactorMigrationTable::clear('2024_03_01_000102_create_states_table');
-            RefactorMigrationTable::clear('2024_03_01_000103_create_pincodes_table');
-            RefactorMigrationTable::clear('2024_03_01_000104_create_countries_table');
-        }
         if (!DbMigration::hasEntry()) {
             RefactorMigrationTable::clear('2024_03_01_000301_create_sales_table');
             RefactorMigrationTable::clear('2024_03_01_000302_create_saleitems_table');

@@ -66,25 +66,26 @@ class DatabaseSeeder extends Seeder
             S112_DepartmentSeeder::run();
             S113_CategorySeeder::run();
             S114_DespatcheSeeder::run();
+        }
 
-//master
+        if (DbMigration::hasMaster()) {
             S201_CompanySeeder::run();
             S202_ContactSeeder::run();
             S203_ProductSeeder::run();
+        }
+
+        if (DbMigration::hasOrder()) {
             S204_OrderSeeder::run();
             S205_StyleSeeder::run();
+        }
 
-//testing
+        if (DbMigration::hasDeveloper()) {
             TestFileSeeder::run();
-
-
-            //AUDIT
+        }
 
 //        ClientSeeder::run();
 //        RootlineSeeder::run();
 //        RootlineItemsSeeder::run();
-
-        }
 
         S00_MigrationSeeder::run();
     }

@@ -38,5 +38,30 @@ class S101_CitySeeder extends Seeder
             'vname' => 'Madurai',
             'active_id' => '1'
         ]);
+
+        City::create([
+            'vname' => 'Salem',
+            'active_id' => '1'
+        ]);
+
+        City::create([
+            'vname' => 'Tiruchirappalli',
+            'active_id' => '1'
+        ]);
+
+        City::create([
+            'vname' => 'Ambattur',
+            'active_id' => '1'
+        ]);
+
+        City::create([
+            'vname' => 'Tirunelveli',
+            'active_id' => '1'
+        ]);
+
+        City::create([
+            'vname' => 'Avadi',
+            'active_id' => '1'
+        ]);
     }
 }

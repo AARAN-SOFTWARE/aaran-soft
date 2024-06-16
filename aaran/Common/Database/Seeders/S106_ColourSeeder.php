@@ -39,5 +39,15 @@ class S106_ColourSeeder extends Seeder
             'active_id' => '1'
         ]);
 
+        Colour::create([
+            'vname' => 'Beige',
+            'active_id' => '1'
+        ]);
+
+        Colour::create([
+            'vname' => 'Orange',
+            'active_id' => '1'
+        ]);
+
     }
 }

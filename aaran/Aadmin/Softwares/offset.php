@@ -39,16 +39,11 @@ return [
     ],
 
     'migrations'=>[
-        DbMigration::Core(),
-
-//        DbMigration::location(),
-//
-//
-//
-//        DbMigration::master(),
-//        DbMigration::product(),
-//        DbMigration::order(),
-//        DbMigration::style(),
+        DbMigration::core(),
+        DbMigration::common(),
+        DbMigration::master(),
+        DbMigration::order(),
+        DbMigration::style(),
     ]
 
 
