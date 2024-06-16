@@ -46,6 +46,7 @@ return [
         DbMigration::style(),
         DbMigration::entry(),
         DbMigration::attendance(),
+        DbMigration::cashBook(),
     ]
 
 ];

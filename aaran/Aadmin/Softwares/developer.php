@@ -42,7 +42,6 @@ return [
         DbMigration::Core(),
 
 
-        DbMigration::accounts(),
         DbMigration::attendance(),
         DbMigration::audit(),
         DbMigration::blog(),

@@ -142,19 +142,6 @@ class DbMigration
     #endregion
 
     #region[Attendance]
-    public static function hasAccounts(): bool
-    {
-        return static::enabled(static::accounts());
-    }
-
-    public static function accounts(): string
-    {
-        return 'accounts';
-    }
-
-    #endregion
-
-    #region[Attendance]
     public static function hasAttendance(): bool
     {
         return static::enabled(static::attendance());

@@ -75,8 +75,10 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_03_01_000310_create_debit_noteitems_table');
         }
 
-        if (!DbMigration::hasAccounts()) {
+        if (!DbMigration::hasCashBook()) {
             RefactorMigrationTable::clear('2024_03_01_000601_create_cashbooks_table');
+        }
+        if (!DbMigration::hasBankBook()) {
             RefactorMigrationTable::clear('2024_03_01_000602_create_bankbooks_table');
         }
 
