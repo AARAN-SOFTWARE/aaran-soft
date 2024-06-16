@@ -76,6 +76,9 @@ class DatabaseSeeder extends Seeder
 
         if (DbMigration::hasOrder()) {
             S204_OrderSeeder::run();
+        }
+
+        if (DbMigration::hasStyle()) {
             S205_StyleSeeder::run();
         }
 

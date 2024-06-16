@@ -45,16 +45,34 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_03_01_000201_create_companies_table');
             RefactorMigrationTable::clear('2024_03_01_000202_create_contacts_table');
             RefactorMigrationTable::clear('2024_03_01_000203_create_contact_details_table');
-            RefactorMigrationTable::clear('2024_03_01_000203_create_products_table');
+            RefactorMigrationTable::clear('2024_03_01_000204_create_products_table');
         }
 
         if (!DbMigration::hasOrder()) {
-            RefactorMigrationTable::clear('2024_03_01_000204_create_orders_table');
+            RefactorMigrationTable::clear('2024_03_01_000205_create_orders_table');
         }
 
         if (!DbMigration::hasStyle()) {
-            RefactorMigrationTable::clear('2024_03_01_000205_create_styles_table');
+            RefactorMigrationTable::clear('2024_03_01_000206_create_styles_table');
+        }
 
+        if (!DbMigration::hasEntry()) {
+            RefactorMigrationTable::clear('2024_03_01_000301_create_sales_table');
+            RefactorMigrationTable::clear('2024_03_01_000302_create_saleitems_table');
+            RefactorMigrationTable::clear('2024_03_01_000303_create_purchases_table');
+            RefactorMigrationTable::clear('2024_03_01_000304_create_purchaseitems_table');
+            RefactorMigrationTable::clear('2024_03_01_000305_create_receipts_table');
+            RefactorMigrationTable::clear('2024_03_01_000306_create_payments_table');
+        }
+
+        if (!DbMigration::hasCreditNote()) {
+            RefactorMigrationTable::clear('2024_03_01_000307_create_credit_notes_table');
+            RefactorMigrationTable::clear('2024_03_01_000308_create_credit_noteitems_table');
+        }
+
+        if (!DbMigration::hasDebitNote()) {
+            RefactorMigrationTable::clear('2024_03_01_000309_create_debit_notes_table');
+            RefactorMigrationTable::clear('2024_03_01_000310_create_debit_noteitems_table');
         }
 
         if (!DbMigration::hasAccounts()) {
@@ -131,25 +149,6 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_03_01_000505_create_todos_table');
         }
 
-
-        if (!DbMigration::hasEntry()) {
-            RefactorMigrationTable::clear('2024_03_01_000301_create_sales_table');
-            RefactorMigrationTable::clear('2024_03_01_000302_create_saleitems_table');
-            RefactorMigrationTable::clear('2024_03_01_000303_create_purchases_table');
-            RefactorMigrationTable::clear('2024_03_01_000304_create_purchaseitems_table');
-            RefactorMigrationTable::clear('2024_03_01_000305_create_receipts_table');
-            RefactorMigrationTable::clear('2024_03_01_000306_create_payments_table');
-        }
-
-        if (!DbMigration::hasDebitNote()) {
-            RefactorMigrationTable::clear('2024_03_01_000309_create_debit_notes_table');
-            RefactorMigrationTable::clear('2024_03_01_000310_create_debit_noteitems_table');
-        }
-
-        if (!DbMigration::hasCreditNote()) {
-            RefactorMigrationTable::clear('2024_03_01_000307_create_credit_notes_table');
-            RefactorMigrationTable::clear('2024_03_01_000308_create_credit_noteitems_table');
-        }
 
         if (!DbMigration::hasErp()) {
             RefactorMigrationTable::clear('2024_03_01_000401_create_fabric_lots_table');

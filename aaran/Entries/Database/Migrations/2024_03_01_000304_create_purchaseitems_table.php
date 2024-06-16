@@ -8,6 +8,7 @@ return new class extends Migration {
     public function up()
     {
         if (Aaran\Aadmin\Src\DbMigration::hasEntry()) {
+
             Schema::create('purchaseitems', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('purchase_id')->references('id')->on('purchases');

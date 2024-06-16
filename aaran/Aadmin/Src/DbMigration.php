@@ -40,7 +40,6 @@ class DbMigration
     {
         return 'core';
     }
-
     #endregion
 
     #region[Common]
@@ -53,7 +52,42 @@ class DbMigration
     {
         return 'common';
     }
+    #endregion
 
+    #region[Master]
+    public static function hasMaster(): bool
+    {
+        return static::enabled(static::master());
+    }
+
+    public static function master(): string
+    {
+        return 'master';
+    }
+    #endregion
+
+    #region[Orders]
+    public static function hasOrder(): bool
+    {
+        return static::enabled(static::order());
+    }
+
+    public static function order(): string
+    {
+        return 'order';
+    }
+    #endregion
+
+    #region[Styles]
+    public static function hasStyle(): bool
+    {
+        return static::enabled(static::style());
+    }
+
+    public static function style(): string
+    {
+        return 'style';
+    }
     #endregion
 
     #region[Entry]
@@ -66,7 +100,6 @@ class DbMigration
     {
         return 'entry';
     }
-
     #endregion
 
     #region[CreditNote]
@@ -108,9 +141,6 @@ class DbMigration
 
     #endregion
 
-
-
-
     #region[Attendance]
     public static function hasAccounts(): bool
     {
@@ -123,7 +153,6 @@ class DbMigration
     }
 
     #endregion
-
 
     #region[Attendance]
     public static function hasAttendance(): bool
@@ -177,8 +206,6 @@ class DbMigration
 
     #endregion
 
-
-
     #region[Magalir]
     public static function hasMagalir(): bool
     {
@@ -191,62 +218,6 @@ class DbMigration
     }
 
     #endregion
-
-    #region[Master]
-    public static function hasMaster(): bool
-    {
-        return static::enabled(static::master());
-    }
-
-    public static function master(): string
-    {
-        return 'master';
-    }
-
-    #endregion
-
-    #region[Products]
-    public static function hasProduct(): bool
-    {
-        return static::enabled(static::product());
-    }
-
-    public static function product(): string
-    {
-        return 'product';
-    }
-
-    #endregion
-
-
-    #region[Orders]
-    public static function hasOrder(): bool
-    {
-        return static::enabled(static::order());
-    }
-
-    public static function order(): string
-    {
-        return 'order';
-    }
-
-    #endregion
-
-
-
-    #region[Styles]
-    public static function hasStyle(): bool
-    {
-        return static::enabled(static::style());
-    }
-
-    public static function style(): string
-    {
-        return 'style';
-    }
-
-    #endregion
-
 
     #region[CashBook]
     public static function hasCashBook(): bool
@@ -313,24 +284,8 @@ class DbMigration
 
     #endregion
 
-    #region[Common]
-
-    #region[Location]
-    //city , state , pincode , country
-    public static function hasLocation(): bool
-    {
-        return static::enabled(static::location());
-    }
-
-    public static function location(): string
-    {
-        return 'location';
-    }
-
-    #endregion
-
     #region[TaskManger]
-     public static function hasTaskManager(): bool
+    public static function hasTaskManager(): bool
     {
         return static::enabled(static::taskManager());
     }
@@ -355,11 +310,6 @@ class DbMigration
 
     #endregion
 
-
-
-
-
-
     #region[Current Version]
     public static function hasCurrentVersion(): bool
     {
@@ -379,7 +329,6 @@ class DbMigration
     }
 
     #endregion
-
 }
 
 

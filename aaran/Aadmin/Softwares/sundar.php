@@ -42,8 +42,6 @@ return [
 
         DbMigration::Core(),
 
-        DbMigration::location(),
-
         DbMigration::accounts(),
         DbMigration::attendance(),
         DbMigration::audit(),
@@ -53,7 +51,6 @@ return [
         DbMigration::magalir(),
 
         DbMigration::master(),
-        DbMigration::product(),
         DbMigration::order(),
         DbMigration::style(),
 

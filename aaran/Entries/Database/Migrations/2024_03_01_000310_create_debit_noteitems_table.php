@@ -8,6 +8,7 @@ return new class extends Migration {
     public function up()
     {
         if (Aaran\Aadmin\Src\DbMigration::hasDebitNote()) {
+
             Schema::create('debit_noteitems', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('sale_id')->references('id')->on('sales');

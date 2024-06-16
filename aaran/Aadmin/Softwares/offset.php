@@ -44,7 +44,7 @@ return [
         DbMigration::master(),
         DbMigration::order(),
         DbMigration::style(),
+        DbMigration::entry(),
     ]
-
 
 ];
