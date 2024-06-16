@@ -47,7 +47,9 @@
                             </x-table.cell-text>
 
                             <x-table.cell-text center>
+                                <a href="{{ route('shareTrades.stockDetails',[$row->id]) }}">
                                 {{date('d-m-Y', strtotime($row->vdate))}}
+                                </a>
                             </x-table.cell-text>
 
                             <x-table.cell-text right>

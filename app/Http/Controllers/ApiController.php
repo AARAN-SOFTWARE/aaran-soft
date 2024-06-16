@@ -2,13 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\User as UserResource;
 
 class ApiController extends Controller
 {
+
+    public function user(Request $request,$id)
+    {
+        $user=User::find($id);
+        return new UserResource($user);
+    }
+
+    public function users()
+    {
+        $user=User::all();
+        return new UserCollection($user);
+    }
+
+
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [

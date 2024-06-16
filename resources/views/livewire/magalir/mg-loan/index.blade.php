@@ -28,6 +28,9 @@
                     </tbody>
                 </table>
             </div>
+            <div>
+                <img class="h-32 w-auto" src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$member->photo)}}" alt="logo"/>
+            </div>
             <div class="flex flex-col px-5 items-center">
                 <div class="-mt-2">
                     <x-input.model-select wire:model="club_id" :label="'club'" wire:change="getByClub"
@@ -41,7 +44,7 @@
                 <div>
                     <x-input.model-select wire:model="member_id" :label="'Member'" wire:change="getByMember"
                                           class="w-[30rem] purple-textbox">
-                        <option>Choose..</option>
+                        <option value="">Choose..</option>
                         @foreach($members as $member)
                             <option value="{{$member->id}}">{{$member->vname}}</option>
                         @endforeach

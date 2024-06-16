@@ -43,6 +43,58 @@ class DbMigration
 
     #endregion
 
+    #region[Entry]
+    public static function hasEntry(): bool
+    {
+        return static::enabled(static::entry());
+    }
+
+    public static function entry(): string
+    {
+        return 'entry';
+    }
+
+    #endregion
+
+    #region[CreditNote]
+    public static function hasCreditNote(): bool
+    {
+        return static::enabled(static::creditnote());
+    }
+
+    public static function creditnote(): string
+    {
+        return 'creditnote';
+    }
+
+    #endregion
+
+    #region[DebitNote]
+    public static function hasDebitNote(): bool
+    {
+        return static::enabled(static::debitnote());
+    }
+
+    public static function debitnote(): string
+    {
+        return 'debitnote';
+    }
+
+    #endregion
+
+    #region[Erp]
+    public static function hasErp(): bool
+    {
+        return static::enabled(static::erp());
+    }
+
+    public static function erp(): string
+    {
+        return 'erp';
+    }
+
+    #endregion
+
 
     #region[Blog]
     public static function hasBlog(): bool
@@ -198,9 +250,12 @@ class DbMigration
     {
         $currentVersion = SoftVersion::find(1);
 
-        if (config(['aadmin.db_version'] == $currentVersion->db_version)) {
-            return static::enabled(static::currentVersion());
+        if ($currentVersion != null) {
+            if (config(['aadmin.db_version'] == $currentVersion->db_version)) {
+                return static::enabled(static::currentVersion());
+            }
         }
+        return false;
     }
 
     public static function currentVersion(): string
