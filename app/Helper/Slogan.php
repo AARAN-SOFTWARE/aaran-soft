@@ -50,6 +50,8 @@ class Slogan
                 'quote' => 'Everything you’ve ever wanted is on the other side of fear.'
             ], [
                 'quote' => 'Begin at the beginning... and go on till you come to the end: then stop.'
+            ], [
+                'quote' => 'Knowing others is intelligence; knowing yourself is true wisdom.'
             ],
         ];
     }
@@ -57,6 +59,6 @@ class Slogan
     public static function getRandomQuote()
     {
         $quote = Collection::make(self::quotes())->random();
-        return  $quote['quote'];
+        return $quote['quote'];
     }
 }
