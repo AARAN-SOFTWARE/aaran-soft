@@ -43,6 +43,19 @@ class DbMigration
 
     #endregion
 
+    #region[Common]
+    public static function hasCommon(): bool
+    {
+        return static::enabled(static::common());
+    }
+
+    public static function common(): string
+    {
+        return 'common';
+    }
+
+    #endregion
+
     #region[Entry]
     public static function hasEntry(): bool
     {

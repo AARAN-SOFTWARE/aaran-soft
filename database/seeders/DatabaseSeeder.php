@@ -42,15 +42,16 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        if (DbMigration::hasDemo()) {
-//sys
+        if (DbMigration::hasCore()) {
+
             S01_TenantSeeder::run();
             S02_RoleSeeder::run();
             S03_UserSeeder::run();
             S04_DefaultCompanySeeder::run();
             S05_SoftVersionSeeder::run();
+        }
 
-//common
+        if (DbMigration::hasCommon()) {
             S101_CitySeeder::run();
             S102_StateSeeder::run();
             S103_PincodeSeeder::run();
