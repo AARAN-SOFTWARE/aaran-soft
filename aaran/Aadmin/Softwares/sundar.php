@@ -44,6 +44,25 @@ return [
 
         DbMigration::location(),
 
+        DbMigration::accounts(),
+        DbMigration::attendance(),
+        DbMigration::audit(),
+        DbMigration::blog(),
+
+        DbMigration::developer(),
+        DbMigration::magalir(),
+
+        DbMigration::master(),
+        DbMigration::product(),
+        DbMigration::order(),
+        DbMigration::style(),
+
+        DbMigration::cashBook(),
+        DbMigration::mailids(),
+        DbMigration::shareTrades(),
+
+        DbMigration::taskManager(),
+
         DbMigration::creditBooks(),
         DbMigration::shareTrades(),
         DbMigration::developer(),

@@ -39,9 +39,39 @@ return [
     ],
 
     'migrations'=>[
-//        DbMigration::hasCreditBooks(),
-//        DbMigration::hasMailids(),
-//        DbMigration::hasShareTrades(),
+        DbMigration::Core(),
+
+        DbMigration::location(),
+
+        DbMigration::accounts(),
+        DbMigration::attendance(),
+        DbMigration::audit(),
+        DbMigration::blog(),
+
+        DbMigration::developer(),
+        DbMigration::magalir(),
+
+        DbMigration::master(),
+        DbMigration::product(),
+        DbMigration::order(),
+        DbMigration::style(),
+
+        DbMigration::taskManager(),
+
+        DbMigration::cashBook(),
+        DbMigration::mailids(),
+        DbMigration::shareTrades(),
+
+        DbMigration::creditBooks(),
+        DbMigration::shareTrades(),
+        DbMigration::developer(),
+        DbMigration::magalir(),
+        DbMigration::blog(),
+        DbMigration::bankBook(),
+        DbMigration::cashBook(),
+        DbMigration::audit(),
+        DbMigration::attendance(),
+        DbMigration::mailids(),
     ]
 
 

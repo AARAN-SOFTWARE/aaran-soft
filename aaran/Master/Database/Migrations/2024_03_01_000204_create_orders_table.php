@@ -9,7 +9,7 @@ return new class extends Migration
 
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasOrder()) {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('vname')->unique();

@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasProduct()) {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
