@@ -15,4 +15,6 @@ return [
     'SPORTS_CLUB' => '402',
 
     'FINANCE' => '501',
+
+    'DEMO' => '1001',
 ];
