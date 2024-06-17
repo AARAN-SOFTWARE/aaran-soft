@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasTaskManager()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasTodoList()) {
 
             Schema::create('todos', function (Blueprint $table) {
                 $table->id();

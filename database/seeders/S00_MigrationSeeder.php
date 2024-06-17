@@ -117,6 +117,9 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_03_01_000502_create_replies_table');
             RefactorMigrationTable::clear('2024_03_01_000503_create_activities_table');
             RefactorMigrationTable::clear('2024_03_01_000504_create_notice_boards_table');
+        }
+
+        if (!DbMigration::hasTodoList()) {
             RefactorMigrationTable::clear('2024_03_01_000505_create_todos_table');
         }
 

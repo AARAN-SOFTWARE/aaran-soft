@@ -9,45 +9,32 @@ return [
 
     'features' => [
         Customise::todoList(),
-        Customise::attendance()
+//        Customise::attendance()
     ],
 
     'customise' => [
         SaleEntry::order(),
         SaleEntry::billingAddress(),
         SaleEntry::shippingAddress(),
-        SaleEntry::style(),
-        SaleEntry::despatch(),
         SaleEntry::transport(),
-        SaleEntry::destination(),
-        SaleEntry::bundle(),
-
         SaleEntry::productDescription(),
-        SaleEntry::colour(),
-        SaleEntry::size(),
     ],
 
-    'menus'=>[
+    'menus' => [
         MainMenu::entries(),
-        MainMenu::accounts(),
         MainMenu::master(),
         MainMenu::common(),
-        MainMenu::task(),
-        MainMenu::audit(),
-        MainMenu::books(),
-        MainMenu::developer(),
+        MainMenu::report(),
     ],
 
-    'migrations'=>[
+    'migrations' => [
         DbMigration::core(),
         DbMigration::common(),
         DbMigration::master(),
-//        DbMigration::order(),
-//        DbMigration::style(),
-//        DbMigration::entry(),
-//        DbMigration::attendance(),
-//        DbMigration::cashBook(),
-        DbMigration::audit(),
+        DbMigration::order(),
+        DbMigration::style(),
+        DbMigration::entry(),
+        DbMigration::todoList(),
     ]
 
 ];

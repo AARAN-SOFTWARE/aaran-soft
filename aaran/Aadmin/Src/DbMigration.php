@@ -279,7 +279,20 @@ class DbMigration
 
     public static function taskManager(): string
     {
-        return 'location';
+        return 'taskManager';
+    }
+
+    #endregion
+
+    #region[TodoList]
+    public static function hasTodoList(): bool
+    {
+        return static::enabled(static::todoList());
+    }
+
+    public static function todoList(): string
+    {
+        return 'todoList';
     }
 
     #endregion
@@ -294,7 +307,6 @@ class DbMigration
     {
         return 'noOfRoll';
     }
-
     #endregion
 
     #region[Current Version]
