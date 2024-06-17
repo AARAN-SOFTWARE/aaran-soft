@@ -35,6 +35,7 @@ return [
         DbMigration::style(),
         DbMigration::entry(),
         DbMigration::todoList(),
+        DbMigration::blog(),
     ]
 
 ];

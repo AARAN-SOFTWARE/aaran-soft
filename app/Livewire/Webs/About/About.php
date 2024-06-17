@@ -8,6 +8,6 @@ class About extends Component
 {
     public function render()
     {
-        return view('livewire.webs.home.about')->layout('layouts.web');
+        return view('livewire.webs.about.about')->layout('layouts.web');
     }
 }
