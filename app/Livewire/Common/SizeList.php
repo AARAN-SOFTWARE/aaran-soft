@@ -16,6 +16,7 @@ class SizeList extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
+                $this->validate(['vname' => 'required|unique:sizes,vname']);
                 Size::create([
                     'vname' => Str::ucfirst($this->vname),
                     'active_id' => $this->active_id,

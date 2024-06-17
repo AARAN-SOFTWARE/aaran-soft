@@ -16,6 +16,7 @@ class TransportList extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
+                $this->validate(['vname' => 'required|unique:transports,vname']);
                 Transport::create([
                     'vname' => Str::ucfirst($this->vname),
                     'active_id' => $this->active_id,

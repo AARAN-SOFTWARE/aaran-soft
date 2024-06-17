@@ -17,6 +17,7 @@ class BankList extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
+                $this->validate(['vname' => 'required|unique:banks,vname']);
                 Bank::create([
                     'vname' => Str::ucfirst($this->vname),
                     'active_id' => $this->active_id,

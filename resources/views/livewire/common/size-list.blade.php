@@ -47,6 +47,9 @@
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
             <x-input.model-text wire:model="vname" :label="'Size'"/>
+            @error('vname')
+            <span class="text-red-500">{{  $message }}</span>
+            @enderror
         </x-forms.create>
 
     </x-forms.m-panel>

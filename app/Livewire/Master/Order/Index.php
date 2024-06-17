@@ -20,6 +20,7 @@ class Index extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
+                $this->validate(['vname' => 'required|unique:orders,vname']);
                 Order::create([
                     'vname' =>($this->vname),
                     'order_name' => Str::ucfirst($this->order_name),
