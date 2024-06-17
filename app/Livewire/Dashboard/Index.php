@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard;
 
+use Aaran\Aadmin\Src\DbMigration;
 use Aaran\Entries\Models\Payment;
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Receipt;
@@ -18,7 +19,9 @@ class  Index extends Component
 
     public function mount()
     {
+        if(DbMigration::hasEntry()){
         $this->transaction = $this->getTransaction();
+        }
     }
 
 

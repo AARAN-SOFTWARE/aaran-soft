@@ -28,47 +28,20 @@ return [
     ],
 
     'menus'=>[
-        MainMenu::entries(),
-        MainMenu::accounts(),
-        MainMenu::master(),
-        MainMenu::common(),
         MainMenu::task(),
-        MainMenu::audit(),
-        MainMenu::books(),
         MainMenu::developer(),
     ],
 
     'migrations'=>[
         DbMigration::Core(),
-
-
-        DbMigration::attendance(),
-        DbMigration::audit(),
-        DbMigration::blog(),
-
-        DbMigration::developer(),
-        DbMigration::magalir(),
-
+        DbMigration::common(),
         DbMigration::master(),
         DbMigration::order(),
         DbMigration::style(),
-
-        DbMigration::taskManager(),
-
-        DbMigration::cashBook(),
-        DbMigration::mailids(),
-        DbMigration::shareTrades(),
-
-        DbMigration::creditBooks(),
-        DbMigration::shareTrades(),
         DbMigration::developer(),
-        DbMigration::magalir(),
+        DbMigration::taskManager(),
         DbMigration::blog(),
-        DbMigration::bankBook(),
-        DbMigration::cashBook(),
         DbMigration::audit(),
-        DbMigration::attendance(),
-        DbMigration::mailids(),
     ]
 
 
