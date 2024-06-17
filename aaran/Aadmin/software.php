@@ -3,6 +3,7 @@
 return [
     'SUNDAR' => '1',
     'DEVELOPER' => '100',
+    'AUDIT' => '101',
 
     'GARMENT' => '201',
     'UPVC' => '202',
