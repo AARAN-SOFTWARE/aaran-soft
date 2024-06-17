@@ -17,7 +17,7 @@ class ProductFactory extends Factory
         $hsncodes = Hsncode::pluck('id');
 
         return [
-            'vname' => $this->faker->unique()->word(),
+            'vname' => $this->faker->unique()->text(15),
             'product_type' => '1',
             'hsncode_id' => $hsncodes->random(),
             'units' => '4',

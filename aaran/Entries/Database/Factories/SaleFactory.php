@@ -3,6 +3,7 @@
 namespace Aaran\Entries\Database\Factories;
 
 use Aaran\Entries\Models\Sale;
+use Aaran\Master\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
@@ -11,13 +12,14 @@ class SaleFactory extends Factory
     protected $model = Sale::class;
     public function definition(): array
     {
+        $contact=Contact::pluck('id');
         return [
             'uniqueno' => $this->faker->unique()->numberBetween(1, 9999),
             'acyear' => 8,
             'company_id' => 1,
             'contact_id' => 1,
-            'invoice_no' => $this->faker->unique()->numberBetween(1, 9999),
-            'invoice_date' => $this->faker->date(),
+            'invoice_no' => Sale::nextNo(),
+            'invoice_date' => $this->faker->dateTimeThisMonth()->format('Y-m-d'),
             'order_id' =>  1,
             'billing_id' => 1,
             'shipping_id' => 1,

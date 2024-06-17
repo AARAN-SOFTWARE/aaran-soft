@@ -5,9 +5,6 @@ namespace Aaran\Entries\Database\Factories;
 use Aaran\Entries\Models\Purchase;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
- */
 class PurchaseFactory extends Factory
 {
 
