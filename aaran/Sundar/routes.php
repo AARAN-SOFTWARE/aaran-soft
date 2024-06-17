@@ -17,6 +17,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('shareTrades/profits', App\Livewire\Sundar\Trading\Profit::class)->name('shareTrades.profits');
     Route::get('shareTrades/charges', App\Livewire\Sundar\Trading\Charges::class)->name('shareTrades.charges');
     Route::get('shareTrades/openingBalance', App\Livewire\Sundar\Trading\OpeningBalance::class)->name('shareTrades.openingBalance');
+    Route::get('shareTrades/{id}/stockDetails', App\Livewire\Sundar\Trading\StockDetails::class)->name('shareTrades.stockDetails');
     Route::get('shareTrades/summary', App\Livewire\Sundar\Trading\ShareTradeList::class)->name('shareTrades.summary');
 
 

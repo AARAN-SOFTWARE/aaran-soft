@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasCategory()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasCommon()) {
 
             Schema::create('categories', function (Blueprint $table) {
                 $table->id();

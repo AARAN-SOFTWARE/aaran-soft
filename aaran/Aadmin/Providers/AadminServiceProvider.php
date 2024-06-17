@@ -17,6 +17,7 @@ class AadminServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../Softwares/developer.php', 'developer');
         $this->mergeConfigFrom(__DIR__ . '/../Softwares/garments.php', 'garment');
         $this->mergeConfigFrom(__DIR__ . '/../Softwares/offset.php', 'offset');
+        $this->mergeConfigFrom(__DIR__ . '/../Softwares/audit.php', 'audit');
 
 
         $this->mergeConfigFrom(__DIR__ . '/../Client/demo/garment_demo.php', 'garment_demo');

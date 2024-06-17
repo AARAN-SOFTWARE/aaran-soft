@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasReceiptType()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasCommon()) {
 
             Schema::create('receipttypes', function (Blueprint $table) {
                 $table->id();

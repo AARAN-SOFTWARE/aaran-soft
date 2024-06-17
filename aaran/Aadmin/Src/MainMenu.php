@@ -6,55 +6,13 @@ class MainMenu
 {
     public static function enabled(string $feature): bool
     {
-        return match (config('aadmin.app_code')) {
-            config('clients.VIJAY_GARMENTS') => in_array($feature, config('vijayGarments.menus', [])),
-            config('clients.AMAL_TEX') => in_array($feature, config('amal_tex.menus', [])),
-            config('clients.KATHIR_PRINTERS') => in_array($feature, config('kathir_printers.menus', [])),
-            config('clients.AJ_PRINTING') => in_array($feature, config('aj_printers.menus', [])),
-            config('clients.VETRIVEL_GARMENTS') => in_array($feature, config('vetrivel_garments.menus', [])),
-            config('clients.ASHWIN_TEX') => in_array($feature, config('ashwin_tex.menus', [])),
-            config('clients.MARK_INTERNATIONAL') => in_array($feature, config('mark_international.menus', [])),
-            config('clients.NEETHU_INDUSTRIES') => in_array($feature, config('neethuIndustries.menus', [])),
-            config('clients.SRI_VENKATESWARA_TEXMART') => in_array($feature, config('sri_venkateswara_texmart.menus', [])),
-            config('clients.A1_IMPEX') => in_array($feature, config('a1_impex.menus', [])),
-            config('clients.SATHYANARAYANA_GARMENTS') => in_array($feature, config('satyanarayana.menus', [])),
-            config('clients.FASHION_FABRICS') => in_array($feature, config('fashion_fabrics.menus', [])),
-            config('clients.SK_PRINTERS') => in_array($feature, config('a1_impex.menus', [])),
-            config('clients.AARAN_ASSOCIATES') => in_array($feature, config('aaran_associates.menus', [])),
-            config('clients.VNINFOTECH') => in_array($feature, config('vninfotech.menus', [])),
+        return match (config('aadmin.app_type')) {
 
-            config('clients.SARA_SCREENS') => in_array($feature, config('sara_screens.menus', [])),
-            config('clients.COLOURS_PRINTING') => in_array($feature, config('colours_printers.menus', [])),
-            config('clients.NEW_AMMAN_PRINTERS') => in_array($feature, config('new_amman_printers.menus', [])),
-            config('clients.KGS_PRINTERS') => in_array($feature, config('kgs_printers.menus', [])),
-            config('clients.THIRUMURUGAN_PRINTERS') => in_array($feature, config('thirumurugan_printing.menus', [])),
-            config('clients.BEST_PRINT') => in_array($feature, config('best_print.menus', [])),
-            config('clients.VIP_GRAPHIICS') => in_array($feature, config('vip_graphiics.menus', [])),
-            config('clients.SAIRF_SOURCING') => in_array($feature, config('sairfsourcing.menus', [])),
-
-            config('clients.SK_ENTERPRISES') => in_array($feature, config('sk_enterprises.menus', [])),
-            config('clients.NEOT') => in_array($feature, config('neot.menus', [])),
-
-            config('clients.AARAN_ERP') => in_array($feature, config('aaran_erp.menus', [])),
-            config('clients.OFFSET_DEMO') => in_array($feature, config('offset_demo.menus', [])),
-            config('clients.GARMENT_DEMO') => in_array($feature, config('garment_demo.menus', [])),
-            config('clients.DEVELOPER_DEMO') => in_array($feature, config('developer_demo.menus', [])),
-
-            config('clients.ESSA_KNITTING') => in_array($feature, config('essa_knitting.menus', [])),
-            config('clients.ESSA_KNITTING_GARMENT') => in_array($feature, config('essa_knitting_garments.menus', [])),
-
-            config('clients.SUKRAA_GARMENTS') => in_array($feature, config('sukraa_garments.menus', [])),
-            config('clients.UGAN_APPARELS') => in_array($feature, config('ugan_apparels.menus', [])),
-            config('clients.SEYON_FASHION') => in_array($feature, config('seyon_fashion.menus', [])),
-            config('clients.SRI_SENTHUR_TEX') => in_array($feature, config('sri_senthur_tex.menus', [])),
-            config('clients.SK_INTERNATIONAL') => in_array($feature, config('sk_international.menus', [])),
-            config('clients.SHONA_EXPORTS') => in_array($feature, config('shona_exports.menus', [])),
-            config('clients.MODE_CREATIONS') => in_array($feature, config('mode_creations.menus', [])),
-            config('clients.KARUNAAMBIKAA_EXPORT') => in_array($feature, config('karunaambikaa_export.menus', [])),
-            config('clients.BOYANCE_INDIA') => in_array($feature, config('boyance_india.menus', [])),
-            config('clients.ASWATH_APPARELS') => in_array($feature, config('aswath_apparels.menus', [])),
-            config('clients.ATO_TEXTILES') => in_array($feature, config('ato_textiles.menus', [])),
-
+            config('software.GARMENT') => in_array($feature, config('garment.menus', [])),
+            config('software.OFFSET') => in_array($feature, config('offset.menus', [])),
+            config('software.SUNDAR') => in_array($feature, config('sundar.menus', [])),
+            config('software.AUDIT') => in_array($feature, config('audit.menus', [])),
+            config('software.DEVELOPER') => in_array($feature, config('developer.menus', [])),
         };
     }
 

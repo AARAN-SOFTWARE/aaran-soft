@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasBank()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasCommon()) {
 
             Schema::create('banks', function (Blueprint $table) {
                 $table->id();

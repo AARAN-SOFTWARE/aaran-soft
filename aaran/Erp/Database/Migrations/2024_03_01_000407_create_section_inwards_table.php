@@ -4,11 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasErp()) {
+
             Schema::create('section_inwards', function (Blueprint $table) {
                 $table->id();
                 $table->integer('vno');
@@ -38,6 +38,7 @@ return new class extends Migration
             });
         }
     }
+
     public function down(): void
     {
         Schema::dropIfExists('section_inward_items');

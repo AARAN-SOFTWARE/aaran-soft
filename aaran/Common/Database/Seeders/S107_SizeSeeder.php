@@ -33,5 +33,15 @@ class S107_SizeSeeder extends Seeder
             'vname' => 'xl',
             'active_id' => '1'
         ]);
+
+        Size::create([
+            'vname' => 'All size',
+            'active_id' => '1'
+        ]);
+
+        Size::create([
+            'vname' => 'Mixed size',
+            'active_id' => '1'
+        ]);
     }
 }

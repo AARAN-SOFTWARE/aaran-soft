@@ -13,6 +13,11 @@ Route::get('/sales',function (){
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+Route::post('/gst',[\App\Http\Controllers\Gst\masterGst::class,'__invoke']);
+
+
+Route::get('user/{id}', [ApiController::class, 'user']);
+Route::get('users', [ApiController::class, 'users']);
 
 Route::post('/register',[ApiController::class,'register']);
 Route::post('/login',[ApiController::class,'login']);

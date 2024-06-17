@@ -4,11 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasTodoList()) {
+
             Schema::create('todos', function (Blueprint $table) {
                 $table->id();
                 $table->integer('slno')->nullable();
@@ -20,7 +20,8 @@ return new class extends Migration
                 $table->string('active_id', 3)->nullable();
                 $table->timestamps();
             });
-        }}
+        }
+    }
 
     public function down(): void
     {

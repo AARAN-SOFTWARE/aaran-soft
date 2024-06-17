@@ -40,19 +40,103 @@ class DbMigration
     {
         return 'core';
     }
+    #endregion
+
+    #region[Common]
+    public static function hasCommon(): bool
+    {
+        return static::enabled(static::common());
+    }
+
+    public static function common(): string
+    {
+        return 'common';
+    }
+    #endregion
+
+    #region[Master]
+    public static function hasMaster(): bool
+    {
+        return static::enabled(static::master());
+    }
+
+    public static function master(): string
+    {
+        return 'master';
+    }
+    #endregion
+
+    #region[Orders]
+    public static function hasOrder(): bool
+    {
+        return static::enabled(static::order());
+    }
+
+    public static function order(): string
+    {
+        return 'order';
+    }
+    #endregion
+
+    #region[Styles]
+    public static function hasStyle(): bool
+    {
+        return static::enabled(static::style());
+    }
+
+    public static function style(): string
+    {
+        return 'style';
+    }
+    #endregion
+
+    #region[Entry]
+    public static function hasEntry(): bool
+    {
+        return static::enabled(static::entry());
+    }
+
+    public static function entry(): string
+    {
+        return 'entry';
+    }
+    #endregion
+
+    #region[CreditNote]
+    public static function hasCreditNote(): bool
+    {
+        return static::enabled(static::creditnote());
+    }
+
+    public static function creditnote(): string
+    {
+        return 'creditnote';
+    }
 
     #endregion
 
-
-    #region[Blog]
-    public static function hasBlog(): bool
+    #region[DebitNote]
+    public static function hasDebitNote(): bool
     {
-        return static::enabled(static::blog());
+        return static::enabled(static::debitnote());
     }
 
-    public static function blog(): string
+    public static function debitnote(): string
     {
-        return 'blog';
+        return 'debitnote';
+    }
+
+    #endregion
+
+    #region[Erp]
+    public static function hasErp(): bool
+    {
+        return static::enabled(static::erp());
+    }
+
+    public static function erp(): string
+    {
+        return 'erp';
     }
 
     #endregion
@@ -60,7 +144,7 @@ class DbMigration
     #region[Attendance]
     public static function hasAttendance(): bool
     {
-        return static::enabled(static::demo());
+        return static::enabled(static::attendance());
     }
 
     public static function attendance(): string
@@ -79,6 +163,45 @@ class DbMigration
     public static function audit(): string
     {
         return 'audit';
+    }
+
+    #endregion
+
+    #region[Blog]
+    public static function hasBlog(): bool
+    {
+        return static::enabled(static::blog());
+    }
+
+    public static function blog(): string
+    {
+        return 'blog';
+    }
+
+    #endregion
+
+    #region[Developer]
+    public static function hasDeveloper(): bool
+    {
+        return static::enabled(static::developer());
+    }
+
+    public static function developer(): string
+    {
+        return 'developer';
+    }
+
+    #endregion
+
+    #region[Magalir]
+    public static function hasMagalir(): bool
+    {
+        return static::enabled(static::magalir());
+    }
+
+    public static function magalir(): string
+    {
+        return 'magalir';
     }
 
     #endregion
@@ -148,59 +271,55 @@ class DbMigration
 
     #endregion
 
-    #region[Common]
-
-    #region[Location]
-    //city , state , pincode , country
-    public static function hasLocation(): bool
+    #region[TaskManger]
+    public static function hasTaskManager(): bool
     {
-        return static::enabled(static::location());
+        return static::enabled(static::taskManager());
     }
 
-    public static function location(): string
+    public static function taskManager(): string
     {
-        return 'location';
+        return 'taskManager';
     }
 
     #endregion
 
-    #endregion
-
-    #region[Developer]
-    public static function hasDeveloper(): bool
+    #region[TodoList]
+    public static function hasTodoList(): bool
     {
-        return static::enabled(static::developer());
+        return static::enabled(static::todoList());
     }
 
-    public static function developer(): string
+    public static function todoList(): string
     {
-        return 'developer';
-    }
-
-    #endregion
-
-    #region[Magalir]
-    public static function hasMagalir(): bool
-    {
-        return static::enabled(static::magalir());
-    }
-
-    public static function magalir(): string
-    {
-        return 'magalir';
+        return 'todoList';
     }
 
     #endregion
 
+    #region[No Of Roll]
+    public static function hasNoOfRoll(): bool
+    {
+        return static::enabled(static::noOfRoll());
+    }
+
+    public static function noOfRoll(): string
+    {
+        return 'noOfRoll';
+    }
+    #endregion
 
     #region[Current Version]
     public static function hasCurrentVersion(): bool
     {
         $currentVersion = SoftVersion::find(1);
 
-        if (config(['aadmin.db_version'] == $currentVersion->db_version)) {
-            return static::enabled(static::currentVersion());
+        if ($currentVersion != null) {
+            if (config(['aadmin.db_version'] == $currentVersion->db_version)) {
+                return static::enabled(static::currentVersion());
+            }
         }
+        return false;
     }
 
     public static function currentVersion(): string
@@ -209,153 +328,6 @@ class DbMigration
     }
 
     #endregion
-
-    #region[HsnCode]
-    public static function hasHsnCode(): bool
-    {
-        return static::enabled(static::hsnCode());
-    }
-
-    public static function hsnCode(): string
-    {
-        return 'hsnCode';
-    }
-
-    #endregion
-
-    #region[Category]
-    public static function hasCategory(): bool
-    {
-        return static::enabled(static::category());
-    }
-
-    public static function category(): string
-    {
-        return 'category';
-    }
-
-    #endregion
-
-    #region[Colour]
-    public static function hasColour(): bool
-    {
-        return static::enabled(static::colour());
-    }
-
-    public static function colour(): string
-    {
-        return 'colour';
-    }
-
-    #endregion
-
-    #region[Size]
-    public static function hasSize(): bool
-    {
-        return static::enabled(static::size());
-    }
-
-    public static function size(): string
-    {
-        return 'size';
-    }
-
-    #endregion
-
-    #region[Department]
-    public static function hasDepartment(): bool
-    {
-        return static::enabled(static::department());
-    }
-
-    public static function department(): string
-    {
-        return 'department';
-    }
-
-    #endregion
-
-    #region[Ledger]
-    public static function hasLedger(): bool
-    {
-        return static::enabled(static::ledger());
-    }
-
-    public static function ledger(): string
-    {
-        return 'ledger';
-    }
-
-    #endregion
-
-    #region[Transport]
-    public static function hasTransport(): bool
-    {
-        return static::enabled(static::transport());
-    }
-
-    public static function transport(): string
-    {
-        return 'transport';
-    }
-
-    #endregion
-
-    #region[Bank]
-    public static function hasBank(): bool
-    {
-        return static::enabled(static::bank());
-    }
-
-    public static function bank(): string
-    {
-        return 'bank';
-    }
-
-    #endregion
-
-    #region[ReceiptType]
-    public static function hasReceiptType(): bool
-    {
-        return static::enabled(static::receiptType());
-    }
-
-    public static function receiptType(): string
-    {
-        return 'receiptType';
-    }
-
-    #endregion
-
-    #region[Despatch]
-    public static function hasDespatch(): bool
-    {
-        return static::enabled(static::despatch());
-    }
-
-    public static function despatch(): string
-    {
-        return 'despatch';
-    }
-
-    #endregion
-
-
-    #region[Test]
-    //test-files , header , modal , action , test-operation , test-review , test-image , code
-    public static function hasTest(): bool
-    {
-        return static::enabled(static::test());
-    }
-
-    public static function test(): string
-    {
-        return 'test';
-    }
-
-    #endregion
-
-
 }
 
 

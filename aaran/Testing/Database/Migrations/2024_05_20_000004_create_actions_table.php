@@ -5,10 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasTest()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasDeveloper()) {
 
             Schema::create('actions', function (Blueprint $table) {
                 $table->id();

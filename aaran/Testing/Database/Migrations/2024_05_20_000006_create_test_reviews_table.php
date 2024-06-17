@@ -5,11 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasTest()) {
-
+        if (Aaran\Aadmin\Src\DbMigration::hasDeveloper()) {
             Schema::create('test_reviews', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('operations_id')->references('id')->on('test_operations')->onDelete('cascade');

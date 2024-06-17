@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDespatch()) {
-
+        if (Aaran\Aadmin\Src\DbMigration::hasCommon()) {
             Schema::create('despatches', function (Blueprint $table) {
                 $table->id();
                 $table->string('vname');

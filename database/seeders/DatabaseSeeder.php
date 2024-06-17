@@ -42,15 +42,16 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        if (DbMigration::hasDemo()) {
-//sys
+        if (DbMigration::hasCore()) {
+
             S01_TenantSeeder::run();
             S02_RoleSeeder::run();
             S03_UserSeeder::run();
             S04_DefaultCompanySeeder::run();
             S05_SoftVersionSeeder::run();
+        }
 
-//common
+        if (DbMigration::hasCommon()) {
             S101_CitySeeder::run();
             S102_StateSeeder::run();
             S103_PincodeSeeder::run();
@@ -65,25 +66,29 @@ class DatabaseSeeder extends Seeder
             S112_DepartmentSeeder::run();
             S113_CategorySeeder::run();
             S114_DespatcheSeeder::run();
+        }
 
-//master
+        if (DbMigration::hasMaster()) {
             S201_CompanySeeder::run();
             S202_ContactSeeder::run();
             S203_ProductSeeder::run();
+        }
+
+        if (DbMigration::hasOrder()) {
             S204_OrderSeeder::run();
+        }
+
+        if (DbMigration::hasStyle()) {
             S205_StyleSeeder::run();
+        }
 
-//testing
+        if (DbMigration::hasDeveloper()) {
             TestFileSeeder::run();
-
-
-            //AUDIT
+        }
 
 //        ClientSeeder::run();
 //        RootlineSeeder::run();
 //        RootlineItemsSeeder::run();
-
-        }
 
         S00_MigrationSeeder::run();
     }
