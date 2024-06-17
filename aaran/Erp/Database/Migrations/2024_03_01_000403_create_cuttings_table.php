@@ -8,6 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         if (Aaran\Aadmin\Src\DbMigration::hasErp()) {
+
             Schema::create('cuttings', function (Blueprint $table) {
                 $table->id();
                 $table->integer('vno');

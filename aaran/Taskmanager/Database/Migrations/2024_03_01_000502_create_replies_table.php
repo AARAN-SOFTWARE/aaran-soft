@@ -9,16 +9,18 @@ return new class extends Migration {
     public function up(): void
     {
         if (Aaran\Aadmin\Src\DbMigration::hasTaskManager()) {
-        Schema::create('replies', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('task_id')->references('id')->on('tasks')->onDelete('cascade');
-            $table->text('vname');
-            $table->string('verified')->nullable();
-            $table->string('verified_on')->nullable();
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->timestamps();
-        });
-    }}
+
+            Schema::create('replies', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('task_id')->references('id')->on('tasks')->onDelete('cascade');
+                $table->text('vname');
+                $table->string('verified')->nullable();
+                $table->string('verified_on')->nullable();
+                $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+                $table->timestamps();
+            });
+        }
+    }
 
     public function down(): void
     {

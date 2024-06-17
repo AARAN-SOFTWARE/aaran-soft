@@ -42,11 +42,12 @@ return [
         DbMigration::core(),
         DbMigration::common(),
         DbMigration::master(),
-        DbMigration::order(),
-        DbMigration::style(),
-        DbMigration::entry(),
-        DbMigration::attendance(),
-        DbMigration::cashBook(),
+//        DbMigration::order(),
+//        DbMigration::style(),
+//        DbMigration::entry(),
+//        DbMigration::attendance(),
+//        DbMigration::cashBook(),
+        DbMigration::audit(),
     ]
 
 ];

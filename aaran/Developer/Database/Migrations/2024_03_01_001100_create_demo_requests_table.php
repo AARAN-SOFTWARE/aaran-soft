@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDeveloper()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasDemo()) {
 
             Schema::create('demo_requests', function (Blueprint $table) {
                 $table->id();

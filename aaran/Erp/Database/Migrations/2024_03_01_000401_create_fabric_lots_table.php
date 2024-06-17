@@ -9,6 +9,7 @@ return new class extends Migration {
     {
 
         if (Aaran\Aadmin\Src\DbMigration::hasErp()) {
+
             Schema::create('fabric_lots', function (Blueprint $table) {
                 $table->id();
                 $table->string('vname');
