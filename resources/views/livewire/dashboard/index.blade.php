@@ -5,7 +5,9 @@
 
         <x-dashboard.greetings/>
 
-        <x-dashboard.cards :transaction="$transaction"/>
+        @if(Aaran\Aadmin\Src\DbMigration::hasEntry())
+            <x-dashboard.cards :transaction="$transaction"/>
+        @endif
 
         <div class="flex flex-col sm:flex-row  gap-4">
             <div class="flex-col justify-evenly">
