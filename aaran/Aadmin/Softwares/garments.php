@@ -39,7 +39,14 @@ return [
     ],
 
     'migrations'=>[
-        DbMigration::hasCreditBooks(),
+        DbMigration::Core(),
+        DbMigration::common(),
+        DbMigration::master(),
+        DbMigration::order(),
+        DbMigration::style(),
+        DbMigration::entry(),
+
+        DbMigration::blog(),
     ]
 
 
