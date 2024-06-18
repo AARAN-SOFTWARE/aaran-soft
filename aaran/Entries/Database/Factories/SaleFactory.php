@@ -13,12 +13,13 @@ class SaleFactory extends Factory
     public function definition(): array
     {
         $contact=Contact::pluck('id');
+        $no=1;
         return [
             'uniqueno' => $this->faker->unique()->numberBetween(1, 9999),
             'acyear' => 8,
             'company_id' => 1,
             'contact_id' => 1,
-            'invoice_no' => Sale::nextNo(),
+            'invoice_no' => $no++,
             'invoice_date' => $this->faker->dateTimeThisMonth()->format('Y-m-d'),
             'order_id' =>  1,
             'billing_id' => 1,

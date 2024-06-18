@@ -10,6 +10,7 @@ use App\Livewire\Trait\CommonTrait;
 use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -33,6 +34,7 @@ class Upsert extends Component
     public string $landline = '';
     public string $website = '';
     public $logo = '';
+    public $old_logo= '';
     public string $pan = '';
     public $bank;
     public $acc_no;
@@ -347,6 +349,7 @@ class Upsert extends Component
             $this->branch = $obj->branch;
             $this->active_id = $obj->active_id;
             $this->logo = $obj->logo;
+            $this->old_logo = $obj->logo;
         } else {
             $this->active_id = true;
         }
@@ -395,6 +398,9 @@ class Upsert extends Component
         if ($this->logo == '') {
             return $this->logo = 'empty';
         } else {
+            if ($this->old_logo){
+                Storage::delete('public/'.$this->old_logo);
+            }
         $logo_name=$this->logo->getClientOriginalName();
             return $this->logo->storeAs('logo', $logo_name,'public');
         }

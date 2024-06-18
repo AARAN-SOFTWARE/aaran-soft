@@ -71,6 +71,9 @@
             <span class="text-red-500">{{  $message }}</span>
             @enderror
             <x-input.model-text wire:model="order_name" :label="'Order Name'"/>
+            @error('order_name')
+            <span class="text-red-500">{{  $message }}</span>
+            @enderror
         </x-forms.create>
 
     </x-forms.m-panel>

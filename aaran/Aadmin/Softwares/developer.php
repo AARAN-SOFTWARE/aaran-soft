@@ -34,6 +34,7 @@ return [
         MainMenu::master(),
         MainMenu::common(),
         MainMenu::report(),
+        MainMenu::magalir(),
     ],
 
     'migrations'=>[
@@ -48,6 +49,7 @@ return [
         DbMigration::blog(),
         DbMigration::audit(),
         DbMigration::todoList(),
+        DbMigration::magalir(),
     ]
 
 
