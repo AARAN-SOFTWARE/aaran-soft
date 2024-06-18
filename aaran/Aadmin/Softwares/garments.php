@@ -8,8 +8,8 @@ use Aaran\Aadmin\Src\SaleEntry;
 return [
 
     'features' => [
-        Customise::todoList(),
-        Customise::attendance()
+//        Customise::todoList(),
+//        Customise::attendance()
     ],
 
     'customise' => [
@@ -21,7 +21,6 @@ return [
         SaleEntry::transport(),
         SaleEntry::destination(),
         SaleEntry::bundle(),
-
         SaleEntry::productDescription(),
         SaleEntry::colour(),
         SaleEntry::size(),
@@ -29,17 +28,21 @@ return [
 
     'menus'=>[
         MainMenu::entries(),
-        MainMenu::accounts(),
         MainMenu::master(),
         MainMenu::common(),
-        MainMenu::task(),
-        MainMenu::audit(),
-        MainMenu::books(),
-        MainMenu::developer(),
+        MainMenu::report(),
     ],
 
     'migrations'=>[
-        DbMigration::hasCreditBooks(),
+        DbMigration::Core(),
+        DbMigration::common(),
+        DbMigration::master(),
+        DbMigration::order(),
+        DbMigration::style(),
+        DbMigration::entry(),
+
+        DbMigration::blog(),
+        DbMigration::todoList(),
     ]
 
 
