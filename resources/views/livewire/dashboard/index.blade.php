@@ -13,13 +13,13 @@
             <div class="flex-col justify-evenly">
                 <div class="lg:w-full lg:flex justify-between gap-3 py-5 h-1/2">
                     <div class="lg:w-[30rem] h-[16-rem] mx-auto">
-                        @if(Aaran\Aadmin\Src\Customise::hasTodoList())
+                        @if(Aaran\Aadmin\Src\DbMigration::hasTodoList())
                             <livewire:taskmanager.todos.index/>
                         @endif
                     </div>
                 </div>
                 <div class="lg:w-[30rem] h-[16-rem] mx-auto">
-                    @if(Aaran\Aadmin\Src\Customise::hasAttendance())
+                    @if(Aaran\Aadmin\Src\DbMigration::hasAttendance())
                         <livewire:attendance.attendance.index/>
                     @endif
                 </div>

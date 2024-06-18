@@ -42,6 +42,7 @@ return [
         DbMigration::taskManager(),
         DbMigration::blog(),
         DbMigration::audit(),
+        DbMigration::todoList(),
     ]
 
 
