@@ -22,8 +22,8 @@ return [
 
     'menus' => [
         MainMenu::entries(),
-        MainMenu::master(),
         MainMenu::common(),
+        MainMenu::master(),
         MainMenu::report(),
     ],
 
@@ -38,5 +38,4 @@ return [
         DbMigration::blog(),
         DbMigration::demo(),
     ]
-
 ];
