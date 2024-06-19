@@ -31,10 +31,14 @@ return [
         MainMenu::task(),
         MainMenu::developer(),
         MainMenu::entries(),
+
         MainMenu::master(),
         MainMenu::common(),
         MainMenu::report(),
-        MainMenu::magalir(),
+
+        MainMenu::common(),
+        MainMenu::master(),
+        MainMenu::report()
     ],
 
     'migrations'=>[
