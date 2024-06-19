@@ -42,22 +42,23 @@ class Payables extends Component
             $obj = Contact::find($this->byParty);
             $this->opening_balance = $obj->opening_balance;
 
-            $purchase = Purchase::where('contact_id', '=', $this->byParty)
-                ->where('acyear', '=',  session()->get('acyear'))
-                ->firstOrFail();
-            $this->purchaseDate_first = $purchase->purchase_date;
+            $this->purchaseDate_first = Carbon::now()->subYear()->format('Y-m-d');
 
 
-            $this->purchase_total = Purchase::whereDate('purchase_date', '<', $this->start_date?:$this->purchaseDate_first)
+            $this->purchase_total = Purchase::whereDate('purchase_date', '<',
+                $this->start_date ?: $this->purchaseDate_first)
+                ->where('contact_id', '=', $this->byParty)
                 ->sum('grand_total');
 
-            $this->payment_total = Payment::whereDate('vdate', '<', $this->start_date?:$this->purchaseDate_first)
+            $this->payment_total = Payment::whereDate('vdate', '<', $this->start_date ?: $this->purchaseDate_first)
+                ->where('contact_id', '=', $this->byParty)
                 ->sum('payment_amount');
 
             $this->opening_balance = $this->opening_balance + $this->purchase_total - $this->payment_total;
         }
         return $this->opening_balance;
     }
+
     #endregion
 
     public function getList()
@@ -107,10 +108,11 @@ class Payables extends Component
 
         if ($this->byParty != null) {
             $this->redirect(route('payables.print',
-                [
-                    'party' => $this->byParty, 'start_date' => $this->start_date ?: $this->purchaseDate_first,
-                    'end_date' => $this->end_date ?: Carbon::now()->format('Y-m-d'),
-                ]));
+                    [
+                        'party' => $this->byParty, 'start_date' => $this->start_date ?: $this->purchaseDate_first,
+                        'end_date' => $this->end_date ?: Carbon::now()->format('Y-m-d'),
+                    ])
+            );
         }
     }
 

@@ -112,7 +112,8 @@ class InvoiceController extends Controller
     private function getPdfViewPath()
     {
         return match (config('aadmin.app_type')) {
-            config('clients.GARMENT_DEMO') =>  'pdf.demo.garments_demo',
+            config('clients.GARMENT_DEMO') =>  'pdf.demo.garment_demo',
+            config('clients.DEVELOPER_DEMO') =>  'pdf.demo.garment_demo',
             config('clients.OFFSET_DEMO') =>  'pdf.demo.offset_demo',
             config('clients.AARAN_ERP') =>  'pdf.demo.aaran_erp',
 
@@ -165,7 +166,7 @@ class InvoiceController extends Controller
             config('clients.ASWATH_APPARELS') =>  'pdf.garments.sales.aswath_apparels',
             config('clients.ATO_TEXTILES') =>  'pdf.garments.sales.ato_textiles',
 
-            default =>'pdf.garments.letterpad_withoutbank' ,
+            default =>'pdf.demo.garment_demo' ,
         };
 //        view('pdf.offset.sales.best_print')
     }

@@ -214,8 +214,11 @@ class Index extends Component
             $photo = $this->image;
             $filename = $this->image->getClientOriginalName();
 
-            if (Storage::disk('public')->exists(Storage::path('public/images/' . $this->old_image))) {
-                Storage::disk('public')->delete(Storage::path('public/images/' . $this->old_image));
+//            if (Storage::disk('public')->exists(Storage::path('public/images/' . $this->old_image))) {
+//                Storage::disk('public')->delete(Storage::path('public/images/' . $this->old_image));
+//            }
+            if ($this->old_image){
+                Storage::delete('public/images/'.$this->old_image);
             }
 
             $photo->storeAs('images', $filename,'public');

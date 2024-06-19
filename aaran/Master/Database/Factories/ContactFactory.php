@@ -27,6 +27,8 @@ class ContactFactory extends Factory
             'user_id'=>'1',
             'company_id'=>'1',
             'active_id'=> 1,
+//            Contact_detail::factory()->count(1)->create()
         ];
+
     }
 }

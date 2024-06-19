@@ -50,6 +50,9 @@
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
             <x-input.model-text wire:model="vname" :label="'Despatch No'"/>
+            @error('vname')
+            <span class="text-red-500">{{  $message }}</span>
+            @enderror
             <x-input.model-date wire:model="vdate" :label="'Despatch date'"/>
         </x-forms.create>
 

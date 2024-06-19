@@ -31,6 +31,11 @@ return [
         MainMenu::task(),
         MainMenu::developer(),
         MainMenu::entries(),
+
+        MainMenu::master(),
+        MainMenu::common(),
+        MainMenu::report(),
+
         MainMenu::common(),
         MainMenu::master(),
         MainMenu::report()
@@ -47,6 +52,8 @@ return [
         DbMigration::taskManager(),
         DbMigration::blog(),
         DbMigration::audit(),
+        DbMigration::todoList(),
+        DbMigration::magalir(),
     ]
 
 

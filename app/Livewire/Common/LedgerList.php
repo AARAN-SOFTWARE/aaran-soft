@@ -16,6 +16,7 @@ class LedgerList extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
+                $this->validate(['vname' => 'required|unique:ledgers,vname']);
                 Ledger::create([
                     'vname' => Str::ucfirst($this->vname),
                     'active_id' => $this->active_id,

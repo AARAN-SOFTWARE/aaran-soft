@@ -90,9 +90,11 @@ class ReportController extends Controller
         $this->opening_balance = $obj->opening_balance;
 
         $this->sale_total = Sale::whereDate('invoice_date', '<', $start_date)
+            ->where('contact_id','=',$party)
             ->sum('grand_total');
 
         $this->receipt_total = Receipt::whereDate('vdate', '<', $start_date)
+            ->where('contact_id','=',$party)
             ->sum('receipt_amount');
 
         $this->opening_balance = $this->opening_balance + $this->sale_total - $this->receipt_total;

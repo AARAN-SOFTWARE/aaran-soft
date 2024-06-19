@@ -86,8 +86,22 @@
 
                         <!-- Button Action ---------------------------------------------------------------------------->
                         <x-table.cell-text center>
-                            <x-icons.icon :icon="'printer'" wire:click="print({{$row->id}})"
-                                          class="mt-1 hover:rounded-sm hover:bg-purple-500 hover:text-white h-5 w-auto block"/>
+                            <div class="group inline-block relative cursor-pointer max-w-fit min-w-fit">
+                                <div
+                                    class="absolute hidden group-hover:block pr-0.5 whitespace-nowrap top-1 w-full">
+                                    <div class="flex flex-col justify-start items-center -translate-y-full">
+                                        <div
+                                            class="bg-blue-500 text-xs shadow-md text-white rounded-lg py-1 px-3 cursor-default">
+                                            Print
+                                        </div>
+                                        <div
+                                            class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[8px] border-l-transparent
+                                            border-r-transparent border-t-blue-500 -mt-[1px]"></div>
+                                    </div>
+                                </div>
+                                <x-icons.icon :icon="'printer'" wire:click="print({{$row->id}})"
+                                              class="mt-1 hover:rounded-sm hover:bg-purple-500 hover:text-white h-5 w-auto block"/>
+                            </div>
                         </x-table.cell-text>
 
                         <x-table.cell-text center class="mb-3 md:mt-2">

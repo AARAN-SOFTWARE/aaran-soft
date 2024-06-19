@@ -12,7 +12,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Receivables extends Component
+class  Receivables extends Component
 {
     use CommonTrait;
 

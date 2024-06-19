@@ -18,6 +18,7 @@ class CountryList extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
+                $this->validate(['vname' => 'required|unique:countries,vname']);
                 Country::create([
                     'vname' => Str::ucfirst($this->vname),
                     'active_id' => $this->active_id,

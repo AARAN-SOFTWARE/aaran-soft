@@ -963,6 +963,10 @@
 
         </section>
     </x-forms.m-panel>
-    <x-forms.m-panel-bottom-button save back print/>
+    @if($vid!="")
+    <x-forms.m-panel-bottom-button save back  print  />
+    @else
+    <x-forms.m-panel-bottom-button save back  />
+    @endif
 </div>
 
