@@ -29,6 +29,7 @@ return [
 
     'menus' => [
         MainMenu::entries(),
+        MainMenu::sundar(),
         MainMenu::accounts(),
         MainMenu::master(),
         MainMenu::common(),
