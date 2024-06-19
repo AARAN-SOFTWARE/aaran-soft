@@ -39,36 +39,20 @@ return [
     ],
 
     'migrations' => [
-
-        DbMigration::Core(),
-
-        DbMigration::attendance(),
-        DbMigration::audit(),
-        DbMigration::blog(),
-
-        DbMigration::developer(),
-        DbMigration::magalir(),
-
+        DbMigration::core(),
+        DbMigration::common(),
         DbMigration::master(),
         DbMigration::order(),
         DbMigration::style(),
-
-        DbMigration::cashBook(),
-        DbMigration::mailids(),
-        DbMigration::shareTrades(),
-
-        DbMigration::taskManager(),
-
-        DbMigration::creditBooks(),
-        DbMigration::shareTrades(),
-        DbMigration::developer(),
-        DbMigration::magalir(),
+        DbMigration::todoList(),
         DbMigration::blog(),
-        DbMigration::bankBook(),
+        DbMigration::demo(),
+        DbMigration::shareTrades(),
+        DbMigration::magalir(),
+        DbMigration::mailids(),
         DbMigration::cashBook(),
         DbMigration::audit(),
-        DbMigration::attendance(),
-        DbMigration::mailids(),
+        DbMigration::developer(),
     ]
 
 ];
