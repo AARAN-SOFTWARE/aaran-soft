@@ -19,6 +19,7 @@ class Index extends Component
             if ($this->vname != '') {
 
                 if ($this->vid == "") {
+                    $this->validate(['vname' => 'required|unique:styles,vname']);
                     Style::create([
                         'vname' => Str::upper($this->vname),
                         'desc' => Str::ucfirst($this->desc),

@@ -84,9 +84,11 @@ class PayablesReportController extends Controller
         $this->opening_balance = $obj->opening_balance;
 
         $this->purchase_total = Purchase::whereDate('purchase_date', '<', $start_date)
+            ->where('contact_id','=',$party)
             ->sum('grand_total');
 
         $this->payment_total = Payment::whereDate('vdate', '<', $start_date)
+            ->where('contact_id','=',$party)
             ->sum('payment_amount');
 
         $this->opening_balance = $this->opening_balance + $this->purchase_total - $this->payment_total;

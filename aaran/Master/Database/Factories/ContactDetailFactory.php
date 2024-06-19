@@ -23,7 +23,7 @@ class ContactDetailFactory extends Factory
         $pincodes = Pincode::pluck('id');
         $countries = Country::pluck('id');
         return [
-            'contact_id' => $contacts->random(),
+            'contact_id' => Contact::factory(),
             'address_type' => 'Primary',
             'address_1'=> $this->faker->address(),
             'address_2'=> $this->faker->address,

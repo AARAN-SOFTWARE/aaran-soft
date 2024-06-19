@@ -20,6 +20,7 @@ class StateList extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
+                $this->validate(['vname' => 'required|unique:states,vname']);
                 State::create([
                     'vname' => Str::ucfirst($this->vname),
                     'state_code' => Str::upper($this->state_code),

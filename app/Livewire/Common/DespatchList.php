@@ -20,6 +20,7 @@ class DespatchList extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
+                $this->validate(['vname' => 'required|unique:despatches,vname']);
                 Despatch::create([
                     'vname' => Str::ucfirst($this->vname),
                     'vdate' => $this->vdate,

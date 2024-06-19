@@ -16,6 +16,7 @@ class PincodeList extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
+                $this->validate(['vname' => 'required|unique:pincodes,vname']);
                 Pincode::create([
                     'vname' => Str::upper($this->vname),
                     'active_id' => $this->active_id,

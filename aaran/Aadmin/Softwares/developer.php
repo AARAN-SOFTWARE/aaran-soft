@@ -30,12 +30,22 @@ return [
     'menus'=>[
         MainMenu::task(),
         MainMenu::developer(),
+        MainMenu::entries(),
+
+        MainMenu::master(),
+        MainMenu::common(),
+        MainMenu::report(),
+
+        MainMenu::common(),
+        MainMenu::master(),
+        MainMenu::report()
     ],
 
     'migrations'=>[
         DbMigration::Core(),
         DbMigration::common(),
         DbMigration::master(),
+        DbMigration::entry(),
         DbMigration::order(),
         DbMigration::style(),
         DbMigration::developer(),
@@ -43,6 +53,7 @@ return [
         DbMigration::blog(),
         DbMigration::audit(),
         DbMigration::todoList(),
+        DbMigration::magalir(),
     ]
 
 

@@ -16,6 +16,7 @@ class CategoryList extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
+                $this->validate(['vname' => 'required|unique:categories,vname']);
                 Category::create([
                     'vname' => Str::ucfirst($this->vname),
                     'active_id' => $this->active_id,

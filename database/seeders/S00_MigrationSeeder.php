@@ -38,7 +38,6 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_03_01_000112_create_bank_table');
             RefactorMigrationTable::clear('2024_03_01_000113_create_receipttypes_table');
             RefactorMigrationTable::clear('2024_03_01_000114_create_despatches_table');
-            RefactorMigrationTable::clear('2024_03_01_000114_create_despatches_table');
         }
 
         if (!DbMigration::hasMaster()) {
