@@ -2,45 +2,32 @@
 
 namespace App\Livewire\Testing\TestingModule;
 
-use Aaran\Testing\Models\Modals;
+use Aaran\Testing\Models\Header;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-class TestModal extends Component
+class Base extends Component
 {
     use CommonTrait;
-    public $header_id;
-    public $title;
-    public $description;
-
-    public function mount($id)
-    {
-        $this->header_id = $id;
-    }
 
     #region[save]
     public function getSave(): void
     {
+
+
         if ($this->vname != '') {
             if ($this->vid == "") {
                 $this->validate(['vname' => 'required']);
-                $this->validate(['title' => 'required']);
-                Modals::create([
-                    'header_id' => $this->header_id,
+                Header::create([
                     'vname' => Str::ucfirst($this->vname),
-                    'title' => $this->title,
-                    'description' => $this->description,
                     'active_id' => $this->active_id,
                 ]);
                 $message = "Saved";
 
             } else {
-                $obj = Modals::find($this->vid);
-                $obj->header_id = $this->header_id;
+                $obj = Header::find($this->vid);
                 $obj->vname = Str::ucfirst($this->vname);
-                $obj->title = $this->title;
-                $obj->description = $this->description;
                 $obj->active_id = $this->active_id;
                 $obj->save();
                 $message = "Updated";
@@ -55,12 +42,9 @@ class TestModal extends Component
     public function getObj($id)
     {
         if ($id) {
-            $obj = Modals::find($id);
+            $obj = Header::find($id);
             $this->vid = $obj->id;
-            $this->header_id = $obj->header_id;
             $this->vname = $obj->vname;
-            $this->title = $obj->title;
-            $this->description = $obj->description;
             $this->active_id = $obj->active_id;
             return $obj;
         }
@@ -71,8 +55,7 @@ class TestModal extends Component
     #region[list]
     public function getList()
     {
-        return Modals::search($this->searches)
-            ->where('header_id', $this->header_id)
+        return Header::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -86,12 +69,12 @@ class TestModal extends Component
     {
         $this->render()->render();
     }
-
+    #endregion
 
     public function render()
     {
-        return view('livewire.testing.testing-module.testModal', [
-            'list' => $this->getList()
+        return view('livewire.testing.testing-module.base', [
+            "list" => $this->getList()
         ]);
     }
 }
