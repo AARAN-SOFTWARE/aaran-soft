@@ -18,14 +18,12 @@ return new class extends Migration
                 $table->longText('action');
                 $table->string('type')->nullable();
                 $table->longText('test_case');
-                $table->string('steps')->nullable();
                 $table->string('test_data')->nullable();
                 $table->string('input');
                 $table->longText('expected_output')->nullable();
                 $table->longText('actual_output');
                 $table->string('browser')->nullable();
                 $table->longText('comment')->nullable();
-                $table->longText('feature')->nullable();
                 $table->string('status');
                 $table->longText('image')->nullable();
                 $table->boolean('active_id');

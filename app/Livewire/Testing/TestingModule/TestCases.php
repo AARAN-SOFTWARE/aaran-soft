@@ -22,17 +22,15 @@ class TestCases extends Component
 
     public mixed $action = '';
 
-    public mixed $type;
-    public mixed $test_case;
-    public mixed $steps;
-    public mixed $test_data;
-    public mixed $input;
-    public mixed $expected_output;
-    public mixed $actual_output;
-    public mixed $browser;
-    public mixed $comment;
-    public mixed $feature;
-    public mixed $status;
+    public mixed $type = '';
+    public mixed $test_case = '';
+    public mixed $test_data = '';
+    public mixed $input = '';
+    public mixed $expected_output = '';
+    public mixed $actual_output = '';
+    public mixed $browser= '';
+    public mixed $comment = '';
+    public mixed $status = '';
 
     public $image='';
     public $old_image = '';
@@ -43,7 +41,7 @@ class TestCases extends Component
     public bool $checked=false;
 
     public $models;
-    public string $sortFields = 'action';
+    public string $sortFields = 'created_at';
 
 
     public mixed $editable = true;
@@ -70,18 +68,16 @@ class TestCases extends Component
                         'action' => $this->action,
                         'type' => $this->type,
                         'test_case' => $this->test_case,
-                        'steps' => $this->steps,
                         'test_data' => $this->test_data,
                         'input' => $this->input,
                         'expected_output' => $this->expected_output,
                         'actual_output' => $this->actual_output,
-                        'browser' => $this->browser,
+                        'browser' => $this->browser?:'Firefox',
                         'comment' => $this->comment,
-                        'feature' => $this->feature,
-                        'status' => $this->status,
-                        'active_id' => $this->active_id,
+                        'status' => $this->status?:'Undefined',
                         'checked' => $this->checked?:0,
                         'image' => $this->save_image(),
+                        'active_id' => 1,
                     ]);
                     $message = 'Saved';
                 }
@@ -90,14 +86,12 @@ class TestCases extends Component
                     $obj->action = Str::ucfirst($this->action);
                     $obj->type = $this->type;
                     $obj->test_case = $this->test_case;
-                    $obj->steps = $this->steps;
                     $obj->test_data = $this->test_data;
                     $obj->input = $this->input;
                     $obj->expected_output = $this->expected_output;
                     $obj->actual_output = $this->actual_output;
                     $obj->browser = $this->browser;
                     $obj->comment = $this->comment;
-                    $obj->feature = $this->feature;
                     $obj->status = $this->status;
                     $obj->active_id = $this->active_id;
                     $obj->checked = $this->checked;
@@ -125,14 +119,12 @@ class TestCases extends Component
         $this->action = '';
         $this->type = '';
         $this->test_case ='';
-        $this->steps = '';
         $this->test_data = '';
         $this->input = '';
         $this->expected_output = '';
         $this->actual_output = '';
         $this->browser = '';
         $this->comment = '';
-        $this->feature = '';
         $this->status = '';
         $this->image = '';
         $this->old_image = '';
@@ -150,14 +142,12 @@ class TestCases extends Component
             $this->action = $obj->action;
             $this->type = $obj->type;
             $this->test_case = $obj->test_case;
-            $this->steps = $obj->steps;
             $this->test_data = $obj->test_data;
             $this->input = $obj->input;
             $this->expected_output = $obj->expected_output;
             $this->actual_output = $obj->actual_output;
             $this->browser = $obj->browser;
             $this->comment = $obj->comment;
-            $this->feature = $obj->feature;
             $this->status = $obj->status;
             $this->image = $obj->image;
             $this->old_image = $obj->image;
