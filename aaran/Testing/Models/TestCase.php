@@ -15,7 +15,7 @@ class TestCase extends Model
     public static function search(string $searches)
     {
         return empty($searches) ? static::query()
-            : static::where('name', 'like', '%' . $searches . '%');
+            : static::where('action', 'like', '%' . $searches . '%');
     }
 
     public static function nextNo()

@@ -194,7 +194,7 @@
                                 <div class="absolute bottom-11 -left-6">
                                     <div class="mx-auto items-center mt-3 mr-1 ">
                                         @if($image)
-                                            <img src="{{$isUploaded? $image->temporaryUrl() : url(\Illuminate\Support\Facades\Storage::url($image)) }}" alt="Image" class="h-16 w-20 mb-1 rounded-md outline outline-2 outline-gray-300 shadow-lg shadow-gray-400">
+                                            <img src="{{$isUploaded? $image->temporaryUrl() : url(\Illuminate\Support\Facades\Storage::url($image)) }}" alt="Image" class="h-16 w-28 mb-1 rounded-md outline outline-2 outline-gray-300 shadow-lg shadow-gray-400">
                                         @else
                                             <x-icons.icon :icon="'logo'" class=""/>
                                         @endif
