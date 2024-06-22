@@ -110,7 +110,7 @@ class Profit extends Component
             ->where('active_id', '=', $this->activeRecord)
             ->where('profit', '>', 0)
             ->where("user_id", $this->k_id?:auth()->id())
-            ->orwhere('loosed', '>', 0)
+            ->orwhere('loosed', '<', 0)
             ->where("user_id", $this->k_id?:auth()->id())
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
