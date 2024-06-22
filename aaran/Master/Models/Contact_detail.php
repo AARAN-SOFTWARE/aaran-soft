@@ -30,6 +30,7 @@ class Contact_detail extends Model
             'address_2' => $obj->address_2,
             'address_3' => $obj->city->vname . ' - ' . $obj->pincode->vname . '.  ' . $obj->state->vname . ' - ' . $obj->state->state_code,
             'gstcell' =>  'GSTin : '.$obj->gstin,
+            'gstContact' =>  $obj->gstin,
             'email'=>$obj->email,
         ]);
     }

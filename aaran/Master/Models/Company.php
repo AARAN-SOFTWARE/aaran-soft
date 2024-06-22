@@ -38,6 +38,7 @@ class Company extends Model
             'contact'=> ' Contact : ' . $obj->mobile,
             'email'=> 'Email : ' . $obj->email ,
             'gstin'=> 'GST : ' . $obj->gstin ,
+            'gst'=> $obj->gstin ,
             'msme'=> 'MSME No : ' . $obj->msme_no,
             'logo'=>$obj->logo,
             'bank'=>$obj->bank,

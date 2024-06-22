@@ -176,7 +176,7 @@
                 <p>&nbsp;&nbsp;Invoice Date</p>
             </td>
             <td class="inv-det1 ">
-                <p>&nbsp;:&nbsp;&nbsp;&nbsp;{{$cmp->get('gstin')}}</p>
+                <p>&nbsp;:&nbsp;&nbsp;&nbsp;{{$cmp->get('gst')}}</p>
                 <p>&nbsp;:&nbsp;&nbsp;&nbsp;{{$obj->invoice_no}}</p>
                 <p>&nbsp;:&nbsp;&nbsp;&nbsp;{{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</p>
             </td>
@@ -222,14 +222,14 @@
         <tr>
             <td class="bill-label">&nbsp;Phone</td>
             <td class="bill-det">{{$billing_address->get('contact')}}</td>
-            <td class="ship-label">Phone</td>
+            <td class="ship-label">&nbsp;Phone</td>
             <td class="ship-det">{{$shipping_address->get('contact')}}</td>
         </tr>
         <tr>
             <td class="bill-label">&nbsp;GSTIN NO</td>
-            <td class="bill-det">{{$billing_address->get('gstcell')}}</td>
+            <td class="bill-det">{{$billing_address->get('gstContact')}}</td>
             <td class="ship-label">&nbsp;GSTIN NO</td>
-            <td class="ship-det">{{$shipping_address->get('gstcell')}}</td>
+            <td class="ship-det">{{$shipping_address->get('gstContact')}}</td>
         </tr>
     </table>
     <table class="table-4">
@@ -488,7 +488,7 @@
             <p>&nbsp;&nbsp;Invoice Date</p>
         </td>
         <td class="inv-det1 ">
-            <p>&nbsp;:&nbsp;&nbsp;&nbsp;{{$cmp->get('gstin')}}</p>
+            <p>&nbsp;:&nbsp;&nbsp;&nbsp;{{$cmp->get('gst')}}</p>
             <p>&nbsp;:&nbsp;&nbsp;&nbsp;{{$obj->invoice_no}}</p>
             <p>&nbsp;:&nbsp;&nbsp;&nbsp;{{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</p>
         </td>
@@ -534,14 +534,14 @@
     <tr>
         <td class="bill-label">&nbsp;Phone</td>
         <td class="bill-det">{{$billing_address->get('contact')}}</td>
-        <td class="ship-label">Phone</td>
+        <td class="ship-label">&nbsp;Phone</td>
         <td class="ship-det">{{$shipping_address->get('contact')}}</td>
     </tr>
     <tr>
         <td class="bill-label">&nbsp;GSTIN NO</td>
-        <td class="bill-det">{{$billing_address->get('gstcell')}}</td>
+        <td class="bill-det">{{$billing_address->get('gstContact')}}</td>
         <td class="ship-label">&nbsp;GSTIN NO</td>
-        <td class="ship-det">{{$shipping_address->get('gstcell')}}</td>
+        <td class="ship-det">{{$shipping_address->get('gstContact')}}</td>
     </tr>
 </table>
 <table class="table-4">
@@ -800,7 +800,7 @@
             <p>&nbsp;&nbsp;Invoice Date</p>
         </td>
         <td class="inv-det1 ">
-            <p>&nbsp;:&nbsp;&nbsp;&nbsp;{{$cmp->get('gstin')}}</p>
+            <p>&nbsp;:&nbsp;&nbsp;&nbsp;{{$cmp->get('gst')}}</p>
             <p>&nbsp;:&nbsp;&nbsp;&nbsp;{{$obj->invoice_no}}</p>
             <p>&nbsp;:&nbsp;&nbsp;&nbsp;{{$obj->invoice_date ?date('d-m-Y', strtotime($obj->invoice_date)):''}}</p>
         </td>
@@ -846,14 +846,14 @@
     <tr>
         <td class="bill-label">&nbsp;Phone</td>
         <td class="bill-det">{{$billing_address->get('contact')}}</td>
-        <td class="ship-label">Phone</td>
+        <td class="ship-label">&nbsp;Phone</td>
         <td class="ship-det">{{$shipping_address->get('contact')}}</td>
     </tr>
     <tr>
         <td class="bill-label">&nbsp;GSTIN NO</td>
-        <td class="bill-det">{{$billing_address->get('gstcell')}}</td>
+        <td class="bill-det">{{$billing_address->get('gstContact')}}</td>
         <td class="ship-label">&nbsp;GSTIN NO</td>
-        <td class="ship-det">{{$shipping_address->get('gstcell')}}</td>
+        <td class="ship-det">{{$shipping_address->get('gstContact')}}</td>
     </tr>
 </table>
 <table class="table-4">
