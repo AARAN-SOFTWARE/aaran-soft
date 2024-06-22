@@ -18,8 +18,8 @@
     <!-- Styles -->
     @livewireStyles
 </head>
-<body>
-<div>
+<body class="">
+<div class="w-full">
     <x-menu.web-top-new/>
 
     {{ $slot }}

@@ -13,6 +13,10 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                'alice-blue': '#F6F9FC'
+
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 Don:[ "Donegal One", "serif"],
