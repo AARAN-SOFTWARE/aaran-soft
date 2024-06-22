@@ -13,6 +13,8 @@ return new class extends Migration {
                 $table->id();
                 $table->string('vname')->nullable();
                 $table->foreignId('header_id')->references('id')->on('headers')->onDelete('cascade');
+                $table->string('title');
+                $table->longText('description');
                 $table->smallInteger('active_id')->nullable();
                 $table->timestamps();
             });

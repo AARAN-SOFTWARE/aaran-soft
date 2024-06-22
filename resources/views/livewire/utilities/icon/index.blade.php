@@ -210,6 +210,7 @@
                 <x-icons.utilities :icon="'u-turn-left2'"/>
                 <x-icons.utilities :icon="'performance'"/>
                 <x-icons.utilities :icon="'right-long-arrow'"/>
+                <x-icons.utilities :icon="'photo'"/>
 
 
 

@@ -144,7 +144,5 @@
         </x-forms.create-new>
     </x-forms.m-panel>
 
-    <script>
-    </script>
 </div>
 

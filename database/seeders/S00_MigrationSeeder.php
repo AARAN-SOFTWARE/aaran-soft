@@ -158,7 +158,7 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_05_20_000005_create_test_operations_table');
             RefactorMigrationTable::clear('2024_05_20_000006_create_test_reviews_table');
             RefactorMigrationTable::clear('2024_05_21_000007_create_test_images_table');
-            RefactorMigrationTable::clear('2024_05_31_000008_create_codes_table');
+            RefactorMigrationTable::clear('2024_05_21_000008_create_test_cases_table');
         }
 
         if (!DbMigration::hasCreditBooks()) {
