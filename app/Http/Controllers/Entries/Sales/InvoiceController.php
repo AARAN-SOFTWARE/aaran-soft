@@ -111,7 +111,7 @@ class InvoiceController extends Controller
     }
     private function getPdfViewPath()
     {
-        return match (config('aadmin.app_type')) {
+        return match (config('aadmin.app_code')) {
             config('clients.GARMENT_DEMO') =>  'pdf.demo.garment_demo',
             config('clients.DEVELOPER_DEMO') =>  'pdf.demo.garment_demo',
             config('clients.OFFSET_DEMO') =>  'pdf.demo.offset_demo',
