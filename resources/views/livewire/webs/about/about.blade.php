@@ -79,6 +79,8 @@
         </div>
         {{--<---counter--->--}}
         <div class="section-counter">
+
+
             <div class="counter-item animate__animated wow animate__zoomInDown">
                 <div class="counter">
                     <h2 data-purecounter-start="0" data-purecounter-end="5000" data-purecounter-duration="5" class="counter-number  purecounter" id="studentsEnrolled"></h2>

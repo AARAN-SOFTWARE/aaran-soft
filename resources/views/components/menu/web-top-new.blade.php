@@ -1,37 +1,40 @@
-<nav class="z-10 bg-gray-50" x-data="{ open: false }">
-    <div class="container mx-auto px-6">
-        <div class="flex items-center justify-between">
-            <div class="text-zinc-600 font-bold text-xl">
+<nav class="sticky top-0" x-data="{ open: false }">
+    <div class="px-6 border-b border-zinc-200 bg-white">
+
+        <div class="flex items-center w-full justify-between ">
+
+            <div class="text-zinc-600 font-bold text-xl ">
+
                 <a href="{{route('home')}}" class="flex items-center">
                     <div class="p-1 lg:p-3 rounded py-3">
-                        <x-assets.logo.cxlogo :icon="'light'" class="h-9 ml-4 mx-auto w-auto  block"/>
+                        <x-assets.logo.cxlogo :icon="'light'" class="h-9 ml-4 mx-auto w-auto block"/>
                     </div>
                     <span
-                        class="self-center text-3xl font-semibold whitespace-nowrap px-2 -mt-2 tracking-wider">CODEXSUN</span>
+                        class="self-center text-3xl font-semibold whitespace-nowrap px-2 -mt-2 font-Don tracking-wider">CODEXSUN</span>
                 </a>
             </div>
 
             <!--main menu ---------------------------------------------------------------------------------------------->
-            <div class="hidden md:block">
-                <ul class="flex items-center space-x-8">
+            <div class="hidden md:block ">
+                <ul class="flex space-x-8 ">
                     <li>
-                        <a class="text-2xl font-sans text-zinc-500 hover:bg-blue-100 hover:text-zinc-700 rounded-md px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-500"
+                        <a class="text-xl font-sans text-zinc-500  hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
                            href="{{route('home')}}">Home</a>
                     </li>
                     <li>
-                        <a class="text-2xl font-sans text-zinc-500 hover:bg-blue-100 hover:text-zinc-700 rounded-md px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-500"
+                        <a class="text-xl font-sans text-zinc-500 hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
                            href="{{route('service')}}">Project</a>
                     </li>
                     <li>
-                        <a class="text-2xl font-sans text-zinc-500 hover:bg-blue-100 hover:text-zinc-700 rounded-md px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-500"
+                        <a class="text-xl font-sans text-zinc-500 hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
                            href="{{route('about')}}">About Us</a>
                     </li>
                     <li>
-                        <a class="text-2xl font-sans text-zinc-500 hover:bg-blue-100 hover:text-zinc-700 rounded-md px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-500"
+                        <a class="text-xl font-sans text-zinc-500 hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
                            href="{{route('contact')}}">Contact</a>
                     </li>
                     <li>
-                        <a class="text-2xl font-sans text-zinc-500 hover:bg-blue-100 hover:text-zinc-700 rounded-md px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-500"
+                        <a class="text-xl font-sans text-zinc-500 hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
                            href="{{route('posts')}}">Blog</a>
                     </li>
                 </ul>
