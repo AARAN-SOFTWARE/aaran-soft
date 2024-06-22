@@ -169,7 +169,6 @@ class TestReply extends Component
         $this->showEditModal_1=true;
         $data=TestImage::find($id);
         $this->full_image=$data->image;
-
     }
     #endregion
 

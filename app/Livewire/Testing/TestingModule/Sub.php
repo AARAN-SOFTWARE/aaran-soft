@@ -7,7 +7,7 @@ use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-class TestModal extends Component
+class Sub extends Component
 {
     use CommonTrait;
     public $header_id;
@@ -87,11 +87,10 @@ class TestModal extends Component
         $this->render()->render();
     }
 
-
     public function render()
     {
-        return view('livewire.testing.testing-module.testModal', [
-            'list' => $this->getList()
+        return view('livewire.testing.testing-module.sub', [
+            "list" => $this->getList()
         ]);
     }
 }
