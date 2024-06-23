@@ -17,15 +17,7 @@ class Index extends Component
     use CommonTrait;
 
     public $vdate;
-    public mixed $opening_balance;
-    public mixed $deposit;
-    public mixed $profit;
-    public mixed $loosed;
-    public mixed $withdraw;
-    public mixed $charges;
-    public mixed $balance;
-    public $remarks = '';
-    public $k_id = '';
+    public $search_user_id = '';
 
     public $users;
 
@@ -37,99 +29,24 @@ class Index extends Component
         $this->users = User::all();
     }
 
-
-    #region[save]
-    public function getSave(): string
-    {
-        if ($this->vid == "") {
-            ShareTrades::create([
-                'vdate' => $this->vdate ?: Carbon::now()->format('Y-m-d'),
-                'opening_balance' => $this->opening_balance ?: 0,
-                'deposit' => $this->deposit ?: 0,
-                'profit' => $this->profit ?: 0,
-                'loosed' => $this->loosed ?: 0,
-                'withdraw' => $this->withdraw ?: 0,
-                'charges' => $this->charges ?: 0,
-                'balance' => $this->balance ?: 0,
-                'remarks' => $this->remarks,
-                'active_id' => $this->active_id,
-            ]);
-            $message = "Saved";
-
-        } else {
-            $obj = ShareTrades::find($this->vid);
-            $obj->vdate = $this->vdate;
-            $obj->opening_balance = $this->opening_balance;
-            $obj->deposit = $this->deposit;
-            $obj->profit = $this->profit;
-            $obj->loosed = $this->loosed;
-            $obj->withdraw = $this->withdraw;
-            $obj->charges = $this->charges;
-            $obj->balance = $this->balance;
-            $obj->remarks = $this->remarks;
-            $obj->active_id = $this->active_id;
-            $obj->save();
-            $message = "Updated";
-        }
-        $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
-
-        return '';
-    }
-    #endregion
-
-    #region[getObj]
-    public function getObj($id)
-    {
-        if ($id) {
-            $obj = ShareTrades::find($id);
-            $this->vid = $obj->id;
-            $this->vdate = $obj->vdate;
-            $this->opening_balance = $obj->opening_balance;
-            $this->deposit = $obj->deposit;
-            $this->profit = $obj->profit;
-            $this->loosed = $obj->loosed;
-            $this->withdraw = $obj->withdraw;
-            $this->charges = $obj->charges;
-            $this->balance = $obj->balance;
-            $this->remarks = $obj->remarks;
-            $this->active_id = $obj->active_id;
-            return $obj;
-        }
-        return null;
-    }
-    #endregion
-
     #region[getList]
     public function getList()
     {
-        $this->user_name =Auth::user()->name;
+        if ($this->search_user_id == '') {
+            $this->search_user_id = auth()->id();
+        }
 
         return ShareTrades::select(
             DB::raw("SUM(opening_balance) as opening_balance"),
             DB::raw("SUM(deposit) as deposit"),
             DB::raw("SUM(withdraw) as withdraw"),
-            DB::raw("SUM(profit) as profit"),
-            DB::raw("SUM(loosed) as loosed"),
+            DB::raw("SUM(share_profit) as share_profit"),
+            DB::raw("SUM(share_loosed) as share_loosed"),
+            DB::raw("SUM(option_profit) as option_profit"),
+            DB::raw("SUM(option_loosed) as option_loosed"),
             DB::raw("SUM(charges) as charges")
-        )->where("user_id", $this->k_id ?: auth()->id())
+        )->where("user_id", $this->search_user_id ?: auth()->id())
             ->get();
-    }
-    #endregion
-
-    #region[clearFields]
-    public function clearFields(): void
-    {
-        $this->vid = '';
-        $this->vdate = '';
-        $this->opening_balance = '';
-        $this->deposit = '';
-        $this->profit = '';
-        $this->loosed = '';
-        $this->withdraw = '';
-        $this->charges = '';
-        $this->balance = '';
-        $this->remarks = '';
-        $this->active_id = '1';
     }
     #endregion
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Sundar\Trading;
+namespace App\Livewire\Sundar\Trading\sub;
 
 use Aaran\Sundar\Models\ShareTrades;
 use Aaran\Sundar\Models\StockTrade;
@@ -16,9 +16,8 @@ class StockDetails extends Component
 
     public $serial;
     public $vdate;
-    public $trade_type;
     public $stock_name;
-    public $option_type;
+    public $trade_type;
     public $buy = 0;
     public $sell = 0;
     public $spread = 0;
@@ -28,7 +27,6 @@ class StockDetails extends Component
     public $commission = 0;
     public $share_trade_id;
     public $users;
-    public $user_id;
 
     #endregion
 
@@ -53,19 +51,17 @@ class StockDetails extends Component
             $obj = StockTrade::create([
                 'serial' => $this->serial,
                 'vdate' => $this->vdate,
-                'trade_type' => $this->trade_type,
                 'stock_name' => $this->stock_name,
-                'option_type' => $this->option_type,
+                'trade_type' => $this->trade_type,
                 'buy' => $this->buy,
                 'sell' => $this->sell,
                 'spread' => $this->spread,
                 'shares' => $this->shares,
                 'profit' => $this->profit,
                 'loosed' => $this->loosed,
-                'commission' => $this->commission?:0,
+                'commission' => $this->commission ?: 0,
                 'share_trade_id' => $this->share_trade_id,
                 'active_id' => 1,
-                'user_id' => $this->user_id ?: auth()->id(),
             ]);
             $this->saveProfit();
             $message = "Saved";
@@ -73,9 +69,8 @@ class StockDetails extends Component
             $obj = StockTrade::find($this->vid);
             $obj->serial = $this->serial;
             $obj->vdate = $this->vdate;
-            $obj->trade_type = $this->trade_type;
             $obj->stock_name = $this->stock_name;
-            $obj->option_type = $this->option_type;
+            $obj->trade_type = $this->trade_type;
             $obj->buy = $this->buy;
             $obj->sell = $this->sell;
             $obj->spread = $this->spread;
@@ -85,13 +80,12 @@ class StockDetails extends Component
             $obj->commission = $this->commission;
             $obj->share_trade_id = $this->share_trade_id;
             $obj->active_id = $this->active_id;
-            $obj->user_id = $this->user_id ?: auth()->id();
             $obj->save();
             $this->saveProfit();
             $message = "Updated";
         }
         $this->profit = '';
-        $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
+        $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         return '';
     }
     #endregion
@@ -106,7 +100,6 @@ class StockDetails extends Component
             $this->vdate = $obj->vdate;
             $this->trade_type = $obj->trade_type;
             $this->stock_name = $obj->stock_name;
-            $this->option_type = $obj->option_type;
             $this->buy = $obj->buy;
             $this->sell = $obj->sell;
             $this->spread = $obj->spread;
@@ -144,7 +137,6 @@ class StockDetails extends Component
         $this->loosed = '';
         $this->trade_type = '';
         $this->stock_name = '';
-        $this->option_type = '';
         $this->buy = '';
         $this->sell = '';
         $this->spread = '';
@@ -164,7 +156,7 @@ class StockDetails extends Component
     #region[getRoute]
     public function getRoute()
     {
-        $this->redirect(route('shareTrades.profits'));
+        $this->redirect(route('shareTrades.shares'));
     }
     #endregion
 
@@ -172,18 +164,20 @@ class StockDetails extends Component
     public function saveProfit()
     {
         $obj = ShareTrades::find($this->share_trade_id);
+
         $totalProfit = DB::table('stock_trades')
             ->where('share_trade_id', $this->share_trade_id)
             ->sum('profit');
+
         $totalLoosed = DB::table('stock_trades')
             ->where('share_trade_id', $this->share_trade_id)
             ->sum('loosed');
-        if ($obj->profit > 0) {
 
-            $obj->profit = $totalProfit;
+        if ($obj->share_profit > 0) {
+            $obj->share_profit = $totalProfit-$totalLoosed;
             $obj->save();
         } else {
-            $obj->loosed = $totalLoosed;
+            $obj->share_loosed = $totalProfit-$totalLoosed;
             $obj->save();
         }
     }

@@ -4,14 +4,14 @@
     <x-forms.m-panel>
 
         <div class="flex justify-between items-center">
-            <select wire:model.live="k_id" :label="'User'" class="w-[30rem] purple-textbox">
+            <select wire:model.live="search_user_id" :label="'User'" class="w-[30rem] purple-textbox">
                 <option class="text-gray-400" value=""> choose ..</option>
                 @foreach($users as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
                 @endforeach
             </select>
 
-            <div>{{ \App\Models\User::getName($k_id?: auth()->id())}}</div>
+            <div>{{ \App\Models\User::getName($search_user_id?: '')}}</div>
             <div>&nbsp;</div>
 
 
@@ -25,6 +25,7 @@
                 <x-table.header-serial wire:click.prevent="sortBy('vdate')"/>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" class="w-[10rem]" center>Date</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Opening Balance</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Remarks</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -48,6 +49,10 @@
 
                         <x-table.cell-text right>
                             {{ $row->opening_balance }}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text left>
+                            {{ $row->remarks }}
                         </x-table.cell-text>
 
                         <x-table.cell-action id="{{$row->id}}"/>
@@ -87,7 +92,8 @@
                 @endforeach
             </x-input.model-select>
             <x-input.model-date wire:model="vdate" :label="'Date'"/>
-            <x-input.model-text wire:model="opening_balance" :label="'Opening Balance'"/>
+            <x-input.model-text wire:model="opening_balance" :label="'Opening'"/>
+            <x-input.model-text wire:model="remarks" :label="'Remarks'"/>
         </x-forms.create>
 
         <div>

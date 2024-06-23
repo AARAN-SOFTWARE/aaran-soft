@@ -126,30 +126,30 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
-            <x-input.model-select wire:model="user_id" :label="'User'">
-                <option class="text-gray-400"> choose ..</option>
-                @foreach($users as $user)
-                    <option value="{{$user->id}}">{{$user->name}}</option>
-                @endforeach
-            </x-input.model-select>
+
+{{--            <x-input.model-select wire:model="user_id" :label="'User'">--}}
+{{--                <option class="text-gray-400"> choose ..</option>--}}
+{{--                @foreach($users as $user)--}}
+{{--                    <option value="{{$user->id}}">{{$user->name}}</option>--}}
+{{--                @endforeach--}}
+{{--            </x-input.model-select>--}}
+
             <x-input.model-text wire:model="serial" :label="'Serial'"/>
-            <x-input.model-date wire:model="vdate" :label="'Date'"/>
+{{--            <x-input.model-date wire:model="vdate" :label="'Date'"/>--}}
+
             <x-input.model-select wire:model="trade_type" :label="'Trade Type'">
                 <option class="text-gray-400"> choose ..</option>
-                    <option value="Delivery">Delivery</option>
-                    <option value="Options">Options</option>
+                    <option value="Delivery">Cash</option>
+                    <option value="Options">MTF-Pay later</option>
             </x-input.model-select>
+
             <x-input.model-text wire:model="stock_name" :label="'Stock Name'"/>
-            <x-input.model-select wire:model="option_type" :label="'Option Type'">
-                <option class="text-gray-400"> choose ..</option>
-                <option value="call">call</option>
-                <option value="Put">Put</option>
-            </x-input.model-select>
+
             <x-input.model-text wire:model="buy" :label="'Buy'"/>
             <x-input.model-text wire:model="sell" wire:change="spreadCalculation" :label="'Sell'"/>
             <x-input.model-text wire:model="spread" :label="'Spread'"/>
             <x-input.model-text wire:model="shares" :label="'Shares'"/>
-            <x-input.model-text wire:model="profit" :label="'Profit'"/>
+            <x-input.model-text wire:model="profit" :label="'profit'"/>
             <x-input.model-text wire:model="loosed" :label="'Loosed'"/>
             <x-input.model-text wire:model="commission" :label="'Commission'"/>
         </x-forms.create>

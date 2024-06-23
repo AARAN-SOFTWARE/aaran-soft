@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Sundar\Trading;
+namespace App\Livewire\Sundar\Trading\sub;
 
 use Aaran\Sundar\Models\ShareTrades;
 use App\Livewire\Trait\CommonTrait;
@@ -8,7 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
 
-class ShareTradeList extends Component
+class ChargesList extends Component
 {
     #region[property]
     use CommonTrait;
@@ -40,7 +40,7 @@ class ShareTradeList extends Component
     {
         if ($this->vid == "") {
             ShareTrades::create([
-                'user_id' => $this->user_id,
+                'user_id' => $this->user_id?:auth()->id(),
                 'vdate' => $this->vdate ?: Carbon::now()->format('Y-m-d'),
                 'opening_balance' => $this->opening_balance ?: 0,
                 'deposit' => $this->deposit ?: 0,
@@ -106,8 +106,9 @@ class ShareTradeList extends Component
     {
         $this->sortField = 'vdate';
 
-        return ShareTrades::search($this->searches)
+        return ShareTrades::search($this->searches)->where('user_id', '=', $this->k_id?:auth()->id())
             ->where('active_id', '=', $this->activeRecord)
+            ->where('charges', '>', 0)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
@@ -116,6 +117,7 @@ class ShareTradeList extends Component
     #region[clearFields]
     public function clearFields(): void
     {
+        $this->vid='';
         $this->user_id = '';
         $this->vdate = '';
         $this->opening_balance = '';
@@ -130,17 +132,17 @@ class ShareTradeList extends Component
     }
     #endregion
 
-    #region[reRender]
-    public function reRender(): void
+    #region[getRoute]
+    public function getRoute()
     {
-        $this->render()->render();
+        $this->redirect(route('shareTrades'));
     }
     #endregion
 
     #region[render]
     public function render()
     {
-        return view('livewire.sundar.trading.share-trade-list')->with([
+        return view('livewire.sundar.trading.charges')->with([
             'list' => $this->getList()
         ]);
     }

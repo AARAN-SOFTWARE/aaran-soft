@@ -6,21 +6,20 @@ use Aaran\Sundar\Models\ShareTrades;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Deposit extends Component
+class Shares extends Component
 {
+    #region[property]
     use CommonTrait;
 
-    #region[property]
     public $vdate;
-    public mixed $opening_balance;
-    public mixed $deposit;
-    public mixed $withdraw;
-    public string $remarks;
+    public mixed $share_profit;
+    public mixed $share_loosed;
     public mixed $user_id = '';
+    public $remarks = '';
     public mixed $search_user_id = '';
+
     public mixed $users;
 
     #endregion
@@ -39,12 +38,13 @@ class Deposit extends Component
                 'user_id' => $this->user_id ?: auth()->id(),
                 'vdate' => $this->vdate ?: Carbon::now()->format('Y-m-d'),
                 'opening_balance' => 0,
-                'deposit' => $this->deposit ?: 0,
-                'withdraw' => $this->withdraw ?: 0,
-                'share_profit' => 0,
-                'share_loosed' => 0,
+                'deposit' => 0,
+                'withdraw' => 0,
+                'share_profit' => $this->share_profit ?: 0,
+                'share_loosed' => $this->share_loosed ?: 0,
                 'option_profit' => 0,
                 'option_loosed' => 0,
+                'charges' => 0,
                 'remarks' => $this->remarks ?: '',
                 'active_id' => $this->active_id,
 
@@ -55,8 +55,8 @@ class Deposit extends Component
             $obj = ShareTrades::find($this->vid);
             $obj->user_id = $this->user_id;
             $obj->vdate = $this->vdate;
-            $obj->deposit = $this->deposit ?: 0;
-            $obj->withdraw = $this->withdraw ?: 0;
+            $obj->share_profit = $this->share_profit ?: 0;
+            $obj->share_loosed = $this->share_loosed ?: 0;
             $obj->remarks = $this->remarks;
             $obj->active_id = $this->active_id;
 
@@ -77,9 +77,8 @@ class Deposit extends Component
             $this->vid = $obj->id;
             $this->user_id = $obj->user_id;
             $this->vdate = $obj->vdate;
-            $this->opening_balance = $obj->opening_balance;
-            $this->deposit = $obj->deposit;
-            $this->withdraw = $obj->withdraw;
+            $this->share_profit = $obj->share_profit;
+            $this->share_loosed = $obj->share_loosed;
             $this->remarks = $obj->remarks;
             $this->active_id = $obj->active_id;
             return $obj;
@@ -99,9 +98,9 @@ class Deposit extends Component
 
         return ShareTrades::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
-            ->where('deposit', '>', 0)
-            ->orWhere('withdraw', '>', 0)
-            ->where('user_id', '=', $this->search_user_id)
+            ->where('share_profit', '>', 0)
+            ->orwhere('share_loosed', '>', 0)
+            ->where("user_id", $this->search_user_id)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
@@ -113,9 +112,8 @@ class Deposit extends Component
         $this->vid = '';
         $this->user_id = '';
         $this->vdate = Carbon::now()->format('Y-m-d');
-        $this->opening_balance = '';
-        $this->deposit = '';
-        $this->withdraw = '';
+        $this->share_profit = '';
+        $this->share_loosed = '';
         $this->remarks = '';
         $this->active_id = '1';
     }
@@ -128,17 +126,10 @@ class Deposit extends Component
     }
     #endregion
 
-    #region[reRender]
-    public function reRender(): void
-    {
-        $this->render()->render();
-    }
-    #endregion
-
     #region[render]
     public function render()
     {
-        return view('livewire.sundar.trading.deposit')->with([
+        return view('livewire.sundar.trading.shares')->with([
             'list' => $this->getList()
         ]);
     }

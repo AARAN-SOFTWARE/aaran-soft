@@ -14,11 +14,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('shareTrades', App\Livewire\Sundar\Trading\Index::class)->name('shareTrades');
     Route::get('shareTrades/deposits', App\Livewire\Sundar\Trading\Deposit::class)->name('shareTrades.deposits');
-    Route::get('shareTrades/profits', App\Livewire\Sundar\Trading\Profit::class)->name('shareTrades.profits');
+    Route::get('shareTrades/shares', App\Livewire\Sundar\Trading\Shares::class)->name('shareTrades.shares');
+    Route::get('shareTrades/options', App\Livewire\Sundar\Trading\Options::class)->name('shareTrades.options');
     Route::get('shareTrades/charges', App\Livewire\Sundar\Trading\Charges::class)->name('shareTrades.charges');
     Route::get('shareTrades/openingBalance', App\Livewire\Sundar\Trading\OpeningBalance::class)->name('shareTrades.openingBalance');
-    Route::get('shareTrades/{id}/stockDetails', App\Livewire\Sundar\Trading\StockDetails::class)->name('shareTrades.stockDetails');
-    Route::get('shareTrades/summary', App\Livewire\Sundar\Trading\ShareTradeList::class)->name('shareTrades.summary');
+
+    Route::get('shareTrades/{id}/stockDetails', App\Livewire\Sundar\Trading\sub\StockDetails::class)->name('shareTrades.stockDetails');
+
+    Route::get('shareTrades/summary', App\Livewire\Sundar\Trading\ShareSummary::class)->name('shareTrades.summary');
 
 
 });
