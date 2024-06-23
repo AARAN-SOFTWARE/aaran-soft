@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         if (Aaran\Aadmin\Src\DbMigration::hasMailids()) {
 
-            Schema::create('share_names', function (Blueprint $table) {
+            Schema::create('stock_names', function (Blueprint $table) {
                 $table->id();
                 $table->string('vname')->nullable();
                 $table->smallInteger('active_id')->nullable();
@@ -20,6 +20,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('share_names');
+        Schema::dropIfExists('stock_names');
     }
 };

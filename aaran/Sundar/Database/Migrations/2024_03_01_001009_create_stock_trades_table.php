@@ -13,7 +13,7 @@ return new class extends Migration {
                 $table->id();
                 $table->integer('serial')->nullable();
                 $table->string('vdate')->nullable();
-                $table->string('stock_name')->nullable();
+                $table->foreignId('stock_name_id')->references('id')->on('stock_names')->cascadeOnDelete();
                 $table->string('trade_type')->nullable();
                 $table->decimal('buy', 15, 2)->nullable();
                 $table->decimal('sell', 15, 2)->nullable();

@@ -13,7 +13,7 @@ return new class extends Migration {
                 $table->id();
                 $table->integer('serial')->nullable();
                 $table->string('vdate')->nullable();
-                $table->string('spot_name')->nullable();
+                $table->foreignId('spot_name_id')->references('id')->on('spot_names')->cascadeOnDelete();
                 $table->decimal('buy', 15, 2)->nullable();
                 $table->decimal('sell', 15, 2)->nullable();
                 $table->decimal('spread', 15, 2)->nullable();
