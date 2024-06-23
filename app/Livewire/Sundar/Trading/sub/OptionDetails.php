@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Sundar\Trading\sub;
 
+use Aaran\Sundar\Models\OptionTrade;
 use Aaran\Sundar\Models\ShareTrades;
 use Aaran\Sundar\Models\StockTrade;
 use App\Livewire\Trait\CommonTrait;
@@ -9,15 +10,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class StockDetails extends Component
+class OptionDetails extends Component
 {
     #region[properties]
     use CommonTrait;
 
     public $serial;
     public $vdate;
-    public $stock_name;
-    public $trade_type;
+    public $spot_name;
     public $buy = 0;
     public $sell = 0;
     public $spread = 0;
@@ -43,11 +43,10 @@ class StockDetails extends Component
     public function getSave(): string
     {
         if ($this->vid == "") {
-            $obj = StockTrade::create([
+            $obj = OptionTrade::create([
                 'serial' => $this->serial,
                 'vdate' => $this->share_trade->vdate,
-                'stock_name' => $this->stock_name,
-                'trade_type' => $this->trade_type,
+                'spot_name' => $this->spot_name,
                 'buy' => $this->buy ?: 0,
                 'sell' => $this->sell ?: 0,
                 'spread' => $this->spread ?: 0,
@@ -61,11 +60,10 @@ class StockDetails extends Component
             $this->saveProfit();
             $message = "Saved";
         } else {
-            $obj = StockTrade::find($this->vid);
+            $obj = OptionTrade::find($this->vid);
             $obj->serial = $this->serial;
             $obj->vdate = $this->vdate;
-            $obj->stock_name = $this->stock_name;
-            $obj->trade_type = $this->trade_type;
+            $obj->spot_name = $this->spot_name;
             $obj->buy = $this->buy ?: 0;
             $obj->sell = $this->sell ?: 0;
             $obj->spread = $this->spread ?: 0;
@@ -89,12 +87,11 @@ class StockDetails extends Component
     public function getObj($id)
     {
         if ($id) {
-            $obj = StockTrade::find($id);
+            $obj = OptionTrade::find($id);
             $this->vid = $obj->id;
             $this->serial = $obj->serial;
             $this->vdate = $obj->vdate;
-            $this->trade_type = $obj->trade_type;
-            $this->stock_name = $obj->stock_name;
+            $this->spot_name = $obj->spot_name;
             $this->buy = $obj->buy;
             $this->sell = $obj->sell;
             $this->spread = $obj->spread;
@@ -114,7 +111,7 @@ class StockDetails extends Component
     {
         $this->sortField = 'vdate';
 
-        return StockTrade::search($this->searches)
+        return OptionTrade::search($this->searches)
             ->where('share_trade_id', $this->share_trade->id)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
@@ -129,8 +126,7 @@ class StockDetails extends Component
         $this->vid = '';
         $this->serial = '';
         $this->loosed = '';
-        $this->trade_type = '';
-        $this->stock_name = '';
+        $this->spot_name = '';
         $this->buy = '';
         $this->sell = '';
         $this->spread = '';
@@ -150,24 +146,24 @@ class StockDetails extends Component
     #region[getRoute]
     public function getRoute()
     {
-        $this->redirect(route('shareTrades.shares'));
+        $this->redirect(route('shareTrades.options'));
     }
     #endregion
 
     #region[render]
     public function saveProfit()
     {
-        $totalProfit = DB::table('stock_trades')
+        $totalProfit = DB::table('option_trades')
             ->where('share_trade_id', $this->share_trade->id)
             ->sum('profit');
 
-        $totalLoosed = DB::table('stock_trades')
+        $totalLoosed = DB::table('option_trades')
             ->where('share_trade_id', $this->share_trade->id)
             ->sum('loosed');
 
         $obj = ShareTrades::find($this->share_trade->id);
-        $obj->share_profit = $totalProfit;
-        $obj->share_loosed = $totalLoosed;
+        $obj->option_profit = $totalProfit;
+        $obj->option_loosed = $totalLoosed;
         $obj->save();
 
     }
@@ -176,7 +172,7 @@ class StockDetails extends Component
     #region[render]
     public function render()
     {
-        return view('livewire.sundar.trading.sub.stock-details')->with([
+        return view('livewire.sundar.trading.sub.option-details')->with([
             'list' => $this->getList(),
         ]);
     }
