@@ -4,10 +4,14 @@ namespace App\Livewire\Sundar\Trading\sub;
 
 use Aaran\Sundar\Models\OptionTrade;
 use Aaran\Sundar\Models\ShareTrades;
+use Aaran\Sundar\Models\SpotName;
+use Aaran\Sundar\Models\StockName;
 use Aaran\Sundar\Models\StockTrade;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class OptionDetails extends Component
@@ -17,7 +21,6 @@ class OptionDetails extends Component
 
     public $serial;
     public $vdate;
-    public $spot_name;
     public $buy = 0;
     public $sell = 0;
     public $spread = 0;
@@ -39,6 +42,79 @@ class OptionDetails extends Component
     }
     #endregion
 
+    #region[Stock Name]
+    public $spot_name_id;
+    public $spot_name;
+
+    public Collection $spotNameCollection;
+    public $highlightSpotName = 0;
+    public $spotNameTyped = false;
+
+    public function decrementSpotName(): void
+    {
+        if ($this->highlightSpotName === 0) {
+            $this->highlightSpotName = count($this->spotNameCollection) - 1;
+            return;
+        }
+        $this->highlightSpotName--;
+    }
+
+    public function incrementStockName(): void
+    {
+        if ($this->highlightSpotName === count($this->spotNameCollection) - 1) {
+            $this->highlightSpotName = 0;
+            return;
+        }
+        $this->highlightSpotName++;
+    }
+
+    public function setSpotName($name, $id): void
+    {
+        $this->spot_name = $name;
+        $this->spot_name_id = $id;
+        $this->getSpotNameList();
+    }
+
+    public function enterSpotName(): void
+    {
+        $obj = $this->spotNameCollection[$this->highlightSpotName] ?? null;
+
+        $this->spot_name = '';
+        $this->spotNameCollection = Collection::empty();
+        $this->highlightSpotName = 0;
+
+        $this->spot_name = $obj['vname'] ?? '';
+        $this->spot_name_id = $obj['id'] ?? '';
+    }
+
+    public function spotSave($name): void
+    {
+        $obj= SpotName::create([
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+
+        $v=['name'=>$name,'id'=>$obj->id];
+        $this->refreshSpotName($v);
+
+    }
+    #[On('refresh-StockName')]
+    public function refreshSpotName($v): void
+    {
+        $this->spot_name_id = $v['id'];
+        $this->spot_name = $v['name'];
+        $this->spotNameTyped = false;
+
+    }
+
+    public function getSpotNameList(): void
+    {
+        $this->spotNameCollection = $this->spot_name ? SpotName::search(trim($this->spot_name))
+            ->get() : SpotName::all();
+    }
+
+    #endregion
+
     #region[save]
     public function getSave(): string
     {
@@ -46,7 +122,7 @@ class OptionDetails extends Component
             $obj = OptionTrade::create([
                 'serial' => $this->serial,
                 'vdate' => $this->share_trade->vdate,
-                'spot_name' => $this->spot_name,
+                'spot_name_id' => $this->spot_name_id,
                 'buy' => $this->buy ?: 0,
                 'sell' => $this->sell ?: 0,
                 'spread' => $this->spread ?: 0,
@@ -63,7 +139,7 @@ class OptionDetails extends Component
             $obj = OptionTrade::find($this->vid);
             $obj->serial = $this->serial;
             $obj->vdate = $this->vdate;
-            $obj->spot_name = $this->spot_name;
+            $obj->spot_name_id = $this->spot_name_id;
             $obj->buy = $this->buy ?: 0;
             $obj->sell = $this->sell ?: 0;
             $obj->spread = $this->spread ?: 0;
@@ -91,7 +167,7 @@ class OptionDetails extends Component
             $this->vid = $obj->id;
             $this->serial = $obj->serial;
             $this->vdate = $obj->vdate;
-            $this->spot_name = $obj->spot_name;
+            $this->spot_name_id = $obj->spot_name_id;
             $this->buy = $obj->buy;
             $this->sell = $obj->sell;
             $this->spread = $obj->spread;
@@ -126,7 +202,7 @@ class OptionDetails extends Component
         $this->vid = '';
         $this->serial = '';
         $this->loosed = '';
-        $this->spot_name = '';
+        $this->spot_name_id = '';
         $this->buy = '';
         $this->sell = '';
         $this->spread = '';
@@ -172,6 +248,8 @@ class OptionDetails extends Component
     #region[render]
     public function render()
     {
+        $this->getSpotNameList();
+
         return view('livewire.sundar.trading.sub.option-details')->with([
             'list' => $this->getList(),
         ]);
