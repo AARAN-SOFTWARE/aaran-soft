@@ -25,7 +25,7 @@ class StockDetails extends Component
     public $profit = 0;
     public $loosed = 0;
     public $commission = 0;
-    public $share_trade_id;
+    public $share_trade;
     public $users;
 
     #endregion
@@ -33,12 +33,7 @@ class StockDetails extends Component
     #region[mount]
     public function mount($id)
     {
-        $this->share_trade_id = $id;
-
-        $obj = ShareTrades::find($id);
-        $this->vdate = $obj->vdate;
-        $this->profit = $obj->profit;
-        $this->loosed = $obj->loosed;
+        $this->share_trade = ShareTrades::find($id);
 
         $this->users = User::all();
     }
@@ -50,17 +45,17 @@ class StockDetails extends Component
         if ($this->vid == "") {
             $obj = StockTrade::create([
                 'serial' => $this->serial,
-                'vdate' => $this->vdate,
+                'vdate' => $this->share_trade->vdate,
                 'stock_name' => $this->stock_name,
                 'trade_type' => $this->trade_type,
-                'buy' => $this->buy,
-                'sell' => $this->sell,
-                'spread' => $this->spread,
-                'shares' => $this->shares,
-                'profit' => $this->profit,
-                'loosed' => $this->loosed,
+                'buy' => $this->buy ?: 0,
+                'sell' => $this->sell ?: 0,
+                'spread' => $this->spread ?: 0,
+                'shares' => $this->shares ?: 0,
+                'profit' => $this->profit ?: 0,
+                'loosed' => $this->loosed ?: 0,
                 'commission' => $this->commission ?: 0,
-                'share_trade_id' => $this->share_trade_id,
+                'share_trade_id' => $this->share_trade->id,
                 'active_id' => 1,
             ]);
             $this->saveProfit();
@@ -71,14 +66,14 @@ class StockDetails extends Component
             $obj->vdate = $this->vdate;
             $obj->stock_name = $this->stock_name;
             $obj->trade_type = $this->trade_type;
-            $obj->buy = $this->buy;
-            $obj->sell = $this->sell;
-            $obj->spread = $this->spread;
-            $obj->shares = $this->shares;
-            $obj->profit = $this->profit;
-            $obj->loosed = $this->loosed;
-            $obj->commission = $this->commission;
-            $obj->share_trade_id = $this->share_trade_id;
+            $obj->buy = $this->buy ?: 0;
+            $obj->sell = $this->sell ?: 0;
+            $obj->spread = $this->spread ?: 0;
+            $obj->shares = $this->shares ?: 0;
+            $obj->profit = $this->profit ?: 0;
+            $obj->loosed = $this->loosed ?: 0;
+            $obj->commission = $this->commission ?: 0;
+            $obj->share_trade_id = $this->share_trade->id;
             $obj->active_id = $this->active_id;
             $obj->save();
             $this->saveProfit();
@@ -107,7 +102,6 @@ class StockDetails extends Component
             $this->profit = $obj->profit;
             $this->loosed = $obj->loosed;
             $this->commission = $obj->commission;
-            $this->share_trade_id = $obj->share_trade_id;
             $this->active_id = $obj->active_id;
             return $obj;
         }
@@ -121,7 +115,7 @@ class StockDetails extends Component
         $this->sortField = 'vdate';
 
         return StockTrade::search($this->searches)
-            ->where('share_trade_id', $this->share_trade_id)
+            ->where('share_trade_id', $this->share_trade->id)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -163,23 +157,18 @@ class StockDetails extends Component
     #region[render]
     public function saveProfit()
     {
-        $obj = ShareTrades::find($this->share_trade_id);
-
         $totalProfit = DB::table('stock_trades')
-            ->where('share_trade_id', $this->share_trade_id)
+            ->where('share_trade_id', $this->share_trade->id)
             ->sum('profit');
 
         $totalLoosed = DB::table('stock_trades')
-            ->where('share_trade_id', $this->share_trade_id)
+            ->where('share_trade_id', $this->share_trade->id)
             ->sum('loosed');
 
-        if ($obj->share_profit > 0) {
-            $obj->share_profit = $totalProfit-$totalLoosed;
-            $obj->save();
-        } else {
-            $obj->share_loosed = $totalProfit-$totalLoosed;
-            $obj->save();
-        }
+        $obj = ShareTrades::find($this->share_trade->id);
+        $obj->share_profit = $totalProfit;
+        $obj->share_loosed = $totalLoosed;
+
     }
     #endregion
 
