@@ -5,6 +5,7 @@ namespace Aaran\Sundar\Models;
 use Aaran\Sundar\Database\factories\StockTradeFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class StockTrade extends Model
 {
@@ -20,4 +21,10 @@ class StockTrade extends Model
         return empty($searches) ? static::query()
             : static::where('vname', 'like', '%' . $searches . '%');
     }
+
+    public function stockName(): BelongsTo
+    {
+        return $this->belongsTo(StockName::class);
+    }
+
 }

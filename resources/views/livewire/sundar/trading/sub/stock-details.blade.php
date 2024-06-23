@@ -51,7 +51,7 @@
 
 
                         <x-table.cell-text center>
-                            {{ $row->stock_name }}
+                            {{ $row->stockName->vname }}
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
@@ -128,7 +128,70 @@
                 <option value="MTF-Pay Later">MTF-Pay Later</option>
             </x-input.model-select>
 
-            <x-input.model-text wire:model="stock_name" :label="'Stock Name'"/>
+{{--            <x-input.model-text wire:model="stock_name_id" :label="'Stock Name'"/>--}}
+
+
+
+            <div class="xl:flex w-full gap-2">
+
+                <!-- Party Name --------------------------------------------------------------------------------------->
+                <label for="stock_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Stock Name</label>
+
+                <div x-data="{isTyped: @entangle('stockNameTyped')}" @click.away="isTyped = false" class="w-full">
+                    <div class="relative ">
+                        <input
+                            id="stock_name"
+                            type="search"
+                            wire:model.live="stock_name"
+                            autocomplete="off"
+                            placeholder="Stock Name.."
+                            @focus="isTyped = true"
+                            @keydown.escape.window="isTyped = false"
+                            @keydown.tab.window="isTyped = false"
+                            @keydown.enter.prevent="isTyped = false"
+                            wire:keydown.arrow-up="decrementStockName"
+                            wire:keydown.arrow-down="incrementStockName"
+                            wire:keydown.enter="enterStockName"
+                            class="block w-full purple-textbox "
+                        />
+{{--                        @error('stock_name_id')--}}
+{{--                        <span class="text-red-500">{{'The Stock Name is Required.'}}</span>--}}
+{{--                        @enderror--}}
+
+                        <div x-show="isTyped"
+                             x-transition:leave="transition ease-in duration-100"
+                             x-transition:leave-start="opacity-100"
+                             x-transition:leave-end="opacity-0"
+                             x-cloak
+                        >
+                            <div class="absolute z-20 w-full mt-2">
+                                <div class="block py-1 shadow-md w-full
+                rounded-lg border-transparent flex-1 appearance-none border
+                                 bg-white text-gray-800 ring-1 ring-purple-600">
+                                    <ul class="overflow-y-scroll h-96">
+                                        @if($stockNameCollection)
+                                            @forelse ($stockNameCollection as $i => $stock)
+
+                                                <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-fit
+                                                        {{ $highlightStockName === $i ? 'bg-yellow-100' : '' }}"
+                                                    wire:click.prevent="setStockName('{{$stock->vname}}','{{$stock->id}}')"
+                                                    x-on:click="isTyped = false">
+                                                    {{ $stock->vname }}
+                                                </li>
+
+                                            @empty
+                                                <button wire:click.prevent="stockSave('{{$stock_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                    create
+                                                </button>
+                                            @endforelse
+                                        @endif
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <x-input.model-text wire:model="buy" :label="'Buy'"/>
             <x-input.model-text wire:model="sell" wire:change="spreadCalculation" :label="'Sell'"/>

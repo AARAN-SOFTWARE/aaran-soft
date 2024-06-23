@@ -3,10 +3,13 @@
 namespace App\Livewire\Sundar\Trading\sub;
 
 use Aaran\Sundar\Models\ShareTrades;
+use Aaran\Sundar\Models\StockName;
 use Aaran\Sundar\Models\StockTrade;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class StockDetails extends Component
@@ -16,7 +19,7 @@ class StockDetails extends Component
 
     public $serial;
     public $vdate;
-    public $stock_name;
+
     public $trade_type;
     public $buy = 0;
     public $sell = 0;
@@ -39,6 +42,78 @@ class StockDetails extends Component
     }
     #endregion
 
+    #region[Stock Name]
+    public $stock_name_id;
+    public $stock_name = '';
+    public Collection $stockNameCollection;
+    public $highlightStockName = 0;
+    public $stockNameTyped = false;
+
+    public function decrementStockName(): void
+    {
+        if ($this->highlightStockName === 0) {
+            $this->highlightStockName = count($this->stockNameCollection) - 1;
+            return;
+        }
+        $this->highlightStockName--;
+    }
+
+    public function incrementStockName(): void
+    {
+        if ($this->highlightStockName === count($this->stockNameCollection) - 1) {
+            $this->highlightStockName = 0;
+            return;
+        }
+        $this->highlightStockName++;
+    }
+
+    public function setStockName($name, $id): void
+    {
+        $this->stock_name = $name;
+        $this->stock_name_id = $id;
+        $this->getStockNameList();
+    }
+
+    public function enterStockName(): void
+    {
+        $obj = $this->stockNameCollection[$this->highlightStockName] ?? null;
+
+        $this->stock_name = '';
+        $this->stockNameCollection = Collection::empty();
+        $this->highlightStockName = 0;
+
+        $this->stock_name = $obj['vname'] ?? '';
+        $this->stock_name_id = $obj['id'] ?? '';
+    }
+
+    public function stockSave($name): void
+    {
+        $obj= StockName::create([
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+
+        $v=['name'=>$name,'id'=>$obj->id];
+        $this->refreshStockName($v);
+
+    }
+    #[On('refresh-StockName')]
+    public function refreshStockName($v): void
+    {
+        $this->stock_name_id = $v['id'];
+        $this->stock_name = $v['name'];
+        $this->stockNameTyped = false;
+
+    }
+
+    public function getStockNameList(): void
+    {
+        $this->stockNameCollection = $this->stock_name ? StockName::search(trim($this->stock_name))
+            ->get() : StockName::all();
+    }
+
+    #endregion
+
     #region[save]
     public function getSave(): string
     {
@@ -46,7 +121,7 @@ class StockDetails extends Component
             $obj = StockTrade::create([
                 'serial' => $this->serial,
                 'vdate' => $this->share_trade->vdate,
-                'stock_name' => $this->stock_name,
+                'stock_name_id' => $this->stock_name_id,
                 'trade_type' => $this->trade_type,
                 'buy' => $this->buy ?: 0,
                 'sell' => $this->sell ?: 0,
@@ -64,7 +139,7 @@ class StockDetails extends Component
             $obj = StockTrade::find($this->vid);
             $obj->serial = $this->serial;
             $obj->vdate = $this->vdate;
-            $obj->stock_name = $this->stock_name;
+            $obj->stock_name_id = $this->stock_name_id;
             $obj->trade_type = $this->trade_type;
             $obj->buy = $this->buy ?: 0;
             $obj->sell = $this->sell ?: 0;
@@ -94,7 +169,7 @@ class StockDetails extends Component
             $this->serial = $obj->serial;
             $this->vdate = $obj->vdate;
             $this->trade_type = $obj->trade_type;
-            $this->stock_name = $obj->stock_name;
+            $this->stock_name_id = $obj->stock_name_id;
             $this->buy = $obj->buy;
             $this->sell = $obj->sell;
             $this->spread = $obj->spread;
@@ -130,7 +205,7 @@ class StockDetails extends Component
         $this->serial = '';
         $this->loosed = '';
         $this->trade_type = '';
-        $this->stock_name = '';
+        $this->stock_name_id = '';
         $this->buy = '';
         $this->sell = '';
         $this->spread = '';
@@ -176,6 +251,8 @@ class StockDetails extends Component
     #region[render]
     public function render()
     {
+        $this->getStockNameList();
+
         return view('livewire.sundar.trading.sub.stock-details')->with([
             'list' => $this->getList(),
         ]);

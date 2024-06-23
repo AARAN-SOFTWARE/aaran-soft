@@ -22,4 +22,6 @@ class ShareTrades extends Model
         return empty($searches) ? static::query()
             : static::where('vname', 'like', '%' . $searches . '%');
     }
+
+
 }
