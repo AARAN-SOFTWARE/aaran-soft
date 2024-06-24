@@ -57,6 +57,9 @@ class Customise
             config('clients.ASWATH_APPARELS') => in_array($feature, config('aswath_apparels.features', [])),
             config('clients.ATO_TEXTILES') => in_array($feature, config('ato_textiles.features', [])),
 
+            config('software.GARMENT_1') => in_array($feature, config('garment_1.features', [])),
+            config('software.GARMENT_2') => in_array($feature, config('garment_2.features', [])),
+
         };
     }
 

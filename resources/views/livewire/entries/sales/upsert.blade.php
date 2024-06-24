@@ -176,7 +176,7 @@
                                                         </li>
 
                                                     @empty
-                                                        <a  href="{{route('contacts.upsert',[$contact_id])}}"
+                                                        <a href="{{route('contacts.upsert',[$contact_id])}}"
                                                            role="button"
                                                            class="flex items-center  justify-center bg-green-500 w-full h-8 text-white text-center">
                                                             Not found , Want to create new
@@ -275,7 +275,7 @@
                 </x-input.model-select>
 
                 @if(\Aaran\Aadmin\Src\SaleEntry::hasJob_no())
-                <x-input.model-text wire:model="job_no" :label="'Job No'"/>
+                    <x-input.model-text wire:model="job_no" :label="'Job No'"/>
                 @endif
 
                 <!-- Style ------------------------------------------------------------------------------------------------>
@@ -342,7 +342,7 @@
                             @if(config('aadmin.app_type')==308)
                                 Po No
                             @else
-                            Despatch No
+                                Despatch No
                             @endif
                         </label>
                         <div x-data="{isTyped: @entangle('despatchTyped')}" @click.away="isTyped = false"
@@ -499,7 +499,8 @@
             @if(\Aaran\Aadmin\Src\SaleEntry::hasNo_of_roll())
                 <div class="w-full">
                     <label for="no_of_roll"></label>
-                    <input id="no_of_roll" wire:model.live="no_of_roll" class="block w-full md:w-full purple-textbox-no-rounded"
+                    <input id="no_of_roll" wire:model.live="no_of_roll"
+                           class="block w-full md:w-full purple-textbox-no-rounded"
                            autocomplete="false"
                            placeholder="No of Roll..">
                 </div>
@@ -550,7 +551,8 @@
                                                     </li>
 
                                                 @empty
-                                                    <button wire:click.prevent="colourSave('{{$colour_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                    <button wire:click.prevent="colourSave('{{$colour_name}}')"
+                                                            class="text-white bg-green-500 text-center w-full">
                                                         create
                                                     </button>
                                                 @endforelse
@@ -609,7 +611,8 @@
                                                     </li>
 
                                                 @empty
-                                                    <button wire:click.prevent="sizeSave('{{$size_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                    <button wire:click.prevent="sizeSave('{{$size_name}}')"
+                                                            class="text-white bg-green-500 text-center w-full">
                                                         create
                                                     </button>
                                                 @endforelse
@@ -638,7 +641,9 @@
                        autocomplete="false"
                        placeholder="price">
             </div>
-            <button wire:click="addItems" class="px-3 justify-items-center py-1.5 md:px-3 bg-green-500 text-white font-semibold tracking-wider ">Add
+            <button wire:click="addItems"
+                    class="px-3 justify-items-center py-1.5 md:px-3 bg-green-500 text-white font-semibold tracking-wider ">
+                Add
             </button>
         </section>
 
@@ -721,9 +726,9 @@
                                         @if($row['description'])
                                             &nbsp;-&nbsp;
                                         @endif
-                                    @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
-                                       {{ $row['description']}}
-                                    @endif
+                                        @if(\Aaran\Aadmin\Src\SaleEntry::hasProductDescription())
+                                            {{ $row['description']}}
+                                        @endif
                                     </div>
 
                                 </td>
@@ -766,9 +771,9 @@
                     <tr class="h-8 text-sm border border-gray-400 bg-cyan-50">
 
                         @if(\Aaran\Aadmin\Src\SaleEntry::hasSize() or \Aaran\Aadmin\Src\SaleEntry::hasColour())
-                        <td colspan="4" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>
+                            <td colspan="4" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>
                         @else
-                        <td colspan="2" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>
+                            <td colspan="2" class="px-2 text-xs text-right border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>
                         @endif
 
                         <td class="px-2 text-center border border-gray-300">{{$total_qty}}</td>
@@ -791,92 +796,38 @@
             <!-- Bottom Left -------------------------------------------------------------------------------------------------->
             <section class="w-full">
                 <div class="w-3/4">
-                    <div class="flex flex-col gap-2 pt-5">
-                        <div class="xl:flex w-full gap-2">
+                    <input   type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500
+                     dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:click="show">&nbsp;&nbsp;&nbsp;<label>Additional Charges</label>
 
-                            <!-- Ledger ----------------------------------------------------------------------------------->
-                            <label for="ledger_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Ledger</label>
-                            <div x-data="{isTyped: @entangle('ledgerTyped')}" @click.away="isTyped = false"
-                                 class='w-full'>
-                                <div class="relative">
-                                    <input
-                                        id="ledger_name"
-                                        type="search"
-                                        wire:model.live="ledger_name"
-                                        autocomplete="off"
-                                        placeholder="Ledger.."
-                                        @focus="isTyped = true"
-                                        @keydown.escape.window="isTyped = false"
-                                        @keydown.tab.window="isTyped = false"
-                                        @keydown.enter.prevent="isTyped = false"
-                                        wire:keydown.arrow-up="decrementLedger"
-                                        wire:keydown.arrow-down="incrementLedger"
-                                        wire:keydown.enter="enterLedger"
-                                        class="block w-full purple-textbox"
-                                    />
-                                    @error('ledger_id')
-                                    <span class="text-red-500">{{'The Ledger is Required.'}}</span>
-                                    @enderror
-
-                                    <div x-show="isTyped"
-                                         x-transition:leave="transition ease-in duration-100"
-                                         x-transition:leave-start="opacity-100"
-                                         x-transition:leave-end="opacity-0"
-                                         x-cloak
-                                    >
-                                        <div class="absolute z-20 w-full mt-2">
-                                            <div class="block py-1 shadow-md w-full
-                rounded-lg border-transparent flex-1 appearance-none border
-                                 bg-white text-gray-800 ring-1 ring-purple-600">
-                                                <ul class="overflow-y-scroll h-96">
-                                                    @if($ledgerCollection)
-                                                        @forelse ($ledgerCollection as $i => $ledger)
-                                                            <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-fit
-                                                        {{ $highlightLedger === $i ? 'bg-yellow-100' : '' }}"
-                                                                wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')"
-                                                                x-on:click="isTyped = false">
-                                                                {{ $ledger->vname }}
-                                                            </li>
-                                                        @empty
-                                                            @livewire('controls.model.common.ledger-model',[$ledger_name])
-                                                        @endforelse
-                                                    @endif
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Transport ---------------------------------------------------------------------------------------->
-
-                    @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())
+                    @if($showInput)
+                        <x-input.model-text wire:model="additional" wire:change.debounce="calculateTotal"
+                                            class="md:text-right purple-textbox w-full md:ml-20" :label="'Additional'"/>
                         <div class="flex flex-col gap-2 pt-5">
                             <div class="xl:flex w-full gap-2">
-                                <label for="transport_name"
-                                       class="w-[10rem] text-zinc-500 tracking-wide py-2">Transport</label>
-                                <div x-data="{isTyped: @entangle('transportTyped')}" @click.away="isTyped = false"
-                                     class="w-full">
+
+                                <!-- Ledger ----------------------------------------------------------------------------------->
+                                <label for="ledger_name"
+                                       class="w-[10rem] text-zinc-500 tracking-wide py-2">Ledger</label>
+                                <div x-data="{isTyped: @entangle('ledgerTyped')}" @click.away="isTyped = false"
+                                     class='w-full'>
                                     <div class="relative">
                                         <input
-                                            id="transport_name"
+                                            id="ledger_name"
                                             type="search"
-                                            wire:model.live="transport_name"
+                                            wire:model.live="ledger_name"
                                             autocomplete="off"
-                                            placeholder="Transport.."
+                                            placeholder="Ledger.."
                                             @focus="isTyped = true"
                                             @keydown.escape.window="isTyped = false"
                                             @keydown.tab.window="isTyped = false"
                                             @keydown.enter.prevent="isTyped = false"
-                                            wire:keydown.arrow-up="decrementTransport"
-                                            wire:keydown.arrow-down="incrementTransport"
-                                            wire:keydown.enter="enterTransport"
+                                            wire:keydown.arrow-up="decrementLedger"
+                                            wire:keydown.arrow-down="incrementLedger"
+                                            wire:keydown.enter="enterLedger"
                                             class="block w-full purple-textbox"
                                         />
-                                        @error('transport_id')
-                                        <span class="text-red-500">{{'The Transport is Required.'}}</span>
+                                        @error('ledger_id')
+                                        <span class="text-red-500">{{'The Ledger is Required.'}}</span>
                                         @enderror
 
                                         <div x-show="isTyped"
@@ -890,16 +841,16 @@
                 rounded-lg border-transparent flex-1 appearance-none border
                                  bg-white text-gray-800 ring-1 ring-purple-600">
                                                     <ul class="overflow-y-scroll h-96">
-                                                        @if($transportCollection)
-                                                            @forelse ($transportCollection as $i => $transport)
+                                                        @if($ledgerCollection)
+                                                            @forelse ($ledgerCollection as $i => $ledger)
                                                                 <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-fit
-                                                        {{ $highlightTransport === $i ? 'bg-yellow-100' : '' }}"
-                                                                    wire:click.prevent="setTransport('{{$transport->vname}}','{{$transport->id}}')"
+                                                        {{ $highlightLedger === $i ? 'bg-yellow-100' : '' }}"
+                                                                    wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')"
                                                                     x-on:click="isTyped = false">
-                                                                    {{ $transport->vname }}
+                                                                    {{ $ledger->vname }}
                                                                 </li>
                                                             @empty
-                                                                @livewire('controls.model.common.transport-mode',[$transport_name])
+                                                                @livewire('controls.model.common.ledger-model',[$ledger_name])
                                                             @endforelse
                                                         @endif
                                                     </ul>
@@ -911,14 +862,81 @@
                             </div>
                         </div>
                     @endif
+                    <!-- Transport ---------------------------------------------------------------------------------------->
+                    <div class="mt-3">
+                        <input   type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500
+                         dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:click="show1">&nbsp;&nbsp;&nbsp;<label>Other</label>
+                        @if($showTransport)
+                            @if(\Aaran\Aadmin\Src\SaleEntry::hasTransport())
+                                <div class="flex flex-col gap-2 pt-5">
+                                    <div class="xl:flex w-full gap-2">
+                                        <label for="transport_name"
+                                               class="w-[10rem] text-zinc-500 tracking-wide py-2">Transport</label>
+                                        <div x-data="{isTyped: @entangle('transportTyped')}"
+                                             @click.away="isTyped = false"
+                                             class="w-full">
+                                            <div class="relative">
+                                                <input
+                                                    id="transport_name"
+                                                    type="search"
+                                                    wire:model.live="transport_name"
+                                                    autocomplete="off"
+                                                    placeholder="Transport.."
+                                                    @focus="isTyped = true"
+                                                    @keydown.escape.window="isTyped = false"
+                                                    @keydown.tab.window="isTyped = false"
+                                                    @keydown.enter.prevent="isTyped = false"
+                                                    wire:keydown.arrow-up="decrementTransport"
+                                                    wire:keydown.arrow-down="incrementTransport"
+                                                    wire:keydown.enter="enterTransport"
+                                                    class="block w-full purple-textbox"
+                                                />
+                                                @error('transport_id')
+                                                <span class="text-red-500">{{'The Transport is Required.'}}</span>
+                                                @enderror
 
-                    @if(\Aaran\Aadmin\Src\SaleEntry::hasDestination())
-                        <x-input.model-text wire:model="destination" :label="'Destination'"/>
-                    @endif
+                                                <div x-show="isTyped"
+                                                     x-transition:leave="transition ease-in duration-100"
+                                                     x-transition:leave-start="opacity-100"
+                                                     x-transition:leave-end="opacity-0"
+                                                     x-cloak
+                                                >
+                                                    <div class="absolute z-20 w-full mt-2">
+                                                        <div class="block py-1 shadow-md w-full
+                rounded-lg border-transparent flex-1 appearance-none border
+                                 bg-white text-gray-800 ring-1 ring-purple-600">
+                                                            <ul class="overflow-y-scroll h-96">
+                                                                @if($transportCollection)
+                                                                    @forelse ($transportCollection as $i => $transport)
+                                                                        <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-fit
+                                                        {{ $highlightTransport === $i ? 'bg-yellow-100' : '' }}"
+                                                                            wire:click.prevent="setTransport('{{$transport->vname}}','{{$transport->id}}')"
+                                                                            x-on:click="isTyped = false">
+                                                                            {{ $transport->vname }}
+                                                                        </li>
+                                                                    @empty
+                                                                        @livewire('controls.model.common.transport-mode',[$transport_name])
+                                                                    @endforelse
+                                                                @endif
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
 
-                    @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())
-                        <x-input.model-text wire:model="bundle" :label="'Bundle'"/>
-                    @endif
+                            @if(\Aaran\Aadmin\Src\SaleEntry::hasDestination())
+                                <x-input.model-text wire:model="destination" :label="'Destination'"/>
+                            @endif
+
+                            @if(\Aaran\Aadmin\Src\SaleEntry::hasBundle())
+                                <x-input.model-text wire:model="bundle" :label="'Bundle'"/>
+                            @endif
+                        @endif
+                    </div>
                 </div>
             </section>
 
@@ -927,14 +945,12 @@
             <section class="w-full">
                 <div class="w-3/4 mr-3 ml-auto ">
 
-                    <x-input.model-text wire:model="additional" wire:change.debounce="calculateTotal"
-                                        class="md:text-right purple-textbox w-full md:ml-20" :label="'Additional'"/>
-
 
                     <div class="grid w-full md:grid-cols-2 pt-6">
                         <label
                             class="md:px-3 md:pb-2 text-left text-gray-600 text-md">Taxable&nbsp;Amount&nbsp;:&nbsp;&nbsp;</label>
-                        <label class="ml-8 md:px-3 md:pb-2 text-right text-gray-800 text-md">{{  $total_taxable }}</label>
+                        <label
+                            class="ml-8 md:px-3 md:pb-2 text-right text-gray-800 text-md">{{  $total_taxable }}</label>
                     </div>
 
 
@@ -964,9 +980,9 @@
         </section>
     </x-forms.m-panel>
     @if($vid!="")
-    <x-forms.m-panel-bottom-button save back  print  />
+        <x-forms.m-panel-bottom-button save back print/>
     @else
-    <x-forms.m-panel-bottom-button save back  />
+        <x-forms.m-panel-bottom-button save back/>
     @endif
 </div>
 

@@ -8,57 +8,41 @@ use Aaran\Aadmin\Src\SaleEntry;
 return [
 
     'features' => [
-        Customise::todoList(),
-        Customise::attendance()
+//        Customise::todoList(),
+//        Customise::attendance()
     ],
 
     'customise' => [
         SaleEntry::order(),
         SaleEntry::billingAddress(),
         SaleEntry::shippingAddress(),
-        SaleEntry::style(),
-        SaleEntry::despatch(),
+//        SaleEntry::style(),
+//        SaleEntry::despatch(),
         SaleEntry::transport(),
         SaleEntry::destination(),
         SaleEntry::bundle(),
-
         SaleEntry::productDescription(),
         SaleEntry::colour(),
         SaleEntry::size(),
     ],
 
     'menus'=>[
-        MainMenu::task(),
-        MainMenu::developer(),
         MainMenu::entries(),
-
         MainMenu::master(),
         MainMenu::common(),
         MainMenu::report(),
-
-        MainMenu::common(),
-        MainMenu::master(),
-        MainMenu::report()
     ],
 
     'migrations'=>[
         DbMigration::Core(),
         DbMigration::common(),
         DbMigration::master(),
-        DbMigration::entry(),
         DbMigration::order(),
         DbMigration::style(),
-        DbMigration::developer(),
-        DbMigration::taskManager(),
+        DbMigration::entry(),
+
         DbMigration::blog(),
-        DbMigration::audit(),
         DbMigration::todoList(),
-        DbMigration::magalir(),
-        DbMigration::demo(),
-        DbMigration::shareTrades(),
-        DbMigration::mailids(),
-        DbMigration::cashBook(),
-        DbMigration::developer(),
     ]
 
 

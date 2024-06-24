@@ -44,11 +44,12 @@ class Charges extends Component
                 'vdate' => $this->vdate ?: Carbon::now()->format('Y-m-d'),
                 'opening_balance' => $this->opening_balance ?: 0,
                 'deposit' => $this->deposit ?: 0,
-                'profit' => $this->profit ?: 0,
-                'loosed' => $this->loosed ?: 0,
                 'withdraw' => $this->withdraw ?: 0,
+                'share_profit' => 0,
+                'share_loosed' => 0,
+                'option_profit' => 0,
+                'option_loosed' => 0,
                 'charges' => $this->charges ?: 0,
-                'balance' => $this->balance ?: 0,
                 'remarks' => $this->remarks ?: '',
                 'active_id' => $this->active_id,
 
@@ -61,11 +62,8 @@ class Charges extends Component
             $obj->vdate = $this->vdate;
             $obj->opening_balance = $this->opening_balance;
             $obj->deposit = $this->deposit;
-            $obj->profit = $this->profit;
-            $obj->loosed = $this->loosed;
             $obj->withdraw = $this->withdraw;
             $obj->charges = $this->charges;
-            $obj->balance = $this->balance;
             $obj->remarks = $this->remarks;
             $obj->active_id = $this->active_id;
 
@@ -88,11 +86,8 @@ class Charges extends Component
             $this->vdate = $obj->vdate;
             $this->opening_balance = $obj->opening_balance;
             $this->deposit = $obj->deposit;
-            $this->profit = $obj->profit;
-            $this->loosed = $obj->loosed;
             $this->withdraw = $obj->withdraw;
             $this->charges = $obj->charges;
-            $this->balance = $obj->balance;
             $this->remarks = $obj->remarks;
             $this->active_id = $obj->active_id;
             return $obj;
