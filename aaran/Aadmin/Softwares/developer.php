@@ -54,6 +54,11 @@ return [
         DbMigration::audit(),
         DbMigration::todoList(),
         DbMigration::magalir(),
+        DbMigration::demo(),
+        DbMigration::shareTrades(),
+        DbMigration::mailids(),
+        DbMigration::cashBook(),
+        DbMigration::developer(),
     ]
 
 

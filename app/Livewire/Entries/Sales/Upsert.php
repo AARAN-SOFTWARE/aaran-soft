@@ -62,8 +62,20 @@ class Upsert extends Component
     public $grandtotalBeforeRound;
     public $dc_no;
     public $no_of_roll;
-
+    public $showInput=false;
+    public $showTransport=false;
     #endregion
+
+    public function show(): void
+    {
+        $this->showInput=!$this->showInput;
+
+    }
+
+    public function show1()
+    {
+        $this->showTransport =!$this->showTransport;
+    }
 
     #region[Contact]
 
