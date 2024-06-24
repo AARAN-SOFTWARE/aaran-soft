@@ -4,7 +4,7 @@ namespace Aaran\Testing\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class TestImageSeeder extends Seeder
+class LwBladeTestSeeder extends Seeder
 {
     /**
      * Run the database seeds.

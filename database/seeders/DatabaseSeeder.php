@@ -82,10 +82,6 @@ class DatabaseSeeder extends Seeder
             S205_StyleSeeder::run();
         }
 
-        if (DbMigration::hasDeveloper()) {
-            TestFileSeeder::run();
-        }
-
 //        ClientSeeder::run();
 //        RootlineSeeder::run();
 //        RootlineItemsSeeder::run();

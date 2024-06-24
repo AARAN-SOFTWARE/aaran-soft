@@ -5,9 +5,9 @@ namespace Aaran\Testing\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Aaran\Testing\Models\TestOperation>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Aaran\Testing\Models\TestModule>
  */
-class TestOperationFactory extends Factory
+class TestModuleFactory extends Factory
 {
     /**
      * Define the model's default state.

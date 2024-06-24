@@ -4,7 +4,7 @@ namespace Aaran\Testing\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class ActionsSeeder extends Seeder
+class DbTestSeeder extends Seeder
 {
     /**
      * Run the database seeds.
