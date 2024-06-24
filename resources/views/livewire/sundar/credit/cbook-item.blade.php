@@ -68,12 +68,6 @@
 
                         <x-table.cell-text right>
                             <a href="{{route('credits.interests',[$row->id])}}">
-                                {{ $row->pending + 0 }}
-                            </a>
-                        </x-table.cell-text>
-
-                        <x-table.cell-text right>
-                            <a href="{{route('credits.interests',[$row->id])}}">
                                 {{ $row->terms + 0 }}
                             </a>
                         </x-table.cell-text>
@@ -81,6 +75,12 @@
                         <x-table.cell-text right>
                             <a href="{{route('credits.interests',[$row->id])}}">
                                 {{ $row->pending_due + 0 }}
+                            </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right>
+                            <a href="{{route('credits.interests',[$row->id])}}">
+                                {{ $row->pending + 0 }}
                             </a>
                         </x-table.cell-text>
 
@@ -115,12 +115,12 @@
         <x-forms.create :id="$vid">
             <x-input.model-date wire:model="vdate" :label="'Date'"/>
             <x-input.model-text wire:model="credit" :label="'Credit'"/>
-            <x-input.model-text wire:model="rate" :label="'Rate'"/>
-            <x-input.model-text wire:model="interest" :label="'Interest'"/>
-            <x-input.model-text wire:model="processing" :label="'Processing'"/>
-            <x-input.model-text wire:model="pending" :label="'Pending'"/>
+            <x-input.model-text wire:model="rate" :label="'Rate of Interest'"/>
+            <x-input.model-text wire:model="interest" :label="'Interest on Month'"/>
+            <x-input.model-text wire:model="processing" :label="'Processing Fee'"/>
             <x-input.model-text wire:model="terms" :label="'Terms'"/>
             <x-input.model-text wire:model="pending_due" :label="'Pending due'"/>
+            <x-input.model-text wire:model="pending" :label="'Pending Amount '"/>
             <x-input.model-text wire:model="remarks" :label="'Remarks'"/>
         </x-forms.create>
 
