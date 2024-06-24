@@ -2,11 +2,10 @@
 
 namespace App\Livewire\Sundar\Trading;
 
-use Aaran\Sundar\Models\ShareTrades;
+use Aaran\Sundar\Models\Share\ShareTrades;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Deposit extends Component

@@ -1,14 +1,15 @@
 <?php
 
-namespace Aaran\Sundar\Models;
+namespace Aaran\Sundar\Models\Share;
 
 use Aaran\Sundar\Database\factories\StockTradeFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class OptionTrade extends Model
+class StockTrade extends Model
 {
+    use HasFactory;
     protected $guarded=[];
 
     protected static function newFactory(): StockTradeFactory
@@ -21,9 +22,9 @@ class OptionTrade extends Model
             : static::where('vname', 'like', '%' . $searches . '%');
     }
 
-    public function spotName(): BelongsTo
+    public function stockName(): BelongsTo
     {
-        return $this->belongsTo(SpotName::class);
+        return $this->belongsTo(StockName::class);
     }
 
 }

@@ -1,13 +1,16 @@
 <?php
 
-namespace Aaran\Sundar\Models;
+namespace Aaran\Sundar\Models\Share;
 
 use Aaran\Sundar\Database\factories\ShareTradesFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class StockName extends Model
+class ShareTrades extends Model
 {
+    use HasFactory;
 
     protected $guarded=[];
     public $timestamps = false;
@@ -21,4 +24,11 @@ class StockName extends Model
         return empty($searches) ? static::query()
             : static::where('vname', 'like', '%' . $searches . '%');
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
 }

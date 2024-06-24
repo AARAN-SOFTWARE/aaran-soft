@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Sundar\Trading\sub;
 
-use Aaran\Sundar\Models\ShareTrades;
-use Aaran\Sundar\Models\StockName;
-use Aaran\Sundar\Models\StockTrade;
+use Aaran\Sundar\Models\Share\ShareTrades;
+use Aaran\Sundar\Models\Share\StockName;
+use Aaran\Sundar\Models\Share\StockTrade;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;

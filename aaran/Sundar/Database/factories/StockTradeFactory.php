@@ -2,7 +2,7 @@
 
 namespace Aaran\Sundar\Database\factories;
 
-use Aaran\Sundar\Models\StockTrade;
+use Aaran\Sundar\Models\Share\StockTrade;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StockTradeFactory extends Factory

@@ -3,6 +3,7 @@
 namespace App\Livewire\Sundar\Credit;
 
 use Aaran\Sundar\Models\Credit\CreditBook;
+use Aaran\Sundar\Models\Credit\CreditMember;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -13,34 +14,38 @@ class Cbook extends Component
     use CommonTrait;
 
     public string $closing = '';
+    public $credit_member;
+
+
+    public function mount($id)
+    {
+        $this->credit_member = CreditMember::find($id);
+    }
 
     #region[Save]
     public function getSave(): string
     {
-        $this->validate(['closing'=>'required|numeric']);
 
         if ($this->vname !== '') {
             if ($this->vid == "") {
                 CreditBook::create([
+                    'credit_member_id' => $this->credit_member->id,
                     'vname' => Str::upper($this->vname),
                     'closing' => $this->closing,
                     'active_id' => $this->active_id,
-                    'company_id' => session()->get('company_id'),
-                    'user_id' => Auth::id(),
                 ]);
                 $message = "Saved";
 
             } else {
                 $obj = CreditBook::find($this->vid);
+                $obj->credit_member_id = $this->credit_member->id;
                 $obj->vname = Str::upper($this->vname);
                 $obj->closing = $this->closing;
                 $obj->active_id = $this->active_id;
-                $obj->company_id = session()->get('company_id');
-                $obj->user_id = Auth::id();
                 $obj->save();
                 $message = "Updated";
             }
-            $this->closing = '';
+            $this->clearFields();
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
         return '';
@@ -48,9 +53,9 @@ class Cbook extends Component
 
     public function clearFields(): void
     {
-        $this->vname='';
+        $this->vname = '';
         $this->closing = '';
-        $this->active_id=true;
+        $this->active_id = true;
 
     }
     #endregion
@@ -77,23 +82,19 @@ class Cbook extends Component
 
         return CreditBook::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
-            ->where('company_id', '=', session()->get('company_id'))
+            ->where('credit_member_id', '=', $this->credit_member->id)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
     #endregion
 
     #region[Render]
-    public function reRender(): void
-    {
-        $this->render();
-    }
 
     public function render()
     {
-        return view('livewire.sundar.creditbook.index')->with([
+        return view('livewire.sundar.credit.cbook')->with([
             'list' => $this->getList()
         ]);
     }
-        #endregion
+    #endregion
 }

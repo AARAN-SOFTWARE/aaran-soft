@@ -1,9 +1,8 @@
 <?php
 
-namespace Aaran\Sundar\Models;
+namespace Aaran\Sundar\Models\Share;
 
 use Aaran\Sundar\Database\factories\StockTradeFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class TradeCommission extends Model

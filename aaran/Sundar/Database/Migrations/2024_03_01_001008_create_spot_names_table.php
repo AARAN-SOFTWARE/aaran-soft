@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasMailids()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasshareTrades()) {
 
             Schema::create('spot_names', function (Blueprint $table) {
                 $table->id();

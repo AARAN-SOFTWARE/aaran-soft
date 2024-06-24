@@ -1,6 +1,6 @@
 <?php
 
-namespace Aaran\Sundar\Models;
+namespace Aaran\Sundar\Models\Share;
 
 use Aaran\Sundar\Database\factories\ShareTradesFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
