@@ -4,17 +4,20 @@
 
 
         <x-dashboard.greetings/>
-
-        @if(Aaran\Aadmin\Src\DbMigration::hasEntry())
-            <x-dashboard.cards :transaction="$transaction"/>
+        @if(session()->get('role_id')==1|| session()->get('role_id')==2|| session()->get('role_id')==3 )
+            @if(Aaran\Aadmin\Src\DbMigration::hasEntry())
+                <x-dashboard.cards :transaction="$transaction"/>
+            @endif
         @endif
 
         <div class="flex flex-col sm:flex-row  gap-4">
             <div class="flex-col justify-evenly">
                 <div class="lg:w-full lg:flex justify-between gap-3 py-5 h-1/2">
                     <div class="lg:w-[30rem] h-[16-rem] mx-auto">
-                        @if(Aaran\Aadmin\Src\DbMigration::hasTodoList())
-                            <livewire:taskmanager.todos.index/>
+                        @if(session()->get('role_id')==1|| session()->get('role_id')==2|| session()->get('role_id')==3 || session()->get('role_id')==4)
+                            @if(Aaran\Aadmin\Src\DbMigration::hasTodoList())
+                                <livewire:taskmanager.todos.index/>
+                            @endif
                         @endif
                     </div>
                 </div>
