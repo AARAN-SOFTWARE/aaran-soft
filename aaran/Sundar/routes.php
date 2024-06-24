@@ -7,13 +7,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('credits', App\Livewire\Sundar\Credit\Cmember::class)->name('credits');
     Route::get('credits/{id}/books', App\Livewire\Sundar\Credit\Cbook::class)->name('credits.books');
+    Route::get('credits/{id}/items', App\Livewire\Sundar\Credit\CbookItem::class)->name('credits.items');
+    Route::get('credits/{id}/interests', App\Livewire\Sundar\Credit\CInterest::class)->name('credits.interests');
 
 
 
-
-    Route::get('creditBooks/{id}/items', App\Livewire\Sundar\Creditbook\Item::class)->name('creditBooks.items');
-
-    Route::get('interestBooks/{id}/show', App\Livewire\Sundar\InterestBook\Index::class)->name('interestBooks.show');
 
     Route::get('socials', App\Livewire\Sundar\Social\Index::class)->name('socials');
 
