@@ -10,7 +10,9 @@ class DbMigration
     {
         return match (config('aadmin.app_type')) {
 
-            config('software.GARMENT') => in_array($feature, config('garment.migrations', [])),
+            config('software.GARMENT_1') => in_array($feature, config('garment_1.migrations', [])),
+            config('software.GARMENT_2') => in_array($feature, config('garment_2.migrations', [])),
+
             config('software.OFFSET') => in_array($feature, config('offset.migrations', [])),
             config('software.SUNDAR') => in_array($feature, config('sundar.migrations', [])),
             config('software.DEVELOPER') => in_array($feature, config('developer.migrations', [])),
