@@ -3,8 +3,8 @@
     <x-forms.m-panel>
 
         <div class="flex justify-between items-center">
-            <div>{{}}</div>
-            <div>&nbsp;</div>
+            <div>{{$share_trade->user->name}}</div>
+            <div>{{date('d-m-Y', strtotime($share_trade->vdate))}}</div>
             <x-button.new/>
         </div>
 
@@ -156,7 +156,8 @@
                                                 </li>
 
                                             @empty
-                                                <button wire:click.prevent="spotSave('{{$spot_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                <button wire:click.prevent="spotSave('{{$spot_name}}')"
+                                                        class="text-white bg-green-500 text-center w-full">
                                                     create
                                                 </button>
                                             @endforelse
