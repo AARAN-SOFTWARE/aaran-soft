@@ -5,14 +5,14 @@
     <x-forms.m-panel>
 
         <div class="flex justify-between items-center">
-            <select wire:model.live="k_id" :label="'User'" class="w-[30rem] purple-textbox">
+            <select wire:model.live="search_user_id" :label="'User'" class="w-[30rem] purple-textbox">
                 <option class="text-gray-400"> choose ..</option>
                 @foreach($users as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
                 @endforeach
             </select>
 
-            <div>{{ \App\Models\User::getName($k_id?: auth()->id())}}</div>
+            <div>{{ \App\Models\User::getName($search_user_id)}}</div>
             <div>&nbsp;</div>
 
         </div>
@@ -78,16 +78,33 @@
 
                     <x-table.row>
                         <x-table.cell-text
-                            class="tracking-wider font-semibold text-md {{$row->profit - $row->loosed > 0 ?'text-green-500':'text-red-500'}}">
-                            <a href="{{route('shareTrades.profits')}}">
-                                Trade P&L
+                                class="tracking-wider font-semibold text-md {{$row->share_profit-$row->share_loosed > 0 ?'text-green-500':'text-red-500'}}">
+                            <a href="{{route('shareTrades.shares')}}">
+                                Share P&L
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text right
-                                           class="tracking-wider font-semibold text-md {{$row->profit - $row->loosed > 0 ?'text-green-500':'text-red-500'}}">
-                            <a href="{{route('shareTrades.profits')}}">
-                                {{ $row->profit - $row->loosed }}
+                                           class="tracking-wider font-semibold text-md {{$row->share_profit-$row->share_loosed > 0 ?'text-green-500':'text-red-500'}}">
+                            <a href="{{route('shareTrades.shares')}}">
+                                {{ $row->share_profit-$row->share_loosed }}
+                            </a>
+
+                        </x-table.cell-text>
+                    </x-table.row>
+
+                    <x-table.row>
+                        <x-table.cell-text
+                                class="tracking-wider font-semibold text-md {{$row->option_profit-$row->option_loosed > 0 ?'text-green-500':'text-red-500'}}">
+                            <a href="{{route('shareTrades.options')}}">
+                                Options P&L
+                            </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right
+                                           class="tracking-wider font-semibold text-md {{$row->option_profit-$row->option_loosed > 0 ?'text-green-500':'text-red-500'}}">
+                            <a href="{{route('shareTrades.options')}}">
+                                {{ $row->option_profit-$row->option_loosed }}
                             </a>
 
                         </x-table.cell-text>
@@ -108,20 +125,20 @@
                     </x-table.row>
 
                     @php
-                        $totalBalance = \App\Helper\ConvertTo::decimal2(($row->opening_balance+$row->deposit+$row->profit)-($row->loosed+$row->charges+$row->withdraw))
+                        $totalBalance = \App\Helper\ConvertTo::decimal2(($row->opening_balance+$row->deposit+$row->share_profit+$row->option_profit)-($row->share_loosed+$row->option_loosed+$row->charges+$row->withdraw))
                     @endphp
 
                     <x-table.row>
                         <x-table.cell-text>
                             <div
-                                class="tracking-wider font-semibold text-md {{$totalBalance > 0 ?'text-green-500':'text-red-500'}}">
+                                    class="tracking-wider font-semibold text-md {{$totalBalance > 0 ?'text-green-500':'text-red-500'}}">
                                 Capitals
                             </div>
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
                             <div
-                                class="tracking-wider font-semibold text-md text-right {{$totalBalance > 0 ?'text-green-500':'text-red-500'}}">
+                                    class="tracking-wider font-semibold text-md text-right {{$totalBalance > 0 ?'text-green-500':'text-red-500'}}">
                                 {{$totalBalance}}
                             </div>
                         </x-table.cell-text>

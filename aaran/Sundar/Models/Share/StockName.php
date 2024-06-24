@@ -1,14 +1,12 @@
 <?php
 
-namespace Aaran\Sundar\Models;
+namespace Aaran\Sundar\Models\Share;
 
 use Aaran\Sundar\Database\factories\ShareTradesFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ShareTrades extends Model
+class StockName extends Model
 {
-    use HasFactory;
 
     protected $guarded=[];
     public $timestamps = false;

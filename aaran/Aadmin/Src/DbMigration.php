@@ -258,7 +258,7 @@ class DbMigration
 
     #endregion
 
-    #region[Share trades]
+    #region[Shares trades]
     public static function hasShareTrades(): bool
     {
         return static::enabled(static::shareTrades());

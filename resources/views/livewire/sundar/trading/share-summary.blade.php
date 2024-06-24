@@ -13,9 +13,11 @@
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Date</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Opening Balance</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Deposit</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Profit</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Loosed</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Withdraw</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Share Profit</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Share Loosed</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Options Profit</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Options Loosed</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Charges</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Balance</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Remarks</x-table.header-text>
@@ -56,15 +58,23 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
-                            {{ $row->profit }}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text right>
-                            {{ $row->loosed }}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text right>
                             {{ $row->withdraw }}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right>
+                            {{ $row->share_profit }}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right>
+                            {{ $row->share_loosed }}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right>
+                            {{ $row->option_profit }}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right>
+                            {{ $row->option_loosed }}
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
@@ -159,9 +169,11 @@
             <x-input.model-date wire:model="vdate" :label="'Date'"/>
             <x-input.model-text wire:model="opening_balance" :label="'Opening Balance'"/>
             <x-input.model-text wire:model="deposit" :label="'Deposit'"/>
-            <x-input.model-text wire:model="profit" :label="'Profit'"/>
-            <x-input.model-text wire:model="loosed" :label="'Loosed'"/>
             <x-input.model-text wire:model="withdraw" :label="'Withdraw'"/>
+            <x-input.model-text wire:model="share_profit" :label="'share_profit'"/>
+            <x-input.model-text wire:model="share_loosed" :label="'share_loosed'"/>
+            <x-input.model-text wire:model="option_profit" :label="'option_profit'"/>
+            <x-input.model-text wire:model="option_loosed" :label="'option_loosed'"/>
             <x-input.model-text wire:model="charges" :label="'Charges'"/>
             <x-input.model-text wire:model="balance" :label="'Balance'"/>
             <x-input.model-text wire:model="remarks" :label="'Remarks'"/>

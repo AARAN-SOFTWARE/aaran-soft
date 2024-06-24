@@ -11,7 +11,7 @@ return new class extends Migration {
 
             Schema::create('credit_interests', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('credit_book_id')->references('id')->on('credit_books');
+                $table->foreignId('credit_book_item_id')->references('id')->on('credit_book_items');
                 $table->string('serial')->nullable();
                 $table->date('vdate');
                 $table->decimal('interest', 11, 2);

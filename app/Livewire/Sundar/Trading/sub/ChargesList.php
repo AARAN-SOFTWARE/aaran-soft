@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Livewire\Sundar\Trading;
+namespace App\Livewire\Sundar\Trading\sub;
 
-use Aaran\Sundar\Models\ShareTrades;
+use Aaran\Sundar\Models\Share\ShareTrades;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
 
-class Profit extends Component
+class ChargesList extends Component
 {
     #region[property]
     use CommonTrait;
@@ -106,12 +106,9 @@ class Profit extends Component
     {
         $this->sortField = 'vdate';
 
-        return ShareTrades::search($this->searches)
+        return ShareTrades::search($this->searches)->where('user_id', '=', $this->k_id?:auth()->id())
             ->where('active_id', '=', $this->activeRecord)
-            ->where('profit', '>', 0)
-            ->where("user_id", $this->k_id?:auth()->id())
-            ->orwhere('loosed', '<', 0)
-            ->where("user_id", $this->k_id?:auth()->id())
+            ->where('charges', '>', 0)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
@@ -145,7 +142,7 @@ class Profit extends Component
     #region[render]
     public function render()
     {
-        return view('livewire.sundar.trading.profit')->with([
+        return view('livewire.sundar.trading.charges')->with([
             'list' => $this->getList()
         ]);
     }

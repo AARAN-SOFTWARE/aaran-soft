@@ -2,36 +2,32 @@
 
 namespace App\Livewire\Sundar\Credit;
 
-use Aaran\Sundar\Models\Credit\CreditBook;
 use Aaran\Sundar\Models\Credit\CreditBookItem;
+use Aaran\Sundar\Models\Credit\CreditInterest;
 use App\Livewire\Trait\CommonTrait;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 
-class CbookItem extends Component
+class CInterest extends Component
 {
     use CommonTrait;
 
     #region[Cashbook properties]
+    public string $serial = '';
     public string $vdate = '';
-    public mixed $credit = '';
-    public mixed $rate = '';
     public mixed $interest = '';
-    public mixed $processing = '';
-    public mixed $pending = '';
-    public mixed $terms = '';
-    public mixed $pending_due = '';
+    public mixed $received = '';
+    public mixed $received_date = '';
     public string $remarks = '';
-    public CreditBook $creditBook;
+    public CreditBookItem $creditBookItem;
     #endregion
 
     #region[Mount]
     public function mount($id)
     {
-        $this->creditBook = CreditBook::find($id);
+        $this->creditBookItem = CreditBookItem::find($id);
     }
     #endregion
 
@@ -39,14 +35,11 @@ class CbookItem extends Component
     public function clearFields(): void
     {
         $this->vid = '';
-        $this->vdate = '';
-        $this->credit = '';
-        $this->rate = '';
+        $this->serial = '';
+        $this->vdate = Carbon::parse(Carbon::now())->format('Y-m-d');
         $this->interest = '';
-        $this->processing = '';
-        $this->pending = '';
-        $this->terms = '';
-        $this->pending_due = '';
+        $this->received = '';
+        $this->received_date = Carbon::parse(Carbon::now())->format('Y-m-d');
         $this->remarks = '';
         $this->active_id = true;
     }
@@ -57,31 +50,23 @@ class CbookItem extends Component
     {
 
         if ($this->vid == "") {
-            CreditBookItem::create([
-                'credit_book_id' => $this->creditBook->id,
+            CreditInterest::create([
+                'credit_book_item_id' => $this->creditBookItem->id,
+                'serial' => $this->serial != '' ? $this->serial : 0,
                 'vdate' => ($this->vdate != '') ? $this->vdate : Carbon::parse(Carbon::now())->format('Y-m-d'),
-                'credit' => $this->credit != '' ? $this->credit : 0,
-                'rate' => $this->rate != '' ? $this->rate : 0,
                 'interest' => $this->interest != '' ? $this->interest : 0,
-                'processing' => $this->processing != '' ? $this->processing : 0,
-                'pending' => $this->pending != '' ? $this->pending : 0,
-                'terms' => $this->terms != '' ? $this->terms : 0,
-                'pending_due' => $this->pending_due != '' ? $this->pending_due : 0,
+                'received' => $this->received != '' ? $this->received : 0,
+                'received_date' => ($this->received_date != '') ? $this->received_date : Carbon::parse(Carbon::now())->format('Y-m-d'),
                 'remarks' => $this->remarks,
-                'active_id' => $this->active_id,
             ]);
             $message = "Saved";
         } else {
-            $obj = CreditBookItem::find($this->vid);
-            $obj->credit_book_id = $this->creditBook->id;
+            $obj = CreditInterest::find($this->vid);
+            $obj->credit_book_item_id = $this->creditBookItem->id;
             $obj->vdate = ($this->vdate != '') ? $this->vdate : Carbon::parse(Carbon::now())->format('Y-m-d');
-            $obj->credit = $this->credit != '' ? $this->credit : 0;
-            $obj->rate = $this->rate != '' ? $this->rate : 0;
             $obj->interest = $this->interest != '' ? $this->interest : 0;
-            $obj->processing = $this->processing != '' ? $this->processing : 0;
-            $obj->pending = $this->pending != '' ? $this->pending : 0;
-            $obj->terms = $this->terms != '' ? $this->terms : 0;
-            $obj->pending_due = $this->pending_due != '' ? $this->pending_due : 0;
+            $obj->received = $this->received != '' ? $this->received : 0;
+            $obj->received_date = ($this->received_date != '') ? $this->received_date : Carbon::parse(Carbon::now())->format('Y-m-d');
             $obj->remarks = $this->remarks;
             $obj->active_id = $this->active_id ?: '0';
             $obj->save();
@@ -109,16 +94,13 @@ class CbookItem extends Component
     public function getObj($id)
     {
         if ($id) {
-            $obj = CreditBookItem::find($id);
+            $obj = CreditInterest::find($id);
             $this->vid = $obj->id;
+            $this->serial = $obj->serial;
             $this->vdate = $obj->vdate;
-            $this->credit = $obj->credit;
-            $this->rate = $obj->rate;
             $this->interest = $obj->interest;
-            $this->processing = $obj->processing;
-            $this->pending = $obj->pending;
-            $this->terms = $obj->terms;
-            $this->pending_due = $obj->pending_due;
+            $this->received = $obj->received;
+            $this->received_date = $obj->received_date;
             $this->remarks = $obj->remarks;
             $this->active_id = $obj->active_id;
             return $obj;
@@ -132,8 +114,8 @@ class CbookItem extends Component
     {
         $this->sortField = 'id';
 
-        return CreditBookItem::search($this->searches)
-            ->where('credit_book_id', '=', $this->creditBook->id)
+        return CreditInterest::search($this->searches)
+            ->where('credit_book_item_id', '=', $this->creditBookItem->id)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
@@ -142,7 +124,7 @@ class CbookItem extends Component
     #region[Render]
     public function render()
     {
-        return view('livewire.sundar.credit.cbook-item')->with([
+        return view('livewire.sundar.credit.cinterest')->with([
             'list' => $this->getList()
         ]);
     }

@@ -49,6 +49,7 @@ return [
         DbMigration::blog(),
         DbMigration::demo(),
         DbMigration::shareTrades(),
+        DbMigration::creditBooks(),
         DbMigration::magalir(),
         DbMigration::mailids(),
         DbMigration::cashBook(),

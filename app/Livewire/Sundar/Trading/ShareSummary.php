@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Sundar\Trading;
 
-use Aaran\Sundar\Models\ShareTrades;
+use Aaran\Sundar\Models\Share\ShareTrades;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
 
-class ShareTradeList extends Component
+class ShareSummary extends Component
 {
     #region[property]
     use CommonTrait;
@@ -16,11 +16,12 @@ class ShareTradeList extends Component
     public $vdate;
     public mixed $opening_balance;
     public mixed $deposit;
-    public mixed $profit;
-    public mixed $loosed;
     public mixed $withdraw;
+    public mixed $share_profit;
+    public mixed $share_loosed;
+    public mixed $option_profit;
+    public mixed $option_loosed;
     public mixed $charges;
-    public mixed $balance;
     public mixed $user_id = '';
     public $remarks = '';
     public mixed $k_id = '';
@@ -44,11 +45,12 @@ class ShareTradeList extends Component
                 'vdate' => $this->vdate ?: Carbon::now()->format('Y-m-d'),
                 'opening_balance' => $this->opening_balance ?: 0,
                 'deposit' => $this->deposit ?: 0,
-                'profit' => $this->profit ?: 0,
-                'loosed' => $this->loosed ?: 0,
+                'profit' => $this->share_profit ?: 0,
+                'loosed' => $this->share_loosed ?: 0,
+                'option_profit' => $this->option_profit ?: 0,
+                'option_loosed' => $this->option_loosed ?: 0,
                 'withdraw' => $this->withdraw ?: 0,
                 'charges' => $this->charges ?: 0,
-                'balance' => $this->balance ?: 0,
                 'remarks' => $this->remarks ?: '',
                 'active_id' => $this->active_id,
 
@@ -61,11 +63,12 @@ class ShareTradeList extends Component
             $obj->vdate = $this->vdate;
             $obj->opening_balance = $this->opening_balance;
             $obj->deposit = $this->deposit;
-            $obj->profit = $this->profit;
-            $obj->loosed = $this->loosed;
             $obj->withdraw = $this->withdraw;
+            $obj->share_profit = $this->share_profit;
+            $obj->share_loosed = $this->share_loosed;
+            $obj->option_profit = $this->option_profit;
+            $obj->option_loosed = $this->option_loosed;
             $obj->charges = $this->charges;
-            $obj->balance = $this->balance;
             $obj->remarks = $this->remarks;
             $obj->active_id = $this->active_id;
 
@@ -88,11 +91,12 @@ class ShareTradeList extends Component
             $this->vdate = $obj->vdate;
             $this->opening_balance = $obj->opening_balance;
             $this->deposit = $obj->deposit;
-            $this->profit = $obj->profit;
-            $this->loosed = $obj->loosed;
+            $this->share_profit = $obj->share_profit;
+            $this->share_loosed = $obj->share_loosed;
+            $this->option_profit = $obj->option_profit;
+            $this->option_loosed = $obj->option_loosed;
             $this->withdraw = $obj->withdraw;
             $this->charges = $obj->charges;
-            $this->balance = $obj->balance;
             $this->remarks = $obj->remarks;
             $this->active_id = $obj->active_id;
             return $obj;
@@ -120,11 +124,12 @@ class ShareTradeList extends Component
         $this->vdate = '';
         $this->opening_balance = '';
         $this->deposit = '';
-        $this->profit = '';
-        $this->loosed = '';
+        $this->share_profit = '';
+        $this->share_loosed = '';
+        $this->option_profit = '';
+        $this->option_loosed = '';
         $this->withdraw = '';
         $this->charges = '';
-        $this->balance = '';
         $this->remarks = '';
         $this->active_id = '1';
     }
@@ -140,7 +145,7 @@ class ShareTradeList extends Component
     #region[render]
     public function render()
     {
-        return view('livewire.sundar.trading.share-trade-list')->with([
+        return view('livewire.sundar.trading.share-summary')->with([
             'list' => $this->getList()
         ]);
     }

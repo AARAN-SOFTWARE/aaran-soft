@@ -8,22 +8,17 @@ use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
 
-class Charges extends Component
+class Options extends Component
 {
     #region[property]
     use CommonTrait;
 
     public $vdate;
-    public mixed $opening_balance;
-    public mixed $deposit;
-    public mixed $profit;
-    public mixed $loosed;
-    public mixed $withdraw;
-    public mixed $charges;
-    public mixed $balance;
+    public mixed $option_profit;
+    public mixed $option_loosed;
     public mixed $user_id = '';
     public $remarks = '';
-    public mixed $k_id = '';
+    public mixed $search_user_id = '';
 
     public mixed $users;
 
@@ -40,15 +35,16 @@ class Charges extends Component
     {
         if ($this->vid == "") {
             ShareTrades::create([
-                'user_id' => $this->user_id?:auth()->id(),
+                'user_id' => $this->user_id ?: auth()->id(),
                 'vdate' => $this->vdate ?: Carbon::now()->format('Y-m-d'),
-                'opening_balance' => $this->opening_balance ?: 0,
-                'deposit' => $this->deposit ?: 0,
-                'profit' => $this->profit ?: 0,
-                'loosed' => $this->loosed ?: 0,
-                'withdraw' => $this->withdraw ?: 0,
-                'charges' => $this->charges ?: 0,
-                'balance' => $this->balance ?: 0,
+                'opening_balance' => 0,
+                'deposit' => 0,
+                'withdraw' => 0,
+                'share_profit' => 0,
+                'share_loosed' => 0,
+                'option_profit' => $this->option_profit ?: 0,
+                'option_loosed' => $this->option_loosed ?: 0,
+                'charges' => 0,
                 'remarks' => $this->remarks ?: '',
                 'active_id' => $this->active_id,
 
@@ -59,13 +55,8 @@ class Charges extends Component
             $obj = ShareTrades::find($this->vid);
             $obj->user_id = $this->user_id;
             $obj->vdate = $this->vdate;
-            $obj->opening_balance = $this->opening_balance;
-            $obj->deposit = $this->deposit;
-            $obj->profit = $this->profit;
-            $obj->loosed = $this->loosed;
-            $obj->withdraw = $this->withdraw;
-            $obj->charges = $this->charges;
-            $obj->balance = $this->balance;
+            $obj->option_profit = $this->option_profit ?: 0;
+            $obj->option_loosed = $this->option_loosed ?: 0;
             $obj->remarks = $this->remarks;
             $obj->active_id = $this->active_id;
 
@@ -86,13 +77,8 @@ class Charges extends Component
             $this->vid = $obj->id;
             $this->user_id = $obj->user_id;
             $this->vdate = $obj->vdate;
-            $this->opening_balance = $obj->opening_balance;
-            $this->deposit = $obj->deposit;
-            $this->profit = $obj->profit;
-            $this->loosed = $obj->loosed;
-            $this->withdraw = $obj->withdraw;
-            $this->charges = $obj->charges;
-            $this->balance = $obj->balance;
+            $this->option_profit = $obj->option_profit;
+            $this->option_loosed = $obj->option_loosed;
             $this->remarks = $obj->remarks;
             $this->active_id = $obj->active_id;
             return $obj;
@@ -106,9 +92,15 @@ class Charges extends Component
     {
         $this->sortField = 'vdate';
 
-        return ShareTrades::search($this->searches)->where('user_id', '=', $this->k_id?:auth()->id())
+        if ($this->search_user_id == '') {
+            $this->search_user_id = auth()->id();
+        }
+
+        return ShareTrades::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
-            ->where('charges', '>', 0)
+            ->where('option_profit', '>', 0)
+            ->orwhere('option_loosed', '>', 0)
+            ->where("user_id", $this->search_user_id)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
@@ -117,16 +109,11 @@ class Charges extends Component
     #region[clearFields]
     public function clearFields(): void
     {
-        $this->vid='';
+        $this->vid = '';
         $this->user_id = '';
-        $this->vdate = '';
-        $this->opening_balance = '';
-        $this->deposit = '';
-        $this->profit = '';
-        $this->loosed = '';
-        $this->withdraw = '';
-        $this->charges = '';
-        $this->balance = '';
+        $this->vdate = Carbon::now()->format('Y-m-d');
+        $this->option_profit = '';
+        $this->option_loosed = '';
         $this->remarks = '';
         $this->active_id = '1';
     }
@@ -142,7 +129,7 @@ class Charges extends Component
     #region[render]
     public function render()
     {
-        return view('livewire.sundar.trading.charges')->with([
+        return view('livewire.sundar.trading.options')->with([
             'list' => $this->getList()
         ]);
     }

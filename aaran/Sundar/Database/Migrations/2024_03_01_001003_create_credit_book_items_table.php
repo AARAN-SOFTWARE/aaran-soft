@@ -17,9 +17,9 @@ return new class extends Migration {
                 $table->decimal('rate', 11, 2);
                 $table->decimal('interest', 11, 2);
                 $table->decimal('processing', 11, 2);
-                $table->decimal('pending', 11, 2);
                 $table->string('terms')->nullable();
                 $table->string('pending_due')->nullable();
+                $table->decimal('pending', 11, 2);
                 $table->string('remarks')->nullable();
                 $table->string('active_id', 3)->nullable();
                 $table->timestamps();

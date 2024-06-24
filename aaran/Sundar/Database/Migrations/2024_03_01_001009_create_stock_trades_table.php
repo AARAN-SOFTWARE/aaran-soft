@@ -13,9 +13,8 @@ return new class extends Migration {
                 $table->id();
                 $table->integer('serial')->nullable();
                 $table->string('vdate')->nullable();
+                $table->foreignId('stock_name_id')->references('id')->on('stock_names')->cascadeOnDelete();
                 $table->string('trade_type')->nullable();
-                $table->string('stock_name')->nullable();
-                $table->string('option_type')->nullable();
                 $table->decimal('buy', 15, 2)->nullable();
                 $table->decimal('sell', 15, 2)->nullable();
                 $table->decimal('spread', 15, 2)->nullable();
@@ -24,7 +23,6 @@ return new class extends Migration {
                 $table->decimal('loosed', 15, 2)->nullable();
                 $table->decimal('commission', 15, 2)->nullable();
                 $table->foreignId('share_trade_id')->references('id')->on('share_trades')->cascadeOnDelete();
-                $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
                 $table->decimal('active_id', 3)->nullable();
                 $table->timestamps();
             });

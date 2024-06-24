@@ -7,6 +7,6 @@
 <x-menu.base.li-menuitem :routes="'socials'" :label="'Social Ids'"/>
 
 
-<x-menu.base.li-menuitem :routes="'creditBooks'" :label="'Credit Book'"/>
+{{--<x-menu.base.li-menuitem :routes="'creditBooks'" :label="'Credit Book'"/>--}}
 <x-menu.base.li-menuitem :routes="'allTasks'" :label="'All Task'"/>
 <x-menu.base.li-menuitem :routes="'activities.admins'" :label="'All Activities'"/>

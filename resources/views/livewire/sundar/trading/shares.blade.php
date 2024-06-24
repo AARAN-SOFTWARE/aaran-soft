@@ -1,17 +1,17 @@
 <div>
-    <x-slot name="header">Profit & Lose</x-slot>
+    <x-slot name="header">Share Profit & Lose</x-slot>
 
     <x-forms.m-panel>
 
         <div class="flex justify-between items-center">
-            <select wire:model.live="k_id" :label="'User'" class="w-[30rem] purple-textbox">
+            <select wire:model.live="search_user_id" :label="'User'" class="w-[30rem] purple-textbox">
                 <option class="text-gray-400"> choose ..</option>
                 @foreach($users as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
                 @endforeach
             </select>
 
-            <div>{{ \App\Models\User::getName($k_id?: auth()->id())}}</div>
+            <div>{{ \App\Models\User::getName($search_user_id) }}</div>
             <div>&nbsp;</div>
 
 
@@ -53,11 +53,11 @@
                             </x-table.cell-text>
 
                             <x-table.cell-text right>
-                                {{ $row->profit }}
+                                {{ $row->share_profit }}
                             </x-table.cell-text>
 
                             <x-table.cell-text right>
-                                {{ $row->loosed }}
+                                {{ $row->share_loosed }}
                             </x-table.cell-text>
 
                             <x-table.cell-text>
@@ -67,8 +67,8 @@
                             <x-table.cell-action id="{{$row->id}}"/>
                         </x-table.row>
                     @php
-                        $totalProfit  += floatval($row->profit);
-                        $totalLoosed  += floatval($row->loosed);
+                        $totalProfit  += floatval($row->share_profit);
+                        $totalLoosed  += floatval($row->share_loosed);
                     @endphp
 
                 @empty
@@ -105,8 +105,8 @@
                 @endforeach
             </x-input.model-select>
             <x-input.model-date wire:model="vdate" :label="'Date'"/>
-            <x-input.model-text wire:model="profit" :label="'Profit'"/>
-            <x-input.model-text wire:model="loosed" :label="'Loosed'"/>
+            <x-input.model-text wire:model="share_profit" :label="'Profit'"/>
+            <x-input.model-text wire:model="share_loosed" :label="'Loosed'"/>
             <x-input.model-text wire:model="remarks" :label="'Remarks'"/>
         </x-forms.create>
 
