@@ -93,9 +93,10 @@ class OpeningBalance extends Component
             $this->search_user_id = auth()->id();
         }
 
-        return ShareTrades::search($this->searches)->where('user_id', '=', $this->search_user_id)
+        return ShareTrades::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->where('opening_balance', '>', 0)
+            ->where('user_id', '=', $this->search_user_id)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }

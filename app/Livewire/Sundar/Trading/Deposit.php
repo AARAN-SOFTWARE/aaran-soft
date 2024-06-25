@@ -99,6 +99,7 @@ class Deposit extends Component
         return ShareTrades::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->where('deposit', '>', 0)
+            ->where('user_id', '=', $this->search_user_id)
             ->orWhere('withdraw', '>', 0)
             ->where('user_id', '=', $this->search_user_id)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
