@@ -34,6 +34,7 @@ use Aaran\Master\Database\Seeders\S205_StyleSeeder;
 
 //use Aaran\Orders\Database\Seeders\OrderSeeder;
 //use Aaran\Orders\Database\Seeders\StyleSeeder;
+use Aaran\Testing\Database\Seeders\DbTestSeeder;
 use Aaran\Testing\Database\Seeders\TestFileSeeder;
 use Illuminate\Database\Seeder;
 
@@ -87,6 +88,8 @@ class DatabaseSeeder extends Seeder
 //        RootlineItemsSeeder::run();
 
         S00_MigrationSeeder::run();
+
+
     }
 
 }

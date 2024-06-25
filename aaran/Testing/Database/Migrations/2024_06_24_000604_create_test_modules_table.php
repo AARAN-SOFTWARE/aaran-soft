@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('test_modules', function (Blueprint $table) {
             $table->id();
             $table->string('vname');
-            $table->boolean('checked');
             $table->longText('description');
-            $table->foreignId('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('checked');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->smallInteger('active_id');
             $table->timestamps();
         });

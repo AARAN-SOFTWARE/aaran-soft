@@ -2,8 +2,10 @@
 
 namespace Aaran\Testing\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TestModule extends Model
 {
@@ -22,5 +24,10 @@ class TestModule extends Model
     protected static function newFactory(): TestModule
     {
         return new TestModule();
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

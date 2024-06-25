@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('module_id')->references('id')->on('test_modules')->onDelete('cascade');
             $table->string('vname');
             $table->longText('description');
-            $table->boolean('checked_1');
-            $table->boolean('checked_2');
+            $table->boolean('db_check');
+            $table->boolean('run_mig');
             $table->longText('comment');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->smallInteger('active_id');

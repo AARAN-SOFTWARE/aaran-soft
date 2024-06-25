@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('lw_blade_tests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('module_id')->references('id')->on('test_modules')->onDelete('cascade');
-            $table->string('livewire_blade');
+            $table->string('vname');
             $table->boolean('checked_1');
             $table->boolean('checked_2');
             $table->longText('description');
