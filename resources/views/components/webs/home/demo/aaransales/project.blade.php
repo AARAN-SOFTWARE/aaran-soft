@@ -15,8 +15,8 @@
             <div
                 class="rounded-lg border border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300  ">
 
-                <div class="h-16 w-32 mx-3 rounded-lg my-8">
-                    <x-icons.icon icon="stack" class="h-28 w-36 text-blue-500"/>
+                <div class="h-16 mx-8 my-8">
+                    <x-icons.erp class="h-24 w-20 text-blue-500"/>
                 </div>
 
                 <div class="card-body mx-5">
@@ -26,6 +26,7 @@
                         any
                         smartphone platform without
                         compatibility issues</p>
+
                 </div>
             </div>
 
@@ -35,8 +36,7 @@
                 class="rounded-lg border border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
 
                 <div class="mb-5">
-                    <img class="w-16 h-16 mr-auto mt-10 ml-auto"
-                         src="../../../../images/features-icon-1.svg" alt="alternative"/>
+                    <x-icons.dashboard1 class="h-28 w-20 pl-4 text-blue-500"/>
                 </div>
 
                 <div class="card-body mx-5">
@@ -55,8 +55,7 @@
                 class="rounded-lg border border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
 
                 <div class="mb-5">
-                    <img class="w-16 h-16 mr-auto mt-10 ml-auto"
-                         src="../../../../images/features-icon-1.svg" alt="alternative"/>
+                    <x-icons.cyber class="h-28 w-20 pl-4"/>
                 </div>
 
                 <div class="card-body mx-5">
@@ -75,8 +74,7 @@
                 class="rounded-lg border border-gray-50  shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
 
                 <div class="mb-5">
-                    <img class="w-16 h-16 mr-auto mt-10 ml-auto"
-                         src="../../../../images/features-icon-1.svg" alt="alternative"/>
+                    <x-icons.productivity class="h-28 w-20 pl-4 text-white"/>
                 </div>
 
                 <div class="card-body mx-5">
@@ -95,8 +93,7 @@
                 class="rounded-lg border border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
 
                 <div class="mb-5">
-                    <img class="w-16 h-16 mr-auto mt-10 ml-auto"
-                         src="../../../../images/features-icon-1.svg" alt="alternative"/>
+                    <x-icons.search class="h-28 w-20 pl-4 text-white"/>
                 </div>
 
                 <div class="card-body mx-5">
@@ -114,8 +111,7 @@
                 class="rounded-lg border border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
 
                 <div class="mb-5">
-                    <img class="w-16 h-16 mr-auto mt-10 ml-auto"
-                         src="../../../../images/features-icon-1.svg" alt="alternative"/>
+                    <x-icons.support class="h-28 w-20 pl-4 text-white"/>
                 </div>
 
                 <div class="card-body mx-5">
