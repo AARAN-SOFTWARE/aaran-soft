@@ -24,6 +24,7 @@ class DatabaseSys extends Component
 
     public bool $showEditModal = false;
     public mixed $editable = true;
+    public string $sortFields = 'created_at';
     #endregion
 
 
@@ -118,6 +119,16 @@ class DatabaseSys extends Component
     }
     #endregion
 
+    public function sortBy($field): void
+    {
+        if ($this->sortFields === $field) {
+            $this->sortAsc = !$this->sortAsc;
+        } else {
+            $this->sortAsc = true;
+        }
+        $this->sortField = $field;
+    }
+
     #region[checked]
     public function isCheck($id): void
     {
@@ -136,7 +147,7 @@ class DatabaseSys extends Component
         return DbTest::search($this->searches)
             ->where('module_id','=',$this->module_id)
             ->where('active_id', '=', $this->activeRecord)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+            ->orderBy($this->sortFields, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
     #endregion
