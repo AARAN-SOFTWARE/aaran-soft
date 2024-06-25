@@ -23,3 +23,6 @@ Route::post('/register',[ApiController::class,'register']);
 Route::post('/login',[ApiController::class,'login']);
 
 Route::get('/detail',[ApiController::class,'detail'])->middleware('auth:sanctum');
+
+
+Route::post('/entery',[\App\Http\Controllers\EnteryController::class,'createEntry']);
