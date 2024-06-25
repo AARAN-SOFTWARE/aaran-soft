@@ -36,13 +36,10 @@ class TestCases extends Component
     public $old_image = '';
     public $isUploaded=false;
     public $showEditModal_1=false;
-
-
     public bool $checked=false;
 
     public $models;
     public string $sortFields = 'created_at';
-
 
     public mixed $editable = true;
     #endregion

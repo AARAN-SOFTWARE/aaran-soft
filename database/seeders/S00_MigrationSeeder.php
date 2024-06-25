@@ -152,13 +152,20 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_05_20_001113_create_ui_replies_table');
 
             RefactorMigrationTable::clear('2024_05_20_000001_create_test_files_table');
-            RefactorMigrationTable::clear('2024_05_20_000002_create_headers_table');
-            RefactorMigrationTable::clear('2024_05_20_000003_create_modals_table');
-            RefactorMigrationTable::clear('2024_05_20_000004_create_actions_table');
-            RefactorMigrationTable::clear('2024_05_20_000005_create_test_operations_table');
-            RefactorMigrationTable::clear('2024_05_20_000006_create_test_reviews_table');
-            RefactorMigrationTable::clear('2024_05_21_000007_create_test_images_table');
-            RefactorMigrationTable::clear('2024_05_21_000008_create_test_cases_table');
+            RefactorMigrationTable::clear('2024_05_24_000601_create_headers_table');
+            RefactorMigrationTable::clear('2024_05_24_000602_create_modals_table');
+            RefactorMigrationTable::clear('2024_05_24_000603_create_actions_table');
+            RefactorMigrationTable::clear('2024_05_24_000603_create_test_cases_table');
+            RefactorMigrationTable::clear('2024_05_24_000603_create_test_operations_table');
+            RefactorMigrationTable::clear('2024_05_24_000603_create_test_reviews_table');
+            RefactorMigrationTable::clear('2024_06_24_000604_create_test_modules_table');
+            RefactorMigrationTable::clear('2024_06_24_000605_create_db_tests_table');
+            RefactorMigrationTable::clear('2024_06_24_000606_create_admin_tests_table');
+            RefactorMigrationTable::clear('2024_06_24_000607_create_sw_tests_table');
+            RefactorMigrationTable::clear('2024_06_24_000608_create_lw_class_tests_table');
+            RefactorMigrationTable::clear('2024_06_24_000609_create_lw_blade_tests_table');
+            RefactorMigrationTable::clear('2024_06_24_000610_create_menu_tests_table');
+            RefactorMigrationTable::clear('2024_06_24_000611_create_test_images_table');
         }
 
         if (!DbMigration::hasCreditBooks()) {

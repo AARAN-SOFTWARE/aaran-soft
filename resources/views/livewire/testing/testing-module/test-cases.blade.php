@@ -18,7 +18,6 @@
         <div class="w-full h-20 md:w-2/4 md:items-center flex md:space-x-2 mx-auto">
             <x-input.search-box/>
             <x-input.toggle-filter :show-filters="$showFilters"/>
-
         </div>
         <div class="">
             <x-forms.per-page/>
@@ -26,9 +25,7 @@
     </div>
     <x-input.advance-search :show-filters="$showFilters" />
 
-
         <!--  Title -->
-
 
         <!-- Header --------------------------------------------------------------------------------------------------->
         <x-forms.table :list="$list" >
@@ -118,7 +115,7 @@
 
                 <!---     INLINE CREATE/EDIT   --->
                     <x-table.row class="border-0" :id="$vid">
-                        <x-table.cell center>
+                        <x-table.cell class="text-center">
                             {{$list->count()+1}}
                         </x-table.cell>
                         <x-table.cell-text colspan="2">
@@ -212,9 +209,7 @@
         </x-forms.table>
         <x-modal.delete/>
 
-
-
-        <!-- full Image --------------------------------------------------------------------------------------->
+            <!-- full Image --------------------------------------------------------------------------------------->
         <div class="w-1/3 bg-stone-100">
             <x-jet.modal :maxWidth="'4xl'" wire:model.defer="showEditModal_1">
                 <div class="px-6  pt-4">
