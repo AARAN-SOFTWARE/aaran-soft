@@ -9,12 +9,12 @@
         <!-- Header --------------------------------------------------------------------------------------------------->
         <x-forms.table :list="$list">
             <x-slot name="table_header">
-                <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Database</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Description</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>check</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Run Migration</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Remarks</x-table.header-text>
+                <x-table.header-serial wire:click.prevent="sortBy('created_at')"/>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Database</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Description</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>check</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Run Migration</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Remarks</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 

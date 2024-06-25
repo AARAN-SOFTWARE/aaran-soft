@@ -92,13 +92,13 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
-            <x-input.model-text wire:model="vname" :label="'State name'"/>
+            <x-input.model-text wire:model="vname" :label="'Migration Table'"/>
             @error('vname')
             <span class="text-red-500">{{  $message }}</span>
             @enderror
-            <x-input.checkbox wire:model="vname" :label="'Migration'"/>
-            <x-input.checkbox wire:model="checked_1" :label="'Db Migration'"/>
-            <x-input.checkbox wire:model="checked_2" :label="'Migration Seeder'"/>
+            <x-input.checkbox wire:model="checked_1" :label="'Migration'"/>
+            <x-input.checkbox wire:model="checked_2" :label="'Db Migration'"/>
+            <x-input.checkbox wire:model="checked_3" :label="'Migration Seeder'"/>
             <x-input.model-text wire:model="description" :label="'Description'"/>
             <x-input.model-text wire:model="comment" :label="'Comment'"/>
         </x-forms.create>
