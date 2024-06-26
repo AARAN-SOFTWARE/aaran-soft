@@ -107,23 +107,6 @@ class BladeSys extends Component
     }
     #endregion
 
-//    public function generate()
-//    {
-//        $data=LwBladeTest::where('module_id','=',$this->module_id)->get();
-//        if ($data->count()==0) {
-//            LwBladeTest::create([
-//                'module_id' => $this->module_id,
-//                'vname' => 'Header Slot',
-//                'description' => '',
-//                'checked_1' => false,
-//                'checked_2' => false,
-//                'comment' => '',
-//                'active_id' => 1,
-//                'user_id' => Auth::user()->id,
-//            ]);
-//            $this->save();
-//        }
-//    }
 
 
     #region[obj]
