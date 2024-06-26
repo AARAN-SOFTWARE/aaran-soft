@@ -31,6 +31,10 @@ return [
         MainMenu::task(),
         MainMenu::developer(),
         MainMenu::entries(),
+        MainMenu::audit(),
+        MainMenu::books(),
+        MainMenu::sundar(),
+        MainMenu::accounts(),
 
         MainMenu::master(),
         MainMenu::common(),
