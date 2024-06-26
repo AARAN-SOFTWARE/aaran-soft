@@ -1,5 +1,5 @@
 <div>
-    <x-slot name="header">Module</x-slot>
+    <x-slot name="header">File</x-slot>
 
     <x-forms.m-panel>
 
@@ -10,7 +10,7 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="20%">Module</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="20%">File </x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Description</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center width="10%">Check</x-table.header-text>
                 <x-table.header-action/>
@@ -26,14 +26,14 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            <a href="{{ route('module.file', $row->id) }}">
-                            {{ $row->vname}}
+                            <a href="{{ route('file.model', $row->id) }}">
+                                {{ $row->vname}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            <a href="{{ route('module.file', $row->id) }}">
-                            {{ $row->description}}
+                            <a href="{{ route('file.model', $row->id) }}">
+                                {{ $row->description}}
                             </a>
                         </x-table.cell-text>
 
@@ -64,13 +64,15 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
-            <x-input.model-text wire:model="vname" :label="'Module'"/>
+            <x-input.model-text wire:model="vname" :label="'File Name'"/>
             @error('vname')
             <span class="text-red-500">{{  $message }}</span>
             @enderror
             <x-input.model-text wire:model="description" :label="'Description'"/>
+            <x-input.checkbox wire:model="checked" :label="'File Check'"/>
         </x-forms.create>
 
     </x-forms.m-panel>
 </div>
+
 

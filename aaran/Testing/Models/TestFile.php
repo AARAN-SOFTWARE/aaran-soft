@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class DbTest extends Model
+class TestFile extends Model
 {
     use HasFactory;
 
@@ -21,17 +21,12 @@ class DbTest extends Model
             : static::where('vname', 'like', '%' . $searches . '%');
     }
 
-    protected static function newFactory(): DbTest
+    public function module(): BelongsTo
     {
-        return new DbTest();
+        return $this->belongsTo(TestModule::class);
     }
 
-    public function file(): BelongsTo
-    {
-        return $this->belongsTo(TestFile::class);
-    }
-
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

@@ -4,7 +4,22 @@
     <x-forms.m-panel>
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
-        <x-forms.top-controls :show-filters="$showFilters"/>
+        <div class="md:flex md:justify-between md:items-center md:pb-5">
+            <div class="w-full h-20 md:w-2/4 md:items-center flex md:space-x-2">
+
+                <x-input.search-box/>
+                <x-input.toggle-filter :show-filters="$showFilters"/>
+
+            </div>
+
+            <div class="flex justify-between md:mb-5 md:space-x-2 md:flex md:items-center">
+                <x-forms.per-page/>
+                <button  type="button" wire:click="generate" class="bg-blue-600 text-white px-2 py-1.5 rounded-md mb-1">Generate</button>
+                <x-button.new/>
+            </div>
+        </div>
+
+        <x-input.advance-search :show-filters="$showFilters" />
 
         <!-- Header --------------------------------------------------------------------------------------------------->
         <x-forms.table :list="$list">
@@ -12,8 +27,9 @@
                 <x-table.header-serial wire:click.prevent="sortBy('created_at')"/>
                 <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Database</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Description</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>check</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Foreign_key</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Run Migration</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Rollback</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Remarks</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
@@ -36,27 +52,36 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <label>
-                                <input wire:click="isChecked({{$row->id}})" type="checkbox"
-                                       @if($row->db_check) checked @endif
-                                       class="h-4 w-4 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out
-                                       {{ $row->db_check ? 'text-green-400 focus:ring-green-500': 'focus:ring-gray-500 text-gray-700'}}">
-                            </label>
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
-                            <label>
-                                <input wire:click="isCheck({{$row->id}})" type="checkbox"
-                                       @if($row->run_mig) checked @endif
-                                       class="h-4 w-4 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out
-                                       {{ $row->rum_mig ? 'text-green-400 focus:ring-green-500': 'focus:ring-gray-500 text-gray-700'}}">
-                            </label>
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
                             <a href="{{ route('db.admin', $row->id) }}">
-                            {{ $row->description}}
+                                {{ $row->description}}
                             </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <label>
+                                <input wire:click="isChecked1({{$row->id}})" type="checkbox"
+                                       @if($row->checked_1) checked @endif
+                                       class="h-4 w-4 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out
+                                       {{ $row->checked_1 ? 'text-green-400 focus:ring-green-500': 'focus:ring-gray-500 text-gray-700'}}">
+                            </label>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <label>
+                                <input wire:click="isChecked2({{$row->id}})" type="checkbox"
+                                       @if($row->checked_2) checked @endif
+                                       class="h-4 w-4 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out
+                                       {{ $row->checked_2 ? 'text-green-400 focus:ring-green-500': 'focus:ring-gray-500 text-gray-700'}}">
+                            </label>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <label>
+                                <input wire:click="isChecked3({{$row->id}})" type="checkbox"
+                                       @if($row->checked_3) checked @endif
+                                       class="h-4 w-4 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out
+                                       {{ $row->checked_3 ? 'text-green-400 focus:ring-green-500': 'focus:ring-gray-500 text-gray-700'}}">
+                            </label>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
