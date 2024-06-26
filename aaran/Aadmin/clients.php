@@ -59,4 +59,6 @@ return [
     'BOYANCE_INDIA' => '324',
     'ASWATH_APPARELS' => '325',
     'ATO_TEXTILES' => '326',
+
+    'AARAN_WELFARE' => '2000',
 ];

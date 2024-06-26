@@ -19,6 +19,8 @@ class Index extends Component
             config('software.DEMO') => 'livewire.webs.home.demo.garment-demo',
             config('software.AUDIT') => 'livewire.webs.home.sundar.aaran-associates',
 
+            config('software.WELFARE') => 'livewire.webs.home.welfare.index',
+
             config('software.GARMENT') => 'livewire.webs.home.index',
             config('software.OFFSET') => 'livewire.webs.home.index',
 

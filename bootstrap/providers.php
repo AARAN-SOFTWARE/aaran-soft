@@ -24,4 +24,6 @@ return [
     Aaran\Finance\Providers\FinanceServiceProvider::class,
     Aaran\Testing\Providers\TestingServiceProvider::class,
 
+    Aaran\Welfare\Providers\WelfareServiceProvider::class,
+
 ];

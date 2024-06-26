@@ -17,4 +17,6 @@ return [
     'gstPercentDefault' => env('GST_PERCENT', '5'),
 
     'unitsDefault' => env('UNITS', '2'),
+
+    'brand' => env('BRAND', 'AARAN'),
 ];

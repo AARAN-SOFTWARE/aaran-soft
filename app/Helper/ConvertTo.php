@@ -139,4 +139,19 @@ class ConvertTo
             return '';
         }
     }
+
+    public static function toLower($v): string
+    {
+        return strtolower($v);
+    }
+
+    public static function toUpper($v): string
+    {
+        return strtoupper($v);
+    }
+
+    public static function toUpperFirst($v): string
+    {
+        return ucfirst($v);
+    }
 }

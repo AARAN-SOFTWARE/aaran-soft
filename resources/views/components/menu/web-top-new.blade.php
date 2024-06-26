@@ -6,11 +6,15 @@
             <div class="text-zinc-600 font-bold text-xl ">
 
                 <a href="{{route('home')}}" class="flex items-center">
-                    <div class="p-1 lg:p-3 rounded py-3">
-                        <x-assets.logo.cxlogo :icon="'light'" class="h-9 ml-4 mx-auto w-auto block"/>
+                    <div class="p-1 lg:p-3 rounded py-2">
+
+                        <x-assets.logo.brand logo="{{ \App\Helper\ConvertTo::toLower(config('aadmin.brand'))}}"/>
+
                     </div>
                     <span
-                        class="self-center text-3xl font-semibold whitespace-nowrap px-2 -mt-2 font-Don tracking-wider">CODEXSUN</span>
+                            class="self-center text-3xl font-semibold whitespace-nowrap px-2 -mt-2 font-Don tracking-wider">
+                        {{ \App\Helper\ConvertTo::toUpper(config('aadmin.brand'))}}
+                    </span>
                 </a>
             </div>
 
@@ -45,7 +49,7 @@
                 <nav>
                     <button class="w-10 h-10 relative focus:outline-none text-gray-800" @click="open = !open">
                         <div
-                            class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
+                                class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
                 <span aria-hidden="true"
                       class="block absolute h-0.5 w-5 bg-current transform transition duration-700 ease-in-out"
                       :class="{'rotate-45': open,' -translate-y-1.5': !open }"></span>
@@ -72,9 +76,9 @@
                             </a>
 
                             <a
-                                href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                class="font-semibold text-xl hover:text-white hover:bg-red-500 px-3 py-1 rounded-md
+                                    href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                    class="font-semibold text-xl hover:text-white hover:bg-red-500 px-3 py-1 rounded-md
                                  focus:outline-none focus:underline transition ease-in-out duration-700"
                             >
                                 Log out
@@ -136,9 +140,9 @@
                         </li>
                         <li>
                             <a
-                                href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                class="hover:underline font-serif block px-4 py-2 text-white "
+                                    href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                    class="hover:underline font-serif block px-4 py-2 text-white "
                             >
                                 Log out
                             </a>
