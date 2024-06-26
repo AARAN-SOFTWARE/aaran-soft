@@ -15,7 +15,8 @@ class Index extends Component
     {
         return match (config('aadmin.app_type')) {
 
-            config('software.DEVELOPER') => 'livewire.webs.home.demo.aaransales',
+//            config('software.DEVELOPER') => 'livewire.webs.home.demo.aaransales',
+            config('software.DEVELOPER') => 'livewire.webs.home.index_1',
             config('software.DEMO') => 'livewire.webs.home.demo.garment-demo',
             config('software.AUDIT') => 'livewire.webs.home.sundar.aaran-associates',
 
