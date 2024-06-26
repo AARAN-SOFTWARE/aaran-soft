@@ -14,7 +14,8 @@ export default {
     theme: {
         extend: {
             colors: {
-                'alice-blue': '#F6F9FC'
+                'alice-blue': '#F6F9FC',
+                'bubble':'#E4F2FE'
 
             },
             fontFamily: {

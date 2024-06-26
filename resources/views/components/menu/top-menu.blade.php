@@ -25,8 +25,9 @@
             </div>
 
             <div class="flex w-full justify-end">
-
+                @if(session()->get('role_id')==1|| session()->get('role_id')==2|| session()->get('role_id')==3|| session()->get('role_id')==4 )
                 <livewire:sys.default-company.index/>
+                @endif
                 {{-- @livewire('controls.searchbars.topsearch')--}}
                 {{-- @livewire('controls.searchbars.searchbar')--}}
                 {{-- @livewire('controls.searchbars.filters')--}}

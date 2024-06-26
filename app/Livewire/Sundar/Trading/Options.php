@@ -99,7 +99,9 @@ class Options extends Component
         return ShareTrades::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->where('option_profit', '>', 0)
+            ->where('user_id', '=', $this->search_user_id)
             ->orwhere('option_loosed', '>', 0)
+            ->where('user_id', '=', $this->search_user_id)
             ->where("user_id", $this->search_user_id)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
