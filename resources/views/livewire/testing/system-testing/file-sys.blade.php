@@ -39,7 +39,7 @@
 
                         <x-table.cell-text center>
                             <label>
-                                <input wire:click="isCheked({{$row->id}})" type="checkbox"
+                                <input wire:click="isChecked({{$row->id}})" type="checkbox"
                                        @if($row->checked) checked @endif
                                        class="h-4 w-4 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out
                                        {{ $row->checked ? 'text-green-400 focus:ring-green-500': 'focus:ring-gray-500 text-gray-700'}}">

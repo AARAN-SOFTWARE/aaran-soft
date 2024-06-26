@@ -14,7 +14,7 @@
 
             <div class="flex justify-between md:mb-5 md:space-x-2 md:flex md:items-center">
                 <x-forms.per-page/>
-                <button  type="button" wire:click="generate" class="bg-blue-600 text-white px-2 py-1.5 rounded-md mb-1">Generate</button>
+{{--                <button  type="button" wire:click="generate" class="bg-blue-600 text-white px-2 py-1.5 rounded-md mb-1">Generate</button>--}}
                 <x-button.new/>
             </div>
         </div>

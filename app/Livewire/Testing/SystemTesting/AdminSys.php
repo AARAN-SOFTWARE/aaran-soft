@@ -23,6 +23,7 @@ class AdminSys extends Component
     public bool $checked_3 = false;
     public mixed $comment = '';
 
+    public string $sortFields = 'created_at';
     public  mixed $users = '';
 
     public bool $showEditModal = false;
@@ -145,13 +146,23 @@ class AdminSys extends Component
     }
     #endregion
 
+    public function sortBy($field): void
+    {
+        if ($this->sortFields === $field) {
+            $this->sortAsc = !$this->sortAsc;
+        } else {
+            $this->sortAsc = true;
+        }
+        $this->sortFields = $field;
+    }
+
     #region[list]
     public function getList()
     {
         return AdminTest::search($this->searches)
             ->where('module_id','=',$this->module_id)
             ->where('active_id', '=', $this->activeRecord)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+            ->orderBy($this->sortFields, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
     #endregion
