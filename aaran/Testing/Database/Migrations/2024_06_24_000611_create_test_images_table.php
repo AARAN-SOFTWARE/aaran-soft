@@ -10,7 +10,6 @@ return new class extends Migration {
         if (Aaran\Aadmin\Src\DbMigration::hasDeveloper()) {
             Schema::create('test_images', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('operations_id')->references('id')->on('test_operations')->onDelete('cascade');
                 $table->longText('image');
                 $table->timestamps();
             });
