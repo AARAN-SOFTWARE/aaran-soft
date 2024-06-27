@@ -104,18 +104,13 @@ class SalesBillReport extends Component
         $this->trackReport = TrackReport::all();
 
         $salesBill = SalesBillItem::join('sales_bills', 'sales_bills.id', '=', 'sales_bill_items.sales_track_bill_id')
-
-//            ->join('sales_track_items', 'sales_track_items.id', '=', 'sales_bills.sales_track_item_id')
-//
-//            ->join('sales_tracks', 'sales_tracks.id', '=', 'sales_track_items.sales_track_id')
-
             ->join('products', 'products.id', '=', 'sales_bill_items.product_id')
             ->join('hsncodes', 'hsncodes.id', '=', 'products.hsncode_id')
             ->where('sales_bills.rootline_id', '=', $this->rootLine_id)
-//            ->when($this->salesTrack_id,function ($query,$salesTrack_id){
-//
-//                return $query->where('sales_track_items.sales_track_id', '=', $salesTrack_id);
-//            })
+            ->when($this->salesTrack_id, function ($query, $salesTrack_id) {
+
+                return $query->where('sales_bills.sales_track_id', '=', $salesTrack_id);
+            })
             ->when($this->group, function ($query, $group) {
                 return $query->where('sales_bills.group', '=', $group);
             })
@@ -131,12 +126,10 @@ class SalesBillReport extends Component
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->where('sales_bills.active_id', '=', $this->activeRecord)
             ->get();
+
         $this->salesBillItem = $salesBill;
 
-
-        return $salesBill
-            ->unique('unique_no');
-
+        return $salesBill->unique('unique_no');
 
     }
     #endregion
@@ -147,6 +140,7 @@ class SalesBillReport extends Component
         $this->showEditModal = !$this->showEditModal;
         $this->getData($id);
     }
+
     #region[property]
     use CommonTrait;
 
@@ -181,6 +175,7 @@ class SalesBillReport extends Component
     public mixed $rootline_id = '';
     public $unique_no;
     public $group_1;
+    public $salesTrack1_id;
     #endregion
 
     public function getData($id)
@@ -191,6 +186,7 @@ class SalesBillReport extends Component
             $this->sales_track_bill_id = $data->id;
             $this->rootline_id = $data->rootline_id;
             $this->sales_track_item_id = $data->sales_track_item_id;
+            $this->salesTrack1_id=$data->sales_track_id;
             $this->unique_no = $data->unique_no;
             $this->group = $data->group;
             $this->vdate = $data->vdate;
@@ -386,6 +382,7 @@ class SalesBillReport extends Component
                     'serial' => $this->serial ?: 0,
                     'rootline_id' => $this->rootline_id,
                     'sales_track_item_id' => $this->sales_track_item_id,
+                    'sales_track_id'=>$this->salesTrack1_id,
                     'unique_no' => $this->sales_from.'~'.$this->vno,
                     'group' => $this->group_1,
                     'vno' => $this->vno ?: 0,
@@ -414,6 +411,7 @@ class SalesBillReport extends Component
                 $obj->serial = $this->serial;
                 $obj->rootline_id = $this->rootline_id;
                 $obj->sales_track_item_id = $this->sales_track_item_id;
+                $obj->sales_track_id = $this->salesTrack1_id;
                 $obj->unique_no = $this->unique_no;;
                 $obj->group = $this->group;;
                 $obj->vdate = $this->vdate;
