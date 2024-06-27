@@ -10,13 +10,13 @@
                         x-transition:enter-start="opacity-0 scale-105"
                         x-transition:enter-end="opacity-100 scale-100"
                         x-transition:leave="transition ease-in-out duration-300 absolute"
-                        x-transition:leave-start="opacity-100 scale-100"
-                        x-transition:leave-end="opacity-0 scale-95"
+                        x-transition:leave-start="opacity-90 scale-100"
+                        x-transition:leave-end="opacity-0 scale-100"
                     >
 
                         <div class="w-full lg:h-[32rem] mt-32">
-                            <div class="w-1/2 mx-auto">
-                                <img class="rounded-xl" :src="item.img" width="1024" height="576" :alt="item.desc">
+                            <div class="w-full mx-auto">
+                                <img class="rounded-xl w-full h-[32rem]" :src="item.img" :alt="item.desc">
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                 firstFrameTime: 0,
                 items: [
                     {
-                        img: '/../../../images/team-3.jpg',
+                        img: '/../../../images/software2.jpg',
                         desc: 'Omnichannel',
                         buttonIcon: 'ps-icon-01.svg',
                     },
@@ -66,12 +66,12 @@
                         buttonIcon: 'ps-icon-02.svg',
                     },
                     {
-                        img: '/../../../images/Receipt-amico.svg',
+                        img: '/../../../images/software1.jpg',
                         desc: 'Interpolate',
                         buttonIcon: 'ps-icon-03.svg',
                     },
                     {
-                        img: '/../../../images/logo.png',
+                        img: '/../../../images/billing-system-software.jpg',
                         desc: 'Enriched',
                         buttonIcon: 'ps-icon-04.svg',
                     },
