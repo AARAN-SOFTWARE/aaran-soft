@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('menu_tests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('module_id')->references('id')->on('test_modules')->onDelete('cascade');
+            $table->foreignId('blade_id')->references('id')->on('lw_blade_tests')->onDelete('cascade');
             $table->string('vname');
             $table->boolean('checked');
             $table->longText('description');

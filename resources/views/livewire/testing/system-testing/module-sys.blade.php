@@ -2,7 +2,7 @@
     <x-slot name="header">Module</x-slot>
 
     <x-forms.m-panel>
-
+        
         <!-- Top Controls --------------------------------------------------------------------------------------------->
         <x-forms.top-controls :show-filters="$showFilters"/>
 

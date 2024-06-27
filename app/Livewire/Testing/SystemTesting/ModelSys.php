@@ -31,6 +31,7 @@ class ModelSys extends Component
     #region[mount]
     public function mount($id)
     {
+
         $this->file_id = TestFile::find($id);
         $this->module_id = $this->file_id->module_id;
         $this->users=User::all();
