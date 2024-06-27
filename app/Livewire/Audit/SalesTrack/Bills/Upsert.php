@@ -59,6 +59,7 @@ class Upsert extends Component
     public mixed $rootline_id = '';
     public $unique_no;
     public $group;
+    public $salesTrack_id;
     #endregion
 
 
@@ -71,6 +72,7 @@ class Upsert extends Component
             $this->sales_track_bill_id = $data->id;
             $this->rootline_id = $data->rootline_id;
             $this->sales_track_item_id = $data->sales_track_item_id;
+            $this->salesTrack_id=$data->sales_track_id;
             $this->unique_no = $data->unique_no;
             $this->group = $data->group;
             $this->vdate = $data->vdate;
@@ -135,6 +137,7 @@ class Upsert extends Component
                     'serial' => $this->serial ?: 0,
                     'rootline_id' => $this->rootline_id,
                     'sales_track_item_id' => $this->sales_track_item_id,
+                    'sales_track_id'=>$this->salesTrack_id,
                     'unique_no' => $this->sales_from.'~'.$this->vno,
                     'group' => $this->group,
                     'vno' => $this->vno ?: 0,
@@ -163,6 +166,7 @@ class Upsert extends Component
                 $obj->serial = $this->serial;
                 $obj->rootline_id = $this->rootline_id;
                 $obj->sales_track_item_id = $this->sales_track_item_id;
+                $obj->sales_track_id = $this->salesTrack_id;
                 $obj->unique_no = $this->unique_no;;
                 $obj->group = $this->group;;
                 $obj->vdate = $this->vdate;
@@ -794,7 +798,7 @@ class Upsert extends Component
 
     #endregion
 
-    #region[render]
+    #region[makeForAll]
     public function makeForAll()
     {
         $obj = SalesTrackItem::find($this->sales_track_item_id);
@@ -807,6 +811,7 @@ class Upsert extends Component
                     'serial' => $this->serial ?: 0,
                     'rootline_id' => $this->rootline_id,
                     'sales_track_item_id' => $data[$i]->id,
+                    'sales_track_id'=>$this->salesTrack_id,
                     'unique_no' => $data[$i]->client_id.'~'.SalesBill::where('sales_from', '=', $data[$i]->client_id)
                             ->max('vno') + 1,
                     'group' => $this->group,
@@ -834,6 +839,7 @@ class Upsert extends Component
                     'serial' => $this->serial ?: 0,
                     'rootline_id' => $this->rootline_id,
                     'sales_track_item_id' => $data[$i]->id,
+                    'sales_track_id'=>$this->salesTrack_id,
                     'unique_no' => $data[$i]->client_id.'~'.SalesBill::where('sales_from', '=', $data[$i]->client_id)
                             ->max('vno') + 1,
                     'group' => $this->group,
@@ -861,8 +867,6 @@ class Upsert extends Component
 
     }
     #endregion
-
-
 
     #region[render]
     public function render()

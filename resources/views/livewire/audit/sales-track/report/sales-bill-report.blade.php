@@ -25,16 +25,6 @@
                     @endforeach
                 </x-input.model-select>
             </div>
-
-            <div class="w-full">
-                <x-input.model-select wire:model.live="salesTrackItem_id" wire:change="getList" :label="'TrackItem'">
-                    <option value="">Choose....</option>
-                    @foreach($salesTrackItems as $salesTrackItem)
-                        <option value="{{$salesTrackItem->id}}">{{$salesTrackItem->client->vname}}</option>
-                    @endforeach
-                </x-input.model-select>
-            </div>
-
             <div class="w-full">
                 <x-input.model-select wire:model.live="group" wire:change="getList" :label="'Group'">
                     <option value="">Choose....</option>
@@ -45,6 +35,16 @@
                     @endforeach
                 </x-input.model-select>
             </div>
+
+            <div class="w-full">
+                <x-input.model-select wire:model.live="salesTrackItem_id" wire:change="getList" :label="'TrackItem'">
+                    <option value="">Choose....</option>
+                    @foreach($salesTrackItems as $salesTrackItem)
+                        <option value="{{$salesTrackItem->id}}">{{$salesTrackItem->client->vname}}</option>
+                    @endforeach
+                </x-input.model-select>
+            </div>
+
 
             <x-input.model-date wire:model.live="start_date" :label="'From'"/>
 
