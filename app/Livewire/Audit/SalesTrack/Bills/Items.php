@@ -69,7 +69,8 @@ class Items extends Component
 
         $this->sales_from = $this->salesTrackItems->client_id;
 
-        $this->rootlineItems = RootlineItems::where('rootline_id', '=',$this->rootline_id)->where('id', '>', $this->salesTrackItems->id)->orderby('id')->first();
+        $this->rootlineItems = SalesTrackItem::where('rootline_id', '=',$this->rootline_id)
+            ->where('id', '>', $this->salesTrackItems->id)->orderby('id')->first();
 
 
         $this->vno = SalesBill::nextNo($this->sales_from);
