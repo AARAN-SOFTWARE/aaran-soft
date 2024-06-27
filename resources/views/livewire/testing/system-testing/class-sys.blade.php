@@ -29,8 +29,8 @@
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Common Trait</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Properties</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Mount</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>GetSave</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>GetList</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center>GetSave</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>GetObj</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>ClearFields</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Description</x-table.header-text>
@@ -149,13 +149,13 @@
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
             <x-input.model-text wire:model="vname" :label="'Livewire Class'"/>
-            <x-input.checkbox wire:model="checked_1" :label="'Class check'"/>
-            <x-input.checkbox wire:model="checked_2" :label="'Class check'"/>
-            <x-input.checkbox wire:model="checked_3" :label="'Class check'"/>
-            <x-input.checkbox wire:model="checked_4" :label="'Class check'"/>
-            <x-input.checkbox wire:model="checked_5" :label="'Class check'"/>
-            <x-input.checkbox wire:model="checked_6" :label="'Class check'"/>
-            <x-input.checkbox wire:model="checked_7" :label="'Class check'"/>
+            <x-input.checkbox wire:model="checked_1" :label="'Common Trait'"/>
+            <x-input.checkbox wire:model="checked_2" :label="'Properties'"/>
+            <x-input.checkbox wire:model="checked_3" :label="'Mount'"/>
+            <x-input.checkbox wire:model="checked_4" :label="'getList'"/>
+            <x-input.checkbox wire:model="checked_5" :label="'getSave'"/>
+            <x-input.checkbox wire:model="checked_6" :label="'getObj'"/>
+            <x-input.checkbox wire:model="checked_7" :label="'ClearFields'"/>
             <x-input.model-text wire:model="description" :label="'Description'"/>
             <x-input.model-text wire:model="comment" :label="'Comment'"/>
         </x-forms.create>

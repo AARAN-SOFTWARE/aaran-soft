@@ -4,7 +4,23 @@
     <x-forms.m-panel>
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
-        <x-forms.top-controls :show-filters="$showFilters"/>
+        <!-- Top Controls --------------------------------------------------------------------------------------------->
+        <div class="md:flex md:justify-between md:items-center md:pb-5">
+            <div class="w-full h-20 md:w-2/4 md:items-center flex md:space-x-2">
+
+                <x-input.search-box/>
+                <x-input.toggle-filter :show-filters="$showFilters"/>
+
+            </div>
+
+            <div class="flex justify-between md:mb-5 md:space-x-2 md:flex md:items-center">
+                <x-forms.per-page/>
+                <button  type="button" wire:click="generate" class="bg-blue-600 text-white px-2 py-1.5 rounded-md mb-1">Generate</button>
+                <x-button.new/>
+            </div>
+        </div>
+
+        <x-input.advance-search :show-filters="$showFilters" />
 
         <!-- Header --------------------------------------------------------------------------------------------------->
         <x-forms.table :list="$list">

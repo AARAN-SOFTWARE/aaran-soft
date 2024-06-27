@@ -30,6 +30,7 @@ class ClassSys extends Component
     public mixed $comment = '';
 
     public  mixed $users = '';
+    public string $sortFields = 'created_at';
 
     public bool $showEditModal = false;
     public mixed $editable = true;
@@ -94,22 +95,7 @@ class ClassSys extends Component
     }
     #endregion
 
-//    public function generate()
-//    {
-//        $data=LwClassTest::where('module_id','=',$this->module_id)->get();
-//        if ($data->count()==0) {
-//            LwClassTest::create([
-//                'module_id' => $this->module_id,
-//                'vname' => 'Common Trait',
-//                'description' => '',
-//                'checked' => false,
-//                'comment' => '',
-//                'active_id' => 1,
-//                'user_id' => Auth::user()->id,
-//            ]);
-//            $this->save();
-//        }
-//    }
+
 
 
     #region[obj]
@@ -207,13 +193,24 @@ class ClassSys extends Component
     #endregion
 
 
+    public function sortBy($field): void
+    {
+        if ($this->sortFields === $field) {
+            $this->sortAsc = !$this->sortAsc;
+        } else {
+            $this->sortAsc = true;
+        }
+        $this->sortFields = $field;
+    }
+
+
     #region[list]
     public function getList()
     {
         return LwClassTest::search($this->searches)
             ->where('module_id','=',$this->module_id)
             ->where('active_id', '=', $this->activeRecord)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+            ->orderBy($this->sortFields, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
     #endregion

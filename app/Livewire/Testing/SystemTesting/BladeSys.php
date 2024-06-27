@@ -17,6 +17,7 @@ class BladeSys extends Component
     #region[properties]
     public mixed $class_id;
     public mixed $module_id;
+    public mixed $module_name;
     public mixed $description = '';
     public bool $checked_1 = false;
     public bool $checked_2 = false;
@@ -36,6 +37,7 @@ class BladeSys extends Component
 
     public bool $showEditModal = false;
     public mixed $editable = true;
+    public string $sortFields = 'created_at';
 
     #endregion
 
@@ -46,6 +48,7 @@ class BladeSys extends Component
     {
         $this->class_id = LwClassTest::find($id);
         $this->module_id = $this->class_id->module_id;
+        $this->module_name = LwClassTest::where('module_id','=',$this->module_id)->get();
         $this->users=User::all();
     }
     #endregion
@@ -106,6 +109,36 @@ class BladeSys extends Component
         }
     }
     #endregion
+
+
+    public function generate()
+    {
+        $data=LwBladeTest::where('module_id','=',$this->module_id)->get();
+        if ($data->count()==0) {
+            foreach ($this->module_name as $row){
+            LwBladeTest::create([
+                'module_id' => $this->module_id,
+                'vname' => $row->vname,
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'checked_5' => false,
+                'checked_6' => false,
+                'checked_7' => false,
+                'checked_8' => false,
+                'checked_9' => false,
+                'checked_10' => false,
+                'checked_11' => false,
+                'checked_12' => false,
+                'comment' => '',
+                'active_id' => 1,
+                'user_id' => Auth::user()->id,
+            ]);
+            $this->save();}
+        }
+    }
 
 
 
@@ -248,6 +281,16 @@ class BladeSys extends Component
     }
     #endregion
 
+    public function sortBy($field): void
+    {
+        if ($this->sortFields === $field) {
+            $this->sortAsc = !$this->sortAsc;
+        } else {
+            $this->sortAsc = true;
+        }
+        $this->sortFields = $field;
+    }
+
 
     #region[list]
     public function getList()
@@ -255,7 +298,7 @@ class BladeSys extends Component
         return LwBladeTest::search($this->searches)
             ->where('module_id','=',$this->module_id)
             ->where('active_id', '=', $this->activeRecord)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+            ->orderBy($this->sortFields, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
     #endregion
