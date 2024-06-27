@@ -16,7 +16,8 @@ class DatabaseSys extends Component
     use CommonTrait;
 
     #region[properties]
-    public mixed $db_id;
+    public mixed $model;
+    public mixed $model_id;
     public mixed $module_id;
     public mixed $description = '';
     public mixed $comment = '';
@@ -35,8 +36,9 @@ class DatabaseSys extends Component
     #region[mount]
     public function mount($id)
     {
-        $this->db_id = ModelTest::find($id);
-        $this->module_id = $this->db_id->module_id;
+        $this->model = ModelTest::find($id);
+        $this->module_id = $this->model->module_id;
+        $this->model_id = $id;
         $this->users=User::all();
     }
     #endregion
@@ -50,6 +52,7 @@ class DatabaseSys extends Component
                     $this->validate(['vname' => 'required']);
                     DbTest::create([
                         'module_id' => $this->module_id,
+                        'model_id' => $this->model_id,
                         'vname' => Str::ucfirst($this->vname),
                         'description' => $this->description,
                         'checked_1' => $this->checked_1,
@@ -87,6 +90,7 @@ class DatabaseSys extends Component
         if ($data->count()==0) {
             DbTest::create([
                 'module_id' => $this->module_id,
+                'model_id' => $this->model_id,
                 'vname' => 'Migration',
                 'description' => '',
                 'checked_1' => false,
@@ -98,6 +102,7 @@ class DatabaseSys extends Component
             ]);
             DbTest::create([
                 'module_id' => $this->module_id,
+                'model_id' => $this->model_id,
                 'vname' => 'Factories',
                 'description' => '',
                 'checked_1' => false,
@@ -109,6 +114,7 @@ class DatabaseSys extends Component
             ]);
             DbTest::create([
                 'module_id' => $this->module_id,
+                'model_id' => $this->model_id,
                 'vname' => 'Seeders',
                 'description' => '',
                 'checked_1' => false,

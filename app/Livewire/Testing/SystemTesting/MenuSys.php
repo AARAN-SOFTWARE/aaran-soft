@@ -15,6 +15,7 @@ class MenuSys extends Component
     use CommonTrait;
 
     #region[properties]
+    public mixed $blade;
     public mixed $blade_id;
     public mixed $module_id;
     public mixed $description = '';
@@ -33,8 +34,9 @@ class MenuSys extends Component
 
     public function mount($id)
     {
-        $this->blade_id = LwBladeTest::find($id);
-        $this->module_id = $this->blade_id->module_id;
+        $this->blade = LwBladeTest::find($id);
+        $this->module_id = $this->blade->module_id;
+        $this->blade_id = $id;
         $this->users=User::all();
     }
     #endregion
@@ -47,6 +49,7 @@ class MenuSys extends Component
                 if ($this->vid == "") {
                     MenuTest::create([
                         'module_id' => $this->module_id,
+                        'blade_id' => $this->blade_id,
                         'vname' => $this->vname,
                         'description' => $this->description,
                         'checked' => $this->checked?:0,

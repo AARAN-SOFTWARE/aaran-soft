@@ -16,6 +16,7 @@ class ModelSys extends Component
 
     #region[properties]
     public mixed $module_id;
+    public mixed $file;
     public mixed $file_id;
     public mixed $description = '';
     public bool $checked = false;
@@ -31,9 +32,9 @@ class ModelSys extends Component
     #region[mount]
     public function mount($id)
     {
-
-        $this->file_id = TestFile::find($id);
-        $this->module_id = $this->file_id->module_id;
+        $this->file = TestFile::find($id);
+        $this->module_id = $this->file->module_id;
+        $this->file_id = $id;
         $this->users=User::all();
     }
     #endregion
@@ -49,6 +50,7 @@ class ModelSys extends Component
                     $this->validate(['vname' => 'required']);
                     ModelTest::create([
                         'module_id' => $this->module_id,
+                        'file_id' => $this->file_id,
                         'vname' => Str::ucfirst($this->vname),
                         'description' => $this->description,
                         'checked' => $this->checked,
@@ -80,6 +82,7 @@ class ModelSys extends Component
         if ($data->count()==0) {
             ModelTest::create([
                 'module_id' => $this->module_id,
+                'file_id' => $this->file_id,
                 'vname' => 'Guarded',
                 'description' => '',
                 'checked' => false,
@@ -88,6 +91,7 @@ class ModelSys extends Component
             ]);
             ModelTest::create([
                 'module_id' => $this->module_id,
+                'file_id' => $this->file_id,
                 'vname' => 'Search',
                 'description' => '',
                 'checked' => false,
@@ -96,6 +100,7 @@ class ModelSys extends Component
             ]);
             ModelTest::create([
                 'module_id' => $this->module_id,
+                'file_id' => $this->file_id,
                 'vname' => 'Relation',
                 'description' => '',
                 'checked' => false,

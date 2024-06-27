@@ -15,6 +15,7 @@ class AdminSys extends Component
     use CommonTrait;
 
     #region[properties]
+    public mixed $db;
     public mixed $db_id;
     public mixed $module_id;
     public mixed $description = '';
@@ -36,8 +37,9 @@ class AdminSys extends Component
 
     public function mount($id)
     {
-        $this->db_id = DbTest::find($id);
-        $this->module_id=$this->db_id->module_id;
+        $this->db = DbTest::find($id);
+        $this->module_id=$this->db->module_id;
+        $this->db_id = $id;
         $this->users=User::all();
     }
     #endregion
@@ -50,6 +52,7 @@ class AdminSys extends Component
                 if ($this->vid == "") {
                     AdminTest::create([
                         'module_id' => $this->module_id,
+                        'db_id' => $this->db_id,
                         'vname' => $this->vname,
                         'description' => $this->description,
                         'checked_1' => $this->checked_1?:0,

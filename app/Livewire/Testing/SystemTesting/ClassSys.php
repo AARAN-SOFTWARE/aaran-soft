@@ -16,6 +16,7 @@ class ClassSys extends Component
     use CommonTrait;
 
     #region[properties]
+    public mixed $sw;
     public mixed $sw_id;
     public mixed $module_id;
 
@@ -42,8 +43,9 @@ class ClassSys extends Component
 
     public function mount($id)
     {
-        $this->sw_id = SwTest::find($id);
-        $this->module_id = $this->sw_id->module_id;
+        $this->sw = SwTest::find($id);
+        $this->module_id = $this->sw->module_id;
+        $this->sw_id = $id;
         $this->users=User::all();
     }
     #endregion
@@ -56,6 +58,7 @@ class ClassSys extends Component
                 if ($this->vid == "") {
                     LwClassTest::create([
                         'module_id' => $this->module_id,
+                        'sw_id' => $this->sw_id,
                         'vname' => $this->vname,
                         'description' => $this->description,
                         'checked_1' => $this->checked_1?:0,

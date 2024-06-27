@@ -15,6 +15,7 @@ class BladeSys extends Component
     use CommonTrait;
 
     #region[properties]
+    public mixed $class;
     public mixed $class_id;
     public mixed $module_id;
     public mixed $module_name;
@@ -46,8 +47,9 @@ class BladeSys extends Component
 
     public function mount($id)
     {
-        $this->class_id = LwClassTest::find($id);
-        $this->module_id = $this->class_id->module_id;
+        $this->class = LwClassTest::find($id);
+        $this->module_id = $this->class->module_id;
+        $this->class_id = $id;
         $this->module_name = LwClassTest::where('module_id','=',$this->module_id)->get();
         $this->users=User::all();
     }
@@ -61,6 +63,7 @@ class BladeSys extends Component
                 if ($this->vid == "") {
                     LwBladeTest::create([
                         'module_id' => $this->module_id,
+                        'class_id' => $this->class,
                         'vname' => $this->vname,
                         'description' => $this->description,
                         'checked_1' => $this->checked_1?:0,
@@ -118,6 +121,7 @@ class BladeSys extends Component
             foreach ($this->module_name as $row){
             LwBladeTest::create([
                 'module_id' => $this->module_id,
+                'class_id' => $this->class_id,
                 'vname' => $row->vname,
                 'description' => '',
                 'checked_1' => false,
