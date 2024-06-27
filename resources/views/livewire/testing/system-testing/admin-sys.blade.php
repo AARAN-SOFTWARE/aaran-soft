@@ -11,7 +11,7 @@
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Migration Table</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Migration check</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Migration condition</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>DbMigration</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Migration Seeder</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Description</x-table.header-text>
@@ -96,7 +96,7 @@
             @error('vname')
             <span class="text-red-500">{{  $message }}</span>
             @enderror
-            <x-input.checkbox wire:model="checked_1" :label="'Migration'"/>
+            <x-input.checkbox wire:model="checked_1" :label="'Migration Condition'"/>
             <x-input.checkbox wire:model="checked_2" :label="'Db Migration'"/>
             <x-input.checkbox wire:model="checked_3" :label="'Migration Seeder'"/>
             <x-input.model-text wire:model="description" :label="'Description'"/>

@@ -26,9 +26,9 @@ class DbTest extends Model
         return new DbTest();
     }
 
-    public function module(): BelongsTo
+    public function file(): BelongsTo
     {
-        return $this->belongsTo(TestModule::class);
+        return $this->belongsTo(TestFile::class);
     }
 
     public function user(): BelongsTo

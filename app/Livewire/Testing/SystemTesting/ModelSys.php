@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Testing\SystemTesting;
 
-use Aaran\Testing\Models\DbTest;
 use Aaran\Testing\Models\ModelTest;
 use Aaran\Testing\Models\TestFile;
 use App\Livewire\Trait\CommonTrait;
@@ -11,18 +10,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-class DatabaseSys extends Component
+class ModelSys extends Component
 {
     use CommonTrait;
 
     #region[properties]
-    public mixed $db_id;
     public mixed $module_id;
+    public mixed $file_id;
     public mixed $description = '';
-    public mixed $comment = '';
-    public bool $checked_1 = false;
-    public bool $checked_2 = false;
-    public bool $checked_3 = false;
+    public bool $checked = false;
 
     public  mixed $users = '';
 
@@ -35,11 +31,14 @@ class DatabaseSys extends Component
     #region[mount]
     public function mount($id)
     {
-        $this->db_id = ModelTest::find($id);
-        $this->module_id = $this->db_id->module_id;
+
+        $this->file_id = TestFile::find($id);
+        $this->module_id = $this->file_id->module_id;
         $this->users=User::all();
     }
     #endregion
+
+    #region[generate]
 
     #region[getSave]
     public function getSave()
@@ -48,26 +47,21 @@ class DatabaseSys extends Component
             if ($this->vname != '') {
                 if ($this->vid == "") {
                     $this->validate(['vname' => 'required']);
-                    DbTest::create([
+                    ModelTest::create([
                         'module_id' => $this->module_id,
                         'vname' => Str::ucfirst($this->vname),
                         'description' => $this->description,
-                        'checked_1' => $this->checked_1,
-                        'checked_2' => $this->checked_2,
-                        'checked_3' => $this->checked_3,
-                        'comment' => $this->comment,
+                        'checked' => $this->checked,
                         'user_id' => Auth::user()->id,
                         'active_id' => $this->active_id,
                     ]);
                     $message = 'Saved';
                 }
                 else {
-                    $obj = DbTest::find($this->vid);
+                    $obj = ModelTest::find($this->vid);
                     $obj->vname = Str::ucfirst($this->vname);
                     $obj->description = $this->description;
-                    $obj->checked_1 = $this->checked_1;
-                    $obj->checked_2 = $this->checked_2;
-                    $obj->checked_3 = $this->checked_3;
+                    $obj->checked = $this->checked;
                     $obj->active_id = $this->active_id;
                     $obj->save();
                     $message = "Updated";
@@ -80,41 +74,31 @@ class DatabaseSys extends Component
     }
     #endregion
 
-
     public function generate()
     {
-        $data=DbTest::where('module_id','=',$this->module_id)->get();
+        $data=ModelTest::where('module_id','=',$this->module_id)->get();
         if ($data->count()==0) {
-            DbTest::create([
+            ModelTest::create([
                 'module_id' => $this->module_id,
-                'vname' => 'Migration',
+                'vname' => 'Guarded',
                 'description' => '',
-                'checked_1' => false,
-                'checked_2' => false,
-                'checked_3' => false,
-                'comment' => '',
+                'checked' => false,
                 'active_id' => 1,
                 'user_id' => Auth::user()->id,
             ]);
-            DbTest::create([
+            ModelTest::create([
                 'module_id' => $this->module_id,
-                'vname' => 'Factories',
+                'vname' => 'Search',
                 'description' => '',
-                'checked_1' => false,
-                'checked_2' => false,
-                'checked_3' => false,
-                'comment' => '',
+                'checked' => false,
                 'active_id' => 1,
                 'user_id' => Auth::user()->id,
             ]);
-            DbTest::create([
+            ModelTest::create([
                 'module_id' => $this->module_id,
-                'vname' => 'Seeders',
+                'vname' => 'Relation',
                 'description' => '',
-                'checked_1' => false,
-                'checked_2' => false,
-                'checked_3' => false,
-                'comment' => '',
+                'checked' => false,
                 'active_id' => 1,
                 'user_id' => Auth::user()->id,
             ]);
@@ -127,14 +111,10 @@ class DatabaseSys extends Component
     public function getObj($id)
     {
         if ($id) {
-            $obj = DbTest::find($id);
+            $obj = ModelTest::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
             $this->description = $obj->description;
-            $this->checked_1 = $obj->checked_1;
-            $this->checked_2 = $obj->checked_2;
-            $this->checked_3 = $obj->checked_3;
-            $this->comment = $obj->comment;
             $this->active_id = $obj->active_id;
             return $obj;
         }
@@ -149,63 +129,26 @@ class DatabaseSys extends Component
         $this->vid = '';
         $this->vname = '';
         $this->description = '';
-        $this->checked_1 = '';
-        $this->checked_2 = '';
-        $this->checked_3 = '';
-        $this->comment = '';
         $this->active_id = 1;
     }
     #endregion
 
     #region[checked]
-    public function isChecked1($id): void
+    public function isChecked($id): void
     {
-        $a = DbTest::find($id);
-        $a->checked_1 = !$a->checked_1;
-        $a->save();
+        $todo = ModelTest::find($id);
+        $todo->checked = !$todo->checked;
+        $todo->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
     #endregion
-
-    #region[checked]
-    public function isChecked2($id): void
-    {
-        $b = DbTest::find($id);
-        $b->checked_2 = !$b->checked_2;
-        $b->save();
-        $this->clearFields();
-        $this->dispatch('$refresh');
-    }
-    #endregion
-
-    #region[checked]
-    public function isChecked3($id): void
-    {
-        $c = DbTest::find($id);
-        $c->checked_3 = !$c->checked_3;
-        $c->save();
-        $this->clearFields();
-        $this->dispatch('$refresh');
-    }
-    #endregion
-
-    public function sortBy($field): void
-    {
-        if ($this->sortFields === $field) {
-            $this->sortAsc = !$this->sortAsc;
-        } else {
-            $this->sortAsc = true;
-        }
-        $this->sortField = $field;
-    }
-
 
 
     #region[list]
     public function getList()
     {
-        return DbTest::search($this->searches)
+        return ModelTest::search($this->searches)
             ->where('module_id','=',$this->module_id)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortFields, $this->sortAsc ? 'asc' : 'desc')
@@ -221,9 +164,8 @@ class DatabaseSys extends Component
 
     public function render()
     {
-        return view('livewire.testing.system-testing.database-sys')->with([
+        return view('livewire.testing.system-testing.model-sys')->with([
             "list" => $this->getList()
         ]);
     }
-    #endregion
 }

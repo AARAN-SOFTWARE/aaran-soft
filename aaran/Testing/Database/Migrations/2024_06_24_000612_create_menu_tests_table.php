@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lw_blade_tests', function (Blueprint $table) {
+        Schema::create('menu_tests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('module_id')->references('id')->on('test_modules')->onDelete('cascade');
+            $table->foreignId('blade_id')->references('id')->on('lw_blade_tests')->onDelete('cascade');
             $table->string('vname');
-            $table->boolean('checked_1');
-            $table->boolean('checked_2');
+            $table->boolean('checked');
             $table->longText('description');
             $table->longText('comment');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lw_blade_tests');
+        Schema::dropIfExists('menu_tests');
     }
 };

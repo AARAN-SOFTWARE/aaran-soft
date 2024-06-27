@@ -2,9 +2,10 @@
 
 namespace Aaran\Testing\Models;
 
-use Aaran\Testing\Database\Factories\TestFileFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TestFile extends Model
 {
@@ -20,8 +21,13 @@ class TestFile extends Model
             : static::where('vname', 'like', '%' . $searches . '%');
     }
 
-    protected static function newFactory(): TestFileFactory
+    public function module(): BelongsTo
     {
-        return new TestFileFactory();
+        return $this->belongsTo(TestModule::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

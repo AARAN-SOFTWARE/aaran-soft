@@ -84,6 +84,158 @@ class SoftwareSys extends Component
     }
     #endregion
 
+    public function generate()
+    {
+        $data=SwTest::where('module_id','=',$this->module_id)->get();
+        if ($data->count()==0) {
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'vname' => 'hasCore',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'vname' => 'hasCommon',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'vname' => 'hasMaster',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'vname' => 'hasEntry',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'vname' => 'hasReport',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'vname' => 'hasErp',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'vname' => 'hasOrder',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'vname' => 'hasStyle',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'vname' => 'hasPo',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'vname' => 'hasCreditNote',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'vname' => 'hasDebitNote',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'vname' => 'hasTodoList',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            $this->save();
+        }
+    }
+
 
     #region[obj]
     public function getObj($id)

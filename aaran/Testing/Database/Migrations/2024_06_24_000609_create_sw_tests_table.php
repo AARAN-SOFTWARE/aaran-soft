@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('db_tests', function (Blueprint $table) {
+        Schema::create('sw_tests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('module_id')->references('id')->on('test_modules')->onDelete('cascade');
+            $table->foreignId('admin_id')->references('id')->on('admin_tests')->onDelete('cascade');
             $table->string('vname');
             $table->longText('description');
-            $table->boolean('db_check');
-            $table->boolean('run_mig');
+            $table->boolean('checked_1');
+            $table->boolean('checked_2');
+            $table->boolean('checked_3');
+            $table->boolean('checked_4');
             $table->longText('comment');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->smallInteger('active_id');
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('db_tests');
+        Schema::dropIfExists('sw_tests');
     }
 };
