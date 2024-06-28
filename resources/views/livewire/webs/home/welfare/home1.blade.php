@@ -1,4 +1,4 @@
-<div class="w-10/12 mx-auto h-52 ">
+<div class="w-full mx-auto">
 
     <!--script -------------------------------------------------------------------------------------------------------->
 
@@ -71,36 +71,36 @@
 
                 <ul x-ref="slider" @scroll="updateCurrentSlide" tabindex="0" role="listbox"
                     aria-labelledby="carousel-content-label"
-                    class="mt-8 flex w-full overflow-x-hidden snap-x snap-mandatory opacity-95">
+                    class="flex w-full overflow-x-hidden snap-x snap-mandatory opacity-95">
                     <li x-bind="disableNextAndPreviousButtons"
                         class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start" role="option">
-                        <img class="w-full h-[40rem] " src="/../../../images/software2.jpg" alt="placeholder image">
+                        <img class="w-full h-[50rem]" src="/../../../images/software2.jpg" alt="placeholder image">
                     </li>
 
                     <li x-bind="disableNextAndPreviousButtons"
                         class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start" role="option">
-                        <img class="w-full h-[40rem]" src="/../../../images/software1.jpg" alt="placeholder image">
+                        <img class="w-full h-[50rem]" src="/../../../images/software1.jpg" alt="placeholder image">
                     </li>
 
                     <li x-bind="disableNextAndPreviousButtons"
                         class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start" role="option">
-                        <img class="w-full h-[40rem]" src="/../../../images/billing-system-software.jpg"
+                        <img class="w-full h-[50rem]" src="/../../../images/billing-system-software.jpg"
                              alt="placeholder image">
                     </li>
 
                     <li x-bind="disableNextAndPreviousButtons"
                         class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start" role="option">
-                        <img class="w-full h-[40rem]" src="/../../../images/software2.jpg" alt="placeholder image">
+                        <img class="w-full h-[50rem]" src="/../../../images/software2.jpg" alt="placeholder image">
                     </li>
 
                     <li x-bind="disableNextAndPreviousButtons"
                         class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start" role="option">
-                        <img class="w-full h-[40rem]" src="/../../../images/software1.jpg" alt="placeholder image">
+                        <img class="w-full h-[50rem]" src="/../../../images/software1.jpg" alt="placeholder image">
                     </li>
 
                     <li x-bind="disableNextAndPreviousButtons"
                         class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start" role="option">
-                        <img class="w-full h-[40rem]" src="/../../../images/software2.jpg" alt="placeholder image">
+                        <img class="w-full h-[50rem]" src="/../../../images/software2.jpg" alt="placeholder image">
 
                         {{--                        <button x-bind="focusableWhenVisible" class="px-4 py-2 text-sm" x-text="currentSlide+1">index</button>--}}
                     </li>
@@ -151,6 +151,5 @@
 
         </div>
     </div>
-
 
 </div>
