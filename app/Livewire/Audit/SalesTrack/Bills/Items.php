@@ -56,6 +56,7 @@ class Items extends Component
     public mixed $salesTrackItems;
     public $rootlineItems;
     public $group;
+    public $salesTrack_id;
     #endregion
 
     #region[mount]
@@ -64,12 +65,14 @@ class Items extends Component
         $this->sales_track_item_id=$id;
 
         $this->salesTrackItems = SalesTrackItem::find($id);
+        $this->salesTrack_id=$this->salesTrackItems->sales_track_id;
 
         $this->rootline_id=$this->salesTrackItems->rootline_id;
 
         $this->sales_from = $this->salesTrackItems->client_id;
 
-        $this->rootlineItems = RootlineItems::where('rootline_id', '=',$this->rootline_id)->where('id', '>', $this->salesTrackItems->id)->orderby('id')->first();
+        $this->rootlineItems = SalesTrackItem::where('rootline_id', '=',$this->rootline_id)
+            ->where('id', '>', $this->salesTrackItems->id)->orderby('id')->first();
 
 
         $this->vno = SalesBill::nextNo($this->sales_from);
@@ -103,6 +106,7 @@ class Items extends Component
                     'serial' => $this->serial ?: 0,
                     'rootline_id' => $this->rootline_id,
                     'sales_track_item_id' => $this->sales_track_item_id,
+                    'sales_track_id'=>$this->salesTrack_id,
                     'unique_no'=>$this->sales_from.'~'.$this->vno,
                     'group'=>$this->group,
                     'vno' => $this->vno ?: 0,
@@ -131,6 +135,7 @@ class Items extends Component
                 $obj->serial = $this->serial;
                 $obj->rootline_id = $this->rootline_id;
                 $obj->sales_track_item_id = $this->sales_track_item_id;
+                $obj->sales_track_id = $this->salesTrack_id;
                 $obj->vno = $this->vno;
                 $obj->unique_no = $this->unique_no;
                 $obj->group = $this->group;

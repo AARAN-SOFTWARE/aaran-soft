@@ -38,5 +38,8 @@ return new class extends Migration {
                 'two_factor_confirmed_at',
             ] : []));
         });
+
+
+
     }
 };

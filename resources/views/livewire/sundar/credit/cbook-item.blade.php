@@ -17,8 +17,8 @@
                 <x-table.header-text center>Rate</x-table.header-text>
                 <x-table.header-text center>Interest</x-table.header-text>
                 <x-table.header-text center>Processing</x-table.header-text>
-                <x-table.header-text center>Pending</x-table.header-text>
                 <x-table.header-text center>Terms</x-table.header-text>
+                <x-table.header-text center>Pending</x-table.header-text>
                 <x-table.header-text center>Pending Dues</x-table.header-text>
                 <x-table.header-text center>Remarks</x-table.header-text>
                 <x-table.header-action/>

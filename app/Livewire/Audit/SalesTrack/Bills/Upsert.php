@@ -5,6 +5,7 @@ namespace App\Livewire\Audit\SalesTrack\Bills;
 use Aaran\Audit\Models\Client;
 use Aaran\Audit\Models\SalesTrack\SalesBill;
 use Aaran\Audit\Models\SalesTrack\SalesBillItem;
+use Aaran\Audit\Models\SalesTrack\SalesTrackItem;
 use Aaran\Audit\Models\Vehicle;
 use Aaran\Common\Models\Colour;
 use Aaran\Common\Models\Ledger;
@@ -58,6 +59,7 @@ class Upsert extends Component
     public mixed $rootline_id = '';
     public $unique_no;
     public $group;
+    public $salesTrack_id;
     #endregion
 
 
@@ -70,6 +72,7 @@ class Upsert extends Component
             $this->sales_track_bill_id = $data->id;
             $this->rootline_id = $data->rootline_id;
             $this->sales_track_item_id = $data->sales_track_item_id;
+            $this->salesTrack_id=$data->sales_track_id;
             $this->unique_no = $data->unique_no;
             $this->group = $data->group;
             $this->vdate = $data->vdate;
@@ -134,6 +137,7 @@ class Upsert extends Component
                     'serial' => $this->serial ?: 0,
                     'rootline_id' => $this->rootline_id,
                     'sales_track_item_id' => $this->sales_track_item_id,
+                    'sales_track_id'=>$this->salesTrack_id,
                     'unique_no' => $this->sales_from.'~'.$this->vno,
                     'group' => $this->group,
                     'vno' => $this->vno ?: 0,
@@ -162,6 +166,7 @@ class Upsert extends Component
                 $obj->serial = $this->serial;
                 $obj->rootline_id = $this->rootline_id;
                 $obj->sales_track_item_id = $this->sales_track_item_id;
+                $obj->sales_track_id = $this->salesTrack_id;
                 $obj->unique_no = $this->unique_no;;
                 $obj->group = $this->group;;
                 $obj->vdate = $this->vdate;
@@ -310,7 +315,6 @@ class Upsert extends Component
     }
     #endregion
 
-
     #region[mark as entered]
     public function markAsEntered()
     {
@@ -332,6 +336,7 @@ class Upsert extends Component
 
     }
     #endregion
+
     #region[sales Entry]
     public $company_id;
     public $contact_id;
@@ -340,7 +345,7 @@ class Upsert extends Component
     public mixed $shipping_id = '';
     public mixed $job_no = '';
     public string $sales_type = '';
-    public string $destination = '';    
+    public string $destination = '';
     public string $style_id = '';
     public string $despatch_id = '';
     public string $transport_id = '';
@@ -413,7 +418,6 @@ class Upsert extends Component
         $this->render();
     }
     #endregion
-
 
     #region[Calculate total]
 
@@ -792,6 +796,76 @@ class Upsert extends Component
             ->get() : Vehicle::where('client_id', '=', $this->sales_from)->get();
     }
 
+    #endregion
+
+    #region[makeForAll]
+    public function makeForAll()
+    {
+        $obj = SalesTrackItem::find($this->sales_track_item_id);
+        $trackId = $obj->sales_track_id;
+        $data = SalesTrackItem::where('sales_track_id', '=', $trackId)->get();
+        for ($i = 1; $i < count($data); $i++) {
+
+            if (isset($data[$i + 1]->client_id)) {
+                $obj = SalesBill::create([
+                    'serial' => $this->serial ?: 0,
+                    'rootline_id' => $this->rootline_id,
+                    'sales_track_item_id' => $data[$i]->id,
+                    'sales_track_id'=>$this->salesTrack_id,
+                    'unique_no' => $data[$i]->client_id.'~'.SalesBill::where('sales_from', '=', $data[$i]->client_id)
+                            ->max('vno') + 1,
+                    'group' => $this->group,
+                    'vno' => SalesBill::where('sales_from', '=', $data[$i]->client_id)
+                        ->max('vno') + 1 ?: 0,
+                    'vdate' => $this->vdate,
+                    'sales_from' => $data[$i]->client_id,
+                    'client_id' => $data[$i + 1]->client_id ?: $data[0]->client_id,
+                    'taxable' => $this->total_taxable,
+                    'total_qty' => $this->total_qty,
+                    'gst' => $this->total_gst,
+                    'ledger_id' => $this->ledger_id ?: 1,
+                    'bundle' => $this->bundle,
+                    'additional' => $this->additional,
+                    'round_off' => $this->round_off,
+                    'grand_total' => $this->grand_total,
+                    'vehicle_id' => $this->vehicle_id ?: '1',
+                    'status' => '1',
+                    'active_id' => $this->active_id ?: '0',
+                    'user_id' => auth()->id(),
+                ]);
+                $this->saveItem($obj->id);
+            } else {
+                $obj = SalesBill::create([
+                    'serial' => $this->serial ?: 0,
+                    'rootline_id' => $this->rootline_id,
+                    'sales_track_item_id' => $data[$i]->id,
+                    'sales_track_id'=>$this->salesTrack_id,
+                    'unique_no' => $data[$i]->client_id.'~'.SalesBill::where('sales_from', '=', $data[$i]->client_id)
+                            ->max('vno') + 1,
+                    'group' => $this->group,
+                    'vno' => SalesBill::where('sales_from', '=', $data[$i]->client_id)
+                        ->max('vno') + 1 ?: 0,
+                    'vdate' => $this->vdate,
+                    'sales_from' => $data[$i]->client_id,
+                    'client_id' => $data[0]->client_id,
+                    'taxable' => $this->total_taxable,
+                    'total_qty' => $this->total_qty,
+                    'gst' => $this->total_gst,
+                    'ledger_id' => $this->ledger_id ?: 1,
+                    'bundle' => $this->bundle,
+                    'additional' => $this->additional,
+                    'round_off' => $this->round_off,
+                    'grand_total' => $this->grand_total,
+                    'vehicle_id' => $this->vehicle_id ?: '1',
+                    'status' => '1',
+                    'active_id' => $this->active_id ?: '0',
+                    'user_id' => auth()->id(),
+                ]);
+                $this->saveItem($obj->id);
+            }
+        }
+
+    }
     #endregion
 
     #region[render]

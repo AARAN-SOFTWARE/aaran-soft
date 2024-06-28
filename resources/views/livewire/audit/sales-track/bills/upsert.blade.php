@@ -1,8 +1,8 @@
 <div>
     <x-slot name="header">Sales Bill Items</x-slot>
 
-
-    <div class="inline-flex gap-3 py-3">
+    <div class="flex justify-evenly">
+    <div class="inline-flex gap-3 py-3 w-full">
         <a href="{{route('salesTracks')}}" class="text-gray-400">Sales Track</a>
 
         <x-icons.icon :icon="'double-arrow-right'"
@@ -14,6 +14,12 @@
                       class="text-gray-500 hover:text-white  hover:rounded-sm  h-4 w-auto block mt-2"/>
 
             <a href="{{route('salesTracks.Bills',[$sales_track_item_id])}}" class="text-gray-500">Sales Bills</a>
+    </div>
+        <div class="w-full text-right p-3">
+            <button class="bg-purple-500 hover:bg-purple-600 rounded-lg p-1.5 text-white" wire:click="makeForAll">
+                Copy Invoice For Entire Track
+            </button>
+        </div>
     </div>
 
     <x-forms.m-panel>
