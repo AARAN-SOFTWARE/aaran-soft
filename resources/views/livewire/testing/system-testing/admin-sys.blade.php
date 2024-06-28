@@ -1,7 +1,15 @@
 <div>
     <x-slot name="header">Migration </x-slot>
 
+    <div class="flex text-gray-400 text-xs ml-6 ">
+        <div class="flex"><a href="/module"  class="flex"><div><x-icons.icon icon="double-arrow-right" class="w-3 h-3 mt-1.5" /></div><div>Module</div></a></div>
+        <div class="flex ml-3"><a href={{route('module.model', $this->module_id)}} class="flex"><div><x-icons.icon icon="double-arrow-right" class="w-3 h-3 mt-1.5" /></div><div>Model</div></a></div>
+        <div class="flex ml-3"><a href={{route('model.db', $previous)}} class="flex"><div><x-icons.icon icon="double-arrow-right" class="w-3 h-3 mt-1.5" /></div><div>Database</div></a></div>
+    </div>
+
+
     <x-forms.m-panel>
+
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
         <div class="md:flex md:justify-between md:items-center md:pb-5">
@@ -48,11 +56,14 @@
                             <a href="{{ route('admin.livewire-class', $row->id) }}">
                                 {{ $row->vname}}
                             </a>
+
                         </x-table.cell-text>
 
 
                         <x-table.cell-text>
+                            <a href="{{ route('admin.livewire-class', $row->id) }}">
                             {{ $row->description }}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
@@ -98,9 +109,6 @@
                         </x-table.cell-text>
                         <x-table.cell-text>
                             <input type="text" wire:model="vname" class="border-0 w-full h-full purple-textbox "/>
-                            @error('action')
-                            <span class="text-red-500">{{  $message }}</span>
-                            @enderror
                         </x-table.cell-text>
                         <x-table.cell-text>
                             <input type="text" wire:model="description" class="border-0 w-full h-full purple-textbox "/>
@@ -111,12 +119,15 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <select wire:model="db_mig" class="w-full h-auto border-0 purple-textbox" style="font-size: 11px ">
+                            <select wire:model="db_mig" class="w-full h-auto border-0 purple-textbox" style="font-size: 12px ">
                                 <option class="text-gray-400"> choose ..</option>
                                 @foreach(\App\Enums\DbMigration::cases() as $dbData )
                                     <option value="{{$dbData->value}}">{{$dbData->getName()}}</option>
                                 @endforeach
                             </select>
+                            @error('db_mig')
+                            <span class="text-red-500">{{  $message }}</span>
+                            @enderror
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
@@ -126,7 +137,7 @@
                             <input type="text" wire:model="comment" class="border-0 w-full h-full purple-textbox"/>
                         </x-table.cell-text>
                         <x-table.cell-text center>
-                                <button type="submit" wire:click.prevent="save" class="bg-blue-600 text-white flex items-center justify-evenly px-2 py-1 rounded-md">
+                                <button type="submit" wire:click.prevent="save" class="bg-green-600 text-white flex items-center justify-evenly px-2 py-1 rounded-md">
                                     <div><x-icons.icon :icon="'save'" class="h-4 w-auto block px-1.5 mt-1"/></div><div>Save</div>
                                 </button>
                         </x-table.cell-text>

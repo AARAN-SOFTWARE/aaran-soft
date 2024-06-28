@@ -30,6 +30,7 @@ class AdminSys extends Component
 
     public bool $showEditModal = false;
     public mixed $editable = true;
+    public $previous;
 
     #endregion
 
@@ -40,6 +41,7 @@ class AdminSys extends Component
     {
         $this->db = DbTest::find($id);
         $this->module_id=$this->db->module_id;
+        $this->previous=$this->db->model_id;
         $this->db_id = $id;
         $this->table_name = DbTest::where('module_id','=',$this->module_id)->get();
         $this->users=User::all();
@@ -55,12 +57,12 @@ class AdminSys extends Component
                 AdminTest::create([
                     'module_id' => $this->module_id,
                     'db_id' => $this->db_id,
-                    'vname' => $this->vname,
-                    'description' => $this->description,
+                    'vname' => Str::lower('create_'.$this->vname.'_table'),
+                    'description' => Str::ucfirst($this->description),
                     'checked_1' => $this->checked_1?:0,
                     'checked_2' => $this->checked_2?:0,
-                    'db_mig' => $this->db_mig,
-                    'comment' => $this->comment,
+                    'db_mig' => $this->db_mig?:6,
+                    'comment' => Str::ucfirst($this->comment),
                     'user_id' => Auth::user()->id,
                     'active_id' => $this->active_id,
                 ]);
@@ -69,11 +71,11 @@ class AdminSys extends Component
             else {
                 $obj = AdminTest::find($this->vid);
                 $obj->vname = Str::ucfirst($this->vname);
-                $obj->description = $this->description;
+                $obj->description = Str::ucfirst($this->description);
                 $obj->checked_1 = $this->checked_1;
                 $obj->checked_2 = $this->checked_2;
                 $obj->db_mig = $this->db_mig;
-                $obj->comment = $this->comment;
+                $obj->comment = Str::ucfirst($this->comment);
                 $obj->active_id = $this->active_id;
                 $obj->save();
                 $message = "Updated";

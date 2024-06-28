@@ -17,6 +17,7 @@ class ModelSys extends Component
     #region[properties]
     public mixed $module_id;
     public mixed $module_name;
+    public mixed $eloquent = '';
     public mixed $description = '';
     public bool $checked_1 = false;
     public bool $checked_2 = false;
@@ -46,14 +47,14 @@ class ModelSys extends Component
         if ($this->editable) {
             if ($this->vname != '') {
                 if ($this->vid == "") {
-                    $this->validate(['vname' => 'required']);
                     ModelTest::create([
                         'module_id' => $this->module_id,
                         'vname' => Str::ucfirst($this->vname),
-                        'description' => $this->description,
+                        'description' => Str::ucfirst($this->description),
                         'checked_1' => $this->checked_1?:0,
                         'checked_2' => $this->checked_2?:0,
                         'checked_3' => $this->checked_3?:0,
+                        'eloquent' => $this->eloquent,
                         'user_id' => Auth::user()->id,
                         'active_id' => 1,
                     ]);
@@ -62,10 +63,11 @@ class ModelSys extends Component
                 else {
                     $obj = ModelTest::find($this->vid);
                     $obj->vname = Str::ucfirst($this->vname);
-                    $obj->description = $this->description;
+                    $obj->description = Str::ucfirst($this->description);
                     $obj->checked_1 = $this->checked_1;
                     $obj->checked_2 = $this->checked_2;
                     $obj->checked_3 = $this->checked_3;
+                    $obj->eloquent = $this->eloquent;
                     $obj->active_id = $this->active_id;
                     $obj->save();
                     $message = "Updated";
@@ -86,10 +88,11 @@ class ModelSys extends Component
             $obj = ModelTest::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
+            $this->description = $obj->description;
             $this->checked_1 = $obj->checked_1;
             $this->checked_2 = $obj->checked_2;
             $this->checked_3 = $obj->checked_3;
-            $this->description = $obj->description;
+            $this->eloquent = $obj->eloquent;
             $this->active_id = $obj->active_id;
             return $obj;
         }
@@ -107,6 +110,7 @@ class ModelSys extends Component
         $this->checked_1 = '';
         $this->checked_2 = '';
         $this->checked_3 = '';
+        $this->eloquent = '';
         $this->active_id = 1;
     }
     #endregion

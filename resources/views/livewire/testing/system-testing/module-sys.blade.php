@@ -10,9 +10,9 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="20%">Module</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="15%">Module</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Description</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="10%">Status</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="20%">Status</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -25,20 +25,20 @@
                             {{ $index + 1 }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text center>
+                        <x-table.cell-text >
                             <a href="{{ route('module.model', $row->id) }}">
                             {{ $row->vname}}
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text center>
+                        <x-table.cell-text>
                             <a href="{{ route('module.model', $row->id) }}">
                             {{ $row->description}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            <div {{  \App\Enums\Status::tryFrom($row->status)->getStyle() }}>
+                            <div class=" flex w-1/2 mx-auto justify-center h-1/4 border border-gray-400 rounded-md {{  \App\Enums\Status::tryFrom($row->status)->getStyle() }}">
                             {{  \App\Enums\Status::tryFrom($row->status)->getName() }}
                             </div>
                         </x-table.cell-text>

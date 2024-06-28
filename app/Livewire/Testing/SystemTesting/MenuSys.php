@@ -2,7 +2,10 @@
 
 namespace App\Livewire\Testing\SystemTesting;
 
+use Aaran\Testing\Models\AdminTest;
+use Aaran\Testing\Models\DbTest;
 use Aaran\Testing\Models\LwBladeTest;
+use Aaran\Testing\Models\LwClassTest;
 use Aaran\Testing\Models\MenuTest;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
@@ -19,7 +22,6 @@ class MenuSys extends Component
     public mixed $blade_id;
     public mixed $module_id;
     public mixed $menu = '';
-    public mixed $description = '';
     public bool $checked = false;
     public mixed $comment = '';
 
@@ -27,6 +29,13 @@ class MenuSys extends Component
 
     public bool $showEditModal = false;
     public mixed $editable = true;
+
+
+    public $previous;
+    public $backToClass;
+    public $backToMigrate;
+    public $backToDB;
+
 
     #endregion
 
@@ -37,6 +46,10 @@ class MenuSys extends Component
     {
         $this->blade = LwBladeTest::find($id);
         $this->module_id = $this->blade->module_id;
+        $this->previous=$this->blade->class_id;
+        $this->backToClass=LwClassTest::find($this->previous)->admin_id;
+        $this->backToMigrate=AdminTest::find($this->backToClass)->db_id;
+        $this->backToDB=DbTest::find($this->backToMigrate)->model_id;
         $this->blade_id = $id;
         $this->users=User::all();
     }
@@ -51,23 +64,21 @@ class MenuSys extends Component
                     MenuTest::create([
                         'module_id' => $this->module_id,
                         'blade_id' => $this->blade_id,
-                        'vname' => $this->vname,
+                        'vname' => Str::upper($this->vname),
                         'menu' => $this->menu?:12,
-                        'description' => $this->description,
                         'checked' => $this->checked?:0,
-                        'comment' => $this->comment,
+                        'comment' => Str::ucfirst($this->comment),
                         'user_id' => Auth::user()->id,
-                        'active_id' => $this->active_id,
+                        'active_id' => 1,
                     ]);
                     $message = 'Saved';
                 }
                 else {
                     $obj = MenuTest::find($this->vid);
-                    $obj->vname = Str::ucfirst($this->vname);
+                    $obj->vname = Str::upper($this->vname);
                     $obj->menu = $this->menu;
-                    $obj->description = $this->description;
                     $obj->checked = $this->checked;
-                    $obj->comment = $this->comment;
+                    $obj->comment = Str::ucfirst($this->comment);
                     $obj->active_id = 1;
                     $obj->save();
                     $message = "Updated";
@@ -89,7 +100,6 @@ class MenuSys extends Component
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
             $this->menu = $obj->menu;
-            $this->description = $obj->description;
             $this->checked = $obj->checked;
             $this->comment = $obj->comment;
             $this->active_id = $obj->active_id;
@@ -99,14 +109,13 @@ class MenuSys extends Component
     }
     #endregion
 
-
     #region[clearFields]
     public function clearFields()
     {
         $this->vid = '';
         $this->vname = '';
         $this->menu = '';
-        $this->description = '';
+        $this->checked = '';
         $this->comment = '';
         $this->active_id = 1;
     }

@@ -20,6 +20,7 @@ return new class extends Migration
                 $table->boolean('checked_1');
                 $table->boolean('checked_2');
                 $table->boolean('checked_3');
+                $table->string('eloquent');
                 $table->longText('description');
                 $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
                 $table->smallInteger('active_id');

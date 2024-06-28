@@ -1,6 +1,13 @@
 <div>
     <x-slot name="header">Livewire Class</x-slot>
 
+    <div class="flex text-gray-400 text-xs ml-6">
+        <div class="flex"><a href="/module"  class="flex"><div><x-icons.icon icon="double-arrow-right" class="w-3 h-3 mt-1.5" /></div><div>Module</div></a></div>
+        <div class="flex ml-3"><a href={{route('module.model', $this->module_id)}} class="flex"><div><x-icons.icon icon="double-arrow-right" class="w-3 h-3 mt-1.5" /></div><div>Model</div></a></div>
+        <div class="flex ml-3"><a href={{route('model.db', $backToDataBase)}} class="flex"><div><x-icons.icon icon="double-arrow-right" class="w-3 h-3 mt-1.5" /></div><div>Database</div></a></div>
+        <div class="flex ml-3"><a href={{route('db.admin', $previous)}} class="flex"><div><x-icons.icon icon="double-arrow-right" class="w-3 h-3 mt-1.5" /></div><div>Migration</div></a></div>
+    </div>
+
     <x-forms.m-panel>
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
@@ -25,8 +32,8 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="15%">Livewire Class</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="15%">Description</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="10%">Folder</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="10%">Class File</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center width="5%">Common Trait</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center width="5%">Properties</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center width="5%">Mount</x-table.header-text>
@@ -34,6 +41,8 @@
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center width="5%">Get Save</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center width="5%">Get Obj</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center width="5%">Clear Fields</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="5%">Other</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="15%">Other Description</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Comment</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
@@ -51,13 +60,13 @@
 
                         <x-table.cell-text>
                             <a href="{{ route('livewire-class.livewire-blade', $row->id) }}">
-                            {{ $row->vname}}
+                                {{ $row->class_file}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
                             <a href="{{ route('livewire-class.livewire-blade', $row->id) }}">
-                                {{ $row->description}}
+                            {{ $row->vname}}
                             </a>
                         </x-table.cell-text>
 
@@ -124,6 +133,20 @@
                             </label>
                         </x-table.cell-text>
 
+                        <x-table.cell-text center>
+                            <label>
+                                <input wire:click="isChecked8({{$row->id}})" type="checkbox"
+                                       @if($row->checked_8) checked @endif
+                                       class="h-4 w-4 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out
+                                       {{ $row->checked_8 ? 'text-green-400 focus:ring-green-500': 'focus:ring-gray-500 text-gray-700'}}">
+                            </label>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <a href="{{ route('livewire-class.livewire-blade', $row->id) }}">
+                                {{ $row->description}}
+                            </a>
+                        </x-table.cell-text>
 
                         <x-table.cell-text>
                             <a href="{{ route('livewire-class.livewire-blade', $row->id) }}">
@@ -144,13 +167,16 @@
                             {{$list->count()+1}}
                         </x-table.cell-text>
                         <x-table.cell-text>
-                            <input type="text" wire:model="vname" class="border-0 w-full h-full purple-textbox "/>
+                            <input type="text" wire:model="class_file" class="border-0 w-full h-full purple-textbox "/>
                             @error('action')
                             <span class="text-red-500">{{  $message }}</span>
                             @enderror
                         </x-table.cell-text>
                         <x-table.cell-text>
-                            <input type="text" wire:model="description" class="border-0 w-full h-full purple-textbox"/>
+                            <input type="text" wire:model="vname" class="border-0 w-full h-full purple-textbox "/>
+                            @error('action')
+                            <span class="text-red-500">{{  $message }}</span>
+                            @enderror
                         </x-table.cell-text>
                         <x-table.cell-text center>
                             <input type="checkbox" wire:model="checked_1" class="h-5 w-5 hover:cursor-pointer mt-2 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out text-green-400 focus:ring-green-500'">
@@ -173,12 +199,17 @@
                         <x-table.cell-text center>
                             <input type="checkbox" wire:model="checked_7" class="h-5 w-5 hover:cursor-pointer mt-2 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out text-green-400 focus:ring-green-500'">
                         </x-table.cell-text>
-
+                        <x-table.cell-text center>
+                            <input type="checkbox" wire:model="checked_8" class="h-5 w-5 hover:cursor-pointer mt-2 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out text-green-400 focus:ring-green-500'">
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <input type="text" wire:model="description" class="border-0 w-full h-full purple-textbox"/>
+                        </x-table.cell-text>
                         <x-table.cell-text>
                             <input type="text" wire:model="comment" class="border-0 w-full h-full purple-textbox"/>
                         </x-table.cell-text>
                         <x-table.cell-text>
-                            <button type="submit" wire:click.prevent="save" class="bg-blue-600 text-white flex items-center justify-evenly px-2 py-1 rounded-md">
+                            <button type="submit" wire:click.prevent="save" class="bg-green-600 text-white flex items-center justify-evenly px-2 py-1 rounded-md">
                                 <div><x-icons.icon :icon="'save'" class="h-5 w-auto block px-1.5 mt-1"/></div><div>Save</div>
                             </button>
                         </x-table.cell-text>

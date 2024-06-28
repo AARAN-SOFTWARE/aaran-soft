@@ -20,10 +20,12 @@ return new class extends Migration
                 $table->string('vname');
                 $table->longText('table_name');
                 $table->longText('description');
+                $table->string('foreign_id');
                 $table->boolean('checked_1');
                 $table->boolean('checked_2');
                 $table->boolean('checked_3');
                 $table->boolean('checked_4');
+                $table->boolean('checked_5');
                 $table->longText('comment');
                 $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
                 $table->smallInteger('active_id');

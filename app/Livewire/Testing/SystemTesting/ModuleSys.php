@@ -33,12 +33,13 @@ class ModuleSys extends Component
     #region[getSave]
     public function getSave()
     {
+        $this->validate(['vname' => 'required']);
         if ($this->editable) {
             if ($this->vname != '') {
                 if ($this->vid == "") {
                     TestModule::create([
-                        'vname' => $this->vname,
-                        'description' => $this->description,
+                        'vname' => Str::ucfirst($this->vname),
+                        'description' => Str::ucfirst($this->description),
                         'status' => $this->status?:1,
                         'user_id' => Auth::user()->id,
                         'active_id' => $this->active_id,
@@ -48,7 +49,7 @@ class ModuleSys extends Component
                 else {
                     $obj = TestModule::find($this->vid);
                     $obj->vname = Str::ucfirst($this->vname);
-                    $obj->description = $this->description;
+                    $obj->description = Str::ucfirst($this->description);
                     $obj->active_id = $this->active_id;
                     $obj->status = $this->status;
                     $obj->save();

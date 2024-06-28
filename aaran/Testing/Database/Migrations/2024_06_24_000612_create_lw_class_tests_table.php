@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('module_id')->references('id')->on('test_modules')->onDelete('cascade');
             $table->foreignId('admin_id')->references('id')->on('admin_tests')->onDelete('cascade');
             $table->string('vname');
+            $table->string('class_file');
             $table->longText('description');
             $table->boolean('checked_1');
             $table->boolean('checked_2');
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->boolean('checked_5');
             $table->boolean('checked_6');
             $table->boolean('checked_7');
+            $table->boolean('checked_8');
             $table->longText('comment');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->smallInteger('active_id');

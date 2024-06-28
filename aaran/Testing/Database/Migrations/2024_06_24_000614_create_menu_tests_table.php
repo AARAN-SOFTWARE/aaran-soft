@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('vname');
             $table->string('menu');
             $table->boolean('checked');
-            $table->longText('description');
             $table->longText('comment');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->smallInteger('active_id');

@@ -1,7 +1,13 @@
 <div>
     <x-slot name="header">Model</x-slot>
 
+    <div class="flex text-gray-400 text-xs ml-6">
+        <div class="flex"><a href="/module"  class="flex"><div><x-icons.icon icon="double-arrow-right" class="w-3 h-3 m-1.5" /></div><div>Module</div></a></div>
+    </div>
+
     <x-forms.m-panel>
+
+
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
         <div class="md:flex md:justify-between md:items-center md:pb-5">
@@ -30,6 +36,7 @@
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center width="10%">Guarded</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center width="10%">Search Query</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center width="10%">Eloquent Relation</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="10%">Eloquent Name</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -48,7 +55,7 @@
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text center>
+                        <x-table.cell-text>
                             <a href="{{ route('model.db', $row->id) }}">
                                 {{ $row->description}}
                             </a>
@@ -81,6 +88,12 @@
                             </label>
                         </x-table.cell-text>
 
+                        <x-table.cell-text>
+                            <a href="{{ route('model.db', $row->id) }}">
+                                {{ $row->eloquent}}
+                            </a>
+                        </x-table.cell-text>
+
 
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
@@ -96,7 +109,7 @@
                         </x-table.cell-text>
                         <x-table.cell-text>
                             <input type="text" wire:model="vname" class="border-0 w-full h-full purple-textbox "/>
-                            @error('action')
+                            @error('vname')
                             <span class="text-red-500">{{  $message }}</span>
                             @enderror
                         </x-table.cell-text>
@@ -113,10 +126,14 @@
                             <input type="checkbox" wire:model="checked_3" class="h-5 w-5 hover:cursor-pointer mt-2 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out text-green-400 focus:ring-green-500'">
                         </x-table.cell-text>
                     <x-table.cell-text>
+                        <input type="text" wire:model="eloquent" class="border-0 w-full h-full purple-textbox"/>
+                    </x-table.cell-text>
+                    <x-table.cell-text>
                         <button type="submit" wire:click.prevent="save" class="bg-green-600 text-white flex items-center justify-evenly px-2 py-1 rounded-md">
                             <div><x-icons.icon :icon="'save'" class="h-5 w-auto block px-1.5 mt-1"/></div><div>Save</div>
                         </button>
                     </x-table.cell-text>
+
                 </x-table.row>
             </x-slot>
 
