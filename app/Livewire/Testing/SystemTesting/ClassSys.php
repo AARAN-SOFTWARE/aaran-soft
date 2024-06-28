@@ -2,22 +2,21 @@
 
 namespace App\Livewire\Testing\SystemTesting;
 
+use Aaran\Testing\Models\AdminTest;
 use Aaran\Testing\Models\LwClassTest;
-use Aaran\Testing\Models\SwTest;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Component;
-use voku\helper\ASCII;
 
 class ClassSys extends Component
 {
     use CommonTrait;
 
     #region[properties]
-    public mixed $sw;
-    public mixed $sw_id;
+    public mixed $admin;
+    public mixed $admin_id;
     public mixed $module_id;
 
     public mixed $description = '';
@@ -43,9 +42,9 @@ class ClassSys extends Component
 
     public function mount($id)
     {
-        $this->sw = SwTest::find($id);
-        $this->module_id = $this->sw->module_id;
-        $this->sw_id = $id;
+        $this->admin = AdminTest::find($id);
+        $this->module_id = $this->admin->module_id;
+        $this->admin_id = $id;
         $this->users=User::all();
     }
     #endregion
@@ -58,7 +57,7 @@ class ClassSys extends Component
                 if ($this->vid == "") {
                     LwClassTest::create([
                         'module_id' => $this->module_id,
-                        'sw_id' => $this->sw_id,
+                        'admin_id' => $this->admin_id,
                         'vname' => $this->vname,
                         'description' => $this->description,
                         'checked_1' => $this->checked_1?:0,
@@ -70,7 +69,7 @@ class ClassSys extends Component
                         'checked_7' => $this->checked_7?:0,
                         'comment' => $this->comment,
                         'user_id' => Auth::user()->id,
-                        'active_id' => $this->active_id,
+                        'active_id' => 1,
                     ]);
                     $message = 'Saved';
                 }
@@ -131,6 +130,13 @@ class ClassSys extends Component
         $this->vid = '';
         $this->vname = '';
         $this->description = '';
+        $this->checked_1 = '';
+        $this->checked_2 = '';
+        $this->checked_3 = '';
+        $this->checked_4 = '';
+        $this->checked_5 = '';
+        $this->checked_6 = '';
+        $this->checked_7 = '';
         $this->comment = '';
         $this->active_id = 1;
     }

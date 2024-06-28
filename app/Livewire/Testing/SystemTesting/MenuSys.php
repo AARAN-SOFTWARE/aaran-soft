@@ -18,6 +18,7 @@ class MenuSys extends Component
     public mixed $blade;
     public mixed $blade_id;
     public mixed $module_id;
+    public mixed $menu = '';
     public mixed $description = '';
     public bool $checked = false;
     public mixed $comment = '';
@@ -51,6 +52,7 @@ class MenuSys extends Component
                         'module_id' => $this->module_id,
                         'blade_id' => $this->blade_id,
                         'vname' => $this->vname,
+                        'menu' => $this->menu?:12,
                         'description' => $this->description,
                         'checked' => $this->checked?:0,
                         'comment' => $this->comment,
@@ -62,10 +64,11 @@ class MenuSys extends Component
                 else {
                     $obj = MenuTest::find($this->vid);
                     $obj->vname = Str::ucfirst($this->vname);
+                    $obj->menu = $this->menu;
                     $obj->description = $this->description;
                     $obj->checked = $this->checked;
                     $obj->comment = $this->comment;
-                    $obj->active_id = $this->active_id;
+                    $obj->active_id = 1;
                     $obj->save();
                     $message = "Updated";
                 }
@@ -85,6 +88,7 @@ class MenuSys extends Component
             $obj = MenuTest::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
+            $this->menu = $obj->menu;
             $this->description = $obj->description;
             $this->checked = $obj->checked;
             $this->comment = $obj->comment;
@@ -101,6 +105,7 @@ class MenuSys extends Component
     {
         $this->vid = '';
         $this->vname = '';
+        $this->menu = '';
         $this->description = '';
         $this->comment = '';
         $this->active_id = 1;

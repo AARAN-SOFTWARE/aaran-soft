@@ -16,12 +16,13 @@ class AdminSys extends Component
 
     #region[properties]
     public mixed $db;
+    public mixed $table_name;
     public mixed $db_id;
     public mixed $module_id;
-    public mixed $description = '';
+    public mixed $description="";
+    public mixed $db_mig = "";
     public bool $checked_1 = false;
     public bool $checked_2 = false;
-    public bool $checked_3 = false;
     public mixed $comment = '';
 
     public string $sortFields = 'created_at';
@@ -40,49 +41,70 @@ class AdminSys extends Component
         $this->db = DbTest::find($id);
         $this->module_id=$this->db->module_id;
         $this->db_id = $id;
+        $this->table_name = DbTest::where('module_id','=',$this->module_id)->get();
         $this->users=User::all();
+        $this->active_id = true;
     }
     #endregion
 
     #region[getSave]
     public function getSave()
     {
-        if ($this->editable) {
-            if ($this->vname != '') {
-                if ($this->vid == "") {
-                    AdminTest::create([
-                        'module_id' => $this->module_id,
-                        'db_id' => $this->db_id,
-                        'vname' => $this->vname,
-                        'description' => $this->description,
-                        'checked_1' => $this->checked_1?:0,
-                        'checked_2' => $this->checked_2?:0,
-                        'checked_3' => $this->checked_3?:0,
-                        'comment' => $this->comment,
-                        'user_id' => Auth::user()->id,
-                        'active_id' => $this->active_id,
-                    ]);
-                    $message = 'Saved';
-                }
-                else {
-                    $obj = AdminTest::find($this->vid);
-                    $obj->vname = Str::ucfirst($this->vname);
-                    $obj->description = $this->description;
-                    $obj->checked_1 = $this->checked_1;
-                    $obj->checked_2 = $this->checked_2;
-                    $obj->checked_3 = $this->checked_3;
-                    $obj->comment = $this->comment;
-                    $obj->active_id = $this->active_id;
-                    $obj->save();
-                    $message = "Updated";
-                }
-                $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
-                $this->clearFields();
-                $this->render();
+        if ($this->vname != '') {
+            if ($this->vid == "") {
+                AdminTest::create([
+                    'module_id' => $this->module_id,
+                    'db_id' => $this->db_id,
+                    'vname' => $this->vname,
+                    'description' => $this->description,
+                    'checked_1' => $this->checked_1?:0,
+                    'checked_2' => $this->checked_2?:0,
+                    'db_mig' => $this->db_mig,
+                    'comment' => $this->comment,
+                    'user_id' => Auth::user()->id,
+                    'active_id' => $this->active_id,
+                ]);
+                $message = 'Saved';
             }
+            else {
+                $obj = AdminTest::find($this->vid);
+                $obj->vname = Str::ucfirst($this->vname);
+                $obj->description = $this->description;
+                $obj->checked_1 = $this->checked_1;
+                $obj->checked_2 = $this->checked_2;
+                $obj->db_mig = $this->db_mig;
+                $obj->comment = $this->comment;
+                $obj->active_id = $this->active_id;
+                $obj->save();
+                $message = "Updated";
+            }
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+            $this->clearFields();
+            $this->render();
         }
     }
     #endregion
+
+    public function generate()
+    {
+        $data=AdminTest::where('module_id','=',$this->module_id)->get();
+        if ($data->count()==0) {
+            foreach ($this->table_name as $row){
+                AdminTest::create([
+                    'module_id' => $this->module_id,
+                    'db_id' => $this->db_id,
+                    'vname' => Str::lower($row->table_name),
+                    'db_mig' => 6,
+                    'description' => '',
+                    'checked_1' => false,
+                    'checked_2' => false,
+                    'comment' => '',
+                    'active_id' => 1,
+                    'user_id' => Auth::user()->id,
+                ]);
+                $this->save();}
+        }
+    }
 
 
     #region[obj]
@@ -93,9 +115,9 @@ class AdminSys extends Component
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
             $this->description = $obj->description;
+            $this->db_mig = $obj->db_mig;
             $this->checked_1 = $obj->checked_1;
             $this->checked_2 = $obj->checked_2;
-            $this->checked_3 = $obj->checked_3;
             $this->comment = $obj->comment;
             $this->active_id = $obj->active_id;
             return $obj;
@@ -111,6 +133,9 @@ class AdminSys extends Component
         $this->vid = '';
         $this->vname = '';
         $this->description = '';
+        $this->checked_1 = '';
+        $this->checked_2 = '';
+        $this->db_mig = '';
         $this->comment = '';
         $this->active_id = 1;
     }

@@ -16,10 +16,11 @@ class ModelSys extends Component
 
     #region[properties]
     public mixed $module_id;
-    public mixed $file;
-    public mixed $file_id;
+    public mixed $module_name;
     public mixed $description = '';
-    public bool $checked = false;
+    public bool $checked_1 = false;
+    public bool $checked_2 = false;
+    public bool $checked_3 = false;
 
     public  mixed $users = '';
 
@@ -32,9 +33,7 @@ class ModelSys extends Component
     #region[mount]
     public function mount($id)
     {
-        $this->file = TestFile::find($id);
-        $this->module_id = $this->file->module_id;
-        $this->file_id = $id;
+        $this->module_id = $id;
         $this->users=User::all();
     }
     #endregion
@@ -50,12 +49,13 @@ class ModelSys extends Component
                     $this->validate(['vname' => 'required']);
                     ModelTest::create([
                         'module_id' => $this->module_id,
-                        'file_id' => $this->file_id,
                         'vname' => Str::ucfirst($this->vname),
                         'description' => $this->description,
-                        'checked' => $this->checked,
+                        'checked_1' => $this->checked_1?:0,
+                        'checked_2' => $this->checked_2?:0,
+                        'checked_3' => $this->checked_3?:0,
                         'user_id' => Auth::user()->id,
-                        'active_id' => $this->active_id,
+                        'active_id' => 1,
                     ]);
                     $message = 'Saved';
                 }
@@ -63,7 +63,9 @@ class ModelSys extends Component
                     $obj = ModelTest::find($this->vid);
                     $obj->vname = Str::ucfirst($this->vname);
                     $obj->description = $this->description;
-                    $obj->checked = $this->checked;
+                    $obj->checked_1 = $this->checked_1;
+                    $obj->checked_2 = $this->checked_2;
+                    $obj->checked_3 = $this->checked_3;
                     $obj->active_id = $this->active_id;
                     $obj->save();
                     $message = "Updated";
@@ -76,41 +78,6 @@ class ModelSys extends Component
     }
     #endregion
 
-    public function generate()
-    {
-        $data=ModelTest::where('module_id','=',$this->module_id)->get();
-        if ($data->count()==0) {
-            ModelTest::create([
-                'module_id' => $this->module_id,
-                'file_id' => $this->file_id,
-                'vname' => 'Guarded',
-                'description' => '',
-                'checked' => false,
-                'active_id' => 1,
-                'user_id' => Auth::user()->id,
-            ]);
-            ModelTest::create([
-                'module_id' => $this->module_id,
-                'file_id' => $this->file_id,
-                'vname' => 'Search',
-                'description' => '',
-                'checked' => false,
-                'active_id' => 1,
-                'user_id' => Auth::user()->id,
-            ]);
-            ModelTest::create([
-                'module_id' => $this->module_id,
-                'file_id' => $this->file_id,
-                'vname' => 'Relation',
-                'description' => '',
-                'checked' => false,
-                'active_id' => 1,
-                'user_id' => Auth::user()->id,
-            ]);
-            $this->save();
-        }
-    }
-
 
     #region[obj]
     public function getObj($id)
@@ -119,6 +86,9 @@ class ModelSys extends Component
             $obj = ModelTest::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
+            $this->checked_1 = $obj->checked_1;
+            $this->checked_2 = $obj->checked_2;
+            $this->checked_3 = $obj->checked_3;
             $this->description = $obj->description;
             $this->active_id = $obj->active_id;
             return $obj;
@@ -134,21 +104,45 @@ class ModelSys extends Component
         $this->vid = '';
         $this->vname = '';
         $this->description = '';
+        $this->checked_1 = '';
+        $this->checked_2 = '';
+        $this->checked_3 = '';
         $this->active_id = 1;
     }
     #endregion
 
     #region[checked]
-    public function isChecked($id): void
+    public function isChecked1($id): void
     {
         $todo = ModelTest::find($id);
-        $todo->checked = !$todo->checked;
+        $todo->checked_1 = !$todo->checked_1;
         $todo->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
     #endregion
 
+    #region[checked]
+    public function isChecked2($id): void
+    {
+        $todo = ModelTest::find($id);
+        $todo->checked_2 = !$todo->checked_2;
+        $todo->save();
+        $this->clearFields();
+        $this->dispatch('$refresh');
+    }
+    #endregion
+
+    #region[checked]
+    public function isChecked3($id): void
+    {
+        $todo = ModelTest::find($id);
+        $todo->checked_3 = !$todo->checked_3;
+        $todo->save();
+        $this->clearFields();
+        $this->dispatch('$refresh');
+    }
+    #endregion
 
     #region[list]
     public function getList()

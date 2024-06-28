@@ -63,7 +63,7 @@ class BladeSys extends Component
                 if ($this->vid == "") {
                     LwBladeTest::create([
                         'module_id' => $this->module_id,
-                        'class_id' => $this->class,
+                        'class_id' => $this->class_id,
                         'vname' => $this->vname,
                         'description' => $this->description,
                         'checked_1' => $this->checked_1?:0,
@@ -80,7 +80,7 @@ class BladeSys extends Component
                         'checked_12' => $this->checked_12?:0,
                         'comment' => $this->comment,
                         'user_id' => Auth::user()->id,
-                        'active_id' => $this->active_id,
+                        'active_id' => 1,
                     ]);
                     $message = 'Saved';
                 }
@@ -122,7 +122,7 @@ class BladeSys extends Component
             LwBladeTest::create([
                 'module_id' => $this->module_id,
                 'class_id' => $this->class_id,
-                'vname' => $row->vname,
+                'vname' => Str::lower($row->vname),
                 'description' => '',
                 'checked_1' => false,
                 'checked_2' => false,
@@ -181,6 +181,18 @@ class BladeSys extends Component
         $this->vid = '';
         $this->vname = '';
         $this->description = '';
+        $this->checked_1 = '';
+        $this->checked_2 = '';
+        $this->checked_3 = '';
+        $this->checked_4 = '';
+        $this->checked_5 = '';
+        $this->checked_6 = '';
+        $this->checked_7 = '';
+        $this->checked_8 = '';
+        $this->checked_9 = '';
+        $this->checked_10 = '';
+        $this->checked_11 = '';
+        $this->checked_12 = '';
         $this->comment = '';
         $this->active_id = 1;
     }
@@ -189,7 +201,7 @@ class BladeSys extends Component
     #region[checked]
     public function isChecked1($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_1 = !$check_1->checked_1;
         $check_1->save();
         $this->clearFields();
@@ -197,7 +209,7 @@ class BladeSys extends Component
     }
     public function isChecked2($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_2 = !$check_1->checked_2;
         $check_1->save();
         $this->clearFields();
@@ -205,7 +217,7 @@ class BladeSys extends Component
     }
     public function isChecked3($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_3 = !$check_1->checked_3;
         $check_1->save();
         $this->clearFields();
@@ -213,7 +225,7 @@ class BladeSys extends Component
     }
     public function isChecked4($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_4 = !$check_1->checked_4;
         $check_1->save();
         $this->clearFields();
@@ -221,7 +233,7 @@ class BladeSys extends Component
     }
     public function isChecked5($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_5 = !$check_1->checked_5;
         $check_1->save();
         $this->clearFields();
@@ -229,7 +241,7 @@ class BladeSys extends Component
     }
     public function isChecked6($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_6 = !$check_1->checked_6;
         $check_1->save();
         $this->clearFields();
@@ -237,7 +249,7 @@ class BladeSys extends Component
     }
     public function isChecked7($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_7 = !$check_1->checked_7;
         $check_1->save();
         $this->clearFields();
@@ -245,7 +257,7 @@ class BladeSys extends Component
     }
     public function isChecked8($id): void
 {
-    $check_1 = LwClassTest::find($id);
+    $check_1 = LwBladeTest::find($id);
     $check_1->checked_8 = !$check_1->checked_8;
     $check_1->save();
     $this->clearFields();
@@ -253,7 +265,7 @@ class BladeSys extends Component
 }
     public function isChecked9($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_9 = !$check_1->checked_9;
         $check_1->save();
         $this->clearFields();
@@ -261,7 +273,7 @@ class BladeSys extends Component
     }
     public function isChecked10($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_10 = !$check_1->checked_10;
         $check_1->save();
         $this->clearFields();
@@ -269,7 +281,7 @@ class BladeSys extends Component
     }
     public function isChecked11($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_11 = !$check_1->checked_11;
         $check_1->save();
         $this->clearFields();
@@ -277,7 +289,7 @@ class BladeSys extends Component
     }
     public function isChecked12($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_12 = !$check_1->checked_12;
         $check_1->save();
         $this->clearFields();

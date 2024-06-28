@@ -2,7 +2,7 @@
     <x-slot name="header">Module</x-slot>
 
     <x-forms.m-panel>
-        
+
         <!-- Top Controls --------------------------------------------------------------------------------------------->
         <x-forms.top-controls :show-filters="$showFilters"/>
 
@@ -12,7 +12,7 @@
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center width="20%">Module</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Description</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="10%">Check</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center width="10%">Status</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -26,24 +26,21 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            <a href="{{ route('module.file', $row->id) }}">
+                            <a href="{{ route('module.model', $row->id) }}">
                             {{ $row->vname}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            <a href="{{ route('module.file', $row->id) }}">
+                            <a href="{{ route('module.model', $row->id) }}">
                             {{ $row->description}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            <label>
-                                <input wire:click="isCheked({{$row->id}})" type="checkbox"
-                                       @if($row->checked) checked @endif
-                                       class="h-4 w-4 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out
-                                       {{ $row->checked ? 'text-green-400 focus:ring-green-500': 'focus:ring-gray-500 text-gray-700'}}">
-                            </label>
+                            <div {{  \App\Enums\Status::tryFrom($row->status)->getStyle() }}>
+                            {{  \App\Enums\Status::tryFrom($row->status)->getName() }}
+                            </div>
                         </x-table.cell-text>
 
 
@@ -69,6 +66,12 @@
             <span class="text-red-500">{{  $message }}</span>
             @enderror
             <x-input.model-text wire:model="description" :label="'Description'"/>
+            <select wire:model="status" class="w-full purple-textbox mt-2" id="changeStatus">
+                <option class="text-zinc-500 px-1">Status...</option>
+                @foreach(\App\Enums\Status::cases() as $obj)
+                    <option value="{{$obj->value}}">{{ $obj->getName() }}</option>
+                @endforeach
+            </select>
         </x-forms.create>
 
     </x-forms.m-panel>
