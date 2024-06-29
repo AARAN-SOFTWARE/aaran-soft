@@ -22,13 +22,13 @@
         .comp-name {
             font-size: 50px;
             font-weight: bold;
-            line-height: 1.1;
+            line-height: 1;
             font-family: SansSerif;
             padding-bottom: 0;
         }
         .comp-details {
-            font-size: 10px;
-            line-height: .5;
+            font-size: 12px;
+            line-height: .4;
             text-align: center;
         }
         .comp-logo {
@@ -79,14 +79,15 @@
         /* Invoice table data and Total */
         .inv-tableHeader {
             background-color: transparent;
-            font-size: 10px;
+            font-size: 12px;
             line-height: 1.5;
             margin-bottom: 15px;
             border-bottom: 1px solid darkgray;
+            letter-spacing: 1px;
         }
         /* table data condition one */
         .inv-tableData1 {
-            font-size: 11px;
+            font-size: 12px;
             text-align: justify-all;
             vertical-align: top;
         }
@@ -118,9 +119,10 @@
 
         .inv-tableTotal, .total-r {
             border: 1px solid darkgray;
-            font-size: 12px;
+            font-size: 13px;
             line-height: 1.5;
             text-align: right;
+            font-weight: bold;
         }
 
         /* Description and Total table */
@@ -134,9 +136,12 @@
 
         }
         .bankDetails {
-            font-size: 10px;
+            font-size: 12px;
             font-weight: bold;
             padding-left: 5px;
+        }
+        .bank {
+            line-height: 1.8;
         }
         .total-col-1 {
 
@@ -156,6 +161,7 @@
             border-top: none;
             border-left: none;
         }
+
         .amount {
             border-top: 1px solid dimgray;
             line-height: 1.5;
@@ -168,7 +174,7 @@
         /* Signature */
         .sign-col1 {
             vertical-align: top;
-            height: 60px;
+            height: 55px;
             font-size: 12px;
             padding-left: 5px;
             border-top: 1px solid dimgray;
@@ -198,7 +204,7 @@
         <td><div style="width: 90px; height: auto;">&nbsp;</div></td> {{-- td - empty div  --}}
         <td class="comp-details">
                 <span class="comp-name">
-                    <img src="{{ public_path('images/client_logo/bestprint_black.png')}}" alt="logo" width="60%" height="35px"/>
+                    <img src="{{ public_path('images/client_logo/bestprint_black.png')}}" alt="logo" width="auto" height="35px" style="margin-top: 4px"/>
                 </span>
             <span class="comp-address">
                     <p>{{$cmp->get('address_1')}}, {{$cmp->get('address_2')}}</p>
@@ -212,9 +218,9 @@
 {{--/*  company Invoice header, address, no. and date.    */--}}
 <table class="table-2">
     <tr class="inv-header">
-        <td style="width: 250px;border-right: none;"></td>
+        <td style="width: 35%;border-right: none;"></td>
         <td style="border: none;">TAX INVOICE</td>
-        <td style="width:250px;border-left: none;" class="inv-copy">Original copy</td>
+        <td style="width:35%;border-left: none;" class="inv-copy">Original copy</td>
     </tr>
     <tr style=>
         <td colspan="2" class="inv-address">
@@ -233,17 +239,17 @@
 {{--  /* Invoice table data and Total */ --}}
 <table class="table-3" width="100%">
     <tr class="inv-tableHeader">
-        <th width="4.33%">S.No</th>
-        <th width="6.33%">P.No</th>
-        <th width="6.33%">Dc.No</th>
-        <th width="8.33%">HSN Code</th>
+        <th width="5%">S.No</th>
+        <th width="5%">PO.No</th>
+        <th width="8%">Dc.No</th>
+        <th width="8%">HSN Code</th>
         <th width="auto">Particulars</th>
-        <th width="4.33%">Quantity</th>
-        <th width="8.33%">Price</th>
-        <th width="8.33%">Taxable Amnt</th>
-        <th width="4.33%">%</th>
-        <th width="16.66">GST</th>
-        <th width="16.66">sub Total</th>
+        <th width="5%">Quantity</th>
+        <th width="8%">Price</th>
+        <th width="8%">Taxable Amount</th>
+        <th width="3%">%</th>
+        <th width="8%">GST</th>
+        <th width="10%">sub Total</th>
     </tr>
     @php
         $gstPercent = 0;
@@ -330,23 +336,24 @@
             <td class="total-col-2" colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         </tr>
         <tr>
-            <td colspan="5"><div></div></td>
+            <td class="bankDetails" rowspan="3" colspan="3" width="100px">
+                <div class="bank">ACCOUNT NO</div>
+                <div class="bank">IFSC CODE</div>
+                <div class="bank">BANK NAME</div>
+                <div class="bank">BRANCH </div>
+            </td>
+            <td rowspan="3" colspan="2" class="bankDetails">
+                <div class="bank">:&nbsp;{{$cmp->get('acc_no')}}</div>
+                <div class="bank">:&nbsp;{{$cmp->get('ifsc_code')}}</div>
+                <div class="bank">:&nbsp;{{$cmp->get('bank')}}</div>
+                <div class="bank">:&nbsp;{{$cmp->get('branch')}}</div>
+            </td>
+{{--            <td colspan="5"><div></div></td>--}}
             <td class="total-col-1" colspan="4">Total GST</td>
             <td class="total-col-2" colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
         </tr>
         <tr>
-            <td class="bankDetails" rowspan="2" colspan="3" width="100px">
-                <div>ACCOUNT NO</div>
-                <div>IFSC CODE</div>
-                <div>BANK NAME</div>
-                <div>BRANCH </div>
-            </td>
-            <td rowspan="2" colspan="2" class="bankDetails">
-                <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
-                <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
-                <div>:&nbsp;{{$cmp->get('bank')}}</div>
-                <div>:&nbsp;{{$cmp->get('branch')}}</div>
-            </td>
+
             @if($obj->additional!=0)
                 <td  class="total-col-1" colspan="4">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
                 </td>
@@ -453,7 +460,7 @@
         <td><div style="width: 90px; height: auto;">&nbsp;</div></td> {{-- td - empty div  --}}
         <td class="comp-details">
                 <span class="comp-name">
-                    <img src="{{ public_path('images/client_logo/bestprint_black.png')}}" alt="logo" width="60%" height="35px"/>
+                    <img src="{{ public_path('images/client_logo/bestprint_black.png')}}" alt="logo" width="auto" height="35px" style="margin-top: 4px"/>
                 </span>
             <span class="comp-address">
                     <p>{{$cmp->get('address_1')}}, {{$cmp->get('address_2')}}</p>
@@ -467,9 +474,9 @@
 {{--/*  company Invoice header, address, no. and date.    */--}}
 <table class="table-2">
     <tr class="inv-header">
-        <td style="width: 250px;border-right: none;"></td>
+        <td style="width: 35%;border-right: none;"></td>
         <td style="border: none;">TAX INVOICE</td>
-        <td style="width:250px;border-left: none;" class="inv-copy">Duplicate copy</td>
+        <td style="width:35%;border-left: none;" class="inv-copy">Duplicate copy</td>
     </tr>
     <tr style=>
         <td colspan="2" class="inv-address">
@@ -488,17 +495,17 @@
 {{--  /* Invoice table data and Total */ --}}
 <table class="table-3" width="100%">
     <tr class="inv-tableHeader">
-        <th width="4.33%">S.No</th>
-        <th width="6.33%">P.No</th>
-        <th width="6.33%">Dc.No</th>
-        <th width="8.33%">HSN Code</th>
+        <th width="5%">S.No</th>
+        <th width="5%">PO.No</th>
+        <th width="8%">Dc.No</th>
+        <th width="8%">HSN Code</th>
         <th width="auto">Particulars</th>
-        <th width="4.33%">Quantity</th>
-        <th width="8.33%">Price</th>
-        <th width="8.33%">Taxable Amnt</th>
-        <th width="4.33%">%</th>
-        <th width="16.66">GST</th>
-        <th width="16.66">sub Total</th>
+        <th width="5%">Quantity</th>
+        <th width="8%">Price</th>
+        <th width="8%">Taxable Amount</th>
+        <th width="3%">%</th>
+        <th width="8%">GST</th>
+        <th width="10%">sub Total</th>
     </tr>
     @php
         $gstPercent = 0;
@@ -585,23 +592,24 @@
             <td class="total-col-2" colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         </tr>
         <tr>
-            <td colspan="5"><div></div></td>
+            <td class="bankDetails" rowspan="3" colspan="3" width="100px">
+                <div class="bank">ACCOUNT NO</div>
+                <div class="bank">IFSC CODE</div>
+                <div class="bank">BANK NAME</div>
+                <div class="bank">BRANCH </div>
+            </td>
+            <td rowspan="3" colspan="2" class="bankDetails">
+                <div class="bank">:&nbsp;{{$cmp->get('acc_no')}}</div>
+                <div class="bank">:&nbsp;{{$cmp->get('ifsc_code')}}</div>
+                <div class="bank">:&nbsp;{{$cmp->get('bank')}}</div>
+                <div class="bank">:&nbsp;{{$cmp->get('branch')}}</div>
+            </td>
+            {{--            <td colspan="5"><div></div></td>--}}
             <td class="total-col-1" colspan="4">Total GST</td>
             <td class="total-col-2" colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
         </tr>
         <tr>
-            <td class="bankDetails" rowspan="2" colspan="3" width="100px">
-                <div>ACCOUNT NO</div>
-                <div>IFSC CODE</div>
-                <div>BANK NAME</div>
-                <div>BRANCH </div>
-            </td>
-            <td rowspan="2" colspan="2" class="bankDetails">
-                <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
-                <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
-                <div>:&nbsp;{{$cmp->get('bank')}}</div>
-                <div>:&nbsp;{{$cmp->get('branch')}}</div>
-            </td>
+
             @if($obj->additional!=0)
                 <td  class="total-col-1" colspan="4">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
                 </td>
@@ -708,7 +716,7 @@
         <td><div style="width: 90px; height: auto;">&nbsp;</div></td> {{-- td - empty div  --}}
         <td class="comp-details">
                 <span class="comp-name">
-                    <img src="{{ public_path('images/client_logo/bestprint_black.png')}}" alt="logo" width="60%" height="35px"/>
+                    <img src="{{ public_path('images/client_logo/bestprint_black.png')}}" alt="logo" width="auto" height="35px" style="margin-top: 4px"/>
                 </span>
             <span class="comp-address">
                     <p>{{$cmp->get('address_1')}}, {{$cmp->get('address_2')}}</p>
@@ -722,9 +730,9 @@
 {{--/*  company Invoice header, address, no. and date.    */--}}
 <table class="table-2">
     <tr class="inv-header">
-        <td style="width: 250px;border-right: none;"></td>
+        <td style="width: 35%;border-right: none;"></td>
         <td style="border: none;">TAX INVOICE</td>
-        <td style="width:250px;border-left: none;" class="inv-copy">Office copy</td>
+        <td style="width:35%;border-left: none;" class="inv-copy">Office copy</td>
     </tr>
     <tr style=>
         <td colspan="2" class="inv-address">
@@ -743,17 +751,17 @@
 {{--  /* Invoice table data and Total */ --}}
 <table class="table-3" width="100%">
     <tr class="inv-tableHeader">
-        <th width="4.33%">S.No</th>
-        <th width="6.33%">P.No</th>
-        <th width="6.33%">Dc.No</th>
-        <th width="8.33%">HSN Code</th>
+        <th width="5%">S.No</th>
+        <th width="5%">PO.No</th>
+        <th width="8%">Dc.No</th>
+        <th width="8%">HSN Code</th>
         <th width="auto">Particulars</th>
-        <th width="4.33%">Quantity</th>
-        <th width="8.33%">Price</th>
-        <th width="8.33%">Taxable Amnt</th>
-        <th width="4.33%">%</th>
-        <th width="16.66">GST</th>
-        <th width="16.66">sub Total</th>
+        <th width="5%">Quantity</th>
+        <th width="8%">Price</th>
+        <th width="8%">Taxable Amount</th>
+        <th width="3%">%</th>
+        <th width="8%">GST</th>
+        <th width="10%">sub Total</th>
     </tr>
     @php
         $gstPercent = 0;
@@ -840,23 +848,24 @@
             <td class="total-col-2" colspan="2">{{number_format($obj->total_gst/2,2,'.','')}}</td>
         </tr>
         <tr>
-            <td colspan="5"><div></div></td>
+            <td class="bankDetails" rowspan="3" colspan="3" width="100px">
+                <div class="bank">ACCOUNT NO</div>
+                <div class="bank">IFSC CODE</div>
+                <div class="bank">BANK NAME</div>
+                <div class="bank">BRANCH </div>
+            </td>
+            <td rowspan="3" colspan="2" class="bankDetails">
+                <div class="bank">:&nbsp;{{$cmp->get('acc_no')}}</div>
+                <div class="bank">:&nbsp;{{$cmp->get('ifsc_code')}}</div>
+                <div class="bank">:&nbsp;{{$cmp->get('bank')}}</div>
+                <div class="bank">:&nbsp;{{$cmp->get('branch')}}</div>
+            </td>
+            {{--            <td colspan="5"><div></div></td>--}}
             <td class="total-col-1" colspan="4">Total GST</td>
             <td class="total-col-2" colspan="2">{{number_format($obj->total_gst,2,'.','')}}</td>
         </tr>
         <tr>
-            <td class="bankDetails" rowspan="2" colspan="3" width="100px">
-                <div>ACCOUNT NO</div>
-                <div>IFSC CODE</div>
-                <div>BANK NAME</div>
-                <div>BRANCH </div>
-            </td>
-            <td rowspan="2" colspan="2" class="bankDetails">
-                <div>:&nbsp;{{$cmp->get('acc_no')}}</div>
-                <div>:&nbsp;{{$cmp->get('ifsc_code')}}</div>
-                <div>:&nbsp;{{$cmp->get('bank')}}</div>
-                <div>:&nbsp;{{$cmp->get('branch')}}</div>
-            </td>
+
             @if($obj->additional!=0)
                 <td  class="total-col-1" colspan="4">Add&nbsp;:&nbsp;{{ $obj->ledger_name }}
                 </td>
