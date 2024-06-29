@@ -92,7 +92,7 @@
                         {{ \App\Helper\ConvertTo::decimal2($totalLoosed)}}</x-table.cell-text>
 
                     <x-table.cell-text right
-                                       :class="'text-blue-600 font-semibold'">
+                                       class="text-blue-600 font-semibold{{$totalProfit-$totalLoosed > 0 ?'text-green-500':'text-red-500'}}">
                         {{ \App\Helper\ConvertTo::decimal2($totalProfit-$totalLoosed)}}</x-table.cell-text>
 
                 </x-table.row>
