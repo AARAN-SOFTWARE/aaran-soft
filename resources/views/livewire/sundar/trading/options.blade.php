@@ -61,7 +61,7 @@
                             {{ $row->option_loosed }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text right>
+                        <x-table.cell-text right class="text-blue-600 font-semibold{{$row->option_profit-$row->option_loosed > 0 ?'text-green-500':'text-red-500'}}">
                             {{ $row->option_profit-$row->option_loosed }}
                         </x-table.cell-text>
 
