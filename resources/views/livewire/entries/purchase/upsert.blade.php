@@ -131,6 +131,9 @@
                 <!--  Purchase No --------------------------------------------------------------------------------------->
 
                 <x-input.model-text wire:model="purchase_no" :label="'Purchase No'"/>
+                @error('purchase_no')
+                <span class="text-red-500">{{  $message }}</span>
+                @enderror
             </div>
 
             <!-- Top Right Area ------------------------------------------------------------------------------------------>

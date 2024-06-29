@@ -62,19 +62,20 @@ class Upsert extends Component
     public $grandtotalBeforeRound;
     public $dc_no;
     public $no_of_roll;
-    public $showInput=false;
-    public $showTransport=false;
+    public $showInput = false;
+    public $showTransport = false;
+
     #endregion
 
     public function show(): void
     {
-        $this->showInput=!$this->showInput;
+        $this->showInput = !$this->showInput;
 
     }
 
     public function show1()
     {
-        $this->showTransport =!$this->showTransport;
+        $this->showTransport = !$this->showTransport;
     }
 
     #region[Contact]
@@ -707,12 +708,12 @@ class Upsert extends Component
 
     public function colourSave($name)
     {
-       $obj= Colour::create([
+        $obj = Colour::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
-       $v=['name'=>$name,'id'=>$obj->id];
-       $this->refreshColour($v);
+        $v = ['name' => $name, 'id' => $obj->id];
+        $this->refreshColour($v);
     }
 
     public function getColourList(): void
@@ -779,11 +780,11 @@ class Upsert extends Component
 
     public function sizeSave($name)
     {
-        $obj= Size::create([
+        $obj = Size::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v=['name'=>$name,'id'=>$obj->id];
+        $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshSize($v);
     }
 
@@ -804,7 +805,7 @@ class Upsert extends Component
                 if ($this->vid == "") {
 
                     $obj = Sale::create([
-                        'uniqueno' => session()->get('company_id') . '~' . session()->get('acyear') . '~' . $this->invoice_no,
+                        'uniqueno' => session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no,
                         'acyear' => session()->get('acyear'),
                         'company_id' => session()->get('company_id'),
                         'contact_id' => $this->contact_id,
@@ -830,12 +831,17 @@ class Upsert extends Component
                         'active_id' => $this->active_id,
                     ]);
                     $this->saveItem($obj->id);
+//                                        $data=response()->json([
+//                        'sale'=>json_encode( $obj),
+//                        'saleItem'=>json_encode($this->itemList),
+//                    ]);
+//                    $this->toApi($data);
                     $message = "Saved";
                     $this->getRoute();
 
                 } else {
                     $obj = Sale::find($this->vid);
-                    $obj->uniqueno = session()->get('company_id') . '~' . session()->get('acyear') . '~' . $this->invoice_no;
+                    $obj->uniqueno = session()->get('company_id').'~'.session()->get('acyear').'~'.$this->invoice_no;
                     $obj->acyear = session()->get('acyear');
                     $obj->company_id = session()->get('company_id');
                     if ($obj->contact_id == $this->contact_id) {
@@ -867,10 +873,15 @@ class Upsert extends Component
                     $obj->save();
                     DB::table('saleitems')->where('sale_id', '=', $obj->id)->delete();
                     $this->saveItem($obj->id);
+//                    $data=response()->json([
+//                        'sale'=>json_encode( $obj),
+//                        'saleItem'=>json_encode($this->itemList),
+//                    ]);
+//                    dd($data);
                     $message = "Updated";
                 }
 
-                $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+                $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
                 $this->getRoute();
             }
         } catch (\Exception $exception) {
@@ -896,6 +907,22 @@ class Upsert extends Component
             ]);
         }
     }
+
+//    public function toApi($data)
+//    {
+//        $url = "http://127.0.0.1:8000/api/entery";
+//        $curl = curl_init($url);
+//        curl_setopt($curl, CURLOPT_URL, $url);
+//        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+//
+//        curl_setopt($curl, CURLOPT_HTTPHEADER, $data);
+//
+//        $resp = curl_exec($curl);
+//        curl_close($curl);
+//        $dataJSON = json_decode($resp);
+//
+//        dd($dataJSON);
+//    }
 
     #endregion
 

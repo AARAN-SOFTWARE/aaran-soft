@@ -5,7 +5,7 @@
         <a href="{{route('salesTracks')}}">Sales Track</a>
         <x-icons.icon :icon="'double-arrow-right'"
                       class="text-black hover:text-white  hover:rounded-sm  h-4 w-auto block mt-2"/>
-        <a href="{{route('salesTracks.items',[$salesTrackIitem->rootline_id])}}">Sales Track-Item</a>
+        <a href="{{route('salesTracks.items',[$track_id])}}">Sales Track-Item</a>
     </div>
 
     <x-forms.m-panel>
