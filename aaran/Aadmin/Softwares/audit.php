@@ -33,8 +33,16 @@ return [
         DbMigration::master(),
         DbMigration::order(),
         DbMigration::style(),
-        DbMigration::entry(),
         DbMigration::todoList(),
+        DbMigration::blog(),
+        DbMigration::demo(),
+        DbMigration::shareTrades(),
+        DbMigration::creditBooks(),
+        DbMigration::magalir(),
+        DbMigration::mailids(),
+        DbMigration::cashBook(),
+        DbMigration::audit(),
+        DbMigration::developer(),
     ]
 
 ];
