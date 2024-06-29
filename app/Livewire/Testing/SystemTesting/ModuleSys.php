@@ -14,7 +14,7 @@ class ModuleSys extends Component
     use CommonTrait;
 
     #region[properties]
-    public bool $checked = false;
+    public mixed $status;
     public mixed $description = '';
     public  mixed $users = '';
 
@@ -33,13 +33,14 @@ class ModuleSys extends Component
     #region[getSave]
     public function getSave()
     {
+        $this->validate(['vname' => 'required']);
         if ($this->editable) {
             if ($this->vname != '') {
                 if ($this->vid == "") {
                     TestModule::create([
-                        'vname' => $this->vname,
-                        'description' => $this->description,
-                        'checked' => $this->checked?:0,
+                        'vname' => Str::ucfirst($this->vname),
+                        'description' => Str::ucfirst($this->description),
+                        'status' => $this->status?:1,
                         'user_id' => Auth::user()->id,
                         'active_id' => $this->active_id,
                     ]);
@@ -48,9 +49,9 @@ class ModuleSys extends Component
                 else {
                     $obj = TestModule::find($this->vid);
                     $obj->vname = Str::ucfirst($this->vname);
-                    $obj->description = $this->description;
+                    $obj->description = Str::ucfirst($this->description);
                     $obj->active_id = $this->active_id;
-                    $obj->checked = $this->checked;
+                    $obj->status = $this->status;
                     $obj->save();
                     $message = "Updated";
                 }
@@ -71,7 +72,7 @@ class ModuleSys extends Component
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
             $this->description = $obj->description;
-            $this->checked = $obj->checked;
+            $this->status = $obj->status;
             $this->active_id = $obj->active_id;
             return $obj;
         }
@@ -86,20 +87,11 @@ class ModuleSys extends Component
         $this->vid = '';
         $this->vname = '';
         $this->description = '';
+        $this->status = '';
         $this->active_id = 1;
     }
     #endregion
 
-    #region[checked]
-    public function isCheked($id): void
-    {
-        $todo = TestModule::find($id);
-        $todo->checked = !$todo->checked;
-        $todo->save();
-        $this->clearFields();
-        $this->dispatch('$refresh');
-    }
-    #endregion
 
     #region[list]
     public function getList()

@@ -1,7 +1,13 @@
 <div>
     <x-slot name="header">Database</x-slot>
 
+    <div class="flex text-gray-400 text-xs ml-6 ">
+        <div class="flex"><a href="/module"  class="flex"><div><x-icons.icon icon="double-arrow-right" class="w-3 h-3 m-1.5" /></div><div>Module</div></a></div>
+        <div class="flex ml-3"><a href={{route('module.model', $this->module_id)}} class="flex"><div><x-icons.icon icon="double-arrow-right" class="w-3 h-3 m-1.5" /></div><div>Model</div></a></div>
+    </div>
+
     <x-forms.m-panel>
+
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
         <div class="md:flex md:justify-between md:items-center md:pb-5">
@@ -15,7 +21,7 @@
             <div class="flex justify-between md:mb-5 md:space-x-2 md:flex md:items-center">
                 <x-forms.per-page/>
                 <button  type="button" wire:click="generate" class="bg-blue-600 text-white px-2 py-1.5 rounded-md mb-1">Generate</button>
-                <x-button.new/>
+{{--                <x-button.new/>--}}
             </div>
         </div>
 
@@ -25,11 +31,15 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('created_at')"/>
-                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Database</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center width="10%">Database</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Table Name</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Description</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Foreign_key</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Run Migration</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Rollback</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center width="10%">Foreign Id</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center width="5%">Foreign key</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center width="5%">Eloquent Relation</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center width="5%">Run Migration</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center width="5%">Rollback</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('created_at')" center width="5%">Db Seeder</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('created_at')" center>Remarks</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
@@ -38,8 +48,8 @@
             <x-slot name="table_body">
                 @forelse ($list as $index =>  $row)
 
-                    <x-table.row>
-                        <x-table.cell-text center>
+                    <x-table.row >
+                        <x-table.cell-text >
                             <a href="{{ route('db.admin', $row->id) }}">
                             {{ $index + 1 }}
                             </a>
@@ -51,13 +61,26 @@
                             </a>
                         </x-table.cell-text>
 
+                        <x-table.cell-text class="lowercase">
+                            <a href="{{ route('db.admin', $row->id) }}">
+
+                              {{$row->table_name}}
+                            </a>
+                        </x-table.cell-text>
+
                         <x-table.cell-text>
                             <a href="{{ route('db.admin', $row->id) }}">
                                 {{ $row->description}}
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
+                            <a href="{{ route('db.admin', $row->id) }}">
+                                {{ $row->foreign_id}}
+                            </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text center>
                             <label>
                                 <input wire:click="isChecked1({{$row->id}})" type="checkbox"
                                        @if($row->checked_1) checked @endif
@@ -66,7 +89,7 @@
                             </label>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             <label>
                                 <input wire:click="isChecked2({{$row->id}})" type="checkbox"
                                        @if($row->checked_2) checked @endif
@@ -75,12 +98,30 @@
                             </label>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             <label>
                                 <input wire:click="isChecked3({{$row->id}})" type="checkbox"
                                        @if($row->checked_3) checked @endif
                                        class="h-4 w-4 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out
                                        {{ $row->checked_3 ? 'text-green-400 focus:ring-green-500': 'focus:ring-gray-500 text-gray-700'}}">
+                            </label>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text center>
+                            <label>
+                                <input wire:click="isChecked4({{$row->id}})" type="checkbox"
+                                       @if($row->checked_4) checked @endif
+                                       class="h-4 w-4 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out
+                                       {{ $row->checked_4 ? 'text-green-400 focus:ring-green-500': 'focus:ring-gray-500 text-gray-700'}}">
+                            </label>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text center>
+                            <label>
+                                <input wire:click="isChecked5({{$row->id}})" type="checkbox"
+                                       @if($row->checked_5) checked @endif
+                                       class="h-4 w-4 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out
+                                       {{ $row->checked_5 ? 'text-green-400 focus:ring-green-500': 'focus:ring-gray-500 text-gray-700'}}">
                             </label>
                         </x-table.cell-text>
 
@@ -96,6 +137,54 @@
                 @empty
                     <x-table.empty/>
                 @endforelse
+
+                    <!-- Create / Edit -->
+                    <x-table.row class="border-0 " :id="$vid">
+                        <x-table.cell-text class="text-center">
+                            {{$list->count()+1}}
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <input type="text" wire:model="vname" class="border-0 w-full h-full purple-textbox "/>
+                            @error('vname')
+                            <span class="text-red-500">{{  $message }}</span>
+                            @enderror
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <input type="text" wire:model="table_name" class="border-0 w-full h-full purple-textbox"/>
+                            @error('table_name')
+                            <span class="text-red-500">{{  $message }}</span>
+                            @enderror
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <input type="text" wire:model="description" class="border-0 w-full h-full purple-textbox"/>
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <input type="text" wire:model="foreign_id" class="border-0 w-full h-full purple-textbox"/>
+                        </x-table.cell-text>
+                        <x-table.cell-text center>
+                            <input type="checkbox" wire:model="checked_1" class="h-5 w-5 hover:cursor-pointer mt-2 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out text-green-400 focus:ring-green-500'">
+                        </x-table.cell-text>
+                        <x-table.cell-text center>
+                            <input type="checkbox" wire:model="checked_2" class="h-5 w-5 hover:cursor-pointer mt-2 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out text-green-400 focus:ring-green-500'">
+                        </x-table.cell-text>
+                        <x-table.cell-text center>
+                            <input type="checkbox" wire:model="checked_3" class="h-5 w-5 hover:cursor-pointer mt-2 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out text-green-400 focus:ring-green-500'">
+                        </x-table.cell-text>
+                        <x-table.cell-text center>
+                            <input type="checkbox" wire:model="checked_4" class="h-5 w-5 hover:cursor-pointer mt-2 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out text-green-400 focus:ring-green-500'">
+                        </x-table.cell-text>
+                        <x-table.cell-text center>
+                            <input type="checkbox" wire:model="checked_5" class="h-5 w-5 hover:cursor-pointer mt-2 bg-gray-100 border-gray-300 rounded focus:ring-2 transition duration-300 ease-in-out text-green-400 focus:ring-green-500'">
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <input type="text" wire:model="comment" class="border-0 w-full h-full purple-textbox"/>
+                        </x-table.cell-text>
+                        <x-table.cell-text>
+                            <button type="submit" wire:click.prevent="save" class="bg-green-600 text-white flex items-center justify-evenly px-2 py-1 rounded-md">
+                                <div><x-icons.icon :icon="'save'" class="h-5 w-auto block px-1.5 mt-1"/></div><div>Save</div>
+                            </button>
+                        </x-table.cell-text>
+                    </x-table.row>
             </x-slot>
 
             <x-slot name="table_pagination">
@@ -106,16 +195,19 @@
         <x-modal.delete/>
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
-        <x-forms.create :id="$vid">
-            <x-input.model-text wire:model="vname" :label="'Database'"/>
-            @error('vname')
-            <span class="text-red-500">{{  $message }}</span>
-            @enderror
-            <x-input.checkbox wire:model="db_check" :label="'DB Migration'"/>
-            <x-input.checkbox wire:model="run_mig" :label="'Run Migration'"/>
-            <x-input.model-text wire:model="description" :label="'Description'"/>
-            <x-input.model-text wire:model="comment" :label="'Comment'"/>
-        </x-forms.create>
+{{--        <x-forms.create :id="$vid">--}}
+{{--            <x-input.model-text wire:model="vname" :label="'Migration'"/>--}}
+{{--            @error('vname')--}}
+{{--            <span class="text-red-500">{{  $message }}</span>--}}
+{{--            @enderror--}}
+{{--            <x-input.model-text wire:model="table_name" :label="'Migration Table'"/>--}}
+{{--            <x-input.checkbox wire:model="checked_1" :label="'Foreign key'"/>--}}
+{{--            <x-input.checkbox wire:model="checked_2" :label="'Eloquent Relation'"/>--}}
+{{--            <x-input.checkbox wire:model="checked_3" :label="'DB Migration'"/>--}}
+{{--            <x-input.checkbox wire:model="checked_4" :label="'Run Migration'"/>--}}
+{{--            <x-input.model-text wire:model="description" :label="'Description'"/>--}}
+{{--            <x-input.model-text wire:model="comment" :label="'Comment'"/>--}}
+{{--        </x-forms.create>--}}
 
     </x-forms.m-panel>
 </div>

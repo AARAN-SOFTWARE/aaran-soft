@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Testing\SystemTesting;
 
+use Aaran\Testing\Models\AdminTest;
+use Aaran\Testing\Models\DbTest;
 use Aaran\Testing\Models\LwBladeTest;
 use Aaran\Testing\Models\LwClassTest;
 use App\Livewire\Trait\CommonTrait;
@@ -15,9 +17,11 @@ class BladeSys extends Component
     use CommonTrait;
 
     #region[properties]
+    public mixed $class;
     public mixed $class_id;
     public mixed $module_id;
     public mixed $module_name;
+    public mixed $blade_file;
     public mixed $description = '';
     public bool $checked_1 = false;
     public bool $checked_2 = false;
@@ -31,13 +35,16 @@ class BladeSys extends Component
     public bool $checked_10 = false;
     public bool $checked_11 = false;
     public bool $checked_12 = false;
-    public mixed $comment = '';
+    public bool $checked_13 = false;
 
-    public  mixed $users = '';
+    public mixed $users = '';
 
     public bool $showEditModal = false;
     public mixed $editable = true;
     public string $sortFields = 'created_at';
+    public $backToDataBase;
+    public $backToMigrate;
+    public $previous;
 
     #endregion
 
@@ -46,10 +53,14 @@ class BladeSys extends Component
 
     public function mount($id)
     {
-        $this->class_id = LwClassTest::find($id);
-        $this->module_id = $this->class_id->module_id;
-        $this->module_name = LwClassTest::where('module_id','=',$this->module_id)->get();
-        $this->users=User::all();
+        $this->class = LwClassTest::find($id);
+        $this->module_id = $this->class->module_id;
+        $this->previous = $this->class->admin_id;
+        $this->backToMigrate = AdminTest::find($this->previous)->db_id;
+        $this->backToDataBase=DbTest::find($this->backToMigrate)->model_id;
+        $this->class_id = $id;
+        $this->module_name = LwClassTest::where('module_id', '=', $this->module_id)->get();
+        $this->users = User::all();
     }
     #endregion
 
@@ -61,30 +72,32 @@ class BladeSys extends Component
                 if ($this->vid == "") {
                     LwBladeTest::create([
                         'module_id' => $this->module_id,
-                        'vname' => $this->vname,
-                        'description' => $this->description,
-                        'checked_1' => $this->checked_1?:0,
-                        'checked_2' => $this->checked_2?:0,
-                        'checked_3' => $this->checked_3?:0,
-                        'checked_4' => $this->checked_4?:0,
-                        'checked_5' => $this->checked_5?:0,
-                        'checked_6' => $this->checked_6?:0,
-                        'checked_7' => $this->checked_7?:0,
-                        'checked_8' => $this->checked_8?:0,
-                        'checked_9' => $this->checked_9?:0,
-                        'checked_10' => $this->checked_10?:0,
-                        'checked_11' => $this->checked_11?:0,
-                        'checked_12' => $this->checked_12?:0,
-                        'comment' => $this->comment,
+                        'class_id' => $this->class_id,
+                        'vname' => Str::ucfirst($this->vname),
+                        'blade_file' => Str::lower($this->blade_file),
+                        'checked_1' => $this->checked_1 ?: 0,
+                        'checked_2' => $this->checked_2 ?: 0,
+                        'checked_3' => $this->checked_3 ?: 0,
+                        'checked_4' => $this->checked_4 ?: 0,
+                        'checked_5' => $this->checked_5 ?: 0,
+                        'checked_6' => $this->checked_6 ?: 0,
+                        'checked_7' => $this->checked_7 ?: 0,
+                        'checked_8' => $this->checked_8 ?: 0,
+                        'checked_9' => $this->checked_9 ?: 0,
+                        'checked_10' => $this->checked_10 ?: 0,
+                        'checked_11' => $this->checked_11 ?: 0,
+                        'checked_12' => $this->checked_12 ?: 0,
+                        'checked_13' => $this->checked_13 ?: 0,
+                        'description' => Str::ucfirst($this->description),
                         'user_id' => Auth::user()->id,
-                        'active_id' => $this->active_id,
+                        'active_id' => 1,
                     ]);
                     $message = 'Saved';
-                }
-                else {
+                } else {
                     $obj = LwBladeTest::find($this->vid);
-                    $obj->vname = Str::ucfirst($this->vname);
-                    $obj->description = $this->description;
+                    $obj->vname = Str::lower($this->vname);
+                    $obj->blade_file = Str::ucfirst($this->blade_file);
+                    $obj->description = Str::ucfirst($this->description);
                     $obj->checked_1 = $this->checked_1;
                     $obj->checked_2 = $this->checked_2;
                     $obj->checked_3 = $this->checked_3;
@@ -97,7 +110,7 @@ class BladeSys extends Component
                     $obj->checked_10 = $this->checked_10;
                     $obj->checked_11 = $this->checked_11;
                     $obj->checked_12 = $this->checked_12;
-                    $obj->comment = $this->comment;
+                    $obj->checked_13 = $this->checked_13;
                     $obj->active_id = $this->active_id;
                     $obj->save();
                     $message = "Updated";
@@ -108,38 +121,41 @@ class BladeSys extends Component
             }
         }
     }
+
     #endregion
 
 
     public function generate()
     {
-        $data=LwBladeTest::where('module_id','=',$this->module_id)->get();
-        if ($data->count()==0) {
-            foreach ($this->module_name as $row){
-            LwBladeTest::create([
-                'module_id' => $this->module_id,
-                'vname' => $row->vname,
-                'description' => '',
-                'checked_1' => false,
-                'checked_2' => false,
-                'checked_3' => false,
-                'checked_4' => false,
-                'checked_5' => false,
-                'checked_6' => false,
-                'checked_7' => false,
-                'checked_8' => false,
-                'checked_9' => false,
-                'checked_10' => false,
-                'checked_11' => false,
-                'checked_12' => false,
-                'comment' => '',
-                'active_id' => 1,
-                'user_id' => Auth::user()->id,
-            ]);
-            $this->save();}
+        $data = LwBladeTest::where('module_id', '=', $this->module_id)->get();
+        if ($data->count() == 0) {
+            foreach ($this->module_name as $row) {
+                LwBladeTest::create([
+                    'module_id' => $this->module_id,
+                    'class_id' => $this->class_id,
+                    'vname' => Str::lower($row->vname),
+                    'blade_file' => Str::ucfirst($row->class_file),
+                    'description' => '',
+                    'checked_1' => false,
+                    'checked_2' => false,
+                    'checked_3' => false,
+                    'checked_4' => false,
+                    'checked_5' => false,
+                    'checked_6' => false,
+                    'checked_7' => false,
+                    'checked_8' => false,
+                    'checked_9' => false,
+                    'checked_10' => false,
+                    'checked_11' => false,
+                    'checked_12' => false,
+                    'checked_13' => false,
+                    'active_id' => 1,
+                    'user_id' => Auth::user()->id,
+                ]);
+                $this->save();
+            }
         }
     }
-
 
 
     #region[obj]
@@ -149,6 +165,7 @@ class BladeSys extends Component
             $obj = LwBladeTest::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
+            $this->blade_file = $obj->blade_file;
             $this->description = $obj->description;
             $this->checked_1 = $obj->checked_1;
             $this->checked_2 = $obj->checked_2;
@@ -162,7 +179,7 @@ class BladeSys extends Component
             $this->checked_10 = $obj->checked_10;
             $this->checked_11 = $obj->checked_11;
             $this->checked_12 = $obj->checked_12;
-            $this->comment = $obj->comment;
+            $this->checked_13 = $obj->checked_13;
             $this->active_id = $obj->active_id;
             return $obj;
         }
@@ -176,8 +193,21 @@ class BladeSys extends Component
     {
         $this->vid = '';
         $this->vname = '';
+        $this->blade_file = '';
         $this->description = '';
-        $this->comment = '';
+        $this->checked_1 = '';
+        $this->checked_2 = '';
+        $this->checked_3 = '';
+        $this->checked_4 = '';
+        $this->checked_5 = '';
+        $this->checked_6 = '';
+        $this->checked_7 = '';
+        $this->checked_8 = '';
+        $this->checked_9 = '';
+        $this->checked_10 = '';
+        $this->checked_11 = '';
+        $this->checked_12 = '';
+        $this->checked_13 = '';
         $this->active_id = 1;
     }
     #endregion
@@ -185,100 +215,121 @@ class BladeSys extends Component
     #region[checked]
     public function isChecked1($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_1 = !$check_1->checked_1;
         $check_1->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
+
     public function isChecked2($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_2 = !$check_1->checked_2;
         $check_1->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
+
     public function isChecked3($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_3 = !$check_1->checked_3;
         $check_1->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
+
     public function isChecked4($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_4 = !$check_1->checked_4;
         $check_1->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
+
     public function isChecked5($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_5 = !$check_1->checked_5;
         $check_1->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
+
     public function isChecked6($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_6 = !$check_1->checked_6;
         $check_1->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
+
     public function isChecked7($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_7 = !$check_1->checked_7;
         $check_1->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
+
     public function isChecked8($id): void
-{
-    $check_1 = LwClassTest::find($id);
-    $check_1->checked_8 = !$check_1->checked_8;
-    $check_1->save();
-    $this->clearFields();
-    $this->dispatch('$refresh');
-}
+    {
+        $check_1 = LwBladeTest::find($id);
+        $check_1->checked_8 = !$check_1->checked_8;
+        $check_1->save();
+        $this->clearFields();
+        $this->dispatch('$refresh');
+    }
+
     public function isChecked9($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_9 = !$check_1->checked_9;
         $check_1->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
+
     public function isChecked10($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_10 = !$check_1->checked_10;
         $check_1->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
+
     public function isChecked11($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_11 = !$check_1->checked_11;
         $check_1->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
+
     public function isChecked12($id): void
     {
-        $check_1 = LwClassTest::find($id);
+        $check_1 = LwBladeTest::find($id);
         $check_1->checked_12 = !$check_1->checked_12;
         $check_1->save();
         $this->clearFields();
         $this->dispatch('$refresh');
     }
+
+    public function isChecked13($id): void
+    {
+        $check_1 = LwBladeTest::find($id);
+        $check_1->checked_13 = !$check_1->checked_13;
+        $check_1->save();
+        $this->clearFields();
+        $this->dispatch('$refresh');
+    }
+
     #endregion
 
     public function sortBy($field): void
@@ -296,7 +347,7 @@ class BladeSys extends Component
     public function getList()
     {
         return LwBladeTest::search($this->searches)
-            ->where('module_id','=',$this->module_id)
+            ->where('module_id', '=', $this->module_id)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortFields, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);

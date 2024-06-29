@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin_tests', function (Blueprint $table) {
+        Schema::create('menu_tests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('module_id')->references('id')->on('test_modules')->onDelete('cascade');
-            $table->foreignId('db_id')->references('id')->on('db_tests')->onDelete('cascade');
+            $table->foreignId('blade_id')->references('id')->on('lw_blade_tests')->onDelete('cascade');
             $table->string('vname');
-            $table->longText('description');
-            $table->boolean('checked_1');
-            $table->boolean('checked_2');
-            $table->boolean('checked_3');
+            $table->string('menu');
+            $table->boolean('checked');
             $table->longText('comment');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->smallInteger('active_id');
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin_tests');
+        Schema::dropIfExists('menu_tests');
     }
 };

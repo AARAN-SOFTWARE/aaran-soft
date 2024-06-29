@@ -16,7 +16,7 @@ return new class extends Migration
                 $table->id();
                 $table->string('vname');
                 $table->longText('description');
-                $table->boolean('checked');
+                $table->string('status');
                 $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
                 $table->smallInteger('active_id');
                 $table->timestamps();
