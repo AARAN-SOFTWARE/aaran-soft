@@ -27,6 +27,7 @@
                 </x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Profit</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Loosed</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Difference</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Remarks</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
@@ -60,6 +61,10 @@
                                 {{ $row->share_loosed }}
                             </x-table.cell-text>
 
+                            <x-table.cell-text right class="font-semibold {{$row->share_profit-$row->share_loosed > 0 ?'text-green-500':'text-red-500'}}">
+                                {{ $row->share_profit-$row->share_loosed }}
+                            </x-table.cell-text>
+
                             <x-table.cell-text>
                                 {{ $row->remarks }}
                             </x-table.cell-text>
@@ -85,6 +90,11 @@
                     <x-table.cell-text right
                                        :class="'text-blue-600 font-semibold'">
                         {{ \App\Helper\ConvertTo::decimal2($totalLoosed)}}</x-table.cell-text>
+
+                    <x-table.cell-text right
+                                       class="font-semibold {{$totalProfit-$totalLoosed > 0 ?'text-green-500':'text-red-500'}}">
+                        {{ \App\Helper\ConvertTo::decimal2($totalProfit-$totalLoosed)}}</x-table.cell-text>
+
 
                 </x-table.row>
 
