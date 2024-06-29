@@ -21,10 +21,13 @@ return [
     ],
 
     'menus' => [
+        MainMenu::books(),
+        MainMenu::audit(),
+        MainMenu::task(),
+        MainMenu::accounts(),
         MainMenu::entries(),
         MainMenu::master(),
         MainMenu::common(),
-        MainMenu::report(),
     ],
 
     'migrations' => [
@@ -33,16 +36,18 @@ return [
         DbMigration::master(),
         DbMigration::order(),
         DbMigration::style(),
+        DbMigration::entry(),
+        DbMigration::creditnote(),
+        DbMigration::debitnote(),
+        DbMigration::erp(),
+        DbMigration::attendance(),
         DbMigration::todoList(),
         DbMigration::blog(),
-        DbMigration::demo(),
-        DbMigration::shareTrades(),
-        DbMigration::creditBooks(),
-        DbMigration::magalir(),
         DbMigration::mailids(),
         DbMigration::cashBook(),
+        DbMigration::bankBook(),
+        DbMigration::taskManager(),
         DbMigration::audit(),
-        DbMigration::developer(),
     ]
 
 ];
