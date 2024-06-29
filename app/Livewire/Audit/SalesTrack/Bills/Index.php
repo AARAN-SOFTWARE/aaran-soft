@@ -58,7 +58,7 @@ class Index extends Component
     {
         if ($this->vid) {
             $obj = $this->getObj($this->vid);
-            DB::table('sales_bill_items')->where('sales_bill_id', '=', $this->vid)->delete();
+            DB::table('sales_bill_items')->where('sales_track_bill_id', '=', $this->vid)->delete();
             $obj->delete();
             $this->showDeleteModal = false;
             $this->clearFields();

@@ -87,7 +87,7 @@ class EnteryController extends Controller
             $obj['colour_id'] = Colour::where('vname', $obj['colour_id'])->first()->id;
             $obj['size_id'] = Size::where('vname', $obj['size_id'])->first()->id;
             $salesItem = Saleitem::create($obj);
-            $response_item = $salesItem->id;
+            $response_item['items'] = $salesItem->id;
         }
 
 
