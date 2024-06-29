@@ -61,7 +61,7 @@
                             {{ $row->option_loosed }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text right class="font-semibold{{$row->option_profit-$row->option_loosed > 0 ?'text-green-500':'text-red-500'}}">
+                        <x-table.cell-text right class="font-semibold {{$row->option_profit-$row->option_loosed > 0 ?'text-green-500':'text-red-500'}}">
                             {{ $row->option_profit-$row->option_loosed }}
                         </x-table.cell-text>
 
@@ -92,7 +92,7 @@
                         {{ \App\Helper\ConvertTo::decimal2($totalLoosed)}}</x-table.cell-text>
 
                     <x-table.cell-text right
-                                       class="font-semibold{{$totalProfit-$totalLoosed > 0 ?'text-green-500':'text-red-500'}}">
+                                       class="font-semibold {{$totalProfit-$totalLoosed > 0 ?'text-green-500':'text-red-500'}}">
                         {{ \App\Helper\ConvertTo::decimal2($totalProfit-$totalLoosed)}}</x-table.cell-text>
 
                 </x-table.row>
