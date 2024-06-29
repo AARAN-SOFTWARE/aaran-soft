@@ -27,6 +27,7 @@
                 </x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Profit</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Loosed</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Difference</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Remarks</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
@@ -41,31 +42,35 @@
             <x-slot name="table_body">
                 @forelse ($list as $index =>  $row)
 
-                        <x-table.row>
-                            <x-table.cell-text center>
-                                {{ $index + 1 }}
-                            </x-table.cell-text>
+                    <x-table.row>
+                        <x-table.cell-text center>
+                            {{ $index + 1 }}
+                        </x-table.cell-text>
 
-                            <x-table.cell-text center>
-                                <a href="{{ route('shareTrades.optionDetails',[$row->id]) }}">
+                        <x-table.cell-text center>
+                            <a href="{{ route('shareTrades.optionDetails',[$row->id]) }}">
                                 {{date('d-m-Y', strtotime($row->vdate))}}
-                                </a>
-                            </x-table.cell-text>
+                            </a>
+                        </x-table.cell-text>
 
-                            <x-table.cell-text right>
-                                {{ $row->option_profit }}
-                            </x-table.cell-text>
+                        <x-table.cell-text right>
+                            {{ $row->option_profit }}
+                        </x-table.cell-text>
 
-                            <x-table.cell-text right>
-                                {{ $row->option_loosed }}
-                            </x-table.cell-text>
+                        <x-table.cell-text right>
+                            {{ $row->option_loosed }}
+                        </x-table.cell-text>
 
-                            <x-table.cell-text>
-                                {{ $row->remarks }}
-                            </x-table.cell-text>
+                        <x-table.cell-text right>
+                            {{ $row->option_profit-$row->option_loosed }}
+                        </x-table.cell-text>
 
-                            <x-table.cell-action id="{{$row->id}}"/>
-                        </x-table.row>
+                        <x-table.cell-text>
+                            {{ $row->remarks }}
+                        </x-table.cell-text>
+
+                        <x-table.cell-action id="{{$row->id}}"/>
+                    </x-table.row>
                     @php
                         $totalProfit  += floatval($row->option_profit);
                         $totalLoosed  += floatval($row->option_loosed);
@@ -85,6 +90,10 @@
                     <x-table.cell-text right
                                        :class="'text-blue-600 font-semibold'">
                         {{ \App\Helper\ConvertTo::decimal2($totalLoosed)}}</x-table.cell-text>
+
+                    <x-table.cell-text right
+                                       :class="'text-blue-600 font-semibold'">
+                        {{ \App\Helper\ConvertTo::decimal2($totalProfit-$totalLoosed)}}</x-table.cell-text>
 
                 </x-table.row>
 
