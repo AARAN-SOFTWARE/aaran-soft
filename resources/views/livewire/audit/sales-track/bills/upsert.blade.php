@@ -8,7 +8,7 @@
         <x-icons.icon :icon="'double-arrow-right'"
                       class="text-gray-500 hover:text-white  hover:rounded-sm  h-4 w-auto block mt-2"/>
 
-            <a href="{{route('salesTracks.items',[$rootline_id])}}" class="text-gray-400">Sales Bills</a>
+            <a href="{{route('salesTracks.items',[$salesTrack_id])}}" class="text-gray-400">Sales Bills</a>
 
         <x-icons.icon :icon="'double-arrow-right'"
                       class="text-gray-500 hover:text-white  hover:rounded-sm  h-4 w-auto block mt-2"/>

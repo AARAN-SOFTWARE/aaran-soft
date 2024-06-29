@@ -27,8 +27,8 @@ class Index extends Component
     {
         $this->salesTrackIitem = SalesTrackItem::find($id);
         $this->vdate = $this->salesTrackIitem->vdate;
+        $this->track_id = $this->salesTrackIitem->sales_track_id;
 //        $this->track_item_id = $salesTrackIitem_id;
-//        $this->track_id = $track_id;
 //        $this->track=Track::find($track_id);
     }
     #endregion
