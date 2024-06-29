@@ -16,6 +16,7 @@ class DbMigration
             config('software.OFFSET') => in_array($feature, config('offset.migrations', [])),
             config('software.SUNDAR') => in_array($feature, config('sundar.migrations', [])),
             config('software.DEVELOPER') => in_array($feature, config('developer.migrations', [])),
+            config('software.WELFARE') => in_array($feature, config('welfare.migrations', [])),
         };
     }
 
