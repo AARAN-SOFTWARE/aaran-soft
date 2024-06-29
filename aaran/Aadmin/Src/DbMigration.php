@@ -13,9 +13,12 @@ class DbMigration
             config('software.GARMENT_1') => in_array($feature, config('garment_1.migrations', [])),
             config('software.GARMENT_2') => in_array($feature, config('garment_2.migrations', [])),
 
+            config('software.AUDIT') => in_array($feature, config('audit.migrations', [])),
+
             config('software.OFFSET') => in_array($feature, config('offset.migrations', [])),
             config('software.SUNDAR') => in_array($feature, config('sundar.migrations', [])),
             config('software.DEVELOPER') => in_array($feature, config('developer.migrations', [])),
+            config('software.WELFARE') => in_array($feature, config('welfare.migrations', [])),
         };
     }
 

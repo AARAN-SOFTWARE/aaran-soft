@@ -1,21 +1,26 @@
 <?php
 
-namespace App\Livewire\Sundar\Trading;
+namespace App\Livewire\Sundar\Trading\sub;
 
 use Aaran\Sundar\Models\Share\ShareTrades;
+use Aaran\Sundar\Models\Share\TradeCommission;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
 
-class Charges extends Component
+class CommissionDetails extends Component
 {
     #region[property]
     use CommonTrait;
 
     public $vdate;
-    public mixed $charges;
-    public mixed $user_id = '';
+    public mixed $share_trade_id;
+    public mixed $stt;
+    public mixed $sebi_fee;
+    public mixed $stamp_duty;
+    public mixed $gst;
+    public mixed $amount;
     public $remarks = '';
     public mixed $search_user_id = '';
 
@@ -23,9 +28,11 @@ class Charges extends Component
 
     #endregion
 
-    public function mount()
+    public function mount($id)
     {
         $this->users = User::all();
+
+        $this->share_trade_id = $id;
     }
 
 
@@ -33,28 +40,29 @@ class Charges extends Component
     public function getSave(): string
     {
         if ($this->vid == "") {
-            ShareTrades::create([
-                'user_id' => $this->user_id?:auth()->id(),
+            TradeCommission::create([
+                'share_trade_id' => $this->share_trade_id,
                 'vdate' => $this->vdate ?: Carbon::now()->format('Y-m-d'),
-                'opening_balance' => 0,
-                'deposit' =>  0,
-                'withdraw' =>  0,
-                'share_profit' => 0,
-                'share_loosed' => 0,
-                'option_profit' => 0,
-                'option_loosed' => 0,
-                'charges' => $this->charges ?: 0,
-                'remarks' => $this->remarks ?: '',
+                'stt' => $this->stt ?: 0,
+                'sebi_fee' => $this->sebi_fee ?: 0,
+                'stamp_duty' => $this->stamp_duty ?: 0,
+                'gst' => $this->gst ?: 0,
+                'amount' => $this->amount ?: 0,
+                'remarks' => $this->remarks ?: 0,
                 'active_id' => $this->active_id,
 
             ]);
             $message = "Saved";
 
         } else {
-            $obj = ShareTrades::find($this->vid);
-            $obj->user_id = $this->user_id;
+            $obj = TradeCommission::find($this->vid);
+            $obj->share_trade_id = $this->share_trade_id;
             $obj->vdate = $this->vdate;
-            $obj->charges = $this->charges;
+            $obj->stt = $this->stt;
+            $obj->sebi_fee = $this->sebi_fee;
+            $obj->stamp_duty = $this->stamp_duty;
+            $obj->gst = $this->gst;
+            $obj->amount = $this->amount;
             $obj->remarks = $this->remarks;
             $obj->active_id = $this->active_id;
 
@@ -71,11 +79,15 @@ class Charges extends Component
     public function getObj($id)
     {
         if ($id) {
-            $obj = ShareTrades::find($id);
+            $obj = TradeCommission::find($id);
             $this->vid = $obj->id;
-            $this->user_id = $obj->user_id;
+            $this->share_trade_id = $obj->share_trade_id;
             $this->vdate = $obj->vdate;
-            $this->charges = $obj->charges;
+            $this->stt = $obj->stt;
+            $this->sebi_fee = $obj->sebi_fee;
+            $this->stamp_duty = $obj->stamp_duty;
+            $this->gst = $obj->gst;
+            $this->amount = $obj->amount;
             $this->remarks = $obj->remarks;
             $this->active_id = $obj->active_id;
             return $obj;
@@ -89,7 +101,8 @@ class Charges extends Component
     {
         $this->sortField = 'vdate';
 
-        return ShareTrades::search($this->searches)->where('user_id', '=', $this->search_user_id?:auth()->id())
+        return TradeCommission::search($this->searches)->where('user_id', '=', $this->k_id?:auth()->id())
+            ->where('share_trade_id', '=', $this->share_trade_id)
             ->where('active_id', '=', $this->activeRecord)
             ->where('charges', '>', 0)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
@@ -101,9 +114,12 @@ class Charges extends Component
     public function clearFields(): void
     {
         $this->vid='';
-        $this->user_id = '';
         $this->vdate = '';
-        $this->charges = '';
+        $this->stt = '';
+        $this->sebi_fee = '';
+        $this->stamp_duty = '';
+        $this->gst = '';
+        $this->amount = '';
         $this->remarks = '';
         $this->active_id = '1';
     }
@@ -112,14 +128,14 @@ class Charges extends Component
     #region[getRoute]
     public function getRoute()
     {
-        $this->redirect(route('shareTrades'));
+        $this->redirect(route('shareTrades.charges'));
     }
     #endregion
 
     #region[render]
     public function render()
     {
-        return view('livewire.sundar.trading.charges')->with([
+        return view('livewire.sundar.trading.sub.commission-details')->with([
             'list' => $this->getList()
         ]);
     }
