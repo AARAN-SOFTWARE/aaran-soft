@@ -198,6 +198,19 @@ class DbMigration
 
     #endregion
 
+    #region[Developer Testing]
+    public static function hasDeveloperTesting(): bool
+    {
+        return static::enabled(static::developerTesting());
+    }
+
+    public static function developerTesting(): string
+    {
+        return 'developerTesting';
+    }
+
+    #endregion
+
     #region[Magalir]
     public static function hasMagalir(): bool
     {

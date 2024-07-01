@@ -121,14 +121,19 @@ class Migration extends Component
         Schema::dropIfExists('admin_tests');
         Schema::dropIfExists('db_tests');
         Schema::dropIfExists('model_tests');
-        Schema::dropIfExists('test_modules');
         Schema::dropIfExists('actions');
         Schema::dropIfExists('test_files');
+        Schema::dropIfExists('test_modules');
         Schema::dropIfExists('test_cases');
         Schema::dropIfExists('test_reviews');
         Schema::dropIfExists('test_operations');
         Schema::dropIfExists('modals');
         Schema::dropIfExists('headers');
+    }
+
+    public function dropTaskTable(): void
+    {
+        Schema::dropIfExists('activities');
     }
 
 

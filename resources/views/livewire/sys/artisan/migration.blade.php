@@ -103,8 +103,10 @@
 
                 <button wire:click.prevent="dropTestingTable" class="px-2 py-1 bg-gray-400">Drop Testing Tables</button>
 
+                <button wire:click.prevent="dropTaskTable" class="px-2 py-1 bg-gray-400">Drop Task Tables</button>
+
                 <div wire:loading
-                     wire:target="dropTestingTable">
+                     wire:target="dropTestingTable,dropTaskTable">
                     Work is on progress...
                 </div>
             </div>

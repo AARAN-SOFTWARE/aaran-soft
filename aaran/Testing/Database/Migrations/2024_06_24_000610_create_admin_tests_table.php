@@ -6,12 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDeveloper()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasDeveloperTesting()) {
 
             Schema::create('admin_tests', function (Blueprint $table) {
                 $table->id();
@@ -30,9 +27,6 @@ return new class extends Migration
         }
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('admin_tests');

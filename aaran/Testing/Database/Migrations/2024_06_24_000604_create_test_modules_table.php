@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasDeveloper()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasDeveloperTesting()) {
+
             Schema::create('test_modules', function (Blueprint $table) {
                 $table->id();
                 $table->string('vname');
