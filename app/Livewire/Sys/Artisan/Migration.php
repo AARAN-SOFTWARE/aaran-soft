@@ -123,6 +123,8 @@ class Migration extends Component
         Schema::dropIfExists('model_tests');
         Schema::dropIfExists('test_modules');
         Schema::dropIfExists('test_cases');
+        Schema::dropIfExists('test_operations');
+        Schema::dropIfExists('test_reviews');
         Schema::dropIfExists('modals');
         Schema::dropIfExists('headers');
     }
