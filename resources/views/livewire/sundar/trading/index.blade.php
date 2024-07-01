@@ -184,7 +184,7 @@
 
 
                     @php
-                        $totalInvesting = \App\Helper\ConvertTo::decimal2(($row->invested-$row->drawings))
+                        $totalInvesting = \App\Helper\ConvertTo::decimal2(($row->drawings-$row->invested))
                     @endphp
 
                     <x-table.row>
