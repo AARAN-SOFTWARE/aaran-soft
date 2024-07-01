@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasCreditBooks()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasshareTrades()) {
 
-            Schema::table('credit_book_items', function (Blueprint $table) {
+            Schema::table('share_trades', function (Blueprint $table) {
                 $table->decimal('invested')
                     ->after('vdate')->default('0')
                     ->nullable();
@@ -23,7 +23,7 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::table('credit_book_items', function (Blueprint $table) {
+        Schema::table('share_trades', function (Blueprint $table) {
             $table->dropColumn('drawings');
             $table->dropColumn('invested');
         });
