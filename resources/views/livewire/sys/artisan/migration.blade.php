@@ -94,6 +94,22 @@
                     SAVE
                 </button>
             </div>
+
+        </div>
+
+        <div class="flex flex-row gap-5 w-full">
+
+            <div class="flex flex-col gap-3 w-1/4">
+
+                <button wire:click.prevent="dropTestingTable" class="px-2 py-1 bg-gray-400">Drop Testing Tables</button>
+
+                <div wire:loading
+                     wire:target="dropTestingTable">
+                    Work is on progress...
+                </div>
+            </div>
+
+        </div>
         @endadmin
 
     </x-forms.m-panel>

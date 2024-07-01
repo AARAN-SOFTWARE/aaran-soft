@@ -8,6 +8,7 @@ use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
 use Livewire\Component;
 
 class Migration extends Component
@@ -108,6 +109,24 @@ class Migration extends Component
     {
         Artisan::call('storage:link');
     }
+
+
+    public function dropTestingTable(): void
+    {
+        Schema::dropIfExists('test_images');
+        Schema::dropIfExists('menu_tests');
+        Schema::dropIfExists('lw_blade_tests');
+        Schema::dropIfExists('lw_class_tests');
+        Schema::dropIfExists('sw_tests');
+        Schema::dropIfExists('admin_tests');
+        Schema::dropIfExists('db_tests');
+        Schema::dropIfExists('model_tests');
+        Schema::dropIfExists('test_modules');
+        Schema::dropIfExists('test_cases');
+        Schema::dropIfExists('modals');
+        Schema::dropIfExists('headers');
+    }
+
 
     #endregion
 
