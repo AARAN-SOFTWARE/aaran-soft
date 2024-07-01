@@ -122,6 +122,8 @@ class Migration extends Component
         Schema::dropIfExists('db_tests');
         Schema::dropIfExists('model_tests');
         Schema::dropIfExists('test_modules');
+        Schema::dropIfExists('actions');
+        Schema::dropIfExists('test_files');
         Schema::dropIfExists('test_cases');
         Schema::dropIfExists('test_reviews');
         Schema::dropIfExists('test_operations');
