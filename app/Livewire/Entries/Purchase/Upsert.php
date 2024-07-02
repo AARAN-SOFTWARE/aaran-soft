@@ -511,6 +511,7 @@ class Upsert extends Component
     {
         if ($this->uniqueno != '') {
             if ($this->vid == "") {
+                $this->validate(['purchase_no' => 'required|unique:purchases,purchase_no']);
                 $obj = Purchase::create([
                     'uniqueno' => session()->get('company_id') . '~'. session()->get('acyear'). '~' . $this->purchase_no,
                    'acyear' => session()->get('acyear'),

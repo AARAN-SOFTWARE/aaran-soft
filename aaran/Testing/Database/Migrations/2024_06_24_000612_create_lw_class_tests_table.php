@@ -4,24 +4,27 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
     public function up(): void
     {
         if (Aaran\Aadmin\Src\DbMigration::hasDeveloperTesting()) {
 
-            Schema::create('model_tests', function (Blueprint $table) {
+            Schema::create('lw_class_tests', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('module_id')->references('id')->on('test_modules')->onDelete('cascade');
+                $table->foreignId('admin_id')->references('id')->on('admin_tests')->onDelete('cascade');
                 $table->string('vname');
+                $table->string('class_file');
+                $table->longText('description');
                 $table->boolean('checked_1');
                 $table->boolean('checked_2');
                 $table->boolean('checked_3');
-                $table->string('eloquent');
-                $table->longText('description');
+                $table->boolean('checked_4');
+                $table->boolean('checked_5');
+                $table->boolean('checked_6');
+                $table->boolean('checked_7');
+                $table->boolean('checked_8');
+                $table->longText('comment');
                 $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
                 $table->smallInteger('active_id');
                 $table->timestamps();
@@ -29,11 +32,8 @@ return new class extends Migration
         }
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('model_tests');
+        Schema::dropIfExists('lw_class_tests');
     }
 };

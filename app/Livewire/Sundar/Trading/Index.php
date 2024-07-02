@@ -35,6 +35,8 @@ class Index extends Component
         }
 
         return ShareTrades::select(
+            DB::raw("SUM(invested) as invested"),
+            DB::raw("SUM(drawings) as drawings"),
             DB::raw("SUM(opening_balance) as opening_balance"),
             DB::raw("SUM(deposit) as deposit"),
             DB::raw("SUM(withdraw) as withdraw"),

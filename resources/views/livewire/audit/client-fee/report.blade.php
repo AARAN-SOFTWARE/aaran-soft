@@ -1,23 +1,11 @@
-<div>
-    <x-slot name="header">Fee</x-slot>
-
-    <x-forms.m-panel>
-
-        <!-- Top Controls --------------------------------------------------------------------------------------------->
+<div class="p-5">
+    <x-slot name="header">Client Fees Report</x-slot>
 
         <div class="flex flex-row gap-3 py-3">
-
             <div class="flex flex-row gap-3 py-3 w-full">
-                <label for="month" class="w-[8rem] text-zinc-500 tracking-wide py-2">Month</label>
-                <select wire:model="month" wire:change="reRender" class="w-full purple-textbox" id="month">
-                    <option class="text-zinc-500 px-1">Choose Month...</option>
-                    @foreach(\App\Enums\Months::cases() as $month)
-                        <option value="{{$month->value}}">{{$month->getName()}}</option>
-                    @endforeach
-                </select>
+                <div class="text-3xl font-extrabold tracking-wider w-full text-center">{{\Aaran\Audit\Models\Client::getName($clientId)}}</div>
             </div>
-
-            <div class="flex flex-row gap-3 py-3 w-full">
+            <div class="flex flex-row gap-3 py-3 w-full print:hidden">
                 <label for="year" class="w-[8rem] text-zinc-500 tracking-wide px-3 py-2">Year</label>
                 <select wire:model="year" wire:change="reRender" class="w-full purple-textbox" id="year">
                     <option class="text-zinc-500 px-1">Choose Year...</option>
@@ -27,28 +15,20 @@
                 </select>
             </div>
         </div>
-
-        <!-- Table Header --------------------------------------------------------------------------------------------->
-
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial/>
-                <x-table.header-text left wire:click.prevent="sortBy('client_id')">Client</x-table.header-text>
-                <x-table.header-text center>Invoice</x-table.header-text>
+                <x-table.header-text center>Month</x-table.header-text>
                 <x-table.header-text right>Amount</x-table.header-text>
                 <x-table.header-text right>Receipt</x-table.header-text>
-                <x-table.header-text center>Reference</x-table.header-text>
                 <x-table.header-text center>Status</x-table.header-text>
-                <x-table.header-action/>
             </x-slot>
-
-            <!-- Table Body ------------------------------------------------------------------------------------------->
-
             <x-slot name="table_body">
 
                 @php
                     $invoice_total = 0;
                     $received_total = 0;
+                     $diff=0;
                 @endphp
 
                 @forelse ($list as $index =>  $row)
@@ -59,13 +39,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('clientFees.report',[$row->client_id])}}">
-                            {{ $row->client->vname }}</a>
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
-                            {{ $row->invoice_no }}
-                            -{{$row->invoice_date ?  date('d-m-Y',strtotime($row->invoice_date )) : '' }}
+                            {{ \App\Enums\Months::tryFrom($row->month)->getName() }}
                         </x-table.cell-text>
 
                         <x-table.cell-text>
@@ -90,10 +64,6 @@
                             </div>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
-                            {{$row->receipt_ref}}
-                        </x-table.cell-text>
-
                         <x-table.cell>
                             <div
                                 class="flex w-full text-xl text-center  items-center justify-center p-1 {{  \App\Enums\Status::tryFrom($row->status_id)->getStyle()}}">
@@ -101,7 +71,6 @@
                             </div>
                         </x-table.cell>
 
-                        <x-table.cell-action :id="$row->id"/>
                     </x-table.row>
 
                     @php
@@ -115,7 +84,18 @@
                 @endforelse
 
                 <x-table.row>
-                    <td colspan="3" class="px-2 text-xl text-right text-gray-400 border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>
+                    <td colspan="5">&nbsp;</td>
+                </x-table.row>
+                <x-table.row>
+                    <x-table.header-text>&nbsp;</x-table.header-text>
+                    <x-table.header-text>Total Amount</x-table.header-text>
+                    <x-table.header-text>Total Receipt</x-table.header-text>
+                    <x-table.header-text>Difference</x-table.header-text>
+                    <x-table.header-text>Status</x-table.header-text>
+                </x-table.row>
+
+                <x-table.row>
+                    <td colspan="1" class="px-2 text-xl text-right text-gray-400 border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;</td>
                     <td class="px-2 text-right  text-xl border text-blue-500 border-gray-300">{{ \App\Helper\ConvertTo::rupeesFormat($invoice_total)}}</td>
                     <td class="px-2 text-right  text-xl border text-blue-500 border-gray-300">{{ \App\Helper\ConvertTo::rupeesFormat($received_total)}}</td>
                     <td class="px-2 text-right  text-xl border  {{$diff ==  0 ? 'text-green-500' : 'text-red-500'}} border-gray-300">{{ \App\Helper\ConvertTo::rupeesFormat($diff)}}</td>
@@ -127,22 +107,4 @@
                 {{ $list->links() }}
             </x-slot>
         </x-forms.table>
-
-        <x-modal.delete/>
-
-        <!-- Create Form ---------------------------------------------------------------------------------------------->
-
-        <x-forms.create :id="$vid">
-            <x-input.model-text wire:model="invoice_no" autofocus :label="'invoice_no'"/>
-            <x-input.model-text wire:model="invoice_date" type="date" :label="'invoice_date'"/>
-            <x-input.model-text wire:model="taxable" :label="'taxable'"/>
-            <x-input.model-text wire:model="gst" :label="'gst'"/>
-            <x-input.model-text wire:model="receipt" :label="'receipt'"/>
-            <x-input.model-text wire:model="receipt_date" type="date" :label="'receipt_date'"/>
-            <x-input.model-text wire:model="receipt_ref" :label="'receipt_ref'"/>
-        </x-forms.create>
-
-        <x-button.primary wire:click="generate">Generate</x-button.primary>
-
-    </x-forms.m-panel>
 </div>

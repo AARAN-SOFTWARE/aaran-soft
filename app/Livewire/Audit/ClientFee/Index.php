@@ -59,6 +59,17 @@ class Index extends Component
             $this->active_id = $obj->active_id;
         }
     }
+
+    public function delete(): void
+    {
+
+        if ($this->vid) {
+            $obj = ClientFee::find($this->vid);
+            $obj->delete();
+            $this->showDeleteModal = false;
+            $this->clearFields();
+        }
+    }
     #endregion
 
     #region[Save]

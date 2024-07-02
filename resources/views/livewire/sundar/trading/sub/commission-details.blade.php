@@ -24,7 +24,11 @@
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vdate')"/>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" class="w-[10rem]" center>Date</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Charges</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Stt</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Sebi_fee</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Stamp Duty</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Gst</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Amount</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vdate')" center>Remarks</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
@@ -48,7 +52,23 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
-                            {{ $row->charges }}
+                            {{ $row->stt }}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right>
+                            {{ $row->sebi_fee }}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right>
+                            {{ $row->stamp_duty }}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right>
+                            {{ $row->gst }}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right>
+                            {{ $row->amount }}
                         </x-table.cell-text>
 
                         <x-table.cell-text>
@@ -59,7 +79,7 @@
                     </x-table.row>
 
                     @php
-                        $totalCharges  += floatval($row->charges);
+                        $totalCharges  += floatval($row->amount);
                     @endphp
 
                 @empty
@@ -92,7 +112,11 @@
                 @endforeach
             </x-input.model-select>
             <x-input.model-date wire:model="vdate" :label="'Date'"/>
-            <x-input.model-text wire:model="charges" :label="'Charges'"/>
+            <x-input.model-text wire:model="stt" :label="'Stt'"/>
+            <x-input.model-text wire:model="sebi_fee" :label="'Sebi fee'"/>
+            <x-input.model-text wire:model="stamp_duty" :label="'Stamp duty'"/>
+            <x-input.model-text wire:model="gst" :label="'gst'"/>
+            <x-input.model-text wire:model="amount" :label="'amount'"/>
             <x-input.model-text wire:model="remarks" :label="'Remarks'"/>
         </x-forms.create>
 

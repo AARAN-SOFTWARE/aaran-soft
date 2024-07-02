@@ -15,6 +15,7 @@ class SoftwareSys extends Component
     use CommonTrait;
 
     #region[properties]
+    public mixed $admin;
     public mixed $admin_id;
     public mixed $module_id;
 
@@ -29,6 +30,7 @@ class SoftwareSys extends Component
 
     public bool $showEditModal = false;
     public mixed $editable = true;
+    public string $sortFields = 'created_at';
 
     #endregion
 
@@ -37,8 +39,9 @@ class SoftwareSys extends Component
 
     public function mount($id)
     {
-        $this->admin_id = AdminTest::find($id);
-        $this->module_id = $this->admin_id->module_id;
+        $this->admin = AdminTest::find($id);
+        $this->module_id = $this->admin->module_id;
+        $this->admin_id = $id;
         $this->users=User::all();
     }
     #endregion
@@ -51,6 +54,7 @@ class SoftwareSys extends Component
                 if ($this->vid == "") {
                     SwTest::create([
                         'module_id' => $this->module_id,
+                        'admin_id' => $this->admin_id,
                         'vname' => $this->vname,
                         'description' => $this->description,
                         'checked_1' => $this->checked_1?:0,
@@ -90,6 +94,7 @@ class SoftwareSys extends Component
         if ($data->count()==0) {
             SwTest::create([
                 'module_id' => $this->module_id,
+                'admin_id' => $this->admin_id,
                 'vname' => 'hasCore',
                 'description' => '',
                 'checked_1' => false,
@@ -102,6 +107,7 @@ class SoftwareSys extends Component
             ]);
             SwTest::create([
                 'module_id' => $this->module_id,
+                'admin_id' => $this->admin_id,
                 'vname' => 'hasCommon',
                 'description' => '',
                 'checked_1' => false,
@@ -114,6 +120,7 @@ class SoftwareSys extends Component
             ]);
             SwTest::create([
                 'module_id' => $this->module_id,
+                'admin_id' => $this->admin_id,
                 'vname' => 'hasMaster',
                 'description' => '',
                 'checked_1' => false,
@@ -126,6 +133,7 @@ class SoftwareSys extends Component
             ]);
             SwTest::create([
                 'module_id' => $this->module_id,
+                'admin_id' => $this->admin_id,
                 'vname' => 'hasEntry',
                 'description' => '',
                 'checked_1' => false,
@@ -138,6 +146,7 @@ class SoftwareSys extends Component
             ]);
             SwTest::create([
                 'module_id' => $this->module_id,
+                'admin_id' => $this->admin_id,
                 'vname' => 'hasReport',
                 'description' => '',
                 'checked_1' => false,
@@ -150,6 +159,20 @@ class SoftwareSys extends Component
             ]);
             SwTest::create([
                 'module_id' => $this->module_id,
+                'admin_id' => $this->admin_id,
+                'vname' => 'hasTodoList',
+                'description' => '',
+                'checked_1' => false,
+                'checked_2' => false,
+                'checked_3' => false,
+                'checked_4' => false,
+                'comment' => '',
+                'user_id' => Auth::user()->id,
+                'active_id' => 1,
+            ]);
+            SwTest::create([
+                'module_id' => $this->module_id,
+                'admin_id' => $this->admin_id,
                 'vname' => 'hasErp',
                 'description' => '',
                 'checked_1' => false,
@@ -162,6 +185,7 @@ class SoftwareSys extends Component
             ]);
             SwTest::create([
                 'module_id' => $this->module_id,
+                'admin_id' => $this->admin_id,
                 'vname' => 'hasOrder',
                 'description' => '',
                 'checked_1' => false,
@@ -174,6 +198,7 @@ class SoftwareSys extends Component
             ]);
             SwTest::create([
                 'module_id' => $this->module_id,
+                'admin_id' => $this->admin_id,
                 'vname' => 'hasStyle',
                 'description' => '',
                 'checked_1' => false,
@@ -186,6 +211,7 @@ class SoftwareSys extends Component
             ]);
             SwTest::create([
                 'module_id' => $this->module_id,
+                'admin_id' => $this->admin_id,
                 'vname' => 'hasPo',
                 'description' => '',
                 'checked_1' => false,
@@ -198,6 +224,7 @@ class SoftwareSys extends Component
             ]);
             SwTest::create([
                 'module_id' => $this->module_id,
+                'admin_id' => $this->admin_id,
                 'vname' => 'hasCreditNote',
                 'description' => '',
                 'checked_1' => false,
@@ -210,6 +237,7 @@ class SoftwareSys extends Component
             ]);
             SwTest::create([
                 'module_id' => $this->module_id,
+                'admin_id' => $this->admin_id,
                 'vname' => 'hasDebitNote',
                 'description' => '',
                 'checked_1' => false,
@@ -220,18 +248,7 @@ class SoftwareSys extends Component
                 'user_id' => Auth::user()->id,
                 'active_id' => 1,
             ]);
-            SwTest::create([
-                'module_id' => $this->module_id,
-                'vname' => 'hasTodoList',
-                'description' => '',
-                'checked_1' => false,
-                'checked_2' => false,
-                'checked_3' => false,
-                'checked_4' => false,
-                'comment' => '',
-                'user_id' => Auth::user()->id,
-                'active_id' => 1,
-            ]);
+
             $this->save();
         }
     }
@@ -313,13 +330,23 @@ class SoftwareSys extends Component
     }
     #endregion
 
+    public function sortBy($field): void
+    {
+        if ($this->sortFields === $field) {
+            $this->sortAsc = !$this->sortAsc;
+        } else {
+            $this->sortAsc = true;
+        }
+        $this->sortFields = $field;
+    }
+
     #region[list]
     public function getList()
     {
         return SwTest::search($this->searches)
             ->where('module_id','=',$this->module_id)
             ->where('active_id', '=', $this->activeRecord)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+            ->orderBy($this->sortFields, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
     #endregion

@@ -27,8 +27,8 @@ class Index extends Component
     {
         $this->salesTrackIitem = SalesTrackItem::find($id);
         $this->vdate = $this->salesTrackIitem->vdate;
+        $this->track_id = $this->salesTrackIitem->sales_track_id;
 //        $this->track_item_id = $salesTrackIitem_id;
-//        $this->track_id = $track_id;
 //        $this->track=Track::find($track_id);
     }
     #endregion
@@ -58,7 +58,7 @@ class Index extends Component
     {
         if ($this->vid) {
             $obj = $this->getObj($this->vid);
-            DB::table('sales_bill_items')->where('sales_bill_id', '=', $this->vid)->delete();
+            DB::table('sales_bill_items')->where('sales_track_bill_id', '=', $this->vid)->delete();
             $obj->delete();
             $this->showDeleteModal = false;
             $this->clearFields();

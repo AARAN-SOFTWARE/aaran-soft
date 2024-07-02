@@ -2,22 +2,24 @@
 
 namespace App\Livewire\Testing\SystemTesting;
 
+use Aaran\Testing\Models\AdminTest;
+use Aaran\Testing\Models\DbTest;
 use Aaran\Testing\Models\LwClassTest;
-use Aaran\Testing\Models\SwTest;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Component;
-use voku\helper\ASCII;
 
 class ClassSys extends Component
 {
     use CommonTrait;
 
     #region[properties]
-    public mixed $sw_id;
+    public mixed $admin;
+    public mixed $admin_id;
     public mixed $module_id;
+    public mixed $class_file;
 
     public mixed $description = '';
     public bool $checked_1 = false;
@@ -27,6 +29,7 @@ class ClassSys extends Component
     public bool $checked_5 = false;
     public bool $checked_6 = false;
     public bool $checked_7 = false;
+    public bool $checked_8 = false;
     public mixed $comment = '';
 
     public  mixed $users = '';
@@ -34,6 +37,8 @@ class ClassSys extends Component
 
     public bool $showEditModal = false;
     public mixed $editable = true;
+    public $backToDataBase;
+    public $previous;
 
     #endregion
 
@@ -42,8 +47,11 @@ class ClassSys extends Component
 
     public function mount($id)
     {
-        $this->sw_id = SwTest::find($id);
-        $this->module_id = $this->sw_id->module_id;
+        $this->admin = AdminTest::find($id);
+        $this->module_id = $this->admin->module_id;
+        $this->previous=$this->admin->db_id;
+        $this->backToDataBase=DbTest::find($this->previous)->model_id;
+        $this->admin_id = $id;
         $this->users=User::all();
     }
     #endregion
@@ -56,8 +64,10 @@ class ClassSys extends Component
                 if ($this->vid == "") {
                     LwClassTest::create([
                         'module_id' => $this->module_id,
-                        'vname' => $this->vname,
-                        'description' => $this->description,
+                        'admin_id' => $this->admin_id,
+                        'vname' => Str::ucfirst($this->vname),
+                        'class_file' => Str::ucfirst($this->class_file),
+                        'description' => Str::ucfirst($this->description),
                         'checked_1' => $this->checked_1?:0,
                         'checked_2' => $this->checked_2?:0,
                         'checked_3' => $this->checked_3?:0,
@@ -65,16 +75,18 @@ class ClassSys extends Component
                         'checked_5' => $this->checked_5?:0,
                         'checked_6' => $this->checked_6?:0,
                         'checked_7' => $this->checked_7?:0,
-                        'comment' => $this->comment,
+                        'checked_8' => $this->checked_8?:0,
+                        'comment' => Str::ucfirst($this->comment),
                         'user_id' => Auth::user()->id,
-                        'active_id' => $this->active_id,
+                        'active_id' => 1,
                     ]);
                     $message = 'Saved';
                 }
                 else {
                     $obj = LwClassTest::find($this->vid);
                     $obj->vname = Str::ucfirst($this->vname);
-                    $obj->description = $this->description;
+                    $obj->class_file = Str::ucfirst($this->class_file);
+                    $obj->description = Str::ucfirst($this->description);
                     $obj->checked_1 = $this->checked_1;
                     $obj->checked_2 = $this->checked_2;
                     $obj->checked_3 = $this->checked_3;
@@ -82,7 +94,8 @@ class ClassSys extends Component
                     $obj->checked_5 = $this->checked_5;
                     $obj->checked_6 = $this->checked_6;
                     $obj->checked_7 = $this->checked_7;
-                    $obj->comment = $this->comment;
+                    $obj->checked_8 = $this->checked_8;
+                    $obj->comment = Str::ucfirst($this->comment);
                     $obj->active_id = $this->active_id;
                     $obj->save();
                     $message = "Updated";
@@ -105,6 +118,7 @@ class ClassSys extends Component
             $obj = LwClassTest::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
+            $this->class_file = $obj->class_file;
             $this->description = $obj->description;
             $this->checked_1 = $obj->checked_1;
             $this->checked_2 = $obj->checked_2;
@@ -113,6 +127,7 @@ class ClassSys extends Component
             $this->checked_5 = $obj->checked_5;
             $this->checked_6 = $obj->checked_6;
             $this->checked_7 = $obj->checked_7;
+            $this->checked_8 = $obj->checked_8;
             $this->comment = $obj->comment;
             $this->active_id = $obj->active_id;
             return $obj;
@@ -127,7 +142,16 @@ class ClassSys extends Component
     {
         $this->vid = '';
         $this->vname = '';
+        $this->class_file = '';
         $this->description = '';
+        $this->checked_1 = '';
+        $this->checked_2 = '';
+        $this->checked_3 = '';
+        $this->checked_4 = '';
+        $this->checked_5 = '';
+        $this->checked_6 = '';
+        $this->checked_7 = '';
+        $this->checked_8 = '';
         $this->comment = '';
         $this->active_id = 1;
     }
@@ -186,6 +210,16 @@ class ClassSys extends Component
     {
         $check_1 = LwClassTest::find($id);
         $check_1->checked_7 = !$check_1->checked_7;
+        $check_1->save();
+        $this->clearFields();
+        $this->dispatch('$refresh');
+    }
+    #endregion
+
+    public function isChecked8($id): void
+    {
+        $check_1 = LwClassTest::find($id);
+        $check_1->checked_8 = !$check_1->checked_8;
         $check_1->save();
         $this->clearFields();
         $this->dispatch('$refresh');
