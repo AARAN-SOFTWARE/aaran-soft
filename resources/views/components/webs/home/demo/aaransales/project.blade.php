@@ -2,18 +2,18 @@
 
     <div class="w-full">
 
-        <div class="font-Don text-6xl mt-8 text-center ">
+        <div class="font-Don text-6xl mt-8 text-center">
             We Offer The Best Quality<br>
             Service for You
         </div>
 
         <!-- Card ---------------------------------------------------------------------------------------------------------->
-        <div class="grid max-w-7xl mx-auto grid-cols-3 gap-12 mt-12 h-[40rem] ">
+        <div class="flex flex-col gap-8 w-3/4 lg:grid lg:max-w-7xl mx-auto lg:grid-cols-3 lg:gap-12 mt-12 lg:h-[40rem] ">
 
             <!-- Card 1 ----------------------------------------------------------------------------------------------------->
 
             <div
-                class="rounded-lg border border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300  ">
+                class="border border-gray-300 rounded-lg lg:border lg:border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300  ">
 
                 <div class="h-16 mx-8 my-8">
                     <x-icons.erp class="h-24 w-20 text-blue-500"/>
@@ -33,7 +33,7 @@
             <!-- Card 2 ----------------------------------------------------------------------------------------------------->
 
             <div
-                class="rounded-lg border border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
+                class="border border-gray-300 rounded-lg lg:border lg:border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
 
                 <div class="mb-5">
                     <x-icons.dashboard1 class="h-28 w-20 pl-4 text-blue-500"/>
@@ -52,7 +52,7 @@
             <!-- Card 3 ----------------------------------------------------------------------------------------------------->
 
             <div
-                class="rounded-lg border border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
+                class="border border-gray-300 rounded-lg lg:border lg:border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
 
                 <div class="mb-5">
                     <x-icons.cyber class="h-28 w-20 pl-4"/>
@@ -71,7 +71,7 @@
             <!-- Card 4 ----------------------------------------------------------------------------------------------------->
 
             <div
-                class="rounded-lg border border-gray-50  shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
+                class="border border-gray-300 rounded-lg lg:border lg:border-gray-50  shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
 
                 <div class="mb-5">
                     <x-icons.productivity class="h-28 w-20 pl-4 text-white"/>
@@ -90,7 +90,7 @@
             <!-- Card 5 ----------------------------------------------------------------------------------------------------->
 
             <div
-                class="rounded-lg border border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
+                class="border border-gray-300 rounded-lg lg:border lg:border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
 
                 <div class="mb-5">
                     <x-icons.search class="h-28 w-20 pl-4 text-white"/>
@@ -108,7 +108,7 @@
             <!-- Card 6 ----------------------------------------------------------------------------------------------------->
 
             <div
-                class="rounded-lg border border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
+                class="border border-gray-300 rounded-lg lg:border lg:border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
 
                 <div class="mb-5">
                     <x-icons.support class="h-28 w-20 pl-4 text-white"/>
@@ -127,9 +127,9 @@
 
         <!-- Pricing -------------------------------------------------------------------------------------------------------->
 
-        <div class="">
+        <div class="mx-auto">
 
-            <div class="pt-8 text-center mx-auto mt-10 mb-10">
+            <div class="pt-8 text-center mx-auto mt-10 mb-10 ">
                 <div class="w-full"></div>
 
                 <h2 class="mb-2.5 font-semibold grid-rows-1 lg:max-w-xl p-3 lg:mx-auto text-5xl">Pricing options for
@@ -145,7 +145,7 @@
             </div>
 
 
-            <div class="grid max-w-7xl mx-auto grid-cols-3 gap-12 mt-12 h-[30rem] mb-16 ">
+            <div class="flex flex-col mx-8 w-3/4 lg:grid lg:max-w-7xl lg:mx-auto lg:grid-cols-3 gap-12 mt-12 lg:h-[30rem] mb-16 ">
 
                 <!--Basic plan----------------------------------------------------------------------------------------------->
 
@@ -161,7 +161,7 @@
 
                     <div class="flex flex-col text-gray-400 w-60 ml-20 mt-20 gap-y-3 font-semibold">
 
-                        <div class="flex ">
+                        <div class="flex">
                             <div>
                                 <x-icons.icon :icon="'check'" class="h-5 w-6"/>
                             </div>

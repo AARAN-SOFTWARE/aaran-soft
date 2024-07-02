@@ -211,11 +211,7 @@
                 <x-icons.utilities :icon="'performance'"/>
                 <x-icons.utilities :icon="'right-long-arrow'"/>
                 <x-icons.utilities :icon="'photo'"/>
-                <x-icons.utilities :icon="'check'"/>
-                <x-icons.utilities :icon="'facebook-fill'"/>
-                <x-icons.utilities :icon="'twitter-fill'"/>
-
-
+                <x-icons.utilities :icon="'phone'"/>
 
                 </div>
             </div>

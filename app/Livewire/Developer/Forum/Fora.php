@@ -143,6 +143,7 @@ class Fora extends Component
             ->where('status', '!=', 100)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
+
         $this->firstFora=$data[0];
         return $data;
     }
