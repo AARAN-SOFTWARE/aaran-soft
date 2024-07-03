@@ -25,5 +25,6 @@ return [
     Aaran\Testing\Providers\TestingServiceProvider::class,
 
     Aaran\Welfare\Providers\WelfareServiceProvider::class,
+    Aaran\Web\Providers\WebServiceProvider::class,
 
 ];
