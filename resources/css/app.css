@@ -566,3 +566,24 @@
 .prose{
     width: 100% !important;
 }
+
+[x-cloak] { display: none; }
+
+.progress {
+    animation:progress;
+    animation-iteration-count:1;
+    animation-fill-mode:forwards;
+    animation-timing-function:linear;
+}
+@keyframes progress {
+    0% {
+        width: 0%;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+        width: 100%;
+    }
+}

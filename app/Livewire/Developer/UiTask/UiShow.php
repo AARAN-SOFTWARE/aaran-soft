@@ -39,17 +39,16 @@ class UiShow extends Component
     public string $changeStatus = '';
     public $image;
     public $old_image;
+    public $uiShowData;
 
     public $route;
     #endregion
-
 
     #region[Mount]
     public function mount($id): void
     {
         $this->route = url()->previous();
         $this->getData($id);
-
         $this->ui_replies = UiReply::where('ui_task_id', $id)->get();
         $this->commentsCount = UiReply::where('ui_task_id', $id)->count();
     }
@@ -89,6 +88,7 @@ class UiShow extends Component
 
     #endregion
 
+    #region[Delete]
     public function delete(): void
     {
 
@@ -100,14 +100,16 @@ class UiShow extends Component
             redirect()->to(route('ui-task.show', [$this->ui_task_id]));
         }
     }
+    #endregion
 
-
-    #region[Obj]
+    #region[Data]
     public function getData($id)
     {
         if ($id) {
 
             $obj = UiTask::find($id);
+
+            $this->uiShowData= $obj;
 
             $this->ui_task_id = $obj->id;
             $this->title = $obj->vname;
@@ -119,29 +121,25 @@ class UiShow extends Component
             $this->actives = $obj->actives ? 0 : 1;
             $this->ui_pic = $obj->ui_pic;
             $this->updated_at = $obj->updated_at;
-
-//            $this->title = $obj->vname;
             return $obj;
-
         }
         return null;
     }
-
-
     #endregion
 
+    #region[Obj]
     public function getObj($id)
     {
         if ($id) {
             $obj = UiReply::find($id);
             $this->vid = $obj->id;
             $this->ui_reply_id = $obj->id;
-            $this->ui_reply = $obj->vname ;
+            $this->ui_reply = $obj->vname;
             $this->old_image = $obj->image;
         }
         return $obj;
     }
-
+    #endregion
 
     #region[ClearFields]
     public function clearFields()
@@ -196,12 +194,9 @@ class UiShow extends Component
             }
         }
     }
-
-
-
 #endregion
 
-#region[FullView]
+    #region[FullView]
     public
         $full_image;
 
@@ -223,7 +218,7 @@ class UiShow extends Component
 
 #endregion
 
-#region[Route]
+    #region[Route]
     public
     function getRoute(): void
     {
@@ -232,7 +227,7 @@ class UiShow extends Component
 
 #endregion
 
-#region[Render]
+    #region[Render]
     public function reRender(): void
     {
         $this->render();

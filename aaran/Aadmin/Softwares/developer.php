@@ -47,6 +47,7 @@ return [
 
     'migrations'=>[
         DbMigration::Core(),
+        DbMigration::todoList(),
         DbMigration::common(),
         DbMigration::master(),
         DbMigration::entry(),
