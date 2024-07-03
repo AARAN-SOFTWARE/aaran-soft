@@ -18,6 +18,8 @@ return [
         SaleEntry::shippingAddress(),
         SaleEntry::transport(),
         SaleEntry::productDescription(),
+        SaleEntry::po_no(),
+        SaleEntry::dc_no(),
     ],
 
     'menus' => [
