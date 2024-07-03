@@ -54,7 +54,7 @@ return [
         DbMigration::mailids(),
         DbMigration::cashBook(),
         DbMigration::audit(),
-        DbMigration::developer(),
+        DbMigration::developerTesting(),
     ]
 
 ];

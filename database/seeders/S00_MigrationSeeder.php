@@ -151,21 +151,22 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_05_20_001112_create_ui_tasks_table');
             RefactorMigrationTable::clear('2024_05_20_001113_create_ui_replies_table');
 
+        }
+
+        if (!DbMigration::hasDeveloperTesting()) {
             RefactorMigrationTable::clear('2024_05_24_000601_create_headers_table');
             RefactorMigrationTable::clear('2024_05_24_000602_create_modals_table');
             RefactorMigrationTable::clear('2024_05_24_000603_create_test_cases_table');
             RefactorMigrationTable::clear('2024_06_24_000604_create_test_modules_table');
-            RefactorMigrationTable::clear('2024_06_24_000605_create_test_files_table');
-            RefactorMigrationTable::clear('2024_06_24_000606_create_model_tests_table');
+             RefactorMigrationTable::clear('2024_06_24_000606_create_model_tests_table');
             RefactorMigrationTable::clear('2024_06_24_000607_create_db_tests_table');
-            RefactorMigrationTable::clear('2024_06_24_000608_create_table_names_table');
-            RefactorMigrationTable::clear('2024_06_24_000609_create_migration_tables_table');
             RefactorMigrationTable::clear('2024_06_24_000610_create_admin_tests_table');
             RefactorMigrationTable::clear('2024_06_24_000611_create_sw_tests_table');
             RefactorMigrationTable::clear('2024_06_24_000612_create_lw_class_tests_table');
             RefactorMigrationTable::clear('2024_06_24_000613_create_lw_blade_tests_table');
             RefactorMigrationTable::clear('2024_06_24_000614_create_menu_tests_table');
             RefactorMigrationTable::clear('2024_06_24_000615_create_test_images_table');
+
         }
 
         if (!DbMigration::hasCreditBooks()) {
