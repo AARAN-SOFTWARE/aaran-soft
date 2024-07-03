@@ -15,9 +15,9 @@
         progress: 0,
         startAutoSlide() {
             this.autoSlideInterval = setInterval(() => {
-             this.progress < 100 ? this.progress += 25 : this.progress=0;
+             //this.progress < 100 ? this.progress += 1 : this.progress=0;
                 this.next();
-            }, 2500);
+            }, 3500);
         },
 
         stopAutoSlide() {
@@ -64,9 +64,9 @@
         }
     }" x-init="startAutoSlide()" @mouseover="stopAutoSlide()" @mouseout="startAutoSlide()" class="flex flex-col w-full">
 
-            <div class="bg-gray-200 rounded-full h-2 w-full mt-4">
-                <div class="bg-blue-500 text-xs leading-none py-1 text-center rounded-full h-2" :style="`width: ${progress}%`">&nbsp;</div>
-            </div>
+{{--            <div class="bg-gray-200 rounded-full h-2 w-full mt-4">--}}
+{{--                <div class="bg-blue-500 text-xs leading-none py-1 text-center rounded-full h-2" :style="`width: ${progress}%`">&nbsp;</div>--}}
+{{--            </div>--}}
 
             <div x-on:keydown.right="next" x-on:keydown.left="prev" tabindex="0" role="region"
                  aria-labelledby="carousel-label" class="flex space-x-6">
@@ -77,7 +77,7 @@
                 <!--image animation ----------------------------------------------------------------------------------->
                 <ul x-ref="slider" @scroll="updateCurrentSlide" tabindex="0" role="listbox"
                     aria-labelledby="carousel-content-label"
-                    class="mt-2 flex w-full overflow-x-hidden snap-x snap-mandatory opacity-95">
+                    class="flex w-full overflow-x-hidden snap-x snap-mandatory opacity-95">
 
 
                     <li x-bind="disableNextAndPreviousButtons"
