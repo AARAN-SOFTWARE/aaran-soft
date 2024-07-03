@@ -29,6 +29,10 @@
                 <x-menu.sub.books/>
             @endif
 
+                @if(Aaran\Aadmin\Src\MainMenu::hasWelfare())
+                    <x-menu.sub.welfare/>
+                @endif
+
             @if(Aaran\Aadmin\Src\MainMenu::hasAdmin())
                 <x-menu.sub.admin/>
             @endif
