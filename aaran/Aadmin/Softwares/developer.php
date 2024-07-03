@@ -67,6 +67,7 @@ return [
         DbMigration::developer(),
         DbMigration::welfare(),
         DbMigration::developerTesting(),
+        DbMigration::welfare(),
     ]
 
 
