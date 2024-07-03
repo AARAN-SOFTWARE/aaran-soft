@@ -346,6 +346,21 @@ class DbMigration
     }
 
     #endregion
+
+    #region[Welfare]
+    public static function hasWelfare(): bool
+    {
+        return static::enabled(static::welfare());
+    }
+
+    public static function welfare(): string
+    {
+        return 'welfare';
+    }
+
+    #endregion
+
+
 }
 
 
