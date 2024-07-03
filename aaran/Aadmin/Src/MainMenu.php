@@ -10,7 +10,7 @@ class MainMenu
 
             config('software.GARMENT_1') => in_array($feature, config('garment_1.menus', [])),
             config('software.GARMENT_2') => in_array($feature, config('garment_2.menus', [])),
-            
+
             config('software.OFFSET') => in_array($feature, config('offset.menus', [])),
             config('software.SUNDAR') => in_array($feature, config('sundar.menus', [])),
             config('software.AUDIT') => in_array($feature, config('audit.menus', [])),
@@ -184,6 +184,22 @@ class MainMenu
     {
         return 'books';
     }
+
+
+    /**
+     * Welfare
+     * @return bool
+     */
+    public static function hasWelfare(): bool
+    {
+        return static::enabled(static::welfare());
+    }
+
+    public static function welfare(): string
+    {
+        return 'books';
+    }
+
 
     /**
      * Sundar

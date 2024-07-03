@@ -42,7 +42,8 @@ return [
 
         MainMenu::common(),
         MainMenu::master(),
-        MainMenu::report()
+        MainMenu::report(),
+        MainMenu::welfare(),
     ],
 
     'migrations'=>[
@@ -63,6 +64,8 @@ return [
         DbMigration::shareTrades(),
         DbMigration::mailids(),
         DbMigration::cashBook(),
+        DbMigration::developer(),
+        DbMigration::welfare(),
         DbMigration::developerTesting(),
     ]
 
