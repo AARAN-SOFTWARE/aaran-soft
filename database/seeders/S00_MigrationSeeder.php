@@ -184,5 +184,15 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_03_01_001006_create_share_trades_table');
             RefactorMigrationTable::clear('2024_03_01_001006_create_stock_trades_table');
         }
+        if (!DbMigration::hasWelfare()) {
+            RefactorMigrationTable::clear('2024_03_01_003001_create_project_segments_table');
+            RefactorMigrationTable::clear('2024_03_01_003002_create_project_products_table');
+            RefactorMigrationTable::clear('2024_03_01_003003_create_projects_table');
+            RefactorMigrationTable::clear('2024_03_01_003005_create_project_provisionals_table');
+            RefactorMigrationTable::clear('2024_03_01_003006_create_project_finals_table');
+            RefactorMigrationTable::clear('2024_03_01_003007_create_project_shares_table');
+            RefactorMigrationTable::clear('2024_03_01_003008_create_project_trades_table');
+
+        }
     }
 }

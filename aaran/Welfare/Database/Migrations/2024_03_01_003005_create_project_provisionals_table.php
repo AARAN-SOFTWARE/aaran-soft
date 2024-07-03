@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         if (Aaran\Aadmin\Src\DbMigration::hasWelfare()) {
 
-            Schema::create('project_finals', function (Blueprint $table) {
+            Schema::create('project_provisionals', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('projects_id')->references('id')->on('projects')->cascadeOnDelete();
                 $table->foreignId('project_product_id')->references('id')->on('project_products')->cascadeOnDelete();
@@ -26,6 +26,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('project_finals');
+        Schema::dropIfExists('project_provisionals');
     }
 };
