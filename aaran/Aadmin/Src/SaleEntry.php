@@ -11,9 +11,10 @@ class SaleEntry
             config('software.GARMENT_1') => in_array($feature, config('garment_1.customise', [])),
             config('software.GARMENT_2') => in_array($feature, config('garment_2.customise', [])),
 
-            config('software.OFFSET') => in_array($feature, config('offset.customise', [])),
-            config('software.AUDIT') => in_array($feature, config('audit.customise', [])),
+            config('software.SUNDAR') => in_array($feature, config('sundar.customise', [])),
             config('software.DEVELOPER') => in_array($feature, config('developer.customise', [])),
+            config('software.AUDIT') => in_array($feature, config('audit.customise', [])),
+            config('software.OFFSET') => in_array($feature, config('offset.customise', [])),
 
         };
     }

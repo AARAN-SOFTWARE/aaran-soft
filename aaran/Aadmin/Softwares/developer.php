@@ -62,7 +62,7 @@ return [
         DbMigration::shareTrades(),
         DbMigration::mailids(),
         DbMigration::cashBook(),
-        DbMigration::developer(),
+        DbMigration::developerTesting(),
     ]
 
 

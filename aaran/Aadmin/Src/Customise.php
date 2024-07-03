@@ -8,6 +8,7 @@ class Customise
     {
 
         return match (config('aadmin.app_code')) {
+
             config('clients.VIJAY_GARMENTS') => in_array($feature, config('vijayGarments.features', [])),
             config('clients.AMAL_TEX') => in_array($feature, config('amal_tex.features', [])),
             config('clients.KATHIR_PRINTERS') => in_array($feature, config('kathir_printers.features', [])),
