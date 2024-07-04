@@ -23,10 +23,23 @@ class ProjectShare extends Model
         return $this->belongsTo(User::class);
     }
 
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
+
     public static function allocated($str)
     {
         if ($str) {
             return User::find($str)->name;
+        } else return '';
+    }
+
+    public static function projects($str)
+    {
+        if ($str) {
+            return Project::find($str)->vname;
         } else return '';
     }
 
