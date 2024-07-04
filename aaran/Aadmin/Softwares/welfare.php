@@ -23,18 +23,7 @@ return [
         DbMigration::core(),
         DbMigration::common(),
         DbMigration::master(),
-        DbMigration::order(),
-        DbMigration::style(),
-        DbMigration::todoList(),
-        DbMigration::blog(),
-        DbMigration::demo(),
-        DbMigration::shareTrades(),
-        DbMigration::creditBooks(),
-        DbMigration::magalir(),
-        DbMigration::mailids(),
-        DbMigration::cashBook(),
-        DbMigration::audit(),
-        DbMigration::developer(),
+        DbMigration::welfare(),
     ]
 
 ];

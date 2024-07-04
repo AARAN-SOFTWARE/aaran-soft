@@ -198,7 +198,7 @@ class MainMenu
 
     public static function welfare(): string
     {
-        return 'books';
+        return 'welfare';
     }
 
 
@@ -213,7 +213,7 @@ class MainMenu
 
     public static function admin(): string
     {
-        return 'sundar';
+        return 'admin';
     }
 
 
