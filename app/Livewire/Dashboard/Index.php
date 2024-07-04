@@ -19,9 +19,29 @@ class  Index extends Component
 
     public function mount()
     {
-        if(DbMigration::hasEntry()){
-        $this->transaction = $this->getTransaction();
+        if (DbMigration::hasEntry()) {
+            $this->transaction = $this->getTransaction();
         }
+
+        if (DbMigration::hasWelfare()) {
+            $this->transaction = $this->getWelfareUserTransaction();
+        }
+
+    }
+
+    public function getWelfareUserTransaction()
+    {
+        $no_of_shares = 0;
+        $total_investment = 0;
+        $total_dividend = 0;
+        $total_percent = 0;
+
+        return Collection::make([
+            'no_of_shares' => ConvertTo::rupeesFormat($no_of_shares),
+            'total_investment' => ConvertTo::rupeesFormat($total_investment),
+            'total_dividend' => ConvertTo::rupeesFormat($total_dividend),
+            'total_percent' => ConvertTo::rupeesFormat($total_percent),
+        ]);
     }
 
 
