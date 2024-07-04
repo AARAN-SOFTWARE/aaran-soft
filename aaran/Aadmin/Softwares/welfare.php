@@ -16,9 +16,7 @@ return [
     ],
 
     'menus' => [
-        MainMenu::audit(),
-        MainMenu::books(),
-        MainMenu::developer(),
+        MainMenu::welfare(),
     ],
 
     'migrations' => [
