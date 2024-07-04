@@ -23,6 +23,29 @@ class ProjectEstimation extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
+    public static function project_name($str)
+    {
+        if ($str) {
+            return Project::find($str)->vname;
+        } else return '';
+    }
+
+    public function project_product(): BelongsTo
+    {
+        return $this->belongsTo(ProjectProduct::class);
+    }
+
+    public static function product_name($str)
+    {
+        if ($str) {
+            return ProjectProduct::find($str)->vname;
+        } else return '';
+    }
+
     public static function allocated($str)
     {
         if ($str) {

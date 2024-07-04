@@ -60,6 +60,7 @@ class Customise
 
             config('software.GARMENT_1') => in_array($feature, config('garment_1.features', [])),
             config('software.GARMENT_2') => in_array($feature, config('garment_2.features', [])),
+            config('software.WELFARE') => in_array($feature, config('welfare.features', [])),
 
         };
     }

@@ -15,6 +15,7 @@ class MainMenu
             config('software.SUNDAR') => in_array($feature, config('sundar.menus', [])),
             config('software.AUDIT') => in_array($feature, config('audit.menus', [])),
             config('software.DEVELOPER') => in_array($feature, config('developer.menus', [])),
+            config('software.WELFARE') => in_array($feature, config('welfare.menus', [])),
         };
     }
 

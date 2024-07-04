@@ -16,6 +16,8 @@ class SaleEntry
             config('software.AUDIT') => in_array($feature, config('audit.customise', [])),
             config('software.OFFSET') => in_array($feature, config('offset.customise', [])),
 
+            config('software.WELFARE') => in_array($feature, config('welfare.menus', [])),
+
         };
     }
 

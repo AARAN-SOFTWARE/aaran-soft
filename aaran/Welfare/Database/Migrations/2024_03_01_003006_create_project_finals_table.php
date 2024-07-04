@@ -15,8 +15,7 @@ return new class extends Migration {
                 $table->foreignId('project_product_id')->references('id')->on('project_products')->cascadeOnDelete();
                 $table->decimal('qty', 15, 3);
                 $table->decimal('rate', 15, 2);
-                $table->decimal('price', 15, 2);
-                $table->decimal('total', 15, 2);
+                $table->decimal('amount', 15, 2);
                 $table->string('active_id', 3)->nullable();
                 $table->foreignId('entry_id')->nullable();
                 $table->timestamps();
