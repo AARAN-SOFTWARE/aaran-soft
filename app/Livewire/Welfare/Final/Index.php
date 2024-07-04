@@ -20,6 +20,7 @@ class Index extends Component
     public $qty=0;
     public $rate=0;
     public $amount=0;
+    public $byProject;
     #endregion
 
     #region[mount]
@@ -107,6 +108,9 @@ class Index extends Component
         $this->sortField='id';
         return ProjectFinal::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
+            ->when($this->byProject,function ($query,$byProject){
+                return $query->where('projects_id','=',$byProject);
+            })
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }

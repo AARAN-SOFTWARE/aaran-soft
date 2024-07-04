@@ -1,5 +1,6 @@
 @props([
-'showFilters'=>false
+'showFilters'=>false,
+'slot',
 ])
 
 <div class="md:flex md:justify-between md:items-center md:pb-5">
@@ -8,6 +9,9 @@
         <x-input.search-box/>
         <x-input.toggle-filter :show-filters="$showFilters"/>
 
+    </div>
+    <div class="flex justify-between md:mb-5 md:space-x-2 md:flex md:items-center">
+        {{$slot}}
     </div>
 
     <div class="flex justify-between md:mb-5 md:space-x-2 md:flex md:items-center">
