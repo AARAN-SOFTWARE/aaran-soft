@@ -11,7 +11,7 @@ return new class extends Migration {
 
             Schema::create('project_estimations', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('projects_id')->references('id')->on('projects')->cascadeOnDelete();
+                $table->foreignId('project_id')->references('id')->on('projects')->cascadeOnDelete();
                 $table->foreignId('project_product_id')->references('id')->on('project_products')->cascadeOnDelete();
                 $table->decimal('qty', 15, 3);
                 $table->decimal('rate', 15, 2);

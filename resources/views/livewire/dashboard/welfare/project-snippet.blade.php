@@ -16,32 +16,43 @@
 
                     @forelse ($list as $index =>  $row)
 
-                    <div class="h-35 border border-green-300 rounded-2xl p-5 hover:bg-amber-50 cursor-pointer">
+                        <div class="h-35 border border-green-300 rounded-2xl p-5 hover:bg-amber-50 cursor-pointer">
 
-                        <div class="w-full flex justify-between">
-                            <span class="text-2xl text-green-500 font-semibold tracking-widest">{{$row->project->vname}}</span>
-                            <span class="font-semibold text-gray-500 tracking-wide">{{$row->project->description}}</span>
+                            <div class="w-full flex justify-between">
+                                <span
+                                    class="text-xl text-slate-500 font-semibold tracking-widest">{{$row->project_segment_name}}</span>
+                            </div>
+
+                            <div class="w-full flex justify-between">
+                                <span
+                                    class="text-2xl text-green-500 font-semibold tracking-widest">{{$row->project_name}}</span>
+                                <span
+                                    class="font-semibold text-gray-500 tracking-wide">{{$row->project_description}}</span>
+                            </div>
+
+                            <div class="w-full flex justify-between">
+                                <span
+                                    class="text-md font-semibold tracking-widest">No of Shares : {{$row->total_shares}}</span>
+                                <span class="font-semibold tracking-wide">Face Value : {{$row->face_value}}</span>
+                            </div>
+
+                            <div>
+                                <span
+                                    class="text-md font-semibold tracking-widest">Sold : {{$row->sold_shares}}/{{$row->total_shares}}</span>
+                                <span
+                                    class="text-md font-semibold tracking-widest">Current : {{$row->current_value}}</span>
+                            </div>
+
+                            <div class="w-full flex justify-between">
+                                <span class="text-md font-semibold tracking-widest">Period : {{$row->period}}</span>
+                            </div>
+
+                            <div class="w-full flex justify-between">
+                                <span class="text-lg font-semibold tracking-widest">Returns : {{$row->returns_percent}} %</span>
+                                <span class="font-semibold tracking-wide">Per Share : {{$row->dividend}}</span>
+                            </div>
+
                         </div>
-
-                        <div class="w-full flex justify-between">
-                            <span class="text-md font-semibold tracking-widest">No of Shares : 360</span>
-                            <span class="font-semibold tracking-wide">Face Value : 10000</span>
-                        </div>
-
-                        <div>
-                            <span class="text-md font-semibold tracking-widest">Sold : 100/200</span>
-                        </div>
-
-                        <div class="w-full flex justify-between">
-                            <span class="text-md font-semibold tracking-widest">Period : 6 months</span>
-                        </div>
-
-                        <div class="w-full flex justify-between">
-                            <span class="text-lg font-semibold tracking-widest">Returns : 3%</span>
-                            <span class="font-semibold tracking-wide">Per Share : 2250</span>
-                        </div>
-
-                    </div>
 
                     @empty
                         <div>
