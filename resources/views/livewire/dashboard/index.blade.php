@@ -10,10 +10,14 @@
             @endif
         @endif
 
-        @if(session()->get('role_id')==1|| session()->get('role_id')==2|| session()->get('role_id')==3 )
-            @if(Aaran\Aadmin\Src\DbMigration::hasWelfare())
-                <x-dashboard.welfare.cards :transaction="$transaction"/>
-            @endif
+        @if(Aaran\Aadmin\Src\DbMigration::hasWelfare())
+            <div class="grid grid-cols-3  gap-4">
+                <div class="grid col-span-2">
+{{--                    <x-dashboard.welfare.project :transaction="$transaction"/>--}}
+                    @livewire('dashboard.welfare.project-snippet')
+                </div>
+                <x-dashboard.welfare.transaction :transaction="$transaction"/>
+            </div>
         @endif
 
         @if(session()->get('role_id')==1|| session()->get('role_id')==2|| session()->get('role_id')==3 || session()->get('role_id')==4)

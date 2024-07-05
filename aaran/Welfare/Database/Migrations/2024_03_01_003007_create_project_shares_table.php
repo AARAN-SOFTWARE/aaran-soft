@@ -11,13 +11,14 @@ return new class extends Migration {
 
             Schema::create('project_shares', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('projects_id')->references('id')->on('projects')->cascadeOnDelete();
+                $table->foreignId('project_id')->references('id')->on('projects')->cascadeOnDelete();
                 $table->decimal('estimated', 15, 3);
                 $table->decimal('face_value', 15, 3);
                 $table->integer('volume');
                 $table->decimal('current_value', 15, 3);
                 $table->decimal('margin', 15, 3);
                 $table->decimal('dividend', 15, 2);
+                $table->string('percent')->nullable();
                 $table->string('active_id', 3)->nullable();
                 $table->foreignId('entry_id')->nullable();
                 $table->timestamps();
