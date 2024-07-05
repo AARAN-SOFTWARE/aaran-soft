@@ -4,7 +4,14 @@
     <x-forms.m-panel>
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
-        <x-forms.top-controls :show-filters="$showFilters"/>
+        <x-forms.top-controls :show-filters="$showFilters">
+            <x-input.model-select wire:model.live="byProject" wire:keydown.escape="$set('byProject', '')" :label="'Project'">
+                <option class="text-gray-400" value=""> choose ..</option>
+                @foreach($projects as $project)
+                    <option value="{{$project->id}}">{{$project->vname}}</option>
+                @endforeach
+            </x-input.model-select>
+        </x-forms.top-controls>
 
         <!-- Header --------------------------------------------------------------------------------------------------->
         <x-forms.table :list="$list">
