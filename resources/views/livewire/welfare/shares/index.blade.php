@@ -75,7 +75,7 @@
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
 
-            <x-input.model-select wire:model="projects_id" :label="'Project'">
+            <x-input.model-select wire:model="project_id" :label="'Project'">
                 <option class="text-gray-400"> choose ..</option>
                 @foreach($projects as $project)
                     <option value="{{$project->id}}">{{$project->vname}}</option>
