@@ -51,7 +51,7 @@ return [
         DbMigration::todoList(),
         DbMigration::common(),
         DbMigration::master(),
-        DbMigration::entry(),
+//        DbMigration::entry(),
         DbMigration::order(),
         DbMigration::style(),
         DbMigration::developer(),
