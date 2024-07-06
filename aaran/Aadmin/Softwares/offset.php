@@ -27,6 +27,7 @@ return [
         MainMenu::common(),
         MainMenu::master(),
         MainMenu::report(),
+        MainMenu::webs(),
     ],
 
     'migrations' => [
@@ -39,5 +40,6 @@ return [
         DbMigration::todoList(),
         DbMigration::blog(),
         DbMigration::demo(),
+        DbMigration::webs(),
     ]
 ];

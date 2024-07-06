@@ -360,6 +360,19 @@ class DbMigration
 
     #endregion
 
+    #region[Welfare]
+    public static function hasWebs(): bool
+    {
+        return static::enabled(static::webs());
+    }
+
+    public static function webs(): string
+    {
+        return 'webs';
+    }
+
+    #endregion
+
 
 }
 
