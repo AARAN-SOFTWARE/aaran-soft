@@ -114,6 +114,11 @@ class CbookItem extends Component
     #region[GenerateDues]
     public function generateDues($id): void
     {
+
+        DB::table('credit_interests')
+            ->where('credit_book_item_id', $id)
+            ->delete();
+
         $cbookItem = $this->getObj($id);
 
         $time = strtotime($cbookItem->emi_date);
@@ -123,7 +128,7 @@ class CbookItem extends Component
             CreditInterest::create([
                 'credit_book_item_id' => $cbookItem->id,
                 'vdate' => $xDate,
-                'interest' => $cbookItem->interest,
+                'interest' => $cbookItem->emi,
                 'received' => 0,
                 'received_date' => '',
                 'remarks' => '',
