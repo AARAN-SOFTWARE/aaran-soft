@@ -22,7 +22,8 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 Don:[ "Donegal One", "serif"],
                 gab:[ "Gabriela", "serif"],
-                Ram:["Ramaraja", "serif"]
+                Ram:["Ramaraja", "serif"],
+                roboto:["Roboto Condensed", "sans-serif"]
             },
         },
     },

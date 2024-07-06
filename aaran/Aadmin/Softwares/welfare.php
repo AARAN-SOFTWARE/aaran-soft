@@ -8,7 +8,7 @@ use Aaran\Aadmin\Src\SaleEntry;
 return [
 
     'features' => [
-//        Customise::todoList(),
+        Customise::todoList(),
     ],
 
     'customise' => [
@@ -17,6 +17,7 @@ return [
 
     'menus' => [
         MainMenu::welfare(),
+        DbMigration::developer()
     ],
 
     'migrations' => [
@@ -24,6 +25,8 @@ return [
         DbMigration::common(),
         DbMigration::master(),
         DbMigration::welfare(),
+//        DbMigration::todoList(),
+        DbMigration::developer()
     ]
 
 ];
