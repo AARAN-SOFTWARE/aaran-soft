@@ -34,6 +34,7 @@ class Show extends Component
     public $verified = '';
     public mixed $clients;
     public $id;
+    public $showEditModal2=false;
     #endregion
 
     #region[Client Bank]
@@ -166,6 +167,14 @@ class Show extends Component
         $this->email = '';
         $this->dvcatm = '';
         $this->verified = '';
+        $this->showEditModal2=false;
+    }
+
+    public function editLogin($id)
+    {
+        $this->clearFields();
+        $this->getObj($id);
+        $this->showEditModal2 = true;
     }
     #endregion
 
