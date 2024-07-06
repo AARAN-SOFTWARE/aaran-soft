@@ -81,10 +81,21 @@
                     <div class="lg:flex">
                         <div>
                             <x-input.model-text wire:model="vname" :label="'Title'"/>
+                            @error('vname')
+                            <div class="text-red-500 w-2/3 mx-auto mb-3 text-center">
+                                max words 50 !
+                            </div>
+                            @enderror
 
                             <div class="py-4 w-2/3">
                                 <x-input.rich-text wire:model="description" :placeholder="'Description'"/>
                             </div>
+
+                            @error('description')
+                            <div class="text-red-500 w-2/3 mx-auto mb-3 text-center">
+                                max words 300 !
+                            </div>
+                            @enderror
 
                             <x-input.model-text wire:model="link" :label="'Button'"/>
 

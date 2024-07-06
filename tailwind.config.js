@@ -23,7 +23,9 @@ export default {
                 Don:[ "Donegal One", "serif"],
                 gab:[ "Gabriela", "serif"],
                 Ram:["Ramaraja", "serif"],
-                roboto:["Roboto Condensed", "sans-serif"]
+                roboto:["Roboto Condensed", "sans-serif"],
+                nunito:["Nunito", "sans-serif"],
+                lexanddeca:["LexendDeca", "sans-serif"],
             },
         },
     },

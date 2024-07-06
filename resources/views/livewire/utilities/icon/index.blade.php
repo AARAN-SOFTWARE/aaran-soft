@@ -212,6 +212,8 @@
                 <x-icons.utilities :icon="'right-long-arrow'"/>
                 <x-icons.utilities :icon="'photo'"/>
                 <x-icons.utilities :icon="'phone'"/>
+                <x-icons.utilities :icon="'cmp1'"/>
+                <x-icons.utilities :icon="'cmp2'"/>
 
                 </div>
             </div>

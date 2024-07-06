@@ -29,7 +29,7 @@
 
     <!-- Tab 1 Content ------------------------------------------------------------------------------------------------>
     <div id="tab1"
-         class="p-4 tab-content bg-white shadow-md rounded-lg grid md:grid-rows-2 md:grid-cols-3 mx-auto justify-items-center">
+         class="w-full p-4 tab-content shadow-md rounded-lg mx-auto bg-green-600">
 
         <a href="https://offset.aaranerp.com"
            class="grid-cols-2 border border-b-gray-500 bg-gray-200 rounded-xl mt-10 m-4">
