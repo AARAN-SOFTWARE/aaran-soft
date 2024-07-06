@@ -13,6 +13,7 @@
             <x-slot name="table_header">
                 <x-table.header-serial/>
                 <x-table.header-text center>Creditor</x-table.header-text>
+                <x-table.header-text center>Loan</x-table.header-text>
                 <x-table.header-text center>Closing</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
@@ -36,6 +37,12 @@
                         <x-table.cell-text>
                             <a href="{{route('credits.items',[$row->id])}}">
                                 {{ $row->vname }}
+                            </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <a href="{{route('credits.items',[$row->id])}}">
+                                {{ $row->loan + 0 }}
                             </a>
                         </x-table.cell-text>
 
@@ -79,6 +86,7 @@
 
         <x-forms.create :id="$vid">
             <x-input.model-text wire:model="vname" :label="'Creditor'"/>
+            <x-input.model-text wire:model="loan" :label="'Loan'"/>
             <x-input.model-text wire:model="closing" :label="'Closing'"/>
         </x-forms.create>
 

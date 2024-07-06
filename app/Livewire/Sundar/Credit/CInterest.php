@@ -90,7 +90,7 @@ class CInterest extends Component
             ->sum('received');
 
         $obj->pending_due = $obj->terms - $count;
-        $obj->pending = ($obj->interest * $obj->terms) - $XDebit;
+        $obj->pending = ($obj->emi * $obj->terms) - $XDebit;
         $obj->save();
 
         $creditBook = CreditBook::find($this->creditBookItem->credit_book_id);

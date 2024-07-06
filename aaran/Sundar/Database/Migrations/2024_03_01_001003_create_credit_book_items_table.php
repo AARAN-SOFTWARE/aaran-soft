@@ -15,10 +15,12 @@ return new class extends Migration {
                 $table->decimal('loan', 11, 2);
                 $table->decimal('rate', 11, 2);
                 $table->decimal('processing', 11, 2);
+                $table->decimal('insurance', 11, 2);
                 $table->decimal('commission', 11, 2);
                 $table->decimal('credited', 11, 2);
                 $table->date('vdate');
                 $table->decimal('emi', 11, 2);
+                $table->date('emi_date');
                 $table->integer('terms')->nullable();
                 $table->string('pending_due')->nullable();
                 $table->decimal('pending', 11, 2);

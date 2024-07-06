@@ -13,6 +13,7 @@ class Cbook extends Component
 {
     use CommonTrait;
 
+    public string $loan = '';
     public string $closing = '';
     public $credit_member;
 
@@ -31,6 +32,7 @@ class Cbook extends Component
                 CreditBook::create([
                     'credit_member_id' => $this->credit_member->id,
                     'vname' => Str::upper($this->vname),
+                    'loan' => $this->loan,
                     'closing' => $this->closing,
                     'active_id' => $this->active_id,
                 ]);
@@ -40,6 +42,7 @@ class Cbook extends Component
                 $obj = CreditBook::find($this->vid);
                 $obj->credit_member_id = $this->credit_member->id;
                 $obj->vname = Str::upper($this->vname);
+                $obj->loan = $this->loan;
                 $obj->closing = $this->closing;
                 $obj->active_id = $this->active_id;
                 $obj->save();
@@ -54,6 +57,7 @@ class Cbook extends Component
     public function clearFields(): void
     {
         $this->vname = '';
+        $this->loan = '';
         $this->closing = '';
         $this->active_id = true;
 
@@ -67,6 +71,7 @@ class Cbook extends Component
             $obj = CreditBook::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
+            $this->loan = $obj->loan;
             $this->closing = $obj->closing;
             $this->active_id = $obj->active_id;
             return $obj;
