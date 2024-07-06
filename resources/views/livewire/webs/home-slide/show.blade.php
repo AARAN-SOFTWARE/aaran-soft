@@ -17,7 +17,7 @@
             this.autoSlideInterval = setInterval(() => {
              this.progress < 100 ? this.progress += 100 : this.progress=0;
                 this.next();
-            }, 3500);
+            }, 4500);
         },
 
         stopAutoSlide() {
@@ -64,9 +64,9 @@
         }
     }" x-init="startAutoSlide()" @mouseover="stopAutoSlide()" @mouseout="startAutoSlide()" class="flex flex-col w-full">
 
-                        <div class="bg-gray-200 rounded-full h-2 w-full mt-4">
-                            <div class="bg-blue-500 text-xs leading-none py-1 text-center rounded-full h-2" :style="`width: ${progress}%`">&nbsp;</div>
-                        </div>
+{{--                        <div class="bg-gray-200 rounded-full h-2 w-full mt-4">--}}
+{{--                            <div class="bg-blue-500 text-xs leading-none py-1 text-center rounded-full h-2" :style="`width: ${progress}%`">&nbsp;</div>--}}
+{{--                        </div>--}}
 
             <div x-on:keydown.right="next" x-on:keydown.left="prev" tabindex="0" role="region"
                  aria-labelledby="carousel-label" class="flex space-x-6">
@@ -85,8 +85,9 @@
                         <li x-bind="disableNextAndPreviousButtons"
                             class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
                             role="option">
-                            <div style="background-image: url({{'images/'.$row->bg_image}});"
-                                 class="w-full h-[40rem] bg-no-repeat bg-cover flex ">
+
+                            <div style="background-image: url('../../../../storage/images/{{$row->bg_image}}');"
+                            class="w-full h-[40rem] bg-no-repeat bg-cover flex ">
                                 <div class="flex flex-row h-[40rem]">
                                     <div class="w-full flex justify-evenly">
                                         <div
@@ -103,7 +104,7 @@
                                     <div class="flex justify-evenly w-3/4">
                                         <img class="w-[30rem] h-[30rem] rounded-full my-auto ml-0 mr-auto"
                                              src="{{ \Illuminate\Support\Facades\Storage::url('images/'.$row->cont_image)}}"
-                                             alt="placeholder image"></div>
+                                             alt=""></div>
                                 </div>
                             </div>
                         </li>
