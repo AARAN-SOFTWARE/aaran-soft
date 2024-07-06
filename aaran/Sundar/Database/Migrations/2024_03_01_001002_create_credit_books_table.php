@@ -13,7 +13,8 @@ return new class extends Migration {
                 $table->id();
                 $table->foreignId('credit_member_id')->references('id')->on('credit_members');
                 $table->string('vname')->unique();
-                $table->decimal('closing', 11, 2);
+                $table->decimal('loan', 15, 2);
+                $table->decimal('closing', 15, 2);
                 $table->string('active_id', 3)->nullable();
                 $table->timestamps();
             });

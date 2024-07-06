@@ -15,8 +15,8 @@
                 <x-table.header-text center>Date</x-table.header-text>
                 <x-table.header-text center>Credit</x-table.header-text>
                 <x-table.header-text center>Rate</x-table.header-text>
-                <x-table.header-text center>Interest</x-table.header-text>
-                <x-table.header-text center>Due Date</x-table.header-text>
+                <x-table.header-text center>EMI</x-table.header-text>
+                <x-table.header-text center>EMI Date</x-table.header-text>
                 <x-table.header-text center>Processing</x-table.header-text>
                 <x-table.header-text center>Terms</x-table.header-text>
                 <x-table.header-text center>Pending</x-table.header-text>
@@ -64,7 +64,7 @@
 
                         <x-table.cell-text right>
                             <a href="{{route('credits.interests',[$row->id])}}">
-                                {{ $row->due_date}}
+                                {{date('d-m-Y', strtotime($row->due_date))}}
                             </a>
                         </x-table.cell-text>
 

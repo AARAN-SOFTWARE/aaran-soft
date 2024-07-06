@@ -12,12 +12,14 @@ return new class extends Migration {
             Schema::create('credit_book_items', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('credit_book_id')->references('id')->on('credit_books');
-                $table->date('vdate');
-                $table->decimal('credit', 11, 2);
+                $table->decimal('loan', 11, 2);
                 $table->decimal('rate', 11, 2);
-                $table->decimal('interest', 11, 2);
                 $table->decimal('processing', 11, 2);
-                $table->string('terms')->nullable();
+                $table->decimal('commission', 11, 2);
+                $table->decimal('credited', 11, 2);
+                $table->date('vdate');
+                $table->decimal('emi', 11, 2);
+                $table->integer('terms')->nullable();
                 $table->string('pending_due')->nullable();
                 $table->decimal('pending', 11, 2);
                 $table->string('remarks')->nullable();
