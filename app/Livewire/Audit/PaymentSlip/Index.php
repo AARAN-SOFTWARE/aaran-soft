@@ -4,6 +4,7 @@ namespace App\Livewire\Audit\PaymentSlip;
 
 use Aaran\Audit\Models\Client;
 use Aaran\Audit\Models\PaymentSlip;
+use App\Enums\Active;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -20,6 +21,7 @@ class Index extends Component
 
     #[Url(history: true)]
     public mixed $group = '';
+    public mixed $groupFilter = '';
     public mixed $allgroup = '';
     public mixed $sender_id = '';
     public mixed $receiver_id = '';
@@ -81,8 +83,8 @@ class Index extends Component
                 $obj->save();
                 $message = "Updated";
             }
-           $this->clearFields();
-            $this->js('window.location.reload()');
+            $this->clearFields();
+//            $this->js('window.location.reload()');
             return $message;
         }
         return '';
@@ -90,8 +92,8 @@ class Index extends Component
 
     public function clearFields()
     {
-        $this->slip_no = 0;
-            $this->group = '';
+        $this->group = Carbon::now()->format('Y-m-d');
+        $this->slip_no = $this->serial();
         $this->sender_id = '';
         $this->receiver_id = '';
         $this->due = '';
@@ -100,6 +102,12 @@ class Index extends Component
         $this->paidOn = '';
         $this->active_id = true;
         $this->status = '';
+    }
+
+    public function serial()
+    {
+        $this->slip_no=PaymentSlip::where('group',$this->group)->max('slip_no') + 1;
+        return $this->slip_no;
     }
 
     public function getObj($id)
@@ -124,59 +132,53 @@ class Index extends Component
 
     public $client_id;
     public $receive_id;
-    public $activeX = '';
+    public $activeX = '1';
 
     public function getList()
     {
         $this->sortField = 'slip_no';
 
-        if ($this->cdate) {
-            return PaymentSlip::search($this->searches)
-                ->whereDate('paidOn', '=', $this->cdate)
-                ->where('active_id', '=', $this->activeRecord)
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                ->paginate($this->perPage);
-        } elseif ($this->group) {
-            return PaymentSlip::search($this->searches)
-                ->where('group', '=', $this->group)
-                ->where('active_id', '=', $this->activeRecord)
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                ->paginate($this->perPage);
-        } elseif ($this->allgroup) {
-            return PaymentSlip::search($this->searches)
-                ->where('group', '=', $this->allgroup)
-                ->orderBy('group')
-                ->orderBy('slip_no')
-                ->paginate($this->perPage);
-        } elseif ($this->client_id) {
-
-            if ($this->receive_id) {
-                return PaymentSlip::search($this->searches)
-                    ->where('sender_id', '=', $this->client_id)
-                    ->where('active_id', '=', $this->activeRecord)
-                    ->where('receiver_id', '=', $this->receive_id)
-                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                    ->paginate($this->perPage);
-            } else {
-                return PaymentSlip::search($this->searches)
-                    ->where('sender_id', '=', $this->client_id)
-                    ->where('active_id', '=', $this->activeRecord)
-                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                    ->paginate($this->perPage);
-            }
-
-        } elseif ($this->activeX == '0') {
-            return PaymentSlip::search($this->searches)
-                ->where('active_id', '=', $this->activeX)
-                ->orderBy('group')
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                ->paginate($this->perPage);
-        }
         return PaymentSlip::search($this->searches)
-            ->where('active_id', '=', $this->activeRecord)
-            ->orderBy('group', $this->sortAsc ? 'asc' : 'desc')
+//            ->where('active_id', '=', $this->activeRecord)
+            ->when($this->groupFilter, function ($query, $groupFilter) {
+                return $query->where('group', '=', $groupFilter);
+            })
+            ->when($this->client_id, function ($query, $client_id) {
+                return $query->where('sender_id', '=', $client_id);
+            })
+            ->when($this->receive_id, function ($query, $receiver_id) {
+                return $query->where('receiver_id', '=', $receiver_id);
+            })
+            ->when($this->cdate, function ($query, $cdate) {
+                return $query->where('paidOn', '=', $cdate);
+            })
+            ->when($this->activeX, function ($query, $activeX) {
+
+                if ($activeX == '1') {
+                    return $query->where('active_id', '=', Active::ACTIVE);
+                } else {
+                    return $query->where('active_id', '=', Active::NOTACTIVE);
+                }
+
+
+            })
+            ->when($this->allgroup, function ($query, $allgroup) {
+                return $query->whereIn('group', $allgroup);
+            })
+            ->orderBy('group')
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
+    }
+
+    public function makeInActive($id)
+    {
+        if ($id) {
+            $obj = PaymentSlip::find($id);
+            $obj->active_id = !$obj->active_id;
+            $obj->save();
+            $this->clearFields();
+            $this->reRender();
+        }
     }
 
     public function reRender(): void
@@ -186,13 +188,14 @@ class Index extends Component
 
     public function reLoad()
     {
-        $this->group = '';
+        $this->groupFilter = '';
         $this->allgroup = '';
         $this->cdate = '';
         $this->client_id = '';
         $this->receive_id = '';
         $this->activeX = '';
     }
+
     public function render()
     {
         return view('livewire.audit.payment-slip.index')->with([

@@ -205,9 +205,11 @@
 
                             <x-table.cell>
                                 <div class="flex px-3">
-                                    <p class="text-gray-400 truncate text-xl text-left">
-                                        &nbsp;
-                                    </p>
+                                    <x-button.link wire:click="edit({{ $id }})">&nbsp;
+
+                                        <x-icons.icon :icon="'pencil'"
+                                                      class="text-blue-500 h-5 hover:h-6 w-auto block"/>
+                                    </x-button.link>
                                 </div>
                             </x-table.cell>
 
@@ -287,6 +289,32 @@
                     </table>
                 </div>
             </div>
+
+            <x-forms.create-new :id="$vid">
+
+                <div class="lg:flex w-full">
+                    <div class="lg:ml-2 px-8 w-1/2">
+                        <x-input.model-text wire:model="vname" :label="'Name'"/>
+                        <x-input.model-text wire:model="acno" :label="'Ac No'"/>
+                        <x-input.model-text wire:model="ifsc" :label="'IFSC Code'"/>
+                        <x-input.model-text wire:model="Bank" :label="'Bank'"/>
+                        <x-input.model-text wire:model="branch" :label="'Branch'"/>
+                        <x-input.model-text wire:model="dvcatm" :label="'dvcatm'"/>
+                        <x-input.model-text wire:model="verified" :label="'Verified'"/>
+                    </div>
+
+
+                    <div class="lg:px-8 w-1/2">
+                        <x-input.model-text wire:model="customer_id" :label="'Cus Id'"/>
+                        <x-input.model-text wire:model="customer_id2" :label="'User Id'"/>
+                        <x-input.model-text wire:model="pks" :label="'Pks'"/>
+                        <x-input.model-text wire:model="trs" :label="'Trs'"/>
+                        <x-input.model-text wire:model="profileps" :label="'Profile'"/>
+                        <x-input.model-text wire:model="mobile" :label="'Mobile'"/>
+                        <x-input.model-text wire:model="email" :label="'Email'"/>
+                    </div>
+                </div>
+            </x-forms.create-new>
 
             <!-- Footer ----------------------------------------------------------------------------------------------->
 

@@ -26,6 +26,10 @@ class Index extends Component
     #region[Save]
     public function getSave()
     {
+        $this->validate([
+            'vname' => 'max:70',
+            'description' => 'max:300',
+        ]);
         if ($this->vname != '') {
             if ($this->vid == "") {
                 $obj = HomeSlide:: create([
