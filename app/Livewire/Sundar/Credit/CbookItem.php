@@ -4,6 +4,7 @@ namespace App\Livewire\Sundar\Credit;
 
 use Aaran\Sundar\Models\Credit\CreditBook;
 use Aaran\Sundar\Models\Credit\CreditBookItem;
+use Aaran\Sundar\Models\Credit\CreditInterest;
 use App\Livewire\Trait\CommonTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,7 @@ class CbookItem extends Component
     public mixed $credit = '';
     public mixed $rate = '';
     public mixed $interest = '';
+    public mixed $due_date = '';
     public mixed $processing = '';
     public mixed $pending = '';
     public mixed $terms = '';
@@ -43,6 +45,7 @@ class CbookItem extends Component
         $this->credit = '';
         $this->rate = '';
         $this->interest = '';
+        $this->due_date = '';
         $this->processing = '';
         $this->pending = '';
         $this->terms = '';
@@ -63,6 +66,7 @@ class CbookItem extends Component
                 'credit' => $this->credit != '' ? $this->credit : 0,
                 'rate' => $this->rate != '' ? $this->rate : 0,
                 'interest' => $this->interest != '' ? $this->interest : 0,
+                'due_date' => $this->due_date != '' ? $this->due_date : 0,
                 'processing' => $this->processing != '' ? $this->processing : 0,
                 'pending' => $this->pending != '' ? $this->pending : 0,
                 'terms' => $this->terms != '' ? $this->terms : 0,
@@ -78,6 +82,7 @@ class CbookItem extends Component
             $obj->credit = $this->credit != '' ? $this->credit : 0;
             $obj->rate = $this->rate != '' ? $this->rate : 0;
             $obj->interest = $this->interest != '' ? $this->interest : 0;
+            $obj->due_date = $this->due_date != '' ? $this->due_date : 0;
             $obj->processing = $this->processing != '' ? $this->processing : 0;
             $obj->pending = $this->pending != '' ? $this->pending : 0;
             $obj->terms = $this->terms != '' ? $this->terms : 0;
@@ -105,6 +110,31 @@ class CbookItem extends Component
     }
     #endregion
 
+    #region[GenerateDues]
+    public function generateDues($id): void
+    {
+        $cbookItem = $this->getObj($id);
+
+        $time = strtotime($cbookItem->due_date);
+        $xDate = date("Y-m-d", strtotime("+1 month", $time));
+
+        for ($i = 0; $i < $cbookItem->terms; $i++) {
+            CreditInterest::create([
+                'credit_book_item_id' => $cbookItem->id,
+                'vdate' => $xDate,
+                'interest' => $cbookItem->interest,
+                'received' => 0,
+                'received_date' => '',
+                'remarks' => '',
+            ]);
+            $time = strtotime($xDate);
+            $xDate = date("Y-m-d", strtotime("+1 month", $time));
+        }
+
+    }
+    #endregion
+
+
     #region[get Obj]
     public function getObj($id)
     {
@@ -115,6 +145,7 @@ class CbookItem extends Component
             $this->credit = $obj->credit;
             $this->rate = $obj->rate;
             $this->interest = $obj->interest;
+            $this->due_date = $obj->due_date;
             $this->processing = $obj->processing;
             $this->pending = $obj->pending;
             $this->terms = $obj->terms;

@@ -12,11 +12,10 @@ return new class extends Migration {
             Schema::create('credit_interests', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('credit_book_item_id')->references('id')->on('credit_book_items');
-                $table->string('serial')->nullable();
                 $table->date('vdate');
                 $table->decimal('interest', 11, 2);
                 $table->decimal('received', 11, 2);
-                $table->date('received_date');
+                $table->string('received_date')->nullable();
                 $table->string('remarks');
                 $table->timestamps();
             });

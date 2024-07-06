@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Sundar\Credit;
 
+use Aaran\Sundar\Models\Credit\CreditBook;
 use Aaran\Sundar\Models\Credit\CreditBookItem;
 use Aaran\Sundar\Models\Credit\CreditInterest;
+use Aaran\Sundar\Models\Credit\CreditMember;
 use App\Livewire\Trait\CommonTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +17,6 @@ class CInterest extends Component
     use CommonTrait;
 
     #region[Cashbook properties]
-    public string $serial = '';
     public string $vdate = '';
     public mixed $interest = '';
     public mixed $received = '';
@@ -35,7 +36,6 @@ class CInterest extends Component
     public function clearFields(): void
     {
         $this->vid = '';
-        $this->serial = '';
         $this->vdate = Carbon::parse(Carbon::now())->format('Y-m-d');
         $this->interest = '';
         $this->received = '';
@@ -48,11 +48,9 @@ class CInterest extends Component
     #region[Save]
     public function getSave()
     {
-
         if ($this->vid == "") {
             CreditInterest::create([
                 'credit_book_item_id' => $this->creditBookItem->id,
-                'serial' => $this->serial != '' ? $this->serial : 0,
                 'vdate' => ($this->vdate != '') ? $this->vdate : Carbon::parse(Carbon::now())->format('Y-m-d'),
                 'interest' => $this->interest != '' ? $this->interest : 0,
                 'received' => $this->received != '' ? $this->received : 0,
@@ -70,6 +68,7 @@ class CInterest extends Component
             $obj->remarks = $this->remarks;
             $obj->save();
             $message = "Updated";
+            $this->updateMaster();
         }
         $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
     }
@@ -78,14 +77,37 @@ class CInterest extends Component
     #region[Update]
     public function updateMaster()
     {
-        $XCredit = DB::table('credit_book_items')
-            ->where('credit_book_id', '=', $this->creditBook->id)
-            ->sum('credit');
-        $XDebit = DB::table('credit_book_items')
-            ->where('credit_book_id', '=', $this->creditBook->id)
-            ->sum('debit');
-        $this->creditBook->closing = $XCredit - $XDebit;
-        $this->creditBook->save();
+        $obj = CreditBookItem::find($this->creditBookItem->id);
+
+        $count = DB::table('credit_interests')
+            ->where('credit_book_item_id', '=', $this->creditBookItem->id)
+            ->where('received', '!=', 0)
+            ->count('received');
+
+        $XDebit = DB::table('credit_interests')
+            ->where('credit_book_item_id', '=', $this->creditBookItem->id)
+            ->where('received', '!=', 0)
+            ->sum('received');
+
+        $obj->pending_due = $obj->terms - $count;
+        $obj->pending = ($obj->interest * $obj->terms) - $XDebit;
+        $obj->save();
+
+        $creditBook = CreditBook::find($this->creditBookItem->credit_book_id);
+        $creditBook->closing = $obj->pending;
+        $creditBook->save();
+
+        $creditMembers = CreditMember::find($creditBook->credit_member_id);
+
+
+
+        $closing = DB::table('credit_books')
+            ->where('credit_member_id', '=', $creditMembers->id)
+            ->sum('closing');
+
+        $creditMembers->closing = $closing;
+        $creditMembers->save();
+
     }
     #endregion
 
@@ -95,7 +117,6 @@ class CInterest extends Component
         if ($id) {
             $obj = CreditInterest::find($id);
             $this->vid = $obj->id;
-            $this->serial = $obj->serial;
             $this->vdate = $obj->vdate;
             $this->interest = $obj->interest;
             $this->received = $obj->received;

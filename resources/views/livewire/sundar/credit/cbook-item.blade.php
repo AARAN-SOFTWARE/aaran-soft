@@ -16,12 +16,14 @@
                 <x-table.header-text center>Credit</x-table.header-text>
                 <x-table.header-text center>Rate</x-table.header-text>
                 <x-table.header-text center>Interest</x-table.header-text>
+                <x-table.header-text center>Due Date</x-table.header-text>
                 <x-table.header-text center>Processing</x-table.header-text>
                 <x-table.header-text center>Terms</x-table.header-text>
                 <x-table.header-text center>Pending</x-table.header-text>
                 <x-table.header-text center>Pending Dues</x-table.header-text>
                 <x-table.header-text center>Remarks</x-table.header-text>
                 <x-table.header-action/>
+                <x-table.header-text center class="w-5">#</x-table.header-text>
             </x-slot>
 
             <!-- Table Body ------------------------------------------------------------------------------------------->
@@ -62,6 +64,12 @@
 
                         <x-table.cell-text right>
                             <a href="{{route('credits.interests',[$row->id])}}">
+                                {{ $row->due_date}}
+                            </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right>
+                            <a href="{{route('credits.interests',[$row->id])}}">
                                 {{ $row->processing + 0 }}
                             </a>
                         </x-table.cell-text>
@@ -93,6 +101,12 @@
 
                         <x-table.cell-action id="{{$row->id}}"/>
 
+                        <x-table.cell-text right>
+                            <button wire:click.prevent="generateDues({{$row->id}})">
+                                <x-icons.icon icon="utilities" class="w-6 h-auto block text-purple-600"/>
+                            </button>
+                        </x-table.cell-text>
+
                     </x-table.row>
 
                 @empty
@@ -116,7 +130,8 @@
             <x-input.model-date wire:model="vdate" :label="'Date'"/>
             <x-input.model-text wire:model="credit" :label="'Credit'"/>
             <x-input.model-text wire:model="rate" :label="'Rate of Interest'"/>
-            <x-input.model-text wire:model="interest" :label="'Interest on Month'"/>
+            <x-input.model-text wire:model="interest" :label="'Interest for Month'"/>
+            <x-input.model-date wire:model="due_date" :label="'Due Date'"/>
             <x-input.model-text wire:model="processing" :label="'Processing Fee'"/>
             <x-input.model-text wire:model="terms" :label="'Terms'"/>
             <x-input.model-text wire:model="pending_due" :label="'Pending due'"/>

@@ -28,27 +28,31 @@
                     <x-table.row>
 
                         <x-table.cell-text>
-                                {{ $index + 1 }}
+                            {{ $index + 1 }}
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                                {{date('d-m-Y', strtotime($row->vdate))}}
+                            {{date('d-m-Y', strtotime($row->vdate))}}
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
-                                {{ $row->interest + 0 }}
+                            {{ $row->interest + 0 }}
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
+                            @if($row->received != 0)
                                 {{ $row->received + 0 }}
+                            @endif
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
-                            {{date('d-m-Y', strtotime($row->received_date))}}
+                            @if($row->received_date != '')
+                                {{date('d-m-Y', strtotime($row->received_date))}}
+                            @endif
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
-                                {{ $row->remarks }}
+                            {{ $row->remarks }}
                         </x-table.cell-text>
 
                         <x-table.cell center>
@@ -80,9 +84,11 @@
         <!-- Create --------------------------------------------------------------------------------------------------->
 
         <x-forms.create :id="$vid">
-            <x-input.model-text wire:model="serial" :label="'serial'"/>
-            <x-input.model-date wire:model="vdate" :label="'Date'"/>
-            <x-input.model-text wire:model="interest" :label="'Interest'"/>
+
+            @if(!$vid)
+                <x-input.model-date wire:model="vdate" :label="'Date'"/>
+                <x-input.model-text wire:model="interest" :label="'Interest'"/>
+            @endif
             <x-input.model-text wire:model="received" :label="'received'"/>
             <x-input.model-date wire:model="received_date" :label="'received_date'"/>
             <x-input.model-text wire:model="remarks" :label="'Remarks'"/>
