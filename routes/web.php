@@ -15,6 +15,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/dashboard', App\Livewire\Dashboard\Index::class)->name('dashboard');
     Route::get('/masterGst', App\Http\Controllers\Gst\masterGst::class)->name('masterGst');
     Route::get('/feed',App\Livewire\Webs\Feed\Index::class)->name('feed');
+    Route::get('/feed/show',App\Livewire\Webs\Feed\Show::class)->name('show');
 });
 
 
