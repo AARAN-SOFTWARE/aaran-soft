@@ -194,5 +194,9 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_03_01_003008_create_project_trades_table');
 
         }
+
+        if (!DbMigration::hasWebs()) {
+            RefactorMigrationTable::clear('2024_07_03_073744_create_home_slides_table');
+        }
     }
 }

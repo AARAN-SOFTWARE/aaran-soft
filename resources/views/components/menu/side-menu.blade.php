@@ -78,6 +78,10 @@
                 <x-menu.sub.developer/>
             @endif
 
+                @if(Aaran\Aadmin\Src\MainMenu::hasWebs())
+                    <x-menu.sub.webs/>
+                @endif
+
             <x-menu.sub.logout/>
         </ul>
     </div>

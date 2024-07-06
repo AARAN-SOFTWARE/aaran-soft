@@ -44,6 +44,7 @@ return [
         MainMenu::master(),
         MainMenu::report(),
         MainMenu::welfare(),
+        MainMenu::webs(),
     ],
 
     'migrations'=>[
@@ -51,8 +52,12 @@ return [
         DbMigration::todoList(),
         DbMigration::common(),
         DbMigration::master(),
-        DbMigration::entry(),
+//        DbMigration::entry(),
         DbMigration::order(),
+
+
+
+
         DbMigration::style(),
         DbMigration::developer(),
         DbMigration::taskManager(),
@@ -68,6 +73,7 @@ return [
         DbMigration::welfare(),
         DbMigration::developerTesting(),
         DbMigration::welfare(),
+        DbMigration::webs(),
     ]
 
 

@@ -198,7 +198,7 @@ class MainMenu
 
     public static function welfare(): string
     {
-        return 'welfare';
+        return 'books';
     }
 
 
@@ -213,7 +213,21 @@ class MainMenu
 
     public static function admin(): string
     {
-        return 'admin';
+        return 'sundar';
+    }
+
+    /**
+     * Webs
+     * @return bool
+     */
+    public static function hasWebs(): bool
+    {
+        return static::enabled(static::webs());
+    }
+
+    public static function webs(): string
+    {
+        return 'webs';
     }
 
 
