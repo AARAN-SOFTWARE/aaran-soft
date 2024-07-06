@@ -198,7 +198,7 @@ class MainMenu
 
     public static function welfare(): string
     {
-        return 'books';
+        return 'welfare';
     }
 
 

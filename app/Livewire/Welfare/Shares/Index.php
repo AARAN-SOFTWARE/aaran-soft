@@ -9,22 +9,24 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    #region[property]
     use CommonTrait;
 
-    public $projects;
+    #region[property]
+    public $project_id;
     public $estimated;
+    public $total_shares;
     public $face_value;
-    public $volume;
+    public $sold_shares;
     public $current_value;
-
-    public $margin;
+    public $period;
+    public $returns_percent;
     public $dividend;
-    public $projects_id;
-
     public $entry_id;
 
-    public string $sortFields = 'projects_id';
+
+    public $projects;
+
+
     #endregion
 
     #region[mount]
@@ -37,11 +39,11 @@ class Index extends Component
     #region[save]
     public function getSave(): string
     {
-        if ($this->projects_id != '') {
+        if ($this->project_id != '') {
 
             if ($this->vid == "") {
                 ProjectShare::create([
-                    'projects_id' => $this->projects_id,
+                    'project_id' => $this->project_id,
                     'estimated' => $this->estimated,
                     'face_value' => $this->face_value,
                     'volume' => $this->volume,
@@ -55,7 +57,7 @@ class Index extends Component
 
             } else {
                 $obj = ProjectShare::find($this->vid);
-                $obj->projects_id = $this->projects_id;
+                $obj->project_id = $this->project_id;
                 $obj->estimated = $this->estimated;
                 $obj->face_value = $this->face_value;
                 $obj->volume = $this->volume;
@@ -78,7 +80,7 @@ class Index extends Component
     public function clearFields()
     {
         $this->vid='';
-        $this->projects_id = '';
+        $this->project_id = '';
         $this->estimated = '';
         $this->face_value = '';
         $this->volume = '';
@@ -95,7 +97,7 @@ class Index extends Component
         if ($id) {
             $obj = ProjectShare::find($id);
             $this->vid = $obj->id;
-            $this->projects_id = $obj->projects_id;
+            $this->project_id = $obj->project_id;
             $this->estimated = $obj->estimated;
             $this->face_value = $obj->face_value;
             $this->volume = $obj->volume;
@@ -125,9 +127,11 @@ class Index extends Component
 
     public function getList()
     {
+        $this->sortField = 'project_id';
+
         return ProjectShare::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
-            ->orderBy($this->sortFields, $this->sortAsc ? 'asc' : 'desc')
+            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
     #endregion
