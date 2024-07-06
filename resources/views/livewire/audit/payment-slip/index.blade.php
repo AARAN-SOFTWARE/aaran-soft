@@ -4,14 +4,15 @@
     <x-forms.m-panel>
         <x-forms.top-control-without-search>
             <div class="mt-5 pr-3 cursor-pointer">
-                <button wire:click.prevent="reLoad" class="bg-yellow-300 rounded-full px-1 py-0.5 flex justify-center items-start" >
+                <button wire:click.prevent="reLoad"
+                        class="bg-yellow-300 rounded-full px-1 py-0.5 flex justify-center items-start">
                     <x-icons.icon :icon="'refresh'" class="block h-6 w-auto"/>
                 </button>
             </div>
 
             <div>
-                <x-input.model-select wire:model="group" wire:change="reRender" :label="'Group'">
-                    <option class="text-gray-400"> choose ..</option>
+                <x-input.model-select wire:model.live="groupFilter" wire:change="reRender" :label="'Group'">
+                    <option class="text-gray-400" value=""> choose ..</option>
                     @foreach($groups as $group)
                         <option value="{{$group->group}}">{{$group->group}}</option>
                     @endforeach
@@ -20,14 +21,14 @@
 
             <div class="py-3 px-5">
                 <label>
-                    <input wire:model="cdate" wire:change.debounce="reRender" type="date"
+                    <input wire:model.live="cdate" type="date"
                            class="purple-textbox w-[12rem]"/>
                 </label>
             </div>
 
             <div>
-                <x-input.model-select wire:model="client_id" wire:change="reRender" :label="'Sender'">
-                    <option class="text-gray-400"> choose ..</option>
+                <x-input.model-select wire:model.live="client_id" wire:change="reRender" :label="'Sender'">
+                    <option class="text-gray-400" value=""> choose ..</option>
                     @foreach($clients as $client)
                         <option value="{{$client->id}}">{{$client->vname}}</option>
                     @endforeach
@@ -35,8 +36,8 @@
             </div>
 
             <div>
-                <x-input.model-select wire:model="receive_id" wire:change="reRender" :label="'Receiver'">
-                    <option class="text-gray-400"> choose ..</option>
+                <x-input.model-select wire:model.live="receive_id" wire:change="reRender" :label="'Receiver'">
+                    <option class="text-gray-400" value=""> choose ..</option>
                     @foreach($clients as $client)
                         <option value="{{$client->id}}">{{$client->vname}}</option>
                     @endforeach
@@ -44,16 +45,16 @@
             </div>
 
             <div class="px-1">
-                <x-input.model-select wire:model="activeX" wire:change="reRender" :label="'Active'">
-                    <option class="text-gray-400"> choose ..</option>
-                    <option value="0">Not Active</option>
+                <x-input.model-select wire:model.live="activeX" :label="'Active'">
+                    <option class="text-gray-400" value=""> choose ..</option>
+                    <option value="0.0">Not Active</option>
                     <option value="1">Active</option>
                 </x-input.model-select>
             </div>
 
             <div>
-                <x-input.model-select wire:model="allgroup" wire:change="reRender" :label="'All Group'">
-                    <option class="text-gray-400"> choose ..</option>
+                <x-input.model-select wire:model.live="allgroup" wire:change="reRender" :label="'All Group'">
+                    <option class="text-gray-400" value=""> choose ..</option>
                     @foreach($allGroups as $allGroup)
                         <option value="{{$allGroup->group}}">{{$allGroup->group}}</option>
                     @endforeach
@@ -74,6 +75,7 @@
                 <x-table.ths-center wire:click.prevent="sortBy('vname')">Amount</x-table.ths-center>
                 <x-table.ths-center wire:click.prevent="sortBy('vname')">Paid</x-table.ths-center>
                 <x-table.ths-center wire:click.prevent="sortBy('vname')">Paid On</x-table.ths-center>
+                <x-table.ths-center wire:click.prevent="sortBy('vname')">Mark As Done</x-table.ths-center>
                 <x-table.ths-center wire:click.prevent="sortBy('vname')">Status</x-table.ths-center>
                 <x-table.ths-center wire:click.prevent="sortBy('vname')">Action</x-table.ths-center>
             </x-slot>
@@ -142,6 +144,14 @@
                         </x-table.cell>
 
                         <x-table.cell>
+                            <div class=" text-center">
+                                    <input type="checkbox"   @if($row->active_id ==0) checked @endif wire:click="makeInActive({{$row->id}})"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500
+                                             dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                        </x-table.cell>
+
+                        <x-table.cell>
                             <div
                                 class="text-center flex items-center w-4 h-4 mr-2 text-sm rounded-full {{$row->status === '1' ?'bg-green-500':'bg-red-500'}}">
                                 &nbsp;
@@ -176,8 +186,8 @@
 
         <x-forms.create :id="$vid">
 
+            <x-input.model-date wire:model="group" wire:change="serial" :label="'Group'"/>
             <x-input.model-text wire:model="slip_no" :label="'Serial'"/>
-            <x-input.model-text wire:model="group" :label="'Group'"/>
 
             <x-input.model-select wire:model="sender_id" :label="'Sender'">
                 <option class="text-gray-400"> choose ..</option>
