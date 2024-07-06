@@ -10,8 +10,8 @@
         </a>
 
         <button
-            class="focus:outline-none focus:bg-gray-700 hover:bg-gray-800 rounded-md text-gray-300"
-            @click="sidebarOpen = false"
+                class="focus:outline-none focus:bg-gray-700 hover:bg-gray-800 rounded-md text-gray-300"
+                @click="sidebarOpen = false"
         >
             <svg xmlns="http://www.w3.org/2000/svg"
                  class="h-8 w-8"
@@ -29,9 +29,9 @@
                 <x-menu.sub.books/>
             @endif
 
-                @if(Aaran\Aadmin\Src\MainMenu::hasWelfare())
-                    <x-menu.sub.welfare/>
-                @endif
+            @if(Aaran\Aadmin\Src\MainMenu::hasWelfare())
+                <x-menu.sub.welfare/>
+            @endif
 
             @if(Aaran\Aadmin\Src\MainMenu::hasAdmin())
                 <x-menu.sub.admin/>
@@ -78,9 +78,9 @@
                 <x-menu.sub.developer/>
             @endif
 
-                @if(Aaran\Aadmin\Src\MainMenu::hasWebs())
-                    <x-menu.sub.webs/>
-                @endif
+            @if(Aaran\Aadmin\Src\MainMenu::hasWebs())
+                <x-menu.sub.webs/>
+            @endif
 
             <x-menu.sub.logout/>
         </ul>
