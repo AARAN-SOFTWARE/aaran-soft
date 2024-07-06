@@ -13,16 +13,16 @@
             <!-- Card 1 ----------------------------------------------------------------------------------------------------->
 
             <div
-                class="border border-gray-300 rounded-lg lg:border lg:border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300  ">
+                class="rounded-md border-b-4 border-b-gray-100 bg-white hover hover:shadow-xl hover:bg-gray-50 duration-300 ">
 
-                <div class="h-16 mx-8 my-8">
-                    <x-icons.erp class="h-24 w-20 text-blue-500"/>
+                <div class="h-16 mx-3 mb-16 my-1">
+                    <x-icons.icon-fill :iconfill="'folder1'" class="h-28 w-20 pl-4" :colour="'#6420AA'"/>
                 </div>
 
                 <div class="card-body mx-5">
-                    <h5 class="card-title mb-5 font-gab text-3xl tracking-wide">Platform Integration</h5>
+                    <h5 class="card-title mb-5 font-roboto text-3xl tracking-wider">Platform Integration</h5>
 
-                    <p class="mb-1.5 font-Don text-lg tracking-wider text-gray-500 ">Your sales force can use the app on
+                    <p class="mb-1.5 text-medium font-lexanddeca tracking-widest text-gray-600 leading-relaxed hover:text-gray-900">Your sales force can use the app on
                         any
                         smartphone platform without
                         compatibility issues</p>
@@ -33,16 +33,16 @@
             <!-- Card 2 ----------------------------------------------------------------------------------------------------->
 
             <div
-                class="border border-gray-300 rounded-lg lg:border lg:border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
+                class="rounded-md border-b-4 border-b-gray-100 bg-white hover hover:shadow-xl hover:bg-gray-50 duration-300 ">
 
-                <div class="mb-5">
-                    <x-icons.dashboard1 class="h-28 w-20 pl-4 text-blue-500"/>
+                <div class="mb-3 mx-3 ">
+                    <x-icons.icon-fill :iconfill="'cmp-3'" class="h-28 w-20 pl-4" :colour="'#6420AA'"/>
                 </div>
 
                 <div class="card-body mx-5">
-                    <h5 class="card-title mb-5 font-gab text-3xl tracking-wide">Easy On Resources</h5>
+                    <h5 class="card-title mb-5 font-lexanddeca text-3xl tracking-wide">Easy On Resources</h5>
 
-                    <p class="mb-5 font-Don text-lg tracking-wider text-gray-500">Works smoothly even on older
+                    <p class="mb-5 font-nunito text-lg tracking-wider text-gray-600">Works smoothly even on older
                         generation hardware due to
                         our
                         optimization efforts</p>
@@ -52,16 +52,16 @@
             <!-- Card 3 ----------------------------------------------------------------------------------------------------->
 
             <div
-                class="border border-gray-300 rounded-lg lg:border lg:border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
+                class="rounded-md border-b-4 border-b-gray-100 bg-white hover hover:shadow-xl hover:bg-gray-50 duration-300 ">
 
-                <div class="mb-5">
-                    <x-icons.cyber class="h-28 w-20 pl-4"/>
+                <div class="mb-3 mx-3">
+                    <x-icons.icon-fill :iconfill="'fast-time'" class="h-28 w-20 pl-4" :colour="'#6420AA'"/>
                 </div>
 
                 <div class="card-body mx-5">
-                    <h5 class="card-title mb-5 font-gab text-3xl tracking-wide">Great Performance</h5>
+                    <h5 class="card-title mb-5 font-lexanddeca text-3xl tracking-wide">Great Performance</h5>
 
-                    <p class="mb-4 font-Don text-lg tracking-wider text-gray-500">Optimized code and innovative
+                    <p class="mb-4 font-nunito text-lg tracking-wider text-gray-600">Optimized code and innovative
                         technology insure no
                         delays
                         and ultra-fast responsiveness</p>
@@ -71,16 +71,16 @@
             <!-- Card 4 ----------------------------------------------------------------------------------------------------->
 
             <div
-                class="border border-gray-300 rounded-lg lg:border lg:border-gray-50  shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
+                class="rounded-md border-b-4 border-b-gray-100 bg-white hover hover:shadow-xl hover:bg-gray-50 duration-300 ">
 
-                <div class="mb-5">
-                    <x-icons.productivity class="h-28 w-20 pl-4 text-white"/>
+                <div class="mb-5 mx-3">
+                    <x-icons.icon-fill :iconfill="'eclipse'" class="h-28 w-20 pl-4" :colour="'#6420AA'"/>
                 </div>
 
                 <div class="card-body mx-5">
-                    <h5 class="card-title mb-5 font-gab text-3xl tracking-wide">Multiple Languages</h5>
+                    <h5 class="card-title mb-5 font-lexanddeca text-3xl tracking-wide">Multiple Languages</h5>
 
-                    <p class="mb-4 font-Don text-lg tracking-wider text-gray-500">Choose from one of the 40 languages
+                    <p class="mb-4 font-nunito text-lg tracking-wider text-gray-600">Choose from one of the 40 languages
                         that come
                         pre-installed
                         and start selling smarter</p>
@@ -90,16 +90,16 @@
             <!-- Card 5 ----------------------------------------------------------------------------------------------------->
 
             <div
-                class="border border-gray-300 rounded-lg lg:border lg:border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
+                class="rounded-md border-b-4 border-b-gray-100 bg-white hover hover:shadow-xl hover:bg-gray-50 duration-300 ">
 
-                <div class="mb-5">
-                    <x-icons.search class="h-28 w-20 pl-4 text-white"/>
+                <div class="mb-5 mx-3">
+                    <x-icons.icon-fill :iconfill="'msgenvelop'" class="h-28 w-20 pl-4" :colour="'#6420AA'"/>
                 </div>
 
                 <div class="card-body mx-5">
-                    <h5 class="card-title mb-5 font-gab text-3xl tracking-wide">Free Updates</h5>
+                    <h5 class="card-title mb-5 font-lexanddeca text-3xl tracking-wide">Free Updates</h5>
 
-                    <p class="mb-4 font-Don text-lg tracking-wider text-gray-500">Don't worry about future costs, pay
+                    <p class="mb-4 font-nunito text-lg tracking-wider text-gray-600">Don't worry about future costs, pay
                         once and receive all
                         future updates at no extra cost</p>
                 </div>
@@ -108,16 +108,16 @@
             <!-- Card 6 ----------------------------------------------------------------------------------------------------->
 
             <div
-                class="border border-gray-300 rounded-lg lg:border lg:border-gray-50 shadow-lg bg-white hover hover:shadow-2xl hover:bg-gray-50 duration-300">
+                class="rounded-md border-b-4 border-b-gray-100 bg-white hover hover:shadow-xl hover:bg-gray-50 duration-300 ">
 
-                <div class="mb-5">
-                    <x-icons.support class="h-28 w-20 pl-4 text-white"/>
+                <div class="mb-5 mx-3">
+                    <x-icons.icon-fill :iconfill="'headset'" class="h-28 w-20 pl-4" :colour="'#6420AA'"/>
                 </div>
 
                 <div class="card-body mx-5">
-                    <h5 class="card-title mb-5 font-gab text-3xl tracking-wide">Community Support</h5>
+                    <h5 class="card-title mb-5 font-lexanddeca text-3xl tracking-wide">Community Support</h5>
 
-                    <p class="mb-4 font-Don text-lg tracking-wider text-gray-500">Register the app and get acces to
+                    <p class="mb-4 font-nunito text-lg tracking-wider text-gray-600">Register the app and get acces to
                         knowledge and ideas
                         from
                         the Pavo online community</p>
@@ -163,7 +163,7 @@
 
                         <div class="flex">
                             <div>
-                                <x-icons.icon :icon="'check'" class="h-5 w-6"/>
+                                <x-icons.icon-fill :iconfill="'check'" class="h-6 w-6 mt-1.5" :colour="'#808080'"/>
                             </div>
 
                             <div class="pl-4">

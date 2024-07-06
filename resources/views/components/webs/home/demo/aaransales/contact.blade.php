@@ -1,18 +1,83 @@
 <div>
-    <div class="h-[40rem] w-full mx-auto">
+    <div class="h-[30rem] w-full mx-auto">
         <div class="flex flex-col">
 
             <div style="background-image: url('/../../../images/index_assets/banner2.jpg');"
-                 class="h-[40rem] w-full">
+                 class="h-[25rem] w-full">
 
-                <div class="mt-32 w-2/3 h-64 mx-auto">
-                    <h5 class="text-7xl tracking-wider text-gray-800 ">Get In Touch</h5>
-                    <h3 class="mt-8 text-8xl font-bold text-blue-950 hover:text-blue-600">Contact</h3>
-                    <p class="text-2xl my-8 tracking-wider">Making your business vision come true with our deep <br>
+                <div class="mt-10 w-2/3 h-48 mx-auto">
+                    <h3 class="mt-28 text-7xl font-bold text-blue-950 hover:text-blue-600">Contact Us</h3>
+                    <p class="text-xl my-10 tracking-wider">Making your business vision come true with our deep <br>
                         operational & implementation expertise.</p>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="grid grid-cols-3 max-w-6xl mx-auto w-full ">
+
+        <div class="flex flex-col">
+
+            <div class="text-center mx-auto">
+
+                <div class="h-20 w-20 rounded-xl border border-gray-300 shadow-xl my-3">
+                    <x-icons.icon :icon="'mail'"
+                                  class="w-14 h-14 text-purple-500 ml-0.5 mt-2.5"/>
+                </div>
+                <h5 class="text-xl font-extrabold tracking-wider">Email</h5>
+            </div>
+
+
+            <div class="">
+                <div class="text-md w-full my-3 text-center ml-5 pr-8 tracking-wider">Send us mail and an ambassador <br>
+                    will respond
+                   </div>
+            </div>
+
+        </div>
+
+        <div class="flex flex-col">
+
+            <div class="text-center mx-auto">
+
+                <div class="h-20 w-20 rounded-xl border border-gray-300 shadow-xl my-3">
+                    <x-icons.icon :icon="'location'"
+                                  class="w-14 h-14 text-purple-500 ml-5 mt-5"/>
+                </div>
+
+                <h5 class="text-xl font-extrabold tracking-wider">Address</h5>
+            </div>
+
+
+            <div class="">
+                <div class="text-md w-full my-3 text-center ml-5 pr-8 tracking-wider">321 Car World, 2nd Breaking Str,<br>
+                    Newyork, USA 10002
+                   </div>
+            </div>
+
+        </div>
+
+        <div class="flex flex-col">
+
+            <div class="text-center mx-auto">
+
+                <div class="h-20 w-20 rounded-xl border border-gray-300 shadow-xl my-3">
+                    <x-icons.icon :icon="'phone'"
+                                  class="w-14 h-14 text-purple-500 ml-0.5 mt-3"/>
+                </div>
+
+
+                <h5 class="text-xl font-extrabold tracking-wider">Phone</h5>
+            </div>
+
+
+            <div class="">
+                <div class="text-md w-full my-3 text-center ml-5 pr-8 tracking-wider">Call us today and get your<br>
+                    further informations.</div>
+            </div>
+
+        </div>
+
     </div>
 
     <div class="h-[40rem] mt-48 w-3/4 mx-auto ">
