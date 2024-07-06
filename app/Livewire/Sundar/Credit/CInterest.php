@@ -68,7 +68,6 @@ class CInterest extends Component
             $obj->received = $this->received != '' ? $this->received : 0;
             $obj->received_date = ($this->received_date != '') ? $this->received_date : Carbon::parse(Carbon::now())->format('Y-m-d');
             $obj->remarks = $this->remarks;
-            $obj->active_id = $this->active_id ?: '0';
             $obj->save();
             $message = "Updated";
         }
@@ -102,7 +101,6 @@ class CInterest extends Component
             $this->received = $obj->received;
             $this->received_date = $obj->received_date;
             $this->remarks = $obj->remarks;
-            $this->active_id = $obj->active_id;
             return $obj;
         }
         return null;

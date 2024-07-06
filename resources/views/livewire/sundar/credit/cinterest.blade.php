@@ -17,6 +17,7 @@
                 <x-table.header-text center>Received</x-table.header-text>
                 <x-table.header-text center>Date</x-table.header-text>
                 <x-table.header-text center>Remarks</x-table.header-text>
+                <x-table.header-text class="w-3" center>#</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -35,7 +36,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
-                                {{ $row->intrest + 0 }}
+                                {{ $row->interest + 0 }}
                         </x-table.cell-text>
 
                         <x-table.cell-text right>
@@ -50,6 +51,12 @@
                                 {{ $row->remarks }}
                         </x-table.cell-text>
 
+                        <x-table.cell center>
+                            <div
+                                class="w-5 h-5 rounded-full {{$row->interest === $row->received ?'bg-green-500':'bg-red-500'}}">
+                                &nbsp;
+                            </div>
+                        </x-table.cell>
 
                         <x-table.cell-action id="{{$row->id}}"/>
 
