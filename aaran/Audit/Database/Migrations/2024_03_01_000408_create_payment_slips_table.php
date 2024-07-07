@@ -16,8 +16,8 @@ return new class extends Migration {
                 $table->foreignId('sender_id')->nullable();
                 $table->foreignId('receiver_id')->nullable();
                 $table->string('due')->nullable();
-                $table->decimal('amount')->nullable();
-                $table->decimal('paid')->nullable();
+                $table->decimal('amount',15,2)->nullable();
+                $table->decimal('paid',15,2)->nullable();
                 $table->string('paidOn')->nullable();
                 $table->string('status')->nullable();
                 $table->string('active_id', 10)->nullable();

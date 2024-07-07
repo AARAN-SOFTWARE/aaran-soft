@@ -116,6 +116,7 @@ class Index extends Component
         $this->email = '';
         $this->dvcatm = '';
         $this->verified = '';
+        $this->active_id=1;
     }
     #endregion
 

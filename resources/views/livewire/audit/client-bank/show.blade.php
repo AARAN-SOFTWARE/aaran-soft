@@ -6,14 +6,16 @@
             <!-- Client Bank-details ---------------------------------------------------------------------------------->
 
             <div class="flex flex-row gap-2">
-                <div class="w-28 text-xl text-gray-500 py-2">Client Id:</div>
-                <div
-                    class="w-12 text-2xl bg-amber-200 rounded-full px-2 py-1 flex items-center justify-center">{{$bank->client_id}}</div>
+                <div class="w-full flex">
+                    <div class="w-28 text-xl text-gray-500 py-2">Client Id:</div>
+                    <div
+                        class="w-12 text-2xl bg-amber-200 rounded-full px-2 py-1 flex items-center justify-center">{{$bank->client_id}}</div>
+                </div>
                 <div class="w-full text-center text-3xl font-semibold tracking-widest">{{$bank->vname}}</div>
-                <div>
-                    <x-input.model-select  wire:model="client_id"  wire:change="switch" :label="''">
+                <div class="w-full">
+                    <x-input.model-select wire:model="client_id" wire:change="switch" :label="''">
                         @foreach($banks as $i)
-                            <option  value="{{$i->id}}">{{$i->vname}}</option>
+                            <option value="{{$i->id}}">{{$i->vname}}</option>
                         @endforeach
                     </x-input.model-select>
                 </div>
@@ -205,11 +207,9 @@
 
                             <x-table.cell>
                                 <div class="flex px-3">
-                                    <x-button.link wire:click="edit({{ $id }})">&nbsp;
-
-                                        <x-icons.icon :icon="'pencil'"
-                                                      class="text-blue-500 h-5 hover:h-6 w-auto block"/>
-                                    </x-button.link>
+                                    <p class="text-gray-400 truncate text-xl text-left">
+                                        &nbsp;
+                                    </p>
                                 </div>
                             </x-table.cell>
 
@@ -221,6 +221,7 @@
                                 </div>
                             </x-table.cell>
 
+
                             <x-table.cell>
                                 <div class="flex px-3">
                                     <p class="text-gray-600 truncate text-xl text-left">
@@ -228,7 +229,10 @@
                                     </p>
                                 </div>
                             </x-table.cell>
+
+
                         </x-table.row>
+
 
                         <x-table.row>
                             <x-table.cell class="w-36">
@@ -284,6 +288,42 @@
                                 </div>
                             </x-table.cell>
                         </x-table.row>
+                        <x-table.row>
+                            <x-table.cell class="w-36">
+                                <div class="flex px-3">
+                                    <p class="text-gray-600 truncate text-xl text-left">
+                                        Edit Bank
+                                    </p>
+                                </div>
+                            </x-table.cell>
+
+                            <x-table.cell>
+                                <div class="flex px-3">
+                                    <x-button.link wire:click="edit({{ $id }})">&nbsp;
+
+                                        <x-icons.icon :icon="'pencil'"
+                                                      class="text-blue-500 h-5 hover:h-6 w-auto block"/>
+                                    </x-button.link>
+                                </div>
+                            </x-table.cell>
+                            <x-table.cell class="w-36">
+                                <div class="flex px-3">
+                                    <p class="text-gray-600 truncate text-xl text-left">
+                                        Edit Login
+                                    </p>
+                                </div>
+                            </x-table.cell>
+
+                            <x-table.cell>
+                                <div class="flex px-3">
+                                    <x-button.link wire:click="editLogin({{ $id }})">&nbsp;
+
+                                        <x-icons.icon :icon="'pencil'"
+                                                      class="text-blue-500 h-5 hover:h-6 w-auto block"/>
+                                    </x-button.link>
+                                </div>
+                            </x-table.cell>
+                        </x-table.row>
 
                         </tbody>
                     </table>
@@ -293,7 +333,7 @@
             <x-forms.create-new :id="$vid">
 
                 <div class="lg:flex w-full">
-                    <div class="lg:ml-2 px-8 w-1/2">
+                    <div class="lg:ml-2 px-8 w-full">
                         <x-input.model-text wire:model="vname" :label="'Name'"/>
                         <x-input.model-text wire:model="acno" :label="'Ac No'"/>
                         <x-input.model-text wire:model="ifsc" :label="'IFSC Code'"/>
@@ -301,26 +341,79 @@
                         <x-input.model-text wire:model="branch" :label="'Branch'"/>
                         <x-input.model-text wire:model="dvcatm" :label="'dvcatm'"/>
                         <x-input.model-text wire:model="verified" :label="'Verified'"/>
-                    </div>
-
-
-                    <div class="lg:px-8 w-1/2">
-                        <x-input.model-text wire:model="customer_id" :label="'Cus Id'"/>
-                        <x-input.model-text wire:model="customer_id2" :label="'User Id'"/>
-                        <x-input.model-text wire:model="pks" :label="'Pks'"/>
-                        <x-input.model-text wire:model="trs" :label="'Trs'"/>
-                        <x-input.model-text wire:model="profileps" :label="'Profile'"/>
-                        <x-input.model-text wire:model="mobile" :label="'Mobile'"/>
                         <x-input.model-text wire:model="email" :label="'Email'"/>
                     </div>
+
+
+                    {{--                    <div class="lg:px-8 w-1/2">--}}
+                    {{--                        <x-input.model-text wire:model="customer_id" :label="'Cus Id'"/>--}}
+                    {{--                        <x-input.model-text wire:model="customer_id2" :label="'User Id'"/>--}}
+                    {{--                        <x-input.model-text wire:model="pks" :label="'Pks'"/>--}}
+                    {{--                        <x-input.model-text wire:model="trs" :label="'Trs'"/>--}}
+                    {{--                        <x-input.model-text wire:model="profileps" :label="'Profile'"/>--}}
+                    {{--                        <x-input.model-text wire:model="mobile" :label="'Mobile'"/>--}}
+                    {{--                    </div>--}}
                 </div>
             </x-forms.create-new>
+
+            <div>
+                <form wire:submit.prevent="save" >
+                    <div class="w-full">
+                        <x-jet.modal :maxWidth="'6xl'" wire:model.defer="showEditModal2">
+                            <div class="px-6  pt-4">
+                                <div class="text-lg">
+                                    {{$id === "" ? 'New Entry' : 'Edit Entry'}}
+                                </div>
+                                <x-forms.section-border class="py-2"/>
+                                                    <div class="lg:px-8 w-full">
+                                                        <x-input.model-text wire:model="customer_id" :label="'Cus Id'"/>
+                                                        <x-input.model-text wire:model="customer_id2" :label="'User Id'"/>
+                                                        <x-input.model-text wire:model="pks" :label="'Pks'"/>
+                                                        <x-input.model-text wire:model="trs" :label="'Trs'"/>
+                                                        <x-input.model-text wire:model="profileps" :label="'Profile'"/>
+                                                        <x-input.model-text wire:model="mobile" :label="'Mobile'"/>
+                                                    </div>
+                                <div class="mb-1">&nbsp;</div>
+                            </div>
+                            <div class="px-6 py-3 bg-gray-100 text-right">
+                                <div class="w-full flex justify-between gap-3">
+                                    <div class="py-2">
+                                        <label for="active_id" class="inline-flex relative items-center cursor-pointer">
+                                            <input type="checkbox" id="active_id" class="sr-only peer"
+                                                   wire:model="active_id">
+                                            <div
+                                                class="w-10 h-5 bg-gray-200 rounded-full peer peer-focus:ring-2
+                                        peer-focus:ring-blue-300
+                                         peer-checked:after:translate-x-full peer-checked:after:border-white
+                                         after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300
+                                         after:border after:rounded-full after:h-4 after:w-4 after:transition-all
+                                         peer-checked:bg-blue-600"></div>
+                                            <span class="ml-3 text-sm font-medium text-gray-900">Active</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <button wire:click.prevent="$set('showEditModal2', false)"
+                                                class='inline-flex items-center px-4 py-2 border border-transparent
+                               rounded-md font-semibold text-xs text-white uppercase tracking-widest
+                               focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-150
+                               focus:ring-gray-500 bg-gray-600 hover:bg-gray-500 active:bg-gray-700 border-gray-600'>
+                                            <x-icons.icon :icon="'chevrons-left'" class="h-5 w-auto block px-1.5"/>
+                                            Cancel
+                                        </button>
+                                        <x-button.save/>
+                                    </div>
+                                </div>
+                            </div>
+                        </x-jet.modal>
+                    </div>
+                </form>
+            </div>
 
             <!-- Footer ----------------------------------------------------------------------------------------------->
 
             <div class="mt-5">
                 <a href="{{route('clientBanks')}}" class="mt-5 bg-gray-400 text-white tracking-wider px-4 py-1
-                rounded-md flex items-center w-24 hover:bg-gray-500" >
+                rounded-md flex items-center w-24 hover:bg-gray-500">
                     <x-icons.icon :icon="'chevrons-left'" class="h-8 w-auto inline-block items-center"/>
                     Back
                 </a>
