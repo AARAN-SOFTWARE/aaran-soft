@@ -16,6 +16,9 @@ class MainMenu
             config('software.AUDIT') => in_array($feature, config('audit.menus', [])),
             config('software.DEVELOPER') => in_array($feature, config('developer.menus', [])),
             config('software.WELFARE') => in_array($feature, config('welfare.menus', [])),
+
+            config('software.SPOT_MY_NUMBER') => in_array($feature, config('spotmynumber.menus', [])),
+            config('software.SPORTS_CLUB') => in_array($feature, config('sportsclub.menus', [])),
         };
     }
 

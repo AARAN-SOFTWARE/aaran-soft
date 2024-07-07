@@ -19,6 +19,9 @@ class DbMigration
             config('software.SUNDAR') => in_array($feature, config('sundar.migrations', [])),
             config('software.DEVELOPER') => in_array($feature, config('developer.migrations', [])),
             config('software.WELFARE') => in_array($feature, config('welfare.migrations', [])),
+
+            config('software.SPOT_MY_NUMBER') => in_array($feature, config('spotmynumber.migrations', [])),
+            config('software.SPORTS_CLUB') => in_array($feature, config('sportsclub.migrations', [])),
         };
     }
 

@@ -9,6 +9,9 @@ class Customise
 
         return match (config('aadmin.app_code')) {
 
+            config('software.SPOT_MY_NUMBER') => in_array($feature, config('spotmynumber.features', [])),
+            config('software.SPORTS_CLUB') => in_array($feature, config('sportsclub.features', [])),
+
             config('clients.VIJAY_GARMENTS') => in_array($feature, config('vijayGarments.features', [])),
             config('clients.AMAL_TEX') => in_array($feature, config('amal_tex.features', [])),
             config('clients.KATHIR_PRINTERS') => in_array($feature, config('kathir_printers.features', [])),

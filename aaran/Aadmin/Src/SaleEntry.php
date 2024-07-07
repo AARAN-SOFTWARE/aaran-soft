@@ -16,7 +16,10 @@ class SaleEntry
             config('software.AUDIT') => in_array($feature, config('audit.customise', [])),
             config('software.OFFSET') => in_array($feature, config('offset.customise', [])),
 
-            config('software.WELFARE') => in_array($feature, config('welfare.menus', [])),
+            config('software.WELFARE') => in_array($feature, config('welfare.customise', [])),
+
+            config('software.SPOT_MY_NUMBER') => in_array($feature, config('spotmynumber.customise', [])),
+            config('software.SPORTS_CLUB') => in_array($feature, config('sportsclub.customise', [])),
 
         };
     }
