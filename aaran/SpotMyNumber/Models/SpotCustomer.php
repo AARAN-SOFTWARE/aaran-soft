@@ -1,11 +1,10 @@
 <?php
 
-namespace Aaran\SpotMyNumber\Models\Credit;
+namespace Aaran\SpotMyNumber\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CreditBook extends Model
+class SpotCustomer extends Model
 {
     protected $guarded = [];
 

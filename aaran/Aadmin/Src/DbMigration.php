@@ -373,7 +373,16 @@ class DbMigration
 
     #endregion
 
+    #region[SpotMyNumber]
+    public static function hasSpotMyNumber(): bool
+    {
+        return static::enabled(static::spotMyNumber());
+    }
 
+    public static function spotMyNumber(): string
+    {
+        return 'spotMyNumber';
+    }
+
+    #endregion
 }
-
-
