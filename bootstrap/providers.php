@@ -27,4 +27,7 @@ return [
     Aaran\Welfare\Providers\WelfareServiceProvider::class,
     Aaran\Web\Providers\WebServiceProvider::class,
 
+    Aaran\SpotMyNumber\Providers\SpotMyNumberServiceProvider::class,
+    Aaran\SportsClub\Providers\SportsClubServiceProvider::class,
+
 ];

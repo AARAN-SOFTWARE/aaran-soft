@@ -61,4 +61,6 @@ return [
     'ATO_TEXTILES' => '326',
 
     'AARAN_WELFARE' => '2000',
+    'SPOT_MY_NUMBER' => '3000',
+    'SPORTS_CLUB' => '4000',
 ];

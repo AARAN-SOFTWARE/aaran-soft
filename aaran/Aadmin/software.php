@@ -15,7 +15,7 @@ return [
 
 
     'MAGALIR_CLUB' => '401',
-    'SPORTS_CLUB' => '402',
+
     'FINANCE' => '501',
 
     'UPVC' => '602',
@@ -23,4 +23,6 @@ return [
     'DEMO' => '1001',
 
     'WELFARE' => '2000',
+    'SPOT_MY_NUMBER' => '3000',
+    'SPORTS_CLUB' => '4000',
 ];
