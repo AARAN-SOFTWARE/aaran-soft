@@ -385,4 +385,18 @@ class DbMigration
     }
 
     #endregion
+
+    #region[Sports Club]
+    public static function hasSportsClub(): bool
+    {
+        return static::enabled(static::sportsClub());
+    }
+
+    public static function sportsClub(): string
+    {
+        return 'sportsClub';
+    }
+
+    #endregion
+
 }
