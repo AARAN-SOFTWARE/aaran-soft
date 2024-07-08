@@ -6,7 +6,7 @@ return [
 
     'db_version' => '1.0.1',
 
-    'git_version' => '#463',
+    'git_version' => '#488',
 
     'current_acyear' => \App\Enums\AcYear::AY_2024_25,
 
