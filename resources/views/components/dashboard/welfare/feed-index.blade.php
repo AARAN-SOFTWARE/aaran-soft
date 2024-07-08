@@ -3,7 +3,7 @@
 ])
 <div>
     @foreach($list as $row)
-    <div class="w-96 h-auto bg-white rounded-3xl shadow shadow-gray-400 ">
+    <div class="w-96 h-auto bg-white rounded-3xl shadow shadow-gray-400 p-3 hover:ring-2 hover:ring-blue-200 cursor-pointer ">
         <div class="w-[95%] mt-3 mx-auto rounded-3xl flex justify-between">
             <!-- card profile -->
             <div class="w-28 flex items-center justify-between">

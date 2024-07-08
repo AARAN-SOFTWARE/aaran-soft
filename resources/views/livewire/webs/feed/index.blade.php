@@ -31,7 +31,7 @@
                 </div>
                 <!-- Feed -->
                 <div class="w-[98%] mx-auto text-xl mt-10 font-roboto font-semibold">Feed</div>
-                <div class="grid grid-cols-3 mt-4 justify-items-center gap-6 font-roboto">
+                <div class="grid grid-cols-3 mt-4 justify-items-center gap-6 font-roboto ">
 {{--                        <a href="/feed/show">--}}
                     <x-dashboard.welfare.feed-index :list="$list" />
 {{--                        </a>--}}

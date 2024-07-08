@@ -29,6 +29,7 @@ return [
         DbMigration::developer(),
         DbMigration::developerTesting(),
         DbMigration::blog(),
+        DbMigration::webs(),
     ]
 
 ];
