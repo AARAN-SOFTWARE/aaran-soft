@@ -137,6 +137,10 @@ class CbookItem extends Component
             $xDate = date("Y-m-d", strtotime("+1 month", $time));
         }
 
+        $cBook = CreditBook::find($cbookItem->credit_book_id);
+        $cBook->loan = $this->loan;
+        $cBook->emi = $this->emi;
+        $cBook->save();
     }
     #endregion
 
