@@ -65,7 +65,7 @@
                 @endforelse
 
                 <x-table.row>
-                    <td colspan="2" class="px-2 text-xl text-right text-gray-400 border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;
+                    <td colspan="3" class="px-2 text-xl text-right text-gray-400 border border-gray-300">&nbsp;TOTALS&nbsp;&nbsp;&nbsp;
                     </td>
                     <td class="px-2 text-right  text-xl border text-red-500 border-gray-300">{{ \App\Helper\ConvertTo::rupeesFormat($totalBalance)}}</td>
                     <td class="px-2 text-right  text-xl border border-gray-300">&nbsp;</td>
