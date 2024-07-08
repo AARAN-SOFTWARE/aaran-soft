@@ -56,6 +56,7 @@ class Cbook extends Component
 
     public function clearFields(): void
     {
+        $this->vid = '';
         $this->vname = '';
         $this->loan = '';
         $this->closing = '';
