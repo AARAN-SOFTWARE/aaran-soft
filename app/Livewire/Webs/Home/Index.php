@@ -16,12 +16,16 @@ class Index extends Component
         return match (config('aadmin.app_type')) {
 
 //            config('software.DEVELOPER') => 'livewire.webs.home.demo.aaransales',
-            config('software.DEVELOPER') => 'livewire.webs.home.welfare.home1',
-            config('software.DEVELOPER') => 'livewire.webs.home.index_1',
+
+            config('software.SPORTS_CLUB') => 'livewire.webs.home.welfare.home1',
+
+//            config('software.DEVELOPER') => 'livewire.webs.home.index_1',
 //            config('software.DEVELOPER') => 'livewire.webs.home.index_2',
-            config('software.DEVELOPER') => 'livewire.webs.home.demo.aaranerp',
-            config('software.DEMO') => 'livewire.webs.home.demo.garment-demo',
+//            config('software.DEVELOPER') => 'livewire.webs.home.demo.aaranerp',
+
             config('software.AUDIT') => 'livewire.webs.home.sundar.aaran-associates',
+
+            config('software.DEMO') => 'livewire.webs.home.demo.garment-demo',
 
             config('software.WELFARE') => 'livewire.webs.home.welfare.index',
 

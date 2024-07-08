@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         if (Aaran\Aadmin\Src\DbMigration::hasSportsClub()) {
 
-            Schema::create('sport_master_pics', function (Blueprint $table) {
+            Schema::create('sport_club_pics', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('sport_master_id')->references('id')->on('sport_masters');
                 $table->string('pic_name')->nullable();
@@ -22,6 +22,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('spot_pics');
+        Schema::dropIfExists('sport_club_pics');
     }
 };

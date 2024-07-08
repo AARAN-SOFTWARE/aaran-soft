@@ -25,6 +25,8 @@ return [
         DbMigration::common(),
         DbMigration::master(),
         DbMigration::sportsClub(),
+        DbMigration::webs(),
+
 //        DbMigration::todoList(),
 //        DbMigration::developer()
     ]
