@@ -13,11 +13,14 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Master extends Component
 {
 
     use CommonTrait;
+
+    use WithFileUploads;
 
     #region[Properties]
     public string $mobile = '';
@@ -32,7 +35,8 @@ class Master extends Component
     public string $age = '';
     public string $gender = '';
     public string $aadhaar = '';
-    public string $master_photo = '';
+    public mixed $master_photo;
+    public mixed $old_master_photo;
 
     public $cities;
     public $states;
@@ -249,6 +253,74 @@ class Master extends Component
     }
     #endregion
 
+    #region[pin-code]
+    public $sportsClub_id = '';
+    public $sportsClub_name = '';
+    public Collection $sportsClubCollection;
+    public $highlightSportsClub = 0;
+    public $sportsClubTyped = false;
+
+    public function decrementSportsClub(): void
+    {
+        if ($this->highlightSportsClub === 0) {
+            $this->highlightSportsClub = count($this->sportsClubCollection) - 1;
+            return;
+        }
+        $this->highlightSportsClub--;
+    }
+
+    public function incrementSportsClub(): void
+    {
+        if ($this->highlightSportsClub === count($this->sportsClubCollection) - 1) {
+            $this->highlightSportsClub = 0;
+            return;
+        }
+        $this->highlightSportsClub++;
+    }
+
+    public function enterSportsClub(): void
+    {
+        $obj = $this->sportsClubCollection[$this->highlightSportsClub] ?? null;
+
+        $this->sportsClub_name = '';
+        $this->sportsClubCollection = Collection::empty();
+        $this->highlightSportsClub = 0;
+
+        $this->sportsClub_name = $obj['vname'] ?? '';;
+        $this->sportsClub_id = $obj['id'] ?? '';;
+    }
+
+    public function setSportsClub($name, $id): void
+    {
+        $this->sportsClub_name = $name;
+        $this->sportsClub_id = $id;
+        $this->getSportsClubList();
+    }
+
+    #[On('refresh-pincode')]
+    public function refreshSportsClub($v): void
+    {
+        $this->sportsClub_id = $v['id'];
+        $this->sportsClub_name = $v['name'];
+        $this->sportsClubTyped = false;
+    }
+
+    public function SportsClubSave($name)
+    {
+        $obj= SportClub::create([
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+        $v=['name'=>$name,'id'=>$obj->id];
+        $this->refreshSportsClub($v);
+    }
+
+    public function getSportsClubList(): void
+    {
+        $this->sportsClubCollection = $this->sportsClub_name ? SportClub::search(trim($this->sportsClub_name))
+            ->get() : SportClub::all();
+    }
+    #endregion
 
     #region[save]
 
