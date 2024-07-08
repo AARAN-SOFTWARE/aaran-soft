@@ -14,6 +14,7 @@ class Cbook extends Component
     use CommonTrait;
 
     public string $loan = '';
+    public string $emi = '';
     public string $closing = '';
     public $credit_member;
 
@@ -33,6 +34,7 @@ class Cbook extends Component
                     'credit_member_id' => $this->credit_member->id,
                     'vname' => Str::upper($this->vname),
                     'loan' => $this->loan,
+                    'emi' => $this->emi,
                     'closing' => $this->closing,
                     'active_id' => $this->active_id,
                 ]);
@@ -43,6 +45,7 @@ class Cbook extends Component
                 $obj->credit_member_id = $this->credit_member->id;
                 $obj->vname = Str::upper($this->vname);
                 $obj->loan = $this->loan;
+                $obj->emi = $this->emi;
                 $obj->closing = $this->closing;
                 $obj->active_id = $this->active_id;
                 $obj->save();
@@ -59,6 +62,7 @@ class Cbook extends Component
         $this->vid = '';
         $this->vname = '';
         $this->loan = '';
+        $this->emi = '';
         $this->closing = '';
         $this->active_id = true;
 
@@ -73,6 +77,7 @@ class Cbook extends Component
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
             $this->loan = $obj->loan;
+            $this->emi = $obj->emi;
             $this->closing = $obj->closing;
             $this->active_id = $obj->active_id;
             return $obj;
