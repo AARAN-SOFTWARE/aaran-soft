@@ -58,7 +58,7 @@
 
                         <x-table.cell-text right>
                             <button wire:click.prevent="payDue({{$row->id}})">
-                                <x-icons.icon icon="cash"  class="w-10 h-auto block text-green" />
+                                <x-icons.icon icon="cash"  class="w-7 h-auto block text-green" />
                             </button>
                         </x-table.cell-text>
 
