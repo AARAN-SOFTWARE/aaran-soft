@@ -46,6 +46,8 @@ return [
         MainMenu::welfare(),
         MainMenu::webs(),
         MainMenu::sports(),
+        MainMenu::spotMyNumber(),
+
     ],
 
     'migrations'=>[
@@ -76,6 +78,7 @@ return [
         DbMigration::welfare(),
         DbMigration::webs(),
         DbMigration::sportsClub(),
+        DbMigration::spotMyNumber(),
     ]
 
 
