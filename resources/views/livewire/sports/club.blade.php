@@ -10,18 +10,14 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>User_name</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('master_name')" center>Mater_name</x-table.header-text>
+                <x-table.header-text class="w-20" center>Logo</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" left>Club Name</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('master_name')" left>Mater name</x-table.header-text>
                 <x-table.header-text center>Mobile</x-table.header-text>
                 <x-table.header-text center>WhatsApp</x-table.header-text>
-                <x-table.header-text center>email</x-table.header-text>
-                <x-table.header-text center>address_1</x-table.header-text>
-                <x-table.header-text center>address_2</x-table.header-text>
-                <x-table.header-text center>city</x-table.header-text>
-                <x-table.header-text center>state</x-table.header-text>
-                <x-table.header-text center>pin_code</x-table.header-text>
-                <x-table.header-text center>started_at</x-table.header-text>
-                <x-table.header-text center>club_photo</x-table.header-text>
+                <x-table.header-text center>City</x-table.header-text>
+                <x-table.header-text center>State</x-table.header-text>
+                <x-table.header-text center>Started at</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -35,6 +31,12 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
+                            <img
+                                src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->club_photo))}}"
+                                alt="logo"/>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
                             {{ $row->vname}}
                         </x-table.cell-text>
 
@@ -42,48 +44,24 @@
                             {{ $row->master_name}}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             {{ $row->mobile}}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             {{ $row->whatsapp}}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
-                            {{ $row->email}}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
-                            {{ $row->address_1}}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
-                            {{ $row->address_2}}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             {{ $row->city->vname}}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             {{ $row->state->vname}}
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            {{ $row->pincode->vname}}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
-                            {{ $row->started_at}}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
-                            <div class="flex-shrink-0 h-10 w-10 mr-4 rounded-xl">
-                                <img
-                                    src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->club_photo))}}"
-                                    alt="logo"/>
-                            </div>
+                            {{ $row->started_at ?  date('d-m-Y', strtotime($row->started_at)) :''}}
                         </x-table.cell-text>
 
                         <x-table.cell-action id="{{$row->id}}"/>
@@ -106,23 +84,27 @@
         <x-forms.create-new :id="$vid">
             <div class="flex gap-5 w-full">
                 <div class="w-full">
-                    <x-input.model-text wire:model="vname" :label="'Username'"/>
-                    <x-input.model-text wire:model="master_name" :label="'Master_name'"/>
+                    <x-input.model-text wire:model="vname" :label="'Club Name'"/>
+                    <x-input.model-text wire:model="master_name" :label="'Master name'"/>
                     <x-input.model-text wire:model="mobile" :label="'Mobile'"/>
                     <x-input.model-text wire:model="whatsapp" :label="'Whatsapp'"/>
                     <x-input.model-text wire:model="email" :label="'Email'"/>
-                    <x-input.model-text wire:model="address_1" :label="'Address_1'"/>
+                    <x-input.model-date wire:model="started_at" :label="'Started at'"/>
 
                 </div>
 
                 <div class="w-full">
-                    <x-input.model-text wire:model="address_2" :label="'Address_2'"/>
+
+                    <x-input.model-text wire:model="address_1" :label="'Address'"/>
+
+                    <x-input.model-text wire:model="address_2" :label="'Street, Area'"/>
 
                     <!-- City ----------------------------------------------------------------------------------------------------->
                     <div class="flex flex-row  gap-3">
                         <div class="xl:flex w-full gap-2">
                             <label for="city_name" class="w-[10rem] text-zinc-500 tracking-wide py-2 ">City</label>
-                            <div x-data="{isTyped: @entangle('cityTyped')}" @click.away="isTyped = false" class="w-full">
+                            <div x-data="{isTyped: @entangle('cityTyped')}" @click.away="isTyped = false"
+                                 class="w-full">
                                 <div class="relative">
                                     <input
                                         id="city_name"
@@ -163,7 +145,8 @@
                                                                 {{ $city->vname }}
                                                             </li>
                                                         @empty
-                                                            <button wire:click.prevent="citySave('{{$city_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                            <button wire:click.prevent="citySave('{{$city_name}}')"
+                                                                    class="text-white bg-green-500 text-center w-full">
                                                                 create
                                                             </button>
                                                         @endforelse
@@ -177,12 +160,12 @@
                         </div>
                     </div>
 
-
                     <!-- State --------------------------------------------------------------------------------------------------->
                     <div class="flex flex-col mt-3 gap-2">
                         <div class="xl:flex w-full gap-2">
                             <label for="state_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">State</label>
-                            <div x-data="{isTyped: @entangle('stateTyped')}" @click.away="isTyped = false" class="w-full">
+                            <div x-data="{isTyped: @entangle('stateTyped')}" @click.away="isTyped = false"
+                                 class="w-full">
                                 <div class="relative">
                                     <input
                                         id="state_name"
@@ -241,7 +224,8 @@
                     <div class="flex flex-col gap-2 mt-3">
                         <div class="xl:flex w-full gap-2">
                             <label for="pincode_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Pincode</label>
-                            <div x-data="{isTyped: @entangle('pincodeTyped')}" @click.away="isTyped = false" class="w-full">
+                            <div x-data="{isTyped: @entangle('pincodeTyped')}" @click.away="isTyped = false"
+                                 class="w-full">
                                 <div class="relative">
                                     <input
                                         id="pincode_name"
@@ -280,7 +264,9 @@
                                                                 {{ $pincode->vname }}
                                                             </li>
                                                         @empty
-                                                            <button wire:click.prevent="pincodeSave('{{$pincode_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                            <button
+                                                                wire:click.prevent="pincodeSave('{{$pincode_name}}')"
+                                                                class="text-white bg-green-500 text-center w-full">
                                                                 create
                                                             </button>
 
@@ -295,39 +281,58 @@
                         </div>
                     </div>
 
-                    <x-input.model-text wire:model="started_at" :label="'Started_at'"/>
 
                     <!-- Image ---------------------------------------------------------------------------------------------------->
+                    <div class="flex flex-row gap-6 mt-4">
 
-                    <div class="flex flex-items-center pt-2">
+                        <div class="flex">
 
-                        <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Club_photo</label>
+                            <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Logo</label>
 
-                        <div class="flex-shrink-0 h-20 w-20">
+                            <div class="flex-shrink-0">
 
-                            <div>
-                                @if($club_photo)
-                                    <div class="flex-shrink-0 h-14 w-14 ">
-                                        <img class="h-14 w-full" src="{{ $club_photo->temporaryUrl() }}"
-                                             alt="{{$club_photo?:''}}"/>
-                                    </div>
-                                @endif
+                                <div>
+                                    @if($club_photo)
+                                        <div class="flex-shrink-0 ">
+                                            <img class="h-24 w-full" src="{{ $club_photo->temporaryUrl() }}"
+                                                 alt="{{$club_photo?:''}}"/>
+                                        </div>
+                                    @endif
 
-                                @if(!$club_photo && isset($old_club_photo))
-                                    <img class="h-14 w-full"
-                                         src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_club_photo))}}"
-                                         alt="">
+                                    @if(!$club_photo && isset($old_club_photo))
+                                        <img class="h-24 w-full"
+                                             src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_club_photo))}}"
+                                             alt="">
 
-                                @else
-                                    <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>
-                                @endif
+                                    @else
+                                        <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>
+                                    @endif
+                                </div>
                             </div>
+
                         </div>
 
-                    </div>
+                        <div class="relative">
 
-                    <div>
-                        <input type="file" wire:model="club_photo">
+                            <div>
+                                <label for="club_photo"
+                                       class="text-gray-500 font-semibold text-base rounded flex flex-col items-center
+                                   justify-center cursor-pointer border-2 border-gray-300 border-dashed p-2
+                                   mx-auto font-[sans-serif]">
+                                    <x-icons.icon icon="cloud-upload" class="w-8 h-auto block text-gray-400"/>
+                                    Upload file
+
+                                    <input type="file" id='club_photo' wire:model="club_photo" class="hidden"/>
+                                    <p class="text-xs font-light text-gray-400 mt-2">PNG, JPG SVG, WEBP, and GIF are
+                                        Allowed.</p>
+                                </label>
+                            </div>
+
+                            <div wire:loading wire:target="club_photo" class="z-10 absolute top-6 left-12">
+                                <div class="w-14 h-14 rounded-full animate-spin
+                                                        border-y-4 border-dashed border-green-500 border-t-transparent"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

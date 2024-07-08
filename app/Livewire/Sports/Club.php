@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Livewire\Sports\Club;
+namespace App\Livewire\Sports;
 
 use Aaran\Common\Models\City;
 use Aaran\Common\Models\Pincode;
 use Aaran\Common\Models\State;
 use Aaran\SportsClub\Models\SportClub;
+use App\Enums\Active;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -13,33 +14,33 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Index extends Component
+class Club extends Component
 {
-
     use CommonTrait;
 
     use WithFileUploads;
 
-    public string $master_name;
-    public string $mobile;
-    public string $whatsapp;
-    public string $email;
-    public string $address_1;
-    public string $address_2;
-    public $city;
-    public $state;
-    public $pincode;
-    public $users;
-    public string $started_at;
-    public  $club_photo="";
-    public string $old_club_photo;
-    public $isUploaded = false;
+    #region[Properties]
+    public string $master_name = '';
+    public string $mobile = '';
+    public string $whatsapp = '';
+    public string $email = '';
+    public string $address_1 = '';
+    public string $address_2 = '';
+    public string $started_at = '';
+    public $club_photo = "";
+    public string $old_club_photo = '';
 
+    public bool $isUploaded = false;
+
+    #endregion
+
+    #region[getSave]
     public function getSave()
     {
-        if ($this->vname != ''){
-            if ($this->vid == ""){
-                $obj = SportClub :: create([
+        if ($this->vname != '') {
+            if ($this->vid == "") {
+                $obj = SportClub:: create([
                     'vname' => $this->vname,
                     'master_name' => $this->master_name,
                     'mobile' => $this->mobile,
@@ -47,12 +48,12 @@ class Index extends Component
                     'email' => $this->email,
                     'address_1' => $this->address_1,
                     'address_2' => $this->address_2,
-                    'city_id' => $this->city_id,
-                    'state_id' => $this->state_id,
-                    'pincode_id' => $this->pincode_id,
+                    'city_id' => $this->city_id ?: 1,
+                    'state_id' => $this->state_id ?: 1,
+                    'pincode_id' => $this->pincode_id ?: 1,
                     'started_at' => $this->started_at,
                     'club_photo' => $this->saveImage(),
-                    'active_id' => $this->active_id ? 1: 0,
+                    'active_id' => $this->active_id ? 1 : 0,
                     'user_id' => auth()->id()
                 ]);
             } else {
@@ -64,9 +65,9 @@ class Index extends Component
                 $obj->email = $this->email;
                 $obj->address_1 = $this->address_1;
                 $obj->address_2 = $this->address_2;
-                $obj->city_id = $this->city_id;
-                $obj->state_id= $this->state_id;
-                $obj->pincode_id = $this->pincode_id;
+                $obj->city_id = $this->city_id ?: 1;
+                $obj->state_id = $this->state_id ?: 1;
+                $obj->pincode_id = $this->pincode_id ?: 1;
                 $obj->started_at = $this->started_at;
                 $obj->club_photo = $this->saveImage();
                 $obj->active_id = $this->active_id;
@@ -76,35 +77,40 @@ class Index extends Component
             $this->clearFields();
         }
     }
+    #endregion
 
+    #region[getObj]
     public function getObj($id)
     {
-     if($id){
-         $obj  = SportClub::find($id);
-         $this->vid = $obj->id;
-         $this->vname = $obj->vname;
-         $this->master_name = $obj->master_name;
-         $this->mobile = $obj->mobile;
-         $this->whatsapp = $obj->whatsapp;
-         $this->email = $obj->email;
-         $this->address_1 = $obj->address_1;
-         $this->address_2 = $obj->address_2;
-         $this->city_id = $obj->city_id;
-         $this->city_name = $obj->city->vname;
-         $this->state_id = $obj->state_id;
-         $this->state_name = $obj->state->vname;
-         $this->pincode_id = $obj->pincode_id;
-         $this->pincode_name = $obj->pincode->vname;
-         $this->started_at = $obj->started_at;
-         $this->old_club_photo = $obj->club_photo;
-         $this->active_id = $obj->active_id;
+        if ($id) {
+            $obj = SportClub::find($id);
+            $this->vid = $obj->id;
+            $this->vname = $obj->vname;
+            $this->master_name = $obj->master_name;
+            $this->mobile = $obj->mobile;
+            $this->whatsapp = $obj->whatsapp;
+            $this->email = $obj->email;
+            $this->address_1 = $obj->address_1;
+            $this->address_2 = $obj->address_2;
+            $this->city_id = $obj->city_id;
+            $this->city_name = $obj->city->vname;
+            $this->state_id = $obj->state_id;
+            $this->state_name = $obj->state->vname;
+            $this->pincode_id = $obj->pincode_id;
+            $this->pincode_name = $obj->pincode->vname;
+            $this->started_at = $obj->started_at;
+            $this->old_club_photo = $obj->club_photo;
+            $this->active_id = $obj->active_id;
 
-         return $obj;
-     }
-
+            return $obj;
+        }
+        return null;
     }
 
-    public function clearFields()
+    #endregion
+
+    #region[clear Fields]
+    public function clearFields(): void
     {
         $this->vid = '';
         $this->vname = '';
@@ -121,9 +127,11 @@ class Index extends Component
         $this->pincode_id = '';
         $this->pincode_name = '';
         $this->started_at = '';
+        $this->club_photo = '';
         $this->old_club_photo = '';
-        $this->active_id = '';
+        $this->active_id = Active::ACTIVE->value;
     }
+    #endregion
 
     #region[Image]
     public function saveImage()
@@ -145,7 +153,7 @@ class Index extends Component
             if ($this->old_club_photo) {
                 return $this->old_club_photo;
             } else {
-                return 'no image';
+                return 'no_image';
             }
         }
     }
@@ -153,9 +161,9 @@ class Index extends Component
     public function updatedphoto()
     {
         $this->validate([
-            'club_photo'=>'image|max:1024',
+            'club_photo' => 'image|max:1024',
         ]);
-        $this->isUploaded=true;
+        $this->isUploaded = true;
     }
     #endregion
 
@@ -223,13 +231,14 @@ class Index extends Component
         $this->cityTyped = false;
 
     }
+
     public function citySave($name)
     {
-        $obj= City::create([
+        $obj = City::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v=['name'=>$name,'id'=>$obj->id];
+        $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshCity($v);
     }
 
@@ -353,11 +362,11 @@ class Index extends Component
 
     public function pincodeSave($name)
     {
-        $obj= Pincode::create([
+        $obj = Pincode::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v=['name'=>$name,'id'=>$obj->id];
+        $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshPincode($v);
     }
 
@@ -366,16 +375,19 @@ class Index extends Component
         $this->pincodeCollection = $this->pincode_name ? Pincode::search(trim($this->pincode_name))
             ->get() : Pincode::all();
     }
+
     #endregion
 
+    #region[Render]
     public function render()
     {
         $this->getCityList();
         $this->getStateList();
         $this->getPincodeList();
 
-        return view('livewire.sports.club.index')->with([
+        return view('livewire.sports.club')->with([
             'list' => $this->getList()
         ]);
     }
+    #endregion
 }

@@ -5,8 +5,7 @@
         <x-dashboard.greetings/>
 
 
-{{--        <div class="w-12 h-12 rounded-full animate-spin--}}
-{{--                    border-y-4 border-dashed border-green-500 border-t-transparent"></div>--}}
+
 
 
         <div class="lg:flex lg:flex-cols-3 w-full h-screen gap-10">
