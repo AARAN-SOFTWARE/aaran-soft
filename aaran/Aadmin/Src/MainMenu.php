@@ -232,6 +232,19 @@ class MainMenu
     {
         return 'webs';
     }
+    /**
+     * spotMyNumber
+     * @return bool
+     */
+    public static function hasSpotMyNumber(): bool
+    {
+        return static::enabled(static::spotMyNumber());
+    }
+    public static function spotMyNumber(): string
+    {
+        return 'spotMyNumber';
+    }
+
 
     /**
      * Webs
