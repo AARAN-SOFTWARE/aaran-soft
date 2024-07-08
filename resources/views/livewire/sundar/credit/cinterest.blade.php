@@ -17,6 +17,7 @@
                 <x-table.header-text center>Received</x-table.header-text>
                 <x-table.header-text center>Date</x-table.header-text>
                 <x-table.header-text center>Remarks</x-table.header-text>
+                <x-table.header-text center>Pay</x-table.header-text>
                 <x-table.header-text class="w-3" center>#</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
@@ -53,6 +54,12 @@
 
                         <x-table.cell-text right>
                             {{ $row->remarks }}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text right>
+                            <button wire:click.prevent="payDue({{$row->id}})">
+                                <x-icons.icon icon="cash"  class="w-10 h-auto block text-green" />
+                            </button>
                         </x-table.cell-text>
 
                         <x-table.cell center>

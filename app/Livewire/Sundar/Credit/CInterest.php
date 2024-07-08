@@ -111,6 +111,19 @@ class CInterest extends Component
     }
     #endregion
 
+    #region[Pay Due]
+    public function payDue($id): void
+    {
+        if ($id) {
+            $obj = CreditInterest::find($id);
+            $this->received = $obj->interest;
+            $this->received_date = Carbon::parse(Carbon::now())->format('Y-m-d');
+            $obj->save();
+        }
+    }
+
+    #endregion
+
     #region[get Obj]
     public function getObj($id)
     {
