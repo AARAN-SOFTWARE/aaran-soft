@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasSportsClub()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasSports()) {
 
             Schema::create('sport_clubs', function (Blueprint $table) {
                 $table->id();

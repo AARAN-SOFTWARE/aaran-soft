@@ -16,7 +16,7 @@ return [
     ],
 
     'menus' => [
-        DbMigration::sportsClub(),
+        DbMigration::sports(),
         DbMigration::webs(),
     ],
 
@@ -24,7 +24,7 @@ return [
         DbMigration::core(),
         DbMigration::common(),
         DbMigration::master(),
-        DbMigration::sportsClub(),
+        DbMigration::sports(),
         DbMigration::webs(),
     ]
 
