@@ -17,7 +17,7 @@
                 <x-table.header-text center>Received</x-table.header-text>
                 <x-table.header-text center>Date</x-table.header-text>
                 <x-table.header-text center>Remarks</x-table.header-text>
-                <x-table.header-text center>Pay</x-table.header-text>
+                <x-table.header-text class="w-6" center>Pay</x-table.header-text>
                 <x-table.header-text class="w-3" center>#</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
