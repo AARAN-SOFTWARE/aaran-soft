@@ -10,8 +10,8 @@
         </a>
 
         <button
-                class="focus:outline-none focus:bg-gray-700 hover:bg-gray-800 rounded-md text-gray-300"
-                @click="sidebarOpen = false"
+            class="focus:outline-none focus:bg-gray-700 hover:bg-gray-800 rounded-md text-gray-300"
+            @click="sidebarOpen = false"
         >
             <svg xmlns="http://www.w3.org/2000/svg"
                  class="h-8 w-8"
@@ -82,7 +82,11 @@
                 <x-menu.sub.webs/>
             @endif
 
+            @if(Aaran\Aadmin\Src\MainMenu::hasSports())
+                <x-menu.sub.sports/>
+            @endif
             <x-menu.sub.logout/>
+
         </ul>
     </div>
 </nav>

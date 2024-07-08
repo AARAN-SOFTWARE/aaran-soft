@@ -45,6 +45,7 @@ return [
         MainMenu::report(),
         MainMenu::welfare(),
         MainMenu::webs(),
+        MainMenu::sports(),
     ],
 
     'migrations'=>[
@@ -74,6 +75,7 @@ return [
         DbMigration::developerTesting(),
         DbMigration::welfare(),
         DbMigration::webs(),
+        DbMigration::sportsClub(),
     ]
 
 

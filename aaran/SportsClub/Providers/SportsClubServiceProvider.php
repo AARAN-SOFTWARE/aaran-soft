@@ -11,7 +11,7 @@ class SportsClubServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->mergeConfigFrom(__DIR__ . '/../config.php','master');
 
-        $this->app->register(SportsClubServiceProvider::class);
+        $this->app->register(SportsClubRouteServiceProvider::class);
     }
 
 }

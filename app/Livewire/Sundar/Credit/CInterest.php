@@ -111,6 +111,19 @@ class CInterest extends Component
     }
     #endregion
 
+    #region[Pay Due]
+    public function payDue($id): void
+    {
+        if ($id) {
+            $obj = CreditInterest::find($id);
+            $obj->received = $obj->interest;
+            $obj->received_date = $obj->vdate;
+            $obj->save();
+        }
+    }
+
+    #endregion
+
     #region[get Obj]
     public function getObj($id)
     {
