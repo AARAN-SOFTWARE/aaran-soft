@@ -100,6 +100,7 @@
         <x-forms.create :id="$vid">
             <x-input.model-text wire:model="vname" :label="'Creditor'"/>
             <x-input.model-text wire:model="loan" :label="'Loan'"/>
+            <x-input.model-text wire:model="emi" :label="'EMI'"/>
             <x-input.model-text wire:model="closing" :label="'Closing'"/>
         </x-forms.create>
 
