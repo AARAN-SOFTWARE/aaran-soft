@@ -17,7 +17,7 @@ class Index extends Component
 
 //            config('software.DEVELOPER') => 'livewire.webs.home.demo.aaransales',
 
-            config('software.SPORTS_CLUB') => 'livewire.webs.home.welfare.home1',
+            config('software.SPORTS_CLUB') => 'livewire.webs.home.welfare.index',
 
 //            config('software.DEVELOPER') => 'livewire.webs.home.index_1',
 //            config('software.DEVELOPER') => 'livewire.webs.home.index_2',

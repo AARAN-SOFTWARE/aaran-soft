@@ -13,9 +13,9 @@
         atEnd: false,
         autoSlideInterval: null,
         progress: 0,
+
         startAutoSlide() {
             this.autoSlideInterval = setInterval(() => {
-             this.progress < 100 ? this.progress += 100 : this.progress=0;
                 this.next();
             }, 4500);
         },
@@ -62,11 +62,15 @@
             let offset = slider.firstElementChild.getBoundingClientRect().width;
             this.currentSlide = Math.round(slider.scrollLeft / offset);
         }
-    }" x-init="startAutoSlide()" @mouseover="stopAutoSlide()" @mouseout="startAutoSlide()" class="flex flex-col w-full">
+    }"
+             x-init="startAutoSlide()" @mouseover="stopAutoSlide()" @mouseout="startAutoSlide()"
+             class="flex flex-col w-full">
 
-{{--                        <div class="bg-gray-200 rounded-full h-2 w-full mt-4">--}}
-{{--                            <div class="bg-blue-500 text-xs leading-none py-1 text-center rounded-full h-2" :style="`width: ${progress}%`">&nbsp;</div>--}}
-{{--                        </div>--}}
+            {{--            <div class="bg-gray-200 rounded-full h-2 w-full mt-4">--}}
+            {{--                <div class="bg-blue-500 text-xs leading-none py-1 text-center rounded-full h-2"--}}
+            {{--                     :style="`width: ${progress}%`">&nbsp;--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
 
             <div x-on:keydown.right="next" x-on:keydown.left="prev" tabindex="0" role="region"
                  aria-labelledby="carousel-label" class="flex space-x-6">
@@ -87,24 +91,31 @@
                             role="option">
 
                             <div style="background-image: url('../../../../storage/images/{{$row->bg_image}}');"
-                            class="w-full h-[40rem] bg-no-repeat bg-cover flex ">
+                                 class="w-full h-[40rem] bg-no-repeat bg-cover flex ">
                                 <div class="flex flex-row h-[40rem]">
                                     <div class="w-full flex justify-evenly">
                                         <div
                                             class="flex flex-col h-auto gap-y-10 w-3/4 ml-auto mr-0 items-start my-auto pl-20 pr-2">
-                                            <div class="text-6xl font-bold">{{$row->vname}}</div>
+                                            <div class="text-6xl font-bold  ">{{$row->vname}}</div>
                                             <div class="text-3xl  tracking-widest text-white">
                                                 <p>
                                                     {!! $row->description !!}
                                                 </p>
                                             </div>
-                                            <a id="change" href="{{$row->link}}" target="_blank" class="bg-purple-700 rounded-lg px-2">Go To</a>
+
+
+
                                         </div>
                                     </div>
-                                    <div class="flex justify-evenly w-3/4">
-                                        <img class="w-[30rem] h-[30rem] rounded-full my-auto ml-0 mr-auto"
-                                             src="{{ \Illuminate\Support\Facades\Storage::url('images/'.$row->cont_image)}}"
-                                             alt=""></div>
+
+                                    @if($row->cont_image != 'no_image')
+                                        <div class="flex justify-evenly w-3/4">
+                                            <img class="w-[30rem] h-[30rem] rounded-full my-auto ml-0 mr-auto"
+                                                 src="{{ \Illuminate\Support\Facades\Storage::url('images/'.$row->cont_image)}}"
+                                                 alt="">
+                                        </div>
+                                    @endif
+
                                 </div>
                             </div>
                         </li>
@@ -156,7 +167,6 @@
                     </template>
                 </div>
             </div>
-
         </div>
     </div>
     @error('')  @enderror

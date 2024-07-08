@@ -9,6 +9,14 @@ use Livewire\Component;
 class Show extends Component
 {
     use CommonTrait;
+
+
+    public function target()
+    {
+        dd('tart');
+    }
+
+
     #region[getList]
     public function getList()
     {

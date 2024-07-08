@@ -14,6 +14,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const slider = document.querySelector('#slider');
+
         setTimeout(function moveSlide() {
             const max = slider.scrollWidth - slider.clientWidth;
             const left = slider.clientWidth;
