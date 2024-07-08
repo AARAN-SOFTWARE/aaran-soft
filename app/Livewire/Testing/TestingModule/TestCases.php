@@ -108,7 +108,6 @@ class TestCases extends Component
     }
     #endregion
 
-
     #region[clearFields]
     public function clearFields()
     {

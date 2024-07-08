@@ -26,7 +26,9 @@ return [
         DbMigration::master(),
         DbMigration::welfare(),
 //        DbMigration::todoList(),
-        DbMigration::developer()
+        DbMigration::developer(),
+        DbMigration::developerTesting(),
+        DbMigration::blog(),
     ]
 
 ];
