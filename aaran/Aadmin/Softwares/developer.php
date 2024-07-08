@@ -58,9 +58,6 @@ return [
 //        DbMigration::entry(),
         DbMigration::order(),
 
-
-
-
         DbMigration::style(),
         DbMigration::developer(),
         DbMigration::taskManager(),
