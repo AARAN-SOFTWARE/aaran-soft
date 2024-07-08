@@ -1,2 +1,2 @@
-<x-menu.base.li-menuitem :routes="'sportsclub'" :label="'SportsClub'"/>
+<x-menu.base.li-menuitem :routes="'sportsClub'" :label="'Sports Club'"/>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Sports\SportsClub;
+namespace App\Livewire\Sports\Club;
 
 use Aaran\SportsClub\Models\SportClub;
 use App\Livewire\Trait\CommonTrait;
@@ -12,8 +12,8 @@ class Index extends Component
 {
 
     use CommonTrait;
-    use WithFileUploads;
 
+    use WithFileUploads;
 
     public string $lname;
     public string $master_name;
@@ -141,10 +141,22 @@ class Index extends Component
     }
     #endregion
 
+    #region[list]
+    public function getList(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    {
+        $this->sortField = 'id';
+
+        return SportClub::search($this->searches)
+            ->where('active_id', '=', $this->activeRecord)
+            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+            ->paginate($this->perPage);
+    }
+    #endregion
+
 
     public function render()
     {
-        return view('livewire.sports.sports-club.index')->with([
+        return view('livewire.sports.club.index')->with([
             'list' => $this->getList()
         ]);
     }

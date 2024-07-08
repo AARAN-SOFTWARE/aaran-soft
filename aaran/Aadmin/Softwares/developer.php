@@ -75,6 +75,7 @@ return [
         DbMigration::developerTesting(),
         DbMigration::welfare(),
         DbMigration::webs(),
+        DbMigration::sportsClub(),
     ]
 
 
