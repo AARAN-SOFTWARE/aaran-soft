@@ -116,8 +116,8 @@ class CInterest extends Component
     {
         if ($id) {
             $obj = CreditInterest::find($id);
-            $this->received = $obj->interest;
-            $this->received_date = Carbon::parse(Carbon::now())->format('Y-m-d');
+            $obj->received = $obj->interest;
+            $obj->received_date = $obj->vdate;
             $obj->save();
         }
     }
