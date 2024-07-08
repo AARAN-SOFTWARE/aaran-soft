@@ -5,7 +5,7 @@
             <!-- profile -->
             <x-dashboard.welfare.profile/>
             <!-- Highlights -->
-            <x-dashboard.welfare.highlights/>
+            <x-dashboard.welfare.highlights :users="$users"/>
             <!-- option -->
             <x-dashboard.welfare.option/>
         </div>
@@ -27,10 +27,10 @@
 
                 <!-- Stories -->
                 <div>
-                    <x-dashboard.welfare.stories/>
+                    <x-dashboard.welfare.stories :users="$users"/>
                 </div>
                 <!-- Feed -->
-                <div class="w-[98%] mx-auto text-xl mt-10 font-roboto font-semibold">Feed</div>
+                <div class="mx-auto text-xl mt-10 font-roboto font-semibold">Feed</div>
                 <x-dashboard.welfare.feed-index :list="$list"/>
             </div>
         </div>

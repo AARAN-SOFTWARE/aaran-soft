@@ -22,6 +22,9 @@ class Index extends Component
     public $image;
     public $old_image;
     public $bookmark = '';
+
+    public $profile;
+    public $user_id;
     public $isUploaded=false;
     public bool $showEditModal=false;
     public mixed $editable = true;
@@ -31,6 +34,7 @@ class Index extends Component
     public function mount()
     {
         $this->users = User::all();
+
     }
     #endregion
 
@@ -89,7 +93,7 @@ class Index extends Component
     {
         if($id){
         $obj = Feed::find($id);
-        $this->vid = $obj->vid;
+        $this->vid = $obj->id;
         $this->vname = $obj->vname;
         $this->description = $obj->description;
         $this->image = $obj->image;

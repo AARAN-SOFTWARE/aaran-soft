@@ -5,22 +5,20 @@
         <div class="w-4/6 h-screen bg-slate-50 rounded-xl">
                 <div class="w-[98%] mx-auto flex-col">
                     <!-- Content Image -->
-                    <img src="../../../../images/profile/bg-1.jpg" alt="" class=" w-3/5 mx-auto mt-5 rounded-3xl">
+                    <img src="{{ URL(\Illuminate\Support\Facades\Storage::url($image)) }}" alt="{{$image}}" class=" w-3/5 mx-auto mt-5 rounded-3xl">
 
                     <div class="w-3/5 mx-auto mt-5">
                         <div class="flex justify-between">
                             <div class="w-2/5 flex-col text-center">
                                 <div class="text-center">
                                     <img src="../../../../images/profile/dp_2.jpg" alt="" class="w-16 h-16 rounded-full mx-auto">
-                                    <div class="font-gab text-sm">Jagadeesh</div>
-                                    <div class="text-xs text-gray-500">jaga_117804</div>
+                                    <div class="font-gab text-sm">{{\Aaran\Web\Models\Feed::allocated($users->id)}}</div>
+                                    <div class="text-xs text-gray-500">{{ $created_at->diffForHumans() }}</div>
                                 </div>
-                                <div class="mt-2 text-md flex justify-items-center">This is a Title Area. looks only short though.</div>
+                                <div class="mt-2 text-md flex justify-center">{{$vname}}</div>
                             </div>
                             <div class="w-3/5 border-l-2 h-auto flex items-center pl-6">
-                                <div class="text-sm text-gray-600">Meggings portland fingerstache lyft, post-ironic fixie man bun banh mi
-                                    umami everyday carry hexagon locavore direct trade art party. Locavore small batch
-                                    listicle gastropub farm-to-table lumbersexual salvia messenger bag.
+                                <div class="text-sm text-gray-600">{{$description}}
                                 </div>
                             </div>
                         </div>
