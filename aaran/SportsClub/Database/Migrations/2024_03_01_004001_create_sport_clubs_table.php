@@ -12,6 +12,7 @@ return new class extends Migration {
             Schema::create('sport_clubs', function (Blueprint $table) {
                 $table->id();
                 $table->string('vname');
+                $table->string('lname');
                 $table->string('master_name')->nullable();
                 $table->string('mobile')->nullable();
                 $table->string('whatsapp')->nullable();
@@ -24,6 +25,7 @@ return new class extends Migration {
                 $table->string('started_at')->nullable();
                 $table->string('club_photo')->nullable();
                 $table->string('active_id', 3)->nullable();
+                $table->foreignId('user_id')->references('id')->on('users');
                 $table->timestamps();
             });
         }

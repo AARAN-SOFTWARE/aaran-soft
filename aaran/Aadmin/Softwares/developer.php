@@ -45,6 +45,7 @@ return [
         MainMenu::report(),
         MainMenu::welfare(),
         MainMenu::webs(),
+        MainMenu::sports(),
     ],
 
     'migrations'=>[

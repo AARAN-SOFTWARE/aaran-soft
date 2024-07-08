@@ -233,6 +233,19 @@ class MainMenu
         return 'webs';
     }
 
+    /**
+     * Webs
+     * @return bool
+     */
+    public static function hasSports(): bool
+    {
+        return static::enabled(static::sports());
+    }
+
+    public static function sports(): string
+    {
+        return 'sports';
+    }
 
 }
 
