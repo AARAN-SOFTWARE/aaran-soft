@@ -107,10 +107,23 @@ class CbookItem extends Component
             $obj->save();
             $message = "Updated";
         }
+        $this->updateCbook($this->creditBook->id);
+
         $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
     }
     #endregion
 
+    #region[update CBook]
+
+    public function updateCbook($id)
+    {
+        $cBook = CreditBook::find($id);
+        $cBook->loan = $this->loan;
+        $cBook->emi = $this->emi;
+        $cBook->save();
+    }
+
+    #endregion
     #region[GenerateDues]
     public function generateDues($id): void
     {
@@ -136,11 +149,8 @@ class CbookItem extends Component
             $time = strtotime($xDate);
             $xDate = date("Y-m-d", strtotime("+1 month", $time));
         }
+        $this->updateCbook();
 
-        $cBook = CreditBook::find($cbookItem->credit_book_id);
-        $cBook->loan = $this->loan;
-        $cBook->emi = $this->emi;
-        $cBook->save();
     }
     #endregion
 
