@@ -12,6 +12,7 @@ return new class extends Migration {
             Schema::create('spot_pics', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('spot_customer_id')->references('id')->on('spot_customers');
+                $table->string('title')->nullable();
                 $table->string('pic_name')->nullable();
                 $table->string('desc')->nullable();
                 $table->string('active_id', 3)->nullable();

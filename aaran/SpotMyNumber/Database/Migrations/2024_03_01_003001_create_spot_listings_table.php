@@ -9,22 +9,18 @@ return new class extends Migration {
     {
         if (Aaran\Aadmin\Src\DbMigration::hasSpotMyNumber()) {
 
-            Schema::create('spot_ratings', function (Blueprint $table) {
+            Schema::create('spot_listings', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('spot_customer_id')->references('id')->on('spot_customers');
                 $table->string('category')->nullable();
-                $table->string('sub_category')->nullable();
                 $table->string('star')->nullable();
                 $table->string('rating')->nullable();
                 $table->string('badge')->nullable();
-                $table->string('views')->nullable();
-                $table->string('likes')->nullable();
             });
         }
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('spot_ratings');
+        Schema::dropIfExists('spot_listings');
     }
 };

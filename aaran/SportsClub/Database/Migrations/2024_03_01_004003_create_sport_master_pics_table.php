@@ -12,6 +12,7 @@ return new class extends Migration {
             Schema::create('sport_master_pics', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('sport_master_id')->references('id')->on('sport_masters');
+                $table->string('Title')->nullable();
                 $table->string('pic_name')->nullable();
                 $table->string('desc')->nullable();
                 $table->string('active_id', 3)->nullable();
