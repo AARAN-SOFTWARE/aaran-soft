@@ -3,39 +3,35 @@
     <div class="flex rounded-xl">
         <div class="w-1/5 h-screen outline-2 outline-gray-400 rounded-l-lg ">
             <!-- profile -->
-            <x-dashboard.welfare.profile />
+            <x-dashboard.welfare.profile/>
             <!-- Highlights -->
-            <x-dashboard.welfare.highlights />
+            <x-dashboard.welfare.highlights/>
             <!-- option -->
-            <x-dashboard.welfare.option />
+            <x-dashboard.welfare.option/>
         </div>
         <div class="w-4/5 h-screen rounded-r-xl ">
             <div class="p-10 bg-gray-50 w-[98%] h-[98%] mx-auto rounded-xl overflow-y-auto">
                 <!-- Top Panel -->
                 <div class="flex justify-between">
                     <div>
-                        <x-dashboard.welfare.search />
+                        <x-dashboard.welfare.search/>
                     </div>
                     <div class="w-44 flex justify-between items-center">
-                        <x-dashboard.welfare.notification />
+                        <x-dashboard.welfare.notification/>
 
                         <div>
-                           <x-dashboard.welfare.create-new-red />
+                            <x-dashboard.welfare.create-new-red/>
                         </div>
                     </div>
                 </div>
 
                 <!-- Stories -->
                 <div>
-                    <x-dashboard.welfare.stories />
+                    <x-dashboard.welfare.stories/>
                 </div>
                 <!-- Feed -->
                 <div class="w-[98%] mx-auto text-xl mt-10 font-roboto font-semibold">Feed</div>
-                <div class="grid grid-cols-3 mt-4 justify-items-center gap-6 font-roboto ">
-{{--                        <a href="/feed/show">--}}
-                    <x-dashboard.welfare.feed-index :list="$list" />
-{{--                        </a>--}}
-                </div>
+                <x-dashboard.welfare.feed-index :list="$list"/>
             </div>
         </div>
     </div>
@@ -59,7 +55,10 @@
             <div class="absolute bottom-5 left-6">
                 <div class="mx-auto items-center mt-3 mr-1 ">
                     @if($image)
-                        <img src="{{$isUploaded? $image->temporaryUrl() : url(\Illuminate\Support\Facades\Storage::url($image)) }}" alt="Image" class="h-16 w-28 mb-1 rounded-md outline outline-2 outline-gray-300 shadow-lg shadow-gray-400">
+                        <img
+                            src="{{$isUploaded? $image->temporaryUrl() : url(\Illuminate\Support\Facades\Storage::url($image)) }}"
+                            alt="Image"
+                            class="h-16 w-28 mb-1 rounded-md outline outline-2 outline-gray-300 shadow-lg shadow-gray-400">
                     @else
                         <x-icons.icon :icon="'logo'" class=""/>
                     @endif
