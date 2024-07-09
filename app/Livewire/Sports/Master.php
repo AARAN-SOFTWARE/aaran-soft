@@ -10,6 +10,7 @@ use Aaran\SportsClub\Models\SportMaster;
 use App\Enums\Active;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -36,12 +37,13 @@ class Master extends Component
     public string $gender = '';
     public string $aadhaar = '';
     public mixed $master_photo;
-    public mixed $old_master_photo;
+    public mixed $old_master_photo = '';
 
     public $cities;
     public $states;
     public $pincodes;
     public $sportClub;
+    public $isUploaded = false;
 
     #endregion
 
@@ -54,7 +56,6 @@ class Master extends Component
         $this->sportClub = SportClub::all();
     }
     #endregion
-
 
     #region[city]
     public $city_id = '';
@@ -253,7 +254,7 @@ class Master extends Component
     }
     #endregion
 
-    #region[pin-code]
+    #region[sport-club]
     public $sportsClub_id = '';
     public $sportsClub_name = '';
     public Collection $sportsClubCollection;
@@ -339,14 +340,14 @@ class Master extends Component
                     'city_id' => $this->city_id ?:1,
                     'state_id' => $this->state_id ?:1,
                     'pincode_id' => $this->pincode_id ?:1,
-                    'sport_club_id' => $this->sport_club_id ?:1,
+                    'sport_club' => $this->sport_club_id ?:1,
                     'grade' => $this->grade,
                     'experience' => $this->experience,
                     'dob' => $this->dob,
                     'age' => $this->age,
                     'gender' => $this->gender,
                     'aadhaar' => $this->aadhaar,
-                    'master_photo' => $this->master_photo,
+                    'master_photo' => $this->saveImage(),
                     'active_id' => $this->active_id,
                 ]);
                 $message = "Saved";
@@ -362,14 +363,14 @@ class Master extends Component
                 $obj->city_id = $this->city_id ?:1;
                 $obj->state_id = $this->state_id ?:1;
                 $obj->pincode_id = $this->pincode_id ?:1;
-                $obj->sport_club_id = $this->sport_club_id ?:1;
+                $obj->sport_club= $this->sport_club_id ?:1;
                 $obj->grade = $this->grade;
                 $obj->experience = $this->experience;
                 $obj->dob = $this->dob;
                 $obj->age = $this->age;
                 $obj->gender = $this->gender;
                 $obj->aadhaar = $this->aadhaar;
-                $obj->master_photo = $this->master_photo;
+                $obj->master_photo = $this->saveImage();
                 $obj->active_id = $this->active_id;
                 $obj->save();
                 $message = "Updated";
@@ -400,6 +401,7 @@ class Master extends Component
         $this->gender = '';
         $this->aadhaar = '';
         $this->master_photo = '';
+        $this->old_master_photo = '';
         $this->active_id = Active::ACTIVE->value;
     }
     #endregion
@@ -417,20 +419,58 @@ class Master extends Component
             $this->address_1 = $obj->address_1;
             $this->address_2 = $obj->address_2;
             $this->city_id = $obj->city_id;
+            $this->city_name = $obj->city->vname;
             $this->state_id = $obj->state_id;
+            $this->state_name = $obj->state->vname;
             $this->pincode_id = $obj->pincode_id;
-            $this->sport_club_id = $obj->sport_club_id;
+            $this->pincode_name = $obj->pincode->vname;
+            $this->sportsClub_id =$obj->sport_club ;
+            $this->sportsClub_name = SportMaster::club($obj->sport_club);
             $this->grade = $obj->grade;
             $this->experience = $obj->experience;
             $this->dob = $obj->dob;
             $this->age = $obj->age;
             $this->gender = $obj->gender;
             $this->aadhaar = $obj->aadhaar;
-            $this->master_photo = $obj->master_photo;
+            $this->old_master_photo = $obj->master_photo;
             $this->active_id = $obj->active_id;
             return $obj;
         }
         return null;
+    }
+    #endregion
+
+    #region[Image]
+    public function saveImage()
+    {
+        if ($this->master_photo) {
+
+            $image = $this->master_photo;
+            $filename = $this->master_photo->getClientOriginalName();
+
+            if (Storage::disk('public')->exists(Storage::path('public/images/' . $this->old_master_photo))) {
+                Storage::disk('public')->delete(Storage::path('public/images/' . $this->old_master_photo));
+            }
+
+            $image->storeAs('public/images', $filename);
+
+            return $filename;
+
+        } else {
+            if ($this->old_master_photo) {
+                return $this->old_master_photo;
+            } else {
+                return 'no_image';
+            }
+        }
+    }
+
+    public function updatedphoto()
+    {
+        $this->validate([
+            'master_photo' => 'image|max:1024',
+        ]);
+        $this->isUploaded = true;
     }
     #endregion
 
@@ -452,6 +492,11 @@ class Master extends Component
 
     public function render()
     {
+        $this->getCityList();
+        $this->getStateList();
+        $this->getPincodeList();
+        $this->getSportsClubList();
+
         return view('livewire.sports.master')->with([
             'list' => $this->getList()
         ]);

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class SportMaster extends Model
+class SportStudent extends Model
 {
     use HasFactory;
 
@@ -42,18 +42,9 @@ class SportMaster extends Model
         return $this->belongsTo(Pincode::class);
     }
 
-    public function sportclub(): BelongsTo
+    public function sportStudent(): BelongsTo
     {
-        return $this->belongsTo(SportClub::class);
+        return $this->belongsTo(SportStudent::class);
     }
 
-    public static function club($str)
-    {
-        return SportClub::find($str)->vname;
-    }
-
-    public static function allocated($str)
-    {
-        return User::find($str)->name;
-    }
 }
