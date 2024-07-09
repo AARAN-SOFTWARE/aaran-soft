@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('feed_replies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('feed_id')->references('id')->on('feeds')->onDelete('cascade');
-            $table->string('vname');
-            $table->longText('image');
+            $table->string('reply');
+            $table->longText('reply_image');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });

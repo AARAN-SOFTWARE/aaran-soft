@@ -1,8 +1,5 @@
-@props([
-    'row'
-])
-<div {{$attributes}}>
-    <div  class="flex justify-center">
+<div>
+    <div class="flex justify-center">
         <div
             x-data="{
                                         open: false,
@@ -77,3 +74,4 @@
         </div>
     </div>
 </div>
+

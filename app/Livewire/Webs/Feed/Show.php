@@ -7,7 +7,6 @@ use Aaran\Web\Models\FeedReply;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
@@ -18,18 +17,17 @@ class Show extends Component
 
     #region[properties]
     public $feed_id;
-    public $feed_image;
-    public $old_image;
-    public $users;
+    public $reply;
+    public $reply_image;
+    public $reply_old_image;
+
 
     public $description;
     public $image;
     public $bookmark;
 
-    public $feed_replies;
-    public $comments;
-    public $isUploaded=false;
-    public bool $showEditModal=false;
+    public $users;
+    public $isUploaded = false;
     public mixed $editable = true;
     public $created_at;
     #endregion
@@ -39,33 +37,30 @@ class Show extends Component
     {
         $this->getData($id);
         $this->users = User::find(1);
-//        $this->feed_replies = FeedReply::where('feed_id', $id)->get();
-//        $this->comments = FeedReply::where('feed_id', $id)->count();
-
     }
     #endregion
 
-    #region[getSave]
-    public function getSave()
+    #region[Save]
+    public function getSave(): string
     {
+        $this->validate(['reply' => 'required']);
         if ($this->editable) {
-            if ($this->vname != '') {
-                if ($this->vid == "") {
+            if ($this->reply != '') {
+                if ($this->vid == '') {
                     FeedReply::create([
                         'feed_id' => $this->feed_id,
-                        'vname' => $this->vname,
-                        'image' => $this->save_image(),
+                        'reply' => $this->reply,
+                        'reply_image' => $this->save_image(),
                         'user_id' => auth()->id(),
                     ]);
                     $message = 'Saved';
-                }
-                else {
+                } else {
                     $obj = FeedReply::find($this->vid);
-                    $obj->vname = Str::ucfirst($this->vname);
-                    if ($obj->feed_image != $this->feed_image ){
-                        $obj->feed_image = $this->save_image();
+                    $obj->reply = $this->reply;
+                    if ($this->reply_image != '') {
+                        $obj->reply_image = $this->save_image();
                     } else {
-                        $obj->feed_image = $this->feed_image;
+                        $obj->reply_image = $this->reply_image;
                     }
                     $obj->save();
                     $message = 'Updated';
@@ -75,7 +70,10 @@ class Show extends Component
                 $this->render();
             }
         }
+        return '';
     }
+
+
     #endregion
 
     #region[Data]
@@ -97,13 +95,25 @@ class Show extends Component
     }
     #endregion
 
+    #region[clearFields]
+    public function clearFields()
+    {
+        $this->vid = '';
+        $this->reply = '';
+        $this->reply_image = '';
+        $this->reply_old_image='';
+        $this->isUploaded=false;
+    }
+    #endregion
+
     #region[getObj]
     public function getObj($id)
     {
-        if ($id) {
+        if($id){
             $obj = FeedReply::find($id);
             $this->vid = $obj->id;
-            $this->image = $obj->image;
+            $this->reply = $obj->reply;
+            $this->reply_old_image = $obj->reply_image;
             return $obj;
         }
         return null;
@@ -113,14 +123,14 @@ class Show extends Component
     #region[image]
     public function save_image()
     {
-        if ($this->feed_image == '') {
-            return $this->feed_image = 'empty';
+        if ($this->reply_image == '') {
+            return $this->reply_image = 'empty';
         } else {
-            if ($this->old_image){
-                Storage::delete('public/'.$this->old_image);
+            if ($this->reply_old_image){
+                Storage::delete('public/'.$this->reply_old_image);
             }
-            $image_name=$this->feed_image->getClientOriginalName();
-            return $this->feed_image->storeAs('feedReply', $image_name,'public');
+            $image_name=$this->reply_image->getClientOriginalName();
+            return $this->reply_image->storeAs('photos', $image_name,'public');
         }
     }
     #endregion
@@ -129,16 +139,19 @@ class Show extends Component
     public function updatedimage()
     {
         $this->validate([
-            'image'=>'image|max:2048',
+            'reply_image'=>'image|max:2048',
         ]);
         $this->isUploaded=true;
     }
     #endregion
 
+
     #region[getList]
     public function getList()
     {
-        return Feed::search($this->searches)
+        $this->sortField = 'created_at';
+        return FeedReply::search($this->searches)
+            ->where('feed_id','=',$this->feed_id)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }

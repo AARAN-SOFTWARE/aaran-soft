@@ -34,7 +34,6 @@ class Index extends Component
     public function mount()
     {
         $this->users = User::all();
-
     }
     #endregion
 
@@ -134,9 +133,10 @@ class Index extends Component
     #region[getList]
     public function getList()
     {
+        $this->sortField = 'created_at';
         return Feed::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+            ->orderBy($this->sortField, $this->sortAsc ? 'desc' : 'asc')
             ->paginate($this->perPage);
     }
     #endregion
