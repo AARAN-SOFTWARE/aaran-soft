@@ -59,10 +59,9 @@
                         <img src="{{ $users->profile_photo_url }}" alt="" class="w-8 h-8 ml-2  rounded-full">
                         <div class="flex-col ">
                             <div class="flex-col items-center">
-                                <div class="w-[30rem] pl-3 text-sm"><span
-                                        class="text-gray-500">@ {{\Aaran\Web\Models\Feed::allocated($users->id)}}</span>
-                                    &nbsp;&nbsp;&nbsp;{{$row->reply}}</div>
-                                <div class="w-[18rem] flex justify-between ">
+                                <div class="w-[30rem] pl-3 text-sm text-justify"><span
+                                        class="text-gray-500 pr-3">@ {{\Aaran\Web\Models\Feed::allocated($users->id)}}</span>{{$row->reply}}</div>
+                                <div class="w-[6rem] flex justify-between ">
                                     <div
                                         class="pl-3 mt-2 text-gray-500 text-[8px]">{{$row->created_at->diffForHumans()}}</div>
                                     <x-dashboard.welfare.dot-dropdown :row="$row"/>
