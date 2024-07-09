@@ -5,6 +5,7 @@ namespace App\Livewire\SpotMyNumber\SpotPicks;
 use Aaran\SpotMyNumber\Models\SpotPic;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -36,7 +37,7 @@ class Index extends Component
             if ($this->vid == "") {
                 SpotPic::create([
                     'spot_customer_id' => $this->spot_customer_id,
-                    'title' => $this->title,
+                    'title' => Str::ucfirst($this->title),
                     'pic_name' => $this->orginalName($this->pic_name),
                     'desc' => $this->desc,
                     'active_id' => $this->active_id,

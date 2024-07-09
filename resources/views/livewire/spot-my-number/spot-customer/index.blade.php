@@ -33,38 +33,40 @@
 
                             <x-table.cell-text center>
                                 <a href="{{route('spotCustomer.pic',[$row->id])}}">
-                                {{ $row->vname}}
+                                    {{ $row->vname}}
                                 </a>
                             </x-table.cell-text>
 
                             <x-table.cell-text center>
                                 <a href="{{route('spotCustomer.pic',[$row->id])}}">
-                                {{ $row->contact_person}}
-                                 </a>
+                                    {{ $row->contact_person}}
+                                </a>
                             </x-table.cell-text>
 
                             <x-table.cell-text center>
                                 <a href="{{route('spotCustomer.pic',[$row->id])}}">
-                                {{ $row->mobile}}
-                                 </a>
+                                    {{ $row->mobile}}
+                                </a>
                             </x-table.cell-text>
 
                             <x-table.cell-text center>
                                 <a href="{{route('spotCustomer.pic',[$row->id])}}">
-                                {{ $row->geoLocation}}
-                                 </a>
+                                    {{ $row->geoLocation}}
+                                </a>
                             </x-table.cell-text>
 
                             <x-table.cell-text center>
                                 <a href="{{route('spotCustomer.pic',[$row->id])}}">
-                                {{ $row->working_days}}
-                                 </a>
+                                    {{ $row->working_days}}
+                                </a>
                             </x-table.cell-text>
 
                             <x-table.cell-text center>
                                 <a href="{{route('spotCustomer.pic',[$row->id])}}">
-                                {{ $row->business_open_timing.'am - '.$row->business_close_timing.'pm'}}
-                                 </a>
+                                    @if($row->business_open_timing||$row->business_close_timing)
+                                        {{ $row->business_open_timing.'am - '.$row->business_close_timing.'pm'}}
+                                    @endif
+                                </a>
                             </x-table.cell-text>
 
                             <x-table.cell-action id="{{$row->id}}"/>
@@ -84,7 +86,7 @@
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create-new :id="$vid">
             <div class="flex gap-5 w-full">
-                <div  class="w-full">
+                <div class="w-full">
                     <x-input.model-text wire:model="vname" :label="'Business Name'"/>
                     @error('vname')
                     <span class="text-red-500">{{  $message }}</span>
@@ -97,12 +99,13 @@
                     <x-input.model-text wire:model="address_2" :label="'Road'"/>
                     <x-input.model-text wire:model="landmark" :label="'Landmark'"/>
 
-                </div >
+                </div>
                 <div class="w-full">
                     <div class="flex flex-row  gap-3">
                         <div class="xl:flex w-full gap-2">
                             <label for="city_name" class="w-[10rem] text-zinc-500 tracking-wide py-2 ">City</label>
-                            <div x-data="{isTyped: @entangle('cityTyped')}" @click.away="isTyped = false" class="w-full">
+                            <div x-data="{isTyped: @entangle('cityTyped')}" @click.away="isTyped = false"
+                                 class="w-full">
                                 <div class="relative">
                                     <input
                                         id="city_name"
@@ -143,7 +146,8 @@
                                                                 {{ $city->vname }}
                                                             </li>
                                                         @empty
-                                                            <button wire:click.prevent="citySave('{{$city_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                            <button wire:click.prevent="citySave('{{$city_name}}')"
+                                                                    class="text-white bg-green-500 text-center w-full">
                                                                 create
                                                             </button>
                                                         @endforelse
@@ -160,7 +164,8 @@
                     <div class="flex flex-col mt-3 gap-2">
                         <div class="xl:flex w-full gap-2">
                             <label for="state_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">State</label>
-                            <div x-data="{isTyped: @entangle('stateTyped')}" @click.away="isTyped = false" class="w-full">
+                            <div x-data="{isTyped: @entangle('stateTyped')}" @click.away="isTyped = false"
+                                 class="w-full">
                                 <div class="relative">
                                     <input
                                         id="state_name"
@@ -218,7 +223,8 @@
                     <div class="flex flex-col gap-2 mt-3">
                         <div class="xl:flex w-full gap-2">
                             <label for="pincode_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Pincode</label>
-                            <div x-data="{isTyped: @entangle('pincodeTyped')}" @click.away="isTyped = false" class="w-full">
+                            <div x-data="{isTyped: @entangle('pincodeTyped')}" @click.away="isTyped = false"
+                                 class="w-full">
                                 <div class="relative">
                                     <input
                                         id="pincode_name"
@@ -257,7 +263,9 @@
                                                                 {{ $pincode->vname }}
                                                             </li>
                                                         @empty
-                                                            <button wire:click.prevent="pincodeSave('{{$pincode_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                            <button
+                                                                wire:click.prevent="pincodeSave('{{$pincode_name}}')"
+                                                                class="text-white bg-green-500 text-center w-full">
                                                                 create
                                                             </button>
 
@@ -275,7 +283,8 @@
                     <div class="flex flex-col gap-2 mt-3">
                         <div class="xl:flex w-full gap-2">
                             <label for="country_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Country</label>
-                            <div x-data="{isTyped: @entangle('countryTyped')}" @click.away="isTyped = false" class="w-full">
+                            <div x-data="{isTyped: @entangle('countryTyped')}" @click.away="isTyped = false"
+                                 class="w-full">
                                 <div class="relative">
                                     <input
                                         id="country_name"
@@ -314,7 +323,9 @@
                                                                 {{ $country->vname }}
                                                             </li>
                                                         @empty
-                                                            <button wire:click.prevent="countrySave('{{$country_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                            <button
+                                                                wire:click.prevent="countrySave('{{$country_name}}')"
+                                                                class="text-white bg-green-500 text-center w-full">
                                                                 create
                                                             </button>
 
