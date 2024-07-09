@@ -2,7 +2,7 @@
 
 return [
 
-    'DEVELOPER_DEMO' => '0',
+    'DEVELOPER_DEMO' => '100',
     'GARMENT_DEMO' => '1',
     'OFFSET_DEMO' => '2',
     'AARAN_ERP' => '3',

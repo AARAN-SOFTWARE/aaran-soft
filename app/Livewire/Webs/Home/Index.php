@@ -15,27 +15,19 @@ class Index extends Component
     {
         return match (config('aadmin.app_type')) {
 
-//            config('software.DEVELOPER') => 'livewire.webs.home.demo.aaransales',
-
-            config('software.SPORTS_CLUB') => 'livewire.webs.home.welfare.index',
-
-//            config('software.DEVELOPER') => 'livewire.webs.home.index_1',
-//            config('software.DEVELOPER') => 'livewire.webs.home.index_2',
-//            config('software.DEVELOPER') => 'livewire.webs.home.demo.aaranerp',
+            config('software.DEVELOPER') => 'livewire.webs.home.index',
 
             config('software.AUDIT') => 'livewire.webs.home.sundar.aaran-associates',
 
-            config('software.DEMO') => 'livewire.webs.home.demo.garment-demo',
-
+            config('software.SPORTS_CLUB') => 'livewire.webs.home.welfare.index',
             config('software.WELFARE') => 'livewire.webs.home.welfare.index',
 
             config('software.GARMENT') => 'livewire.webs.home.index',
             config('software.OFFSET') => 'livewire.webs.home.index',
 
-            config('clients.DEVELOPER_DEMO') => 'livewire.webs.home.index_1',
+            config('software.DEMO') => 'livewire.webs.home.demo.garment-demo',
 
             default => 'livewire.webs.home.index',
         };
-//        view('livewire.webs.home.index')
     }
 }
