@@ -1,5 +1,5 @@
 <div>
-    <x-slot name="header">Master List</x-slot>
+    <x-slot name="header">Sports Students</x-slot>
 
     <x-forms.m-panel>
 
@@ -10,14 +10,16 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
-                <x-table.header-text center>Photo</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Master</x-table.header-text>
+                <x-table.header-text class="w-20" center>Logo</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Student</x-table.header-text>
                 <x-table.header-text center>Mobile</x-table.header-text>
-                <x-table.header-text center>WhatsApp</x-table.header-text>
                 <x-table.header-text center>email</x-table.header-text>
-                <x-table.header-text center>city</x-table.header-text>
-                <x-table.header-text center>Sport Club</x-table.header-text>
-                <x-table.header-text center>Grade</x-table.header-text>
+                <x-table.header-text center>City</x-table.header-text>
+                <x-table.header-text center>Dob</x-table.header-text>
+                <x-table.header-text center>Age</x-table.header-text>
+                <x-table.header-text center>Gender</x-table.header-text>
+                <x-table.header-text center>Institution</x-table.header-text>
+                <x-table.header-text center>Student_photo</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -31,39 +33,41 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <div class="flex-shrink-0 h-10 w-10 mr-4 rounded-xl">
-                                <img
-                                    src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->master_photo))}}"
-                                    alt="logo"/>
-                            </div>
+                            <img
+                                src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->student_photo))}}"
+                                alt="logo"/>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
                             {{ $row->vname}}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             {{ $row->mobile}}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
-                            {{ $row->whatsapp}}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             {{ $row->email}}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             {{ $row->city->vname}}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
-                            {{ \Aaran\SportsClub\Models\SportMaster::club($row->sport_club)}}
+                        <x-table.cell-text center>
+                            {{ $row->dob}}
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
-                            {{ $row->grade}}
+                        <x-table.cell-text center>
+                            {{ $row->age}}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text center>
+                            {{ $row->gender}}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text center>
+                            {{ $row->institution}}
                         </x-table.cell-text>
 
                         <x-table.cell-action id="{{$row->id}}"/>
@@ -86,84 +90,35 @@
         <x-forms.create-new :id="$vid">
             <div class="flex gap-5 w-full">
                 <div class="w-full">
-                    <x-input.model-text wire:model="vname" :label="'Name'"/>
+                    <x-input.model-text wire:model="vname" :label="'Student Name'"/>
                     <x-input.model-text wire:model="mobile" :label="'Mobile'"/>
                     <x-input.model-text wire:model="whatsapp" :label="'Whatsapp'"/>
                     <x-input.model-text wire:model="email" :label="'Email'"/>
-                    <x-input.model-date wire:model="dob" :label="'DOB'"/>
-                    <x-input.model-text wire:model="age" :label="'Age'"/>
-                    <x-input.model-select wire:model="gender" :label="'Gender'">
-                        <option>Choose...</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Others">Others</option>
-                        </x-input.model-select>
+                    <x-input.model-text wire:model="address_1" :label="'Address_1'"/>
+                    <x-input.model-text wire:model="address_2" :label="'Address_2'"/>
                     <x-input.model-text wire:model="aadhaar" :label="'aadhaar'"/>
-                    <x-input.model-text wire:model="grade" :label="'grade'"/>
-
+                    <x-input.model-text wire:model="father_name" :label="'FatherName'"/>
+                    <x-input.model-text wire:model="mother_name" :label="'MotherName'"/>
+                    <x-input.model-date wire:model="dob" :label="'DOB'"/>
 
                 </div>
 
                 <div class="w-full">
 
-                    <!-- Image ---------------------------------------------------------------------------------------------------->
-                    <div class="flex flex-row gap-6 mt-4">
+                    <x-input.model-text wire:model="age" :label="'Age'"/>
 
-                        <div class="flex">
+                    <x-input.model-select wire:model="gender" :label="'Gender'">
+                        <option>Choose...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                    </x-input.model-select>
 
-                            <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Photo</label>
+                    <x-input.model-text wire:model="institution" :label="'Institution'"/>
+                    <x-input.model-text wire:model="standard" :label="'Standard'"/>
+                    <x-input.model-text wire:model="experience" :label="'Experience'"/>
 
-                            <div class="flex-shrink-0">
-
-                                <div>
-                                    @if($master_photo)
-                                        <div class="flex-shrink-0 ">
-                                            <img class="h-24 w-full" src="{{ $master_photo->temporaryUrl() }}"
-                                                 alt="{{$master_photo?:''}}"/>
-                                        </div>
-                                    @endif
-
-                                    @if(!$master_photo && isset($master_photo))
-                                        <img class="h-24 w-full"
-                                             src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_master_photo))}}"
-                                             alt="">
-
-                                    @else
-                                        <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>
-                                    @endif
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="relative">
-
-                            <div>
-                                <label for="master_photo"
-                                       class="text-gray-500 font-semibold text-base rounded flex flex-col items-center
-                                   justify-center cursor-pointer border-2 border-gray-300 border-dashed p-2
-                                   mx-auto font-[sans-serif]">
-                                    <x-icons.icon icon="cloud-upload" class="w-8 h-auto block text-gray-400"/>
-                                    Upload Photo
-
-                                    <input type="file" id='master_photo' wire:model="master_photo" class="hidden"/>
-                                    <p class="text-xs font-light text-gray-400 mt-2">PNG and JPG are Allowed.</p>
-                                </label>
-                            </div>
-
-                            <div wire:loading wire:target="master_photo" class="z-10 absolute top-6 left-12">
-                                <div class="w-14 h-14 rounded-full animate-spin
-                                                        border-y-4 border-dashed border-green-500 border-t-transparent"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Address ----------------------------------------------------------------------------------------------------->
-
-                    <x-input.model-text wire:model="address_1" :label="'Address'"/>
-                    <x-input.model-text wire:model="address_2" :label="'Street, Area'"/>
-
-                    <!-- City ----------------------------------------------------------------------------------------------------->
+                    <!-- City ----------------------------------------------------------------------------------------->
                     <div class="flex flex-row  gap-3">
                         <div class="xl:flex w-full gap-2">
                             <label for="city_name" class="w-[10rem] text-zinc-500 tracking-wide py-2 ">City</label>
@@ -224,7 +179,7 @@
                         </div>
                     </div>
 
-                    <!-- State --------------------------------------------------------------------------------------------------->
+                    <!-- State ---------------------------------------------------------------------------------------->
                     <div class="flex flex-col mt-3 gap-2">
                         <div class="xl:flex w-full gap-2">
                             <label for="state_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">State</label>
@@ -284,7 +239,7 @@
                         </div>
                     </div>
 
-                    <!-- Pin-code --------------------------------------------------------------------------------------------------->
+                    <!-- Pin-code ------------------------------------------------------------------------------------->
                     <div class="flex flex-col gap-2 mt-3">
                         <div class="xl:flex w-full gap-2">
                             <label for="pincode_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Pincode</label>
@@ -345,30 +300,32 @@
                         </div>
                     </div>
 
-                    <!-- Sports Club --------------------------------------------------------------------------------------------------->
-                    <div class="flex flex-col gap-2 mt-3">
+
+                    <!-- SportMaster ---------------------------------------------------------------------------------->
+                    <div class="flex flex-row  gap-3 mt-3">
                         <div class="xl:flex w-full gap-2">
-                            <label for="sportsClub_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Sports Club</label>
-                            <div x-data="{isTyped: @entangle('sportsClubTyped')}" @click.away="isTyped = false"
+                            <label for="sportsMaster_name" class="w-[10rem] text-zinc-500 tracking-wide py-2 ">Sports Master</label>
+                            <div x-data="{isTyped: @entangle('sportsMasterTyped')}" @click.away="isTyped = false"
                                  class="w-full">
                                 <div class="relative">
                                     <input
-                                        id="sportsClub_name"
+                                        id="sportsMaster_name"
                                         type="search"
-                                        wire:model.live="sport_club_id"
+                                        wire:model.live="sportsMaster_name"
                                         autocomplete="off"
                                         placeholder="Choose.."
                                         @focus="isTyped = true"
                                         @keydown.escape.window="isTyped = false"
                                         @keydown.tab.window="isTyped = false"
                                         @keydown.enter.prevent="isTyped = false"
-                                        wire:keydown.arrow-up="decrementSportsClub"
-                                        wire:keydown.arrow-down="incrementSportsClub"
-                                        wire:keydown.enter="enterSportsClub"
-                                        class="block w-full purple-textbox"
+                                        wire:keydown.arrow-up="decrementSportsMaster"
+                                        wire:keydown.arrow-down="incrementSportsMaster"
+                                        wire:keydown.enter="enterSportsMaster"
+                                        class="block w-full purple-textbox "
                                     />
 
-                                    <!-- Pin-code Dropdown -------------------------------------------------------------------->
+                                    <!-- SportMaster Dropdown -------------------------------------------------------------------->
+
                                     <div x-show="isTyped"
                                          x-transition:leave="transition ease-in duration-100"
                                          x-transition:leave-start="opacity-100"
@@ -380,21 +337,20 @@
                 rounded-lg border-transparent flex-1 appearance-none border
                                  bg-white text-gray-800 ring-1 ring-purple-600">
                                                 <ul class="overflow-y-scroll h-96">
-                                                    @if($sportsClubCollection)
-                                                        @forelse ($sportsClubCollection as $i => $sportsClub)
+                                                    @if($sportsMasterCollection)
+                                                        @forelse ($sportsMasterCollection as $i => $sportsMaster)
+
                                                             <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8
-                                                        {{ $highlightSportsClub === $i ? 'bg-yellow-100' : '' }}"
-                                                                wire:click.prevent="setSportsClub('{{$sportsClub->vname}}','{{$sportsClub->id}}')"
+                                                        {{ $highlightSportsMaster === $i ? 'bg-yellow-100' : '' }}"
+                                                                wire:click.prevent="setSportsMaster('{{$sportsMaster->vname}}','{{$sportsMaster->id}}')"
                                                                 x-on:click="isTyped = false">
-                                                                {{ $sportsClub->vname }}
+                                                                {{ $sportsMaster->vname }}
                                                             </li>
                                                         @empty
-                                                            <button
-                                                                wire:click.prevent="sportsClubSave('{{$sportsClub_name}}')"
-                                                                class="text-white bg-green-500 text-center w-full">
-                                                                create
-                                                            </button>
-
+                                                            <a href="{{route('sportsClub.masters')}}" role="button"
+                                                               class="flex items-center justify-center bg-green-500 w-full h-8 text-white text-center">
+                                                                Not found , Want to create new
+                                                            </a>
                                                         @endforelse
                                                     @endif
                                                 </ul>
@@ -407,11 +363,58 @@
                     </div>
 
 
-                    <x-input.model-text wire:model="experience" :label="'experience'"/>
+                    <!-- Image ---------------------------------------------------------------------------------------->
+                    <div class="flex flex-row gap-6 mt-4">
 
-                    <x-input.model-date wire:model="started_at" :label="'Started_at'"/>
+                        <div class="flex">
 
+                            <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Logo</label>
 
+                            <div class="flex-shrink-0">
+
+                                <div>
+                                    @if($student_photo)
+                                        <div class="flex-shrink-0 ">
+                                            <img class="h-24 w-full" src="{{ $student_photo->temporaryUrl() }}"
+                                                 alt="{{$student_photo?:''}}"/>
+                                        </div>
+                                    @endif
+
+                                    @if(!$student_photo && isset($old_student_photo))
+                                        <img class="h-24 w-full"
+                                             src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_student_photo))}}"
+                                             alt="">
+
+                                    @else
+                                        <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>
+                                    @endif
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="relative">
+
+                            <div>
+                                <label for="student_photo"
+                                       class="text-gray-500 font-semibold text-base rounded flex flex-col items-center
+                                   justify-center cursor-pointer border-2 border-gray-300 border-dashed p-2
+                                   mx-auto font-[sans-serif]">
+                                    <x-icons.icon icon="cloud-upload" class="w-8 h-auto block text-gray-400"/>
+                                    Upload file
+
+                                    <input type="file" id='club_photo' wire:model="club_photo" class="hidden"/>
+                                    <p class="text-xs font-light text-gray-400 mt-2">PNG, JPG SVG, WEBP, and GIF are
+                                        Allowed.</p>
+                                </label>
+                            </div>
+
+                            <div wire:loading wire:target="club_photo" class="z-10 absolute top-6 left-12">
+                                <div class="w-14 h-14 rounded-full animate-spin
+                                                        border-y-4 border-dashed border-green-500 border-t-transparent"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </x-forms.create-new>
