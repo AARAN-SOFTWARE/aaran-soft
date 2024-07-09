@@ -1,5 +1,5 @@
 <div>
-    <x-slot name="header">Sports Students</x-slot>
+    <x-slot name="header">Students List</x-slot>
 
     <x-forms.m-panel>
 
@@ -10,16 +10,15 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
-                <x-table.header-text class="w-20" center>Logo</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Student</x-table.header-text>
+                <x-table.header-text center>StudentPhoto</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center>StudentName</x-table.header-text>
                 <x-table.header-text center>Mobile</x-table.header-text>
-                <x-table.header-text center>email</x-table.header-text>
+                <x-table.header-text center>Email</x-table.header-text>
                 <x-table.header-text center>City</x-table.header-text>
-                <x-table.header-text center>Dob</x-table.header-text>
+                <x-table.header-text center>DOB</x-table.header-text>
                 <x-table.header-text center>Age</x-table.header-text>
                 <x-table.header-text center>Gender</x-table.header-text>
                 <x-table.header-text center>Institution</x-table.header-text>
-                <x-table.header-text center>Student_photo</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -34,6 +33,7 @@
 
                         <x-table.cell-text>
                             <img
+                                class="w-10 h-10"
                                 src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->student_photo))}}"
                                 alt="logo"/>
                         </x-table.cell-text>
@@ -94,8 +94,8 @@
                     <x-input.model-text wire:model="mobile" :label="'Mobile'"/>
                     <x-input.model-text wire:model="whatsapp" :label="'Whatsapp'"/>
                     <x-input.model-text wire:model="email" :label="'Email'"/>
-                    <x-input.model-text wire:model="address_1" :label="'Address_1'"/>
-                    <x-input.model-text wire:model="address_2" :label="'Address_2'"/>
+                    <x-input.model-text wire:model="address_1" :label="'Address'"/>
+                    <x-input.model-text wire:model="address_2" :label="'Street,Area'"/>
                     <x-input.model-text wire:model="aadhaar" :label="'aadhaar'"/>
                     <x-input.model-text wire:model="father_name" :label="'FatherName'"/>
                     <x-input.model-text wire:model="mother_name" :label="'MotherName'"/>
@@ -368,7 +368,7 @@
 
                         <div class="flex">
 
-                            <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Logo</label>
+                            <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Student Image</label>
 
                             <div class="flex-shrink-0">
 
@@ -403,13 +403,13 @@
                                     <x-icons.icon icon="cloud-upload" class="w-8 h-auto block text-gray-400"/>
                                     Upload file
 
-                                    <input type="file" id='club_photo' wire:model="club_photo" class="hidden"/>
+                                    <input type="file" id='student_photo' wire:model="student_photo" class="hidden"/>
                                     <p class="text-xs font-light text-gray-400 mt-2">PNG, JPG SVG, WEBP, and GIF are
                                         Allowed.</p>
                                 </label>
                             </div>
 
-                            <div wire:loading wire:target="club_photo" class="z-10 absolute top-6 left-12">
+                            <div wire:loading wire:target="student_photo" class="z-10 absolute top-6 left-12">
                                 <div class="w-14 h-14 rounded-full animate-spin
                                                         border-y-4 border-dashed border-green-500 border-t-transparent"></div>
                             </div>
