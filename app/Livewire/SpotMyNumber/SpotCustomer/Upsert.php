@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\SportMyNumber\SportCustomer;
+namespace App\Livewire\SpotMyNumber\SpotCustomer;
 
 use Aaran\Common\Models\City;
 use Aaran\Common\Models\Country;
@@ -14,9 +14,8 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Livewire\WithPagination;
 
-class Index extends Component
+class Upsert extends Component
 {
     use WithFileUploads;
     use CommonTrait;
@@ -392,7 +391,7 @@ class Index extends Component
                 Storage::delete('public/'.$image);
             }
             $logo_name=$image->getClientOriginalName();
-            return $image->storeAs('logo', $logo_name,'public');
+            return $image->storeAs('spot_my_number', $logo_name,'public');
         }
     }
     #endregion
@@ -404,7 +403,7 @@ class Index extends Component
         $this->getStateList();
         $this->getPincodeList();
         $this->getCountryList();
-        return view('livewire.sport-my-number.sport-customer.index');
+        return view('livewire.spot-my-number.spot-customer.upsert');
     }
     #endregion
 }

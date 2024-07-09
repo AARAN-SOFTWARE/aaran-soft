@@ -17,6 +17,8 @@ return new class extends Migration {
                 $table->longText('body_1')->nullable();
                 $table->longText('body_2')->nullable();
                 $table->string('pic')->nullable();
+                $table->string('active_id', 3)->nullable();
+                $table->timestamps();
             });
         }
     }
