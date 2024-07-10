@@ -11,10 +11,12 @@ return new class extends Migration {
 
             Schema::create('spot_listings', function (Blueprint $table) {
                 $table->id();
-                $table->string('category')->nullable();
-                $table->string('star')->nullable();
-                $table->string('rating')->nullable();
-                $table->string('badge')->nullable();
+                $table->string('vname')->nullable();
+                $table->string('active_id', 3)->nullable();
+//                $table->string('star')->nullable();
+//                $table->string('rating')->nullable();
+//                $table->string('badge')->nullable();
+                $table->timestamps();
             });
         }
     }

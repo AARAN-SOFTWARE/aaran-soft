@@ -28,19 +28,27 @@
                             </x-table.cell-text>
 
                             <x-table.cell-text>
+                                <a href="{{route('spotCustomer.category',[$row->spot_customer_id])}}">
                                     {{ $row->title}}
+                                </a>
                             </x-table.cell-text>
 
                             <x-table.cell-text>
+                                <a href="{{route('spotCustomer.category',[$row->spot_customer_id])}}">
                                     {{ $row->slogan}}
+                                </a>
                             </x-table.cell-text>
 
                             <x-table.cell-text>
+                                <a href="{{route('spotCustomer.category',[$row->spot_customer_id])}}">
                                 {{ $row->body_1}}
+                                </a>
                             </x-table.cell-text>
 
                             <x-table.cell-text>
+                                <a href="{{route('spotCustomer.category',[$row->spot_customer_id])}}">
                                 {{ $row->body_2}}
+                                </a>
                             </x-table.cell-text>
 
                             <x-table.cell-text center>

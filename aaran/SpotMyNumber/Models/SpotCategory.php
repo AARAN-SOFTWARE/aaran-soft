@@ -11,6 +11,11 @@ class SpotCategory extends Model
     public static function search(string $searches)
     {
         return empty($searches) ? static::query()
-            : static::where('vname', 'like', '%' . $searches . '%');
+            : static::where('spot_customer_id', 'like', '%' . $searches . '%');
+    }
+
+    public static function spotList($id)
+    {
+        return SpotListing::find($id)->vname;
     }
 }
