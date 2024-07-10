@@ -36,6 +36,7 @@ use Aaran\Master\Database\Seeders\S205_StyleSeeder;
 //use Aaran\Orders\Database\Seeders\StyleSeeder;
 use Aaran\Testing\Database\Seeders\DbTestSeeder;
 use Aaran\Testing\Database\Seeders\TestFileSeeder;
+use Aaran\Web\Database\Seeders\FeedCategorySeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -81,6 +82,10 @@ class DatabaseSeeder extends Seeder
 
         if (DbMigration::hasStyle()) {
             S205_StyleSeeder::run();
+        }
+
+        if (DbMigration::hasWebs()) {
+            FeedCategorySeeder::run();
         }
 
 //        ClientSeeder::run();

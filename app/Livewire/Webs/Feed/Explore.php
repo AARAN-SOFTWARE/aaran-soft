@@ -2,17 +2,16 @@
 
 namespace App\Livewire\Webs\Feed;
 
+use Aaran\Web\Models\Feed;
 use Aaran\Web\Models\FeedCategory;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
-use Aaran\Web\Models\Feed;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
-use Illuminate\Support\Str;
 
-
-class Index extends Component
+class Explore extends Component
 {
     use CommonTrait;
     use WithFileUploads;
@@ -100,16 +99,16 @@ class Index extends Component
     public function getObj($id)
     {
         if($id){
-        $obj = Feed::find($id);
-        $this->vid = $obj->id;
-        $this->vname = $obj->vname;
-        $this->feed_category_id = $obj->feed_category_id;
-        $this->description = $obj->description;
-        $this->image = $obj->image;
-        $this->old_image = $obj->old_image;
-        $this->bookmark = $obj->bookmark;
-        $this->active_id = $obj->active_id;
-        return $obj;
+            $obj = Feed::find($id);
+            $this->vid = $obj->id;
+            $this->vname = $obj->vname;
+            $this->feed_category_id = $obj->feed_category_id;
+            $this->description = $obj->description;
+            $this->image = $obj->image;
+            $this->old_image = $obj->old_image;
+            $this->bookmark = $obj->bookmark;
+            $this->active_id = $obj->active_id;
+            return $obj;
         }
         return null;
     }
@@ -146,7 +145,11 @@ class Index extends Component
         $this->sortField = 'created_at';
         return Feed::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
-            ->where('user_id', '=', $this->userFilter?:auth()->id())
+            ->when($this->categoryFilter,function ($query,$categoryFilter){
+                return $query->whereIn('feed_category_id',$categoryFilter);
+//                    ->where('feed_category_id', '=', $categoryFilter);
+            })
+//            ->where('feed_category_id', '=', $this->categoryFilter)
             ->orderBy($this->sortField, $this->sortAsc ? 'desc' : 'asc')
             ->paginate($this->perPage);
     }
@@ -154,12 +157,21 @@ class Index extends Component
 
 
     #region[filterUser]
-    public $userFilter;
-    public function filterUser($id)
+    public array $categoryFilter=[];
+    public function filterType($id)
     {
-        $this->userFilter=$id;
+       return array_push($this->categoryFilter,$id);
     }
     #endregion
+    public function clearFilter()
+    {
+        $this->categoryFilter=[];
+    }
+
+    public function removeFilter($id)
+    {
+        unset($this->categoryFilter[$id]);
+    }
 
 
     #region[render]
@@ -170,9 +182,8 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.webs.feed.index')->with([
+        return view('livewire.webs.feed.explore')->with([
             "list" => $this->getList()
         ]);
     }
-    #endregion
 }

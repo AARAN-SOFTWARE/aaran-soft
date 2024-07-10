@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Feed extends Model
+class FeedCategory extends Model
 {
     use HasFactory;
 
@@ -24,22 +24,10 @@ class Feed extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(FeedCategory::class);
-    }
-
     public static function allocated($str)
     {
         if ($str) {
             return User::find($str)->name;
-        } else return '';
-    }
-
-    public static function type($str)
-    {
-        if ($str) {
-            return FeedCategory::find($str)->vname;
         } else return '';
     }
 }
