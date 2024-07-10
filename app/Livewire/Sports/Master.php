@@ -29,7 +29,6 @@ class Master extends Component
     public string $email = '';
     public string $address_1 = '';
     public string $address_2 = '';
-    public string $sport_club_id = '';
     public string $grade = '';
     public string $experience = '';
     public string $dob = '';
@@ -42,18 +41,24 @@ class Master extends Component
     public $cities;
     public $states;
     public $pincodes;
-    public $sportClub;
+    public $sportClubs;
+    public SportClub $sportClub;
     public $isUploaded = false;
 
     #endregion
 
     #region[Mount]
-    public function mount()
+    public function mount($id)
     {
         $this->cities = City::all();
         $this->states = State::all();
         $this->pincodes = Pincode::all();
-        $this->sportClub = SportClub::all();
+        $this->sportClubs = SportClub::all();
+
+        if ($id) {
+            $this->sportClub = SportClub::find($id);
+        }
+
     }
     #endregion
 
@@ -109,13 +114,14 @@ class Master extends Component
         $this->cityTyped = false;
 
     }
+
     public function citySave($name)
     {
-        $obj= City::create([
+        $obj = City::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v=['name'=>$name,'id'=>$obj->id];
+        $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshCity($v);
     }
 
@@ -239,11 +245,11 @@ class Master extends Component
 
     public function pincodeSave($name)
     {
-        $obj= Pincode::create([
+        $obj = Pincode::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v=['name'=>$name,'id'=>$obj->id];
+        $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshPincode($v);
     }
 
@@ -251,75 +257,6 @@ class Master extends Component
     {
         $this->pincodeCollection = $this->pincode_name ? Pincode::search(trim($this->pincode_name))
             ->get() : Pincode::all();
-    }
-    #endregion
-
-    #region[sport-club]
-    public $sportsClub_id = '';
-    public $sportsClub_name = '';
-    public Collection $sportsClubCollection;
-    public $highlightSportsClub = 0;
-    public $sportsClubTyped = false;
-
-    public function decrementSportsClub(): void
-    {
-        if ($this->highlightSportsClub === 0) {
-            $this->highlightSportsClub = count($this->sportsClubCollection) - 1;
-            return;
-        }
-        $this->highlightSportsClub--;
-    }
-
-    public function incrementSportsClub(): void
-    {
-        if ($this->highlightSportsClub === count($this->sportsClubCollection) - 1) {
-            $this->highlightSportsClub = 0;
-            return;
-        }
-        $this->highlightSportsClub++;
-    }
-
-    public function enterSportsClub(): void
-    {
-        $obj = $this->sportsClubCollection[$this->highlightSportsClub] ?? null;
-
-        $this->sportsClub_name = '';
-        $this->sportsClubCollection = Collection::empty();
-        $this->highlightSportsClub = 0;
-
-        $this->sportsClub_name = $obj['vname'] ?? '';;
-        $this->sportsClub_id = $obj['id'] ?? '';;
-    }
-
-    public function setSportsClub($name, $id): void
-    {
-        $this->sportsClub_name = $name;
-        $this->sportsClub_id = $id;
-        $this->getSportsClubList();
-    }
-
-    #[On('refresh-sportsClub')]
-    public function refreshSportsClub($v): void
-    {
-        $this->sportsClub_id = $v['id'];
-        $this->sportsClub_name = $v['name'];
-        $this->sportsClubTyped = false;
-    }
-
-    public function SportsClubSave($name)
-    {
-        $obj= SportClub::create([
-            'vname' => $name,
-            'active_id' => '1'
-        ]);
-        $v=['name'=>$name,'id'=>$obj->id];
-        $this->refreshSportsClub($v);
-    }
-
-    public function getSportsClubList(): void
-    {
-        $this->sportsClubCollection = $this->sportsClub_name ? SportClub::search(trim($this->sportsClub_name))
-            ->get() : SportClub::all();
     }
     #endregion
 
@@ -337,10 +274,10 @@ class Master extends Component
                     'email' => $this->email,
                     'address_1' => $this->address_1,
                     'address_2' => $this->address_2,
-                    'city_id' => $this->city_id ?:1,
-                    'state_id' => $this->state_id ?:1,
-                    'pincode_id' => $this->pincode_id ?:1,
-                    'sport_club' => $this->sport_club_id ?:1,
+                    'city_id' => $this->city_id ?: 1,
+                    'state_id' => $this->state_id ?: 1,
+                    'pincode_id' => $this->pincode_id ?: 1,
+                    'sport_club_id' => $this->sportClub->id,
                     'grade' => $this->grade,
                     'experience' => $this->experience,
                     'dob' => $this->dob,
@@ -360,10 +297,10 @@ class Master extends Component
                 $obj->email = $this->email;
                 $obj->address_1 = $this->address_1;
                 $obj->address_2 = $this->address_2;
-                $obj->city_id = $this->city_id ?:1;
-                $obj->state_id = $this->state_id ?:1;
-                $obj->pincode_id = $this->pincode_id ?:1;
-                $obj->sport_club= $this->sport_club_id ?:1;
+                $obj->city_id = $this->city_id ?: 1;
+                $obj->state_id = $this->state_id ?: 1;
+                $obj->pincode_id = $this->pincode_id ?: 1;
+                $obj->sport_club_id = $this->sportClub->id;
                 $obj->grade = $this->grade;
                 $obj->experience = $this->experience;
                 $obj->dob = $this->dob;
@@ -396,8 +333,6 @@ class Master extends Component
         $this->state_name = '';
         $this->pincode_id = '';
         $this->pincode_name = '';
-        $this->sport_club_id = '';
-        $this->sportsClub_name = '';
         $this->grade = '';
         $this->experience = '';
         $this->dob = '';
@@ -428,8 +363,6 @@ class Master extends Component
             $this->state_name = $obj->state->vname;
             $this->pincode_id = $obj->pincode_id;
             $this->pincode_name = $obj->pincode->vname;
-            $this->sportsClub_id =$obj->sport_club ;
-            $this->sportsClub_name = SportMaster::club($obj->sport_club);
             $this->grade = $obj->grade;
             $this->experience = $obj->experience;
             $this->dob = $obj->dob;
@@ -483,6 +416,7 @@ class Master extends Component
     public function getList()
     {
         return SportMaster::search($this->searches)
+            ->where('sport_club_id', '=', $this->sportClub->id)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -490,17 +424,11 @@ class Master extends Component
     #endregion
 
     #region[render]
-    public function reRender(): void
-    {
-        $this->render()->render();
-    }
-
     public function render()
     {
         $this->getCityList();
         $this->getStateList();
         $this->getPincodeList();
-        $this->getSportsClubList();
 
         return view('livewire.sports.master')->with([
             'list' => $this->getList()

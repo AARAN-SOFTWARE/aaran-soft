@@ -37,11 +37,15 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            {{ $row->vname}}
+                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                                {{ $row->vname}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            {{ $row->master_name}}
+                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                                {{ $row->master_name}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
