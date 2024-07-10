@@ -298,7 +298,7 @@ class Master extends Component
         $this->getSportsClubList();
     }
 
-    #[On('refresh-pincode')]
+    #[On('refresh-sportsClub')]
     public function refreshSportsClub($v): void
     {
         $this->sportsClub_id = $v['id'];
@@ -391,9 +391,13 @@ class Master extends Component
         $this->address_1 = '';
         $this->address_2 = '';
         $this->city_id = '';
+        $this->city_name = '';
         $this->state_id = '';
+        $this->state_name = '';
         $this->pincode_id = '';
+        $this->pincode_name = '';
         $this->sport_club_id = '';
+        $this->sportsClub_name = '';
         $this->grade = '';
         $this->experience = '';
         $this->dob = '';

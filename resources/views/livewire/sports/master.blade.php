@@ -305,7 +305,7 @@
                                     <input
                                         id="sportsClub_name"
                                         type="search"
-                                        wire:model.live="sport_club_id"
+                                        wire:model.live="sportsClub_name"
                                         autocomplete="off"
                                         placeholder="Choose.."
                                         @focus="isTyped = true"
@@ -318,7 +318,6 @@
                                         class="block w-full purple-textbox"
                                     />
 
-                                    <!-- Pin-code Dropdown -------------------------------------------------------------------->
                                     <div x-show="isTyped"
                                          x-transition:leave="transition ease-in duration-100"
                                          x-transition:leave-start="opacity-100"
@@ -359,7 +358,6 @@
 
                     <x-input.model-text wire:model="experience" :label="'experience'"/>
 
-                    <x-input.model-date wire:model="started_at" :label="'Started_at'"/>
 
                     <!-- Image ---------------------------------------------------------------------------------------------------->
                     <div class="flex flex-row gap-6 mt-4">
