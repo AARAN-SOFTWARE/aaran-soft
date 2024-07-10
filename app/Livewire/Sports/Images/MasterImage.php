@@ -145,7 +145,7 @@ class MasterImage extends Component
 
     public function render()
     {
-        return view('livewire.image.master-image')->with([
+        return view('livewire.sports.image.master-image')->with([
             'list' => $this->getList(),
     ]);
     }

@@ -144,7 +144,7 @@ class StudentImage extends Component
 
     public function render()
     {
-        return view('livewire.image.student-image')->with([
+        return view('livewire.sports.image.student-image')->with([
             'list' => $this->getList(),
         ]);
     }

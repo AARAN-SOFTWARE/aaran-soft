@@ -22,6 +22,6 @@ class Show extends Component
     #endregion
     public function render()
     {
-        return view('livewire.image.show');
+        return view('livewire.sports.image.show');
     }
 }

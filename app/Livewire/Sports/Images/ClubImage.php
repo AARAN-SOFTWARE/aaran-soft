@@ -144,7 +144,7 @@ class ClubImage extends Component
     #region[render]
     public function render()
     {
-        return view('livewire.image.club-image')->with([
+        return view('livewire.sports.image.club-image')->with([
             'list' => $this->getList(),
         ]);
     }
