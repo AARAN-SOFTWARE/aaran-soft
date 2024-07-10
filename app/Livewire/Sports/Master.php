@@ -434,6 +434,7 @@ class Master extends Component
             $this->aadhaar = $obj->aadhaar;
             $this->old_master_photo = $obj->master_photo;
             $this->active_id = $obj->active_id;
+
             return $obj;
         }
         return null;

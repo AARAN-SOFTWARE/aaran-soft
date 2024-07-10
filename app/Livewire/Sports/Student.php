@@ -49,7 +49,7 @@ class Student extends Component
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
-                $obj = SportClub:: create([
+                $obj = SportStudent:: create([
                     'vname' => $this->vname,
                     'mobile' => $this->mobile,
                     'whatsapp' => $this->whatsapp,
@@ -67,14 +67,13 @@ class Student extends Component
                     'gender' => $this->gender,
                     'institution' => $this->institution,
                     'standard' => $this->standard,
-                    'sport_master_id' => $this->sport_master_id ?: 1,
+                    'sport_master_id' => $this->sportsMaster_id ?: 1,
                     'experience' => $this->experience,
                     'student_photo' => $this->saveImage(),
                     'active_id' => $this->active_id ? 1 : 0,
-                    'user_id' => auth()->id()
                 ]);
             } else {
-                $obj = SportClub::find($this->vid);
+                $obj = SportStudent::find($this->vid);
                 $obj->vname = $this->vname;
                 $obj->mobile = $this->mobile;
                 $obj->whatsapp = $this->whatsapp;
@@ -122,18 +121,18 @@ class Student extends Component
             $this->state_name = $obj->state->vname;
             $this->pincode_id = $obj->pincode_id;
             $this->pincode_name = $obj->pincode->vname;
-            $this->aadhaar = $obj->aadhaar->vname;
-            $this->father_name = $obj->father_name->vname;
-            $this->mother_name = $obj->mother_name->vname;
-            $this->dob = $obj->dob->vname;
-            $this->age = $obj->age->vname;
-            $this->gender = $obj->gender->vname;
-            $this->institution = $obj->institution->vname;
-            $this->sportsMaster_id = $obj->sportsMaster_id->vname;
-            $this->sportsMaster_name= $obj->sportsMaster_name->vname;
-            $this->standard = $obj->standard->vname;
-            $this->experience = $obj->experience->vname;
-            $this->old_student_photo = $obj->old_student_photo;
+            $this->aadhaar = $obj->aadhaar;
+            $this->father_name = $obj->father_name;
+            $this->mother_name = $obj->mother_name;
+            $this->dob = $obj->dob;
+            $this->age = $obj->age;
+            $this->gender = $obj->gender;
+            $this->institution = $obj->institution;
+            $this->sportsMaster_id = $obj->sport_master_id;
+            $this->sportsMaster_name = SportStudent::master($obj->sport_master_id);
+            $this->standard = $obj->standard;
+            $this->experience = $obj->experience;
+            $this->old_student_photo = $obj->student_photo;
             $this->active_id = $obj->active_id;
 
             return $obj;

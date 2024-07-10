@@ -106,57 +106,7 @@
 
                 <div class="w-full">
 
-                    <!-- Image ---------------------------------------------------------------------------------------------------->
-                    <div class="flex flex-row gap-6 mt-4">
 
-                        <div class="flex">
-
-                            <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Photo</label>
-
-                            <div class="flex-shrink-0">
-
-                                <div>
-                                    @if($master_photo)
-                                        <div class="flex-shrink-0 ">
-                                            <img class="h-24 w-full" src="{{ $master_photo->temporaryUrl() }}"
-                                                 alt="{{$master_photo?:''}}"/>
-                                        </div>
-                                    @endif
-
-                                    @if(!$master_photo && isset($master_photo))
-                                        <img class="h-24 w-full"
-                                             src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_master_photo))}}"
-                                             alt="">
-
-                                    @else
-                                        <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>
-                                    @endif
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="relative">
-
-                            <div>
-                                <label for="master_photo"
-                                       class="text-gray-500 font-semibold text-base rounded flex flex-col items-center
-                                   justify-center cursor-pointer border-2 border-gray-300 border-dashed p-2
-                                   mx-auto font-[sans-serif]">
-                                    <x-icons.icon icon="cloud-upload" class="w-8 h-auto block text-gray-400"/>
-                                    Upload Photo
-
-                                    <input type="file" id='master_photo' wire:model="master_photo" class="hidden"/>
-                                    <p class="text-xs font-light text-gray-400 mt-2">PNG and JPG are Allowed.</p>
-                                </label>
-                            </div>
-
-                            <div wire:loading wire:target="master_photo" class="z-10 absolute top-6 left-12">
-                                <div class="w-14 h-14 rounded-full animate-spin
-                                                        border-y-4 border-dashed border-green-500 border-t-transparent"></div>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- Address ----------------------------------------------------------------------------------------------------->
 
@@ -410,6 +360,58 @@
                     <x-input.model-text wire:model="experience" :label="'experience'"/>
 
                     <x-input.model-date wire:model="started_at" :label="'Started_at'"/>
+
+                    <!-- Image ---------------------------------------------------------------------------------------------------->
+                    <div class="flex flex-row gap-6 mt-4">
+
+                        <div class="flex">
+
+                            <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Photo</label>
+
+                            <div class="flex-shrink-0">
+
+                                <div>
+                                    @if($master_photo)
+                                        <div class="flex-shrink-0 ">
+                                            <img class="h-24 w-full" src="{{ $master_photo->temporaryUrl() }}"
+                                                 alt="{{$master_photo?:''}}"/>
+                                        </div>
+                                    @endif
+
+                                    @if(!$master_photo && isset($master_photo))
+                                        <img class="h-24 w-full"
+                                             src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_master_photo))}}"
+                                             alt="">
+
+                                    @else
+                                        <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>
+                                    @endif
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="relative">
+
+                            <div>
+                                <label for="master_photo"
+                                       class="text-gray-500 font-semibold text-base rounded flex flex-col items-center
+                                   justify-center cursor-pointer border-2 border-gray-300 border-dashed p-2
+                                   mx-auto font-[sans-serif]">
+                                    <x-icons.icon icon="cloud-upload" class="w-8 h-auto block text-gray-400"/>
+                                    Upload Photo
+
+                                    <input type="file" id='master_photo' wire:model="master_photo" class="hidden"/>
+                                    <p class="text-xs font-light text-gray-400 mt-2">PNG and JPG are Allowed.</p>
+                                </label>
+                            </div>
+
+                            <div wire:loading wire:target="master_photo" class="z-10 absolute top-6 left-12">
+                                <div class="w-14 h-14 rounded-full animate-spin
+                                                        border-y-4 border-dashed border-green-500 border-t-transparent"></div>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>

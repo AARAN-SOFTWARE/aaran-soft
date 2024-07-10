@@ -42,6 +42,11 @@ class SportStudent extends Model
         return $this->belongsTo(Pincode::class);
     }
 
+    public static function master($str)
+    {
+        return SportMaster::find($str)->vname;
+    }
+
     public function sportStudent(): BelongsTo
     {
         return $this->belongsTo(SportStudent::class);
