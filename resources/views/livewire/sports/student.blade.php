@@ -59,7 +59,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            {{ $row->dob}}
+                            {{ $row->dob ?  date('d-m-Y', strtotime($row->dob)) :''}}
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
