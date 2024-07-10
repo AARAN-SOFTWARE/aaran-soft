@@ -11,10 +11,11 @@ return new class extends Migration {
 
             Schema::create('sport_club_pics', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('sport_master_id')->references('id')->on('sport_masters');
+                $table->foreignId('sport_club_id')->references('id')->on('sport_clubs');
+                $table->foreignId('user_id')->references('id')->on('users');
                 $table->string('title')->nullable();
-                $table->string('pic_name')->nullable();
-                $table->string('desc')->nullable();
+                $table->string('club_image')->nullable();
+                $table->longText('desc')->nullable();
                 $table->string('active_id', 3)->nullable();
                 $table->timestamps();
             });

@@ -18,6 +18,7 @@
                 <x-table.header-text center>city</x-table.header-text>
                 <x-table.header-text center>Sport Club</x-table.header-text>
                 <x-table.header-text center>Grade</x-table.header-text>
+                <x-table.header-text center>Gallery</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -74,13 +75,19 @@
 
                         <x-table.cell-text>
                             <a href="{{route('sportsClub.students',[$row->id])}}">
-                                {{ \Aaran\SportsClub\Models\SportMaster::club($row->sport_club_id)}}
+                                {{ \Aaran\SportsClub\Models\SportMaster::club($row->sport_club)}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
                             <a href="{{route('sportsClub.students',[$row->id])}}">
                                 {{ $row->grade}}
+                            </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <a href="{{route('sportsClub.masterImage',[$row->id])}}">
+                                <x-icons.icon :icon="'photo'" class="w-3 h-3"/>
                             </a>
                         </x-table.cell-text>
 
