@@ -11,6 +11,7 @@ use Aaran\SpotMyNumber\Models\SpotPic;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -310,7 +311,7 @@ class Upsert extends Component
         if ($this->vname!="") {
             if ($this->vid == "") {
                 $obj = SpotCustomer::create([
-                    'vname' => $this->vname,
+                    'vname' => Str::ucfirst($this->vname),
                     'contact_person' => $this->contact_person,
                     'mobile' => $this->mobile,
                     'whatsapp' => $this->whatsapp,

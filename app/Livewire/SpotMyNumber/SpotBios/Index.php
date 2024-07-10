@@ -5,6 +5,7 @@ namespace App\Livewire\SpotMyNumber\SpotBios;
 use Aaran\SpotMyNumber\Models\SpotBio;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -38,7 +39,7 @@ class Index extends Component
             if ($this->vid == "") {
                 SpotBio::create([
                     'spot_customer_id' => $this->spot_customer_id,
-                    'title' => $this->title,
+                    'title' => Str::ucfirst($this->title),
                     'slogan'=>$this->slogan,
                     'body_1'=>$this->body_1,
                     'body_2'=>$this->body_2,

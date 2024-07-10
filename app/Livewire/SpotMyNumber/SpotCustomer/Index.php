@@ -11,6 +11,7 @@ use Aaran\SpotMyNumber\Models\SpotPic;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -308,12 +309,13 @@ class Index extends Component
     #endregion
 
     #region[save]
-    public function save()
+    public function getSave()
     {
         if ($this->vname != "") {
             if ($this->vid == "") {
+                $this->validate(['vname' => 'required|unique:spot_customers,vname']);
                 $obj = SpotCustomer::create([
-                    'vname' => $this->vname,
+                    'vname' => Str::ucfirst($this->vname),
                     'contact_person' => $this->contact_person,
                     'mobile' => $this->mobile,
                     'whatsapp' => $this->whatsapp,
@@ -425,6 +427,7 @@ class Index extends Component
         $this->business_open_timing='';
         $this->business_close_timing='';
         $this->active_id=1;
+        $this->showEditModal=false;
     }
     #endregion
 
