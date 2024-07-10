@@ -10,15 +10,15 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
-                <x-table.header-text center>StudentPhoto</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>StudentName</x-table.header-text>
+                <x-table.header-text center>Photo</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Student Name</x-table.header-text>
+                <x-table.header-text center>Institution</x-table.header-text>
+                <x-table.header-text center>Standard</x-table.header-text>
                 <x-table.header-text center>Mobile</x-table.header-text>
-                <x-table.header-text center>Email</x-table.header-text>
-                <x-table.header-text center>City</x-table.header-text>
+                <x-table.header-text center>Gender</x-table.header-text>
                 <x-table.header-text center>DOB</x-table.header-text>
                 <x-table.header-text center>Age</x-table.header-text>
-                <x-table.header-text center>Gender</x-table.header-text>
-                <x-table.header-text center>Institution</x-table.header-text>
+                <x-table.header-text center>City</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -43,15 +43,19 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
+                            {{ $row->institution}}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text center>
+                            {{ $row->standard}}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text center>
                             {{ $row->mobile}}
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            {{ $row->email}}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text center>
-                            {{ $row->city->vname}}
+                            {{ $row->gender}}
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
@@ -63,11 +67,7 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            {{ $row->gender}}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text center>
-                            {{ $row->institution}}
+                            {{ $row->city->vname}}
                         </x-table.cell-text>
 
                         <x-table.cell-action id="{{$row->id}}"/>
@@ -299,65 +299,65 @@
                         </div>
                     </div>
 
-{{--                    <!-- SportMaster ---------------------------------------------------------------------------------->--}}
-{{--                    <div class="flex flex-col sm:flex-row w-full gap-2">--}}
-{{--                        <label for="sportsMaster_name"--}}
-{{--                               class="w-[10rem] text-zinc-500 tracking-wide py-2 ">Master</label>--}}
-{{--                        <div x-data="{isTyped: @entangle('sportsMasterTyped')}" @click.away="isTyped = false"--}}
-{{--                             class="w-full">--}}
-{{--                            <div class="relative">--}}
-{{--                                <input--}}
-{{--                                    id="sportsMaster_name"--}}
-{{--                                    type="search"--}}
-{{--                                    wire:model.live="sportsMaster_name"--}}
-{{--                                    autocomplete="off"--}}
-{{--                                    placeholder="Choose.."--}}
-{{--                                    @focus="isTyped = true"--}}
-{{--                                    @keydown.escape.window="isTyped = false"--}}
-{{--                                    @keydown.tab.window="isTyped = false"--}}
-{{--                                    @keydown.enter.prevent="isTyped = false"--}}
-{{--                                    wire:keydown.arrow-up="decrementSportsMaster"--}}
-{{--                                    wire:keydown.arrow-down="incrementSportsMaster"--}}
-{{--                                    wire:keydown.enter="enterSportsMaster"--}}
-{{--                                    class="block w-full purple-textbox "--}}
-{{--                                />--}}
+                    {{--                    <!-- SportMaster ---------------------------------------------------------------------------------->--}}
+                    {{--                    <div class="flex flex-col sm:flex-row w-full gap-2">--}}
+                    {{--                        <label for="sportsMaster_name"--}}
+                    {{--                               class="w-[10rem] text-zinc-500 tracking-wide py-2 ">Master</label>--}}
+                    {{--                        <div x-data="{isTyped: @entangle('sportsMasterTyped')}" @click.away="isTyped = false"--}}
+                    {{--                             class="w-full">--}}
+                    {{--                            <div class="relative">--}}
+                    {{--                                <input--}}
+                    {{--                                    id="sportsMaster_name"--}}
+                    {{--                                    type="search"--}}
+                    {{--                                    wire:model.live="sportsMaster_name"--}}
+                    {{--                                    autocomplete="off"--}}
+                    {{--                                    placeholder="Choose.."--}}
+                    {{--                                    @focus="isTyped = true"--}}
+                    {{--                                    @keydown.escape.window="isTyped = false"--}}
+                    {{--                                    @keydown.tab.window="isTyped = false"--}}
+                    {{--                                    @keydown.enter.prevent="isTyped = false"--}}
+                    {{--                                    wire:keydown.arrow-up="decrementSportsMaster"--}}
+                    {{--                                    wire:keydown.arrow-down="incrementSportsMaster"--}}
+                    {{--                                    wire:keydown.enter="enterSportsMaster"--}}
+                    {{--                                    class="block w-full purple-textbox "--}}
+                    {{--                                />--}}
 
-{{--                                <!-- SportMaster Dropdown -------------------------------------------------------------------->--}}
+                    {{--                                <!-- SportMaster Dropdown -------------------------------------------------------------------->--}}
 
-{{--                                <div x-show="isTyped"--}}
-{{--                                     x-transition:leave="transition ease-in duration-100"--}}
-{{--                                     x-transition:leave-start="opacity-100"--}}
-{{--                                     x-transition:leave-end="opacity-0"--}}
-{{--                                     x-cloak--}}
-{{--                                >--}}
-{{--                                    <div class="absolute z-20 w-full mt-2">--}}
-{{--                                        <div class="block py-1 shadow-md w-full--}}
-{{--                rounded-lg border-transparent flex-1 appearance-none border--}}
-{{--                                 bg-white text-gray-800 ring-1 ring-purple-600">--}}
-{{--                                            <ul class="overflow-y-scroll h-96">--}}
-{{--                                                @if($sportsMasterCollection)--}}
-{{--                                                    @forelse ($sportsMasterCollection as $i => $sportsMaster)--}}
+                    {{--                                <div x-show="isTyped"--}}
+                    {{--                                     x-transition:leave="transition ease-in duration-100"--}}
+                    {{--                                     x-transition:leave-start="opacity-100"--}}
+                    {{--                                     x-transition:leave-end="opacity-0"--}}
+                    {{--                                     x-cloak--}}
+                    {{--                                >--}}
+                    {{--                                    <div class="absolute z-20 w-full mt-2">--}}
+                    {{--                                        <div class="block py-1 shadow-md w-full--}}
+                    {{--                rounded-lg border-transparent flex-1 appearance-none border--}}
+                    {{--                                 bg-white text-gray-800 ring-1 ring-purple-600">--}}
+                    {{--                                            <ul class="overflow-y-scroll h-96">--}}
+                    {{--                                                @if($sportsMasterCollection)--}}
+                    {{--                                                    @forelse ($sportsMasterCollection as $i => $sportsMaster)--}}
 
-{{--                                                        <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
-{{--                                                        {{ $highlightSportsMaster === $i ? 'bg-yellow-100' : '' }}"--}}
-{{--                                                            wire:click.prevent="setSportsMaster('{{$sportsMaster->vname}}','{{$sportsMaster->id}}')"--}}
-{{--                                                            x-on:click="isTyped = false">--}}
-{{--                                                            {{ $sportsMaster->vname }}--}}
-{{--                                                        </li>--}}
-{{--                                                    @empty--}}
-{{--                                                        <a href="{{route('sportsClub.masters')}}" role="button"--}}
-{{--                                                           class="flex items-center justify-center bg-green-500 w-full h-8 text-white text-center">--}}
-{{--                                                            Not found , Want to create new--}}
-{{--                                                        </a>--}}
-{{--                                                    @endforelse--}}
-{{--                                                @endif--}}
-{{--                                            </ul>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    {{--                                                        <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
+                    {{--                                                        {{ $highlightSportsMaster === $i ? 'bg-yellow-100' : '' }}"--}}
+                    {{--                                                            wire:click.prevent="setSportsMaster('{{$sportsMaster->vname}}','{{$sportsMaster->id}}')"--}}
+                    {{--                                                            x-on:click="isTyped = false">--}}
+                    {{--                                                            {{ $sportsMaster->vname }}--}}
+                    {{--                                                        </li>--}}
+                    {{--                                                    @empty--}}
+                    {{--                                                        <a href="{{route('sportsClub.masters')}}" role="button"--}}
+                    {{--                                                           class="flex items-center justify-center bg-green-500 w-full h-8 text-white text-center">--}}
+                    {{--                                                            Not found , Want to create new--}}
+                    {{--                                                        </a>--}}
+                    {{--                                                    @endforelse--}}
+                    {{--                                                @endif--}}
+                    {{--                                            </ul>--}}
+                    {{--                                        </div>--}}
+                    {{--                                    </div>--}}
+                    {{--                                </div>--}}
+                    {{--                            </div>--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
 
                     <x-input.model-text wire:model="experience" :label="'Experience'"/>
 
