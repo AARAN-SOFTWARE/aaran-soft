@@ -50,15 +50,9 @@ class Master extends Component
     #region[Mount]
     public function mount($id)
     {
-        $this->cities = City::all();
-        $this->states = State::all();
-        $this->pincodes = Pincode::all();
-        $this->sportClubs = SportClub::all();
-
         if ($id) {
             $this->sportClub = SportClub::find($id);
         }
-
     }
     #endregion
 

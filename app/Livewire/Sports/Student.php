@@ -42,6 +42,17 @@ class Student extends Component
 
     public bool $isUploaded = false;
 
+    public SportMaster $sportMaster;
+
+    #endregion
+
+    #region[Mount]
+    public function mount($id)
+    {
+        if ($id) {
+            $this->sportMaster = SportMaster::find($id);
+        }
+    }
     #endregion
 
     #region[getSave]
@@ -67,7 +78,7 @@ class Student extends Component
                     'gender' => $this->gender,
                     'institution' => $this->institution,
                     'standard' => $this->standard,
-                    'sport_master_id' => $this->sportsMaster_id ?: 1,
+                    'sport_master_id' => $this->sportMaster->id,
                     'experience' => $this->experience,
                     'student_photo' => $this->saveImage(),
                     'active_id' => $this->active_id ? 1 : 0,
@@ -91,7 +102,7 @@ class Student extends Component
                 $obj->gender = $this->gender;
                 $obj->institution = $this->institution;
                 $obj->standard = $this->standard;
-                $obj->sport_master_id = $this->sport_master_id ?: 1;
+                $obj->sport_master_id = $this->sportMaster->id;
                 $obj->experience = $this->experience;
                 $obj->student_photo = $this->saveImage();
                 $obj->active_id = $this->active_id;
@@ -128,8 +139,8 @@ class Student extends Component
             $this->age = $obj->age;
             $this->gender = $obj->gender;
             $this->institution = $obj->institution;
-            $this->sportsMaster_id = $obj->sport_master_id;
-            $this->sportsMaster_name = SportStudent::master($obj->sport_master_id);
+//            $this->sportsMaster_id = $obj->sport_master_id;
+//            $this->sportsMaster_name = SportStudent::master($obj->sport_master_id);
             $this->standard = $obj->standard;
             $this->experience = $obj->experience;
             $this->old_student_photo = $obj->student_photo;
@@ -166,8 +177,8 @@ class Student extends Component
         $this->gender = '';
         $this->institution = '';
         $this->standard = '';
-        $this->sportsMaster_id = '';
-        $this->sportsMaster_name = '';
+//        $this->sportsMaster_id = '';
+//        $this->sportsMaster_name = '';
         $this->experience = '';
         $this->student_photo = '';
         $this->old_student_photo = '';
@@ -215,6 +226,7 @@ class Student extends Component
         $this->sortField = 'id';
 
         return SportStudent::search($this->searches)
+            ->where('sport_master_id', '=', $this->sportMaster->id)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -420,74 +432,74 @@ class Student extends Component
 
     #endregion
 
-    #region[SportsMaster]
-    public $sportsMaster_id = '';
-    public $sportsMaster_name = '';
-    public Collection $sportsMasterCollection;
-    public $highlightSportsMaster = 0;
-    public $sportsMasterTyped = false;
-
-    public function decrementSportsMaster(): void
-    {
-        if ($this->highlightSportsMaster === 0) {
-            $this->highlightSportsMaster = count($this->sportsMasterCollection) - 1;
-            return;
-        }
-        $this->highlightSportsMaster--;
-    }
-
-    public function incrementSportsMaster(): void
-    {
-        if ($this->highlightSportsMaster === count($this->sportsMasterCollection) - 1) {
-            $this->highlightSportsMaster = 0;
-            return;
-        }
-        $this->highlightSportsMaster++;
-    }
-
-    public function setSportsMaster($name, $id): void
-    {
-        $this->sportsMaster_name = $name;
-        $this->sportsMaster_id = $id;
-        $this->getSportsMasterList();
-    }
-
-    public function enterSportsMaster(): void
-    {
-        $obj = $this->sportsMasterCollection[$this->highlightSportsMaster] ?? null;
-
-        $this->sportsMaster_name = '';
-        $this->sportsMasterCollection = Collection::empty();
-        $this->highlightSportsMaster = 0;
-
-        $this->sportsMaster_name = $obj['vname'] ?? '';;
-        $this->sportsMaster_id = $obj['id'] ?? '';;
-    }
-
-    #[On('refresh-sportsMaster')]
-    public function refreshSportsMaster($v): void
-    {
-        $this->sportsMaster_id = $v['id'];
-        $this->sportsMaster_name = $v['name'];
-        $this->sportsMasterTyped = false;
-
-    }
-
-    public function sportsMasterSave($name)
-    {
-        $obj = SportMaster::create([
-            'vname' => $name,
-            'active_id' => '1'
-        ]);
-        $v = ['name' => $name, 'id' => $obj->id];
-        $this->refreshCity($v);
-    }
-
-    public function getSportsMasterList(): void
-    {
-        $this->sportsMasterCollection = $this->sportsMaster_name ? SportMaster::search(trim($this->sportsMaster_name))->get() : SportMaster::all();
-    }
-    #endregion
+//    #region[SportsMaster]
+//    public $sportsMaster_id = '';
+//    public $sportsMaster_name = '';
+//    public Collection $sportsMasterCollection;
+//    public $highlightSportsMaster = 0;
+//    public $sportsMasterTyped = false;
+//
+//    public function decrementSportsMaster(): void
+//    {
+//        if ($this->highlightSportsMaster === 0) {
+//            $this->highlightSportsMaster = count($this->sportsMasterCollection) - 1;
+//            return;
+//        }
+//        $this->highlightSportsMaster--;
+//    }
+//
+//    public function incrementSportsMaster(): void
+//    {
+//        if ($this->highlightSportsMaster === count($this->sportsMasterCollection) - 1) {
+//            $this->highlightSportsMaster = 0;
+//            return;
+//        }
+//        $this->highlightSportsMaster++;
+//    }
+//
+//    public function setSportsMaster($name, $id): void
+//    {
+//        $this->sportsMaster_name = $name;
+//        $this->sportsMaster_id = $id;
+//        $this->getSportsMasterList();
+//    }
+//
+//    public function enterSportsMaster(): void
+//    {
+//        $obj = $this->sportsMasterCollection[$this->highlightSportsMaster] ?? null;
+//
+//        $this->sportsMaster_name = '';
+//        $this->sportsMasterCollection = Collection::empty();
+//        $this->highlightSportsMaster = 0;
+//
+//        $this->sportsMaster_name = $obj['vname'] ?? '';;
+//        $this->sportsMaster_id = $obj['id'] ?? '';;
+//    }
+//
+//    #[On('refresh-sportsMaster')]
+//    public function refreshSportsMaster($v): void
+//    {
+//        $this->sportsMaster_id = $v['id'];
+//        $this->sportsMaster_name = $v['name'];
+//        $this->sportsMasterTyped = false;
+//
+//    }
+//
+//    public function sportsMasterSave($name)
+//    {
+//        $obj = SportMaster::create([
+//            'vname' => $name,
+//            'active_id' => '1'
+//        ]);
+//        $v = ['name' => $name, 'id' => $obj->id];
+//        $this->refreshCity($v);
+//    }
+//
+//    public function getSportsMasterList(): void
+//    {
+//        $this->sportsMasterCollection = $this->sportsMaster_name ? SportMaster::search(trim($this->sportsMaster_name))->get() : SportMaster::all();
+//    }
+//    #endregion
 
     #region[Render]
     public function reRender(): void
@@ -500,7 +512,6 @@ class Student extends Component
         $this->getCityList();
         $this->getStateList();
         $this->getPincodeList();
-        $this->getSportsMasterList();
 
         return view('livewire.sports.student')->with([
             'list' => $this->getList()

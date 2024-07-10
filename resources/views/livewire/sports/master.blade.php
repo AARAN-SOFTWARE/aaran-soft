@@ -39,11 +39,15 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
+                            <a href="{{route('sportsClub.students',[$row->id])}}">
                             {{ $row->vname}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
+                            <a href="{{route('sportsClub.students',[$row->id])}}">
                             {{ $row->mobile}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
