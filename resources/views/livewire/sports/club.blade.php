@@ -27,13 +27,17 @@
 
                     <x-table.row>
                         <x-table.cell-text center>
-                            {{ $index + 1 }}
+                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                                {{ $index + 1 }}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <img
-                                src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->club_photo))}}"
-                                alt="logo"/>
+                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                                <img
+                                    src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->club_photo))}}"
+                                    alt="logo"/>
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
@@ -49,23 +53,33 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            {{ $row->mobile}}
+                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                                {{ $row->mobile}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            {{ $row->whatsapp}}
+                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                                {{ $row->whatsapp}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            {{ $row->city->vname}}
+                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                                {{ $row->city->vname}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            {{ $row->state->vname}}
+                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                                {{ $row->state->vname}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            {{ $row->started_at ?  date('d-m-Y', strtotime($row->started_at)) :''}}
+                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                                {{ $row->started_at ?  date('d-m-Y', strtotime($row->started_at)) :''}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-action id="{{$row->id}}"/>

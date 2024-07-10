@@ -27,47 +27,61 @@
 
                     <x-table.row>
                         <x-table.cell-text center>
-                            {{ $index + 1 }}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
-                            <div class="flex-shrink-0 h-10 w-10 mr-4 rounded-xl">
-                                <img
-                                    src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->master_photo))}}"
-                                    alt="logo"/>
-                            </div>
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
                             <a href="{{route('sportsClub.students',[$row->id])}}">
-                            {{ $row->vname}}
+                                {{ $index + 1 }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
                             <a href="{{route('sportsClub.students',[$row->id])}}">
-                            {{ $row->mobile}}
+                                <div class="flex-shrink-0 h-10 w-10 mr-4 rounded-xl">
+                                    <img
+                                        src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->master_photo))}}"
+                                        alt="logo"/>
+                                </div>
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            {{ $row->whatsapp}}
+                            <a href="{{route('sportsClub.students',[$row->id])}}">
+                                {{ $row->vname}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            {{ $row->email}}
+                            <a href="{{route('sportsClub.students',[$row->id])}}">
+                                {{ $row->mobile}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            {{ $row->city->vname}}
+                            <a href="{{route('sportsClub.students',[$row->id])}}">
+                                {{ $row->whatsapp}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            {{ \Aaran\SportsClub\Models\SportMaster::club($row->sport_club_id)}}
+                            <a href="{{route('sportsClub.students',[$row->id])}}">
+                                {{ $row->email}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            {{ $row->grade}}
+                            <a href="{{route('sportsClub.students',[$row->id])}}">
+                                {{ $row->city->vname}}
+                            </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <a href="{{route('sportsClub.students',[$row->id])}}">
+                                {{ \Aaran\SportsClub\Models\SportMaster::club($row->sport_club_id)}}
+                            </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <a href="{{route('sportsClub.students',[$row->id])}}">
+                                {{ $row->grade}}
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-action id="{{$row->id}}"/>
@@ -298,69 +312,69 @@
                             </div>
                         </div>
 
-{{--                        <!-- Sports Club ------------------------------------------------------------------------------>--}}
-{{--                        <div class="flex flex-col sm:flex-row w-full gap-2">--}}
-{{--                            <label for="sportsClub_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Sports--}}
-{{--                                Club</label>--}}
-{{--                            <div x-data="{isTyped: @entangle('sportsClubTyped')}" @click.away="isTyped = false"--}}
-{{--                                 class="w-full">--}}
-{{--                                <div class="relative">--}}
-{{--                                    <input--}}
-{{--                                        id="sportsClub_name"--}}
-{{--                                        type="search"--}}
-{{--                                        wire:model.live="sportsClub_name"--}}
-{{--                                        autocomplete="off"--}}
-{{--                                        placeholder="Choose.."--}}
-{{--                                        @focus="isTyped = true"--}}
-{{--                                        @keydown.escape.window="isTyped = false"--}}
-{{--                                        @keydown.tab.window="isTyped = false"--}}
-{{--                                        @keydown.enter.prevent="isTyped = false"--}}
-{{--                                        wire:keydown.arrow-up="decrementSportsClub"--}}
-{{--                                        wire:keydown.arrow-down="incrementSportsClub"--}}
-{{--                                        wire:keydown.enter="enterSportsClub"--}}
-{{--                                        class="block w-full purple-textbox"--}}
-{{--                                    />--}}
+                        {{--                        <!-- Sports Club ------------------------------------------------------------------------------>--}}
+                        {{--                        <div class="flex flex-col sm:flex-row w-full gap-2">--}}
+                        {{--                            <label for="sportsClub_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Sports--}}
+                        {{--                                Club</label>--}}
+                        {{--                            <div x-data="{isTyped: @entangle('sportsClubTyped')}" @click.away="isTyped = false"--}}
+                        {{--                                 class="w-full">--}}
+                        {{--                                <div class="relative">--}}
+                        {{--                                    <input--}}
+                        {{--                                        id="sportsClub_name"--}}
+                        {{--                                        type="search"--}}
+                        {{--                                        wire:model.live="sportsClub_name"--}}
+                        {{--                                        autocomplete="off"--}}
+                        {{--                                        placeholder="Choose.."--}}
+                        {{--                                        @focus="isTyped = true"--}}
+                        {{--                                        @keydown.escape.window="isTyped = false"--}}
+                        {{--                                        @keydown.tab.window="isTyped = false"--}}
+                        {{--                                        @keydown.enter.prevent="isTyped = false"--}}
+                        {{--                                        wire:keydown.arrow-up="decrementSportsClub"--}}
+                        {{--                                        wire:keydown.arrow-down="incrementSportsClub"--}}
+                        {{--                                        wire:keydown.enter="enterSportsClub"--}}
+                        {{--                                        class="block w-full purple-textbox"--}}
+                        {{--                                    />--}}
 
-{{--                                    <div x-show="isTyped"--}}
-{{--                                         x-transition:leave="transition ease-in duration-100"--}}
-{{--                                         x-transition:leave-start="opacity-100"--}}
-{{--                                         x-transition:leave-end="opacity-0"--}}
-{{--                                         x-cloak--}}
-{{--                                    >--}}
-{{--                                        <div class="absolute z-20 w-full mt-2">--}}
-{{--                                            <div class="block py-1 shadow-md w-full--}}
-{{--                rounded-lg border-transparent flex-1 appearance-none border--}}
-{{--                                 bg-white text-gray-800 ring-1 ring-purple-600">--}}
-{{--                                                <ul class="overflow-y-scroll h-96">--}}
-{{--                                                    @if($sportsClubCollection)--}}
-{{--                                                        @forelse ($sportsClubCollection as $i => $sportsClub)--}}
-{{--                                                            <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
-{{--                                                        {{ $highlightSportsClub === $i ? 'bg-yellow-100' : '' }}"--}}
-{{--                                                                wire:click.prevent="setSportsClub('{{$sportsClub->vname}}','{{$sportsClub->id}}')"--}}
-{{--                                                                x-on:click="isTyped = false">--}}
-{{--                                                                {{ $sportsClub->vname }}--}}
-{{--                                                            </li>--}}
-{{--                                                        @empty--}}
-{{--                                                            <button--}}
-{{--                                                                wire:click.prevent="sportsClubSave('{{$sportsClub_name}}')"--}}
-{{--                                                                class="text-white bg-green-500 text-center w-full">--}}
-{{--                                                                create--}}
-{{--                                                            </button>--}}
+                        {{--                                    <div x-show="isTyped"--}}
+                        {{--                                         x-transition:leave="transition ease-in duration-100"--}}
+                        {{--                                         x-transition:leave-start="opacity-100"--}}
+                        {{--                                         x-transition:leave-end="opacity-0"--}}
+                        {{--                                         x-cloak--}}
+                        {{--                                    >--}}
+                        {{--                                        <div class="absolute z-20 w-full mt-2">--}}
+                        {{--                                            <div class="block py-1 shadow-md w-full--}}
+                        {{--                rounded-lg border-transparent flex-1 appearance-none border--}}
+                        {{--                                 bg-white text-gray-800 ring-1 ring-purple-600">--}}
+                        {{--                                                <ul class="overflow-y-scroll h-96">--}}
+                        {{--                                                    @if($sportsClubCollection)--}}
+                        {{--                                                        @forelse ($sportsClubCollection as $i => $sportsClub)--}}
+                        {{--                                                            <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8--}}
+                        {{--                                                        {{ $highlightSportsClub === $i ? 'bg-yellow-100' : '' }}"--}}
+                        {{--                                                                wire:click.prevent="setSportsClub('{{$sportsClub->vname}}','{{$sportsClub->id}}')"--}}
+                        {{--                                                                x-on:click="isTyped = false">--}}
+                        {{--                                                                {{ $sportsClub->vname }}--}}
+                        {{--                                                            </li>--}}
+                        {{--                                                        @empty--}}
+                        {{--                                                            <button--}}
+                        {{--                                                                wire:click.prevent="sportsClubSave('{{$sportsClub_name}}')"--}}
+                        {{--                                                                class="text-white bg-green-500 text-center w-full">--}}
+                        {{--                                                                create--}}
+                        {{--                                                            </button>--}}
 
-{{--                                                        @endforelse--}}
-{{--                                                    @endif--}}
-{{--                                                </ul>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                                                        @endforelse--}}
+                        {{--                                                    @endif--}}
+                        {{--                                                </ul>--}}
+                        {{--                                            </div>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
 
                         <x-input.model-text wire:model="experience" :label="'experience'"/>
 
                         <x-input.model-select wire:model="grade" :label="'Grade'">
-                            <option >Choose...</option>
+                            <option>Choose...</option>
                             <option value="Senior Master">Senior Master</option>
                             <option value="Master">Master</option>
                             <option value="referee">referee</option>
