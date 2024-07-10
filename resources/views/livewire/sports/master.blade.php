@@ -83,39 +83,42 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
 
-        <x-forms.create-new :id="$vid">
-            <div class="flex gap-5 w-full">
-                <div class="w-full">
-                    <x-input.model-text wire:model="vname" :label="'Name'"/>
-                    <x-input.model-text wire:model="mobile" :label="'Mobile'"/>
-                    <x-input.model-text wire:model="whatsapp" :label="'Whatsapp'"/>
-                    <x-input.model-text wire:model="email" :label="'Email'"/>
-                    <x-input.model-date wire:model="dob" :label="'DOB'"/>
-                    <x-input.model-text wire:model="age" :label="'Age'"/>
-                    <x-input.model-select wire:model="gender" :label="'Gender'">
-                        <option>Choose...</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Others">Others</option>
+        <x-forms.create max-width="6xl" :id="$vid">
+
+            <div class="mt-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-5 w-full">
+
+                    <div class="flex flex-col gap-0 sm:gap-3">
+                        <x-input.model-text wire:model="vname" :label="'Name'"/>
+                        <x-input.model-text wire:model="mobile" :label="'Mobile'"/>
+                        <x-input.model-text wire:model="whatsapp" :label="'Whatsapp'"/>
+                        <x-input.model-text wire:model="email" :label="'Email'"/>
+
+                        <x-input.model-date wire:model="dob" :label="'DOB'"/>
+
+                        <x-input.model-text wire:model="age" :label="'Age'"/>
+
+                        <x-input.model-select wire:model="gender" :label="'Gender'">
+                            <option>Choose...</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Others">Others</option>
                         </x-input.model-select>
-                    <x-input.model-text wire:model="aadhaar" :label="'aadhaar'"/>
-                    <x-input.model-text wire:model="grade" :label="'grade'"/>
 
+                        <x-input.model-text wire:model="aadhaar" :label="'aadhaar'"/>
 
-                </div>
+                    </div>
 
-                <div class="w-full">
+                    <div class="flex flex-col gap-0 sm:gap-3">
 
+                        <!-- Address ---------------------------------------------------------------------------------->
 
+                        <x-input.model-text wire:model="address_1" :label="'Address'"/>
 
-                    <!-- Address ----------------------------------------------------------------------------------------------------->
+                        <x-input.model-text wire:model="address_2" :label="'Street, Area'"/>
 
-                    <x-input.model-text wire:model="address_1" :label="'Address'"/>
-                    <x-input.model-text wire:model="address_2" :label="'Street, Area'"/>
-
-                    <!-- City ----------------------------------------------------------------------------------------------------->
-                    <div class="flex flex-row  gap-3">
-                        <div class="xl:flex w-full gap-2">
+                        <!-- City ------------------------------------------------------------------------------------->
+                        <div class="flex flex-col sm:flex-row w-full gap-2">
                             <label for="city_name" class="w-[10rem] text-zinc-500 tracking-wide py-2 ">City</label>
                             <div x-data="{isTyped: @entangle('cityTyped')}" @click.away="isTyped = false"
                                  class="w-full">
@@ -172,11 +175,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- State --------------------------------------------------------------------------------------------------->
-                    <div class="flex flex-col mt-3 gap-2">
-                        <div class="xl:flex w-full gap-2">
+                        <!-- State ------------------------------------------------------------------------------------>
+                        <div class="flex flex-col sm:flex-row w-full gap-2">
                             <label for="state_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">State</label>
                             <div x-data="{isTyped: @entangle('stateTyped')}" @click.away="isTyped = false"
                                  class="w-full">
@@ -232,12 +233,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Pin-code --------------------------------------------------------------------------------------------------->
-                    <div class="flex flex-col gap-2 mt-3">
-                        <div class="xl:flex w-full gap-2">
-                            <label for="pincode_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Pincode</label>
+                        <!-- Pin-code --------------------------------------------------------------------------------->
+                        <div class="flex flex-col sm:flex-row w-full gap-2">
+                            <label for="pincode_name"
+                                   class="w-[10rem] text-zinc-500 tracking-wide py-2">Pincode</label>
                             <div x-data="{isTyped: @entangle('pincodeTyped')}" @click.away="isTyped = false"
                                  class="w-full">
                                 <div class="relative">
@@ -293,12 +293,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Sports Club --------------------------------------------------------------------------------------------------->
-                    <div class="flex flex-col gap-2 mt-3">
-                        <div class="xl:flex w-full gap-2">
-                            <label for="sportsClub_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Sports Club</label>
+                        <!-- Sports Club ------------------------------------------------------------------------------>
+                        <div class="flex flex-col sm:flex-row w-full gap-2">
+                            <label for="sportsClub_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Sports
+                                Club</label>
                             <div x-data="{isTyped: @entangle('sportsClubTyped')}" @click.away="isTyped = false"
                                  class="w-full">
                                 <div class="relative">
@@ -353,60 +352,66 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                        <x-input.model-text wire:model="experience" :label="'experience'"/>
 
-                    <x-input.model-text wire:model="experience" :label="'experience'"/>
+                        <x-input.model-select wire:model="grade" :label="'Grade'">
+                            <option >Choose...</option>
+                            <option value="Senior Master">Senior Master</option>
+                            <option value="Master">Master</option>
+                            <option value="referee">referee</option>
+                            <option value="Manager">Manager</option>
+                        </x-input.model-select>
 
+                        <!-- Image ------------------------------------------------------------------------------------>
+                        <div class="flex flex-row gap-6 mt-4">
 
-                    <!-- Image ---------------------------------------------------------------------------------------------------->
-                    <div class="flex flex-row gap-6 mt-4">
+                            <div class="flex">
 
-                        <div class="flex">
+                                <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Photo</label>
 
-                            <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Photo</label>
+                                <div class="flex-shrink-0">
 
-                            <div class="flex-shrink-0">
+                                    <div>
+                                        @if($master_photo)
+                                            <div class="flex-shrink-0 ">
+                                                <img class="h-24 w-full" src="{{ $master_photo->temporaryUrl() }}"
+                                                     alt="{{$master_photo?:''}}"/>
+                                            </div>
+                                        @endif
+
+                                        @if(!$master_photo && isset($master_photo))
+                                            <img class="h-24 w-full"
+                                                 src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_master_photo))}}"
+                                                 alt="">
+
+                                        @else
+                                            <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="relative">
 
                                 <div>
-                                    @if($master_photo)
-                                        <div class="flex-shrink-0 ">
-                                            <img class="h-24 w-full" src="{{ $master_photo->temporaryUrl() }}"
-                                                 alt="{{$master_photo?:''}}"/>
-                                        </div>
-                                    @endif
-
-                                    @if(!$master_photo && isset($master_photo))
-                                        <img class="h-24 w-full"
-                                             src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_master_photo))}}"
-                                             alt="">
-
-                                    @else
-                                        <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>
-                                    @endif
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="relative">
-
-                            <div>
-                                <label for="master_photo"
-                                       class="text-gray-500 font-semibold text-base rounded flex flex-col items-center
+                                    <label for="master_photo"
+                                           class="text-gray-500 font-semibold text-base rounded flex flex-col items-center
                                    justify-center cursor-pointer border-2 border-gray-300 border-dashed p-2
                                    mx-auto font-[sans-serif]">
-                                    <x-icons.icon icon="cloud-upload" class="w-8 h-auto block text-gray-400"/>
-                                    Upload Photo
+                                        <x-icons.icon icon="cloud-upload" class="w-8 h-auto block text-gray-400"/>
+                                        Upload Photo
 
-                                    <input type="file" id='master_photo' wire:model="master_photo" class="hidden"/>
-                                    <p class="text-xs font-light text-gray-400 mt-2">PNG and JPG are Allowed.</p>
-                                </label>
-                            </div>
+                                        <input type="file" id='master_photo' wire:model="master_photo" class="hidden"/>
+                                        <p class="text-xs font-light text-gray-400 mt-2">PNG and JPG are Allowed.</p>
+                                    </label>
+                                </div>
 
-                            <div wire:loading wire:target="master_photo" class="z-10 absolute top-6 left-12">
-                                <div class="w-14 h-14 rounded-full animate-spin
+                                <div wire:loading wire:target="master_photo" class="z-10 absolute top-6 left-12">
+                                    <div class="w-14 h-14 rounded-full animate-spin
                                                         border-y-4 border-dashed border-green-500 border-t-transparent"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -414,7 +419,8 @@
 
                 </div>
             </div>
-        </x-forms.create-new>
+
+        </x-forms.create>
 
     </x-forms.m-panel>
 
