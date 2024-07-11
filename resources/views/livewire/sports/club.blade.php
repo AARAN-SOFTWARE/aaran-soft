@@ -18,6 +18,7 @@
                 <x-table.header-text center>City</x-table.header-text>
                 <x-table.header-text center>State</x-table.header-text>
                 <x-table.header-text center>Started at</x-table.header-text>
+                <x-table.header-text center>Gallery</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -82,6 +83,12 @@
                             </a>
                         </x-table.cell-text>
 
+                        <x-table.cell-text>
+                            <a href="{{route('sportsClub.clubimage',[$row->id])}}">
+                                <x-icons.icon :icon="'photo'" class="w-3 h-3"/>
+                            </a>
+                        </x-table.cell-text>
+
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
 
@@ -117,7 +124,7 @@
 
                     <x-input.model-text wire:model="address_2" :label="'Street, Area'"/>
 
-                    <!-- City ----------------------------------------------------------------------------------------------------->
+                    <!-- City ----------------------------------------------------------------------------------------->
                     <div class="flex flex-row  gap-3">
                         <div class="xl:flex w-full gap-2">
                             <label for="city_name" class="w-[10rem] text-zinc-500 tracking-wide py-2 ">City</label>
@@ -178,7 +185,7 @@
                         </div>
                     </div>
 
-                    <!-- State --------------------------------------------------------------------------------------------------->
+                    <!-- State ---------------------------------------------------------------------------------------->
                     <div class="flex flex-col mt-3 gap-2">
                         <div class="xl:flex w-full gap-2">
                             <label for="state_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">State</label>
@@ -238,7 +245,7 @@
                         </div>
                     </div>
 
-                    <!-- Pin-code --------------------------------------------------------------------------------------------------->
+                    <!-- Pin-code ------------------------------------------------------------------------------------->
                     <div class="flex flex-col gap-2 mt-3">
                         <div class="xl:flex w-full gap-2">
                             <label for="pincode_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Pincode</label>
@@ -300,7 +307,7 @@
                     </div>
 
 
-                    <!-- Image ---------------------------------------------------------------------------------------------------->
+                    <!-- Image ---------------------------------------------------------------------------------------->
                     <div class="flex flex-row gap-6 mt-4">
 
                         <div class="flex">

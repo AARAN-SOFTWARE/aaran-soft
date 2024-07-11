@@ -20,7 +20,7 @@ return new class extends Migration {
                 $table->foreignId('city_id')->references('id')->on('cities');
                 $table->foreignId('state_id')->references('id')->on('states');
                 $table->foreignId('pincode_id')->references('id')->on('pincodes');
-                $table->foreignId('sport_club')->references('id')->on('sport_clubs');
+                $table->foreignId('sport_club_id')->references('id')->on('sport_clubs');
                 $table->string('grade')->nullable();
                 $table->string('experience')->nullable();
                 $table->string('dob')->nullable();

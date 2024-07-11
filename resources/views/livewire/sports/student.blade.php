@@ -19,6 +19,7 @@
                 <x-table.header-text center>DOB</x-table.header-text>
                 <x-table.header-text center>Age</x-table.header-text>
                 <x-table.header-text center>City</x-table.header-text>
+                <x-table.header-text center>Gallery</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -68,6 +69,12 @@
 
                         <x-table.cell-text center>
                             {{ $row->city->vname}}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <a href="{{route('sportsClub.studentImage',[$row->id])}}">
+                                <x-icons.icon :icon="'collection'" class="w-3 h-3"/>
+                            </a>
                         </x-table.cell-text>
 
                         <x-table.cell-action id="{{$row->id}}"/>

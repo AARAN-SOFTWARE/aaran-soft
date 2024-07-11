@@ -22,7 +22,8 @@
                             </a>
                         </div>
 
-                        <div class="h-92 w-[38rem]  ">
+                        <div class="h-92 w-[38rem]">
+
                             <!-- Header ------------------------------------------------------------------------------->
 
                             <div class=" flex justify-between gap-2 mt-5 ">
