@@ -29,6 +29,8 @@ return new class extends Migration {
                 $table->string('aadhaar')->nullable();
                 $table->string('master_photo')->nullable();
                 $table->string('active_id', 3)->nullable();
+                $table->foreignId('user_id')->references('id')->on('users');
+                $table->foreignId('tenant_id')->references('id')->on('tenants');
                 $table->timestamps();
             });
         }
