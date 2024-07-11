@@ -96,7 +96,7 @@
 
         <x-forms.create-new :id="$vid">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-5 w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-7 w-full">
 
                 <div class="flex flex-col gap-0 sm:gap-3">
                     <x-input.model-text wire:model="vname" :label="'Student Name'"/>
