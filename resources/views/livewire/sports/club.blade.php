@@ -108,7 +108,6 @@
 
         <x-forms.create max-width="6xl" :id="$vid">
 
-            <div class="mt-5">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-5 w-full">
 
                     <div class="flex flex-col gap-0 sm:gap-3">
@@ -366,7 +365,6 @@
                     </div>
 
                 </div>
-            </div>
 
         </x-forms.create>
 

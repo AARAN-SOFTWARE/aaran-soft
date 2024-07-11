@@ -11,7 +11,9 @@
                     {{$id === "" ? 'New Entry' : 'Edit Entry'}}
                 </div>
                 <x-forms.section-border class="py-2"/>
-                {{$slot}}
+                <div class="mt-5">
+                    {{$slot}}
+                </div>
                 <div class="mb-1">&nbsp;</div>
             </div>
             <div class="px-6 py-3 bg-gray-100 text-right">
