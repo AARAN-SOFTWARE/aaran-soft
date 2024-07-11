@@ -12,8 +12,9 @@ return new class extends Migration
         if (Aaran\Aadmin\Src\DbMigration::hasSpotMyNumber()) {
             Schema::create('spot_categories', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('customer_id')->references('id')->on('spot_customers')->onDelete('cascade');
-                $table->foreignId('category_id')->references('id')->on('spot_listings');
+                $table->foreignId('spot_customer_id')->references('id')->on('spot_customers')->onDelete('cascade');
+                $table->foreignId('spot_category_id')->references('id')->on('spot_listings');
+                $table->string('active_id', 3)->nullable();
                 $table->timestamps();
             });
         }
