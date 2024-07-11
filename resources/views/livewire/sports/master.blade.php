@@ -16,7 +16,6 @@
                 <x-table.header-text center>WhatsApp</x-table.header-text>
                 <x-table.header-text center>email</x-table.header-text>
                 <x-table.header-text center>city</x-table.header-text>
-                <x-table.header-text center>Sport Club</x-table.header-text>
                 <x-table.header-text center>Grade</x-table.header-text>
                 <x-table.header-text center>Gallery</x-table.header-text>
                 <x-table.header-action/>
@@ -70,12 +69,6 @@
                         <x-table.cell-text>
                             <a href="{{route('sportsClub.students',[$row->id])}}">
                                 {{ $row->city->vname}}
-                            </a>
-                        </x-table.cell-text>
-
-                        <x-table.cell-text>
-                            <a href="{{route('sportsClub.students',[$row->id])}}">
-                                {{ \Aaran\SportsClub\Models\SportMaster::club($row->sport_club)}}
                             </a>
                         </x-table.cell-text>
 

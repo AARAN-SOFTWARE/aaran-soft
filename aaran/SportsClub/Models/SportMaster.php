@@ -6,13 +6,11 @@ use Aaran\Common\Models\City;
 use Aaran\Common\Models\Pincode;
 use Aaran\Common\Models\State;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SportMaster extends Model
 {
-    use HasFactory;
 
     protected $guarded = [];
 
@@ -42,18 +40,9 @@ class SportMaster extends Model
         return $this->belongsTo(Pincode::class);
     }
 
-    public function sportclub(): BelongsTo
+    public function sportClub(): BelongsTo
     {
         return $this->belongsTo(SportClub::class);
     }
 
-    public static function club($str)
-    {
-        return SportClub::find($str)->vname;
-    }
-
-    public static function allocated($str)
-    {
-        return User::find($str)->name;
-    }
 }
