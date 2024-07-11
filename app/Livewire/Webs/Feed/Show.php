@@ -27,6 +27,7 @@ class Show extends Component
     public $bookmark;
 
     public $users;
+    public $user_id;
     public $isUploaded = false;
     public mixed $editable = true;
     public $created_at;
@@ -36,7 +37,8 @@ class Show extends Component
     public function mount($id)
     {
         $this->getData($id);
-        $this->users = User::find(1);
+        $obj = Feed::find($id)->user_id;
+        $this->users=User::find($obj);
     }
     #endregion
 
@@ -72,8 +74,6 @@ class Show extends Component
         }
         return '';
     }
-
-
     #endregion
 
     #region[Data]
@@ -119,6 +119,7 @@ class Show extends Component
         return null;
     }
     #endregion
+
 
     #region[image]
     public function save_image()

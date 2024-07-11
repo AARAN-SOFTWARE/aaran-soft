@@ -111,17 +111,6 @@ class Index extends Component
     }
     #endregion
 
-    #region[sortFields]
-    public function sortBy($field): void
-    {
-        if ($this->sortFields === $field) {
-            $this->sortAsc = !$this->sortAsc;
-        } else {
-            $this->sortAsc = true;
-        }
-        $this->sortFields = $field;
-    }
-    #endregion
 
     #region[list]
 

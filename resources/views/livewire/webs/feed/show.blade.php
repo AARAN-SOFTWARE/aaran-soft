@@ -56,11 +56,11 @@
             <div class="w-[95%] mx-auto h-[38rem] mt-2 overflow-y-auto">
                 @foreach($list as $row)
                     <div class="flex mt-3 pb-5">
-                        <img src="{{ $users->profile_photo_url }}" alt="" class="w-8 h-8 ml-2  rounded-full">
+                        <img src="{{ $row->user->profile_photo_url }}" alt="" class="w-8 h-8 ml-2  rounded-full">
                         <div class="flex-col ">
                             <div class="flex-col items-center">
                                 <div class="w-[30rem] pl-3 text-sm text-justify"><span
-                                        class="text-gray-500 pr-3">@ {{\Aaran\Web\Models\Feed::allocated($users->id)}}</span>{{$row->reply}}</div>
+                                        class="text-gray-500 pr-3">@ {{$row->user->name}}</span>{{$row->reply}}</div>
                                 <div class="w-[6rem] flex justify-between ">
                                     <div
                                         class="pl-3 mt-2 text-gray-500 text-[8px]">{{$row->created_at->diffForHumans()}}</div>
@@ -70,7 +70,7 @@
                             @if($row->reply_image!='empty')
                                 <div class="rounded-lg">
                                     <img src="{{ \Illuminate\Support\Facades\Storage::url($row->reply_image)}}" alt=""
-                                         class="w-auto h-40 mt-4 rounded-lg">
+                                         class="w-auto h-40 rounded-lg">
                                 </div>
                             @endif
                         </div>
@@ -89,7 +89,7 @@
                 <button class="px-6  h-10 text-blue-700 ring-0    border-0" type="submit" wire:click.prevent="save"
                         wire:keydown.enter="save">Post
                 </button>
-                <div class="mx-auto items-center absolute bottom-16 left-2">
+                <div class="mx-auto items-center absolute bottom-16 -left-6">
                     @if($reply_image!='')
                         <img
                             src="{{$reply_image->temporaryUrl()}}"
@@ -104,6 +104,10 @@
                                 class="h-16 w-28 mb-1 rounded-md outline outline-2 outline-gray-300 shadow-lg shadow-gray-400">
                         @endif
                     @endif
+                </div>
+                <div wire:loading wire:target="reply_image" class="z-6 absolute bottom-20 left-6">
+                    <div class="w-6 h-6 rounded-full animate-spin
+                    border-y-4 border-dashed border-blue-400 border-t-transparent"></div>
                 </div>
             </div>
         </div>

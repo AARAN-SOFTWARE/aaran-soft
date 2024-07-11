@@ -4,20 +4,25 @@
 <div class=" mx-auto mt-8 font-semibold font-roboto">
     <div class="text-xl">Stories</div>
 </div>
-<div class=" mx-auto mt-3 flex gap-6 font-roboto">
+<div class=" mx-auto mt-3 flex font-roboto">
 
     <div class="flex-col justify-center text-center">
-        <div class="w-16 h-16 bg-gray-200 rounded-full flex justify-evenly">
-            <button wire:click="create" class="flex justify-evenly"><x-icons.icon icon="plus-slim"  class="w-6 h-6 flex text-black" /></button>
+        <div class="w-12 h-12 bg-gray-200 rounded-full flex justify-evenly mb-1 outline outline-4 outline-offset-4 outline-gray-300">
+            <button wire:click="create" class="flex justify-evenly">
+                <x-icons.icon icon="plus-slim" class="w-6 h-6 flex text-black"/>
+            </button>
         </div>
-        <div>new</div>
+        <div class="text-center text-xs mt-3">new</div>
     </div>
     @foreach($users as $user)
-        <div class="flex-col justify-center text-center">
-            <div class="w-16 h-16 bg-gray-200 rounded-full flex justify-evenly">
-                <img src="{{$user->profile_photo_url}}" alt="" class="outline outline-2 outline-offset-2 outline-gray-400 rounded-full">
+        <button wire:click="filterUser({{$user->id}})" class="text-center pl-8">
+            <div class="flex-col flex justify-items-center text-center ">
+                <div class="w-12 h-12 bg-gray-200 rounded-full flex justify-evenly mb-1">
+                    <img src="{{$user->profile_photo_url}}" alt=""
+                         class="outline outline-4 outline-offset-4 outline-gray-300 rounded-full">
+                </div>
+                <div class="text-center text-xs mt-2">{{$user->name}}</div>
             </div>
-            <div>{{$user->name}}</div>
-        </div>
+        </button>
     @endforeach
 </div>

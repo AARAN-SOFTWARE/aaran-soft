@@ -26,8 +26,8 @@
                 </a>
             </div>
 
-            <div class="w-[95%] mt-2 pb-4 mx-auto text-sm text"><a href="{{ route('show', $row->id) }}"> {!! (nl2br(e(Str::words($row->vname, '18')))) !!} </a></div>
-
+            <div class="w-[95%] mt-2 mx-auto text-sm "><a href="{{ route('show', $row->id) }}"> {!! (nl2br(e(Str::words($row->vname, '18')))) !!} </a></div>
+            <div class="w-[95%] pb-4 mx-auto text-xs text-blue-600">#{{ \Aaran\Web\Models\Feed::type($row->feed_category_id)}}</div>
             <!-- Like & Share -->
             <div class="w-[95%]  mx-auto flex justify-between ">
                 <div class="flex w-28 justify-between">

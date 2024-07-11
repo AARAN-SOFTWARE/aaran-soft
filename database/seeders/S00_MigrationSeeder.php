@@ -196,7 +196,10 @@ class S00_MigrationSeeder extends Seeder
         }
 
         if (!DbMigration::hasWebs()) {
-            RefactorMigrationTable::clear('2024_07_03_073744_create_home_slides_table');
+            RefactorMigrationTable::clear('2024_03_08_000701_create_home_slides_table');
+            RefactorMigrationTable::clear('2024_07_08_000702_create_feed_categories_table');
+            RefactorMigrationTable::clear('2024_07_08_000703_create_feeds_table');
+            RefactorMigrationTable::clear('2024_07_08_000704_create_feed_replies_table');
         }
     }
 }
