@@ -3,6 +3,7 @@
 namespace App\Livewire\Sys\DefaultCompany;
 
 use Aaran\Master\Models\Company;
+use Aaran\SportsClub\Models\SportClub;
 use AllowDynamicProperties;
 use App\Enums\AcYear;
 use App\Models\DefaultCompany;
@@ -34,6 +35,11 @@ class Index extends Component
     {
         $this->defaultCompany = DefaultCompany::find(1);
         $soft_version = SoftVersion::latest()->first();
+
+        $defaultClub=SportClub::where('tenant_id','=',session()->get('tenant_id'))->firstOrFail();
+        if ($defaultClub){
+            session()->put('club_id',$defaultClub->id);
+        }
 
         if ($this->defaultCompany) {
             session()->put('company_id', $this->defaultCompany->company_id);

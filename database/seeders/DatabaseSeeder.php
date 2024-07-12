@@ -34,6 +34,7 @@ use Aaran\Master\Database\Seeders\S205_StyleSeeder;
 
 //use Aaran\Orders\Database\Seeders\OrderSeeder;
 //use Aaran\Orders\Database\Seeders\StyleSeeder;
+use Aaran\SportsClub\Database\Seeders\S3001_SportClubSeeder;
 use Aaran\Testing\Database\Seeders\DbTestSeeder;
 use Aaran\Testing\Database\Seeders\TestFileSeeder;
 use Aaran\Web\Database\Seeders\FeedCategorySeeder;
@@ -74,6 +75,10 @@ class DatabaseSeeder extends Seeder
             S201_CompanySeeder::run();
             S202_ContactSeeder::run();
             S203_ProductSeeder::run();
+        }
+
+        if (DbMigration::hasSports()){
+            S3001_SportClubSeeder::run();
         }
 
         if (DbMigration::hasOrder()) {

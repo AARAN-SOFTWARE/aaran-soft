@@ -28,13 +28,13 @@
 
                     <x-table.row>
                         <x-table.cell-text center>
-                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                            <a href="{{route('sportsClub.masters',)}}">
                                 {{ $index + 1 }}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                            <a href="{{route('sportsClub.masters',)}}">
                                 <img
                                     src="{{ URL(\Illuminate\Support\Facades\Storage::url('images/'.$row->club_photo))}}"
                                     alt="logo"/>
@@ -42,43 +42,43 @@
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                            <a href="{{route('sportsClub.masters',)}}">
                                 {{ $row->vname}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                            <a href="{{route('sportsClub.masters',)}}">
                                 {{ $row->master_name}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                            <a href="{{route('sportsClub.masters',)}}">
                                 {{ $row->mobile}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                            <a href="{{route('sportsClub.masters',)}}">
                                 {{ $row->whatsapp}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                            <a href="{{route('sportsClub.masters',)}}">
                                 {{ $row->city->vname}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                            <a href="{{route('sportsClub.masters',)}}">
                                 {{ $row->state->vname}}
                             </a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
-                            <a href="{{route('sportsClub.masters',[$row->id])}}">
+                            <a href="{{route('sportsClub.masters',)}}">
                                 {{ $row->started_at ?  date('d-m-Y', strtotime($row->started_at)) :''}}
                             </a>
                         </x-table.cell-text>
@@ -306,6 +306,17 @@
                             </div>
                         </div>
                     </div>
+
+                    @admin
+                    <div>
+                        <x-input.model-select wire:model="tenant_id" :label="'Tenant'">
+                            <option>Choose...</option>
+                            @foreach($tenants as $i)
+                                <option value="{{ $i->id }}">{{ $i->t_name }}</option>
+                            @endforeach
+                        </x-input.model-select>
+                    </div>
+                    @endadmin
 
 
                     <!-- Image ---------------------------------------------------------------------------------------->

@@ -8,7 +8,9 @@ use Aaran\Common\Models\State;
 use Aaran\SportsClub\Models\SportClub;
 use App\Enums\Active;
 use App\Livewire\Trait\CommonTrait;
+use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -32,8 +34,15 @@ class Club extends Component
     public string $old_club_photo = '';
 
     public bool $isUploaded = false;
-
+    public $tenant_id;
+    public Collection $tenants;
     #endregion
+
+    public function getTenants()
+    {
+        $this->tenants = Tenant::all();
+
+    }
 
     #region[getSave]
     public function getSave()
@@ -54,7 +63,8 @@ class Club extends Component
                     'started_at' => $this->started_at,
                     'club_photo' => $this->saveImage(),
                     'active_id' => $this->active_id ? 1 : 0,
-                    'user_id' => auth()->id()
+                    'user_id' => \auth()->id(),
+                    'tenant_id' => $this->tenant_id ?: '1',
                 ]);
             } else {
                 $obj = SportClub::find($this->vid);
@@ -71,6 +81,8 @@ class Club extends Component
                 $obj->started_at = $this->started_at;
                 $obj->club_photo = $this->saveImage();
                 $obj->active_id = $this->active_id;
+                $obj->tenant_id = $this->tenant_id?:'1';
+                $obj->user_id = \auth()->id();
 
                 $obj->save();
             }
@@ -101,6 +113,7 @@ class Club extends Component
             $this->started_at = $obj->started_at;
             $this->old_club_photo = $obj->club_photo;
             $this->active_id = $obj->active_id;
+            $this->tenant_id=$obj->tenant_id;
 
             return $obj;
         }
@@ -129,6 +142,7 @@ class Club extends Component
         $this->started_at = '';
         $this->club_photo = '';
         $this->old_club_photo = '';
+        $this->tenant_id='';
         $this->active_id = Active::ACTIVE->value;
     }
     #endregion
@@ -174,6 +188,7 @@ class Club extends Component
 
         return SportClub::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
+            ->where('tenant_id', '=', session()->get('tenant_id'))
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
@@ -389,7 +404,7 @@ class Club extends Component
         $this->getCityList();
         $this->getStateList();
         $this->getPincodeList();
-
+        $this->getTenants();
         return view('livewire.sports.club')->with([
             'list' => $this->getList()
         ]);

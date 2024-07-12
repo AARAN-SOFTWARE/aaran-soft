@@ -82,6 +82,8 @@ class Student extends Component
                     'experience' => $this->experience,
                     'student_photo' => $this->saveImage(),
                     'active_id' => $this->active_id ? 1 : 0,
+                    'user_id'=>auth()->id(),
+                    'tenant_id'=>session()->get('tenant_id'),
                 ]);
             } else {
                 $obj = SportStudent::find($this->vid);
@@ -106,6 +108,8 @@ class Student extends Component
                 $obj->experience = $this->experience;
                 $obj->student_photo = $this->saveImage();
                 $obj->active_id = $this->active_id;
+                $obj->user_id=auth()->id();
+                $obj->tenant_id=session()->get('tenant_id');
 
                 $obj->save();
             }
@@ -228,6 +232,7 @@ class Student extends Component
         return SportStudent::search($this->searches)
             ->where('sport_master_id', '=', $this->sportMaster->id)
             ->where('active_id', '=', $this->activeRecord)
+            ->where('tenant_id', '=', session()->get('tenant_id'))
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }

@@ -41,18 +41,13 @@ class Master extends Component
     public $cities;
     public $states;
     public $pincodes;
-    public $sportClubs;
-    public SportClub $sportClub;
     public $isUploaded = false;
 
     #endregion
 
     #region[Mount]
-    public function mount($id)
+    public function mount()
     {
-        if ($id) {
-            $this->sportClub = SportClub::find($id);
-        }
     }
     #endregion
 
@@ -271,7 +266,7 @@ class Master extends Component
                     'city_id' => $this->city_id ?: 1,
                     'state_id' => $this->state_id ?: 1,
                     'pincode_id' => $this->pincode_id ?: 1,
-                    'sport_club_id' => $this->sportClub->id,
+                    'sport_club_id' => session()->get('club_id'),
                     'grade' => $this->grade,
                     'experience' => $this->experience,
                     'dob' => $this->dob,
@@ -280,6 +275,8 @@ class Master extends Component
                     'aadhaar' => $this->aadhaar,
                     'master_photo' => $this->saveImage(),
                     'active_id' => $this->active_id,
+                    'user_id'=>auth()->id(),
+                    'tenant_id'=>session()->get('tenant_id'),
                 ]);
                 $message = "Saved";
 
@@ -294,7 +291,7 @@ class Master extends Component
                 $obj->city_id = $this->city_id ?: 1;
                 $obj->state_id = $this->state_id ?: 1;
                 $obj->pincode_id = $this->pincode_id ?: 1;
-                $obj->sport_club_id = $this->sportClub->id;
+                $obj->sport_club_id =session()->get('club_id');
                 $obj->grade = $this->grade;
                 $obj->experience = $this->experience;
                 $obj->dob = $this->dob;
@@ -303,6 +300,8 @@ class Master extends Component
                 $obj->aadhaar = $this->aadhaar;
                 $obj->master_photo = $this->saveImage();
                 $obj->active_id = $this->active_id;
+                $obj->user_id = auth()->id();
+                $obj->tenant_id = session()->get('tenant_id');
                 $obj->save();
                 $message = "Updated";
             }
@@ -410,7 +409,8 @@ class Master extends Component
     public function getList()
     {
         return SportMaster::search($this->searches)
-            ->where('sport_club_id', '=', $this->sportClub->id)
+            ->where('sport_club_id', '=',session()->get('club_id'))
+            ->where('tenant_id', '=', session()->get('tenant_id'))
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
