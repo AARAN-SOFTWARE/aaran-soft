@@ -1,4 +1,5 @@
 <div>
+<div>
     <x-slot name="header"> Sports Image</x-slot>
 
     <div class="w-full mt-4 md:w-full md:mt-20 mx-auto">
@@ -246,4 +247,5 @@
 
         showTab('tab1');
     </script>
+</div>
 </div>

@@ -91,7 +91,7 @@
                             role="option">
 
                             <div style="background-image: url('../../../../storage/images/{{$row->bg_image}}');"
-                                 class="w-full h-[40rem] bg-no-repeat bg-cover flex ">
+                                 class="w-full h-[40rem] bg-no-repeat flex bg-cover">
                                 <div class="flex flex-row h-[40rem]">
                                     <div class="w-full flex justify-evenly">
                                         <div
@@ -102,7 +102,6 @@
                                                     {!! $row->description !!}
                                                 </p>
                                             </div>
-
 
 
                                         </div>
@@ -170,4 +169,7 @@
         </div>
     </div>
     @error('')  @enderror
+
+
+
 </div>
