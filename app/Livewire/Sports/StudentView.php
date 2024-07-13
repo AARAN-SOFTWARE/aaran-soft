@@ -16,9 +16,8 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Student extends Component
-{
-    use CommonTrait;
+class StudentView extends Component
+{ use CommonTrait;
 
     use WithFileUploads;
 
@@ -43,15 +42,18 @@ class Student extends Component
     public bool $isUploaded = false;
 
     public SportMaster $sportMaster;
+    public $sportsMaster_id;
+    public $user;
 
     #endregion
 
     #region[Mount]
-    public function mount($id)
+    public function mount()
     {
-        if ($id) {
-            $this->sportMaster = SportMaster::find($id);
-        }
+        $this->user=User::find(auth()->id());
+//        if ($id) {
+//            $this->sportMaster = SportMaster::find($id);
+//        }
     }
     #endregion
 
@@ -85,7 +87,6 @@ class Student extends Component
                     'user_id'=>auth()->id(),
                     'tenant_id'=>session()->get('tenant_id'),
                 ]);
-                $this->createUser();
             } else {
                 $obj = SportStudent::find($this->vid);
                 $obj->vname = $this->vname;
@@ -105,7 +106,7 @@ class Student extends Component
                 $obj->gender = $this->gender;
                 $obj->institution = $this->institution;
                 $obj->standard = $this->standard;
-                $obj->sport_master_id = $this->sportMaster->id;
+                $obj->sport_master_id = $this->sportsMaster_id;
                 $obj->experience = $this->experience;
                 $obj->student_photo = $this->saveImage();
                 $obj->active_id = $this->active_id;
@@ -116,19 +117,6 @@ class Student extends Component
             }
             $this->clearFields();
         }
-    }
-    #endregion
-
-    #region[createUser]
-    public function createUser()
-    {
-        User::create([
-            'name'=>$this->vname,
-            'email'=>$this->email,
-            'password'=>bcrypt(123456789),
-            'tenant_id' => session()->get('tenant_id'),
-            'role_id' => 8,
-        ]);
     }
     #endregion
 
@@ -157,7 +145,7 @@ class Student extends Component
             $this->age = $obj->age;
             $this->gender = $obj->gender;
             $this->institution = $obj->institution;
-//            $this->sportsMaster_id = $obj->sport_master_id;
+            $this->sportsMaster_id = $obj->sport_master_id;
 //            $this->sportsMaster_name = SportStudent::master($obj->sport_master_id);
             $this->standard = $obj->standard;
             $this->experience = $obj->experience;
@@ -244,7 +232,7 @@ class Student extends Component
         $this->sortField = 'id';
 
         return SportStudent::search($this->searches)
-            ->where('sport_master_id', '=', $this->sportMaster->id)
+            ->where('vname', '=', $this->user->name)
             ->where('active_id', '=', $this->activeRecord)
             ->where('tenant_id', '=', session()->get('tenant_id'))
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
@@ -462,8 +450,7 @@ class Student extends Component
         $this->getCityList();
         $this->getStateList();
         $this->getPincodeList();
-
-        return view('livewire.sports.student')->with([
+        return view('livewire.sports.student-view')->with([
             'list' => $this->getList()
         ]);
     }
