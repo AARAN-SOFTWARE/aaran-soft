@@ -215,6 +215,14 @@
                 <x-icons.utilities :icon="'cmp1'"/>
                 <x-icons.utilities :icon="'cmp2'"/>
 
+                {{--<----row-15 ----->--}}
+                <x-icons.utilities :icon="'event'"/>
+                <x-icons.utilities :icon="'newspaper-outline'"/>
+                <x-icons.utilities :icon="'arrow-right-circle'"/>
+                <x-icons.utilities :icon="'member-group'"/>
+                <x-icons.utilities :icon="'gift-top'"/>
+
+
                 </div>
             </div>
     </x-forms.m-panel>
