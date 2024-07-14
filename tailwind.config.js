@@ -11,6 +11,8 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+    plugins: [forms, typography],
+
     theme: {
         extend: {
             colors: {
@@ -26,9 +28,9 @@ export default {
                 roboto:["Roboto Condensed", "sans-serif"],
                 nunito:["Nunito", "sans-serif"],
                 lexanddeca:["LexendDeca", "sans-serif"],
+                bebas:["Bebas Neue", "sans-serif"],
+
             },
         },
     },
-
-    plugins: [forms, typography],
 };
