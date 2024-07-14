@@ -95,6 +95,18 @@
                 </button>
             </div>
 
+            <div class="w-1/4 border-2 p-3">
+                <x-input.model-text wire:model="t_name" :label="'Tenant Name'"/>
+                <button type="submit" wire:click.prevent="saveTenant"
+                        class="inline-flex items-center px-4 py-2 rounded-md font-semibold text-xs text-white uppercase tracking-widest
+                                        transition-all shadow-xs
+                                        bg-gradient-to-r from-blue-600 to-blue-500 hover:bg-gradient-to-b dark:shadow-blue-900
+                                        shadow-blue-200 hover:shadow-2xl hover:shadow-blue-200 hover:-tranneutral-y-px'">
+                    <x-icons.icon :icon="'save'" class="h-5 w-auto block px-1.5"/>
+                    SAVE
+                </button>
+            </div>
+
         </div>
 
         <div class="flex flex-row gap-5 w-full">

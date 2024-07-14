@@ -5,11 +5,11 @@ namespace App\Livewire\Sports;
 use Aaran\Common\Models\City;
 use Aaran\Common\Models\Pincode;
 use Aaran\Common\Models\State;
-use Aaran\SportsClub\Models\SportClub;
 use Aaran\SportsClub\Models\SportMaster;
 use Aaran\SportsClub\Models\SportStudent;
 use App\Enums\Active;
 use App\Livewire\Trait\CommonTrait;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
@@ -82,7 +82,10 @@ class Student extends Component
                     'experience' => $this->experience,
                     'student_photo' => $this->saveImage(),
                     'active_id' => $this->active_id ? 1 : 0,
+                    'user_id'=>auth()->id(),
+                    'tenant_id'=>session()->get('tenant_id'),
                 ]);
+                $this->createUser();
             } else {
                 $obj = SportStudent::find($this->vid);
                 $obj->vname = $this->vname;
@@ -106,11 +109,26 @@ class Student extends Component
                 $obj->experience = $this->experience;
                 $obj->student_photo = $this->saveImage();
                 $obj->active_id = $this->active_id;
+                $obj->user_id=auth()->id();
+                $obj->tenant_id=session()->get('tenant_id');
 
                 $obj->save();
             }
             $this->clearFields();
         }
+    }
+    #endregion
+
+    #region[createUser]
+    public function createUser()
+    {
+        User::create([
+            'name'=>$this->vname,
+            'email'=>$this->email,
+            'password'=>bcrypt(123456789),
+            'tenant_id' => session()->get('tenant_id'),
+            'role_id' => 8,
+        ]);
     }
     #endregion
 
@@ -228,6 +246,7 @@ class Student extends Component
         return SportStudent::search($this->searches)
             ->where('sport_master_id', '=', $this->sportMaster->id)
             ->where('active_id', '=', $this->activeRecord)
+            ->where('tenant_id', '=', session()->get('tenant_id'))
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
@@ -431,75 +450,6 @@ class Student extends Component
     }
 
     #endregion
-
-//    #region[SportsMaster]
-//    public $sportsMaster_id = '';
-//    public $sportsMaster_name = '';
-//    public Collection $sportsMasterCollection;
-//    public $highlightSportsMaster = 0;
-//    public $sportsMasterTyped = false;
-//
-//    public function decrementSportsMaster(): void
-//    {
-//        if ($this->highlightSportsMaster === 0) {
-//            $this->highlightSportsMaster = count($this->sportsMasterCollection) - 1;
-//            return;
-//        }
-//        $this->highlightSportsMaster--;
-//    }
-//
-//    public function incrementSportsMaster(): void
-//    {
-//        if ($this->highlightSportsMaster === count($this->sportsMasterCollection) - 1) {
-//            $this->highlightSportsMaster = 0;
-//            return;
-//        }
-//        $this->highlightSportsMaster++;
-//    }
-//
-//    public function setSportsMaster($name, $id): void
-//    {
-//        $this->sportsMaster_name = $name;
-//        $this->sportsMaster_id = $id;
-//        $this->getSportsMasterList();
-//    }
-//
-//    public function enterSportsMaster(): void
-//    {
-//        $obj = $this->sportsMasterCollection[$this->highlightSportsMaster] ?? null;
-//
-//        $this->sportsMaster_name = '';
-//        $this->sportsMasterCollection = Collection::empty();
-//        $this->highlightSportsMaster = 0;
-//
-//        $this->sportsMaster_name = $obj['vname'] ?? '';;
-//        $this->sportsMaster_id = $obj['id'] ?? '';;
-//    }
-//
-//    #[On('refresh-sportsMaster')]
-//    public function refreshSportsMaster($v): void
-//    {
-//        $this->sportsMaster_id = $v['id'];
-//        $this->sportsMaster_name = $v['name'];
-//        $this->sportsMasterTyped = false;
-//
-//    }
-//
-//    public function sportsMasterSave($name)
-//    {
-//        $obj = SportMaster::create([
-//            'vname' => $name,
-//            'active_id' => '1'
-//        ]);
-//        $v = ['name' => $name, 'id' => $obj->id];
-//        $this->refreshCity($v);
-//    }
-//
-//    public function getSportsMasterList(): void
-//    {
-//        $this->sportsMasterCollection = $this->sportsMaster_name ? SportMaster::search(trim($this->sportsMaster_name))->get() : SportMaster::all();
-//    }
-//    #endregion
 
     #region[Render]
     public function reRender(): void

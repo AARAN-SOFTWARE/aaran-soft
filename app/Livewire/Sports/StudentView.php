@@ -5,53 +5,65 @@ namespace App\Livewire\Sports;
 use Aaran\Common\Models\City;
 use Aaran\Common\Models\Pincode;
 use Aaran\Common\Models\State;
-use Aaran\SportsClub\Models\SportClub;
+use Aaran\SportsClub\Models\SportMaster;
+use Aaran\SportsClub\Models\SportStudent;
 use App\Enums\Active;
 use App\Livewire\Trait\CommonTrait;
-use App\Models\Tenant;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Club extends Component
-{
-    use CommonTrait;
+class StudentView extends Component
+{ use CommonTrait;
 
     use WithFileUploads;
 
     #region[Properties]
-    public string $master_name = '';
     public string $mobile = '';
     public string $whatsapp = '';
     public string $email = '';
     public string $address_1 = '';
     public string $address_2 = '';
-    public string $started_at = '';
-    public $club_photo = "";
-    public string $old_club_photo = '';
+    public string $aadhaar = '';
+    public string $father_name = '';
+    public string $mother_name = '';
+    public string $dob = '';
+    public string $age = '';
+    public string $gender = '';
+    public string $institution = '';
+    public string $standard = '';
+    public string $experience = '';
+    public $student_photo = "";
+    public string $old_student_photo = '';
 
     public bool $isUploaded = false;
-    public $tenant_id;
-    public Collection $tenants;
+
+    public SportMaster $sportMaster;
+    public $sportsMaster_id;
+    public $user;
+
     #endregion
 
-    public function getTenants()
+    #region[Mount]
+    public function mount()
     {
-        $this->tenants = Tenant::all();
-
+        $this->user=User::find(auth()->id());
+//        if ($id) {
+//            $this->sportMaster = SportMaster::find($id);
+//        }
     }
+    #endregion
 
     #region[getSave]
     public function getSave()
     {
         if ($this->vname != '') {
             if ($this->vid == "") {
-                $obj = SportClub:: create([
+                $obj = SportStudent:: create([
                     'vname' => $this->vname,
-                    'master_name' => $this->master_name,
                     'mobile' => $this->mobile,
                     'whatsapp' => $this->whatsapp,
                     'email' => $this->email,
@@ -60,16 +72,24 @@ class Club extends Component
                     'city_id' => $this->city_id ?: 1,
                     'state_id' => $this->state_id ?: 1,
                     'pincode_id' => $this->pincode_id ?: 1,
-                    'started_at' => $this->started_at,
-                    'club_photo' => $this->saveImage(),
+                    'aadhaar' => $this->aadhaar,
+                    'father_name' => $this->father_name,
+                    'mother_name' => $this->mother_name,
+                    'dob' => $this->dob,
+                    'age' => $this->age,
+                    'gender' => $this->gender,
+                    'institution' => $this->institution,
+                    'standard' => $this->standard,
+                    'sport_master_id' => $this->sportMaster->id,
+                    'experience' => $this->experience,
+                    'student_photo' => $this->saveImage(),
                     'active_id' => $this->active_id ? 1 : 0,
-                    'user_id' => \auth()->id(),
-                    'tenant_id' => $this->tenant_id ?: '1',
+                    'user_id'=>auth()->id(),
+                    'tenant_id'=>session()->get('tenant_id'),
                 ]);
             } else {
-                $obj = SportClub::find($this->vid);
+                $obj = SportStudent::find($this->vid);
                 $obj->vname = $this->vname;
-                $obj->master_name = $this->master_name;
                 $obj->mobile = $this->mobile;
                 $obj->whatsapp = $this->whatsapp;
                 $obj->email = $this->email;
@@ -78,11 +98,20 @@ class Club extends Component
                 $obj->city_id = $this->city_id ?: 1;
                 $obj->state_id = $this->state_id ?: 1;
                 $obj->pincode_id = $this->pincode_id ?: 1;
-                $obj->started_at = $this->started_at;
-                $obj->club_photo = $this->saveImage();
+                $obj->aadhaar = $this->aadhaar;
+                $obj->father_name = $this->father_name;
+                $obj->mother_name = $this->mother_name;
+                $obj->dob = $this->dob;
+                $obj->age = $this->age;
+                $obj->gender = $this->gender;
+                $obj->institution = $this->institution;
+                $obj->standard = $this->standard;
+                $obj->sport_master_id = $this->sportsMaster_id;
+                $obj->experience = $this->experience;
+                $obj->student_photo = $this->saveImage();
                 $obj->active_id = $this->active_id;
-                $obj->tenant_id = $this->tenant_id?:'1';
-                $obj->user_id = \auth()->id();
+                $obj->user_id=auth()->id();
+                $obj->tenant_id=session()->get('tenant_id');
 
                 $obj->save();
             }
@@ -95,10 +124,9 @@ class Club extends Component
     public function getObj($id)
     {
         if ($id) {
-            $obj = SportClub::find($id);
+            $obj = SportStudent::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
-            $this->master_name = $obj->master_name;
             $this->mobile = $obj->mobile;
             $this->whatsapp = $obj->whatsapp;
             $this->email = $obj->email;
@@ -110,10 +138,19 @@ class Club extends Component
             $this->state_name = $obj->state->vname;
             $this->pincode_id = $obj->pincode_id;
             $this->pincode_name = $obj->pincode->vname;
-            $this->started_at = $obj->started_at;
-            $this->old_club_photo = $obj->club_photo;
+            $this->aadhaar = $obj->aadhaar;
+            $this->father_name = $obj->father_name;
+            $this->mother_name = $obj->mother_name;
+            $this->dob = $obj->dob;
+            $this->age = $obj->age;
+            $this->gender = $obj->gender;
+            $this->institution = $obj->institution;
+            $this->sportsMaster_id = $obj->sport_master_id;
+//            $this->sportsMaster_name = SportStudent::master($obj->sport_master_id);
+            $this->standard = $obj->standard;
+            $this->experience = $obj->experience;
+            $this->old_student_photo = $obj->student_photo;
             $this->active_id = $obj->active_id;
-            $this->tenant_id=$obj->tenant_id;
 
             return $obj;
         }
@@ -127,7 +164,6 @@ class Club extends Component
     {
         $this->vid = '';
         $this->vname = '';
-        $this->master_name = '';
         $this->mobile = '';
         $this->whatsapp = '';
         $this->email = '';
@@ -139,10 +175,19 @@ class Club extends Component
         $this->state_name = '';
         $this->pincode_id = '';
         $this->pincode_name = '';
-        $this->started_at = '';
-        $this->club_photo = '';
-        $this->old_club_photo = '';
-        $this->tenant_id='';
+        $this->aadhaar = '';
+        $this->father_name = '';
+        $this->mother_name = '';
+        $this->dob = '';
+        $this->age = '';
+        $this->gender = '';
+        $this->institution = '';
+        $this->standard = '';
+//        $this->sportsMaster_id = '';
+//        $this->sportsMaster_name = '';
+        $this->experience = '';
+        $this->student_photo = '';
+        $this->old_student_photo = '';
         $this->active_id = Active::ACTIVE->value;
     }
     #endregion
@@ -150,13 +195,13 @@ class Club extends Component
     #region[Image]
     public function saveImage()
     {
-        if ($this->club_photo) {
+        if ($this->student_photo) {
 
-            $image = $this->club_photo;
-            $filename = $this->club_photo->getClientOriginalName();
+            $image = $this->student_photo;
+            $filename = $this->student_photo->getClientOriginalName();
 
-            if (Storage::disk('public')->exists(Storage::path('public/images/' . $this->old_club_photo))) {
-                Storage::disk('public')->delete(Storage::path('public/images/' . $this->old_club_photo));
+            if (Storage::disk('public')->exists(Storage::path('public/images/' . $this->old_student_photo))) {
+                Storage::disk('public')->delete(Storage::path('public/images/' . $this->old_student_photo));
             }
 
             $image->storeAs('public/images', $filename);
@@ -164,8 +209,8 @@ class Club extends Component
             return $filename;
 
         } else {
-            if ($this->old_club_photo) {
-                return $this->old_club_photo;
+            if ($this->old_student_photo) {
+                return $this->old_student_photo;
             } else {
                 return 'no_image';
             }
@@ -175,7 +220,7 @@ class Club extends Component
     public function updatedphoto()
     {
         $this->validate([
-            'club_photo' => 'image|max:1024',
+            'student_photo' => 'image|max:1024',
         ]);
         $this->isUploaded = true;
     }
@@ -186,7 +231,8 @@ class Club extends Component
     {
         $this->sortField = 'id';
 
-        return SportClub::search($this->searches)
+        return SportStudent::search($this->searches)
+            ->where('vname', '=', $this->user->name)
             ->where('active_id', '=', $this->activeRecord)
             ->where('tenant_id', '=', session()->get('tenant_id'))
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
@@ -394,7 +440,7 @@ class Club extends Component
     #endregion
 
     #region[Render]
-    public function reRender():void
+    public function reRender(): void
     {
         $this->render()->render();
     }
@@ -404,8 +450,7 @@ class Club extends Component
         $this->getCityList();
         $this->getStateList();
         $this->getPincodeList();
-        $this->getTenants();
-        return view('livewire.sports.club')->with([
+        return view('livewire.sports.student-view')->with([
             'list' => $this->getList()
         ]);
     }

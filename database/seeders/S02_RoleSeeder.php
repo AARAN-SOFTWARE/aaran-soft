@@ -34,5 +34,20 @@ class S02_RoleSeeder extends Seeder
             'vname' => 'viewer',
             'active_id' => '1'
         ]);
+
+        Role::create([
+            'vname' => 'Master',
+            'active_id' => '1'
+        ]);
+
+        Role::create([
+            'vname' => 'Assistant Master',
+            'active_id' => '1'
+        ]);
+
+        Role::create([
+            'vname' => 'Student',
+            'active_id' => '1'
+        ]);
     }
 }

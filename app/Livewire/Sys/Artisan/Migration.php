@@ -25,6 +25,8 @@ class Migration extends Component
     public string $soft_v = '';
     public string $db_v = '';
 
+
+
     public function getUser()
     {
         $this->users = \DB::table('users')->get();
@@ -137,6 +139,22 @@ class Migration extends Component
     }
 
 
+    #endregion
+
+    #region[Tenant]
+    public string $t_name;
+    public function saveTenant()
+    {
+        if($this->t_name!='') {
+            Tenant::create([
+                't_name' => $this->t_name,
+                'active_id' => 1
+            ]);
+            $message = "Saved";
+        }
+        $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+        $this->t_name="";
+    }
     #endregion
 
     public function render()
