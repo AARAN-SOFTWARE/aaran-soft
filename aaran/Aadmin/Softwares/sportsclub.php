@@ -26,6 +26,7 @@ return [
         DbMigration::master(),
         DbMigration::sports(),
         DbMigration::webs(),
+        DbMigration::blog(),
     ]
 
 ];
