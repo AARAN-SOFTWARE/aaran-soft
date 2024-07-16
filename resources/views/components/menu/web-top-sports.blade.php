@@ -31,7 +31,7 @@
                     </li>
                     <li>
                         <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
-                           href="{{route('contact')}}">Videos</a>
+                           href="{{route('videos')}}">Videos</a>
                     </li>
                     <li>
                         <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
@@ -39,7 +39,7 @@
                     </li>
                     <li>
                         <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
-                           href="{{route('posts')}}">Blog</a>
+                           href="{{route('feed')}}">Blog</a>
                     </li>
                     <li>
                         <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
