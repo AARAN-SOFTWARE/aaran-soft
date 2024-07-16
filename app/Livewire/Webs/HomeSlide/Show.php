@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Webs\HomeSlide;
 
+use Aaran\SportsClub\Models\Achievements;
+use Aaran\SportsClub\Models\SportClubPic;
 use Aaran\Web\Models\HomeSlide;
 use App\Livewire\Trait\CommonTrait;
 use Livewire\Component;
@@ -9,11 +11,24 @@ use Livewire\Component;
 class Show extends Component
 {
     use CommonTrait;
-
+    public $clubImage;
+    public $image;
 
     public function target()
     {
         dd('tart');
+    }
+
+    public function getClubImage()
+    {
+        $this->clubImage=SportClubPic::latest()->take(8)->get();
+
+    }
+
+    public function getImage()
+    {
+        $this->image=Achievements::latest()->take(3)->get();
+
     }
 
 
@@ -34,6 +49,8 @@ class Show extends Component
     #region[Render]
     public function render()
     {
+        $this->getClubImage();
+        $this->getImage();
         return view('livewire.webs.home-slide.show')->with([
             'list' => $this->getList(),
         ]);
