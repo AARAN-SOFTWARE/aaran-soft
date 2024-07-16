@@ -11,6 +11,7 @@ return new class extends Migration {
 
             Schema::create('sport_clubs', function (Blueprint $table) {
                 $table->id();
+                $table->string('unique_no')->nullable();
                 $table->string('vname');
                 $table->string('master_name')->nullable();
                 $table->string('mobile')->nullable();

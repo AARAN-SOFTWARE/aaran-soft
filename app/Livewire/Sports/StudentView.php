@@ -44,7 +44,7 @@ class StudentView extends Component
     public SportMaster $sportMaster;
     public $sportsMaster_id;
     public $user;
-
+    public $unique_no;
     #endregion
 
     #region[Mount]
@@ -89,6 +89,7 @@ class StudentView extends Component
                 ]);
             } else {
                 $obj = SportStudent::find($this->vid);
+                $obj->unique_no=$this->unique_no;
                 $obj->vname = $this->vname;
                 $obj->mobile = $this->mobile;
                 $obj->whatsapp = $this->whatsapp;
@@ -126,6 +127,7 @@ class StudentView extends Component
         if ($id) {
             $obj = SportStudent::find($id);
             $this->vid = $obj->id;
+            $this->unique_no=$obj->unique_no;
             $this->vname = $obj->vname;
             $this->mobile = $obj->mobile;
             $this->whatsapp = $obj->whatsapp;

@@ -36,12 +36,19 @@ class Club extends Component
     public bool $isUploaded = false;
     public $tenant_id;
     public Collection $tenants;
+    public $unique_no;
     #endregion
 
     public function getTenants()
     {
         $this->tenants = Tenant::all();
+    }
 
+    public function mount()
+    {
+        $parts = explode('-', SportClub::all()->max('unique_no'));
+        $parts[1] = str_pad(++$parts[1], 4, '0', STR_PAD_LEFT);
+        $this->unique_no ='Clb'.'-'.$parts[1];
     }
 
     #region[getSave]
@@ -50,6 +57,7 @@ class Club extends Component
         if ($this->vname != '') {
             if ($this->vid == "") {
                 $obj = SportClub:: create([
+                    'unique_no' => $this->unique_no,
                     'vname' => $this->vname,
                     'master_name' => $this->master_name,
                     'mobile' => $this->mobile,
@@ -68,6 +76,7 @@ class Club extends Component
                 ]);
             } else {
                 $obj = SportClub::find($this->vid);
+                $obj->unique_no=$this->unique_no;
                 $obj->vname = $this->vname;
                 $obj->master_name = $this->master_name;
                 $obj->mobile = $this->mobile;
@@ -97,6 +106,7 @@ class Club extends Component
         if ($id) {
             $obj = SportClub::find($id);
             $this->vid = $obj->id;
+            $this->unique_no=$obj->unique_no;
             $this->vname = $obj->vname;
             $this->master_name = $obj->master_name;
             $this->mobile = $obj->mobile;

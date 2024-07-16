@@ -100,6 +100,9 @@
 
                 <div class="flex flex-col gap-0 sm:gap-3">
                     <x-input.model-text wire:model="vname" :label="'Student Name'"/>
+                    @error('vname')
+                    <span class="text-red-500">{{  $message }}</span>
+                    @enderror
                     <x-input.model-text wire:model="institution" :label="'Institution'"/>
                     <x-input.model-text wire:model="standard" :label="'Standard'"/>
                     <x-input.model-text wire:model="father_name" :label="'FatherName'"/>
@@ -123,6 +126,9 @@
                     <x-input.model-text wire:model="mobile" :label="'Mobile'"/>
                     <x-input.model-text wire:model="whatsapp" :label="'Whatsapp'"/>
                     <x-input.model-text wire:model="email" :label="'Email'"/>
+                    @error('email')
+                    <span class="text-red-500">{{  $message }}</span>
+                    @enderror
 
                     <x-input.model-text wire:model="address_1" :label="'Address'"/>
                     <x-input.model-text wire:model="address_2" :label="'Street,Area'"/>

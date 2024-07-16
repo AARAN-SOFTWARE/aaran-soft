@@ -19,7 +19,7 @@ class SportClub extends Model
     public static function search(string $searches)
     {
         return empty($searches) ? static::query()
-            : static::where('vname', 'like', '%' . $searches . '%');
+            : static::where('vname', 'like', '%'.$searches.'%');
     }
 
     public function user(): BelongsTo

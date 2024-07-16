@@ -44,6 +44,21 @@ class Student extends Component
 
     public SportMaster $sportMaster;
 
+    public $unique_no;
+    #endregion
+
+    #region[getUniqueNo]
+    public function getUniqueNo()
+    {
+        $parts = explode('-', SportStudent::where('tenant_id',session()->get('tenant_id'))->max('unique_no'));
+        if ($parts[0]!='') {
+            $parts[1] = str_pad(++$parts[1], 4, '0', STR_PAD_LEFT);
+            $this->unique_no = 'Std'.'-'.$parts[1];
+        }
+        else{
+            $this->unique_no='Std-0001';
+        }
+    }
     #endregion
 
     #region[Mount]
@@ -58,9 +73,15 @@ class Student extends Component
     #region[getSave]
     public function getSave()
     {
+        $this->getUniqueNo();
         if ($this->vname != '') {
             if ($this->vid == "") {
+                $this->validate([
+                    'vname' => 'required|unique:sport_students,vname',
+                    'email'=>'required|unique:sport_students,email',
+                    ]);
                 $obj = SportStudent:: create([
+                    'unique_no' => $this->unique_no,
                     'vname' => $this->vname,
                     'mobile' => $this->mobile,
                     'whatsapp' => $this->whatsapp,
@@ -88,6 +109,7 @@ class Student extends Component
                 $this->createUser();
             } else {
                 $obj = SportStudent::find($this->vid);
+                $obj->unique_no = $this->unique_no;
                 $obj->vname = $this->vname;
                 $obj->mobile = $this->mobile;
                 $obj->whatsapp = $this->whatsapp;
@@ -138,6 +160,7 @@ class Student extends Component
         if ($id) {
             $obj = SportStudent::find($id);
             $this->vid = $obj->id;
+            $this->unique_no=$obj->unique_no;
             $this->vname = $obj->vname;
             $this->mobile = $obj->mobile;
             $this->whatsapp = $obj->whatsapp;

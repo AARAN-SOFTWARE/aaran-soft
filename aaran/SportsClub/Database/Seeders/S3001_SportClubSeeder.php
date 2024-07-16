@@ -10,6 +10,7 @@ class S3001_SportClubSeeder extends Seeder
     public static function run(): void
     {
         SportClub::create([
+            'unique_no'=>'Clb-0001',
             'vname' => '-',
             'master_name' => '-',
             'mobile' => '-',
