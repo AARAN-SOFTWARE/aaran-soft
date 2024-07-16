@@ -11,6 +11,7 @@ return new class extends Migration {
 
             Schema::create('sport_students', function (Blueprint $table) {
                 $table->id();
+                $table->string('unique_no')->nullable();
                 $table->string('vname');
                 $table->string('mobile');
                 $table->string('whatsapp')->nullable();

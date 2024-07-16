@@ -42,12 +42,20 @@ class Master extends Component
     public $states;
     public $pincodes;
     public $isUploaded = false;
-
+    public $unique_no;
     #endregion
 
-    #region[Mount]
-    public function mount()
+    #region[getUniqueNo]
+    public function getUniqueNo()
     {
+        $parts = explode('-', SportMaster::where('sport_club_id',session()->get('club_id'))->max('unique_no'));
+        if ($parts[0]!='') {
+            $parts[1] = str_pad(++$parts[1], 4, '0', STR_PAD_LEFT);
+            $this->unique_no = 'Mas'.'-'.$parts[1];
+        }
+       else{
+            $this->unique_no='Mas-0001';
+        }
     }
     #endregion
 
@@ -253,10 +261,12 @@ class Master extends Component
 
     public function getSave(): void
     {
+        $this->getUniqueNo();
         if ($this->vname != '') {
             if ($this->vid == "") {
                 $this->validate(['vname' => 'required|unique:banks,vname']);
                 SportMaster::create([
+                    'unique_no'=>$this->unique_no,
                     'vname' => Str::ucfirst($this->vname),
                     'mobile' => $this->mobile,
                     'whatsapp' => $this->whatsapp,
@@ -282,6 +292,7 @@ class Master extends Component
 
             } else {
                 $obj = SportMaster::find($this->vid);
+                $obj->
                 $obj->vname = Str::ucfirst($this->vname);
                 $obj->mobile = $this->mobile;
                 $obj->whatsapp = $this->whatsapp;

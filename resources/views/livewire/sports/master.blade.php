@@ -317,7 +317,7 @@
                             <option>Choose...</option>
                             <option value="Senior Master">Senior Master</option>
                             <option value="Master">Master</option>
-                            <option value="referee">referee</option>
+                            <option value="Referee">Referee</option>
                             <option value="Manager">Manager</option>
                         </x-input.model-select>
 
