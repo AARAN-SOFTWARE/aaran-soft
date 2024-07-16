@@ -6,7 +6,7 @@
         </div>
         <div class="flex justify-between mt-3">
             @for($i=1; $i<=4; $i++)
-                <x-SportsClub.card-1 />
+                <x-SportsClub.card.card-1 />
             @endfor
         </div>
     </div>

@@ -27,11 +27,19 @@
                     </li>
                     <li>
                         <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
-                           href="{{route('service')}}">Project</a>
+                           href="{{route('gallery')}}">Gallery</a>
                     </li>
                     <li>
                         <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
-                           href="{{route('about')}}">About Us</a>
+                           href="{{route('contact')}}">Videos</a>
+                    </li>
+                    <li>
+                        <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                           href="{{route('news')}}">News</a>
+                    </li>
+                    <li>
+                        <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                           href="{{route('posts')}}">Blog</a>
                     </li>
                     <li>
                         <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
@@ -39,7 +47,7 @@
                     </li>
                     <li>
                         <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
-                           href="{{route('posts')}}">Blog</a>
+                           href="{{route('about')}}">About Us</a>
                     </li>
                 </ul>
             </div>
@@ -71,14 +79,14 @@
                     <div id="menu" class="space-x-4 ">
                         @auth
                             <a href="{{route('dashboard')}}" role="button"
-                               class="font-semibold text-xl hover:text-white hover:bg-green-400  px-3 py-1 rounded-md focus:outline-none focus:underline  transition ease-in-out duration-150">
+                               class="font-semibold text-xl hover:text-[#19398A] hover:bg-white  px-3 py-1 rounded-md focus:outline-none focus:underline  transition ease-in-out duration-300">
                                 Dashboard
                             </a>
 
                             <a
                                     href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                    class="font-semibold text-xl hover:text-white hover:bg-red-500 px-3 py-1 rounded-md
+                                    class="font-semibold text-xl hover:text-[#19398A] hover:bg-white px-3 py-1 rounded-md
                                  focus:outline-none focus:underline transition ease-in-out duration-700"
                             >
                                 Log out

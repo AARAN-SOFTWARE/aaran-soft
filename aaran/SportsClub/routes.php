@@ -16,5 +16,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('sportsClub/{id}/studentImage', \App\Livewire\Sports\Images\StudentImage::class)->name('sportsClub.studentImage');
 
     Route::get('sportsClub/show', \App\Livewire\Sports\Images\Show::class)->name('sportsClub.show');
+    Route::get('/gallery', \App\Livewire\Sports\Web\Gallery::class)->name('gallery');
+    Route::get('/news', \App\Livewire\Sports\Web\News::class)->name('news');
+
 
 });
