@@ -1,7 +1,7 @@
 @props([
-    "slot"
+    "list"
 ])
-<div class="relative">
+<div class="w-3/12 h-44 bg-orange-500 rounded-lg relative">
 
     <div x-data="{
         currentSlide: 0,
@@ -14,7 +14,7 @@
         startAutoSlide() {
             this.autoSlideInterval = setInterval(() => {
                 this.next();
-            }, 4500);
+            }, 1500);
         },
 
         stopAutoSlide() {
@@ -63,11 +63,6 @@
          x-init="startAutoSlide()" @mouseover="stopAutoSlide()" @mouseout="startAutoSlide()"
          class="flex flex-col w-full">
 
-        {{--            <div class="bg-gray-200 rounded-full h-2 w-full mt-4">--}}
-        {{--                <div class="bg-blue-500 text-xs leading-none py-1 text-center rounded-full h-2"--}}
-        {{--                     :style="`width: ${progress}%`">&nbsp;--}}
-        {{--                </div>--}}
-        {{--            </div>--}}
 
         <div x-on:keydown.right="next" x-on:keydown.left="prev" tabindex="0" role="region"
              aria-labelledby="carousel-label" class="flex space-x-6">
@@ -81,44 +76,29 @@
             <ul x-ref="slider" @scroll="updateCurrentSlide" tabindex="0" role="listbox"
                 aria-labelledby="carousel-content-label"
                 class="flex w-full overflow-x-hidden snap-x snap-mandatory opacity-95">
-                {{$slot}}
+
+                    <li x-bind="disableNextAndPreviousButtons"
+                        class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
+                        role="option">
+                        <div class="w-full h-44 flex-col flex justify-center items-center">
+                            <div>Tournament</div>
+                            <div>240</div>
+                        </div>
+                    </li>
+                    <li x-bind="disableNextAndPreviousButtons"
+                        class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
+                        role="option">
+                        <div class="w-full h-44 flex-col flex justify-center items-center">
+                            <div>Tournament</div>
+                            <div>280</div>
+                        </div>
+                    </li>
             </ul>
-
-        </div>
-
-        <!-- Prev / Next Buttons ---------------------------------------------------------------------------------->
-
-        <div class="absolute z-10 flex justify-between w-full h-full px-4">
-
-            <!-- Prev Button -------------------------------------------------------------------------------------->
-            <button x-on:click="prev" class="text-6xl" :aria-disabled="atBeginning" :tabindex="atEnd ? -1 : 0">
-
-                <span aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-auto h-5 text-gray-300 lg:h-8 hover:text-gray-400"
-                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                    </svg>
-                </span>
-                <span class="sr-only">Skip to previous slide page</span>
-            </button>
-
-
-            <!-- Next Button -------------------------------------------------------------------------------------->
-
-            <button x-on:click="next" class="text-6xl" :aria-disabled="atEnd" :tabindex="atEnd ? -1 : 0">
-                <span aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-auto h-5 text-gray-300 lg:h-8 hover:text-gray-400"
-                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </span>
-                <span class="sr-only">Skip to next slide page</span>
-            </button>
         </div>
 
         <!-- Indicators ------------------------------------------------------------------------------------------->
 
-        <div class="absolute z-10 w-full bottom-10 lg:bottom-12">
+        <div class="absolute bottom-2 right-[148px]">
             <div class="flex justify-center space-x-2">
                 <template x-for="(slide, index) in Array.from($refs.slider.children)" :key="index">
                     <button @click="goToSlide(index)"
@@ -130,4 +110,5 @@
     </div>
 </div>
 @error('')  @enderror
+
 

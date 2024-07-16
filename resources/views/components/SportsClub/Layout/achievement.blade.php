@@ -1,4 +1,4 @@
-<div class="w-9/12 h-[32rem] mx-auto flex-col flex justify-center gap-y-5">
+<div class="w-9/12 h-[31rem] mx-auto flex-col flex justify-center gap-y-5">
     <div class="font-gab text-3xl font-semibold">Achievements</div>
     <div class="flex justify-between">
         @for($i=1; $i<=3; $i++)
@@ -8,7 +8,6 @@
                     <div class="font-bebas text-2xl tracking-wider">Viewers Choice</div>
                     <div class="font-roboto">“Pursue what catches your heart, not what catches your eyes.” - Roy T. Bennett, The Light in the Heart</div>
                 </div>
-
             </div>
         @endfor
     </div>

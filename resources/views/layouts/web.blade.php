@@ -20,9 +20,23 @@
 </head>
 <body class="">
 <div class="w-full">
-    <x-menu.web-top-new/>
+    @switch(config('aadmin.app_type'))
+        @case(config('software.SPORTS_CLUB'))
+            <x-menu.web-top-sports/>
+            @break
+        @default
+            <x-menu.web-top-new/>
+    @endswitch
     {{ $slot }}
-
+        @switch(config('aadmin.app_type'))
+            @case(config('software.SPORTS_CLUB'))
+                <x-SportsClub.footer.sponser/>
+                <x-SportsClub.footer.footer/>
+                @break
+            @default
+                <x-menu.web-top-new/>
+        @endswitch
+    <x-SportsClub.footer.copyright/>
 </div>
 
 @livewireScripts

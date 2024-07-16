@@ -1,4 +1,4 @@
-<div class=" flex-col flex justify-center h-96 bg-[#11141C]">
+<div class=" flex-col flex justify-center h-96 bg-[#10172B]">
     <div class="flex mx-auto w-9/12 justify-between ">
 
         <div class="flex flex-col mt-10 w-4/12">
@@ -73,8 +73,5 @@
         </div>
     </div>
 
-    <div class="text-gray-300 text-sm mt-4 text-center w-9/12 flex justify-center mx-auto  border-t border-t-gray-300">
-        <!-- copyright-->
-        © copyright@aaraninfotech
-    </div>
-</div>
+
+0</div>
