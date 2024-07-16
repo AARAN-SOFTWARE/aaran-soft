@@ -1,5 +1,5 @@
 <div class="bg-[#10172B] h-[42rem] flex-col flex gap-y-6">
-    <div class="w-9/12 mx-auto text-white font-Don text-2xl tracking-wider">Latest</div>
+    <div class="w-9/12 mx-auto text-white font-Don text-2xl tracking-wider mt-4">Latest</div>
     <div class="w-9/12 flex justify-between mx-auto gap-12">
         <x-SportsClub.slider.slider-1/>
         <x-SportsClub.slider.slider-2/>

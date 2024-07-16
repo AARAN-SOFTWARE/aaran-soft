@@ -10,12 +10,14 @@
     <!-- Menu -1 (optional) -->
     <x-SportsClub.menu.menu-1 />
     <!-- Gallery -->
-    <x-SportsClub.layout.gallery />
+    <!-- demo -->
+    <x-SportsClub.Layout.gallery :clubImage="$clubImage" />
     <!-- Achievement -->
-    <x-SportsClub.layout.achievement />
-
+    <x-SportsClub.Layout.achievement :image="$image" />
+    <!-- Blog -->
     <!-- Latest News -->
     <x-SportsClub.layout.latest />
 
+    <x-SportsClub.sportcontact/>
 </div>
 
