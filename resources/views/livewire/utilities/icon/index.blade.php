@@ -221,6 +221,8 @@
                 <x-icons.utilities :icon="'arrow-right-circle'"/>
                 <x-icons.utilities :icon="'member-group'"/>
                 <x-icons.utilities :icon="'gift-top'"/>
+                <x-icons.utilities :icon="'eye-new'"/>
+                <x-icons.utilities :icon="'x-mark'"/>
 
 
                 </div>
