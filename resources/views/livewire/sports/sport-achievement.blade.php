@@ -10,6 +10,7 @@
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
                 <x-table.header-text center>Photo</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>title</x-table.header-text>
+                <x-table.header-text center width="50%">Description</x-table.header-text>
                 <x-table.header-text center>category</x-table.header-text>
                 <x-table.header-text center>date</x-table.header-text>
                 <x-table.header-action/>
@@ -38,6 +39,10 @@
 
                         <x-table.cell-text>
                             {{ $row->vname}}
+                        </x-table.cell-text>
+
+                        <x-table.cell-text class="overflow-auto">
+                            {{ $row->desc}}
                         </x-table.cell-text>
 
                         <x-table.cell-text>
@@ -69,66 +74,64 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-7 w-full">
 
-                <div class="flex flex-row gap-0 sm:gap-3">
+                <div class="flex flex-col gap-3">
+                    <x-input.model-text wire:model="vname" :label="'Title'"/>
+                    <label class="text-gray-500">Achievements</label>
+                    <textarea wire:model="desc" name="desc" id="" cols="3" rows="5" placeholder="Write your cherished movements...."></textarea>
+                    <x-input.model-text wire:model="category" :label="'Category'"/>
+                </div>
 
-                    <div class="flex flex-col gap-3">
-                        <x-input.model-text wire:model="vname" :label="'Title'"/>
-                        <x-input.model-text wire:model="desc" :label="'Description'" :placeholder="''"/>
-                        <x-input.model-text wire:model="category" :label="'Category'"/>
-                    </div>
+                <div class="flex flex-col gap-3">
+                    <x-input.model-date wire:model="date" :label="'date'"/>
+                    <x-input.model-text wire:model="location" :label="'Location'"/>
 
-                    <div class="flex flex-col gap-3">
-                        <x-input.model-date wire:model="date" :label="'date'"/>
-                        <x-input.model-text wire:model="location" :label="'Location'"/>
+                    <div class="flex flex-row gap-6 mt-4">
 
-                        <div class="flex flex-row gap-6 mt-4">
+                        <div class="flex">
 
-                            <div class="flex">
+                            <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Photo</label>
 
-                                <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Photo</label>
-
-                                <div class="flex-shrink-0">
-
-                                    <div>
-                                        @if($image)
-                                            <div class="flex-shrink-0 ">
-                                                <img class="h-24 w-full" src="{{ $image->temporaryUrl() }}"
-                                                     alt="{{$image?:''}}"/>
-                                            </div>
-                                        @endif
-
-                                        @if(!$image && isset($image))
-                                            <img class="h-24 w-full"
-                                                 src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_image))}}"
-                                                 alt="">
-
-                                        @else
-                                            <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>
-                                        @endif
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="relative">
+                            <div class="flex-shrink-0">
 
                                 <div>
-                                    <label for="image"
-                                           class="text-gray-500 font-semibold text-base rounded flex flex-col items-center
+                                    @if($image)
+                                        <div class="flex-shrink-0 ">
+                                            <img class="h-24 w-full" src="{{ $image->temporaryUrl() }}"
+                                                 alt="{{$image?:''}}"/>
+                                        </div>
+                                    @endif
+
+                                    @if(!$image && isset($image))
+                                        <img class="h-24 w-full"
+                                             src="{{URL(\Illuminate\Support\Facades\Storage::url('images/'.$old_image))}}"
+                                             alt="">
+
+                                    @else
+                                        <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>
+                                    @endif
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="relative">
+
+                            <div>
+                                <label for="image"
+                                       class="text-gray-500 font-semibold text-base rounded flex flex-col items-center
                                    justify-center cursor-pointer border-2 border-gray-300 border-dashed p-2
                                    mx-auto font-[sans-serif]">
-                                        <x-icons.icon icon="cloud-upload" class="w-8 h-auto block text-gray-400"/>
-                                        Upload Photo
+                                    <x-icons.icon icon="cloud-upload" class="w-8 h-auto block text-gray-400"/>
+                                    Upload Photo
 
-                                        <input type="file" id='image' wire:model="image" class="hidden"/>
-                                        <p class="text-xs font-light text-gray-400 mt-2">PNG and JPG are Allowed.</p>
-                                    </label>
-                                </div>
+                                    <input type="file" id='image' wire:model="image" class="hidden"/>
+                                    <p class="text-xs font-light text-gray-400 mt-2">PNG and JPG are Allowed.</p>
+                                </label>
+                            </div>
 
-                                <div wire:loading wire:target="image" class="z-10 absolute top-6 left-12">
-                                    <div class="w-14 h-14 rounded-full animate-spin
+                            <div wire:loading wire:target="image" class="z-10 absolute top-6 left-12">
+                                <div class="w-14 h-14 rounded-full animate-spin
                                                         border-y-4 border-dashed border-green-500 border-t-transparent"></div>
-                                </div>
                             </div>
                         </div>
                     </div>
