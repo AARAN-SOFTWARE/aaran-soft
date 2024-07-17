@@ -2,7 +2,7 @@
     'clubImage'=>null,
 ])
 
-<div class=" relative">
+<div class="w-full relative">
 
     <div x-data="{
         currentSlide: 0,
@@ -105,7 +105,7 @@
         <div class="absolute z-10 flex justify-between w-full h-full  ">
 
             <!-- Prev Button -------------------------------------------------------------------------------------->
-            <button x-on:click="prev" class="text-2xl absolute right-[50px] -top-[46px]" :aria-disabled="atBeginning" :tabindex="atEnd ? -1 : 0">
+            <button x-on:click="prev" class="text-2xl absolute right-[50px] -top-[36px]" :aria-disabled="atBeginning" :tabindex="atEnd ? -1 : 0">
 
                 <span aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-auto h-5 text-white lg:h-8 hover:text-gray-400"
@@ -119,7 +119,7 @@
 
             <!-- Next Button -------------------------------------------------------------------------------------->
 
-            <button x-on:click="prev" class="text-2xl absolute right-[20px] -top-[46px]" :aria-disabled="atEnd" :tabindex="atEnd ? -1 : 0">
+            <button x-on:click="prev" class="text-2xl absolute right-[20px] -top-[36px]" :aria-disabled="atEnd" :tabindex="atEnd ? -1 : 0">
                 <span aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-auto h-5 text-white lg:h-8 hover:text-gray-400"
                          fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
