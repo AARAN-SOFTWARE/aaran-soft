@@ -292,7 +292,7 @@ class Master extends Component
 
             } else {
                 $obj = SportMaster::find($this->vid);
-                $obj->
+                $obj->unique_no=$this->unique_no;
                 $obj->vname = Str::ucfirst($this->vname);
                 $obj->mobile = $this->mobile;
                 $obj->whatsapp = $this->whatsapp;
