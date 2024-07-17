@@ -6,7 +6,7 @@
 
     <x-SportsClub.slider.slider-modifiy :list="$list"/>
     <!-- Recent Activities -->
-    <x-SportsClub.layout.activities />
+    <x-SportsClub.layout.activities :list="$activities"/>
     <!-- Menu -1 (optional) -->
     <x-SportsClub.menu.menu-1 />
     <!-- Gallery -->

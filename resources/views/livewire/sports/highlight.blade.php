@@ -1,5 +1,5 @@
 <div>
-    <x-slot name="header">City</x-slot>
+    <x-slot name="header">Sports Activities</x-slot>
     <x-forms.m-panel>
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
@@ -10,7 +10,8 @@
             <x-forms.table :list="$list">
                 <x-slot name="table_header">
                     <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
-                    <x-table.header-text wire:click.prevent="sortBy('vname')" center>City</x-table.header-text>
+                    <x-table.header-text wire:click.prevent="sortBy('vname')" center>HighLight</x-table.header-text>
+                    <x-table.header-text wire:click.prevent="sortBy('vname')" width="50%" center>URL</x-table.header-text>
                     <x-table.header-action/>
                 </x-slot>
 
@@ -25,6 +26,10 @@
 
                             <x-table.cell-text>
                                 {{ $row->vname}}
+                            </x-table.cell-text>
+
+                            <x-table.cell-text>
+                                {{ $row->url }}
                             </x-table.cell-text>
 
                             <x-table.cell-action id="{{$row->id}}"/>
@@ -46,10 +51,13 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
-            <x-input.model-text wire:model="vname" :label="'City Name'"/>
-            @error('vname')
-            <span class="text-red-500">{{  $message }}</span>
-            @enderror
+            <div class="flex flex-col gap-3">
+                <x-input.model-text wire:model="vname" :label="'Highlight'"/>
+                @error('vname')
+                <span class="text-red-500">{{  $message }}</span>
+                @enderror
+                <x-input.model-text wire:model="url" :label="'Video Url'"/>
+            </div>
         </x-forms.create>
 
     </x-forms.m-panel>
