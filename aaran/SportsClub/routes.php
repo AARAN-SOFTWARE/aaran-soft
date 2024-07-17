@@ -22,6 +22,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/showNews', \App\Livewire\Sports\Web\AllNews::class)->name('showNews');
 
 
+    Route::get('/contact', \App\Livewire\Sports\Web\Contact::class)->name('contact');
+
+
+
+
     Route::get('sportsClub/SportAchievement', \App\Livewire\Sports\SportAchievement::class)->name('sportsClub.sportAchievement');
 
 });

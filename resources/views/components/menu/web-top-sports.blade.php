@@ -1,4 +1,4 @@
-<nav class="sticky top-0" x-data="{ open: false }">
+<nav class="sticky z-[999] top-0" x-data="{ open: false }">
     <div class="px-6 border-b border-zinc-200 bg-[#19398A] text-white">
 
         <div class="flex items-center w-full justify-between ">
@@ -28,10 +28,6 @@
                     <li>
                         <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
                            href="{{route('gallery')}}">Gallery</a>
-                    </li>
-                    <li>
-                        <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
-                           href="{{route('videos')}}">Videos</a>
                     </li>
                     <li>
                         <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
