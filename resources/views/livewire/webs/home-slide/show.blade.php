@@ -18,8 +18,5 @@
     <!-- Latest News -->
     <x-SportsClub.layout.latest />
 
-    <x-SportsClub.Layout.sportabout/>
-
-
 </div>
 
