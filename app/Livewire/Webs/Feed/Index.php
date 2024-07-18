@@ -6,7 +6,9 @@ use Aaran\Web\Models\FeedCategory;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Aaran\Web\Models\Feed;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Illuminate\Support\Str;
@@ -23,8 +25,6 @@ class Index extends Component
     public $image;
     public $old_image;
     public $categories;
-    public $feed_category_id;
-    public $bookmark = '';
 
     public $profile;
     public $user_id;
@@ -32,6 +32,148 @@ class Index extends Component
     public bool $showEditModal=false;
     public mixed $editable = true;
     #endregion
+
+    #region[Category]
+    public $feed_category_id;
+    public $feed_category_name;
+    public Collection $feed_category_collection;
+    public $highlight_feed_category;
+    public $feed_category_typed;
+
+    public function decrementCategory(): void
+    {
+        if ($this->highlight_feed_category === 0) {
+            $this->highlight_feed_category = count($this->feed_category_collection) - 1;
+            return;
+        }
+        $this->highlight_feed_category--;
+    }
+
+    public function incrementCategory(): void
+    {
+        if ($this->highlight_feed_category === count($this->feed_category_collection) - 1) {
+            $this->highlight_feed_category = 0;
+            return;
+        }
+        $this->highlight_feed_category++;
+    }
+
+    public function setCategory($name, $id): void
+    {
+        $this->feed_category_name = $name;
+        $this->feed_category_id = $id;
+        $this->getCategoryList();
+    }
+
+    public function enterCategory(): void
+    {
+        $obj = $this->feed_category_collection[$this->highlight_feed_category] ?? null;
+
+        $this->feed_category_name = '';
+        $this->feed_category_collection = Collection::empty();
+        $this->highlight_feed_category = 0;
+
+        $this->feed_category_name = $obj['vname'] ?? '';;
+        $this->feed_category_id = $obj['id'] ?? '';;
+    }
+
+    #[On('refresh-city')]
+    public function refreshCategory($v): void
+    {
+        $this->feed_category_id = $v['id'];
+        $this->feed_category_name = $v['name'];
+        $this->feed_category_typed = false;
+
+    }
+    public function categorySave($name)
+    {
+        $obj= FeedCategory::create([
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+        $v=['name'=>$name,'id'=>$obj->id];
+        $this->refreshCategory($v);
+    }
+
+    public function getCategoryList(): void
+    {
+        $this->feed_category_collection = $this->feed_category_name ? FeedCategory::search(trim($this->feed_category_name))->get() : FeedCategory::all();
+    }
+    #endregion
+
+
+    #region[city]
+    public $tag_id = '';
+    public $tag_name = '';
+    public Collection $tagCollection;
+    public $highlightTag = 0;
+    public $tagTyped = false;
+
+    public function decrementTagy(): void
+    {
+        if ($this->highlightTag === 0) {
+            $this->highlightTag = count($this->tagCollection) - 1;
+            return;
+        }
+        $this->highlightTag--;
+    }
+
+    public function incrementTag(): void
+    {
+        if ($this->highlightTag === count($this->tagCollection) - 1) {
+            $this->highlightTag = 0;
+            return;
+        }
+        $this->highlightTag++;
+    }
+
+    public function setTag($name, $id): void
+    {
+        $this->tag_name = $name;
+        $this->tag_id = $id;
+        $this->getTagList();
+    }
+
+    public function enterTag(): void
+    {
+        $obj = $this->tagCollection[$this->highlightTag] ?? null;
+
+        $this->tag_name = '';
+        $this->tagCollection = Collection::empty();
+        $this->highlightTag = 0;
+
+        $this->tag_name = $obj['vname'] ?? '';;
+        $this->tag_id = $obj['id'] ?? '';;
+    }
+
+    #[On('refresh-city')]
+    public function refreshTag($v): void
+    {
+        $this->tag_id = $v['id'];
+        $this->tag_name = $v['name'];
+        $this->tagTyped = false;
+
+    }
+    public function tagSave($name)
+    {
+        $obj= \Aaran\Web\Models\Tag::create([
+            'feed_category_id'=>$this->feed_category_id,
+            'vname' => $name,
+            'active_id' => '1'
+        ]);
+        $v=['name'=>$name,'id'=>$obj->id];
+        $this->refreshTag($v);
+    }
+
+    public function getTagList(): void
+    {
+        $this->tagCollection = $this->tag_name ? \Aaran\Web\Models\Tag::search(trim($this->tag_name))->where('feed_category_id','=',$this->feed_category_id)->get() : \Aaran\Web\Models\Tag::where('feed_category_id','=',$this->feed_category_id)->get();
+    }
+    #endregion
+
+
+
+
 
     #region[mount]
     public function mount()
@@ -52,9 +194,9 @@ class Index extends Component
                     Feed::create([
                         'vname' => $this->vname,
                         'feed_category_id' => $this->feed_category_id?:4,
+                        'tag_id' => $this->tag_id,
                         'description' => $this->description,
                         'image' => $this->save_image(),
-                        'bookmark'=> $this->bookmark,
                         'user_id' => auth()->id(),
                         'active_id' => $this->active_id
                     ]);
@@ -64,8 +206,8 @@ class Index extends Component
                     $obj = Feed::find($this->vid);
                     $obj->vname = Str::ucfirst($this->vname);
                     $obj->feed_category_id = $this->feed_category_id;
+                    $obj->tag_id = $this->tag_id;
                     $obj->description = Str::ucfirst($this->description);
-                    $obj->bookmark = $this->bookmark;
                     if ($obj->image != $this->image ){
                         $obj->image = $this->save_image();
                     } else {
@@ -88,9 +230,9 @@ class Index extends Component
         $this->vid = '';
         $this->vname = '';
         $this->feed_category_id = '';
+        $this->tag_id = '';
         $this->description = '';
         $this->image = '';
-        $this->bookmark = '';
         $this->isUploaded=false;
         $this->active_id = 1;
     }
@@ -104,10 +246,10 @@ class Index extends Component
         $this->vid = $obj->id;
         $this->vname = $obj->vname;
         $this->feed_category_id = $obj->feed_category_id;
+        $this->tag_id = $obj->tag_id;
         $this->description = $obj->description;
         $this->image = $obj->image;
         $this->old_image = $obj->old_image;
-        $this->bookmark = $obj->bookmark;
         $this->active_id = $obj->active_id;
         return $obj;
         }
@@ -146,20 +288,40 @@ class Index extends Component
         $this->sortField = 'created_at';
         return Feed::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
-            ->where('user_id', '=', $this->userFilter?:auth()->id())
+            ->when($this->categoryFilter,function ($query,$categoryFilter){
+                return $query->whereIn('feed_category_id',$categoryFilter);
+            })
+//            ->where('user_id', '=', $this->userFilter?:auth()->id())
             ->orderBy($this->sortField, $this->sortAsc ? 'desc' : 'asc')
             ->paginate($this->perPage);
     }
     #endregion
 
+//
+//    #region[filterUser]
+//    public $userFilter;
+//    public function filterUser($id)
+//    {
+//        $this->userFilter=$id;
+//    }
+//    #endregion
 
     #region[filterUser]
-    public $userFilter;
-    public function filterUser($id)
+    public array $categoryFilter=[];
+    public function filterType($id)
     {
-        $this->userFilter=$id;
+        return array_push($this->categoryFilter,$id);
     }
     #endregion
+    public function clearFilter()
+    {
+        $this->categoryFilter=[];
+    }
+
+    public function removeFilter($id)
+    {
+        unset($this->categoryFilter[$id]);
+    }
 
 
     #region[render]
@@ -170,6 +332,8 @@ class Index extends Component
 
     public function render()
     {
+        $this->getCategoryList();
+        $this->getTagList();
         return view('livewire.webs.feed.index')->with([
             "list" => $this->getList()
         ]);

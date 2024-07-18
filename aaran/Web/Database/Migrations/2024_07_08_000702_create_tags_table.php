@@ -13,24 +13,21 @@ return new class extends Migration
     {
         if (Aaran\Aadmin\Src\DbMigration::hasWebs()) {
 
-            Schema::create('feeds', function (Blueprint $table) {
+            Schema::create('tags', function (Blueprint $table) {
                 $table->id();
-                $table->string('vname');
                 $table->foreignId('feed_category_id')->references('id')->on('feed_categories')->onDelete('cascade');
-                $table->foreignId('tag_id')->references('id')->on('tags')->onDelete('cascade');
-                $table->longText('description');
-                $table->longText('image');
-                $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+                $table->string('vname');
                 $table->smallInteger('active_id');
                 $table->timestamps();
             });
         }
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('feeds');
+        Schema::dropIfExists('tags');
     }
 };

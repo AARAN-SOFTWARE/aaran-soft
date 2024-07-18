@@ -89,9 +89,9 @@ class DatabaseSeeder extends Seeder
             S205_StyleSeeder::run();
         }
 
-        if (DbMigration::hasWebs()) {
-            FeedCategorySeeder::run();
-        }
+//        if (DbMigration::hasWebs()) {
+//            FeedCategorySeeder::run();
+//        }
 
 //        ClientSeeder::run();
 //        RootlineSeeder::run();

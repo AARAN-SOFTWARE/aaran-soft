@@ -26,7 +26,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 
     Route::get('sportsClub/SportAchievement', \App\Livewire\Sports\SportAchievement::class)->name('sportsClub.sportAchievement');
-    Route::get('sportsClub/sportNews',\App\Livewire\Sports\SportNews::class)->name('sportsClub.sportNews');
+    Route::get('/sportNews',\App\Livewire\Sports\SportNews::class)->name('sportNews');
 
 });
 
