@@ -124,7 +124,7 @@ class SalesBillReport extends Component
                 return $query->whereDate('sales_bills.vdate', '<=', $end_date);
             })
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-            ->orderBy('serial')
+            ->orderBy('sales_bills.serial')
             ->where('sales_bills.active_id', '=', $this->activeRecord)
             ->get();
 
