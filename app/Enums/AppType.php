@@ -19,7 +19,7 @@ enum AppType: int
             self::GARMENTS => '1',
             self::OFFSET => 'Offset',
             self::UPVC => 'Upvc',
-            self::AUDIT => 'Audit',
+            self::AUDIT => 'audit',
             self::BLOG => 'Blog',
         };
     }

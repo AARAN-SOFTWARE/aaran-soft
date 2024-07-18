@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-//Audit
+//audit
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('clients', App\Livewire\Audit\Client\Index::class)->name('clients');

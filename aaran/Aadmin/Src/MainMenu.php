@@ -75,7 +75,7 @@ class MainMenu
     }
 
     /**
-     * Audit
+     * audit
      * @return bool
      */
     public static function hasAudit(): bool

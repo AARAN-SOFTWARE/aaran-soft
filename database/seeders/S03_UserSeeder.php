@@ -33,7 +33,7 @@ class S03_UserSeeder extends Seeder
 
 
         User::create([
-            'name' => 'Audit',
+            'name' => 'audit',
             'email' => 'audit@aaran.org',
             'password' => bcrypt('123456789'),
             'email_verified_at' => now(),

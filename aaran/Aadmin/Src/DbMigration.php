@@ -162,7 +162,7 @@ class DbMigration
 
     #endregion
 
-    #region[Audit]
+    #region[audit]
     public static function hasAudit(): bool
     {
         return static::enabled(static::audit());

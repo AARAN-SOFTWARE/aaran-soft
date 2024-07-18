@@ -8,8 +8,6 @@ Route::get('/about', \App\Livewire\Webs\About\About::class)->name('about');
 Route::get('/contact', \App\Livewire\Webs\Contact\Contact::class)->name('contact');
 
 
-
-
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::get('/dashboard', App\Livewire\Dashboard\Index::class)->name('dashboard');
@@ -24,9 +22,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/icons', App\Livewire\Utilities\Icon\Index::class)->name('icons');
     //sys
     Route::get('sys', App\Livewire\Sys\Artisan\Migration::class)->name('sys');
+    //zync
+    Route::get('zync', App\Livewire\Zync\Audit\SalesTrack\Index::class)->name('zync');
 
 });
-
 
 
 //E-invoice
