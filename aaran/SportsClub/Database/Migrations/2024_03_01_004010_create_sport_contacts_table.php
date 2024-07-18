@@ -4,21 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
 
     public function up(): void
     {
-        Schema::create('sport_contacts', function (Blueprint $table) {
-            $table->id();
-            $table->string('vname');
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->longText('message')->nullable();
-            $table->timestamps();
-        });
+        if (Aaran\Aadmin\Src\DbMigration::hasSports()) {
+            Schema::create('sport_contacts', function (Blueprint $table) {
+                $table->id();
+                $table->string('vname');
+                $table->string('email')->nullable();
+                $table->string('phone')->nullable();
+                $table->longText('message')->nullable();
+                $table->timestamps();
+            });
+        }
     }
-
 
     public function down(): void
     {
