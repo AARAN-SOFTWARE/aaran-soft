@@ -5,7 +5,7 @@ return [
 
     'DEVELOPER' => '100',
 
-    'AUDIT' => '101',
+    'AUDIT' => '103',
 
     'GARMENT_1' => '201',
     'GARMENT_2' => '202',
