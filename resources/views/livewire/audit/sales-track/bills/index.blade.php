@@ -61,17 +61,17 @@
 
                         <x-table.cell-text>
                             <a href="{{route('salesTracks.upsert',[$row->id])}}">
-                                {{  $row->vdate }}
+                                {{date('d-m-Y', strtotime($row->vdate))}}
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             <a href="{{route('salesTracks.upsert',[$row->id])}}">
                                 {{  $row->total_qty }}
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text right>
                             <a href="{{route('salesTracks.upsert',[$row->id])}}">
                                 {{  $row->grand_total }}
                             </a>
