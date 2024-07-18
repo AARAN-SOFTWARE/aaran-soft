@@ -2,10 +2,9 @@
 
 namespace App\Livewire\Sys\DefaultCompany;
 
+use Aaran\Aadmin\Src\DbMigration;
 use Aaran\Master\Models\Company;
 use Aaran\SportsClub\Models\SportClub;
-use AllowDynamicProperties;
-use App\Enums\AcYear;
 use App\Models\DefaultCompany;
 use App\Models\SoftVersion;
 use Illuminate\Database\Eloquent\Collection;
@@ -36,9 +35,11 @@ class Index extends Component
         $this->defaultCompany = DefaultCompany::find(1);
         $soft_version = SoftVersion::latest()->first();
 
-        $defaultClub=SportClub::where('tenant_id','=',session()->get('tenant_id'))->firstOrFail();
-        if ($defaultClub){
-            session()->put('club_id',$defaultClub->id);
+        if (DbMigration::hasSports()) {
+            $defaultClub = SportClub::where('tenant_id', '=', session()->get('tenant_id'))->firstOrFail();
+            if ($defaultClub) {
+                session()->put('club_id', $defaultClub->id);
+            }
         }
 
         if ($this->defaultCompany) {

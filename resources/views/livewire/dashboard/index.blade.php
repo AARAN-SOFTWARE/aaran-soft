@@ -4,12 +4,7 @@
 
         <x-dashboard.greetings/>
 
-
-
-
-
         <div class="lg:flex lg:flex-cols-3 w-full h-screen gap-10">
-
 
             <div class="w-full shadow-2xl h-screen p-5 mt-6">
                 @if(session()->get('role_id')==1|| session()->get('role_id')==2|| session()->get('role_id')==3 )
