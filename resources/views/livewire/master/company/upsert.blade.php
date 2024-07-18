@@ -53,7 +53,7 @@
                                             @forelse ($cityCollection as $i => $city)
                                                 <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8
                                                         {{ $highlightCity === $i ? 'bg-yellow-100' : '' }}"
-                                                    wire:click.prevent="setCity('{{$city->vname}}','{{$city->id}}')"
+                                                    wire:click.prevent="setCity('{{  $city->vname }}','{{$city->id}}')"
                                                     x-on:click="isTyped = false">
                                                     {{ $city->vname }}
                                                 </li>
