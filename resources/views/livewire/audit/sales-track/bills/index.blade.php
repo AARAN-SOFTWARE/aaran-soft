@@ -29,6 +29,8 @@
                 <x-table.header-text center>Client</x-table.header-text>
                 <x-table.header-text center>Invoice No</x-table.header-text>
                 <x-table.header-text center>Date</x-table.header-text>
+                <x-table.header-text center>Total Qty</x-table.header-text>
+                <x-table.header-text center>Invoice Amount</x-table.header-text>
                 <x-table.header-text center>Vehicle</x-table.header-text>
                 <x-table.header-text center>Status</x-table.header-text>
                 <x-table.header-action/>
@@ -60,6 +62,18 @@
                         <x-table.cell-text>
                             <a href="{{route('salesTracks.upsert',[$row->id])}}">
                                 {{  $row->vdate }}
+                            </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <a href="{{route('salesTracks.upsert',[$row->id])}}">
+                                {{  $row->total_qty }}
+                            </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <a href="{{route('salesTracks.upsert',[$row->id])}}">
+                                {{  $row->grand_total }}
                             </a>
                         </x-table.cell-text>
 
