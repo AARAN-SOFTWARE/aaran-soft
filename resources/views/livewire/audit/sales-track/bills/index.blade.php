@@ -53,7 +53,7 @@
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
+                        <x-table.cell-text center>
                             <a href="{{route('salesTracks.upsert',[$row->id])}}">
                                 {{  $row->vno }}
                             </a>
