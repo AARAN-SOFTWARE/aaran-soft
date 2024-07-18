@@ -123,6 +123,8 @@
                 </div>
                 <!--group----------------------------------------------------------------------------------------->
                 <x-input.model-text wire:model="group" :label="'Group'"/>
+
+                <x-input.model-text wire:model="serial" :label="'Serial'"/>
             </div>
 
         </div>
