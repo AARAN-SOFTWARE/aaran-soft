@@ -1,5 +1,5 @@
 <nav class="sticky z-[999] top-0" x-data="{ open: false }">
-    <div class="px-6 border-b border-zinc-200 bg-[#19398A] text-white">
+    <div class="px-6 border-b border-zinc-200 bg-white text-black">
 
         <div class="flex items-center w-full justify-between ">
 
@@ -22,27 +22,27 @@
             <div class="hidden md:block ">
                 <ul class="flex space-x-8 ">
                     <li>
-                        <a class="text-lg font-sans text-white px-2 hover:border-b py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-sans text-black px-2 hover:border-b py-1 hover:border-blue-400 transition-colors duration-600"
                            href="{{route('home')}}">Home</a>
                     </li>
                     <li>
-                        <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-sans text-black px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
                            href="{{route('gallery')}}">Gallery</a>
                     </li>
                     <li>
-                        <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-sans text-black px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
                            href="{{route('news')}}">News</a>
                     </li>
                     <li>
-                        <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-sans text-black px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
                            href="{{route('feed')}}">Blog</a>
                     </li>
                     <li>
-                        <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-sans text-black px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
                            href="{{route('contact')}}">Contact</a>
                     </li>
                     <li>
-                        <a class="text-lg font-sans text-white px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-sans text-black px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
                            href="{{route('about')}}">About Us</a>
                     </li>
                 </ul>
@@ -75,7 +75,7 @@
                     <div id="menu" class="space-x-4 ">
                         @auth
                             <a href="{{route('dashboard')}}" role="button"
-                               class="font-semibold text-xl hover:text-[#19398A] hover:bg-white  px-3 py-1 rounded-md focus:outline-none focus:underline  transition ease-in-out duration-300">
+                               class="font-semibold text-black text-xl hover:text-[#19398A] hover:bg-white  px-3 py-1 rounded-md focus:outline-none focus:underline  transition ease-in-out duration-300">
                                 Dashboard
                             </a>
 
