@@ -24,13 +24,14 @@ class Show extends Component
 
     public $description;
     public $image;
-    public $bookmark;
 
+    public $feed_category;
     public $users;
     public $user_id;
     public $isUploaded = false;
     public mixed $editable = true;
     public $created_at;
+    public $tag_id;
     #endregion
 
     #region[Mount]
@@ -38,6 +39,8 @@ class Show extends Component
     {
         $this->getData($id);
         $obj = Feed::find($id)->user_id;
+        $this->feed_category = Feed::find($id)->feed_category_id;
+        $this->tag_id = Feed::find($id)->tag_id;
         $this->users=User::find($obj);
     }
     #endregion
