@@ -1,10 +1,10 @@
 <div>
     <x-slot name="header">Blog ✨</x-slot>
     <div class="flex rounded-xl">
-        <div class="w-1/5  h-screen outline-2 outline-gray-400 rounded-l-lg ">
+        <div class="w-1/5  h-screen outline-2 outline-gray-400 rounded-l-lg">
             <div class="relative h-screen bg-gray-50 rounded-xl overflow-y-auto" x-data="{ isOpen: false}">
                     @if($categoryFilter!='')
-                        <div class="w-full mx-auto grid grid-cols-3 gap-2">
+                        <div class="w-full mx-auto grid grid-cols-3 gap-2 pl-5 mt-5">
                             @foreach($categoryFilter as $index=> $row)
                                 <div class="w-20 flex bg-gray-100 p-1.5 rounded-lg text-xs font-roboto justify-between">
                                     <div>{{\Aaran\Web\Models\Feed::type($row)}}</div>
@@ -17,7 +17,7 @@
                             @endforeach
                         </div>
                     @endif
-                <div class=" flex justify-between items-center mt-4 px-5" >
+                <div class=" flex justify-between items-center mt-8 px-5" >
 
                     <div class="w-[90%] mx-auto font-roboto text-md">Categories</div>
                     <button  @click="isOpen = !isOpen"
@@ -27,7 +27,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="w-[90%] absolute  bg-gray-400 mx-auto overflow-y-auto mt-2" x-show="isOpen"
+                <div class="w-[90%] absolute mx-auto overflow-y-auto mt-2 px-5" x-show="isOpen"
                      @click.away="isOpen = false">
                     <button class=" flex" wire:click="clearFilter">
                         <div class=" flex ml-2 mt-2 bg-whit">

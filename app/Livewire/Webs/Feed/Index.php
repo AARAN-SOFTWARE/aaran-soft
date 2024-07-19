@@ -188,6 +188,8 @@ class Index extends Component
     {
         $this->validate(['vname' => 'required']);
         $this->validate(['image' => 'required']);
+        $this->validate(['feed_category_id' => 'required']);
+        $this->validate(['tag_id' => 'required']);
         if ($this->editable) {
             if ($this->vname != '') {
                 if ($this->vid == "") {
