@@ -169,9 +169,16 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.webs.feed.show')->with([
-            "list" => $this->getList()
-        ]);
+        if (auth()->id()){
+            return view('livewire.webs.feed.show')->with([
+                "list" => $this->getList()
+            ]);
+        }else{
+            return view('livewire.webs.feed.show')->layout('layouts.web')->with([
+                "list" => $this->getList()
+            ]);
+        }
+
     }
     #endregion
 }

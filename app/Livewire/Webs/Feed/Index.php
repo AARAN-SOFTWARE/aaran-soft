@@ -102,7 +102,7 @@ class Index extends Component
     #endregion
 
 
-    #region[city]
+    #region[tag]
     public $tag_id = '';
     public $tag_name = '';
     public Collection $tagCollection;
@@ -170,10 +170,6 @@ class Index extends Component
         $this->tagCollection = $this->tag_name ? \Aaran\Web\Models\Tag::search(trim($this->tag_name))->where('feed_category_id','=',$this->feed_category_id)->get() : \Aaran\Web\Models\Tag::where('feed_category_id','=',$this->feed_category_id)->get();
     }
     #endregion
-
-
-
-
 
     #region[mount]
     public function mount()
@@ -248,7 +244,9 @@ class Index extends Component
         $this->vid = $obj->id;
         $this->vname = $obj->vname;
         $this->feed_category_id = $obj->feed_category_id;
+        $this->feed_category_name =  Feed::type( $obj->feed_category_id);
         $this->tag_id = $obj->tag_id;
+        $this->tag_name=Feed::tagName($obj->tag_id);
         $this->description = $obj->description;
         $this->image = $obj->image;
         $this->old_image = $obj->old_image;
@@ -291,7 +289,10 @@ class Index extends Component
         return Feed::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->when($this->categoryFilter,function ($query,$categoryFilter){
-                return $query->whereIn('feed_category_id',$categoryFilter);
+                return $query->where('feed_category_id',$categoryFilter);
+            })
+            ->when($this->tagFilter,function ($query,$tagFilter){
+                return $query->whereIn('tag_id',$tagFilter);
             })
 //            ->where('user_id', '=', $this->userFilter?:auth()->id())
             ->orderBy($this->sortField, $this->sortAsc ? 'desc' : 'asc')
@@ -309,20 +310,43 @@ class Index extends Component
 //    #endregion
 
     #region[filterUser]
-    public array $categoryFilter=[];
+    public  $categoryFilter='';
+    public array $tagFilter=[];
+    public $tags;
+
+    public function categoryType($id)
+    {
+        $this->tagCollection($id);
+        return $this->categoryFilter=$id;
+    }
+
+    public function clearCategory()
+    {
+        $this->tagFilter=[];
+        $this->categoryFilter='';
+    }
+
+
+    public function tagCollection($id)
+    {
+        $this->tags=\Aaran\Web\Models\Tag::where('feed_category_id',$id)->get();
+    }
+
     public function filterType($id)
     {
-        return array_push($this->categoryFilter,$id);
+        if (!in_array($id,$this->tagFilter,true)) {
+            return array_push($this->tagFilter, $id);
+        }
     }
     #endregion
     public function clearFilter()
     {
-        $this->categoryFilter=[];
+        $this->tagFilter=[];
     }
 
     public function removeFilter($id)
     {
-        unset($this->categoryFilter[$id]);
+        unset($this->tagFilter[$id]);
     }
 
 
@@ -336,9 +360,16 @@ class Index extends Component
     {
         $this->getCategoryList();
         $this->getTagList();
-        return view('livewire.webs.feed.index')->with([
-            "list" => $this->getList()
-        ]);
+
+        if (auth()->id()) {
+            return view('livewire.webs.feed.index')->with([
+                "list" => $this->getList()
+            ]);
+        }else{
+            return view('livewire.webs.feed.index')->layout('layouts.web')->with([
+                "list" => $this->getList()
+            ]);
+        }
     }
     #endregion
 }
