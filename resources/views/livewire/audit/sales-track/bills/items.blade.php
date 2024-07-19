@@ -8,124 +8,106 @@
         <x-icons.icon :icon="'double-arrow-right'"
                       class="text-gray-500 hover:text-white  hover:rounded-sm  h-4 w-auto block mt-2"/>
 
-            <a href="{{route('salesTracks.items',[$salesTrackItems->sales_track_id])}}" class="text-gray-400">Sales Track Item</a>
+        <a href="{{route('salesTracks.items',[$salesTrackItems->sales_track_id])}}" class="text-gray-400">Item</a>
 
         <x-icons.icon :icon="'double-arrow-right'"
                       class="text-gray-500 hover:text-white  hover:rounded-sm  h-4 w-auto block mt-2"/>
 
-            <a href="{{route('salesTracks.Bills',[$salesTrackItems->id])}}" class="text-gray-500">Sales Bills</a>
+        <a href="{{route('salesTracks.Bills',[$salesTrackItems->id])}}" class="text-gray-400">Bills</a>
     </div>
+
 
     <x-forms.m-panel>
 
+        <div class="bg-blue-500 text-center -mt-5 -mx-5 h-10 text-white tracking-wide text-2xl font-semibold">
+            {{\Aaran\Audit\Models\Client::getName($salesTrackItems->client_id)}}
+        </div>
 
 
+        <div class="grid grid-cols-2 gap-5">
 
-        <div class="flex w-full gap-3">
+            <div class="flex flex-col sm:flex-row gap-1 sm:gap-3">
+                <label class="w-[10rem] text-zinc-500 tracking-wide py-2">
+                    Bill To
+                </label>
 
+                <label class="tracking-wide text-2xl text-semibold w-full">
+                    {{\Aaran\Audit\Models\Client::getName($client_id)}}</label>
+            </div>
 
+            <x-input.model-text wire:model="group" :label="'Group'"/>
 
+            <x-input.model-text wire:model="vno" :label="'Invoice No'"/>
 
-            <!-- Sales From-------------------------------------------------------------------------------------------->
-            <div class="w-full">
+            <x-input.model-text wire:model="serial" :label="'Serial'"/>
 
+            <x-input.model-date wire:model="vdate" :label="'Date'"/>
 
-                <div class="inline-flex gap-5">
-                    <label for="Sales From"
-                           class="w-[10rem] text-zinc-500 tracking-wide py-2">Sales From</label>
-                    <label class="w-[10rem]  tracking-wide text-lg text-semibold py-2">
-                    {{\Aaran\Audit\Models\Client::getName($salesTrackItems->client_id)}}</label>
-                </div>
+            <div>&nbsp;</div>
 
-                <!--Invoice No----------------------------------------------------------------------------------------->
-                <x-input.model-text wire:model="vno" :label="'Invoice No'"/>
+            <!--Vehicle-------------------------------------------------------------------------------------------->
+            <div class="flex flex-col gap-2 pt-5">
+                <div class="xl:flex w-full gap-2">
 
-                <!-- Date  -------------------------------------------------------------------------------------------->
-                <x-input.model-date wire:model="vdate" :label="'Date'"/>
+                    <!-- vehicle ----------------------------------------------------------------------------------->
+                    <label for="ledger_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Vehicle</label>
+                    <div x-data="{isTyped: @entangle('vehicleTyped')}" @click.away="isTyped = false"
+                         class='w-full'>
+                        <div class="relative">
+                            <input
+                                id="vehicle_name"
+                                type="search"
+                                wire:model.live="vehicle_name"
+                                autocomplete="off"
+                                placeholder="Vehicle.."
+                                @focus="isTyped = true"
+                                @keydown.escape.window="isTyped = false"
+                                @keydown.tab.window="isTyped = false"
+                                @keydown.enter.prevent="isTyped = false"
+                                wire:keydown.arrow-up="decrementVehicle"
+                                wire:keydown.arrow-down="incrementVehicle"
+                                wire:keydown.enter="enterVehicle"
+                                class="block w-full purple-textbox"
+                            />
 
-
-
-                <!--Vehicle-------------------------------------------------------------------------------------------->
-                <div class="flex flex-col gap-2 pt-5">
-                    <div class="xl:flex w-full gap-2">
-
-                        <!-- vehicle ----------------------------------------------------------------------------------->
-                        <label for="ledger_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Vehicle</label>
-                        <div x-data="{isTyped: @entangle('vehicleTyped')}" @click.away="isTyped = false"
-                             class='w-full'>
-                            <div class="relative">
-                                <input
-                                    id="vehicle_name"
-                                    type="search"
-                                    wire:model.live="vehicle_name"
-                                    autocomplete="off"
-                                    placeholder="Vehicle.."
-                                    @focus="isTyped = true"
-                                    @keydown.escape.window="isTyped = false"
-                                    @keydown.tab.window="isTyped = false"
-                                    @keydown.enter.prevent="isTyped = false"
-                                    wire:keydown.arrow-up="decrementVehicle"
-                                    wire:keydown.arrow-down="incrementVehicle"
-                                    wire:keydown.enter="enterVehicle"
-                                    class="block w-full purple-textbox"
-                                />
-
-                                <div x-show="isTyped"
-                                     x-transition:leave="transition ease-in duration-100"
-                                     x-transition:leave-start="opacity-100"
-                                     x-transition:leave-end="opacity-0"
-                                     x-cloak
-                                >
-                                    <div class="absolute z-20 w-full mt-2">
-                                        <div class="block py-1 shadow-md w-full
+                            <div x-show="isTyped"
+                                 x-transition:leave="transition ease-in duration-100"
+                                 x-transition:leave-start="opacity-100"
+                                 x-transition:leave-end="opacity-0"
+                                 x-cloak
+                            >
+                                <div class="absolute z-20 w-full mt-2">
+                                    <div class="block py-1 shadow-md w-full
                 rounded-lg border-transparent flex-1 appearance-none border
                                  bg-white text-gray-800 ring-1 ring-purple-600">
-                                            <ul class="overflow-y-scroll h-96">
-                                                @if($vehicleCollection)
-                                                    @forelse ($vehicleCollection as $i => $vehicle)
-                                                        <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-fit
+                                        <ul class="overflow-y-scroll h-96">
+                                            @if($vehicleCollection)
+                                                @forelse ($vehicleCollection as $i => $vehicle)
+                                                    <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-fit
                                                         {{ $highlightVehicle === $i ? 'bg-yellow-100' : '' }}"
-                                                            wire:click.prevent="setVehicle('{{$vehicle->vname}}','{{$vehicle->id}}')"
-                                                            x-on:click="isTyped = false">
-                                                            {{ $vehicle->vname }}
-                                                        </li>
-                                                    @empty
-                                                        <button wire:click.prevent="vehicleSave('{{$vehicle_name}}')"
-                                                                class="text-white bg-green-500 text-center w-full">
-                                                            create
-                                                        </button>
-                                                    @endforelse
-                                                @endif
-                                            </ul>
-                                        </div>
+                                                        wire:click.prevent="setVehicle('{{$vehicle->vname}}','{{$vehicle->id}}')"
+                                                        x-on:click="isTyped = false">
+                                                        {{ $vehicle->vname }}
+                                                    </li>
+                                                @empty
+                                                    <button wire:click.prevent="vehicleSave('{{$vehicle_name}}')"
+                                                            class="text-white bg-green-500 text-center w-full">
+                                                        create
+                                                    </button>
+                                                @endforelse
+                                            @endif
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
-
-            <!-- Bill To  -------------------------------------------------------------------------------------------->
-            <div class="w-full">
-                <div class="inline-flex gap-5">
-                    <label for="Sales From"
-                           class="w-[10rem] text-zinc-500 tracking-wide py-2">Bill To</label>
-                    <label class="w-[10rem]  tracking-wide text-lg text-semibold py-2">
-                        {{\Aaran\Audit\Models\Client::getName($client_id)}}</label>
-                </div>
-                <!--group----------------------------------------------------------------------------------------->
-
-
-                <x-input.model-text wire:model="group" :label="'Group'"/>
-
-                <x-input.model-text wire:model="serial" :label="'Serial'"/>
-
-
             </div>
 
         </div>
+
+        <div class="mt-6">&nbsp;</div>
 
         <section class="md:flex md:flex-row w-full gap-0.5">
             <!-- product -------------------------------------------------------------------------------------------->
@@ -329,7 +311,7 @@
 
         </section>
 
-            <!-- Table Bottom ------------------------------------------------------------------------------------->
+        <!-- Table Bottom ------------------------------------------------------------------------------------->
         <x-forms.table>
 
             <x-slot name="table_header">
@@ -428,11 +410,11 @@
         </x-forms.table>
 
         <!-- Bottom Right  -------------------------------------------------------------------------------------------->
-        <section class="w-full flex gap-5">
-            <div class="w-1/4">
-                <div class="flex flex-col gap-2 pt-5">
-                    <div class="xl:flex w-full gap-2">
+        <section class="flex">
 
+            <div class="w-1/4 flex gap-3 flex-col">
+
+                    <div class="xl:flex w-full gap-2">
                         <!-- Ledger ----------------------------------------------------------------------------------->
                         <label for="ledger_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Ledger</label>
                         <div x-data="{isTyped: @entangle('ledgerTyped')}" @click.away="isTyped = false"
@@ -484,10 +466,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
                 <x-input.model-text wire:model="bundle" :label="'Bundle'"/>
+
             </div>
+
             <div class="w-2/5 mr-3 ml-auto ">
 
                 <x-input.model-text wire:model="additional" wire:change.debounce="calculateTotal"
@@ -523,13 +506,7 @@
             </div>
         </section>
 
-        <!-- Bottom Buttons-------------------------------------------------------------------------------------------->
-        <div class="flex justify-between pt-1">
-            <div>
-                <x-button.save/>
-                <x-button.back/>
-            </div>
-        </div>
-
     </x-forms.m-panel>
+
+    <x-forms.m-panel-bottom-button save back/>
 </div>
