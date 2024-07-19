@@ -29,6 +29,11 @@ class Feed extends Model
         return $this->belongsTo(FeedCategory::class);
     }
 
+    public function tag(): BelongsTo
+    {
+        return $this->belongsTo(Tag::class);
+    }
+
     public static function allocated($str)
     {
         if ($str) {
@@ -40,6 +45,13 @@ class Feed extends Model
     {
         if ($str) {
             return FeedCategory::find($str)->vname;
+        } else return '';
+    }
+
+    public static function tagName($str)
+    {
+        if ($str) {
+            return Tag::find($str)->vname;
         } else return '';
     }
 }
