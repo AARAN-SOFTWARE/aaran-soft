@@ -80,9 +80,10 @@
 
                     <tr class="bg-lime-100">
 
-                        <x-table.cell-text center>
+                        <x-table.cell-text left>
                             <div>
-                                {{ \Aaran\Audit\Models\Client::getName($row->sales_from) ?? '' }}
+                                {{ $row->serial }}
+                                &nbsp;-&nbsp;{{ \Aaran\Audit\Models\Client::getName($row->sales_from) ?? '' }}
                             </div>
                         </x-table.cell-text>
 
@@ -95,7 +96,7 @@
                                 <input type="checkbox" @if($row->unique_no===$trackreport->unique_no)  checked
                                        @endif class="text-green-600">
                             @empty
-                                <input wire:click="getChecked({{$row->sales_track_bill_id}})" type="checkbox"
+                                <input wire:click="getChecked('{{$row->sales_track_bill_id}}')" type="checkbox"
                                        class="text-green-600">
                             @endforelse
                         </x-table.cell-text>
@@ -199,7 +200,7 @@
                                     </x-table.cell-text>
 
                                     <x-table.cell-text right>
-                                        <x-table.edit wire:click="editBill({{$items->sales_track_bill_id}})"/>
+                                        <x-table.edit wire:click="editBill('{{$items->sales_track_bill_id}}')"/>
                                     </x-table.cell-text>
                                 </x-table.row>
                             @endif
@@ -250,7 +251,8 @@
                                 <div class="xl:flex w-full gap-2">
 
                                     <!-- vehicle ----------------------------------------------------------------------------------->
-                                    <label for="ledger_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Vehicle</label>
+                                    <label for="ledger_name"
+                                           class="w-[10rem] text-zinc-500 tracking-wide py-2">Vehicle</label>
                                     <div x-data="{isTyped: @entangle('vehicleTyped')}" @click.away="isTyped = false"
                                          class='w-full'>
                                         <div class="relative">
@@ -290,8 +292,9 @@
                                                                         {{ $vehicle->vname }}
                                                                     </li>
                                                                 @empty
-                                                                    <button wire:click.prevent="vehicleSave('{{$vehicle_name}}')"
-                                                                            class="text-white bg-green-500 text-center w-full">
+                                                                    <button
+                                                                        wire:click.prevent="vehicleSave('{{$vehicle_name}}')"
+                                                                        class="text-white bg-green-500 text-center w-full">
                                                                         create
                                                                     </button>
                                                                 @endforelse
@@ -551,46 +554,46 @@
 
                                     <x-table.cell>
                                         <button class="w-full h-full cursor-pointer"
-                                                wire:click.prevent="changeItems({{$index}})">
+                                                wire:click.prevent="changeItems('{{$index}}')">
                                             {{$row['colour_name']}}
                                         </button>
                                     </x-table.cell>
 
                                     <x-table.cell>
                                         <button class="w-full h-full cursor-pointer"
-                                                wire:click.prevent="changeItems({{$index}})">
+                                                wire:click.prevent="changeItems('{{$index}}')">
                                             {{$row['size_name']}}
                                         </button>
                                     </x-table.cell>
 
                                     <x-table.cell>
                                         <button class="w-full h-full cursor-pointer"
-                                                wire:click.prevent="changeItems({{$index}})">
+                                                wire:click.prevent="changeItems('{{$index}}')">
                                             {{$row['qty']}}
                                         </button>
                                     </x-table.cell>
 
                                     <x-table.cell>
                                         <button class="w-full h-full cursor-pointer"
-                                                wire:click.prevent="changeItems({{$index}})">
+                                                wire:click.prevent="changeItems('{{$index}}')">
                                             {{$row['price']}}
                                         </button>
                                     </x-table.cell>
 
                                     <x-table.cell>
                                         <button class="w-full h-full cursor-pointer"
-                                                wire:click.prevent="changeItems({{$index}})">
+                                                wire:click.prevent="changeItems('{{$index}}')">
                                             {{  round($row['qty']*$row['price']) }}
                                         </button>
                                     </x-table.cell>
 
                                     <x-table.cell>
                                         <div class="inline-flex gap-3">
-                                            <button wire:click.prevent="changeItems({{$index}})"
+                                            <button wire:click.prevent="changeItems('{{$index}}')"
                                                     class="py-1.5 w-full text-gray-500 items-center ">
                                                 <x-icons.icon icon="pencil" class="block w-auto h-6"/>
                                             </button>
-                                            <button wire:click.prevent="removeItems({{$index}})"
+                                            <button wire:click.prevent="removeItems('{{$index}}')"
                                                     class="py-1.5 w-full text-red-500 items-center ">
                                                 <x-icons.icon icon="trash" class="block w-auto h-6"/>
                                             </button>
@@ -607,100 +610,102 @@
 
                 </x-forms.table>
 
-                    <section class="w-full flex gap-5">
-                        <div class="w-1/4">
-                            <div class="flex flex-col gap-2 pt-5">
-                                <div class="xl:flex w-full gap-2">
+                <section class="w-full flex gap-5">
+                    <div class="w-1/4">
+                        <div class="flex flex-col gap-2 pt-5">
+                            <div class="xl:flex w-full gap-2">
 
-                                    <!-- Ledger ----------------------------------------------------------------------------------->
-                                    <label for="ledger_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Ledger</label>
-                                    <div x-data="{isTyped: @entangle('ledgerTyped')}" @click.away="isTyped = false"
-                                         class='w-full'>
-                                        <div class="relative">
-                                            <input
-                                                id="ledger_name"
-                                                type="search"
-                                                wire:model.live="ledger_name"
-                                                autocomplete="off"
-                                                placeholder="Ledger.."
-                                                @focus="isTyped = true"
-                                                @keydown.escape.window="isTyped = false"
-                                                @keydown.tab.window="isTyped = false"
-                                                @keydown.enter.prevent="isTyped = false"
-                                                wire:keydown.arrow-up="decrementLedger"
-                                                wire:keydown.arrow-down="incrementLedger"
-                                                wire:keydown.enter="enterLedger"
-                                                class="block w-full purple-textbox"
-                                            />
+                                <!-- Ledger ----------------------------------------------------------------------------------->
+                                <label for="ledger_name"
+                                       class="w-[10rem] text-zinc-500 tracking-wide py-2">Ledger</label>
+                                <div x-data="{isTyped: @entangle('ledgerTyped')}" @click.away="isTyped = false"
+                                     class='w-full'>
+                                    <div class="relative">
+                                        <input
+                                            id="ledger_name"
+                                            type="search"
+                                            wire:model.live="ledger_name"
+                                            autocomplete="off"
+                                            placeholder="Ledger.."
+                                            @focus="isTyped = true"
+                                            @keydown.escape.window="isTyped = false"
+                                            @keydown.tab.window="isTyped = false"
+                                            @keydown.enter.prevent="isTyped = false"
+                                            wire:keydown.arrow-up="decrementLedger"
+                                            wire:keydown.arrow-down="incrementLedger"
+                                            wire:keydown.enter="enterLedger"
+                                            class="block w-full purple-textbox"
+                                        />
 
-                                            <div x-show="isTyped"
-                                                 x-transition:leave="transition ease-in duration-100"
-                                                 x-transition:leave-start="opacity-100"
-                                                 x-transition:leave-end="opacity-0"
-                                                 x-cloak
-                                            >
-                                                <div class="absolute z-20 w-full mt-2">
-                                                    <div class="block py-1 shadow-md w-full
+                                        <div x-show="isTyped"
+                                             x-transition:leave="transition ease-in duration-100"
+                                             x-transition:leave-start="opacity-100"
+                                             x-transition:leave-end="opacity-0"
+                                             x-cloak
+                                        >
+                                            <div class="absolute z-20 w-full mt-2">
+                                                <div class="block py-1 shadow-md w-full
                 rounded-lg border-transparent flex-1 appearance-none border
                                  bg-white text-gray-800 ring-1 ring-purple-600">
-                                                        <ul class="overflow-y-scroll h-96">
-                                                            @if($ledgerCollection)
-                                                                @forelse ($ledgerCollection as $i => $ledger)
-                                                                    <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-fit
+                                                    <ul class="overflow-y-scroll h-96">
+                                                        @if($ledgerCollection)
+                                                            @forelse ($ledgerCollection as $i => $ledger)
+                                                                <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-fit
                                                         {{ $highlightLedger === $i ? 'bg-yellow-100' : '' }}"
-                                                                        wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')"
-                                                                        x-on:click="isTyped = false">
-                                                                        {{ $ledger->vname }}
-                                                                    </li>
-                                                                @empty
-                                                                    @livewire('controls.model.common.ledger-model',[$ledger_name])
-                                                                @endforelse
-                                                            @endif
-                                                        </ul>
-                                                    </div>
+                                                                    wire:click.prevent="setLedger('{{$ledger->vname}}','{{$ledger->id}}')"
+                                                                    x-on:click="isTyped = false">
+                                                                    {{ $ledger->vname }}
+                                                                </li>
+                                                            @empty
+                                                                @livewire('controls.model.common.ledger-model',[$ledger_name])
+                                                            @endforelse
+                                                        @endif
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <x-input.model-text wire:model="bundle" :label="'Bundle'"/>
                         </div>
-                        <div class="w-2/5 mr-3 ml-auto ">
 
-                            <x-input.model-text wire:model="additional" wire:change.debounce="calculateTotal"
-                                                class="md:text-right purple-textbox w-full md:ml-20" :label="'Additional'"/>
+                        <x-input.model-text wire:model="bundle" :label="'Bundle'"/>
+                    </div>
+                    <div class="w-2/5 mr-3 ml-auto ">
 
-                            <div class="grid w-full md:grid-cols-2 pt-6">
-                                <label
-                                    class="md:px-3 md:pb-2 text-left text-gray-600 text-md">Taxable&nbsp;Amount&nbsp;:&nbsp;&nbsp;</label>
-                                <label class="ml-8 md:px-3 md:pb-2 text-right text-gray-800 text-md">{{  $total_taxable }}</label>
-                            </div>
+                        <x-input.model-text wire:model="additional" wire:change.debounce="calculateTotal"
+                                            class="md:text-right purple-textbox w-full md:ml-20" :label="'Additional'"/>
 
-
-                            <div class="grid w-full grid-cols-2 pt-6">
-                                <label
-                                    class="px-3 pb-2 text-left text-gray-600 text-md">Gst&nbsp;:&nbsp;&nbsp;</label>
-                                <label class="px-3 pb-2 text-right text-gray-800 text-md">{{  $total_gst }}</label>
-                            </div>
-
-
-                            <div class="grid w-full grid-cols-2 pt-6">
-                                <label
-                                    class="px-3 pb-2 text-left text-gray-600 text-md">Round off&nbsp;:&nbsp;&nbsp;</label>
-                                <label class="px-3 pb-2 text-right text-gray-800 text-md">{{$round_off}}</label>
-                            </div>
-
-
-                            <div class="grid w-full grid-cols-2 pt-6">
-                                <label
-                                    class="mr-3 md:px-3 md:pb-2 text-xl text-left  text-gray-600">Grand&nbsp;Total&nbsp;:&nbsp;&nbsp;</label>
-                                <label
-                                    class="ml-8  px-3 pb-2  md:px-3 md:pb-2 text-xl font-extrabold text-right text-gray-800">{{$grand_total}}</label>
-                            </div>
+                        <div class="grid w-full md:grid-cols-2 pt-6">
+                            <label
+                                class="md:px-3 md:pb-2 text-left text-gray-600 text-md">Taxable&nbsp;Amount&nbsp;:&nbsp;&nbsp;</label>
+                            <label
+                                class="ml-8 md:px-3 md:pb-2 text-right text-gray-800 text-md">{{  $total_taxable }}</label>
                         </div>
-                    </section>
+
+
+                        <div class="grid w-full grid-cols-2 pt-6">
+                            <label
+                                class="px-3 pb-2 text-left text-gray-600 text-md">Gst&nbsp;:&nbsp;&nbsp;</label>
+                            <label class="px-3 pb-2 text-right text-gray-800 text-md">{{  $total_gst }}</label>
+                        </div>
+
+
+                        <div class="grid w-full grid-cols-2 pt-6">
+                            <label
+                                class="px-3 pb-2 text-left text-gray-600 text-md">Round off&nbsp;:&nbsp;&nbsp;</label>
+                            <label class="px-3 pb-2 text-right text-gray-800 text-md">{{$round_off}}</label>
+                        </div>
+
+
+                        <div class="grid w-full grid-cols-2 pt-6">
+                            <label
+                                class="mr-3 md:px-3 md:pb-2 text-xl text-left  text-gray-600">Grand&nbsp;Total&nbsp;:&nbsp;&nbsp;</label>
+                            <label
+                                class="ml-8  px-3 pb-2  md:px-3 md:pb-2 text-xl font-extrabold text-right text-gray-800">{{$grand_total}}</label>
+                        </div>
+                    </div>
+                </section>
             </div>
             <div class="flex justify-between  px-6 py-2">
                 <div class="gap-3">
