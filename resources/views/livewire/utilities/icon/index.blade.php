@@ -223,6 +223,11 @@
                 <x-icons.utilities :icon="'gift-top'"/>
                 <x-icons.utilities :icon="'eye-new'"/>
                 <x-icons.utilities :icon="'x-mark'"/>
+                <x-icons.utilities :icon="'location1'"/>
+                <x-icons.utilities :icon="'circle-location'"/>
+                <x-icons.utilities :icon="'mail1'"/>
+                <x-icons.utilities :icon="'location-3'"/>
+                <x-icons.utilities :icon="'phone-call'"/>
 
 
                 </div>
