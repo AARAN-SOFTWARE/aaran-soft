@@ -13,7 +13,7 @@
         <x-icons.icon :icon="'double-arrow-right'"
                       class="text-gray-500 hover:text-white  hover:rounded-sm  h-4 w-auto block mt-2"/>
 
-            <a href="{{route('salesTracks.Bills',[$sales_track_item_id])}}" class="text-gray-500">Sales Bills</a>
+            <a href="{{route('salesTracks.Bills',[$salesTrackItems->id])}}" class="text-gray-500">Sales Bills</a>
     </div>
 
     <x-forms.m-panel>
@@ -34,7 +34,7 @@
                     <label for="Sales From"
                            class="w-[10rem] text-zinc-500 tracking-wide py-2">Sales From</label>
                     <label class="w-[10rem]  tracking-wide text-lg text-semibold py-2">
-                    {{\Aaran\Audit\Models\Client::getName($sales_from)}}</label>
+                    {{\Aaran\Audit\Models\Client::getName($salesTrackItems->client_id)}}</label>
                 </div>
 
                 <!--Invoice No----------------------------------------------------------------------------------------->
@@ -119,6 +119,8 @@
 
 
                 <x-input.model-text wire:model="group" :label="'Group'"/>
+
+                <x-input.model-text wire:model="serial" :label="'Serial'"/>
 
 
             </div>
@@ -351,7 +353,7 @@
                             <x-table.cell>
                                 <p class="flex px-3 text-gray-600 truncate text-xl text-left">
                                     <button class="w-full h-full cursor-pointer"
-                                            wire:click.prevent="changeItems({{$index}})">
+                                            wire:click.prevent="changeItems('{{$index}}')">
                                         {{$index+1}}
                                     </button>
                                 </p>
@@ -359,7 +361,7 @@
 
                             <x-table.cell>
                                 <button class="w-full h-full cursor-pointer"
-                                        wire:click.prevent="changeItems({{$index}})">
+                                        wire:click.prevent="changeItems('{{$index}}')">
                                     {{$row['product_name']}}
                                     @if($row['description'])
                                         &nbsp;-&nbsp;{{$row['description']}}
@@ -369,46 +371,46 @@
 
                             <x-table.cell>
                                 <button class="w-full h-full cursor-pointer"
-                                        wire:click.prevent="changeItems({{$index}})">
+                                        wire:click.prevent="changeItems('{{$index}}')">
                                     {{$row['colour_name']}}
                                 </button>
                             </x-table.cell>
 
                             <x-table.cell>
                                 <button class="w-full h-full cursor-pointer"
-                                        wire:click.prevent="changeItems({{$index}})">
+                                        wire:click.prevent="changeItems('{{$index}}')">
                                     {{$row['size_name']}}
                                 </button>
                             </x-table.cell>
 
                             <x-table.cell>
                                 <button class="w-full h-full cursor-pointer"
-                                        wire:click.prevent="changeItems({{$index}})">
+                                        wire:click.prevent="changeItems('{{$index}}')">
                                     {{$row['qty']}}
                                 </button>
                             </x-table.cell>
 
                             <x-table.cell>
                                 <button class="w-full h-full cursor-pointer"
-                                        wire:click.prevent="changeItems({{$index}})">
+                                        wire:click.prevent="changeItems('{{$index}}')">
                                     {{$row['price']}}
                                 </button>
                             </x-table.cell>
 
                             <x-table.cell>
                                 <button class="w-full h-full cursor-pointer"
-                                        wire:click.prevent="changeItems({{$index}})">
+                                        wire:click.prevent="changeItems('{{$index}}')">
                                     {{  round($row['qty']*$row['price']) }}
                                 </button>
                             </x-table.cell>
 
                             <x-table.cell>
                                 <div class="inline-flex gap-3">
-                                    <button wire:click.prevent="changeItems({{$index}})"
+                                    <button wire:click.prevent="changeItems('{{$index}}')"
                                             class="py-1.5 w-full text-gray-500 items-center ">
                                         <x-icons.icon icon="pencil" class="block w-auto h-6"/>
                                     </button>
-                                    <button wire:click.prevent="removeItems({{$index}})"
+                                    <button wire:click.prevent="removeItems('{{$index}}')"
                                             class="py-1.5 w-full text-red-500 items-center ">
                                         <x-icons.icon icon="trash" class="block w-auto h-6"/>
                                     </button>

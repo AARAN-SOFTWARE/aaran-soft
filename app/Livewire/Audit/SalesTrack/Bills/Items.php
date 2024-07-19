@@ -25,72 +25,53 @@ class Items extends Component
     use CommonTrait;
 
     public mixed $serial = '';
-    public mixed $sales_from = '';
     public mixed $sales_track_bill_id;
     public mixed $qty = '';
     public mixed $price;
     public mixed $description = '';
-    public $status;
+    public mixed $status = 1;
     public mixed $showEditModal_1 = false;
     public mixed $products;
     public $category_id = '';
-    public mixed $sales_track_item_id='';
     public mixed $vno = '';
     public mixed $vdate = '';
     public mixed $client_id = '';
-    public mixed $additional = '';
+    public mixed $additional = 0;
     public mixed $vehicle = '';
     public mixed $itemList = [];
     public mixed $itemIndex = '';
     public string $bundle = '';
     public mixed $total_qty = 0;
-    public mixed $total_taxable = '';
+    public mixed $total_taxable = 0;
     public string $ledger;
-    public string $total_gst = '';
-    public mixed $round_off = '';
-    public mixed $grand_total = '';
-    public mixed $gst_percent = '';
+    public mixed $total_gst = 0;
+    public mixed $round_off = 0;
+    public mixed $grand_total = 0;
+    public mixed $gst_percent = 0;
     public mixed $grandtotalBeforeRound;
     public mixed $rout;
-    public mixed $rootline_id = '';
     public mixed $salesTrackItems;
     public $rootlineItems;
     public $group;
-    public $salesTrack_id;
     #endregion
 
     #region[mount]
     public function mount($id)
     {
-        $this->sales_track_item_id=$id;
-
         $this->salesTrackItems = SalesTrackItem::find($id);
-        $this->salesTrack_id=$this->salesTrackItems->sales_track_id;
 
-        $this->rootline_id=$this->salesTrackItems->rootline_id;
-
-        $this->sales_from = $this->salesTrackItems->client_id;
-
-        $this->rootlineItems = SalesTrackItem::where('rootline_id', '=',$this->rootline_id)
+        $this->rootlineItems = SalesTrackItem::where('rootline_id', '=', $this->salesTrackItems->rootline_id)
             ->where('id', '>', $this->salesTrackItems->id)->orderby('id')->first();
 
+        $this->vno = SalesBill::nextNo($this->salesTrackItems->client_id);
 
-        $this->vno = SalesBill::nextNo($this->sales_from);
         $this->group = SalesBill::gruopNo($id);
 
         $this->vdate = Carbon::now()->format('Y-m-d');
-        $this->status = 1;
-        $this->additional = 0;
 
-        $obj=RootlineItems::where('rootline_id', '=',$this->rootline_id)->orderby('id')->first();
-        $this->client_id = $this->rootlineItems->client_id ?? $obj->client_id;
+        $this->client_id = $this->rootlineItems->client_id ?? RootlineItems::where('rootline_id', '=', $this->salesTrackItems->rootline_id)->orderby('id')->first();
 
-        $this->grand_total = 0;
-        $this->total_taxable = 0;
-        $this->round_off = 0;
-        $this->total_gst = 0;
-        $this->active_id = true;
-
+        $this->serial = $this->salesTrackItems->serial;
 
         $this->calculateTotal();
     }
@@ -103,15 +84,15 @@ class Items extends Component
         if ($this->client_id != '') {
             if ($this->vid == "") {
                 $obj = SalesBill::create([
-                    'serial' => $this->serial ?: 0,
-                    'rootline_id' => $this->rootline_id,
-                    'sales_track_item_id' => $this->sales_track_item_id,
-                    'sales_track_id'=>$this->salesTrack_id,
-                    'unique_no'=>$this->sales_from.'~'.$this->vno,
-                    'group'=>$this->group,
+                    'serial' => $this->serial ?: $this->salesTrackItems->serial,
+                    'rootline_id' => $this->salesTrackItems->rootline_id,
+                    'sales_track_item_id' => $this->salesTrackItems->id,
+                    'sales_track_id' => $this->salesTrackItems->sales_track_id,
+                    'unique_no' => $this->salesTrackItems->client_id . '~' . $this->vno,
+                    'group' => $this->group,
                     'vno' => $this->vno ?: 0,
                     'vdate' => $this->vdate,
-                    'sales_from' => $this->sales_from,
+                    'sales_from' => $this->salesTrackItems->client_id,
                     'client_id' => $this->client_id,
                     'taxable' => $this->total_taxable,
                     'total_qty' => $this->total_qty,
@@ -124,7 +105,7 @@ class Items extends Component
                     'vehicle_id' => $this->vehicle_id ?: '1',
                     'status' => '1',
                     'active_id' => $this->active_id ?: '0',
-                    'user_id'=>auth()->id(),
+                    'user_id' => auth()->id(),
                 ]);
                 $this->saveItem($obj->id);
                 $message = "Saved";
@@ -133,14 +114,14 @@ class Items extends Component
             } else {
                 $obj = SalesBill::find($this->vid);
                 $obj->serial = $this->serial;
-                $obj->rootline_id = $this->rootline_id;
-                $obj->sales_track_item_id = $this->sales_track_item_id;
-                $obj->sales_track_id = $this->salesTrack_id;
+                $obj->rootline_id = $this->salesTrackItems->rootline_id;
+                $obj->sales_track_item_id = $this->salesTrackItems->id;
+                $obj->sales_track_id = $this->salesTrackItems->sales_track_id;
                 $obj->vno = $this->vno;
                 $obj->unique_no = $this->unique_no;
                 $obj->group = $this->group;
                 $obj->vdate = $this->vdate;
-                $obj->sales_from = $this->sales_from;
+                $obj->sales_from = $this->salesTrackItems->client_id;
                 $obj->client_id = $this->client_id;
                 $obj->taxable = $this->total_taxable;
                 $obj->total_qty = $this->total_qty;
@@ -179,7 +160,7 @@ class Items extends Component
                 'qty' => $sub['qty'],
                 'price' => $sub['price'],
                 'active_id' => '1',
-                'user_id'=>auth()->id(),
+                'user_id' => auth()->id(),
 
 
             ]);
@@ -655,10 +636,10 @@ class Items extends Component
     public function vehicleSave($name)
     {
         $obj = Vehicle::create([
-            'client_id' => $this->sales_from,
+            'client_id' => $this->salesTrackItems->client_id,
             'vname' => $name,
             'active_id' => '1',
-            'user_id'=>auth()->id()
+            'user_id' => auth()->id()
         ]);
         $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshVehicle($v);
@@ -667,7 +648,7 @@ class Items extends Component
     public function getVehicleList(): void
     {
         $this->vehicleCollection = $this->vehicle_name ? Vehicle::search(trim($this->vehicle_name))
-            ->get() : Vehicle::where('client_id', '=', $this->sales_from)->get();
+            ->get() : Vehicle::where('client_id', '=', $this->salesTrackItems->client_id)->get();
     }
 
     #endregion
@@ -685,7 +666,7 @@ class Items extends Component
 
     public function getRoute(): void
     {
-        $this->redirect(route('salesTracks.Bills',[$this->sales_track_item_id]));
+        $this->redirect(route('salesTracks.Bills', [$this->salesTrackItems->id]));
     }
     #endregion
 }

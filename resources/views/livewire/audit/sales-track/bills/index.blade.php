@@ -85,6 +85,12 @@
 
                         <x-table.cell-text>
                             <a href="{{route('salesTracks.upsert',[$row->id])}}">
+                                {{  $row->serial }}
+                            </a>
+                        </x-table.cell-text>
+
+                        <x-table.cell-text>
+                            <a href="{{route('salesTracks.upsert',[$row->id])}}">
                                 <div
                                     class="text-gray-600 truncate text-xl text-center px-2 {{ \App\Enums\Status::tryFrom($row->status)->getStyle() }}">
                                     {{ \App\Enums\Status::tryFrom($row->status)->getName() }}
@@ -110,7 +116,7 @@
                                                       class="text-blue-500 hover:text-white  hover:rounded-sm hover:bg-blue-500 h-5 w-auto block"/>
                                     </x-button.link>
                                 </a>
-                                <x-table.delete wire:click="getDelete({{ $row->id }})"/>
+                                <x-table.delete wire:click="getDelete('{{ $row->id }}')"/>
                             </div>
                         </x-table.cell-text>
 
