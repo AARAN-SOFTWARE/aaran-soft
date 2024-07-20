@@ -46,7 +46,7 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
-            <x-input.model-text wire:model="vname" :label="'Tag Name'"/>
+            <x-input.model-text wire:model="vname" :label="'TagSeeder Name'"/>
             @error('vname')
             <span class="text-red-500">{{  $message }}</span>
             @enderror

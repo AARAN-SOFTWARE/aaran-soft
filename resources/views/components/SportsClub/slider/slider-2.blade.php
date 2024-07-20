@@ -1,7 +1,7 @@
 @props([
-    "list"
+    "list"=>null,
 ])
-<div class="w-5/12 h-44 bg-orange-500 rounded-lg relative">
+<div class=" h-44 bg-gradient-to-br from-[#19398A] to-orange-500  rounded-lg relative">
 
     <div x-data="{
         currentSlide: 0,
@@ -14,7 +14,7 @@
         startAutoSlide() {
             this.autoSlideInterval = setInterval(() => {
                 this.next();
-            }, 2000);
+            }, 3000);
         },
 
         stopAutoSlide() {
@@ -76,29 +76,30 @@
             <ul x-ref="slider" @scroll="updateCurrentSlide" tabindex="0" role="listbox"
                 aria-labelledby="carousel-content-label"
                 class="flex w-full overflow-x-hidden snap-x snap-mandatory opacity-95">
-
-                <li x-bind="disableNextAndPreviousButtons"
-                    class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
-                    role="option">
-                    <div class="w-full h-44 flex-col flex justify-center items-center">
-                        <div>Tournament</div>
-                        <div>240</div>
-                    </div>
-                </li>
-                <li x-bind="disableNextAndPreviousButtons"
-                    class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
-                    role="option">
-                    <div class="w-full h-44 flex-col flex justify-center items-center">
-                        <div>Tournament</div>
-                        <div>280</div>
-                    </div>
-                </li>
+                @foreach($list as $row)
+                    <li x-bind="disableNextAndPreviousButtons"
+                        class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
+                        role="option">
+                        <div class="flex">
+                            <div class="h-44">
+                                <img class="h-full w-64 rounded-l-lg"
+                                     src="{{URL( \Illuminate\Support\Facades\Storage::url($row->image) )}}" alt="img"/>
+                            </div>
+                            <div
+                                class="w-full h-44 flex-col flex justify-center items-center text-white text-sm p-5 rounded-r-lg">
+                                <div class="font-bold font-gab text-xl tracking-wider bg-gradient-to-r from-white via-yellow-500 to-cyan-500 inline-block text-transparent bg-clip-text"> Blogs</div>
+                                <div class="text-md text-center font-semibold">{{\Illuminate\Support\Str::words($row->vname, 6)}}</div>
+                                <div class="text-justify text-sm text-gray-200">{!! \Illuminate\Support\Str::words( $row->description ,15) !!}</div>
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
             </ul>
         </div>
 
         <!-- Indicators ------------------------------------------------------------------------------------------->
 
-        <div class="absolute bottom-4 right-[258px]">
+        <div class="absolute bottom-4 right-[180px]">
             <div class="flex justify-center space-x-2">
                 <template x-for="(slide, index) in Array.from($refs.slider.children)" :key="index">
                     <button @click="goToSlide(index)"

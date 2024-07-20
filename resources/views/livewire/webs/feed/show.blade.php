@@ -4,7 +4,6 @@
     @endif
 
     <div class="flex-col pt-5 rounded-xl font-roboto">
-
         <!-- Content slide -->
         <div class="w-4/6 mx-auto h-screen rounded-xl flex-col flex justify-center items-center">
             <div class="w-5/6 mx-auto text-2xl my-4">{{$vname}}</div>

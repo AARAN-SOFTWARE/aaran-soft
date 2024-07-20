@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Sports\Web;
 
+use Aaran\Web\Models\Feed;
 use App\Livewire\Trait\CommonTrait;
 use Livewire\Component;
 
@@ -13,8 +14,7 @@ class News extends Component
 
     public function getNews()
     {
-        $this->news=\Aaran\SportsClub\Models\News::latest()->get();
-
+        $this->news=Feed::where('tag_id',4)->latest()->get();
     }
 
     public function render()

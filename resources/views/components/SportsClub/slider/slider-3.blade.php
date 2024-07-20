@@ -1,7 +1,7 @@
 @props([
     "list"
 ])
-<div class="w-3/12 h-44 bg-orange-500 rounded-lg relative">
+<div class="h-44 bg-gradient-to-br from-[#19398A] to-orange-500 rounded-lg relative">
 
     <div x-data="{
         currentSlide: 0,
@@ -14,7 +14,7 @@
         startAutoSlide() {
             this.autoSlideInterval = setInterval(() => {
                 this.next();
-            }, 1500);
+            }, 2000);
         },
 
         stopAutoSlide() {
@@ -77,28 +77,26 @@
                 aria-labelledby="carousel-content-label"
                 class="flex w-full overflow-x-hidden snap-x snap-mandatory opacity-95">
 
+                @foreach($list as $row)
                     <li x-bind="disableNextAndPreviousButtons"
                         class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
                         role="option">
-                        <div class="w-full h-44 flex-col flex justify-center items-center">
-                            <div>Tournament</div>
-                            <div>240</div>
+
+                        <div class="w-full h-44 flex-col flex justify-center items-center text-gray-200 p-5">
+                            <div class="font-bold font-gab text-xl tracking-wider bg-gradient-to-r from-white via-yellow-500 to-cyan-500 inline-block text-transparent bg-clip-text">Events</div>
+                            <div
+                                class="font-bold text-md text-center">{{ \Illuminate\Support\Str::words($row->vname, 8)}}</div>
+                            <div class="text-sm text-gray-200 text-justify">{!! \Illuminate\Support\Str::words( $row->description ,15) !!}</div>
                         </div>
                     </li>
-                    <li x-bind="disableNextAndPreviousButtons"
-                        class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
-                        role="option">
-                        <div class="w-full h-44 flex-col flex justify-center items-center">
-                            <div>Tournament</div>
-                            <div>280</div>
-                        </div>
-                    </li>
+                @endforeach
+
             </ul>
         </div>
 
         <!-- Indicators ------------------------------------------------------------------------------------------->
 
-        <div class="absolute bottom-2 right-[148px]">
+        <div class="absolute bottom-2 right-[180px]">
             <div class="flex justify-center space-x-2">
                 <template x-for="(slide, index) in Array.from($refs.slider.children)" :key="index">
                     <button @click="goToSlide(index)"
