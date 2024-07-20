@@ -12,7 +12,7 @@ return new class extends Migration {
 
             Schema::create('sport_highlights', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('activity_id')->references('id')->on('sport_activities')->onDelete('cascade');
+                $table->foreignId('activity_id')->nullable();
                 $table->string('vname');
                 $table->longText('url')->nullable();
                 $table->string('active_id', 3)->nullable();
