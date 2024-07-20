@@ -2,21 +2,21 @@
 
     <!--script -------------------------------------------------------------------------------------------------------->
 
-    <script src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.js"></script>
 
-    <x-SportsClub.slider.slider-modifiy :list="$list"/>
+
+    <x-sports.slider.slider-modifiy :list="$list"/>
     <!-- Recent Activities -->
-    <x-SportsClub.layout.activities :list="$activities"/>
+    <x-sports.design.activities :list="$activities"/>
     <!-- Menu -1 (optional) -->
-    <x-SportsClub.menu.menu-1 />
+    <x-sports.menu.menu-1 />
     <!-- Gallery -->
     <!-- demo -->
-    <x-SportsClub.Layout.gallery :clubImage="$clubImage" />
+    <x-sports.design.gallery :clubImage="$clubImage" />
     <!-- Achievement -->
-    <x-SportsClub.Layout.achievement :image="$achievements" />
+    <x-sports.design.achievement :image="$achievements" />
     <!-- Blog -->
     <!-- Latest News -->
-    <x-SportsClub.layout.latest :events="$events" :up-coming-events="$upComingEvents" :blogs="$blogs" :news="$news" :moments="$moments"/>
+    <x-sports.design.latest :events="$events" :up-coming-events="$upComingEvents" :blogs="$blogs" :news="$news" :moments="$moments"/>
 
 </div>
 
