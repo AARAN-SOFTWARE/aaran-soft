@@ -86,14 +86,14 @@
                     class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
                     role="option">
                     <div class="w-full h-[22rem] my-4 flex justify-between">
-                        <x-SportsClub.card.card-1 :clubImage="$clubImage->take(4)"/>
+                        <x-sports.card.card-1 :clubImage="$clubImage->take(4)"/>
                     </div>
                 </li>
                 <li x-bind="disableNextAndPreviousButtons"
                     class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
                     role="option">
                     <div class="w-full h-[22rem] my-4 flex justify-between">
-                        <x-SportsClub.card.card-1 :clubImage="$clubImage->skip(4)"/>
+                        <x-sports.card.card-1 :clubImage="$clubImage->skip(4)"/>
                     </div>
                 </li>
             </ul>

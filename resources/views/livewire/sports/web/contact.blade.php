@@ -1,3 +1,3 @@
 <div>
-    <x-SportsClub.Layout.sportcontact/>
+    <x-sports.design.sportcontact/>
 </div>

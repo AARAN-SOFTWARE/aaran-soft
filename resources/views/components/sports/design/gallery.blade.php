@@ -9,7 +9,7 @@
             <a href="{{route('gallery')}}" class="px-4 py-2 text-white font-roboto tracking-wider border border-white mr-24">See More</a>
         </div>
         <div class="flex justify-between ">
-            <x-SportsClub.slider-demo :clubImage="$clubImage"/>
+            <x-sports.slider-demo :clubImage="$clubImage"/>
         </div>
     </div>
 </div>

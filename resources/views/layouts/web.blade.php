@@ -30,8 +30,8 @@
     {{ $slot }}
         @switch(config('aadmin.app_type'))
             @case(config('software.SPORTS_CLUB'))
-                <x-SportsClub.footer.sponser/>
-                <x-SportsClub.footer.footer/>
+                <x-sports.footer.sponser/>
+                <x-sports.footer.footer/>
                 @break
             @default
 {{--                <x-SportsClub.footer.copyright/>--}}
