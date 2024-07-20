@@ -34,9 +34,8 @@
                 <x-SportsClub.footer.footer/>
                 @break
             @default
-                <x-menu.web-top-new/>
+{{--                <x-SportsClub.footer.copyright/>--}}
         @endswitch
-    <x-SportsClub.footer.copyright/>
 </div>
 
 @livewireScripts
