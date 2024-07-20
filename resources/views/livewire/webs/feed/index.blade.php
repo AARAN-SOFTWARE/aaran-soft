@@ -1,76 +1,142 @@
 <div>
-    <x-slot name="header">Blog ✨</x-slot>
+    @if(auth()->id())
+        <x-slot name="header">Blog ✨</x-slot>
+    @endif
     <div class="flex rounded-xl">
         <div class="w-1/5  h-screen outline-2 outline-gray-400 rounded-l-lg">
-            <div class="relative h-screen bg-gray-50 rounded-xl overflow-y-auto" x-data="{ isOpen: false}">
-                    @if($categoryFilter!='')
-                        <div class="w-full mx-auto grid grid-cols-3 gap-2 pl-5 mt-5">
-                            @foreach($categoryFilter as $index=> $row)
-                                <div class="w-20 flex bg-gray-100 p-1.5 rounded-lg text-xs font-roboto justify-between">
-                                    <div>{{\Aaran\Web\Models\Feed::type($row)}}</div>
-                                    <button wire:click="removeFilter({{$index}})" class="pl-1 hover:text-red-600">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
-                                            <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif
-                <div class=" flex justify-between items-center mt-8 px-5" >
+            <div class="relative h-screen bg-gray-50 rounded-xl overflow-y-auto"
+                 x-data="{ isOpenCategory: false, isOpenTag:false}">
+                <div class="mt-2 px-6">@if($categoryFilter)
+                        #
+                    @endif{{\Aaran\Web\Models\Feed::type($categoryFilter)}}</div>
+                @if($tagFilter!='')
+                    <div class="w-full mx-auto grid grid-cols-3 gap-2 pl-5 mt-5">
+                        @foreach($tagFilter as $index=> $row)
+                            <div class="w-20 flex bg-gray-100 p-1.5 rounded-lg text-xs font-roboto justify-between">
+                                <div>{{\Aaran\Web\Models\Feed::tagName($row)}}</div>
+                                <button wire:click="removeFilter({{$index}})" class="pl-1 hover:text-red-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                         class="size-3">
+                                        <path fill-rule="evenodd"
+                                              d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
+                <div class=" flex justify-between items-center mt-8 px-5">
 
                     <div class="w-[90%] mx-auto font-roboto text-md">Categories</div>
-                    <button  @click="isOpen = !isOpen"
-                             @keydown.escape="isOpen = false" >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    <button @click="isOpenCategory = !isOpenCategory"
+                            @keydown.escape="isOpenCategory = false">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
                         </svg>
                     </button>
                 </div>
-                <div class="w-[90%] absolute mx-auto overflow-y-auto mt-2 px-5" x-show="isOpen"
-                     @click.away="isOpen = false">
-                    <button class=" flex" wire:click="clearFilter">
+                <div class="w-[100%] absolute mx-auto overflow-y-auto mt-2 px-5 bg-white" x-show="isOpenCategory"
+                     @click.away="isOpenCategory = false">
+                    <button @click="isOpenCategory = !isOpenCategory" class=" flex" wire:click="clearCategory">
                         <div class=" flex ml-2 mt-2 bg-whit">
                             <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 mt-0.5 ">
-                                    <path fill-rule="evenodd" d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clip-rule="evenodd" />
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                     class="size-4 mt-0.5 ">
+                                    <path fill-rule="evenodd"
+                                          d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z"
+                                          clip-rule="evenodd"/>
                                 </svg>
                             </div>
-                            <div class="pl-4 text-sm font-roboto">All</div>
+                            <div class="pl-4 text-sm font-roboto">Clear</div>
                         </div>
                     </button>
                     @foreach($categories as $category)
-                        <button class="flex" wire:click="filterType({{$category->id}})">
+                        <button @click="isOpenCategory = !isOpenCategory,isOpenTag = !isOpenTag" class="flex"
+                                wire:click="categoryType({{$category->id}})">
                             <div class="flex ml-2 mt-2">
-                                <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 mt-0.5 ">
-                                        <path fill-rule="evenodd" d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clip-rule="evenodd" />
-                                    </svg></div>
+                                <div>
+                                    <input type="radio" wire:model="categoryFilter" value="{{$category->id}}">
+                                    {{--                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 mt-0.5 ">--}}
+                                    {{--                                        <path fill-rule="evenodd" d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clip-rule="evenodd" />--}}
+                                    {{--                                    </svg>--}}
+                                </div>
                                 <div class="pl-4 text-sm font-roboto">{{$category->vname}}</div>
                             </div>
                         </button>
                     @endforeach
                 </div>
-            </div>
 
+                <div class=" flex justify-between items-center mt-8 px-5">
+
+                    <div class="w-[90%] mx-auto font-roboto text-md">Tag</div>
+                    <button @click="isOpenTag = !isOpenTag"
+                            @keydown.escape="isOpenTag = false">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="w-[90%] absolute mx-auto overflow-y-auto mt-2 px-5" x-show="isOpenTag"
+                     @click.away="isOpenTag = false">
+                    <button class=" flex" wire:click="clearFilter">
+                        <div class=" flex ml-2 mt-2 bg-whit">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                     class="size-4 mt-0.5 ">
+                                    <path fill-rule="evenodd"
+                                          d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div class="pl-4 text-sm font-roboto">All</div>
+                        </div>
+                    </button>
+                    @if(isset($tags))
+                        @foreach($tags as $tag)
+                            <button class="flex" wire:click="filterType({{$tag->id}})">
+                                <div class="flex ml-2 mt-2">
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                             fill="currentColor" class="size-4 mt-0.5 ">
+                                            <path fill-rule="evenodd"
+                                                  d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z"
+                                                  clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="pl-4 text-sm font-roboto">{{$tag->vname}}</div>
+                                </div>
+                            </button>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
         </div>
+
+
         <div class="w-4/5 h-screen rounded-r-xl ">
             <div class="p-10 bg-gray-50 w-[98%] h-[98%] mx-auto rounded-xl overflow-y-auto">
                 <!-- Top Panel -->
-                <div class="flex justify-between">
-                    <div>
-                        <x-dashboard.welfare.search/>
-                    </div>
-                    <div class="w-44 flex justify-between items-center relative">
-                        <x-dashboard.welfare.notification/>
-
-                        <div class="absolute bottom-6 left-3 text-[10px] bg-red-500 text-white w-4 h-4 rounded-full text-center font-semibold">{{$list->count()}}</div>
-
+                @if(auth()->id())
+                    <div class="flex justify-between">
                         <div>
-                            <x-dashboard.welfare.create-new-red/>
+                            <x-dashboard.welfare.search/>
+                        </div>
+                        <div class="w-44 flex justify-between items-center relative">
+                            <x-dashboard.welfare.notification/>
+
+                            <div
+                                class="absolute bottom-6 left-3 text-[10px] bg-red-500 text-white w-4 h-4 rounded-full text-center font-semibold">{{$list->count()}}</div>
+
+                            <div>
+                                <x-dashboard.welfare.create-new-red/>
+                            </div>
                         </div>
                     </div>
-                </div>
-
+                @endif
                 <!-- Stories -->
                 <div>
                     {{--                    <x-dashboard.welfare.stories :users="$users" />--}}
@@ -98,7 +164,8 @@
                 <div class="flex flex-row py-3 gap-3">
                     <div class="xl:flex w-full gap-2">
                         <label for="city_name" class="w-[10rem] text-zinc-500 tracking-wide py-2 ">Category</label>
-                        <div x-data="{isTyped: @entangle('feed_category_typed')}" @click.away="isTyped = false" class="w-full">
+                        <div x-data="{isTyped: @entangle('feed_category_typed')}" @click.away="isTyped = false"
+                             class="w-full">
                             <div class="relative">
                                 <input
                                     id="feed_category_name"
@@ -136,7 +203,9 @@
                                                             {{ $category->vname }}
                                                         </li>
                                                     @empty
-                                                        <button wire:click.prevent="categorySave('{{$feed_category_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                        <button
+                                                            wire:click.prevent="categorySave('{{$feed_category_name}}')"
+                                                            class="text-white bg-green-500 text-center w-full">
                                                             create
                                                         </button>
                                                     @endforelse
@@ -149,7 +218,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Tag ----------------------------------------------------------------------------------------------------->
+                <!-- TagSeeder ----------------------------------------------------------------------------------------------------->
                 <div class="flex flex-row py-3 gap-3">
                     <div class="xl:flex w-full gap-2">
                         <label for="tag_name" class="w-[10rem] text-zinc-500 tracking-wide py-2 ">Tag</label>
@@ -191,7 +260,8 @@
                                                             {{ $tag->vname }}
                                                         </li>
                                                     @empty
-                                                        <button wire:click.prevent="tagSave('{{$tag_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                        <button wire:click.prevent="tagSave('{{$tag_name}}')"
+                                                                class="text-white bg-green-500 text-center w-full">
                                                             create
                                                         </button>
                                                     @endforelse

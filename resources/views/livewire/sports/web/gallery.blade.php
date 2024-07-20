@@ -1,9 +1,9 @@
 <div class="bg-[#F0F2F8]">
-    <div class="w-full h-16 bg-[#081E40] flex-col flex justify-center items-center">
-        <div class="text-white text-2xl w-9/12 mx-auto font-gab">Gallery</div>
+    <div class="w-full h-44 bg-[#081E40] flex-col flex justify-center items-center">
+        <div class="text-white text-4xl w-9/12 mx-auto font-gab">Gallery</div>
     </div>
     <div class="w-9/12 grid grid-cols-4 gap-2 mx-auto py-12">
-        @foreach($clubImage as $row)
+        @foreach( $clubImage as $row)
             <div
                 class="h-72 border border-gray-400 bg-cover bg-center bg-no-repeat bg-black rounded-md flex-col flex items-center justify-evenly group hover:opacity-75 hover:bg-black "
                 style="background-image:  url('../../../../storage/images/{{$row->club_image}}');">

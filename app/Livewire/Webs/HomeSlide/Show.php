@@ -5,6 +5,7 @@ namespace App\Livewire\Webs\HomeSlide;
 use Aaran\SportsClub\Models\Achievements;
 use Aaran\SportsClub\Models\SportActivity;
 use Aaran\SportsClub\Models\SportClubPic;
+use Aaran\Web\Models\Feed;
 use Aaran\Web\Models\HomeSlide;
 use App\Livewire\Trait\CommonTrait;
 use Livewire\Component;
@@ -13,8 +14,13 @@ class Show extends Component
 {
     use CommonTrait;
     public $clubImage;
-    public $image;
+    public $achievements;
     public $activities;
+    public $events;
+    public $blogs;
+    public $news;
+    public $moments;
+    public $upComingEvents;
 
     public function target()
     {
@@ -27,15 +33,15 @@ class Show extends Component
 
     }
 
-    public function getImage()
+    public function getData()
     {
-        $this->image=Achievements::latest()->take(3)->get();
-
-    }
-
-    public function grtActivities()
-    {
-        $this->activities=SportActivity::latest()->take(8)->get();
+        $this->activities=Feed::where('tag_id',1)->latest()->take(8)->get();
+        $this->events=Feed::where('tag_id',2)->latest()->take(3)->get();
+        $this->achievements=Feed::where('tag_id',3)->latest()->take(3)->get();
+        $this->news=Feed::where('tag_id',4)->latest()->take(3)->get();
+        $this->blogs=Feed::where('tag_id',5)->latest()->take(3)->get();
+        $this->upComingEvents=Feed::where('tag_id',6)->latest()->take(3)->get();
+        $this->moments=Feed::where('tag_id',7)->latest()->take(3)->get();
 
     }
 
@@ -58,8 +64,7 @@ class Show extends Component
     public function render()
     {
         $this->getClubImage();
-        $this->getImage();
-        $this->grtActivities();
+        $this->getData();
         return view('livewire.webs.home-slide.show')->with([
             'list' => $this->getList(),
         ]);

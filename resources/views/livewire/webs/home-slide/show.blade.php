@@ -13,10 +13,10 @@
     <!-- demo -->
     <x-SportsClub.Layout.gallery :clubImage="$clubImage" />
     <!-- Achievement -->
-    <x-SportsClub.Layout.achievement :image="$image" />
+    <x-SportsClub.Layout.achievement :image="$achievements" />
     <!-- Blog -->
     <!-- Latest News -->
-    <x-SportsClub.layout.latest />
+    <x-SportsClub.layout.latest :events="$events" :up-coming-events="$upComingEvents" :blogs="$blogs" :news="$news" :moments="$moments"/>
 
 </div>
 

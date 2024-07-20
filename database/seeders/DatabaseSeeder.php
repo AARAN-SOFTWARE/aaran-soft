@@ -38,6 +38,7 @@ use Aaran\SportsClub\Database\Seeders\S3001_SportClubSeeder;
 use Aaran\Testing\Database\Seeders\DbTestSeeder;
 use Aaran\Testing\Database\Seeders\TestFileSeeder;
 use Aaran\Web\Database\Seeders\FeedCategorySeeder;
+use Aaran\Web\Database\Seeders\TagSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -89,9 +90,10 @@ class DatabaseSeeder extends Seeder
             S205_StyleSeeder::run();
         }
 
-//        if (DbMigration::hasWebs()) {
-//            FeedCategorySeeder::run();
-//        }
+        if (DbMigration::hasWebs()) {
+            FeedCategorySeeder::run();
+            TagSeeder::run();
+        }
 
 //        ClientSeeder::run();
 //        RootlineSeeder::run();
