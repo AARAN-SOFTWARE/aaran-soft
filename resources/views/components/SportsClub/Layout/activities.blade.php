@@ -1,5 +1,5 @@
 @props([
-    "list"
+    "list" => null
 ])
 <div class="h-64 bg-[#10172B] rounded-b-3xl font-roboto">
     <div class="w-9/12 h-5/6 mx-auto py-5 flex-col">
