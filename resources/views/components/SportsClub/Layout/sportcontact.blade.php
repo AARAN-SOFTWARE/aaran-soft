@@ -78,26 +78,30 @@
 {{--</div>--}}
 <div class="h-screen">
     <!-- header -->
-    <div class="h-[25rem] w-full bg-cover bg-gradient-to-r from-white to-[#ccfbf1] flex-col flex justify-center items-center">
-        <div class="w-2/3 mx-auto font-roboto ">
+    <div style="background-image: url('/../../../images/profile/b1.jpg')"
+        class="h-[25rem] w-full bg-contain bg-no-repeat bg-right flex-col flex justify-center items-center">
+        <div class="w-2/6 mx-auto font-roboto ">
             <div class=" text-7xl font-bold inline-flex gap-5 font-semibold">
                 <span>Contact</span>
                 <span class="text-[#FFAF11]">Us</span></div>
-            <div class="text-sm text-gray-600 my-8 tracking-wider">Making your business vision come true with our deep <br>
-                operational & implementation expertise.</div>
+            <div class="text-sm text-gray-600 my-8 tracking-wider">Making your business vision come true with our deep
+                <br>
+                operational & implementation expertise.
+            </div>
         </div>
     </div>
-<!-- contact  -->
+    <!-- contact  -->
     <div class="flex justify-between max-w-6xl mx-auto my-16">
         <div class="flex-col flex items-center text-center">
             <div class="h-14 w-14 rounded-xl border border-gray-300 shadow-xl flex justify-center items-center">
-            <x-icons.icon-fill :iconfill="'mail1'" :colour="'#3F8462'" class="w-8 h-8"/>
+                <x-icons.icon-fill :iconfill="'mail1'" :colour="'#3F8462'" class="w-8 h-8"/>
             </div>
             <div class="my-3">
                 <div class="font-semibold text-xl">Email</div>
                 <div class="w-60 text-md">Send us mail and an ambassador will respond</div>
             </div>
         </div>
+
         <div class="border-l border-gray-200"></div>
         <div class="flex-col flex items-center text-center ">
             <div class="h-14 w-14 rounded-xl border border-gray-300 shadow-xl flex justify-center items-center">
@@ -108,6 +112,7 @@
                 <div class="w-60 text-md">321 Car World, 2nd Breaking Str, New York, USA 10002</div>
             </div>
         </div>
+
         <div class="border-l border-gray-200"></div>
         <div class="flex-col flex items-center text-center">
             <div class="h-14 w-14 rounded-xl border border-gray-300 shadow-xl flex justify-center items-center">
@@ -120,55 +125,30 @@
         </div>
     </div>
 
-<!-- Form -->
-    <div class="max-w-6xl mx-auto rounded-3xl">
-        <div style="background-image: url('/../../../images/bg-1.jpg');"
-             class="h-[25rem] w-full bg-cover rounded-3xl">
-            <div>
-            <div class="text-2xl font-roboto font-semibold w-5/6 mx-auto py-5">GET IN TOUCH</div>
-            <div class="text-sm text-gray-600 w-5/6 mx-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</div>
-            <div
-                class="w-5/6 h-[40rem] bg-alice-blue border border-alice-blue mx-auto mt-5 rounded-lg shadow-xl mb-5">
+    <!-- Form -->
 
-                <div class="grid grid-cols-2 w-full mt-10 mx-12">
-                    <div class="flex flex-col gap-3">
-                        <label>First Name</label>
-                        <input type="text" wire:model="vname" class="w-5/6 h-14 rounded-lg border-teal-600"
-                               placeholder="First Name"></div>
 
-                    <div class="flex flex-col gap-3">
-                        <label>Last Name</label>
-                        <input type="text" wire:model="vname" class="w-5/6 h-14 rounded-lg border-teal-600"
-                               placeholder="Last Name"></div>
+    <div class="max-w-6xl h-[55rem] mx-auto rounded-[40px] bg-gradient-to-t from-white via-white to-teal-500 p-24">
+        <div class="w-full h-full rounded-[40px] bg-white p-20 grid gap-y-4 shadow-xl">
+            <div class="grid">
+                <div class="font-roboto text-2xl font-semibold">GET IN TOUCH</div>
+                <div class="text-sm text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis,
+                    pulvinar dapibus leo.
                 </div>
-
-                <div class="grid grid-cols-2 w-full mt-10 mx-12">
-
-                    <div class="flex flex-col gap-3">
-                        <label>Email</label>
-                        <input type="text" wire:model="vname" class="w-5/6 h-14 rounded-lg border-teal-600"
-                               placeholder="Email Address"></div>
-
-                    <div class="flex flex-col gap-3">
-                        <label>Phone No</label>
-                        <input type="text" wire:model="vname" class="w-5/6 h-14 rounded-lg border-teal-600"
-                               placeholder="phone number"></div>
-                </div>
-
-                <div class="mt-14 w-full ml-12">
-                    <textarea name="" wire:model="message" class="border-teal-600 rounded-lg" id="" cols="80" rows="8"
-                              placeholder="Your Message"></textarea>
-                </div>
-
-                <div class="w-full flex justify-end items-end">
-                    <button wire:click="getSave"
-                            class="w-28 mr-10 mt-4 font-lexanddeca font-semibold tracking-wider rounded-lg text-white p-2 bg-blue-900">
-                        SEND
-                    </button>
-                </div>
-
             </div>
-            </div>
+            <form action="" class="flex-col grid gap-y-6">
+                <div>
+                    <div class="grid grid-cols-2 justify-between gap-x-16 gap-y-4">
+                        <input type="text" class=" h-16 border border-gray-300 rounded-full focus:border-gray-300 focus:ring-black placeholder-gray-300 text-sm px-5" placeholder='First Name'>
+                        <input type="text" class=" h-16 border border-gray-300 rounded-full focus:border-gray-300 focus:ring-black placeholder-gray-300 text-sm px-5" placeholder='Last Name'>
+                        <input type="text" class=" h-16 border border-gray-300 rounded-full focus:border-gray-300 focus:ring-black placeholder-gray-300 text-sm px-5" placeholder='Email Address'>
+                        <input type="text" class=" h-16 border border-gray-300 rounded-full focus:border-gray-300 focus:ring-black placeholder-gray-300 text-sm px-5" placeholder='Subject'>
+                    </div>
+                </div>
+                <textarea name="" id="" cols="30" rows="4" class="rounded-[30px] border border-gray-300
+                 focus:border-gray-300 focus:ring-black p-5 placeholder-gray-300 text-sm" placeholder='Comments/Questions'></textarea>
+                <button class="bg-[#3F8462] w-1/5 h-[3.5rem] rounded-[30px] text-white font-roboto duration-300 hover:bg-[#F2A766] hover:scale-90 hover:duration-300 hover:shadow-lg hover:shadow-gray-200">Send Message</button>
+            </form>
         </div>
     </div>
 
