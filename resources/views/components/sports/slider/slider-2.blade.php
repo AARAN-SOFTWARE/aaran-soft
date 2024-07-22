@@ -80,18 +80,26 @@
                     <li x-bind="disableNextAndPreviousButtons"
                         class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
                         role="option">
-                        <div class="flex">
-                            <div class="h-44">
-                                <img class="h-full w-64 rounded-l-lg"
-                                     src="{{URL( \Illuminate\Support\Facades\Storage::url($row->image) )}}" alt="img"/>
+                            <div class="flex">
+                                <div class="h-44">
+                                    <a href="/feed">
+                                    <img class="h-full w-64 rounded-l-lg"
+                                         src="{{URL( \Illuminate\Support\Facades\Storage::url($row->image) )}}"
+                                         alt="img"/>
+                                    </a>
+                                </div>
+                                <div
+                                    class="w-full h-44 flex-col flex justify-center items-center text-white text-sm p-5 rounded-r-lg">
+                                    <div
+                                        class="font-bold font-gab text-xl tracking-wider bg-gradient-to-r from-white via-yellow-500 to-cyan-500 inline-block text-transparent bg-clip-text">
+                                        Blogs
+                                    </div>
+                                    <div
+                                        class="text-md text-center font-semibold"><a href="/feed">{{\Illuminate\Support\Str::words($row->vname, 6)}}</a></div>
+                                    <div
+                                        class="text-justify text-sm text-gray-200"><a href="/feed">{!! \Illuminate\Support\Str::words( $row->description ,15) !!}</a></div>
+                                </div>
                             </div>
-                            <div
-                                class="w-full h-44 flex-col flex justify-center items-center text-white text-sm p-5 rounded-r-lg">
-                                <div class="font-bold font-gab text-xl tracking-wider bg-gradient-to-r from-white via-yellow-500 to-cyan-500 inline-block text-transparent bg-clip-text"> Blogs</div>
-                                <div class="text-md text-center font-semibold">{{\Illuminate\Support\Str::words($row->vname, 6)}}</div>
-                                <div class="text-justify text-sm text-gray-200">{!! \Illuminate\Support\Str::words( $row->description ,15) !!}</div>
-                            </div>
-                        </div>
                     </li>
                 @endforeach
             </ul>

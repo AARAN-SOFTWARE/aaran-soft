@@ -81,18 +81,27 @@
                     <li x-bind="disableNextAndPreviousButtons"
                         class="flex w-full p-0 shrink-0 snap-start"
                         role="option">
-                        <div class="flex">
-                            <div class="h-44">
-                                <img class="h-full rounded-l-lg"
-                                     src="{{URL( \Illuminate\Support\Facades\Storage::url($row->image) )}}" alt="img"/>
+
+                            <div class="flex">
+                                <div class="h-44">
+                                    <a href="/news">
+                                    <img class="h-full rounded-l-lg"
+                                         src="{{URL( \Illuminate\Support\Facades\Storage::url($row->image) )}}"
+                                         alt="img"/>
+                                    </a>
+                                </div>
+                                <div
+                                    class="w-full h-44 flex-col flex justify-center items-center text-white p-5 rounded-r-lg">
+                                    <div
+                                        class="font-bold font-gab text-xl tracking-wider bg-gradient-to-r from-white via-yellow-500 to-cyan-500 inline-block text-transparent bg-clip-text">
+                                        News
+                                    </div>
+                                    <div
+                                        class="text-md text-center"><a href="/news">{{\Illuminate\Support\Str::words($row->vname, 6)}}</a></div>
+                                    <div
+                                        class="text-sm text-gray-200 text-justify"><a href="/news">{!! \Illuminate\Support\Str::words( $row->description ,16) !!}</a></div>
+                                </div>
                             </div>
-                            <div
-                                class="w-full h-44 flex-col flex justify-center items-center text-white p-5 rounded-r-lg">
-                                <div class="font-bold font-gab text-xl tracking-wider bg-gradient-to-r from-white via-yellow-500 to-cyan-500 inline-block text-transparent bg-clip-text">News</div>
-                                <div class="text-md text-center">{{\Illuminate\Support\Str::words($row->vname, 6)}}</div>
-                                <div class="text-sm text-gray-200 text-justify">{!! \Illuminate\Support\Str::words( $row->description ,16) !!}</div>
-                            </div>
-                        </div>
                     </li>
                 @endforeach
 

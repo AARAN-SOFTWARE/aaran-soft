@@ -9,9 +9,11 @@
             @foreach($list as $row)
                 <div class="flex-col">
                     <div class="w-32 h-32 border border-white  hover:border-dashed hover:border-red-700 rounded-lg ">
-                        <img class="rounded-lg hover:scale-95 hover:duration-300 w-full h-full"
+                        <a href="/feed">
+                        <img class="rounded-lg duration-300 hover:scale-95 hover:duration-300 w-full h-full"
                              src="{{ URL(\Illuminate\Support\Facades\Storage::url($row->image))}}"
                              alt="Img"/>
+                        </a>
                         </div>
                     <div class="w-28 text-center pt-1 text-sm text-white">{{$row->vname}}</div>
                 </div>

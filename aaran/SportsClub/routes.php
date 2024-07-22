@@ -26,4 +26,4 @@ Route::get('/gallery', \App\Livewire\Sports\Web\Gallery::class)->name('gallery')
 Route::get('/videos', \App\Livewire\Sports\Web\Videos::class)->name('videos');
 Route::get('/news', \App\Livewire\Sports\Web\News::class)->name('news');
 Route::get('/contact', \App\Livewire\Sports\Web\Contact::class)->name('contact');
-Route::get('/about', \App\Livewire\Sports\Web\About::class)->name('about');
+Route::get('/sportAbout', \App\Livewire\Sports\Web\About::class)->name('sportAbout');

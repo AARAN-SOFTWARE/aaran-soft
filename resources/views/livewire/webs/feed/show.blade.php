@@ -1,12 +1,12 @@
 <div class="p-0">
     @if(auth()->id())
-        <x-slot name="header">Feeds 🤩</x-slot>
+        <x-slot name="header">Blog 🤩</x-slot>
     @endif
 
     <div class="flex-col pt-5 rounded-xl font-roboto">
         <!-- Content slide -->
         <div class="w-4/6 mx-auto h-screen rounded-xl flex-col flex justify-center items-center">
-            <div class="w-5/6 mx-auto text-2xl my-4">{{$vname}}</div>
+            <div class="w-5/6 mx-auto uppercase font-roboto font-semibold tracking-wider text-4xl my-4">{{$vname}}</div>
             <!-- Content Image -->
             <div class="flex-col">
                 <img src="{{ URL(\Illuminate\Support\Facades\Storage::url($image)) }}" alt="{{$image}}"
