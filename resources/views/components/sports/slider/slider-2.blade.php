@@ -82,7 +82,7 @@
                         role="option">
                             <div class="flex">
                                 <div class="h-44">
-                                    <a href="/feed">
+                                    <a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">
                                     <img class="h-full w-64 rounded-l-lg"
                                          src="{{URL( \Illuminate\Support\Facades\Storage::url($row->image) )}}"
                                          alt="img"/>
@@ -95,9 +95,9 @@
                                         Blogs
                                     </div>
                                     <div
-                                        class="text-md text-center font-semibold"><a href="/feed">{{\Illuminate\Support\Str::words($row->vname, 6)}}</a></div>
+                                        class="text-md text-center font-semibold"><a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">{{\Illuminate\Support\Str::words($row->vname, 6)}}</a></div>
                                     <div
-                                        class="text-justify text-sm text-gray-200"><a href="/feed">{!! \Illuminate\Support\Str::words( $row->description ,15) !!}</a></div>
+                                        class="text-justify text-sm text-gray-200"><a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">{!! \Illuminate\Support\Str::words( $row->description ,15) !!}</a></div>
                                 </div>
                             </div>
                     </li>

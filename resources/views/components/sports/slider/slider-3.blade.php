@@ -85,8 +85,8 @@
                         <div class="w-full h-44 flex-col flex justify-center items-center text-gray-200 p-5">
                             <div class="font-bold font-gab text-xl tracking-wider bg-gradient-to-r from-white via-yellow-500 to-cyan-500 inline-block text-transparent bg-clip-text">Events</div>
                             <div
-                                class="font-bold text-md text-center">{{ \Illuminate\Support\Str::words($row->vname, 8)}}</div>
-                            <div class="text-sm text-gray-200 text-justify">{!! \Illuminate\Support\Str::words( $row->description ,15) !!}</div>
+                                class="font-bold text-md text-center"><a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">{{ \Illuminate\Support\Str::words($row->vname, 8)}}</a></div>
+                            <div class="text-sm text-gray-200 text-justify"><a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">{!! \Illuminate\Support\Str::words( $row->description ,15) !!}</a></div>
                         </div>
                     </li>
                 @endforeach
