@@ -13,7 +13,7 @@ return new class extends Migration {
                 $table->id();
                 $table->string('vname');
                 $table->string('email')->nullable();
-                $table->string('phone')->nullable();
+                $table->string('subject')->nullable();
                 $table->longText('message')->nullable();
                 $table->timestamps();
             });
