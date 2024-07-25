@@ -172,10 +172,18 @@ class Index extends Component
     #endregion
 
     #region[mount]
-    public function mount()
+    public function mount($category_id=null,$tag_id=null)
     {
         $this->users = User::all();
         $this->categories = FeedCategory::all();
+        if ($category_id||$tag_id) {
+            $this->categoryFilter=$category_id;
+           return array_push($this->tagFilter, $tag_id);
+        }else{
+            $this->categoryFilter="";
+            $this->tagFilter=[];
+        }
+
     }
     #endregion
 

@@ -8,14 +8,16 @@
         <div class="pt-4 flex justify-between">
             @foreach($list as $row)
                 <div class="flex-col">
-                    <div class="w-32 h-32 border border-white  hover:border-dashed hover:border-red-700 rounded-lg ">
-                        <a href="/feed">
-                        <img class="rounded-lg duration-300 hover:scale-95 hover:duration-300 w-full h-full"
-                             src="{{ URL(\Illuminate\Support\Facades\Storage::url($row->image))}}"
-                             alt="Img"/>
-                        </a>
+
+                    <a href="{{route('feed',['category_id'=>$row->feed_category_id?:'','tag_id'=>$row->tag_id?:''])}}">
+                        <div
+                            class="w-32 h-32 border border-white  hover:border-dashed hover:border-red-700 rounded-lg ">
+                            <img class="rounded-lg hover:scale-95 hover:duration-300 w-full h-full"
+                                 src="{{ URL(\Illuminate\Support\Facades\Storage::url($row->image))}}"
+                                 alt="Img"/>
                         </div>
-                    <div class="w-28 text-center pt-1 text-sm text-white">{{$row->vname}}</div>
+                        <div class="w-28 text-center pt-1 text-sm text-white">{{$row->vname}}</div>
+                    </a>
                 </div>
             @endforeach
         </div>

@@ -32,9 +32,9 @@
             @case(config('software.SPORTS_CLUB'))
                 <x-sports.footer.sponser/>
                 <x-sports.footer.footer/>
+                <x-sports.footer.copyright/>
                 @break
             @default
-{{--                <x-SportsClub.footer.copyright/>--}}
         @endswitch
 </div>
 

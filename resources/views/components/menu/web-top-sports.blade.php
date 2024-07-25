@@ -39,7 +39,7 @@
                     </li>
                     <li>
                         <a class="text-lg font-sans text-black px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
-                           href="{{route('contact')}}">Contact</a>
+                           href="{{route('sportContact')}}">Contact</a>
                     </li>
                     <li>
                         <a class="text-lg font-sans text-black px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"

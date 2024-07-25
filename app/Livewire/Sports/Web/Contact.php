@@ -11,8 +11,9 @@ class Contact extends Component
 {
     use CommonTrait;
     #region[properties]
+    public string $vname_2 = '';
     public string $email = '';
-    public string $phone = '';
+    public string $subject = '';
     public string $message = '';
     #endregion
 
@@ -23,23 +24,22 @@ class Contact extends Component
             if ($this->vid == "") {
                 $this->validate(['vname' => 'required']);
                 SportContact::create([
-                    'vname' => Str::ucfirst($this->vname),
+                    'vname' => Str::ucfirst($this->vname.''.$this->vname_2),
                     'email' => $this->email,
-                    'phone' => $this->phone,
+                    'subject' => $this->subject,
                     'message' => $this->message,
                 ]);
                 $message = "Saved";
                 $this->clearFields();
             } else {
                 $obj = SportContact::find($this->vid);
-                $obj->vname = Str::ucfirst($this->vname);
+                $obj->vname = Str::ucfirst($this->vname).''.$this->vname_2;
                 $obj->email = $this->email;
-                $obj->phone = $this->phone;
+                $obj->subject = $this->subject;
                 $obj->message = $this->message;
                 $obj->save();
                 $message = "Updated";
             }
-
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
@@ -49,8 +49,9 @@ class Contact extends Component
     public function clearFields()
     {
         $this->vname = '';
+        $this->vname_2 = '';
         $this->email = '';
-        $this->phone = '';
+        $this->subject = '';
         $this->message = '';
     }
     #endregion
@@ -63,7 +64,7 @@ class Contact extends Component
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
             $this->email = $obj->email;
-            $this->phone = $obj->phone;
+            $this->subject = $obj->subject;
             $this->message = $obj->message;
             return $obj;
         }
