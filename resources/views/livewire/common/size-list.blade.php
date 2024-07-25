@@ -10,7 +10,7 @@
         <x-forms.table :list="$list">
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Ledger</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Size</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 

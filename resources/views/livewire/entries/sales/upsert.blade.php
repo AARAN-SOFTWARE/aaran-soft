@@ -261,7 +261,7 @@
 
             <!-- Top Right Area-------------------------------------------------------------------------------------------->
 
-            <div class="ml-5">
+            <div class="ml-5 mt-3 flex flex-col gap-5">
 
                 <x-input.model-text wire:model="invoice_no" :label="'Invoice No'"/>
 

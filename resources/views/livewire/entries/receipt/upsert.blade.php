@@ -5,7 +5,7 @@
 
         <!-- Left Area -------------------------------------------------------------------------------------------------->
         <div class="md:grid grid-cols-2 gap-2 ">
-            <div class="px-4">
+            <div class="px-4 flex flex-col gap-5">
                     <!-- Party Name ------------------------------------------------------------------------------------->
                 <div class="xl:flex w-full gap-2 pt-3">
 
@@ -69,7 +69,7 @@
             </div>
 
             <!-- Right Area --------------------------------------------------------------------------------------------->
-            <div class="px-4">
+            <div class="px-4 flex flex-col gap-5">
                 <!-- Payment Model -------------------------------------------------------------------------------------->
                 <div class="xl:flex w-full gap-2 pt-3">
                     <label for="receipttype_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Payment-Model</label>

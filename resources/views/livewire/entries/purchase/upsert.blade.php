@@ -6,7 +6,7 @@
     <x-forms.m-panel>
         <!-- Top Left Area ----------------------------------------------------------------------------------------------->
         <section class="grid grid-cols-2 gap-2 ">
-            <div class="w-3/4 mt-3">
+            <div class="w-3/4 mt-3 flex flex-col gap-5">
                 <div class="xl:flex w-full gap-2">
 
                     <!--  Party Name ------------------------------------------------------------------------------------->
@@ -71,7 +71,7 @@
                 <!--  Order No ------------------------------------------------------------------------------------------>
 
                 @if(\Aaran\Aadmin\Src\SaleEntry::hasOrder())
-                    <div class="flex flex-col gap-2 pt-6">
+                    <div class="flex flex-col gap-2">
                         <div class="xl:flex w-full gap-2">
                             <label for="order_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">Order NO</label>
                             <div x-data="{isTyped: @entangle('orderTyped')}" @click.away="isTyped = false"
@@ -138,8 +138,8 @@
 
             <!-- Top Right Area ------------------------------------------------------------------------------------------>
 
-            <div class="w-full">
-                <div class=" w-3/4 mr-4 ml-auto">
+            <div class="w-full mt-3">
+                <div class=" w-3/4 mr-4 ml-auto flex flex-col gap-2">
                     <x-input.model-text wire:model="entry_no" :label="'Entry No'"/>
 
                     <div class="xl:flex flex-row gap-3 py-3">

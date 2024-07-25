@@ -146,7 +146,7 @@
             <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
             <x-forms.create-new :id="$vid">
                 <div class="lg:flex w-full">
-                    <div class="w-full">
+                    <div class="w-full flex flex-col gap-5">
                         <div class="flex items-center gap-2">
                             <x-input.model-text wire:model="sub_domain" :label="'Sub Domain'"/>
                             <x-copyClipboard text="'{{$sub_domain}}'"/>
@@ -167,7 +167,7 @@
                         <x-input.checkbox wire:model="copy_env" :label="'Copy Env'"/>
                         <x-input.checkbox wire:model="db_migrate" :label="'Db Migrate'"/>
                     </div>
-                    <div class="w-full pl-5">
+                    <div class="w-full pl-5 flex flex-col gap-5">
                         <x-input.checkbox wire:model="storage_link" :label="'Storage Link'"/>
                         <x-input.checkbox wire:model="user_created" :label="'User Created'"/>
                         <x-input.checkbox wire:model="user_tenant_id" :label="'User Tenant Id'"/>
