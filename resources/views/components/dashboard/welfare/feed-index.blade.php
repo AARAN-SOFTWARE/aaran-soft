@@ -22,13 +22,11 @@
             <!-- Image -->
             <div>
                 <a href="{{ route('show', $row->id) }}">
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url($row->image)}}" alt="" class="w-[95%] h-44 mt-4 mx-auto rounded-3xl">
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($row->image)}}" alt="" class="w-[95%] h-60 mt-4 mx-auto rounded-3xl">
                 </a>
             </div>
 
             <div class="w-[95%] mt-2 mx-auto text-sm "><a href="{{ route('show', $row->id) }}"> {!! (nl2br(e(Str::words($row->vname, '18')))) !!} </a></div>
-{{--            <div>{{$row->feed_category_id}}</div>--}}
-{{--            <div>{{$row->tag_id}}</div>--}}
             <div class="w-[95%] pb-4 mx-auto text-xs text-blue-600">#{{ \Aaran\Web\Models\Feed::tagName($row->tag_id)}}</div>
             <!-- Like & Share -->
             <div class="w-[95%]  mx-auto flex justify-between ">

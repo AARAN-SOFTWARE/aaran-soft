@@ -78,21 +78,20 @@
 
             <!--image animation ----------------------------------------------------------------------------------->
 
-
             <ul x-ref="slider" @scroll="updateCurrentSlide" tabindex="0" role="listbox"
                 aria-labelledby="carousel-content-label"
                 class="flex w-full overflow-x-hidden snap-x snap-mandatory opacity-95">
                 <li x-bind="disableNextAndPreviousButtons"
                     class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
                     role="option">
-                    <div class="w-full h-[22rem] my-4 flex justify-between">
+                    <div class="w-full h-[22rem] my-4 grid grid-cols-4">
                         <x-sports.card.card-1 :clubImage="$clubImage->take(4)"/>
                     </div>
                 </li>
                 <li x-bind="disableNextAndPreviousButtons"
                     class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
                     role="option">
-                    <div class="w-full h-[22rem] my-4 flex justify-between">
+                    <div class="w-full h-[22rem] my-4 grid grid-cols-4">
                         <x-sports.card.card-1 :clubImage="$clubImage->skip(4)"/>
                     </div>
                 </li>

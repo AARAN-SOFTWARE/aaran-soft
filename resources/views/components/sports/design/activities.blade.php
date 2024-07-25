@@ -8,6 +8,7 @@
         <div class="pt-4 flex justify-between">
             @foreach($list as $row)
                 <div class="flex-col">
+
                     <a href="{{route('feed',['category_id'=>$row->feed_category_id?:'','tag_id'=>$row->tag_id?:''])}}">
                         <div
                             class="w-32 h-32 border border-white  hover:border-dashed hover:border-red-700 rounded-lg ">

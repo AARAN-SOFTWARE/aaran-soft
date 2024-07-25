@@ -2,8 +2,6 @@
 
     <!--script -------------------------------------------------------------------------------------------------------->
 
-
-
     <x-sports.slider.slider-modifiy :list="$list"/>
     <!-- Recent Activities -->
     <x-sports.design.activities :list="$activities"/>

@@ -230,19 +230,7 @@ class Index extends Component
     }
     #endregion
 
-    #region[clearFields]
-    public function clearFields()
-    {
-        $this->vid = '';
-        $this->vname = '';
-        $this->feed_category_id = '';
-        $this->tag_id = '';
-        $this->description = '';
-        $this->image = '';
-        $this->isUploaded=false;
-        $this->active_id = 1;
-    }
-    #endregion
+
 
     #region[getObj]
     public function getObj($id)
@@ -262,6 +250,22 @@ class Index extends Component
         return $obj;
         }
         return null;
+    }
+    #endregion
+
+    #region[clearFields]
+    public function clearFields()
+    {
+        $this->vid = '';
+        $this->vname = '';
+        $this->feed_category_id = '';
+        $this->feed_category_name = '';
+        $this->tag_id = '';
+        $this->tag_name = '';
+        $this->description = '';
+        $this->image = '';
+        $this->isUploaded=false;
+        $this->active_id = 1;
     }
     #endregion
 
