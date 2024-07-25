@@ -11,7 +11,8 @@
                 <x-slot name="table_header">
                     <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
                     <x-table.header-text wire:click.prevent="sortBy('vname')" center>HighLight</x-table.header-text>
-                    <x-table.header-text wire:click.prevent="sortBy('vname')" width="50%" center>URL</x-table.header-text>
+                    <x-table.header-text wire:click.prevent="sortBy('vname')" width="50%" center>URL
+                    </x-table.header-text>
                     <x-table.header-action/>
                 </x-slot>
 
@@ -29,7 +30,7 @@
                             </x-table.cell-text>
 
                             <x-table.cell-text>
-                                {{ $row->url }}
+                                {!! $row->url !!}
                             </x-table.cell-text>
 
                             <x-table.cell-action id="{{$row->id}}"/>

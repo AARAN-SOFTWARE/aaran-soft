@@ -16,9 +16,9 @@ class Highlight extends Component
     #endrregion
 
     #region[mount]
-    public function mount($id)
+    public function mount($id=null)
     {
-        $this->activity_id = $id;
+        $this->activity_id = $id?:1;
     }
     #endrregion
 
@@ -29,7 +29,7 @@ class Highlight extends Component
             if ($this->vid == "") {
                 $this->validate(['vname' => 'required|unique:cities,vname']);
                 SportHighlight::create([
-                    'activity_id' => $this->activity_id,
+                    'activity_id' => $this->activity_id?:1,
                     'vname' => Str::ucfirst($this->vname),
                     'url' => $this->url,
                     'active_id' => $this->active_id,

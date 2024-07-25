@@ -87,7 +87,7 @@
                         class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
                         role="option">
 
-                        <div style="background-image: url('/../../../../storage/images/{{$row->bg_image}}');" class="w-full h-[35rem] bg-fixed bg-no-repeat bg-center bg-cover bg-[#10172B] flex-col flex justify-center">
+                        <div style="background-image: url('/../../../storage/images/{{$row->bg_image}}');" class="w-full h-[35rem] bg-fixed bg-no-repeat bg-center bg-cover bg-[#10172B] flex-col flex justify-center">
                             <div class="w-4/12 h-10/12 mx-auto flex-col text-white bg-black/25 rounded-lg p-5 mb-5">
                                 <div class="font-gab text-4xl  text-center  ">{{$row->vname}}</div>
                                 <div class="font-roboto text-lg mt-3 text-justify tracking-wider">{!! $row->description !!}</div>
