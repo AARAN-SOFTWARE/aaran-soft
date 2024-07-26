@@ -90,7 +90,6 @@ class Show extends Component
             $this->vname = $obj->vname;
             $this->description = $obj->description;
             $this->image = $obj->image;
-            $this->bookmark = $obj->bookmark;
             $this->created_at=$obj->created_at;
             return $obj;
         }
