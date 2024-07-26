@@ -30,7 +30,7 @@
 
                         <x-table.cell-text center>
                             <a href="{{ route('discourse.show',[$row->id]) }}">
-                            {{ $row->id }}</a>
+                                {{ $row->id }}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
@@ -81,10 +81,11 @@
 
                         <x-table.cell>
                             <a href="{{ route('discourse.show',[$row->id]) }}">
-                            <div
-                                class="flex w-full text-xl text-center  items-center justify-center p-1 {{  \App\Enums\Status::tryFrom($row->status)->getStyle()}}">
-                                {{ \App\Enums\Status::tryFrom($row->status)->getName()}}
-                            </div></a>
+                                <div
+                                    class="flex w-full text-xl text-center  items-center justify-center p-1 {{  \App\Enums\Status::tryFrom($row->status)->getStyle()}}">
+                                    {{ \App\Enums\Status::tryFrom($row->status)->getName()}}
+                                </div>
+                            </a>
                         </x-table.cell>
 
                         <x-table.cell-action :id="$row->id"/>
@@ -107,15 +108,13 @@
         <x-forms.create-new :id="$vid">
 
             <div class="flex space-x-5">
-                <div>
-
+                <div class="flex flex-col gap-4">
                     <x-input.model-select wire:model="client_id" :label="'Client'">
                         <option class="text-gray-400"> choose ..</option>
                         @foreach($clients as $client)
                             <option value="{{$client->id}}">{{$client->vname}}</option>
                         @endforeach
                     </x-input.model-select>
-
 
                     <x-input.model-text wire:model="title" :label="'Title'"/>
 
@@ -131,8 +130,7 @@
                     </x-input.model-select>
                 </div>
 
-                <div>
-
+                <div class="flex flex-col gap-4">
                     <x-input.model-text wire:model="vdate" type="date" :label="'Date'"/>
 
                     <x-input.model-select wire:model="allocated" :label="'Assign To'">
@@ -155,22 +153,72 @@
                     <x-input.model-date wire:model="verified_on" :label="'Verified On'"/>
                     @endadmin
 
-                    <div class="grid grid-cols-2 flex-shrink-0 h-80 w-80 mr-4">
-                        <div class="border border-gray-400 h-64 w-52">
-                            Photo Preview:
-                            @if($image)
-                                <img
-                                    src="{{$isUploaded? $image->temporaryUrl() : url(\Illuminate\Support\Facades\Storage::url($image)) }}"
-                                    class="h-64 w-auto" alt="{{$image}}">
-                            @endif
+                    <!-- image ---------------------------------------------------------------------------------------------->
+
+{{--                    <div class="grid grid-cols-2 flex-shrink-0 h-80 w-80 mr-4">--}}
+{{--                        <div class="border border-gray-400 h-64 w-52">--}}
+{{--                            Photo Preview:--}}
+{{--                            @if($image)--}}
+{{--                                <img--}}
+{{--                                    src="{{$isUploaded? $image->temporaryUrl() : url(\Illuminate\Support\Facades\Storage::url($image)) }}"--}}
+{{--                                    class="h-64 w-auto" alt="{{$image}}">--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <div>--}}
+{{--                        <input type="file" wire:model="image">--}}
+{{--                        <button wire:click.prevent="save_image"></button>--}}
+{{--                    </div>--}}
+
+                    <!-- Create Form ---------------------------------------------------------------------------------------------->
+
+                    <!-- Create Form ---------------------------------------------------------------------------------------------->
+
+                    <div class="flex flex-row gap-6 mt-4">
+
+                        <div class="flex">
+
+                            <label for="logo_in" class="w-[10rem] text-zinc-500 tracking-wide py-2">Image</label>
+
+                            <div class="flex-shrink-0">
+
+                                <div>
+                                    @if($image)
+                                        <img
+                                            src="{{$isUploaded? $image->temporaryUrl() : url(\Illuminate\Support\Facades\Storage::url($image)) }}"
+                                            alt="Image"
+                                            class="h-24 w-auto mb-1 rounded-md outline outline-2 outline-gray-300 shadow-md shadow-gray-400">
+                                    @else
+                                        <x-icons.icon :icon="'logo'" class="w-auto h-auto block "/>
+                                    @endif
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="relative">
+
+                            <div>
+                                <label for="image"
+                                       class="text-gray-500 font-semibold text-base rounded flex flex-col items-center
+                                   justify-center cursor-pointer border-2 border-gray-300 border-dashed p-2
+                                   mx-auto font-[sans-serif]">
+                                    <x-icons.icon icon="cloud-upload" class="w-8 h-auto block text-gray-400"/>
+                                    Upload file
+
+                                    <input type="file" id='image' wire:model="image" class="hidden"/>
+                                    <p class="text-xs font-light text-gray-400 mt-2">PNG, JPG SVG, WEBP, and GIF are
+                                        Allowed.</p>
+                                </label>
+                            </div>
+
+                            <div wire:loading wire:target="image" class="z-10 absolute top-6 left-[107px]">
+                                <div class="w-14 h-14 rounded-full animate-spin
+                    border-y-4 border-dashed border-green-500 border-t-transparent"></div>
+                            </div>
                         </div>
                     </div>
-
-                    <div>
-                        <input type="file" wire:model="image">
-                        <button wire:click.prevent="save_image"></button>
-                    </div>
-
 
                 </div>
             </div>

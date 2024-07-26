@@ -49,11 +49,13 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
-            <x-input.model-text wire:model="vname" :label="'Segment'"/>
-            @error('vname')
-            <span class="text-red-500">{{  $message }}</span>
-            @enderror
-            <x-input.model-text wire:model="description" :label="'Description'"/>
+            <div class="flex flex-col gap-5">
+                <x-input.model-text wire:model="vname" :label="'Segment'"/>
+                @error('vname')
+                <span class="text-red-500">{{  $message }}</span>
+                @enderror
+                <x-input.model-text wire:model="description" :label="'Description'"/>
+            </div>
         </x-forms.create>
 
     </x-forms.m-panel>

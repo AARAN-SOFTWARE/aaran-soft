@@ -12,7 +12,8 @@
                 <x-table.header-serial wire:click.prevent="sortBy('no_of_shares')"/>
                 <x-table.header-text wire:click.prevent="sortBy('no_of_shares')" center>User</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('no_of_shares')" center>Projects</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('no_of_shares')" center>No of Share</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('no_of_shares')" center>No of Share
+                </x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
 
@@ -55,19 +56,21 @@
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
 
-            <x-input.model-select wire:model="user_id" :label="'User'">
-                <option class="text-gray-400"> choose ..</option>
-                @foreach($user as $row)
-                    <option value="{{$row->id}}">{{$row->name}}</option>
-                @endforeach
-            </x-input.model-select>
-            <x-input.model-select wire:model="projects_id" :label="'Project'">
-                <option class="text-gray-400"> choose ..</option>
-                @foreach($projects as $project)
-                    <option value="{{$project->id}}">{{$project->vname}}</option>
-                @endforeach
-            </x-input.model-select>
-            <x-input.model-text wire:model="no_of_shares" :label="'No of Shares'"/>
+            <div class="flex flex-col gap-5">
+                <x-input.model-select wire:model="user_id" :label="'User'">
+                    <option class="text-gray-400"> choose ..</option>
+                    @foreach($user as $row)
+                        <option value="{{$row->id}}">{{$row->name}}</option>
+                    @endforeach
+                </x-input.model-select>
+                <x-input.model-select wire:model="projects_id" :label="'Project'">
+                    <option class="text-gray-400"> choose ..</option>
+                    @foreach($projects as $project)
+                        <option value="{{$project->id}}">{{$project->vname}}</option>
+                    @endforeach
+                </x-input.model-select>
+                <x-input.model-text wire:model="no_of_shares" :label="'No of Shares'"/>
+            </div>
         </x-forms.create>
 
     </x-forms.m-panel>

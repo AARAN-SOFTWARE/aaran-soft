@@ -5,7 +5,7 @@
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
         <x-forms.top-controls :show-filters="$showFilters"/>
-        <div class="w-1/6">
+        <div class="lg:w-1/6 ">
             <x-input.model-select wire:model.live="contactType" :label="'Contact Type'">
                 <option class="text-gray-400" value=""> choose ..</option>
                 <option class="text-gray-400" value="0.0"> Creditors</option>

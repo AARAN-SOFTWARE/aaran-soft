@@ -2,7 +2,7 @@
     <x-slot name="header">Product Entry</x-slot>
 
     <x-forms.m-panel>
-        <div>
+        <div class="flex flex-col gap-4">
             <x-input.model-text wire:model="vname" :label="'Name'"/>
 
             <!-- Product Type ------------------------------------------------------------------------------------->
@@ -14,8 +14,8 @@
             </x-input.model-select>
 
             <!-- Hsn-Code------------------------------------------------------------------------------------------>
-            <div class="flex flex-row gap-3 py-3">
-                <div class="xl:flex gap-2 w-full">
+            <div class="flex flex-row gap-3">
+                <div class="xl:flex gap-3 w-full">
                     <label for="hsncode_no" class="w-[10rem] text-zinc-500 tracking-wide py-2">Hsncode</label>
                     <div x-data="{isTyped: @entangle('hsncodeTyped')}" @click.away="isTyped = false" class="w-full">
                         <div>

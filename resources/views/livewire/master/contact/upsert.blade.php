@@ -5,7 +5,7 @@
         <div class="lg:flex">
 
             <!-- Left area -------------------------------------------------------------------------------------------->
-            <div class="lg:w-1/2 ml-2 px-8">
+            <div class="lg:w-1/2 ml-2 px-8 flex flex-col gap-3">
 
                 <x-input.model-text wire:model="vname" :label="'Name'"/>
 
@@ -29,7 +29,7 @@
             </div>
 
             <!-- Right area ------------------------------------------------------------------------------------------->
-            <div class="lg:w-1/2 px-8">
+            <div class="lg:w-1/2 px-8 flex flex-col gap-3">
 
                 <x-input.model-select wire:model="address_type" :label="'Address Type'">
                     <option class="text-gray-400"> choose ..</option>
@@ -85,7 +85,8 @@
                                                             {{ $city->vname }}
                                                         </li>
                                                     @empty
-                                                        <button wire:click.prevent="citySave('{{$city_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                        <button wire:click.prevent="citySave('{{$city_name}}')"
+                                                                class="text-white bg-green-500 text-center w-full">
                                                             create
                                                         </button>
                                                     @endforelse
@@ -199,7 +200,8 @@
                                                             {{ $pincode->vname }}
                                                         </li>
                                                     @empty
-                                                        <button wire:click.prevent="pincodeSave('{{$pincode_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                        <button wire:click.prevent="pincodeSave('{{$pincode_name}}')"
+                                                                class="text-white bg-green-500 text-center w-full">
                                                             create
                                                         </button>
 
@@ -256,7 +258,8 @@
                                                             {{ $country->vname }}
                                                         </li>
                                                     @empty
-                                                        <button wire:click.prevent="countrySave('{{$country_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                        <button wire:click.prevent="countrySave('{{$country_name}}')"
+                                                                class="text-white bg-green-500 text-center w-full">
                                                             create
                                                         </button>
 
@@ -275,10 +278,12 @@
 
                 <x-input.model-text wire:model="email" :label="'Email'"/>
 
-                <button wire:click="addItems"
-                        class="px-3 bg-green-500 text-white font-semibold tracking-wider rounded-lg p-2">Add
-                    Address
-                </button>
+                <div class="w-full flex justify-end items-end">
+                    <button wire:click="addItems"
+                            class="px-3 bg-green-500 w-fit text-white font-semibold tracking-wider rounded-lg p-2">Add
+                        Address
+                    </button>
+                </div>
             </div>
 
         </div>
@@ -349,7 +354,7 @@
 
                                 <x-table.cell>
                                     <div class="flex justify-center gap-3">
-                                        <x-table.edit  wire:click.prevent="changeItems({{$index}})"/>
+                                        <x-table.edit wire:click.prevent="changeItems({{$index}})"/>
                                         <x-table.delete wire:click.prevent="removeItems({{$index}})"/>
                                     </div>
                                 </x-table.cell>
@@ -367,5 +372,5 @@
     </x-forms.m-panel>
 
     <!-- Save Button area --------------------------------------------------------------------------------------------->
-    <x-forms.m-panel-bottom-button save back active />
+    <x-forms.m-panel-bottom-button save back active/>
 </div>
