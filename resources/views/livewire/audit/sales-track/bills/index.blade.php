@@ -83,11 +83,11 @@
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text>
-                            <a href="{{route('salesTracks.upsert',[$row->id])}}">
-                                {{  $row->serial }}
-                            </a>
-                        </x-table.cell-text>
+{{--                        <x-table.cell-text>--}}
+{{--                            <a href="{{route('salesTracks.upsert',[$row->id])}}">--}}
+{{--                                {{  $row->serial }}--}}
+{{--                            </a>--}}
+{{--                        </x-table.cell-text>--}}
 
                         <x-table.cell-text>
                             <a href="{{route('salesTracks.upsert',[$row->id])}}">
