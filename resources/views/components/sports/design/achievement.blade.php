@@ -7,7 +7,7 @@
         @foreach($image as $row)
             <div style="background-image: url('/../../../storage/{{$row->image}}')"
                  class="w-96 h-96 bg-no-repeat bg-cover bg-center rounded-xl flex-col flex justify-end">
-                <a href="/feed{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">
+                <a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">
                     <div class=" bg-gradient-to-t from-black to-gray-400/25 text-white flex-col p-5 rounded-b-lg">
                         <div class="font-bebas text-2xl tracking-wider">{{$row->vname}}</div>
                         <div class="font-roboto">{{ \Illuminate\Support\Str::words( $row->desc,15)}}</div>

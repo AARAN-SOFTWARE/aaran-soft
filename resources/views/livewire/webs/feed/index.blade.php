@@ -44,7 +44,7 @@
                     </button>
                 </div>
                 <div class="w-[95%] absolute overflow-y-auto mt-2 mx-2 px-3 bg-white rounded-md" x-show="isOpenCategory"
-                     @click.away="isOpenCategory = false" >
+                     @click.away="isOpenCategory = false">
                     <button @click="isOpenCategory = !isOpenCategory" class=" flex mb-2" wire:click="clearCategory">
                         <div class=" flex ml-2 mt-2 bg-white">
                             <div>
@@ -142,7 +142,7 @@
                     {{--                    <x-dashboard.welfare.stories :users="$users" />--}}
                 </div>
                 <!-- Feed -->
-                <div class="mx-auto text-xl mt-10 font-roboto font-semibold">Feed</div>
+                <div class="mx-auto text-xl mt-10 font-roboto uppercase font-semibold">{{ \Aaran\Web\Models\Feed::tagName($tag_id) ?: 'Feeds'}}</div>
                 <x-dashboard.welfare.feed-index :list="$list"/>
             </div>
         </div>
