@@ -71,6 +71,7 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
+            <div class="flex flex-col gap-5">
             <x-input.model-select wire:model="projects_id" :label="'Project'">
                 <option class="text-gray-400"> choose ..</option>
                 @foreach($projects as $project)
@@ -89,6 +90,7 @@
 
             <x-input.model-text wire:model="rate" wire:change="calculate" :label="'Rate'"/>
             <x-input.model-text wire:model="amount" :label="'Amount'"/>
+            </div>
         </x-forms.create>
 
     </x-forms.m-panel>

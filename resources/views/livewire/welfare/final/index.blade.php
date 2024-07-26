@@ -5,7 +5,8 @@
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
         <x-forms.top-controls :show-filters="$showFilters">
-            <x-input.model-select wire:model.live="byProject" wire:keydown.escape="$set('byProject', '')" :label="'Project'">
+            <x-input.model-select wire:model.live="byProject" wire:keydown.escape="$set('byProject', '')"
+                                  :label="'Project'">
                 <option class="text-gray-400" value=""> choose ..</option>
                 @foreach($projects as $project)
                     <option value="{{$project->id}}">{{$project->vname}}</option>
@@ -71,24 +72,26 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
-            <x-input.model-select wire:model="projects_id" :label="'Project'">
-                <option class="text-gray-400"> choose ..</option>
-                @foreach($projects as $project)
-                    <option value="{{$project->id}}">{{$project->vname}}</option>
-                @endforeach
-            </x-input.model-select>
+            <div class="flex flex-col gap-5">
+                <x-input.model-select wire:model="projects_id" :label="'Project'">
+                    <option class="text-gray-400"> choose ..</option>
+                    @foreach($projects as $project)
+                        <option value="{{$project->id}}">{{$project->vname}}</option>
+                    @endforeach
+                </x-input.model-select>
 
-            <x-input.model-select wire:model="project_product_id" :label="'Product'">
-                <option class="text-gray-400"> choose ..</option>
-                @foreach($project_product as $product)
-                    <option value="{{$product->id}}">{{$product->vname}}</option>
-                @endforeach
-            </x-input.model-select>
+                <x-input.model-select wire:model="project_product_id" :label="'Product'">
+                    <option class="text-gray-400"> choose ..</option>
+                    @foreach($project_product as $product)
+                        <option value="{{$product->id}}">{{$product->vname}}</option>
+                    @endforeach
+                </x-input.model-select>
 
-            <x-input.model-text wire:model="qty" :label="'Qty'"/>
+                <x-input.model-text wire:model="qty" :label="'Qty'"/>
 
-            <x-input.model-text wire:model="rate" wire:change="calculate" :label="'Rate'"/>
-            <x-input.model-text wire:model="amount" :label="'Amount'"/>
+                <x-input.model-text wire:model="rate" wire:change="calculate" :label="'Rate'"/>
+                <x-input.model-text wire:model="amount" :label="'Amount'"/>
+            </div>
         </x-forms.create>
 
     </x-forms.m-panel>

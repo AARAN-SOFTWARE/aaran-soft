@@ -97,10 +97,12 @@
         <!-- Create --------------------------------------------------------------------------------------------------->
 
         <x-forms.create :id="$vid">
-            <x-input.model-text wire:model="gstr1_arn" autofocus :label="'GSTR-1-ARN'"/>
-            <x-input.model-text wire:model="gstr1_date" type="date" :label="'GSTR-1-DATE'"/>
-            <x-input.model-text wire:model="gstr3b_arn" :label="'3B-ARN'"/>
-            <x-input.model-text wire:model="gstr3b_date" type="date" :label="'3B-DATE'"/>
+            <div class="flex flex-col gap-4">
+                <x-input.model-text wire:model="gstr1_arn" autofocus :label="'GSTR-1-ARN'"/>
+                <x-input.model-text wire:model="gstr1_date" type="date" :label="'GSTR-1-DATE'"/>
+                <x-input.model-text wire:model="gstr3b_arn" :label="'3B-ARN'"/>
+                <x-input.model-text wire:model="gstr3b_date" type="date" :label="'3B-DATE'"/>
+            </div>
         </x-forms.create>
 
         <div class="flex flex-row justify-between px-5">

@@ -30,12 +30,12 @@
                             </a>
                         </x-table.cell-text>
 
-                        <x-table.cell-text >
+                        <x-table.cell-text>
                             <a href="{{route('clients.show',[$row->id])}}">
                                 <div class="text-gray-600 truncate text-xl text-left">
                                     {{ $row->vname }}
                                 </div>
-                                    &nbsp;&nbsp;&nbsp;-&nbsp;{{ $row->group }}
+                                &nbsp;&nbsp;&nbsp;-&nbsp;{{ $row->group }}
                             </a>
                         </x-table.cell-text>
 
@@ -70,13 +70,15 @@
         <!-- Create --------------------------------------------------------------------------------------------------->
 
         <x-forms.create :id="$vid">
-            <x-input.model-text wire:model="vname" :label="'company'"/>
-            <x-input.model-text wire:model="group" :label="'group'"/>
-            <x-input.model-select wire:model="payable" :label="'payable'">
-                <option>Choose</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </x-input.model-select>
+            <div class="flex flex-col gap-4">
+                <x-input.model-text wire:model="vname" :label="'company'"/>
+                <x-input.model-text wire:model="group" :label="'group'"/>
+                <x-input.model-select wire:model="payable" :label="'payable'">
+                    <option>Choose</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </x-input.model-select>
+            </div>
         </x-forms.create>
 
     </x-forms.m-panel>

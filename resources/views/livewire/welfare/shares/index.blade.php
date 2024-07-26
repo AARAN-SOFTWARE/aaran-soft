@@ -14,7 +14,8 @@
                 <x-table.header-text wire:click.prevent="sortBy('no_of_shares')" center>estimated</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('no_of_shares')" center>Face value</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('no_of_shares')" center>Volume</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('no_of_shares')" center>Current value</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('no_of_shares')" center>Current value
+                </x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('no_of_shares')" center>Margin</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('no_of_shares')" center>Dividend</x-table.header-text>
                 <x-table.header-action/>
@@ -75,18 +76,20 @@
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid">
 
-            <x-input.model-select wire:model="project_id" :label="'Project'">
-                <option class="text-gray-400"> choose ..</option>
-                @foreach($projects as $project)
-                    <option value="{{$project->id}}">{{$project->vname}}</option>
-                @endforeach
-            </x-input.model-select>
-            <x-input.model-text wire:model="estimated" :label="'Estimated'"/>
-            <x-input.model-text wire:model="face_value" :label="'Face value'"/>
-            <x-input.model-text wire:model="volume" :label="'Volume'"/>
-            <x-input.model-text wire:model="current_value" :label="'Current Value'"/>
-            <x-input.model-text wire:model="margin" :label="'Margin'"/>
-            <x-input.model-text wire:model="dividend" :label="'Dividend'"/>
+            <div class="flex flex-col gap-5">
+                <x-input.model-select wire:model="project_id" :label="'Project'">
+                    <option class="text-gray-400"> choose ..</option>
+                    @foreach($projects as $project)
+                        <option value="{{$project->id}}">{{$project->vname}}</option>
+                    @endforeach
+                </x-input.model-select>
+                <x-input.model-text wire:model="estimated" :label="'Estimated'"/>
+                <x-input.model-text wire:model="face_value" :label="'Face value'"/>
+                <x-input.model-text wire:model="volume" :label="'Volume'"/>
+                <x-input.model-text wire:model="current_value" :label="'Current Value'"/>
+                <x-input.model-text wire:model="margin" :label="'Margin'"/>
+                <x-input.model-text wire:model="dividend" :label="'Dividend'"/>
+            </div>
         </x-forms.create>
 
     </x-forms.m-panel>
