@@ -2,11 +2,11 @@
 
 return [
 
-    'soft_version' => '1.0.1',
+    'soft_version' => '1.0.2',
 
-    'db_version' => '1.0.1',
+    'db_version' => '1.0.2',
 
-    'git_version' => '#491',
+    'git_version' => '#539',
 
     'current_acyear' => \App\Enums\AcYear::AY_2024_25,
 
