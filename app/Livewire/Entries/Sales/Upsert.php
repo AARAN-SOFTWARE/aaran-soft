@@ -18,6 +18,7 @@ use App\Livewire\Trait\CommonTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
@@ -831,10 +832,10 @@ class Upsert extends Component
                         'active_id' => $this->active_id,
                     ]);
                     $this->saveItem($obj->id);
-//                                        $data=response()->json([
-//                        'sale'=>json_encode( $obj),
-//                        'saleItem'=>json_encode($this->itemList),
-//                    ]);
+                     $data=response()->json([
+                        'sale'=>json_encode( $obj),
+                        'saleItem'=>json_encode($this->itemList),
+                    ]);
 //                    $this->toApi($data);
                     $message = "Saved";
                     $this->getRoute();
@@ -873,11 +874,11 @@ class Upsert extends Component
                     $obj->save();
                     DB::table('saleitems')->where('sale_id', '=', $obj->id)->delete();
                     $this->saveItem($obj->id);
-//                    $data=response()->json([
-//                        'sale'=>json_encode( $obj),
-//                        'saleItem'=>json_encode($this->itemList),
-//                    ]);
-//                    dd($data);
+                    $data=response()->json([
+                        'sale'=>json_encode( $obj),
+                        'saleItem'=>json_encode($this->itemList),
+                    ]);
+//                    $this->toApi($data);
                     $message = "Updated";
                 }
 
@@ -911,17 +912,23 @@ class Upsert extends Component
 //    public function toApi($data)
 //    {
 //        $url = "http://127.0.0.1:8000/api/entery";
+////        $response = Http::post($url,$data);
+//
 //        $curl = curl_init($url);
 //        curl_setopt($curl, CURLOPT_URL, $url);
 //        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 //
-//        curl_setopt($curl, CURLOPT_HTTPHEADER, $data);
+//        $headers = array(
+//            $data
+//        );
+//        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 //
 //        $resp = curl_exec($curl);
 //        curl_close($curl);
 //        $dataJSON = json_decode($resp);
-//
 //        dd($dataJSON);
+//
+//
 //    }
 
     #endregion

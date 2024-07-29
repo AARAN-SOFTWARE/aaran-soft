@@ -12,6 +12,7 @@ use Aaran\Master\Models\Contact_detail;
 use App\Livewire\Trait\CommonTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -49,6 +50,48 @@ class Upsert extends Component
     #region[array]
     public $itemList = [];
     public mixed $itemIndex = '';
+    public $secondaryAddress=[];
+    public $addressIncrement=1;
+    #endregion
+
+
+    #region[addAddress]
+    public function addAddress($id)
+    {
+        $this->addressIncrement=$id+1;
+        array_push($this->secondaryAddress,$id);
+        array_push($this->itemList,[
+            'contact_detail_id'=>0,
+            'address_type'=>'Secondary',
+            "state_name"=>"",
+            "state_id"=>"",
+            "city_id"=>"",
+            "city_name"=>"",
+            "country_id"=>"",
+            "country_name"=>"",
+            "pincode_id"=>"",
+            "pincode_name"=>"",
+            "address_1"=>"",
+            "address_2"=>"",
+            "gstin"=>"",
+            "email"=>"",
+            ]);
+        $this->city_name="";
+        $this->state_name="";
+        $this->country_name="";
+        $this->pincode_name="";
+        $this->city_id='';
+        $this->state_id='';
+        $this->country_id='';
+        $this->pincode_id='';
+    }
+    #endregion
+
+    #region[removeAddress]
+    public function removeAddress($id)
+    {
+        unset($this->secondaryAddress[$id]);
+    }
     #endregion
 
     #region[City]
@@ -76,14 +119,17 @@ class Upsert extends Component
         $this->highlightCity++;
     }
 
-    public function setCity($name, $id): void
+    public function setCity($name, $id,$index): void
     {
         $this->city_name = $name;
         $this->city_id = $id;
+        Arr::set($this->itemList[$index],'city_name',$name);
+        Arr::set($this->itemList[$index],'city_id',$id);
+
         $this->getCityList();
     }
 
-    public function enterCity(): void
+    public function enterCity($index): void
     {
         $obj = $this->cityCollection[$this->highlightCity] ?? null;
 
@@ -92,26 +138,32 @@ class Upsert extends Component
         $this->highlightCity = 0;
 
         $this->city_name = $obj['vname'] ?? '';;
-        $this->city_id = $obj['id'] ?? '';;
+        $this->city_id = $obj['id'] ?? '';
+        Arr::set($this->itemList[$index],'city_name',$obj['vname'] );
+        Arr::set($this->itemList[$index],'city_id',$obj['id']);
+
     }
 
     #[On('refresh-city')]
-    public function refreshCity($v): void
+    public function refreshCity($v,$index): void
     {
         $this->city_id = $v['id'];
         $this->city_name = $v['name'];
+        Arr::set($this->itemList[$index],'city_name',$v['name']);
+        Arr::set($this->itemList[$index],'city_id',$v['id']);
+
         $this->cityTyped = false;
 
     }
 
-    public function citySave($name)
+    public function citySave($name,$index)
     {
         $obj= City::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
         $v=['name'=>$name,'id'=>$obj->id];
-        $this->refreshCity($v);
+        $this->refreshCity($v,$index);
     }
 
     public function getCityList(): void
@@ -145,14 +197,16 @@ class Upsert extends Component
         $this->highlightState++;
     }
 
-    public function setState($name, $id): void
+    public function setState($name, $id,$index): void
     {
         $this->state_name = $name;
         $this->state_id = $id;
+        Arr::set($this->itemList[$index],'state_name',$name);
+        Arr::set($this->itemList[$index],'state_id',$id);
         $this->getStateList();
     }
 
-    public function enterState(): void
+    public function enterState($index): void
     {
         $obj = $this->stateCollection[$this->highlightState] ?? null;
 
@@ -162,15 +216,18 @@ class Upsert extends Component
 
         $this->state_name = $obj['vname'] ?? '';;
         $this->state_id = $obj['id'] ?? '';;
+        Arr::set($this->itemList[$index],'state_name',$obj['vname']);
+        Arr::set($this->itemList[$index],'state_id',$obj['id']);
     }
 
     #[On('refresh-state')]
-    public function refreshState($v): void
+    public function refreshState($v,$index): void
     {
         $this->state_id = $v['id'];
         $this->state_name = $v['name'];
+        Arr::set($this->itemList[$index],'state_name',$v['name']);
+        Arr::set($this->itemList[$index],'state_id',$v['id']);
         $this->stateTyped = false;
-
     }
 
     public function getStateList(): void
@@ -206,7 +263,7 @@ class Upsert extends Component
         $this->highlightPincode++;
     }
 
-    public function enterPincode(): void
+    public function enterPincode($index): void
     {
         $obj = $this->pincodeCollection[$this->highlightPincode] ?? null;
 
@@ -216,31 +273,37 @@ class Upsert extends Component
 
         $this->pincode_name = $obj['vname'] ?? '';;
         $this->pincode_id = $obj['id'] ?? '';;
+        Arr::set($this->itemList[$index],'pincode_name',$obj['vname']);
+        Arr::set($this->itemList[$index],'pincode_id',$obj['id']);
     }
 
-    public function setPincode($name, $id): void
+    public function setPincode($name, $id,$index): void
     {
         $this->pincode_name = $name;
         $this->pincode_id = $id;
+        Arr::set($this->itemList[$index],'pincode_name',$name);
+        Arr::set($this->itemList[$index],'pincode_id',$id);
         $this->getPincodeList();
     }
 
     #[On('refresh-pincode')]
-    public function refreshPincode($v): void
+    public function refreshPincode($v,$index): void
     {
         $this->pincode_id = $v['id'];
         $this->pincode_name = $v['name'];
+        Arr::set($this->itemList[$index],'pincode_name',$v['name']);
+        Arr::set($this->itemList[$index],'pincode_id',$v['id']);
         $this->pincodeTyped = false;
     }
 
-    public function pincodeSave($name)
+    public function pincodeSave($name,$index)
     {
         $obj= Pincode::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
         $v=['name'=>$name,'id'=>$obj->id];
-        $this->refreshPincode($v);
+        $this->refreshPincode($v,$index);
     }
 
     public function getPincodeList(): void
@@ -277,7 +340,7 @@ class Upsert extends Component
         $this->highlightCountry++;
     }
 
-    public function enterCountry(): void
+    public function enterCountry($index): void
     {
         $obj = $this->countryCollection[$this->highlightCountry] ?? null;
 
@@ -287,31 +350,37 @@ class Upsert extends Component
 
         $this->country_name = $obj['vname'] ?? '';;
         $this->country_id = $obj['id'] ?? '';;
+        Arr::set($this->itemList[$index],'country_name',$obj['vname'] );
+        Arr::set($this->itemList[$index],'country_id',$obj['id']);
     }
 
-    public function setCountry($name, $id): void
+    public function setCountry($name, $id,$index): void
     {
         $this->country_name = $name;
         $this->country_id = $id;
+        Arr::set($this->itemList[$index],'country_name',$name);
+        Arr::set($this->itemList[$index],'country_id',$id);
         $this->getcountryList();
     }
 
     #[On('refresh-country')]
-    public function refreshCountry($v): void
+    public function refreshCountry($v,$index): void
     {
         $this->country_id = $v['id'];
         $this->country_name = $v['name'];
+        Arr::set($this->itemList[$index],'country_name',$v['name']);
+        Arr::set($this->itemList[$index],'country_id',$v['id']);
         $this->countryTyped = false;
     }
 
-    public function countrySave($name)
+    public function countrySave($name,$index)
     {
         $obj= country::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
         $v=['name'=>$name,'id'=>$obj->id];
-        $this->refreshCountry($v);
+        $this->refreshCountry($v,$index);
     }
 
     public function getCountryList(): void
@@ -478,42 +547,75 @@ class Upsert extends Component
                         'email' => $data->email,
                     ];
                 });
+            for ($j=0; $j < $data->skip(1)->count(); $j++) {
+                array_push($this->secondaryAddress,$data->skip(1)->count());
+            }
             $this->itemList = $data;
         } else {
             $this->effective_from = Carbon::now()->format('Y-m-d');
             $this->active_id = true;
-            $this->contact_type = '';
-            $this->state_id = '2';
-            $this->state_name = 'Tamilnadu';
-            $this->city_id = 2;
-            $this->city_name = 'Tiruppur';
-            $this->country_id = 2;
-            $this->country_name = "India";
+//            $this->itemList[0]=[
+//                "state_name"=>"Tamilnadu",
+//                "state_id"=>"2",
+//                "city_id"=>"2",
+//                "city_name"=>"Tiruppur",
+//                "country_id"=>"2",
+//                "country_name"=>"India",
+//                "pincode_id"=>"2",
+//                "pincode_name"=>"641601",
+//                "address_1"=>"",
+//                "address_2"=>"",
+//                "gstin"=>"",
+//                "email"=>"",
+//            ];
+            $this->itemList[0]=[
+                "contact_detail_id"=>0,
+                'address_type' => $this->address_type?:"Secondary",
+                "state_name"=>"",
+                "state_id"=>"",
+                "city_id"=>"",
+                "city_name"=>"",
+                "country_id"=>"",
+                "country_name"=>"",
+                "pincode_id"=>"",
+                "pincode_name"=>"",
+                "address_1"=>"",
+                "address_2"=>"",
+                "gstin"=>"",
+                "email"=>"",
+            ];
+//            $this->contact_type = '';
+//            $this->state_id = '2';
+//            $this->state_name = 'Tamilnadu';
+//            $this->city_id = 2;
+//            $this->city_name = 'Tiruppur';
+//            $this->country_id = 2;
+//            $this->country_name = "India";
             $this->address_type = "Primary";
         }
     }
 #endregion
 
     #region[Add Item]
-    public function addItems(): void
+    public function addItems($id): void
     {
 
         if ($this->itemIndex == "") {
-            if (!(empty($this->city_name)) &&
-                !(empty($this->address_type)) &&
-                !(empty($this->state_name)) &&
+            if (!(empty($this->address_1)) &&
+                !(empty($this->address_2)) &&
                 !(empty($this->gstin))
             ) {
-                $this->itemList[] = [
+
+                $this->itemList[$id] = [
                     'contact_detail_id' => $this->contact_detail_id ?: 0,
-                    'address_type' => $this->address_type,
-                    'city_name' => $this->city_name,
-                    'city_id' => $this->city_id,
-                    'state_name' => $this->state_name,
-                    'state_id' => $this->state_id,
-                    'pincode_name' => $this->pincode_name,
+                    'address_type' => $this->address_type?:"Secondary",
+                    'city_name' => $this->city_name?:"-",
+                    'city_id' => $this->city_id?:1,
+                    'state_name' => $this->state_name?:"-",
+                    'state_id' => $this->state_id?:1,
+                    'pincode_name' => $this->pincode_name?:"-",
                     'pincode_id' => $this->pincode_id ?: '1',
-                    'country_name' => $this->country_name,
+                    'country_name' => $this->country_name?:"-",
                     'country_id' => $this->country_id ?: '1',
                     'address_1' => $this->address_1,
                     'address_2' => $this->address_2,
@@ -542,7 +644,7 @@ class Upsert extends Component
 
         }
 
-        $this->resetsItems();
+//        $this->resetsItems();
         $this->render();
     }
 

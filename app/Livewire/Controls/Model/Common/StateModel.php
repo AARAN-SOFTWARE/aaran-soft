@@ -26,7 +26,7 @@ class StateModel extends Component
                 'state_code'=>$this->state_code,
                 'active_id' => '1'
             ]);
-            $this->dispatch('refresh-state', ['name' => $this->vname,'state_code'=>$this->state_code, 'id' => $obj->id]);
+            $this->dispatch('refresh-state', ['name' => $this->vname,'state_code'=>$this->state_code, 'id' => $obj->id,'index'=>0]);
             $this->clearAll();
         }
     }
