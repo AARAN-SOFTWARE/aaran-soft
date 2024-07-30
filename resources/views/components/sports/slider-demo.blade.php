@@ -84,14 +84,14 @@
                 <li x-bind="disableNextAndPreviousButtons"
                     class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
                     role="option">
-                    <div class="w-full h-[22rem] my-4 grid grid-cols-4">
+                    <div class="w-full md:h-[22rem]  my-4 md:grid md:grid-cols-4 grid grid-cols-2 gap-3 h-auto px-2">
                         <x-sports.card.card-1 :clubImage="$clubImage->take(4)"/>
                     </div>
                 </li>
                 <li x-bind="disableNextAndPreviousButtons"
                     class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
                     role="option">
-                    <div class="w-full h-[22rem] my-4 grid grid-cols-4">
+                    <div class="w-full md:h-[22rem] my-4 md:grid md:grid-cols-4 grid grid-cols-2 gap-6 h-auto px-2">
                         <x-sports.card.card-1 :clubImage="$clubImage->skip(4)"/>
                     </div>
                 </li>
@@ -104,7 +104,7 @@
         <div class="absolute z-10 flex justify-between w-full h-full  ">
 
             <!-- Prev Button -------------------------------------------------------------------------------------->
-            <button x-on:click="prev" class="text-2xl absolute right-[50px] -top-[36px]" :aria-disabled="atBeginning" :tabindex="atEnd ? -1 : 0">
+            <button x-on:click="prev" class="text-2xl absolute md:right-[50px] right-[46px] -top-[36px]" :aria-disabled="atBeginning" :tabindex="atEnd ? -1 : 0">
 
                 <span aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-auto h-5 text-white lg:h-8 hover:text-gray-400"
@@ -118,7 +118,7 @@
 
             <!-- Next Button -------------------------------------------------------------------------------------->
 
-            <button x-on:click="prev" class="text-2xl absolute right-[20px] -top-[36px]" :aria-disabled="atEnd" :tabindex="atEnd ? -1 : 0">
+            <button x-on:click="prev" class="text-2xl absolute md:right-[20px] right-[16px] -top-[36px]" :aria-disabled="atEnd" :tabindex="atEnd ? -1 : 0">
                 <span aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-auto h-5 text-white lg:h-8 hover:text-gray-400"
                          fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">

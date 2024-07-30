@@ -99,7 +99,7 @@
                                     <div
                                         class="text-md text-center"><a href="/news">{{\Illuminate\Support\Str::words($row->vname, 6)}}</a></div>
                                     <div
-                                        class="text-sm text-gray-200 text-justify"><a href="/news">{!! \Illuminate\Support\Str::words( $row->description ,16) !!}</a></div>
+                                        class="md:text-sm text-xs text-gray-200 text-justify"><a href="/news">{!! \Illuminate\Support\Str::words( $row->description ,15) !!}</a></div>
                                 </div>
                             </div>
                     </li>
@@ -110,7 +110,7 @@
 
         <!-- Indicators ------------------------------------------------------------------------------------------->
 
-        <div class="absolute bottom-4 right-[300px]">
+        <div class="absolute bottom-4 md:right-[300px] right-[150px]">
             <div class="flex justify-center space-x-2">
                 <template x-for="(slide, index) in Array.from($refs.slider.children)" :key="index">
                     <button @click="goToSlide(index)"

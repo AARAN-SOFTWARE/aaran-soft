@@ -92,7 +92,7 @@
                                 class="w-full h-44 flex-col flex justify-center items-center text-white p-5 rounded-r-lg">
                                 <div class="font-bold font-gab text-xl tracking-wider bg-gradient-to-r from-white via-yellow-500 to-cyan-500 inline-block text-transparent bg-clip-text">Moments</div>
                                 <div class="text-md text-center"><a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">{{\Illuminate\Support\Str::words($row->vname, 6)}}</a></div>
-                                <div class="text-sm text-justify text-gray-200 "><a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">{!! \Illuminate\Support\Str::words( $row->description ,16) !!}</a></div>
+                                <div class="md:text-sm text-xs text-justify text-gray-200 "><a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">{!! \Illuminate\Support\Str::words( $row->description ,15) !!}</a></div>
                             </div>
                         </div>
                     </li>
@@ -103,7 +103,7 @@
 
         <!-- Indicators ------------------------------------------------------------------------------------------->
 
-        <div class="absolute bottom-4 right-[300px]">
+        <div class="absolute bottom-4 md:right-[300px] right-[150px]">
             <div class="flex justify-center space-x-2">
                 <template x-for="(slide, index) in Array.from($refs.slider.children)" :key="index">
                     <button @click="goToSlide(index)"
