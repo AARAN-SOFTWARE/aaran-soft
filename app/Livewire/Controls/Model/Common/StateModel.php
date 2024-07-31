@@ -12,10 +12,12 @@ class StateModel extends Component
 
     public $vname ='';
     public $state_code='';
+    public $index='';
 
-    public function mount($name): void
+    public function mount($name,$index=null): void
     {
         $this->vname = $name;
+        $this->index=$index;
     }
 
     public function save(): void
@@ -26,7 +28,7 @@ class StateModel extends Component
                 'state_code'=>$this->state_code,
                 'active_id' => '1'
             ]);
-            $this->dispatch('refresh-state', ['name' => $this->vname,'state_code'=>$this->state_code, 'id' => $obj->id,'index'=>0]);
+            $this->dispatch('refresh-state', ['name' => $this->vname,'index'=>$this->index,'state_code'=>$this->state_code, 'id' => $obj->id,]);
             $this->clearAll();
         }
     }
