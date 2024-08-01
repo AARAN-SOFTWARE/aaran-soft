@@ -2,7 +2,7 @@
 'list',
 ])
 
-<div class="grid grid-cols-3 mt-4 justify-items-center gap-6 font-roboto ">
+<div class="grid md:grid-cols-3 grid-cols-1 mt-4 justify-items-center gap-6 font-roboto ">
     @foreach($list as $row)
         <div class="w-full bg-white rounded-3xl px-2 py-4 hover:bg-white-50 hover:shadow-md hover:shadow-gray-400 cursor-pointer ">
             <div class="w-[95%] mx-auto rounded-3xl flex justify-between">

@@ -5,18 +5,18 @@
     "news"=>null,
     "moments"=>null
 ])
-<div class="bg-[#10172B] h-[42rem] flex-col flex gap-y-6">
+<div class="bg-[#10172B] md:h-[42rem] h-auto flex-col flex gap-y-6">
     <div class="w-9/12 mx-auto text-white font-Don text-2xl tracking-wider mt-4">Latest</div>
-    <div class="w-9/12 grid grid-cols-3  mx-auto gap-6">
+    <div class="w-9/12 grid md:grid-cols-3 grid-cols-1 mx-auto gap-6">
         <x-sports.slider.slider-1 :list="$upComingEvents"/>
         <x-sports.slider.slider-2 :list="$blogs"/>
         <x-sports.slider.slider-3 :list="$events"/>
     </div>
-    <div class="w-9/12 grid grid-cols-2 gap-6 mx-auto">
+    <div class="w-9/12 grid md:grid-cols-2 grid-cols-1 gap-6 mx-auto">
         <x-sports.slider.slider-4 :list="$news"/>
         <x-sports.slider.slider-5 :list="$moments"/>
     </div>
-    <div class="w-9/12 grid grid-cols-3 mx-auto gap-6">
+    <div class="w-9/12 grid md:grid-cols-3 grid-cols-1 mx-auto gap-6">
         <a href="/gallery">
             <div
                 class=" h-44 bg-[#19398A] rounded-lg flex-col flex justify-center items-center text-white font-roboto text-xl">

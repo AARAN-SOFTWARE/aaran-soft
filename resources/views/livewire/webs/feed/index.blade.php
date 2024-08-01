@@ -3,7 +3,7 @@
         <x-slot name="header">Blog ✨</x-slot>
     @endif
     <div class="flex rounded-xl">
-        <div class="w-1/5  h-screen outline-2 outline-gray-400 rounded-l-lg">
+        <div class="md:w-1/5 h-screen outline-2 outline-gray-400 rounded-l-lg">
             <div class="relative h-screen bg-gray-50 rounded-xl overflow-y-auto"
                  x-data="{ isOpenCategory: false, isOpenTag:false}">
                 <!-- Category List -->
@@ -14,7 +14,7 @@
                 </div>
                 <!-- tag list -->
                 @if($tagFilter!='')
-                    <div class="w-full mx-auto grid grid-cols-3 gap-2 pl-5 mt-5">
+                    <div class="w-full mx-auto grid md:grid-cols-3 grid-cols-1 gap-2 pl-5 mt-5">
                         @foreach($tagFilter as $index=> $row)
                             <div class="w-20 flex bg-gray-100 p-1.5 rounded-lg text-xs font-roboto justify-between">
                                 <div>{{\Aaran\Web\Models\Feed::tagName($row)}}</div>
@@ -121,16 +121,15 @@
             <div class="p-10 bg-gray-50 w-[98%] h-[98%] mx-auto rounded-xl overflow-y-auto">
                 <!-- Top Panel -->
                 @if(auth()->id())
-                    <div class="flex justify-between">
+                    <div class="md:flex md:justify-between grid gap-y-6">
                         <div>
                             <x-dashboard.welfare.search/>
                         </div>
-                        <div class="w-44 flex justify-between items-center relative">
+                        <div class="md:w-44 flex justify-between  items-center  relative">
                             <x-dashboard.welfare.notification/>
-
                             <div
-                                class="absolute bottom-6 left-3 text-[10px] bg-red-500 text-white w-4 h-4 rounded-full text-center font-semibold">{{$list->count()}}</div>
-
+                                class="absolute bottom-6 left-3 text-[10px] bg-red-500 text-white w-4 h-4 rounded-full text-center
+                                font-semibold">{{$list->count()}}</div>
                             <div>
                                 <x-dashboard.welfare.create-new-red/>
                             </div>
@@ -142,7 +141,8 @@
                     {{--                    <x-dashboard.welfare.stories :users="$users" />--}}
                 </div>
                 <!-- Feed -->
-                <div class="mx-auto text-xl mt-10 font-roboto uppercase font-semibold">{{ \Aaran\Web\Models\Feed::tagName($tag_id) ?: 'Feeds'}}</div>
+                <div
+                    class="mx-auto text-xl mt-10 font-roboto uppercase font-semibold">{{ \Aaran\Web\Models\Feed::tagName($tag_id) ?: 'Feeds'}}</div>
                 <x-dashboard.welfare.feed-index :list="$list"/>
             </div>
         </div>

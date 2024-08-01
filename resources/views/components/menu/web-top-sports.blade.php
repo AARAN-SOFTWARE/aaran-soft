@@ -117,19 +117,23 @@
                 </li>
                 <li>
                     <a class="hover:underline font-serif block px-4 py-2 text-white "
-                       href="{{route('service')}}">services</a>
+                       href="{{route('gallery')}}">Gallery</a>
                 </li>
                 <li>
                     <a class="hover:underline font-serif block px-4 py-2 text-white "
-                       href="{{route('about')}}">About Us</a>
+                       href="{{route('news')}}">News</a>
                 </li>
                 <li>
                     <a class="hover:underline font-serif block px-4 py-2 text-white "
-                       href="{{route('contact')}}">Contact</a>
+                       href="{{route('feed')}}">Blog</a>
                 </li>
                 <li>
                     <a class="hover:underline font-serif block px-4 py-2 text-white "
-                       href="{{route('posts')}}">Blog</a>
+                       href="{{route('sportContact')}}">Contact</a>
+                </li>
+                <li>
+                    <a class="hover:underline font-serif block px-4 py-2 text-white "
+                       href="{{route('sportAbout')}}">About Us</a>
                 </li>
 
 
