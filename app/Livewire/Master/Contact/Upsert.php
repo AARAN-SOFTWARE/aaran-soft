@@ -237,12 +237,12 @@ class Upsert extends Component
     }
 
     #[On('refresh-state')]
-    public function refreshState($v,$index=null): void
+    public function refreshState($v): void
     {
         $this->state_id = $v['id'];
         $this->state_name = $v['name'];
-        Arr::set($this->itemList[$index],'state_name',$v['name']);
-        Arr::set($this->itemList[$index],'state_id',$v['id']);
+        Arr::set($this->itemList[$v['index']],'state_name',$v['name']);
+        Arr::set($this->itemList[$v['index']],'state_id',$v['id']);
         $this->stateTyped = false;
     }
 
