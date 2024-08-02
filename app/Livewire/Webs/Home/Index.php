@@ -19,7 +19,8 @@ class Index extends Component
 
             config('software.AUDIT') => 'livewire.webs.home.sundar.aaran-associates',
 
-            config('software.SPORTS_CLUB') => 'livewire.webs.home.welfare.index',
+//            config('software.SPORTS_CLUB') => 'livewire.webs.home.welfare.index',
+            config('software.SPORTS_CLUB') => 'livewire.sports.home.index',
             config('software.WELFARE') => 'livewire.webs.home.welfare.index',
 
             config('software.GARMENT') => 'livewire.webs.home.index',

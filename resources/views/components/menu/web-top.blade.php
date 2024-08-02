@@ -21,7 +21,7 @@
 {{--            <ul class="gap-2 mx-auto lg:ml-60  lg:h-7 grid grid-rows-5 lg:flex-col lg:grid-cols-5 flex-row">--}}
 {{--                <li>--}}
 {{--                    <a class="hover:underline font-serif text-2xl p-2 grid-rows-1 lg:p-3 lg:grid-cols-1"--}}
-{{--                       href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>--}}
+{{--                       href="{{route('home')}}">home <span class="sr-only">(current)</span></a>--}}
 {{--                </li>--}}
 {{--                <li>--}}
 {{--                    <a class="hover:underline text-2xl p-2 grid-rows-2 font-serif lg:p-3 lg:grid-cols-2"--}}

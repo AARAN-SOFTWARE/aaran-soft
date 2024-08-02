@@ -1,0 +1,4 @@
+@props([
+    'slides'=>null
+])
+
