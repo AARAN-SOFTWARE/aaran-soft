@@ -107,7 +107,7 @@
 
         <!-- Indicators ------------------------------------------------------------------------------------------->
 
-        <div class="absolute bottom-4 md:right-[180px] right-[150px]">
+        <div class="absolute bottom-4 right-[180px]">
             <div class="flex justify-center space-x-2">
                 <template x-for="(slide, index) in Array.from($refs.slider.children)" :key="index">
                     <button @click="goToSlide(index)"
