@@ -1,7 +1,7 @@
 @props([
     "image"=>null,
 ])
-<div class="w-9/12 h-auto mx-auto flex-col flex justify-center my-6">
+<div class="w-11/12 h-auto mx-auto flex-col flex justify-center my-6">
     <div class="font-gab text-3xl font-semibold mb-3">Achievements</div>
     <div class="grid md:grid-cols-3 md:gap-y-9 grid-cols-1 gap-y-3">
         @foreach($image as $row)

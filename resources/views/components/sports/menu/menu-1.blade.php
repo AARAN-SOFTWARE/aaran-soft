@@ -1,5 +1,5 @@
 <div class=" h-48 bg-gray-50 flex items-center">
-    <div class="w-8/12 h-7/8 py-5 flex-col mx-auto justify-between">
+    <div class="w-11/12 h-7/8 py-5 flex-col mx-auto justify-between">
         <div class="text-center font-gab md:text-3xl text-xl">What are You Looking For?</div>
         <div class="md:grid md:grid-cols-4 md:gap-24 mt-5 grid grid-cols-2 gap-6 font-roboto">
             <a href="{{route('feed',['category_id'=>1,'tag_id'=>7])}}">
