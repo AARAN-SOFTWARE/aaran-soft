@@ -378,7 +378,8 @@ class Index extends Component
                 "list" => $this->getList()
             ]);
         }else{
-            return view('livewire.webs.feed.index')->layout('layouts.web')->with([
+//            return view('livewire.webs.feed.index')->layout('layouts.web')->with([
+            return view('components.sports.latestblog.latestblog')->layout('layouts.web')->with([
                 "list" => $this->getList()
             ]);
         }
