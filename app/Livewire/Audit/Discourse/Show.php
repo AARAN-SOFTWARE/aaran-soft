@@ -129,7 +129,7 @@ class Show extends Component
     }
     public function render()
     {
-        return view('livewire.audit.discourse.show');
+        return view('livewire.audit.discourse.show1');
     }
     #endregion
 
