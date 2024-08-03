@@ -27,10 +27,30 @@
                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
             @break
 
-        @case('chevrons-left')
+        @case('chevrons-left-double')
             <polyline points="11 17 6 12 11 7"></polyline>
             <polyline points="18 17 13 12 18 7"></polyline>
             @break
+
+        @case('chevrons-left')
+            <path stroke-linecap="round" stroke-width="2" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+            @break
+
+
+        @case('chevrons-right')
+            <path stroke-linecap="round" stroke-width="2" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            @break
+
+        @case('chevrons-down')
+            <path stroke-linecap="round" stroke-width="2" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+            @break
+
+        @case('chevrons-up')
+            <path stroke-linecap="round" stroke-width="2" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+            @break
+
+
+
 
         @case('printer')
             <polyline points="6 9 6 2 18 2 18 9"></polyline>

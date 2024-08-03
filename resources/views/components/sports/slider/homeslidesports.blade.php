@@ -27,14 +27,19 @@
 <div class="bg-gray-100 flex items-center justify-center h-screen">
     <div x-data="slider()" x-init="init()" class="relative w-full ">
         <div class="overflow-hidden relative">
+
             <div class="flex transition-transform duration-700 ease-in-out"
                  :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+
                 <template x-for="(image, index) in images" :key="index">
                     <div class="w-full flex-shrink-0">
                         <img :src="image" class="w-full h-screen object-cover opacity-65">
                     </div>
                 </template>
             </div>
+
+
+
 
             @foreach($title as $index =>$row)
                 <div :key="index"
