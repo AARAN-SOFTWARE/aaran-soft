@@ -58,6 +58,7 @@
                             <div class="flex-shrink-0 h-12 w-12 rounded-xl mx-auto mt-2">
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->bg_image)}}"
                                      alt="{{$row->bg_image}}"/>
+                                {{\Illuminate\Support\Facades\Storage::url('/images/'.$row->bg_image)}}
                             </div>
                         </x-table.cell-text>
 
