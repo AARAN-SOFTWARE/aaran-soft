@@ -11,7 +11,9 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
-    plugins: [forms, typography],
+    plugins: [forms, typography,
+        require("tailwindcss-animate"),
+    ],
 
     theme: {
         extend: {

@@ -60,13 +60,18 @@
 
                             <div style="background-image: url('/../../../storage/images/{{$row->bg_image}}');"
                                  class="w-full md:h-[35rem] h-[96] bg-fixed bg-no-repeat bg-center md:bg-cover bg-[#10172B]  flex-col flex justify-center items-center">
+
+
                                 <div
                                     class="md:w-4/12 w-8/12 h-10/12  mx-auto flex-col text-white bg-black/25 rounded-lg p-5 my-5">
-                                    <div class="font-gab md:text-6xl text-3xl text-center  ">{{$row->vname}}</div>
+
+                                    <div class="font-gab md:text-6xl text-3xl text-center">{{$row->vname}}</div>
+
                                     <div
                                         class="font-roboto text-xl mt-3 text-justify tracking-wider">{!! $row->description !!}</div>
                                     <div class="text-xs mt-3 text-gray-300">{{$row->created_at}}</div>
                                 </div>
+
                             </div>
 
                         </li>
