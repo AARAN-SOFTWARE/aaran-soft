@@ -105,7 +105,7 @@ class Index extends Component
                 Storage::disk('public')->delete(Storage::path('public/images' . $this->old_bg_image));
             }
 
-            $image->StoreAs('public/images', $filname);
+            $image->StoreAs('images', $filname,'public');
 
             return $filname;
 
