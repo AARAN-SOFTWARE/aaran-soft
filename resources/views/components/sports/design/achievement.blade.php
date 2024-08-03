@@ -1,19 +1,22 @@
 @props([
     "image"=>null,
 ])
+
+<div class="h-16">&nbsp;</div>
 <div class="w-11/12 h-auto mx-auto flex-col flex justify-center my-6">
-    <div class="font-gab text-3xl font-semibold mb-3">Achievements</div>
-    <div class="grid md:grid-cols-3 md:gap-y-9 grid-cols-1 gap-y-3">
+    <div class="font-gab text-3xl font-semibold mb-6">Achievements</div>
+    <div class="grid md:grid-cols-3 gap-6  grid-cols-1 ">
         @foreach($image as $row)
-            <div style="background-image: url('/../../../storage/{{$row->image}}')"
-                 class="md:w-96 md:h-96 w-auto h-80 bg-no-repeat bg-cover bg-center rounded-xl flex-col flex justify-end">
-                <a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">
+            <a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}" class="hover:scale-105 hover:duration-300 ">
+                <div style="background-image: url('/../../../storage/{{$row->image}}')"
+                     class="md:h-96 w-auto h-80 bg-no-repeat bg-cover bg-center rounded-xl flex-col flex justify-end p-3">
+
                     <div class=" bg-gradient-to-t from-black to-gray-400/25 text-white flex-col p-5 rounded-b-lg">
                         <div class="font-bebas text-2xl tracking-wider">{{$row->vname}}</div>
                         <div class="font-roboto">{{ \Illuminate\Support\Str::words( $row->desc,15)}}</div>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
         @endforeach
     </div>
 </div>

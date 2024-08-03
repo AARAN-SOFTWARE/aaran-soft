@@ -5,9 +5,11 @@
     "news"=>null,
     "moments"=>null
 ])
+
+<div class="h-24">&nbsp;</div>
 <div class="bg-[#10172B] md:h-[42rem] h-auto flex-col flex gap-y-6">
-    <div class="w-11/12 mx-auto text-white font-Don text-2xl tracking-wider mt-4">Latest</div>
-    <div class="w-11/12 grid md:grid-cols-3 grid-cols-1 mx-auto gap-6">
+    <div class="w-11/12 mx-auto text-white font-Don text-2xl tracking-wider mt-16">Latest</div>
+    <div class="w-11/12 grid md:grid-cols-3 grid-cols-1 mx-auto gap-6 mt-4">
         <x-sports.slider.slider-1 :list="$upComingEvents"/>
         <x-sports.slider.slider-2 :list="$blogs"/>
         <x-sports.slider.slider-3 :list="$events"/>
@@ -39,3 +41,4 @@
         </a>
     </div>
 </div>
+<div class="h-48 bg-[#10172B]">&nbsp;</div>

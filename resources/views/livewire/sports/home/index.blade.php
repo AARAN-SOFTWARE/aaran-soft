@@ -4,8 +4,10 @@
 
     <x-slider.home :list="$list"/>
 
-    <!-- Recent Activities -->
-    <x-sports.design.activities :list="$activities"/>
+    <!-- Latest News -->
+    <x-sports.design.latest-news :list="$activities"/>
+
+{{--    <x-sports.design.activities :list="$activities"/>--}}
     <!-- Menu -1 (optional) -->
     <x-sports.menu.menu-1 />
     <!-- Gallery -->

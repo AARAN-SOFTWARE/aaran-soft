@@ -1,21 +1,46 @@
-<div class="text-[#E8E8E8] bg-[#081E40] text-sm flex-col flex items-center ">
-    <div class="h-full my-5 inline-flex gap-2">
-        <span class="items-center">
-            <?xml version="1.0" encoding="iso-8859-1"?>
-            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-            <svg fill="#E8E8E8" height="15px" width="15px"  version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 367.467 367.467" xml:space="preserve" class="mt-1">
-            <g>
-	<path d="M183.73,0.018C82.427,0.018,0,82.404,0,183.733c0,101.289,82.427,183.716,183.73,183.716
-		c101.315,0,183.737-82.427,183.737-183.716C367.467,82.404,285.045,0.018,183.73,0.018z M183.73,326.518
-		c-78.743,0-142.798-64.052-142.798-142.784c0-78.766,64.055-142.817,142.798-142.817c78.752,0,142.807,64.052,142.807,142.817
-		C326.536,262.466,262.481,326.518,183.73,326.518z"/>
-	<path d="M244.036,217.014c-11.737,20.141-33.562,32.635-56.956,32.635c-36.329,0-65.921-29.585-65.921-65.915
-		c0-36.36,29.592-65.955,65.921-65.955c23.395,0,45.219,12.54,56.956,32.641l1.517,2.627h44.28l-2.658-7.129
-		c-7.705-20.413-21.225-37.769-39.122-50.157c-17.942-12.42-39.017-19.009-60.973-19.009c-58.981,0-106.946,48.006-106.946,106.982
-		c0,58.98,47.965,106.941,106.946,106.941c21.956,0,43.03-6.567,60.973-19.006c17.897-12.391,31.417-29.741,39.122-50.154
-		l2.658-7.133h-44.28L244.036,217.014z"/>
-</g>
-            </svg>
+<div class="bg-[#081E40]">
+    <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+        <span class="text-gray-50 text-sm text-center sm:text-left">
+            <a class="text-gray-50 hover:text-amber-600 cursor-pointer">Aaran info Tech</a>
+            © 2020 - 2024 — All Rights Reserved.
         </span>
-        <span>copyright@aaraninfotech</span></div>
+
+        <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
+        <a class="text-gray-50 hover:text-amber-600 cursor-pointer">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+               viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-50 hover:text-amber-600 cursor-pointer">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+               viewBox="0 0 24 24">
+            <path
+                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-50 hover:text-amber-600 cursor-pointer">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+               class="w-5 h-5" viewBox="0 0 24 24">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-50 hover:text-amber-600 cursor-pointer">
+          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0"
+               class="w-5 h-5" viewBox="0 0 24 24">
+            <path stroke="none"
+                  d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+          </svg>
+        </a>
+
+
+      </span>
+
+    </div>
+    <div class="fixed bottom-3.5 right-2 px-5">
+        <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-gray-50 hover:text-amber-600 cursor-pointer" target="_blank">Powered
+            by Sundar</a>
+    </div>
 </div>

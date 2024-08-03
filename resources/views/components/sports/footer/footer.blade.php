@@ -1,34 +1,31 @@
 <div class=" flex-col flex justify-center md:h-96 h-auto bg-[#10172B]">
-    <div class="md:flex md:mx-auto md:w-9/12 md:justify-between hidden">
+    <div class="md:flex md:mx-auto md:w-11/12 md:justify-between hidden">
 
         <div class="flex flex-col mt-10 w-4/12">
             <!-- address, socialmedia-->
-            <div class="text-white text-xl">AARAN
+            <div class="text-white text-xl">AARAN WELFARE ASSOCIATION
             </div>
 
             <div class="mt-3">
                 <div class="text-sm font-roboto text-white leading-relaxed tracking-wider">
                     10-A Venkatappa Gounder Street,<br>
-                    Tiruppur,641654 <br>
-                    Tamilnadu <br>
+                    Postal Colony, P.N.road,<br>
+                    Tiruppur - 641602 <br>
+                    Tamilnadu, INDIA. <br>
+                    &nbsp;<br>
+                    info@sportsclub.com<br>
+                    +91 9655227738<br>
                 </div>
 
-                <div class="flex flex-row gap-4 mt-3">
-                    <x-icons.icon-fill :iconfill="'twitter1'" :colour="'#E6E6FA'"/>
-                    <x-icons.icon-fill :iconfill="'facebook-fill'" :colour="'#E6E6FA'"/>
-                    <x-icons.icon-fill :iconfill="'git-hub'" :colour="'#E6E6FA'"/>
-                    <x-icons.icon-fill :iconfill="'phone1'" :colour="'#E6E6FA'"/>
-                </div>
-
-                <div class="mt-4 w-3/5">
+                <div class="mt-4 w-[25rem]">
                     <div class="text-white">
                         NewsLetter
                     </div>
 
-                    <div class="bg-[#11141C] border border-white rounded-sm mt-3">
-                        <div class="p-1 rounded-sm">
-                            <input type="text" class="w-44 rounded-sm white  border-0 focus:ring-0 bg-white">
-                            <button class="text-white text-sm hover:text-cyan-200">Subscribe</button>
+                    <div class="bg-[#11141C] border border-white rounded-md mt-3">
+                        <div class="p-1 rounded-sm flex flex-row">
+                            <input type="text" class="w-full rounded-sm white  border-0 focus:ring-0 bg-white">
+                            <button class="text-white text-sm px-3 hover:text-cyan-200">Subscribe</button>
                         </div>
                     </div>
                 </div>
@@ -37,38 +34,52 @@
 
         </div>
 
-        <div class="flex flex-row my-4 w-8/12 justify-between">
+        <div class="flex flex-row my-4 w-8/12 justify-between font-nunito">
             <!-- link -->
             <div class="my-3">
-                <div class="text-white text-2xl font-nunito my-2">Team</div>
-                <div class="text-white text-sm tracking-widest my-4">Blue Team</div>
-                <div class="text-white text-sm tracking-widest my-4">Red Team</div>
-                <div class="text-white text-sm tracking-widest my-4">Green Team</div>
-                <div class="text-white text-sm tracking-widest my-4">Yellow Team</div>
+                <div class="text-white text-2xl my-2">Aaran</div>
+                <div class="text-white text-sm tracking-widest my-4">Mission</div>
+                <div class="text-white text-sm tracking-widest my-4">Organisation</div>
+                <div class="text-white text-sm tracking-widest my-4">President</div>
+                <div class="text-white text-sm tracking-widest my-4">Event Calendar</div>
+                <div class="text-white text-sm tracking-widest my-4">Careers</div>
+                <div class="text-white text-sm tracking-widest my-4">Publications</div>
+
+                <div class="text-white text-sm tracking-widest my-4">Finance</div>
             </div>
 
+
             <div class="my-3 ">
-                <div class="text-white text-2xl font-nunito my-2">About</div>
+                <div class="text-white text-2xl font-nunito my-2">Explore</div>
+                <div class="text-white text-sm tracking-widest my-4">Clubs</div>
+                <div class="text-white text-sm tracking-widest my-4">Masters</div>
+                <div class="text-white text-sm tracking-widest my-4">Students</div>
+                <div class="text-white text-sm tracking-widest my-4">Achievements</div>
+                <div class="text-white text-sm tracking-widest my-4">Gallery</div>
+                <div class="text-white text-sm tracking-widest my-4">News</div>
+                <div class="text-white text-sm tracking-widest my-4">Blogs</div>
+            </div>
+
+
+            <div class="my-3 ">
+                <div class="text-white text-2xl font-nunito my-2">Beyond the Games</div>
                 <div class="text-white text-sm tracking-widest my-4">About Us</div>
+                <div class="text-white text-sm tracking-widest my-4">History</div>
+                <div class="text-white text-sm tracking-widest my-4">Services</div>
+                <div class="text-white text-sm tracking-widest my-4">News & Media</div>
+                <div class="text-white text-sm tracking-widest my-4">Store</div>
+
+            </div>
+
+            <div class="my-3">
+                <div class="text-white text-2xl font-nunito my-2">Links</div>
+                <div class="text-white text-sm tracking-widest my-4">Contact Us</div>
+                <div class="text-white text-sm tracking-widest my-4">Sponsorship</div>
+                <div class="text-white text-sm tracking-widest my-4">Privacy Policy</div>
                 <div class="text-white text-sm tracking-widest my-4">Anti Corruption Policy</div>
                 <div class="text-white text-sm tracking-widest my-4">Anti Doping Policy</div>
                 <div class="text-white text-sm tracking-widest my-4">News Access Regulation</div>
                 <div class="text-white text-sm tracking-widest my-4">Image Use Terms</div>
-            </div>
-
-            <div class="my-3">
-                <div class="text-white text-2xl font-nunito my-2">Stories</div>
-                <div class="text-white text-sm tracking-widest my-4">Recent Blog</div>
-                <div class="text-white text-sm tracking-widest my-4">Club Story</div>
-                <div class="text-white text-sm tracking-widest my-4">Master Story</div>
-                <div class="text-white text-sm tracking-widest my-4">Student Story</div>
-            </div>
-
-            <div class="my-3">
-                <div class="text-white text-2xl font-nunito my-2">Contact</div>
-                <div class="text-white text-sm tracking-widest my-4">Contact Us</div>
-                <div class="text-white text-sm tracking-widest my-4">Sponsorship</div>
-                <div class="text-white text-sm tracking-widest my-4">Privacy Policy</div>
             </div>
         </div>
     </div>

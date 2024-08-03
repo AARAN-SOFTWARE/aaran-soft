@@ -85,7 +85,7 @@
                             <div class="flex">
                                 <div class="h-44">
                                     <a href="/news">
-                                    <img class="h-full rounded-l-lg"
+                                    <img class="h-full rounded-l-lg p-1.5"
                                          src="{{URL( \Illuminate\Support\Facades\Storage::url($row->image) )}}"
                                          alt="img"/>
                                     </a>
