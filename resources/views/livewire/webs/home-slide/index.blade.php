@@ -57,14 +57,14 @@
                         <x-table.cell-text center>
                             <div class="flex-shrink-0 h-12 w-12 rounded-xl mx-auto mt-2">
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->bg_image)}}"
-                                     alt="bg_image"/>
+                                     alt="{{$row->bg_image}}"/>
                             </div>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
                             <div class="flex-shrink-0 h-12 w-12 rounded-xl mx-auto mt-2">
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url('/images/'.$row->cont_image)}}"
-                                     alt="cont_image"/>
+                                     alt="{{$row->cont_image}}"/>
                             </div>
                         </x-table.cell-text>
 
