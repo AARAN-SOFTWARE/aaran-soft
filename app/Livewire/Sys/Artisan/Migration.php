@@ -112,6 +112,10 @@ class Migration extends Component
         Artisan::call('storage:link');
     }
 
+    public function storageUnLink(): void
+    {
+        Artisan::call('storage:unlink');
+    }
 
     public function dropTestingTable(): void
     {
