@@ -12,8 +12,8 @@
 
                     </div>
                     <span
-                            class="self-center text-3xl text-white font-semibold whitespace-nowrap px-2 font-gab tracking-wider">
-                        {{ \App\Helper\ConvertTo::toUpper(config('aadmin.brand'))}}
+                            class="self-center text-3xl font-semibold whitespace-nowrap px-2 font-gab tracking-wider">
+                        {{ \App\Helper\ConvertTo::toUpper(config('app.name'))}}
                     </span>
                 </a>
             </div>

@@ -5,6 +5,8 @@
             <x-webs.home.hero/>
 
 
+
+
 {{--            <div class="pt-4 pb-14 text-center font-sans animate__animated wow animate__bounce">--}}
 {{--                <div--}}
 {{--                    class="container px-4 sm:px-8 xl:px-4 justify-items-center mx-auto  animate__animated animate__backInUp">--}}
