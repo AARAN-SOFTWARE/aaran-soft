@@ -57,7 +57,9 @@
                         <x-table.cell-text center>
                             <div class="flex-shrink-0 h-12 w-12 rounded-xl mx-auto mt-2">
 
-                                <img src="{{ asset('images/'.$row->bg_image)}}" alt=""/>
+{{--                                <img src="{{ asset('images/'.$row->bg_image)}}" alt=""/>--}}
+                                <img  src="{{ \Illuminate\Support\Facades\Storage::url($row->bg_image) }}" alt=""/>
+
 {{--                                <img src="{{ \Illuminate\Support\Facades\Storage::url('public/images/'.$row->bg_image)}}" alt=""/>--}}
 {{--                                {{\Illuminate\Support\Facades\Storage::url('public/images/'.$row->bg_image)}}--}}
 
