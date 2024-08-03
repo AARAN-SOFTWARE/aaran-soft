@@ -16,7 +16,7 @@
 
                 <button wire:click.prevent="storageLink" class="px-2 py-1 bg-gray-400">Storage Link</button>
 
-                <button wire:click.prevent="storageUnLink" class="px-2 py-1 bg-gray-400">Storage Un Link</button>
+                <button wire:click.prevent="storageUnLink" class="px-2 py-1 bg-gray-400">Storage UnLink</button>
 
                 <button wire:click.prevent="runMigrationFreshSeed" class="px-2 py-1 bg-gray-400">Run Migration:fresh
                     --seed
