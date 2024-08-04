@@ -18,12 +18,12 @@
 
             <div>
                 <h3 class="font-bold text-7xl">
-                    <span data-purecounter-start="0" data-purecounter-end="6" data-purecounter-duration="2"
+                    <span data-purecounter-start="0" data-purecounter-end="22" data-purecounter-duration="3"
                         class="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 purecounter"></span>
                 </h3>
                 <p class="mt-4 text-xl font-medium text-gray-900 animate__animated wow animate__zoomIn"
                    data-wow-duration="3s">
-                    Senior Master
+                    Years of experience
                 </p>
 
                 <p class="text-base mt-0.5 text-gray-500 animate__animated wow animate__zoomIn"
@@ -34,24 +34,24 @@
 
             <div>
                 <h3 class="font-bold text-7xl">
-                    <span data-purecounter-start="1" data-purecounter-end="15" data-purecounter-duration="3"
+                    <span data-purecounter-start="1" data-purecounter-end="25" data-purecounter-duration="3"
                           class="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 purecounter"></span>
                 </h3>
                 <p class="mt-4 text-xl font-medium text-gray-900 animate__animated wow animate__zoomIn"
                    data-wow-duration="3s">
-                    Junior Masters
+                    Masters
                 </p>
 
                 <p class="text-base mt-0.5 text-gray-500 animate__animated wow animate__zoomIn"
                    data-wow-duration="3s">
-                    In last 6 years
+                    In last 15 years
                 </p>
 
             </div>
 
             <div>
                 <h3 class="font-bold text-7xl">
-                    <span data-purecounter-start="1" data-purecounter-end="75" data-purecounter-duration="3"
+                    <span data-purecounter-start="1" data-purecounter-end="375" data-purecounter-duration="3"
                           class="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 purecounter"></span>
                 </h3>
                 <p class="mt-4 text-xl font-medium text-gray-900 animate__animated wow animate__zoomIn"
@@ -61,7 +61,7 @@
 
                 <p class="text-base mt-0.5 text-gray-500 animate__animated wow animate__zoomIn"
                    data-wow-duration="3s">
-                    In last 6 years
+                    In last 15 years
                 </p>
             </div>
 
@@ -72,12 +72,12 @@
                 </h3>
                 <p class="mt-4 text-xl font-medium text-gray-900 animate__animated wow animate__zoomIn"
                    data-wow-duration="3s">
-                    Class
+                    Champions
                 </p>
 
                 <p class="text-base mt-0.5 text-gray-500 animate__animated wow animate__zoomIn"
                    data-wow-duration="3s">
-                    In last 6 years
+                    In last 15 years
                 </p>
             </div>
 
@@ -93,7 +93,7 @@
 
                 <p class="text-base mt-0.5 text-gray-500 animate__animated wow animate__zoomIn"
                    data-wow-duration="3s">
-                    In last 6 years
+                    In last 15 years
                 </p>
             </div>
 

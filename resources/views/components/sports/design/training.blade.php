@@ -58,7 +58,7 @@
 
                     <div class="mt-4 md:mx-4 md:mt-0">
                         <h1 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">
-                            Learning to Lift Like an Athlete
+                            One-on-one Training
                         </h1>
 
                         <p class="mt-3 text-gray-500 dark:text-gray-300">
@@ -111,11 +111,12 @@
 
                     <div class="mt-4 md:mx-4 md:mt-0">
                         <h1 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">
-                            Rise Above the Rest, Aim for the Best
+                            Group Sessions
                         </h1>
 
                         <p class="mt-3 text-gray-500 dark:text-gray-300">
                             Whatever the mind can conceive and believe, the mind can achieve.
+                            Immerse yourself in a professional environment and develop your skills.
                         </p>
                     </div>
                 </div>
@@ -172,12 +173,12 @@
 
                     <div class="mt-4 md:mx-4 md:mt-0">
                         <h1 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">
-                            Elevate Your Game to a New Dimension
+                            Online Coaching
                         </h1>
 
                         <p class="mt-3 text-gray-500 dark:text-gray-300">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab nulla quod dignissimos
-                            vel non corrupti doloribus voluptatum eveniet
+                            During the school year, we offer a variety of different types of structured classes.
+                            Classes run in consecutive 5-week sessions.
                         </p>
                     </div>
                 </div>
@@ -236,7 +237,7 @@
 
                     <div class="mt-4 md:mx-4 md:mt-0">
                         <h1 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">
-                            Master the Field, Define Your Destiny
+                            Specialty Programs
                         </h1>
 
                         <p class="mt-3 text-gray-500 dark:text-gray-300">
