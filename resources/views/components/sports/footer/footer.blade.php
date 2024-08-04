@@ -1,4 +1,4 @@
-<div class=" flex-col flex justify-center md:h-96 h-auto bg-[#10172B]">
+<div class=" flex-col flex justify-center md:h-96 h-auto bg-[#0d0d0d] pattern">
     <div class="md:flex md:mx-auto md:w-11/12 md:justify-between hidden">
 
         <div class="flex flex-col mt-10 w-4/12">

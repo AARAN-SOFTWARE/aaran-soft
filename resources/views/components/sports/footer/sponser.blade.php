@@ -1,5 +1,5 @@
 <div>
-    <div class="w-full md:h-48 h-auto flex bg-[#081E40]">
+    <div class="w-full md:h-48 h-auto flex bg-[#1a1a1a]">
 
         <div class="md:flex md:flex-row my-4 w-full justify-between hidden">
 

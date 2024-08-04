@@ -5,7 +5,7 @@
             <div class="grid items-center grid-cols-1 md:grid-cols-2">
                 <div>
 
-                    <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl  animate__animated wow animate__slideInLeft"  data-wow-duration="2s">
+                    <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl animate__animated wow animate__slideInLeft"  data-wow-duration="2s">
                         Hey 👋 I am <br class="block sm:hidden" />Jenny Carter</h2>
 
                     <p class="max-w-lg mt-3 text-xl leading-relaxed text-gray-600 md:mt-8  animate__animated wow animate__slideInRight"  data-wow-duration="3s">

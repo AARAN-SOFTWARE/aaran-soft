@@ -3,16 +3,16 @@
 
         <div class="flex items-center w-full justify-between ">
 
-            <div class="text-zinc-600 font-bold text-xl ">
+            <div class="">
 
                 <a href="{{route('home')}}" class="flex items-center">
-                    <div class=" lg:p-3 rounded">
+                    <div class=" lg:p-3 rounded hover:scale-125 transition duration-500">
 
                         <x-assets.logo.brand logo="{{ \App\Helper\ConvertTo::toLower(config('aadmin.brand'))}}"/>
 
                     </div>
                     <span
-                            class="self-center text-3xl font-semibold whitespace-nowrap px-2 font-gab tracking-wider">
+                        class="text-black hover:scale-105 transition duration-500 self-center text-4xl font-bold whitespace-nowrap px-2 font-roboto tracking-wider">
                         {{ \App\Helper\ConvertTo::toUpper(config('app.name'))}}
                     </span>
                 </a>
@@ -22,27 +22,27 @@
             <div class="hidden md:block ">
                 <ul class="flex space-x-8 ">
                     <li>
-                        <a class="text-lg font-sans text-black px-2 hover:border-b py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
                            href="{{route('home')}}">Home</a>
                     </li>
                     <li>
-                        <a class="text-lg font-sans text-black px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
                            href="{{route('gallery')}}">Gallery</a>
                     </li>
                     <li>
-                        <a class="text-lg font-sans text-black px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
                            href="{{route('news')}}">News</a>
                     </li>
                     <li>
-                        <a class="text-lg font-sans text-black px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
                            href="{{route('feed')}}">Blog</a>
                     </li>
                     <li>
-                        <a class="text-lg font-sans text-black px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
                            href="{{route('sportContact')}}">Contact</a>
                     </li>
                     <li>
-                        <a class="text-lg font-sans text-black px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
                            href="{{route('sportAbout')}}">About Us</a>
                     </li>
                 </ul>
@@ -53,7 +53,7 @@
                 <nav>
                     <button class="w-10 h-10 relative focus:outline-none text-gray-800" @click="open = !open">
                         <div
-                                class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
+                            class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
                 <span aria-hidden="true"
                       class="block absolute h-0.5 w-5 bg-current transform transition duration-700 ease-in-out"
                       :class="{'rotate-45': open,' -translate-y-1.5': !open }"></span>
@@ -66,7 +66,6 @@
                         </div>
                     </button>
                 </nav>
-
             </div>
 
             <!--login--------------------------------------------------------------------------------------------------->
@@ -74,17 +73,15 @@
                 @if (Route::has('login'))
                     <div id="menu" class="space-x-4 ">
                         @auth
+
                             <a href="{{route('dashboard')}}" role="button"
-                               class="font-semibold text-black text-xl hover:text-[#19398A] hover:bg-white  px-3 py-1 rounded-md focus:outline-none focus:underline  transition ease-in-out duration-300">
+                               class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600">
                                 Dashboard
                             </a>
 
-                            <a
-                                    href="{{ route('logout') }}"
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                    class="font-semibold text-xl hover:text-[#19398A] hover:bg-white px-3 py-1 rounded-md
-                                 focus:outline-none focus:underline transition ease-in-out duration-700"
-                            >
+                            <a href="{{route('logout')}}" role="button"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                               class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600">
                                 Log out
                             </a>
 
@@ -148,9 +145,9 @@
                         </li>
                         <li>
                             <a
-                                    href="{{ route('logout') }}"
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                    class="hover:underline font-serif block px-4 py-2 text-white "
+                                href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                class="hover:underline font-serif block px-4 py-2 text-white "
                             >
                                 Log out
                             </a>

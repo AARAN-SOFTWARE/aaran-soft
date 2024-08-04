@@ -1,4 +1,4 @@
-<div class="bg-[#081E40]">
+<div class="bg-[#1a1a1a]">
     <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
         <span class="text-gray-50 text-sm text-center sm:text-left">
             <a class="text-gray-50 hover:text-amber-600 cursor-pointer">Aaran info Tech</a>

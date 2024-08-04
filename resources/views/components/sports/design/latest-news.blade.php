@@ -7,9 +7,11 @@
     <div class="border-b-2 max-w-screen-2xl mx-auto p-5 sm:p-10 md:p-16">
 
         <div class="border-b-2 mb-5 flex justify-between text-sm">
-            <div class="flex items-center pb-2 pr-2 uppercase">
 
-                <svg class="h-12 mr-3" x="0px" y="0px" viewBox="0 0 455.005 455.005">
+            <div
+                class="flex items-center pb-2 pr-2 uppercase cursor-pointer animate__animated wow animate__backInLeft"
+                data-wow-duration="3s">
+                <svg class="h-12 mr-3 transition duration-500 hover:scale-125" viewBox="0 0 455.005 455.005">
                     <g>
                         <path
                             d="M446.158,267.615c-5.622-3.103-12.756-2.421-19.574,1.871l-125.947,79.309c-3.505,2.208-4.557,6.838-2.35,10.343 c2.208,3.505,6.838,4.557,10.343,2.35l125.947-79.309c2.66-1.675,4.116-1.552,4.331-1.432c0.218,0.12,1.096,1.285,1.096,4.428 c0,8.449-6.271,19.809-13.42,24.311l-122.099,76.885c-6.492,4.088-12.427,5.212-16.284,3.084c-3.856-2.129-6.067-7.75-6.067-15.423 c0-19.438,13.896-44.61,30.345-54.967l139.023-87.542c2.181-1.373,3.503-3.77,3.503-6.347s-1.323-4.974-3.503-6.347L184.368,50.615 c-2.442-1.538-5.551-1.538-7.993,0L35.66,139.223C15.664,151.815,0,180.188,0,203.818v4c0,23.63,15.664,52.004,35.66,64.595 l209.292,131.791c3.505,2.207,8.136,1.154,10.343-2.35c2.207-3.505,1.155-8.136-2.35-10.343L43.653,259.72 C28.121,249.941,15,226.172,15,207.818v-4c0-18.354,13.121-42.122,28.653-51.902l136.718-86.091l253.059,159.35l-128.944,81.196 c-20.945,13.189-37.352,42.909-37.352,67.661c0,13.495,4.907,23.636,13.818,28.555c3.579,1.976,7.526,2.956,11.709,2.956 c6.231,0,12.985-2.176,19.817-6.479l122.099-76.885c11.455-7.213,20.427-23.467,20.427-37.004 C455.004,277.119,451.78,270.719,446.158,267.615z"></path>
@@ -27,50 +29,61 @@
                             d="M53.527,192.864c-2.187,3.518-1.109,8.142,2.409,10.329l183.478,114.081c1.232,0.767,2.601,1.132,3.953,1.132 c2.506,0,4.956-1.256,6.376-3.541c2.187-3.518,1.109-8.142-2.409-10.329L63.856,190.455 C60.338,188.266,55.714,189.346,53.527,192.864z"></path>
                     </g>
                 </svg>
-                <a href="#" class="inline-block text-5xl font-roboto font-bold">Latest News</a>
+
+                <a href="{{route('sportNews')}}"
+                   class="inline-block text-5xl font-roboto font-bold transition duration-500 hover:scale-105">
+                    Latest&nbsp;News</a>
             </div>
-            <a href="#" class="inline-block text-xl font-roboto text-gray-300 hover:text-gray-700">Read All News</a>
+
+            <div class="hidden lg:flex animate__animated wow animate__backInRight" data-wow-duration="3s">
+                <a href="{{route('sportNews')}}"
+                   class="inline-block text-xl font-roboto text-gray-300 hover:text-gray-700 transition duration-500 hover:scale-105">
+                    Read&nbsp;All&nbsp;News&nbsp;&nbsp;
+                </a>
+            </div>
+
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
             @foreach($list as $row)
                 <!-- CARD 1 -->
                 <section class="wow slideInDown" data-wow-duration="2s">
-                <div class="rounded overflow-hidden shadow-lg flex flex-col relative top-0 hover:-top-2 transition-all duration-300">
+                    <div
+                        class="rounded overflow-hidden shadow-lg flex flex-col relative top-0 hover:-top-2 transition-all duration-300">
 
-                    <div class="relative">
+                        <div class="relative">
 
-                        <a href="{{route('sportNews')}}">
-                            <img class="w-full h-64 object-fill"
-                                 src="{{ URL(\Illuminate\Support\Facades\Storage::url($row->image))}}"
-                                 alt="{{$row->image}}">
-                            <div
-                                class="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
-                            </div>
-                        </a>
+                            <a href="{{route('sportNews')}}">
+                                <img class="w-full h-64 object-fill"
+                                     src="{{ URL(\Illuminate\Support\Facades\Storage::url($row->image))}}"
+                                     alt="{{$row->image}}">
+                                <div
+                                    class="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
+                                </div>
+                            </a>
 
-                        <a href="#">
-                            <div
-                                class="text-xs absolute top-0 right-0 bg-green-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
-                                Trending
-                            </div>
-                        </a>
+                            <a href="#">
+                                <div
+                                    class="text-xs absolute top-0 right-0 bg-green-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+                                    Trending
+                                </div>
+                            </a>
 
-                    </div>
-
-                    <div class="px-6 py-4 mb-auto">
-                        <a href="#"
-                           class="font-medium text-lg hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
-                            {{ \Illuminate\Support\Str::words($row->vname, 5)}}
-                        </a>
-
-                        <div class="text-gray-400 text-xs">
-                            {!! \Illuminate\Support\Str::words($row->description, 15) !!}
                         </div>
 
-                    </div>
+                        <div class="px-6 py-4 mb-auto">
+                            <a href="#"
+                               class="font-medium text-lg hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
+                                {{ \Illuminate\Support\Str::words($row->vname, 5)}}
+                            </a>
 
-                    <div class="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
+                            <div class="text-gray-400 text-xs">
+                                {!! \Illuminate\Support\Str::words($row->description, 15) !!}
+                            </div>
+
+                        </div>
+
+                        <div class="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
 
                 <span href="#" class="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center">
                     <svg height="13px" width="13px" viewBox="0 0 512 512">
@@ -83,8 +96,8 @@
                     </span>
                 </span>
 
-                        <span href="#"
-                              class="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center">
+                            <span href="#"
+                                  class="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center">
                     <svg class="h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z">
@@ -92,9 +105,9 @@
                     </svg>
                     <span class="ml-1">{{$row->feedReply->count()}} Comments</span>
                 </span>
-                    </div>
+                        </div>
 
-                </div>
+                    </div>
                 </section>
             @endforeach
         </div>
