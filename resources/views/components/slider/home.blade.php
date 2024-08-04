@@ -65,7 +65,7 @@
                                 <div
                                     class="md:w-4/12 w-8/12 h-10/12  mx-auto flex-col text-white bg-black/25 rounded-lg p-5 my-5">
 
-                                    <div class="font-gab md:text-6xl text-3xl text-center">{{$row->vname}}</div>
+                                        <div class="font-gab md:text-6xl text-3xl text-center">{{$row->vname}}</div>
 
                                     <div
                                         class="font-roboto text-xl mt-3 text-justify tracking-wider">{!! $row->description !!}</div>

@@ -13,6 +13,7 @@ class Index extends Component
 {
 
     use CommonTrait;
+
     public $clubImage;
     public $achievements;
     public $activities;
@@ -29,19 +30,20 @@ class Index extends Component
 
     public function getClubImage()
     {
-        $this->clubImage=SportClubPic::latest()->take(8)->get();
+        $this->clubImage = SportClubPic::latest()->take(8)->get();
 
     }
 
     public function getData()
     {
-        $this->activities=Feed::where('tag_id',1)->latest()->take(8)->get();
-        $this->events=Feed::where('tag_id',2)->latest()->take(3)->get();
-        $this->achievements=Feed::where('tag_id',3)->latest()->take(6)->get();
-        $this->news=Feed::where('tag_id',4)->latest()->take(3)->get();
-        $this->blogs=Feed::where('tag_id',5)->latest()->take(3)->get();
-        $this->upComingEvents=Feed::where('tag_id',6)->latest()->take(3)->get();
-        $this->moments=Feed::where('tag_id',7)->latest()->take(3)->get();
+        $this->activities = Feed::where('tag_id', 1)->latest()->take(3)->get();
+
+        $this->events = Feed::where('tag_id', 2)->latest()->take(3)->get();
+        $this->achievements = Feed::where('tag_id', 3)->latest()->take(6)->get();
+        $this->news = Feed::where('tag_id', 4)->latest()->take(3)->get();
+        $this->blogs = Feed::where('tag_id', 5)->latest()->take(3)->get();
+        $this->upComingEvents = Feed::where('tag_id', 6)->latest()->take(3)->get();
+        $this->moments = Feed::where('tag_id', 7)->latest()->take(3)->get();
 
     }
 

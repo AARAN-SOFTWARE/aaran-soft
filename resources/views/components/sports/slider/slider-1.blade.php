@@ -75,7 +75,8 @@
 
             <ul x-ref="slider" @scroll="updateCurrentSlide" tabindex="0" role="listbox"
                 aria-labelledby="carousel-content-label"
-                class="flex w-full overflow-x-hidden snap-x snap-mandatory opacity-95">
+                class="flex w-full overflow-x-hidden snap-x snap-mandatory opacity-95 animate__animated wow animate__fadeInUp"
+                data-wow-duration="2s" data-wow-delay="1s">
                 @foreach($list as $row)
                     <li x-bind="disableNextAndPreviousButtons"
                         class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"

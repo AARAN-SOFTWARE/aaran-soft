@@ -104,7 +104,10 @@
         <div class="absolute z-10 flex justify-between w-full h-full  ">
 
             <!-- Prev Button -------------------------------------------------------------------------------------->
-            <button x-on:click="prev" class="text-2xl absolute md:right-[50px] right-[46px] -top-[36px]" :aria-disabled="atBeginning" :tabindex="atEnd ? -1 : 0">
+            <button x-on:click="prev"
+                    class="text-2xl absolute md:right-[50px] right-[46px] -top-[36px] animate__animated wow animate__lightSpeedInLeft"
+                    data-wow-delay="3s"
+                    :aria-disabled="atBeginning" :tabindex="atEnd ? -1 : 0">
 
                 <span aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-auto h-5 text-white lg:h-8 hover:text-gray-400"
@@ -118,7 +121,10 @@
 
             <!-- Next Button -------------------------------------------------------------------------------------->
 
-            <button x-on:click="prev" class="text-2xl absolute md:right-[20px] right-[16px] -top-[36px]" :aria-disabled="atEnd" :tabindex="atEnd ? -1 : 0">
+            <button x-on:click="prev"
+                    class="text-2xl absolute md:right-[20px] right-[16px] -top-[36px] animate__animated wow animate__lightSpeedInRight"
+                    data-wow-delay="3s"
+                    :aria-disabled="atEnd" :tabindex="atEnd ? -1 : 0">
                 <span aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-auto h-5 text-white lg:h-8 hover:text-gray-400"
                          fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
@@ -131,15 +137,15 @@
 
         <!-- Indicators ------------------------------------------------------------------------------------------->
 
-{{--        <div class="absolute z-10 w-full bottom-10 lg:bottom-12">--}}
-{{--            <div class="flex justify-center space-x-2">--}}
-{{--                <template x-for="(slide, index) in Array.from($refs.slider.children)" :key="index">--}}
-{{--                    <button @click="goToSlide(index)"--}}
-{{--                            :class="{'bg-gray-500': currentSlide === index, 'bg-bubble': currentSlide !== index}"--}}
-{{--                            class="w-3 h-1 rounded-full lg:w-3 lg:h-3 hover:bg-gray-400 focus:outline-none focus:bg-gray-400"></button>--}}
-{{--                </template>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        {{--        <div class="absolute z-10 w-full bottom-10 lg:bottom-12">--}}
+        {{--            <div class="flex justify-center space-x-2">--}}
+        {{--                <template x-for="(slide, index) in Array.from($refs.slider.children)" :key="index">--}}
+        {{--                    <button @click="goToSlide(index)"--}}
+        {{--                            :class="{'bg-gray-500': currentSlide === index, 'bg-bubble': currentSlide !== index}"--}}
+        {{--                            class="w-3 h-1 rounded-full lg:w-3 lg:h-3 hover:bg-gray-400 focus:outline-none focus:bg-gray-400"></button>--}}
+        {{--                </template>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
     </div>
 </div>
 @error('')  @enderror

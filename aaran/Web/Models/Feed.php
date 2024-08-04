@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Feed extends Model
 {
@@ -54,4 +55,10 @@ class Feed extends Model
             return Tag::find($str)->vname;
         } else return '';
     }
+
+    public function feedReply(): HasMany
+    {
+        return $this->hasMany(FeedReply::class);
+    }
+
 }

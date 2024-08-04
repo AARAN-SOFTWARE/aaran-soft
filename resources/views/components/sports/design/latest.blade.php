@@ -7,7 +7,8 @@
 ])
 
 <div class="h-24">&nbsp;</div>
-<div class="bg-[#10172B] md:h-[42rem] h-auto flex-col flex gap-y-6">
+<div class="md:h-[42rem] h-auto flex-col flex gap-y-6 animate__animated wow animate__fadeInUpBig"
+     data-wow-duration="2s" data-wow-delay="1s">
     <div class="w-11/12 mx-auto text-white font-Don text-2xl tracking-wider mt-16">Latest</div>
     <div class="w-11/12 grid md:grid-cols-3 grid-cols-1 mx-auto gap-6 mt-4">
         <x-sports.slider.slider-1 :list="$upComingEvents"/>
@@ -41,4 +42,4 @@
         </a>
     </div>
 </div>
-<div class="h-48 bg-[#10172B]">&nbsp;</div>
+<div class="h-48">&nbsp;</div>

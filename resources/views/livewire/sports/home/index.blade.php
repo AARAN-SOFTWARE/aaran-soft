@@ -7,9 +7,15 @@
     <!-- Latest News -->
     <x-sports.design.latest-news :list="$activities"/>
 
+    <x-sports.design.training/>
+
+    <x-sports.design.iamhere/>
+
+    <x-sports.design.recent-posts/>
+
 {{--    <x-sports.design.activities :list="$activities"/>--}}
     <!-- Menu -1 (optional) -->
-    <x-sports.menu.menu-1 />
+{{--    <x-sports.menu.menu-1 />--}}
     <!-- Gallery -->
     <!-- demo -->
     <x-sports.design.gallery :clubImage="$clubImage" />
