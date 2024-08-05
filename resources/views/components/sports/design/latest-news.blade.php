@@ -30,13 +30,13 @@
                     </g>
                 </svg>
 
-                <a href="{{route('sportNews')}}"
+                <a href="{{route('feed',['category_id'=>1,'tag_id'=>4])}}"
                    class="inline-block text-5xl font-roboto font-bold transition duration-500 hover:scale-105">
                     Latest&nbsp;News</a>
             </div>
 
             <div class="hidden lg:flex animate__animated wow animate__backInRight" data-wow-duration="3s">
-                <a href="{{route('sportNews')}}"
+                <a href="{{route('feed',['category_id'=>1,'tag_id'=>4])}}"
                    class="inline-block text-xl font-roboto text-gray-300 hover:text-gray-700 transition duration-500 hover:scale-105">
                     Read&nbsp;All&nbsp;News&nbsp;&nbsp;
                 </a>
@@ -53,7 +53,7 @@
 
                         <div class="relative">
 
-                            <a href="{{route('sportNews')}}">
+                            <a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">
                                 <img class="w-full h-64 object-fill"
                                      src="{{ URL(\Illuminate\Support\Facades\Storage::url($row->image))}}"
                                      alt="{{$row->image}}">
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="px-6 py-4 mb-auto">
-                            <a href="#"
+                            <a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}"
                                class="font-medium text-lg hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
                                 {{ \Illuminate\Support\Str::words($row->vname, 5)}}
                             </a>
