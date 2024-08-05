@@ -5,6 +5,8 @@ namespace App\Livewire\Sports\Home;
 use Aaran\SportsClub\Models\SportClubPic;
 use Aaran\Web\Models\Feed;
 use Aaran\Web\Models\HomeSlide;
+use Aaran\Web\Models\Testimony;
+use Aaran\Web\Models\TestimonyItem;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -22,6 +24,8 @@ class Index extends Component
     public $news;
     public $moments;
     public $upComingEvents;
+    public $testimony;
+    public $testimonyData;
 
     public function target()
     {
@@ -44,6 +48,9 @@ class Index extends Component
         $this->blogs = Feed::where('tag_id', 5)->latest()->take(3)->get();
         $this->upComingEvents = Feed::where('tag_id', 6)->latest()->take(3)->get();
         $this->moments = Feed::where('tag_id', 7)->latest()->take(3)->get();
+        $this->testimony=  Testimony::where('active_id','1')->latest()->take(1)->get();
+        $obj=$this->testimony->toarray();
+        $this->testimonyData=TestimonyItem::where('testimony_id',$obj[0]['id'])->get();
 
     }
 

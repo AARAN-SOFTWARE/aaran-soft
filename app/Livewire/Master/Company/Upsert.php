@@ -6,6 +6,7 @@ use Aaran\Common\Models\City;
 use Aaran\Common\Models\Pincode;
 use Aaran\Common\Models\State;
 use Aaran\Master\Models\Company;
+use App\Livewire\Forms\CommonForm;
 use App\Livewire\Trait\CommonTrait;
 use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Collection;
@@ -22,25 +23,27 @@ class Upsert extends Component
     use CommonTrait;
     use WithFileUploads;
 
+    public CommonForm $cityForm;
+
     #region[properties]
     public string $mobile = '';
     public string $email = '';
     public string $gstin = '';
-    public mixed $msme_no= '';
-    public mixed $msme_type= '';
+    public mixed $msme_no = '';
+    public mixed $msme_type = '';
     public string $address_1 = '';
     public string $address_2 = '';
     public string $display_name = '';
     public string $landline = '';
     public string $website = '';
     public $logo = '';
-    public $old_logo= '';
+    public $old_logo = '';
     public string $pan = '';
     public $bank;
     public $acc_no;
     public $ifsc_code;
     public $branch;
-    public $isUploaded=false;
+    public $isUploaded = false;
 
 
     public string $cities;
@@ -51,70 +54,29 @@ class Upsert extends Component
     #endregion
 
     #region[city]
-    public $city_id = '';
-    public $city_name = '';
-    public Collection $cityCollection;
-    public $highlightCity = 0;
-    public $cityTyped = false;
+    public function city($name = null, $id = null): void
+    {
+        if (City::search(trim($name))->get()->isNotEmpty()) {
+            $this->cityForm->setCity($name, $id);
+        } else {
+            $this->cityForm->citySave($name);
+        }
+        $this->cityForm->getCityList();
+    }
 
     public function decrementCity(): void
     {
-        if ($this->highlightCity === 0) {
-            $this->highlightCity = count($this->cityCollection) - 1;
-            return;
-        }
-        $this->highlightCity--;
+        $this->cityForm->decrementCity();
     }
 
     public function incrementCity(): void
     {
-        if ($this->highlightCity === count($this->cityCollection) - 1) {
-            $this->highlightCity = 0;
-            return;
-        }
-        $this->highlightCity++;
-    }
-
-    public function setCity($name, $id): void
-    {
-        $this->city_name = $name;
-        $this->city_id = $id;
-        $this->getCityList();
+        $this->cityForm->incrementCity();
     }
 
     public function enterCity(): void
     {
-        $obj = $this->cityCollection[$this->highlightCity] ?? null;
-
-        $this->city_name = '';
-        $this->cityCollection = Collection::empty();
-        $this->highlightCity = 0;
-
-        $this->city_name = $obj['vname'] ?? '';;
-        $this->city_id = $obj['id'] ?? '';;
-    }
-
-    #[On('refresh-city')]
-    public function refreshCity($v): void
-    {
-        $this->city_id = $v['id'];
-        $this->city_name = $v['name'];
-        $this->cityTyped = false;
-
-    }
-    public function citySave($name)
-    {
-        $obj= City::create([
-            'vname' => $name,
-            'active_id' => '1'
-        ]);
-        $v=['name'=>$name,'id'=>$obj->id];
-        $this->refreshCity($v);
-    }
-
-    public function getCityList(): void
-    {
-        $this->cityCollection = $this->city_name ? City::search(trim($this->city_name))->get() : City::all();
+        $this->cityForm->enterCity();
     }
     #endregion
 
@@ -232,11 +194,11 @@ class Upsert extends Component
 
     public function pincodeSave($name)
     {
-        $obj= Pincode::create([
+        $obj = Pincode::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
-        $v=['name'=>$name,'id'=>$obj->id];
+        $v = ['name' => $name, 'id' => $obj->id];
         $this->refreshPincode($v);
     }
 
@@ -302,7 +264,7 @@ class Upsert extends Component
                 $obj->ifsc_code = $this->ifsc_code;
                 $obj->branch = $this->branch;
                 $obj->active_id = $this->active_id;
-                $obj->tenant_id = $this->tenant_id?:'1';
+                $obj->tenant_id = $this->tenant_id ?: '1';
                 $obj->user_id = Auth::id();
                 if ($obj->logo != $this->logo) {
                     $obj->logo = $this->save_logo();
@@ -313,7 +275,7 @@ class Upsert extends Component
                 $message = "Updated";
             }
             $this->getRoute();
-            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message.' Successfully']);
         }
     }
     #endregion
@@ -337,8 +299,8 @@ class Upsert extends Component
             $this->pan = $obj->pan;
             $this->email = $obj->email;
             $this->website = $obj->website;
-            $this->city_id = $obj->city_id;
-            $this->city_name = $obj->city->vname;
+            $this->cityForm->city_id = $obj->city_id;
+            $this->cityForm->city_name = $obj->city->vname;
             $this->state_id = $obj->state_id;
             $this->state_name = $obj->state->vname;
             $this->pincode_id = $obj->pincode_id;
@@ -374,8 +336,8 @@ class Upsert extends Component
             $this->pan = $obj->pan;
             $this->email = $obj->email;
             $this->website = $obj->website;
-            $this->city_id = $obj->city_id;
-            $this->city_name = $obj->city->vname;
+            $this->cityForm->city_id = $obj->city_id;
+            $this->cityForm->city_name = $obj->city->vname;
             $this->state_id = $obj->state_id;
             $this->state_name = $obj->state->vname;
             $this->pincode_id = $obj->pincode_id;
@@ -398,20 +360,20 @@ class Upsert extends Component
         if ($this->logo == '') {
             return $this->logo = 'empty';
         } else {
-            if ($this->old_logo){
+            if ($this->old_logo) {
                 Storage::delete('public/'.$this->old_logo);
             }
-        $logo_name=$this->logo->getClientOriginalName();
-            return $this->logo->storeAs('logo', $logo_name,'public');
+            $logo_name = $this->logo->getClientOriginalName();
+            return $this->logo->storeAs('logo', $logo_name, 'public');
         }
     }
 
     public function updatedlogo()
     {
         $this->validate([
-            'logo'=>'image|max:1024',
+            'logo' => 'image|max:1024',
         ]);
-        $this->isUploaded=true;
+        $this->isUploaded = true;
     }
     #endregion
 
@@ -433,7 +395,7 @@ class Upsert extends Component
     #region[render]
     public function render()
     {
-        $this->getCityList();
+        $this->cityForm->getCityList();
         $this->getStateList();
         $this->getPincodeList();
         $this->getTenants();

@@ -9,6 +9,7 @@ use Aaran\Web\Models\Feed;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Illuminate\Support\Str;
@@ -323,6 +324,7 @@ class Index extends Component
 
     #region[filterUser]
     public  $categoryFilter='';
+    #[Url]
     public array $tagFilter=[];
     public $tags;
 

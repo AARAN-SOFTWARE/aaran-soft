@@ -3,7 +3,7 @@
 
     <x-sports.design.latest-news :list="$activities"/>
 
-    <x-sports.design.training/>
+    <x-sports.design.training :testimony="$testimony"  :testimony-data="$testimonyData"/>
 
     <x-sports.design.iamhere/>
 
