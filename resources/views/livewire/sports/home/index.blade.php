@@ -1,7 +1,7 @@
 <div>
     <x-slider.home :list="$list"/>
 
-    <x-sports.design.latest-news :list="$activities"/>
+    <x-sports.design.latest-news :list="$news"/>
 
     <x-sports.design.training/>
 

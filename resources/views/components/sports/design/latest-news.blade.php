@@ -30,13 +30,13 @@
                     </g>
                 </svg>
 
-                <a href="{{route('feed',['category_id'=>1,'tag_id'=>4])}}"
+                <a href="{{route('news')}}"
                    class="inline-block text-5xl font-roboto font-bold transition duration-500 hover:scale-105">
                     Latest&nbsp;News</a>
             </div>
 
             <div class="hidden lg:flex animate__animated wow animate__backInRight" data-wow-duration="3s">
-                <a href="{{route('feed',['category_id'=>1,'tag_id'=>4])}}"
+                <a href="{{route('news')}}"
                    class="inline-block text-xl font-roboto text-gray-300 hover:text-gray-700 transition duration-500 hover:scale-105">
                     Read&nbsp;All&nbsp;News&nbsp;&nbsp;
                 </a>
@@ -53,7 +53,7 @@
 
                         <div class="relative">
 
-                            <a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">
+                            <a href="{{route('news')}}">
                                 <img class="w-full h-64 object-fill"
                                      src="{{ URL(\Illuminate\Support\Facades\Storage::url($row->image))}}"
                                      alt="{{$row->image}}">
@@ -62,7 +62,7 @@
                                 </div>
                             </a>
 
-                            <a href="#">
+                            <a href="{{route('news')}}">
                                 <div
                                     class="text-xs absolute top-0 right-0 bg-green-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
                                     Trending
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="px-6 py-4 mb-auto">
-                            <a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}"
+                            <a href="{{route('news')}}"
                                class="font-medium text-lg hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
                                 {{ \Illuminate\Support\Str::words($row->vname, 5)}}
                             </a>
@@ -85,26 +85,26 @@
 
                         <div class="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
 
-                <span href="#" class="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center">
-                    <svg height="13px" width="13px" viewBox="0 0 512 512">
-                        <path
-                            d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M277.333,256 c0,11.797-9.536,21.333-21.333,21.333h-85.333c-11.797,0-21.333-9.536-21.333-21.333s9.536-21.333,21.333-21.333h64v-128 c0-11.797,9.536-21.333,21.333-21.333s21.333,9.536,21.333,21.333V256z">
-                        </path>
-                    </svg>
-                    <span class="ml-1">
-                        {{$row->updated_at->diffForHumans()}}
-                    </span>
-                </span>
+                            <span href="#" class="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center">
+                                <svg height="13px" width="13px" viewBox="0 0 512 512">
+                                    <path
+                                        d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M277.333,256 c0,11.797-9.536,21.333-21.333,21.333h-85.333c-11.797,0-21.333-9.536-21.333-21.333s9.536-21.333,21.333-21.333h64v-128 c0-11.797,9.536-21.333,21.333-21.333s21.333,9.536,21.333,21.333V256z">
+                                    </path>
+                                </svg>
+                                <span class="ml-1">
+                                    {{$row->updated_at->diffForHumans()}}
+                                </span>
+                            </span>
 
                             <span href="#"
                                   class="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center">
-                    <svg class="h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z">
-                        </path>
-                    </svg>
-                    <span class="ml-1">{{$row->feedReply->count()}} Comments</span>
-                </span>
+                            <svg class="h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z">
+                            </path>
+                            </svg>
+                            <span class="ml-1">{{$row->feedReply->count()}} Comments</span>
+                            </span>
                         </div>
 
                     </div>

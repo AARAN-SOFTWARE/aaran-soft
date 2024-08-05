@@ -63,14 +63,15 @@
 
 
                                 <div
-                                    class=" w-8/12 h-10/12 flex-col text-white font-roboto p-5 my-5 border-l-[16px] border-white px-10 absolute md:left-80 left-20 bg-black/10 ">
+                                    class=" w-auto h-10/12 flex-col text-white font-roboto p-5 my-5 border-l-[16px] border-white px-10 absolute md:left-80 left-20 ">
 
                                     <div
-                                        class=" md:text-9xl text-xl drop-shadow-2xl  ml-10  animate__animated wow animate__bounceInUp capitalize">{{$row->vname}}</div>
+                                        class=" md:text-9xl text-xl  ml-10  animate__animated wow animate__bounceInUp capitalize drop-shadow-lg">{{$row->vname}}</div>
 
                                     <div
-                                        class="md:text-6xl mt-3 text-justify tracking-wider drop-shadow-2 ml-10 animate__animated wow animate__slideInLeft capitalize">{!! $row->description !!}</div>
-                                    <div class="text-md mt-3 text-gray-300 ml-10 drop-shadow-2xl">{{$row->created_at}}</div>
+                                        class="md:text-6xl mt-3 text-justify tracking-wider drop-shadow-lg ml-10 animate__animated wow animate__slideInLeft capitalize">{!! $row->description !!}</div>
+                                    <div
+                                        class="text-md mt-3 text-white ml-10 drop-shadow-lg bg-black/10 ">{{$row->created_at}}</div>
                                 </div>
 
                             </div>
