@@ -52,24 +52,25 @@
 
         <div class="flex space-x-6">
             <ul x-ref="slider" @scroll="updateCurrentSlide"
-                class="flex w-full overflow-x-hidden snap-x snap-mandatory">
+                class="flex w-full md:h-screen h-96 overflow-x-hidden snap-x snap-mandatory">
 
                 @if($list)
                     @forelse($list as $row)
-                        <li class="flex flex-col items-center justify-center w-full shrink-0 snap-start">
+                        <li class="flex flex-col items-center justify-center w-full md:h-screen h-80 shrink-0 snap-start">
 
                             <div style="background-image: url('/../../../storage/images/{{$row->bg_image}}');"
-                                 class="w-full md:h-[35rem] h-[96] bg-fixed bg-no-repeat bg-center md:bg-cover bg-[#10172B]  flex-col flex justify-center items-center">
+                                 class="w-full md:h-screen h-96 bg-cover bg-no-repeat mx-auto  flex-col flex justify-center relative">
 
 
                                 <div
-                                    class="md:w-4/12 w-8/12 h-10/12  mx-auto flex-col text-white bg-black/25 rounded-lg p-5 my-5">
-
-                                        <div class="font-gab md:text-6xl text-3xl text-center">{{$row->vname}}</div>
+                                    class=" w-8/12 h-10/12 flex-col text-white font-roboto p-5 my-5 border-l-[16px] border-white px-10 absolute md:left-80 left-20 bg-black/10 ">
 
                                     <div
-                                        class="font-roboto text-xl mt-3 text-justify tracking-wider">{!! $row->description !!}</div>
-                                    <div class="text-xs mt-3 text-gray-300">{{$row->created_at}}</div>
+                                        class=" md:text-9xl text-xl drop-shadow-2xl  ml-10  animate__animated wow animate__bounceInUp capitalize">{{$row->vname}}</div>
+
+                                    <div
+                                        class="md:text-6xl mt-3 text-justify tracking-wider drop-shadow-2 ml-10 animate__animated wow animate__slideInLeft capitalize">{!! $row->description !!}</div>
+                                    <div class="text-md mt-3 text-gray-300 ml-10 drop-shadow-2xl">{{$row->created_at}}</div>
                                 </div>
 
                             </div>

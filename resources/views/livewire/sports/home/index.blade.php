@@ -7,11 +7,11 @@
 
     <x-sports.design.iamhere/>
 
-    <x-sports.design.recent-posts/>
+    <x-sports.design.recent-posts :list="$blogs"/>
 
 {{--    <x-sports.design.gallery :clubImage="$clubImage"/>--}}
 
-    <x-sports.design.gallery_1/>
+    <x-sports.design.gallery_1 :list="$clubImage"/>
 
 
 {{--    <x-sports.design.achievement :image="$achievements"/>--}}
