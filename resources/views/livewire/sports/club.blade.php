@@ -108,7 +108,7 @@
 
         <x-forms.create max-width="6xl" :id="$vid">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-7 w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-7 w-full">
 
                 <div class="flex flex-col gap-0 sm:gap-3">
                     <x-input.model-text wire:model="vname" :label="'Club Name'"/>
@@ -117,14 +117,14 @@
                     <x-input.model-text wire:model="whatsapp" :label="'Whatsapp'"/>
                     <x-input.model-text wire:model="email" :label="'Email'"/>
                     <x-input.model-date wire:model="started_at" :label="'Started at'"/>
+                    <x-input.model-text wire:model="address_1" :label="'Address'"/>
+                    <x-input.model-text wire:model="address_2" :label="'Street, Area'"/>
 
                 </div>
 
                 <div class="flex flex-col gap-0 sm:gap-3">
 
-                    <x-input.model-text wire:model="address_1" :label="'Address'"/>
 
-                    <x-input.model-text wire:model="address_2" :label="'Street, Area'"/>
 
                     <!-- City ----------------------------------------------------------------------------------------->
                     <div class="flex flex-col sm:flex-row w-full gap-2">
@@ -186,7 +186,7 @@
                     </div>
 
                     <!-- State ---------------------------------------------------------------------------------------->
-                    <div class="flex flex-col mt-3 gap-2">
+                    <div class="flex flex-col gap-2">
                         <div class="xl:flex w-full gap-2">
                             <label for="state_name" class="w-[10rem] text-zinc-500 tracking-wide py-2">State</label>
                             <div x-data="{isTyped: @entangle('stateTyped')}" @click.away="isTyped = false"
@@ -246,7 +246,7 @@
                     </div>
 
                     <!-- Pin-code ------------------------------------------------------------------------------------->
-                    <div class="flex flex-col gap-2 mt-3">
+                    <div class="flex flex-col gap-2 ">
                         <div class="xl:flex w-full gap-2">
                             <label for="pincode_name"
                                    class="w-[10rem] text-zinc-500 tracking-wide py-2">Pincode</label>

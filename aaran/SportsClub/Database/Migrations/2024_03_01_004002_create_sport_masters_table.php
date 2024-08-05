@@ -13,6 +13,7 @@ return new class extends Migration {
                 $table->id();
                 $table->string('unique_no')->nullable();
                 $table->string('vname');
+                $table->longText('desc');
                 $table->string('mobile');
                 $table->string('whatsapp')->nullable();
                 $table->string('email')->nullable();

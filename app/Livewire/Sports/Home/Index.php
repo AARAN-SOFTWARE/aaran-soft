@@ -3,6 +3,8 @@
 namespace App\Livewire\Sports\Home;
 
 use Aaran\SportsClub\Models\SportClubPic;
+use Aaran\SportsClub\Models\SportMaster;
+use Aaran\SportsClub\Models\SportStudent;
 use Aaran\Web\Models\Feed;
 use Aaran\Web\Models\HomeSlide;
 use App\Livewire\Trait\CommonTrait;
@@ -22,11 +24,9 @@ class Index extends Component
     public $news;
     public $moments;
     public $upComingEvents;
+    public $master;
+    public $student;
 
-    public function target()
-    {
-        dd('tart');
-    }
 
     public function getClubImage()
     {
@@ -34,6 +34,15 @@ class Index extends Component
 
     }
 
+    public function getMaster()
+    {
+        $this->master = SportMaster::latest()->take(1)->get();
+    }
+
+    public function getStudent()
+    {
+        $this->student = SportStudent::all();
+    }
     public function getData()
     {
         $this->activities = Feed::where('tag_id', 1)->latest()->take(3)->get();
@@ -65,7 +74,8 @@ class Index extends Component
     {
         $this->getClubImage();
         $this->getData();
-
+        $this->getMaster();
+        $this->getStudent();
 //        $this->getSlideData();
         return view('livewire.sports.home.index')->layout('layouts.web')->with([
 //            'list' => $this->getSlideData(),'title'=>HomeSlide::all(),

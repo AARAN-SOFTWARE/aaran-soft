@@ -57,9 +57,9 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
 
-        <x-forms.create :id="$vid" >
+        <x-forms.create :id="$vid" :max-width="'xl'" >
 
-            <div class="gap-5 w-full">
+            <div class="flex flex-col gap-5 w-full">
 
                 <x-input.model-text wire:model="title" :label="'Title'"/>
                 <x-input.rich-text wire:model="desc" :label="'Description'" :placeholder="''"/>

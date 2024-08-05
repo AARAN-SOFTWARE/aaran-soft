@@ -118,18 +118,16 @@
                         <option value="Others">Others</option>
                     </x-input.model-select>
 
-
+                    <x-input.model-text wire:model="email" :label="'Email'"/>
+                    @error('email')
+                    <span class="text-red-500">{{  $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="flex flex-col gap-0 sm:gap-3">
 
                     <x-input.model-text wire:model="mobile" :label="'Mobile'"/>
                     <x-input.model-text wire:model="whatsapp" :label="'Whatsapp'"/>
-                    <x-input.model-text wire:model="email" :label="'Email'"/>
-                    @error('email')
-                    <span class="text-red-500">{{  $message }}</span>
-                    @enderror
-
                     <x-input.model-text wire:model="address_1" :label="'Address'"/>
                     <x-input.model-text wire:model="address_2" :label="'Street,Area'"/>
 

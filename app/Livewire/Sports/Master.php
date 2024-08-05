@@ -24,6 +24,7 @@ class Master extends Component
     use WithFileUploads;
 
     #region[Properties]
+    public string $desc = '';
     public string $mobile = '';
     public string $whatsapp = '';
     public string $email = '';
@@ -268,6 +269,7 @@ class Master extends Component
                 SportMaster::create([
                     'unique_no'=>$this->unique_no,
                     'vname' => Str::ucfirst($this->vname),
+                    'desc' => Str::ucfirst($this->desc),
                     'mobile' => $this->mobile,
                     'whatsapp' => $this->whatsapp,
                     'email' => $this->email,
@@ -294,6 +296,7 @@ class Master extends Component
                 $obj = SportMaster::find($this->vid);
                 $obj->unique_no=$this->unique_no;
                 $obj->vname = Str::ucfirst($this->vname);
+                $obj->desc = Str::ucfirst($this->desc);
                 $obj->mobile = $this->mobile;
                 $obj->whatsapp = $this->whatsapp;
                 $obj->email = $this->email;
@@ -326,6 +329,7 @@ class Master extends Component
     {
         $this->vid = '';
         $this->vname = '';
+        $this->desc = '';
         $this->mobile = '';
         $this->whatsapp = '';
         $this->email = '';
@@ -356,6 +360,7 @@ class Master extends Component
             $obj = SportMaster::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
+            $this->desc = $obj->desc;
             $this->mobile = $obj->mobile;
             $this->whatsapp = $obj->whatsapp;
             $this->email = $obj->email;
