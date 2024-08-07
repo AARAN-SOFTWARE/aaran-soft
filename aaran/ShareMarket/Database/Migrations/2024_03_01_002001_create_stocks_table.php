@@ -28,6 +28,7 @@ return new class extends Migration {
                 $table->decimal('chg', 15, 2)->nullable();
                 $table->decimal('chg_percent', 15, 2)->nullable();
                 $table->decimal('volume', 15, 2)->nullable();
+                $table->decimal('open_interest', 15, 2)->nullable();
                 $table->decimal('open', 15, 2)->nullable();
                 $table->decimal('close', 15, 2)->nullable();
                 $table->decimal('high', 15, 2)->nullable();
@@ -61,6 +62,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::dropIfExists('stock_details');
+
         Schema::dropIfExists('stocks');
     }
 };
