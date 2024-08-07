@@ -14,6 +14,8 @@ return new class extends Migration {
                 $table->id();
                 $table->string('vname')->unique();
                 $table->string('symbol')->unique();
+                $table->foreignId('category_id')->nullable();
+                $table->foreignId('tag_id')->nullable();
                 $table->smallInteger('active_id')->nullable();
                 $table->timestamps();
             });
