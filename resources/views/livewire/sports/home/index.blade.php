@@ -5,7 +5,7 @@
 
     <x-sports.design.training :testimony="$testimony"  :testimony-data="$testimonyData"/>
 
-    <x-sports.design.iamhere/>
+    <x-sports.design.iamhere :list="$master"/>
 
     <x-sports.design.recent-posts :list="$blogs"/>
 
@@ -23,7 +23,7 @@
 
     <x-sports.design.stats :stats="$stats" :stats-item="$statsItem"/>
 
-    <x-sports.design.peoples/>
+    <x-sports.design.peoples :list="$student"/>
 
     <x-sports.footer.footer/>
 

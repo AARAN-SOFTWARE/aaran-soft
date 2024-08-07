@@ -103,17 +103,23 @@
 
         <x-forms.create max-width="6xl" :id="$vid">
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-7 w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-7 w-full">
 
-                    <div class="flex flex-col gap-0 sm:gap-3">
-                        <x-input.model-text wire:model="vname" :label="'Name'"/>
-                        <x-input.model-text wire:model="mobile" :label="'Mobile'"/>
-                        <x-input.model-text wire:model="whatsapp" :label="'Whatsapp'"/>
-                        <x-input.model-text wire:model="email" :label="'Email'"/>
+                <div class="flex flex-col gap-3 sm:gap-3 sm:flex sm:flex-col">
+                    <x-input.model-text wire:model="vname" :label="'Name'"/>
+                    <x-input.rich-text wire:model="desc" :placeholder="'write here'" :label="'Description'"/>
+                    <x-input.model-text wire:model="mobile" :label="'Mobile'"/>
+                    <x-input.model-text wire:model="whatsapp" :label="'Whatsapp'"/>
+                    <x-input.model-text wire:model="email" :label="'Email'"/>
+                    <x-input.model-text wire:model="aadhaar" :label="'aadhaar'"/>
 
-                        <x-input.model-date wire:model="dob" :label="'DOB'"/>
 
-                        <x-input.model-text wire:model="age" :label="'Age'"/>
+                </div>
+
+                <div class="flex flex-col gap-3 sm:gap-3">
+
+                    <x-input.model-date wire:model="dob" :label="'DOB'"/>
+                    <x-input.model-text wire:model="age" :label="'Age'"/>
 
                         <x-input.model-select wire:model="gender" :label="'Gender'">
                             <option>Choose...</option>
@@ -122,11 +128,7 @@
                             <option value="Others">Others</option>
                         </x-input.model-select>
 
-                        <x-input.model-text wire:model="aadhaar" :label="'aadhaar'"/>
 
-                    </div>
-
-                    <div class="flex flex-col gap-0 sm:gap-3">
 
                         <!-- Address ---------------------------------------------------------------------------------->
 
@@ -373,9 +375,7 @@
                             </div>
                         </div>
                     </div>
-
-
-                </div>
+            </div>
 
         </x-forms.create>
 
