@@ -35,12 +35,12 @@ class Show extends Component
     #endregion
 
     #region[Mount]
-    public function mount($id)
+    public function mount($id=null)
     {
         $this->getData($id);
         $obj = Feed::find($id)->user_id;
-        $this->feed_category = Feed::find($id)->feed_category_id;
-        $this->tag_id = Feed::find($id)->tag_id;
+//        $this->feed_category = Feed::find($id)->feed_category_id;
+//        $this->tag_id = Feed::find($id)->tag_id;
         $this->users=User::find($obj);
     }
     #endregion
@@ -91,6 +91,9 @@ class Show extends Component
             $this->description = $obj->description;
             $this->image = $obj->image;
             $this->created_at=$obj->created_at;
+            $this->tag_id=$obj->tag_id;
+            $this->feed_category=$obj->feed_category_id;
+//            $this->users=$obj->user_id;
             return $obj;
         }
         return null;

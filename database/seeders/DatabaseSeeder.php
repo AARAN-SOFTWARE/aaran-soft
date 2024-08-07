@@ -38,7 +38,11 @@ use Aaran\SportsClub\Database\Seeders\S3001_SportClubSeeder;
 use Aaran\Testing\Database\Seeders\DbTestSeeder;
 use Aaran\Testing\Database\Seeders\TestFileSeeder;
 use Aaran\Web\Database\Seeders\FeedCategorySeeder;
+use Aaran\Web\Database\Seeders\StatsItemSeeder;
+use Aaran\Web\Database\Seeders\StatsSeeder;
 use Aaran\Web\Database\Seeders\TagSeeder;
+use Aaran\Web\Database\Seeders\TestimonyItemSeeder;
+use Aaran\Web\Database\Seeders\TestimonySeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -93,6 +97,10 @@ class DatabaseSeeder extends Seeder
         if (DbMigration::hasWebs()) {
             FeedCategorySeeder::run();
             TagSeeder::run();
+            TestimonySeeder::run();
+            TestimonyItemSeeder::run();
+            StatsSeeder::run();
+            StatsItemSeeder::run();
         }
 
 //        ClientSeeder::run();

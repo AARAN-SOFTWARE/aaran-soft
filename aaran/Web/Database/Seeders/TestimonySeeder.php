@@ -2,15 +2,19 @@
 
 namespace Aaran\Web\Database\Seeders;
 
+use Aaran\Web\Models\Testimony;
 use Illuminate\Database\Seeder;
 
 class TestimonySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public static function run(): void
     {
-        //
+        Testimony::create([
+            'vname' => 'TRAINING',
+            'description' => 'Effective and affordable way to achieve a result ',
+            'image' => '-',
+            'active_id' => 1,
+            'user_id' => 1,
+        ]);
     }
 }

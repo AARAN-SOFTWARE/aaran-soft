@@ -21,7 +21,7 @@
 
     <x-sports.footer.sponser/>
 
-    <x-sports.design.stats/>
+    <x-sports.design.stats :stats="$stats" :stats-item="$statsItem"/>
 
     <x-sports.design.peoples/>
 
