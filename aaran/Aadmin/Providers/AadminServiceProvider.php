@@ -89,7 +89,7 @@ class AadminServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../Client/garments/aswath_apparels.php', 'aswath_apparels');
         $this->mergeConfigFrom(__DIR__ . '/../Client/garments/ato_textiles.php', 'ato_textiles');
 
-
+        $this->mergeConfigFrom(__DIR__ . '/../Softwares/shares.php', 'shares');
 
         $this->app->register(AadminServiceProvider::class);
     }

@@ -30,4 +30,6 @@ return [
     Aaran\SpotMyNumber\Providers\SpotMyNumberServiceProvider::class,
     Aaran\SportsClub\Providers\SportsClubServiceProvider::class,
 
+    Aaran\ShareMarket\Providers\ShareMarketServiceProvider::class,
+
 ];
