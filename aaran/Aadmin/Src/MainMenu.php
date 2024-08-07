@@ -19,6 +19,8 @@ class MainMenu
 
             config('software.SPOT_MY_NUMBER') => in_array($feature, config('spotmynumber.menus', [])),
             config('software.SPORTS_CLUB') => in_array($feature, config('sportsclub.menus', [])),
+
+            config('software.SHARES') => in_array($feature, config('shares.menus', [])),
         };
     }
 
@@ -259,6 +261,19 @@ class MainMenu
     {
         return 'sports';
     }
+
+
+    #region[Shares]
+    public static function hasShares(): bool
+    {
+        return static::enabled(static::shares());
+    }
+
+    public static function shares(): string
+    {
+        return 'shares';
+    }
+    #endregion
 
 }
 
