@@ -19,7 +19,7 @@
     <x-sports.design.latest :events="$events" :up-coming-events="$upComingEvents" :blogs="$blogs" :news="$news"
                             :moments="$moments"/>
 
-    <x-sports.footer.sponser/>
+    <x-sports.footer.sponser :list="$sponsors"/>
 
     <x-sports.design.stats/>
 

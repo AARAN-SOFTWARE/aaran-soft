@@ -19,6 +19,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('sportsClub/show', \App\Livewire\Sports\Images\Show::class)->name('sportsClub.show');
 
 
+    Route::get('sponsorIndex', App\Livewire\Sports\SportsSponsor\Index::class)->name('sponsorIndex');
 });
 
 Route::get('/gallery', \App\Livewire\Sports\Web\Gallery::class)->name('gallery');

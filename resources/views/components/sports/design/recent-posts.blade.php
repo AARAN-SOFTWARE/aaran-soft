@@ -20,7 +20,7 @@
                             class="bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]
                 relative top-0 hover:-top-2 transition-all duration-300">
                         <a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">
-                            <img src="https://readymadeui.com/Imagination.webp" alt="Blog Post 1"
+                            <img src="{{ URL(\Illuminate\Support\Facades\Storage::url($row->image))}}" alt="Blog Post 1"
                                  class="w-full h-60 object-cover"/>
                             <div class="p-6">
                                 <span

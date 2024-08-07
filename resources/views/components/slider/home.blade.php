@@ -56,7 +56,7 @@
 
                 @if($list)
                     @forelse($list as $row)
-                        <li class="flex flex-col items-center justify-center w-full md:h-screen h-80 shrink-0 snap-start">
+                        <li class="flex flex-col items-center justify-center w-full md:h-screen h-80 shrink-0 snap-start animate__animated">
 
                             <div style="background-image: url('/../../../storage/images/{{$row->bg_image}}');"
                                  class="w-full md:h-screen h-96 bg-cover bg-no-repeat mx-auto  flex-col flex justify-center relative">

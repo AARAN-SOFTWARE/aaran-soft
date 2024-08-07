@@ -14,6 +14,7 @@ export default {
     plugins: [forms, typography],
 
     theme: {
+        mode: 'jit',
         extend: {
             colors: {
                 'alice-blue': '#F6F9FC',
@@ -31,6 +32,17 @@ export default {
                 bebas:["Bebas Neue", "sans-serif"],
 
             },
+            animation: {
+                marquee: 'marquee 25s linear infinite',
+            },
+            keyframes: {
+                marquee: {
+                    '0%':{transform: 'translateX(100%)'},
+                    '100%':{transform: 'translateX(-100%)'},
+
+                }
+            }
         },
     },
+    variants: {},
 };
