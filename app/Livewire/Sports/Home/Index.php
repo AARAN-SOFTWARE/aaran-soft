@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Sports\Home;
 
+use Aaran\SportsClub\Models\Sponsor;
 use Aaran\SportsClub\Models\SportClubPic;
 use Aaran\Web\Models\Feed;
 use Aaran\Web\Models\HomeSlide;
@@ -23,15 +24,11 @@ class Index extends Component
     public $moments;
     public $upComingEvents;
 
+    public $sponsors;
+
     public function target()
     {
         dd('tart');
-    }
-
-    public function getClubImage()
-    {
-        $this->clubImage = SportClubPic::latest()->take(8)->get();
-
     }
 
     public function getData()
@@ -44,6 +41,10 @@ class Index extends Component
         $this->blogs = Feed::where('tag_id', 5)->latest()->take(3)->get();
         $this->upComingEvents = Feed::where('tag_id', 6)->latest()->take(3)->get();
         $this->moments = Feed::where('tag_id', 7)->latest()->take(3)->get();
+
+        $this->clubImage = SportClubPic::latest()->take(8)->get();
+
+        $this->sponsors = Sponsor::latest()->get();
 
     }
 
@@ -63,7 +64,6 @@ class Index extends Component
 
     public function render()
     {
-        $this->getClubImage();
         $this->getData();
 
 //        $this->getSlideData();
