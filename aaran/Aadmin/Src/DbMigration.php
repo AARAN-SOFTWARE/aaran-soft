@@ -22,6 +22,8 @@ class DbMigration
 
             config('software.SPOT_MY_NUMBER') => in_array($feature, config('spotmynumber.migrations', [])),
             config('software.SPORTS_CLUB') => in_array($feature, config('sportsclub.migrations', [])),
+
+            config('software.SHARES') => in_array($feature, config('shares.migrations', [])),
         };
     }
 
