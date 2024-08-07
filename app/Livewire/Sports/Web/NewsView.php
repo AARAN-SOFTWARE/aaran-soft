@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Webs\Feed;
+namespace App\Livewire\Sports\Web;
 
 use Aaran\Web\Models\Feed;
 use Aaran\Web\Models\FeedReply;
@@ -8,44 +8,36 @@ use App\Livewire\Trait\CommonTrait;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
-use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Livewire\WithFileUploads;
 
-class Show extends Component
+class NewsView extends Component
 {
     use CommonTrait;
     use WithFileUploads;
 
     #region[properties]
     public $feed_id;
+    public $description;
     public $reply;
     public $reply_image;
     public $reply_old_image;
-
-
-    public $description;
     public $image;
-
-    public $feed_category;
+    public $created_at;
+    public $updated_at;
     public $users;
-    public $user_id;
     public $isUploaded = false;
     public mixed $editable = true;
-    public $created_at;
-    public $tag_id;
-    #endregion
 
-    #region[Mount]
-    public function mount($id=null)
+    #endregion
+    #region[mount]
+    public function mount($id)
     {
         $this->getData($id);
         $obj = Feed::find($id)->user_id;
-//        $this->feed_category = Feed::find($id)->feed_category_id;
-//        $this->tag_id = Feed::find($id)->tag_id;
-        $this->users=User::find($obj);
-    }
-    #endregion
+        $this->users = User::find($obj);
 
-    #region[Save]
+    }
+
     public function getSave(): string
     {
         $this->validate(['reply' => 'required']);
@@ -77,38 +69,7 @@ class Show extends Component
         }
         return '';
     }
-    #endregion
 
-    #region[Data]
-    public function getData($id)
-    {
-        if ($id) {
-
-            $obj = Feed::find($id);
-
-            $this->feed_id = $obj->id;
-            $this->vname = $obj->vname;
-            $this->description = $obj->description;
-            $this->image = $obj->image;
-            $this->created_at=$obj->created_at;
-            $this->tag_id=$obj->tag_id;
-            $this->feed_category=$obj->feed_category_id;
-//            $this->users=$obj->user_id;
-            return $obj;
-        }
-        return null;
-    }
-    #endregion
-
-    #region[clearFields]
-    public function clearFields()
-    {
-        $this->vid = '';
-        $this->reply = '';
-        $this->reply_image = '';
-        $this->reply_old_image='';
-        $this->isUploaded=false;
-    }
     #endregion
 
     #region[getObj]
@@ -126,17 +87,45 @@ class Show extends Component
     #endregion
 
 
+    public function getData($id)
+    {
+        if ($id) {
+            $obj = Feed::find($id);
+
+            $this->feed_id = $obj->id;
+            $this->vname = $obj->vname;
+            $this->description = $obj->description;
+            $this->image = $obj->image;
+            $this->created_at = $obj->created_at;
+            $this->updated_at = $obj->updated_at;
+            return $obj;
+
+        }
+        return null;
+    }
+
+    #region[clearFields]
+    public function clearFields()
+    {
+        $this->vid = '';
+        $this->reply = '';
+        $this->reply_image = '';
+        $this->reply_old_image = '';
+        $this->isUploaded = false;
+    }
+    #endregion
+
     #region[image]
     public function save_image()
     {
         if ($this->reply_image == '') {
             return $this->reply_image = 'empty';
         } else {
-            if ($this->reply_old_image){
-                Storage::delete('public/'.$this->reply_old_image);
+            if ($this->reply_old_image) {
+                Storage::delete('public/' . $this->reply_old_image);
             }
-            $image_name=$this->reply_image->getClientOriginalName();
-            return $this->reply_image->storeAs('photos', $image_name,'public');
+            $image_name = $this->reply_image->getClientOriginalName();
+            return $this->reply_image->storeAs('photos', $image_name, 'public');
         }
     }
     #endregion
@@ -145,42 +134,31 @@ class Show extends Component
     public function updatedimage()
     {
         $this->validate([
-            'reply_image'=>'image|max:2048',
+            'reply_image' => 'image|max:2048',
         ]);
-        $this->isUploaded=true;
+        $this->isUploaded = true;
     }
     #endregion
-
 
     #region[getList]
     public function getList()
     {
         $this->sortField = 'created_at';
         return FeedReply::search($this->searches)
-            ->where('feed_id','=',$this->feed_id)
+            ->where('feed_id', '=', $this->feed_id)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
     #endregion
 
     #region[render]
-    public function reRender(): void
-    {
-        $this->render()->render();
-    }
 
     public function render()
     {
-        if (auth()->id()){
-            return view('livewire.webs.feed.show')->with([
-                "list" => $this->getList()
-            ]);
-        }else{
-            return view('livewire.webs.feed.show')->layout('layouts.web')->with([
-                "list" => $this->getList()
-            ]);
-        }
-
+        return view('livewire.sports.web.news-view')->layout('layouts.web')->with([
+            "list" => $this->getList()
+        ]);
     }
     #endregion
+
 }

@@ -32,9 +32,9 @@
                  x-transition:leave="transition ease-in duration-300"
                  x-transition:leave-start="opacity-100 transform scale-100"
                  x-transition:leave-end="opacity-0 transform scale-90"
-                 class="fixed inset-0 z-50 flex items-center justify-center w-full p-2 overflow-hidden bg-black bg-opacity-75 h-100">
+                 class="fixed inset-0 z-50  flex items-center justify-center w-full p-2 overflow-hidden bg-black bg-opacity-75 h-100">
                 <div @click.away="lightbox = ''" class="">
-                    <img class=" w-auto md:h-[40rem] h-auto border-2 border-white rounded-md" :src="imgModalSrc" :alt="imgModalAlt">
+                    <img class=" w-auto md:h-[45rem]  mt-16 h-auto border-2 border-white rounded-md" :src="imgModalSrc" :alt="imgModalAlt">
                 </div>
             </div>
 

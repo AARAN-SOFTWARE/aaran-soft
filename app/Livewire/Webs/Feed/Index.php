@@ -9,6 +9,7 @@ use Aaran\Web\Models\Feed;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Illuminate\Support\Str;
@@ -323,6 +324,7 @@ class Index extends Component
 
     #region[filterUser]
     public  $categoryFilter='';
+    #[Url]
     public array $tagFilter=[];
     public $tags;
 
@@ -378,8 +380,8 @@ class Index extends Component
                 "list" => $this->getList()
             ]);
         }else{
-//            return view('livewire.webs.feed.index')->layout('layouts.web')->with([
-            return view('components.sports.latestblog.latestblog')->layout('layouts.web')->with([
+            return view('livewire.webs.feed.index')->layout('layouts.web')->with([
+//            return view('components.sports.latestblog.latestblog')->layout('layouts.web')->with([
                 "list" => $this->getList()
             ]);
         }

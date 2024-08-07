@@ -1,9 +1,9 @@
 <div>
     <x-slider.home :list="$list"/>
 
-    <x-sports.design.latest-news :list="$activities"/>
+    <x-sports.design.latest-news :list="$news"/>
 
-    <x-sports.design.training/>
+    <x-sports.design.training :testimony="$testimony"  :testimony-data="$testimonyData"/>
 
     <x-sports.design.iamhere :list="$master"/>
 
@@ -19,9 +19,9 @@
     <x-sports.design.latest :events="$events" :up-coming-events="$upComingEvents" :blogs="$blogs" :news="$news"
                             :moments="$moments"/>
 
-    <x-sports.footer.sponser/>
+    <x-sports.footer.sponser :list="$sponsors"/>
 
-    <x-sports.design.stats/>
+    <x-sports.design.stats :stats="$stats" :stats-item="$statsItem"/>
 
     <x-sports.design.peoples :list="$student"/>
 
