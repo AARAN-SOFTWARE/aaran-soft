@@ -6,6 +6,10 @@ use Aaran\SportsClub\Models\Sponsor;
 use Aaran\SportsClub\Models\SportClubPic;
 use Aaran\Web\Models\Feed;
 use Aaran\Web\Models\HomeSlide;
+use Aaran\Web\Models\Stats;
+use Aaran\Web\Models\StatsItem;
+use Aaran\Web\Models\Testimony;
+use Aaran\Web\Models\TestimonyItem;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -23,6 +27,10 @@ class Index extends Component
     public $news;
     public $moments;
     public $upComingEvents;
+    public $testimony;
+    public $testimonyData;
+    public $stats;
+    public $statsItem;
 
     public $sponsors;
 
@@ -41,6 +49,12 @@ class Index extends Component
         $this->blogs = Feed::where('tag_id', 5)->latest()->take(3)->get();
         $this->upComingEvents = Feed::where('tag_id', 6)->latest()->take(3)->get();
         $this->moments = Feed::where('tag_id', 7)->latest()->take(3)->get();
+        $this->testimony=  Testimony::where('active_id','1')->latest()->take(1)->get();
+        $obj=$this->testimony->toarray();
+        $this->testimonyData=TestimonyItem::where('testimony_id',$obj[0]['id'])->get();
+        $this->stats=  Stats::where('active_id','1')->latest()->take(1)->get();
+        $obj1=$this->testimony->toarray();
+        $this->statsItem=StatsItem::where('stats_id',$obj1[0]['id'])->get();
 
         $this->clubImage = SportClubPic::latest()->take(8)->get();
 

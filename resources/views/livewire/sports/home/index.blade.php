@@ -3,7 +3,7 @@
 
     <x-sports.design.latest-news :list="$news"/>
 
-    <x-sports.design.training/>
+    <x-sports.design.training :testimony="$testimony"  :testimony-data="$testimonyData"/>
 
     <x-sports.design.iamhere/>
 
@@ -21,7 +21,7 @@
 
     <x-sports.footer.sponser :list="$sponsors"/>
 
-    <x-sports.design.stats/>
+    <x-sports.design.stats :stats="$stats" :stats-item="$statsItem"/>
 
     <x-sports.design.peoples/>
 

@@ -19,13 +19,13 @@
         <!-- City ----------------------------------------------------------------------------------------------------->
         <div class="flex flex-row py-3 gap-3">
             <div class="xl:flex w-full gap-2">
-                <label for="city_name" class="w-[10rem] text-zinc-500 tracking-wide py-2 ">City</label>
+                <label for="cityForm.city_name" class="w-[10rem] text-zinc-500 tracking-wide py-2 ">City</label>
                 <div x-data="{isTyped: @entangle('cityTyped')}" @click.away="isTyped = false" class="w-full">
                     <div>
                         <input
-                            id="city_name"
+                            id="cityForm.city_name"
                             type="search"
-                            wire:model.live="city_name"
+                            wire:model.live="cityForm.city_name"
                             autocomplete="off"
                             placeholder="City Name.."
                             @focus="isTyped = true"
@@ -49,16 +49,16 @@
                                 <div class="block py-1 shadow-md w-full rounded-lg border-transparent flex-1 appearance-none border
                                  bg-white text-gray-800 ring-1 ring-purple-600">
                                     <ul class="overflow-y-scroll h-96">
-                                        @if($cityCollection)
-                                            @forelse ($cityCollection as $i => $city)
+                                        @if($cityForm->cityCollection)
+                                            @forelse ($cityForm->cityCollection as $i => $city)
                                                 <li class="cursor-pointer px-3 py-1 hover:font-bold hover:bg-yellow-100 border-b border-gray-300 h-8
-                                                        {{ $highlightCity === $i ? 'bg-yellow-100' : '' }}"
-                                                    wire:click.prevent="setCity('{{  $city->vname }}','{{$city->id}}')"
+                                                        {{ $cityForm->highlightCity === $i ? 'bg-yellow-100' : '' }}"
+                                                    wire:click.prevent="city('{{  $city->vname }}','{{$city->id}}')"
                                                     x-on:click="isTyped = false">
                                                     {{ $city->vname }}
                                                 </li>
                                             @empty
-                                                <button wire:click.prevent="citySave('{{$city_name}}')" class="text-white bg-green-500 text-center w-full">
+                                                <button wire:click.prevent="city('{{$cityForm->city_name}}')" class="text-white bg-green-500 text-center w-full">
                                                     create
                                                 </button>
                                             @endforelse
