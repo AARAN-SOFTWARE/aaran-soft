@@ -78,9 +78,9 @@
 
                 <!-- Create Record ------------------------------------------------------------------------------------>
 
-                <x-forms.create :max-width="'6xl'" :id="$vid">
+                <x-forms.create :max-width="'6xl'" :id="$vid ">
                     <div class="lg:flex gap-6">
-                        <div class="flex flex-col gap-3 w-1/2">
+                        <div class="flex flex-col gap-3 lg:w-1/2">
                             <x-input.model-text wire:model="vname" :label="'Title'"/>
                             @error('vname')
                             <div class="text-red-500 w-2/3 mx-auto mb-3 text-center">

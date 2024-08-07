@@ -3,6 +3,8 @@
 
     <section class="pt-10 overflow-hidden md:pt-0 sm:pt-16 2xl:pt-16">
         <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+
+            <!-- Title & desc ----------------------------------------------------------------------------------------->
             <div class="grid items-center grid-cols-1 md:grid-cols-2">
                 @foreach($list as $row)
                     <div>
@@ -26,6 +28,8 @@
                         </p>
                     </div>
 
+                    <!-- Image ----------------------------------------------------------------------------------------->
+
                     <div class="relative">
                         <img
                             class="absolute inset-x-0 bottom-0 -mb-48 -translate-x-1/2 left-1/2  animate__animated wow animate__slideInRight"
@@ -35,7 +39,7 @@
                         <img
                             class="relative w-full xl:max-w-lg xl:mx-auto 2xl:origin-bottom 2xl:scale-110  animate__animated wow animate__slideInLeft"
                             data-wow-duration="3s"
-                            src="{{ \Illuminate\Support\Facades\Storage::url($row->master_photo)}}" alt="image"
+                            src="{{ \Illuminate\Support\Facades\Storage::url('images/'.$row->master_photo)}}" alt="image"
                             />
                     </div>
                 @endforeach
