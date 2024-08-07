@@ -12,6 +12,7 @@ return [
     'WELFARE' => '2000',
     'SPOT_MY_NUMBER' => '3000',
     'SPORTS_CLUB' => '4000',
+    'SHARES' => '5000',
 
     'GARMENT_1' => '201',
     'GARMENT_2' => '202',
