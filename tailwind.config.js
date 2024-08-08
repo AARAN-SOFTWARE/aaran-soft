@@ -30,6 +30,7 @@ export default {
                 nunito:["Nunito", "sans-serif"],
                 lexanddeca:["LexendDeca", "sans-serif"],
                 bebas:["Bebas Neue", "sans-serif"],
+                asul:["Asul", "sans-serif"]
 
             },
             animation: {
@@ -38,7 +39,7 @@ export default {
             keyframes: {
                 marquee: {
                     '0%':{transform: 'translateX(100%)'},
-                    '100%':{transform: 'translateX(-100%)'},
+                    '100%':{transform: 'translateX(-90%)'},
 
                 }
             }

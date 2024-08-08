@@ -1,4 +1,4 @@
-<nav class="sticky top-0" x-data="{ open: false }">
+<nav class="sticky z-[999] top-0" x-data="{ open: false }">
     <div class="px-6 border-b border-zinc-200 bg-white">
 
         <div class="flex items-center w-full justify-between ">
@@ -6,13 +6,13 @@
             <div class="text-zinc-600 font-bold text-xl ">
 
                 <a href="{{route('home')}}" class="flex items-center">
-                    <div class="p-1 lg:p-3 rounded py-2">
+                    <div class="p-1 lg:p-3 rounded py-2 hover:scale-105 transition duration-500">
 
                         <x-assets.logo.brand logo="{{ \App\Helper\ConvertTo::toLower(config('aadmin.brand'))}}"/>
 
                     </div>
                     <span
-                            class="self-center text-3xl font-semibold whitespace-nowrap px-2 -mt-2 font-Don tracking-wider">
+                            class="self-center mb-1 hover:scale-105 transition duration-500 text-3xl font-semibold whitespace-nowrap px-2 font-Don tracking-wider">
                         {{ \App\Helper\ConvertTo::toUpper(config('aadmin.brand'))}}
                     </span>
                 </a>
@@ -22,23 +22,23 @@
             <div class="hidden md:block ">
                 <ul class="flex space-x-8 ">
                     <li>
-                        <a class="text-xl font-sans text-zinc-500  hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-bold font-sans text-zinc-500 hover:tracking-wider hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-all duration-600"
                            href="{{route('home')}}">Home</a>
                     </li>
                     <li>
-                        <a class="text-xl font-sans text-zinc-500 hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-bold font-sans text-zinc-500 hover:tracking-wider hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-all duration-600"
                            href="{{route('service')}}">Project</a>
                     </li>
                     <li>
-                        <a class="text-xl font-sans text-zinc-500 hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-bold font-sans text-zinc-500 hover:tracking-wider hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-all duration-600"
                            href="{{route('about')}}">About Us</a>
                     </li>
                     <li>
-                        <a class="text-xl font-sans text-zinc-500 hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-bold font-sans text-zinc-500 hover:tracking-wider hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-all duration-600"
                            href="{{route('contact')}}">Contact</a>
                     </li>
                     <li>
-                        <a class="text-xl font-sans text-zinc-500 hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-colors duration-600"
+                        <a class="text-lg font-bold font-sans text-zinc-500 hover:tracking-wider hover:text-zinc-700 px-2 hover:border-b-2 py-1 hover:border-blue-400 transition-all duration-600"
                            href="{{route('posts')}}">Blog</a>
                     </li>
                 </ul>
@@ -71,15 +71,15 @@
                     <div id="menu" class="space-x-4 ">
                         @auth
                             <a href="{{route('dashboard')}}" role="button"
-                               class="font-semibold text-xl hover:text-white hover:bg-green-400  px-3 py-1 rounded-md focus:outline-none focus:underline  transition ease-in-out duration-150">
+                               class="font-semibold text-xl hover:text-white hover:bg-green-400 hover:tracking-wider px-3 py-1 rounded-md focus:outline-none focus:underline  transition-all duration-700">
                                 Dashboard
                             </a>
 
                             <a
                                     href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                    class="font-semibold text-xl hover:text-white hover:bg-red-500 px-3 py-1 rounded-md
-                                 focus:outline-none focus:underline transition ease-in-out duration-700"
+                                    class="font-semibold text-xl hover:text-white hover:bg-red-500 hover:tracking-wider px-3 py-1 rounded-md
+                                 focus:outline-none focus:underline transition-all duration-700"
                             >
                                 Log out
                             </a>
@@ -91,7 +91,7 @@
 
                         @else
                             <a href="{{ route('login') }}"
-                               class="font-semibold text-xl hover:text-white hover:bg-blue-600 px-3 py-1 rounded-md
+                               class="font-semibold text-xl hover:text-white hover:bg-blue-600 hover:tracking-wider px-3 py-1 rounded-md
                                    focus:outline-none transition ease-in-out duration-500">
                                 Log in
                             </a>
