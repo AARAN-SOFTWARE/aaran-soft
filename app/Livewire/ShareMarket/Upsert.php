@@ -2,6 +2,7 @@
 
 namespace App\Livewire\ShareMarket;
 
+use Aaran\ShareMarket\Models\Stock;
 use Aaran\ShareMarket\Models\StockDetail;
 use App\Livewire\Trait\CommonTrait;
 use Illuminate\Support\Carbon;
@@ -34,12 +35,18 @@ class Upsert extends Component
     public $s2;
     public $s3;
     public $trend;
+
+    public $stock;
+
     #endregion
 
     #region[mount]
     public function mount($id)
     {
+        $this->stock = Stock::find($id);
+
         $this->stock_id = $id;
+
         $this->vdate=Carbon::now()->format('Y-m-d');
     }
     #endregion
@@ -50,7 +57,7 @@ class Upsert extends Component
         if ($this->open != '') {
             if ($this->vid == "") {
                 StockDetail::create([
-                    'stock_id' => $this->stock_id,
+                    'stock_id' => $this->stock->id,
                     'vdate'=>$this->vdate,
                     'ltp'=>$this->ltp?:0,
                     'chg'=>$this->chg?:0,
@@ -79,7 +86,7 @@ class Upsert extends Component
 
             } else {
                 $obj = StockDetail::find($this->vid);
-                $obj->stock_id = $this->stock_id;
+                $obj->stock_id = $this->stock->id;
                 $obj->vdate = $this->vdate;
                 $obj->ltp = $this->ltp;
                 $obj->chg = $this->chg;
@@ -185,7 +192,7 @@ class Upsert extends Component
         $this->sortField='vdate';
         return StockDetail::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
-            ->where('stock_id', '=', $this->stock_id)
+            ->where('stock_id', '=', $this->stock->id)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }

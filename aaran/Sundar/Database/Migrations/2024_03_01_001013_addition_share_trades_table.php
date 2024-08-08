@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (Aaran\Aadmin\Src\DbMigration::hasshareTrades()) {
+        if (Aaran\Aadmin\Src\DbMigration::hasShareMarket()) {
 
             Schema::table('share_trades', function (Blueprint $table) {
                 $table->decimal('invested')

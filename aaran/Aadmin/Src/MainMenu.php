@@ -264,14 +264,14 @@ class MainMenu
 
 
     #region[Shares]
-    public static function hasShares(): bool
+    public static function hasSharesMarket(): bool
     {
-        return static::enabled(static::shares());
+        return static::enabled(static::sharesMarket());
     }
 
-    public static function shares(): string
+    public static function sharesMarket(): string
     {
-        return 'shares';
+        return 'sharesMarket';
     }
     #endregion
 

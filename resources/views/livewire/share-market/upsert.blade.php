@@ -72,40 +72,83 @@
 
         <!-- Create/ Edit Popup --------------------------------------------------------------------------------------->
         <x-forms.create :id="$vid" :max-width="'6xl'">
-            <div class="flex gap-3 w-full">
-                <div class="flex flex-col gap-3 w-full">
-                    <x-input.model-date wire:model="vdate" :label="'Date'"/>
-                    <x-input.model-text wire:model="ltp" :label="'LTP'"/>
-                    <x-input.model-text wire:model="chg" :label="'Charges'"/>
-                    <x-input.model-text wire:model="chg_percent" :label="'Chg Percent'"/>
-                    <x-input.model-text wire:model="volume" :label="'LTP'"/>
-                    <x-input.model-text wire:model="open_interest" :label="'Open Interest'"/>
-                    <x-input.model-text wire:model="open" :label="'Open'"/>
-                    <x-input.model-text wire:model="close" :label="'Close'"/>
-                    <x-input.model-text wire:model="high" :label="'High'"/>
-                    <x-input.model-text wire:model="low" :label="'Low'"/>
-                    <x-input.model-text wire:model="pivot" :label="'Pivot'"/>
+
+            <div class="flex flex-col gap-3 w-full">
+
+                <div class="flex flex-row gap-3 w-full">
+                <div class="text-3xl font-semibold text-amber-600 tracking-widest w-full">
+                    {{$stock->vname}}-{{$stock->symbol}}
                 </div>
-                <div class="flex flex-col gap-3 w-full">
-                    <x-input.model-text wire:model="high_52" :label="'52Weeks High'"/>
-                    <x-input.model-text wire:model="low_52" :label="'52Weeks Low'"/>
-                    <x-input.model-text wire:model="all_high" :label="'AllTime High'"/>
-                    <x-input.model-text wire:model="all_low" :label="'AllTime Low'"/>
-                    <x-input.model-text wire:model="r1" :label="'Resistance 1'"/>
-                    <x-input.model-text wire:model="r2" :label="'Resistance 2'"/>
-                    <x-input.model-text wire:model="r3" :label="'Resistance 3'"/>
-                    <x-input.model-text wire:model="s1" :label="'Support 1'"/>
-                    <x-input.model-text wire:model="s2" :label="'Support 2'"/>
-                    <x-input.model-text wire:model="s3" :label="'Support 3'"/>
-                    <x-input.model-select wire:model="trend" :label="'Trend'">
-                        <option value="">Choose...</option>
-                        <option value="UpTrend">UpTrend</option>
-                        <option value="DownTrend">DownTrend</option>
-                        <option value="SideWise">SideWise</option>
-                    </x-input.model-select>
+                <x-input.model-date wire:model="vdate" :label="'Date'"/>
                 </div>
+
+                <x-tabs.tab-panel>
+
+                    <x-slot name="tabs">
+                        <x-tabs.tab>Price</x-tabs.tab>
+                        <x-tabs.tab>Market</x-tabs.tab>
+                        <x-tabs.tab>Pivots</x-tabs.tab>
+                    </x-slot>
+
+                    <x-slot name="content">
+
+                        <x-tabs.content>
+                            <div class="grid grid-cols-2 gap-3 w-full">
+                                <x-input.model-text wire:model="ltp" :label="'LTP'"/>
+                                <x-input.model-text wire:model="chg" :label="'Changes'"/>
+                                <x-input.model-text wire:model="chg_percent" :label="'Chg Percent %'"/>
+                                <div>&nbsp;</div>
+                                <x-input.model-text wire:model="volume" :label="'Volume'"/>
+                                <x-input.model-text wire:model="open_interest" :label="'Open Interest'"/>
+                            </div>
+                        </x-tabs.content>
+
+                        <x-tabs.content>
+                            <div class="grid grid-cols-2 gap-3 w-full">
+                                <x-input.model-text wire:model="open" :label="'Open'"/>
+                                <x-input.model-text wire:model="close" :label="'Prev-Close'"/>
+                                <x-input.model-text wire:model="high" :label="'Today-High'"/>
+                                <x-input.model-text wire:model="low" :label="'Today-Low'"/>
+                                <x-input.model-text wire:model="high_52" :label="'52 Weeks High'"/>
+                                <x-input.model-text wire:model="low_52" :label="'52 Weeks Low'"/>
+                                <x-input.model-text wire:model="all_high" :label="'AllTime High'"/>
+                                <x-input.model-text wire:model="all_low" :label="'AllTime Low'"/>
+                            </div>
+                        </x-tabs.content>
+
+                        <x-tabs.content>
+                            <div class="grid grid-cols-3 gap-3 w-full">
+                                <x-input.model-text wire:model="r1" tabindex="1" :label="'Resistance 1'"/>
+                                <div>&nbsp;</div>
+                                <x-input.model-text wire:model="s1" tabindex="5" :label="'Support 1'"/>
+
+                                <x-input.model-text wire:model="r2" tabindex="2" :label="'Resistance 2'"/>
+                                <x-input.model-text wire:model="pivot" tabindex="4" :label="'Pivot'"/>
+                                <x-input.model-text wire:model="s2" tabindex="6" :label="'Support 2'"/>
+
+                                <x-input.model-text wire:model="r3" tabindex="3" :label="'Resistance 3'"/>
+                                <div>&nbsp;</div>
+                                <x-input.model-text wire:model="s3" tabindex="7" :label="'Support 3'"/>
+                            </div>
+                        </x-tabs.content>
+
+                    </x-slot>
+
+                </x-tabs.tab-panel>
+
+                <x-input.model-select wire:model="trend" :label="'Trend'">
+                    <option value="">Choose...</option>
+                    <option value="UpTrend">UpTrend</option>
+                    <option value="DownTrend">DownTrend</option>
+                    <option value="SideWise">SideWay</option>
+                </x-input.model-select>
+
+{{--                <x-radio.radio value="up"/>--}}
+
             </div>
+
         </x-forms.create>
+
 
     </x-forms.m-panel>
 </div>

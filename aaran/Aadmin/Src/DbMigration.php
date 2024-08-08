@@ -282,14 +282,14 @@ class DbMigration
     #endregion
 
     #region[Shares trades]
-    public static function hasShareTrades(): bool
+    public static function hasShareMarket(): bool
     {
-        return static::enabled(static::shareTrades());
+        return static::enabled(static::shareMarket());
     }
 
-    public static function shareTrades(): string
+    public static function shareMarket(): string
     {
-        return 'shareTrades';
+        return 'shareMarket';
     }
 
     #endregion

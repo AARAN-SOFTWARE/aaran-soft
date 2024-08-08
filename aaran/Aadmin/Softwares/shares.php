@@ -17,7 +17,8 @@ return [
     ],
 
     'menus' => [
-        MainMenu::shares(),
+        MainMenu::sharesMarket(),
+        MainMenu::webs(),
     ],
 
     'migrations' => [
@@ -25,7 +26,7 @@ return [
         DbMigration::common(),
         DbMigration::master(),
 
-        DbMigration::shareTrades(),
+        DbMigration::shareMarket(),
         DbMigration::blog(),
         DbMigration::webs(),
 

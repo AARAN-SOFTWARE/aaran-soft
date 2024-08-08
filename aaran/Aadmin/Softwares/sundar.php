@@ -48,7 +48,7 @@ return [
         DbMigration::todoList(),
         DbMigration::blog(),
         DbMigration::demo(),
-        DbMigration::shareTrades(),
+        DbMigration::shareMarket(),
         DbMigration::creditBooks(),
         DbMigration::magalir(),
         DbMigration::mailids(),
