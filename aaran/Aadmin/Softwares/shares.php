@@ -26,6 +26,8 @@ return [
         DbMigration::master(),
 
         DbMigration::shareTrades(),
+        DbMigration::blog(),
+        DbMigration::webs(),
 
     ]
 
