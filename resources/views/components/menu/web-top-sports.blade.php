@@ -12,7 +12,9 @@
 
                     </div>
                     <span
-                        class="text-black hover:scale-105 transition duration-500 self-center text-4xl font-bold whitespace-nowrap px-2 font-roboto tracking-wider">
+                        class="text-black hover:scale-105 transition duration-500
+                        self-center text-4xl font-bold whitespace-nowrap px-2 font-roboto
+                        tracking-wider">
                         {{ \App\Helper\ConvertTo::toUpper(config('app.name'))}}
                     </span>
                 </a>

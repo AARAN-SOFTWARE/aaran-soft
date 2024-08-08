@@ -1,7 +1,10 @@
 @props([
     "list"
 ])
-<div class=" h-44 bg-gradient-to-br from-[#19398A] to-orange-500 rounded-lg relative">
+<!-- #DEFCE8-->
+<!-- #EDFCF2-->
+<!-- #19398A-->
+<div class="h-44 bg-gradient-to-br from-[#DEFCE8] to-[#EDFCF2] rounded-lg relative p-2">
 
     <div x-data="{
         currentSlide: 0,
@@ -79,39 +82,45 @@
                 data-wow-duration="2s" data-wow-delay="1s">
                 @foreach($list as $row)
                     <li x-bind="disableNextAndPreviousButtons"
-                        class="flex flex-col items-center justify-center w-full p-0 shrink-0 snap-start"
+                        class="flex flex-col items-center justify-center w-full shrink-0 snap-start"
                         role="option">
-                        <div class="w-full h-44 flex-col flex justify-center items-center text-gray-200 p-5">
-                            <div
-                                class="font-bold font-gab text-xl tracking-wider bg-gradient-to-r from-white via-yellow-500 to-cyan-500 inline-block text-transparent bg-clip-text">
-                                <a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">Upcoming
-                                    Events</a>
+                        <div class="text-center flex justify-between items-center">
+                            <div class="w-5/12">
+                                <img src="{{ \Illuminate\Support\Facades\Storage::url($row->image)}}" alt="" class="w-full h-40 rounded-md">
                             </div>
-                            <div
-                                class="font-bold text-md text-center"><a
-                                    href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}"></a>{{ \Illuminate\Support\Str::words($row->vname, 8)}}
+                            <div class="w-7/12 flex-col gap-3">
+                                <div class="font-bold font-gab text-xl tracking-wider bg-gradient-to-r from-red-600
+                                via-yellow-500 to-cyan-500 inline-block text-transparent bg-clip-text">
+                                    <a href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">{{ \Aaran\Web\Models\Feed::tagName($row->tag_id)}}</a>
+                                </div>
+                                <div class="text-md text-[#19398A] font-roboto tracking-wider">
+                                    <a
+                                        href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">{{ \Illuminate\Support\Str::words($row->vname, 5)}}</a>
+                                </div>
+                                <div class="text-sm text-[#19398A] font-roboto tracking-wider">
+                                    <a
+                                        href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">{{  \Illuminate\Support\Str::words($row->description, 8) }}</a>
+                                </div>
                             </div>
-                            <div class="md:text-sm text-xs text-gray-200 text-justify"><a
-                                    href="{{route('feed',['category_id'=>$row->feed_category_id,'tag_id'=>$row->tag_id])}}">{!! \Illuminate\Support\Str::words( $row->description ,15) !!}</a>
-                            </div>
+
                         </div>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
+        </li>
+        @endforeach
+        </ul>
+    </div>
 
-        <!-- Indicators ------------------------------------------------------------------------------------------->
+    <!-- Indicators ------------------------------------------------------------------------------------------->
 
-        <div class="absolute bottom-2 md:right-[230px] right-[180px]">
-            <div class="flex justify-center space-x-2">
-                <template x-for="(slide, index) in Array.from($refs.slider.children)" :key="index">
-                    <button @click="goToSlide(index)"
-                            :class="{'bg-gray-500': currentSlide === index, 'bg-bubble': currentSlide !== index}"
-                            class="w-3 h-1 rounded-full lg:w-3 lg:h-3 hover:bg-gray-400 focus:outline-none focus:bg-gray-400"></button>
-                </template>
-            </div>
+    <div class="absolute bottom-2 md:right-[230px] right-[180px]">
+        <div class="flex justify-center space-x-2">
+            <template x-for="(slide, index) in Array.from($refs.slider.children)" :key="index">
+                <button @click="goToSlide(index)"
+                        :class="{'bg-gray-500': currentSlide === index, 'bg-bubble': currentSlide !== index}"
+                        class="w-3 h-1 rounded-full lg:w-3 lg:h-3 hover:bg-gray-400 focus:outline-none focus:bg-gray-400"></button>
+            </template>
         </div>
     </div>
+</div>
 </div>
 @error('')  @enderror
 
