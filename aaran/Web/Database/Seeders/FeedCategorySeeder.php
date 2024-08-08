@@ -13,8 +13,9 @@ class FeedCategorySeeder extends Seeder
             'vname' => 'Sports Club',
             'active_id' => '1'
         ]);
-
-
-
+        FeedCategory::create([
+            'vname' => 'SharesTrade',
+            'active_id' => '1'
+        ]);
     }
 }

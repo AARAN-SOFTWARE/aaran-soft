@@ -97,37 +97,36 @@
                 </div>
             </div>
         </div>
-        <div class="ml-2 px-8  grid grid-cols-3 gap-6">
+        <div class="ml-2 px-8 ">
             @foreach( $secondaryItem as $index => $row )
-                <div class="gap-3">
-                    <div class="flex flex-col gap-3">
+                <div class=" flex flex-col-4 gap-6 mb-3 w-full">
+                    <div class="w-full">
                         <x-input.model-text wire:model.live="itemList.{{$row}}.title" :label="'Title'"/>
-
-                        <div class="flex flex-col sm:flex-row gap-1 sm:gap-3">
-                            <label for="description"
-                                   class="w-[10rem] text-zinc-500 tracking-wide py-2">Description</label>
-                            <textarea id="description" autocomplete="off"
-                                      wire:model.live="itemList.{{$row}}.description"
-                                      class="w-full purple-textbox h-16 overflow-auto"
-                            ></textarea>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row gap-1 sm:gap-3">
-                            <label for="description"
-                                   class="w-[10rem] text-zinc-500 tracking-wide py-2">Icon</label>
-                            <textarea id="description" autocomplete="off" wire:model.live="itemList.{{$row}}.icon"
-                                      class="w-full purple-textbox h-16 overflow-auto"
-                            ></textarea>
-                        </div>
-
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-1 sm:gap-3 w-full">
+                        <label for="description"
+                               class="w-[10rem] text-zinc-500 tracking-wide py-2">Description</label>
+                        <textarea id="description" autocomplete="off"
+                                  wire:model.live="itemList.{{$row}}.description"
+                                  class="w-full purple-textbox h-16 overflow-auto"
+                        ></textarea>
                     </div>
 
-                    <button
-                        class=" bg-red-500 hover:bg-red-700 inline-block py-1 px-3 text-white h-fit font-semibold flex-col gap-2 rounded-lg"
-                        wire:click="deleteItem('{{$index}}','{{$row}}')">
-                        <span>Delete</span>
-                        <x-icons.icon :icon="'trash'" class="block h-4 w-4"/>
-                    </button>
+                    <div class="flex flex-col sm:flex-row gap-1 sm:gap-3 w-full">
+                        <label for="description"
+                               class="w-[10rem] text-zinc-500 tracking-wide py-2">Icon</label>
+                        <textarea id="description" autocomplete="off" wire:model.live="itemList.{{$row}}.icon"
+                                  class="w-full purple-textbox h-16 overflow-auto"
+                        ></textarea>
+                    </div>
+                    <div class="w-1/4 flex items-center justify-center">
+                        <button
+                            class=" bg-red-500 hover:bg-red-700 inline-block py-1 px-3 text-white h-fit font-semibold flex-col gap-2 rounded-lg "
+                            wire:click="deleteItem('{{$index}}','{{$row}}')">
+                            <span>Delete</span>
+                            <x-icons.icon :icon="'trash'" class="block h-4 w-4"/>
+                        </button>
+                    </div>
                 </div>
             @endforeach
         </div>
