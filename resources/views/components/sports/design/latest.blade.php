@@ -9,10 +9,9 @@
 <!-- #EDFCF2-->
 <!-- #19398A-->
 
-<div class="h-24">&nbsp;</div>
 <div class="md:h-[42rem] h-auto flex-col flex gap-y-6 animate__animated wow animate__fadeInUpBig"
      data-wow-duration="2s">
-    <div class="w-11/12 mx-auto text-white font-Don text-2xl tracking-wider mt-16">Latest</div>
+    <div class="w-11/12 mx-auto font-roboto font-semibold tracking-wider mt-32 text-5xl animate__animated wow animate__slideInLeft">Latest Updates</div>
     <div class="w-11/12 grid md:grid-cols-3 grid-cols-1 mx-auto gap-6 mt-4">
         <x-sports.slider.slider-1 :list="$upComingEvents"/>
         <x-sports.slider.slider-1 :list="$blogs"/>

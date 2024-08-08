@@ -54,7 +54,7 @@ class Index extends Component
         $this->student = SportStudent::all();
     }
 
-  
+
     public function getData()
     {
         $this->activities = Feed::where('tag_id', 1)->latest()->take(3)->get();
@@ -72,7 +72,7 @@ class Index extends Component
         $obj1=$this->testimony->toarray();
         $this->statsItem=StatsItem::where('stats_id',$obj1[0]['id'])->get();
 
-        $this->clubImage = SportClubPic::latest()->take(8)->get();
+        $this->clubImage = SportClubPic::latest()->take(15)->get();
 
         $this->sponsors = Sponsor::latest()->get();
 
