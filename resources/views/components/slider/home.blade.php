@@ -68,8 +68,9 @@
                                     <div
                                         class=" md:text-9xl text-xl  ml-10  animate__animated wow animate__bounceInUp capitalize drop-shadow-lg">{{$row->vname}}</div>
 
-                                    <div
-                                        class="md:text-6xl mt-3 text-justify tracking-wider drop-shadow-lg ml-10 animate__animated wow animate__slideInLeft capitalize">{!! $row->description !!}</div>
+                                    {{--                                    <div--}}
+                                    {{--                                        class="md:text-6xl mt-3 text-justify tracking-wider drop-shadow-lg ml-10
+                                    animate__animated wow animate__slideInLeft capitalize">{!! $row->description !!}</div>--}}
                                     <div
                                         class="text-md mt-3 text-white ml-10 drop-shadow-lg bg-black/10 ">{{$row->created_at}}</div>
                                 </div>
