@@ -54,7 +54,8 @@ return new class extends Migration {
                 $table->timestamps();
             });
 
-        } else {
+        }
+        else {
             RefactorMigrationTable::clear('2024_03_01_002001_create_stocks_table');
         }
     }
