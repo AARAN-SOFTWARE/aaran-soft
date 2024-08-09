@@ -11,7 +11,7 @@ Route::get('/contact', \App\Livewire\Webs\Contact\Contact::class)->name('contact
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::get('/dashboard', App\Livewire\Dashboard\Index::class)->name('dashboard');
-    Route::get('/masterGst', App\Http\Controllers\Gst\masterGst::class)->name('masterGst');
+//    Route::get('/masterGst', App\Http\Controllers\Gst\masterGst::class)->name('masterGst');
 
 });
 
