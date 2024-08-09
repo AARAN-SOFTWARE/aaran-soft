@@ -13,7 +13,9 @@ Route::get('/sales',function (){
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-Route::post('/gst',[\App\Http\Controllers\Gst\masterGst::class,'__invoke']);
+Route::get('/gst',[\App\Http\Controllers\Gst\masterGst::class,'authenticate']);
+Route::get('/details',[\App\Http\Controllers\Gst\masterGst::class,'gstDetails']);
+Route::get('/irn',[\App\Http\Controllers\Gst\masterGst::class,'getIrn']);
 
 
 Route::get('user/{id}', [ApiController::class, 'user']);
