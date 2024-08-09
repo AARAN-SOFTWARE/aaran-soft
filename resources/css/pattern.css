@@ -23,3 +23,55 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52' viewBox='0 0 52 52'%3E%3Cpath fill='%23322e6a' fill-opacity='0.4' d='M0 17.83V0h17.83a3 3 0 0 1-5.66 2H5.9A5 5 0 0 1 2 5.9v6.27a3 3 0 0 1-2 5.66zm0 18.34a3 3 0 0 1 2 5.66v6.27A5 5 0 0 1 5.9 52h6.27a3 3 0 0 1 5.66 0H0V36.17zM36.17 52a3 3 0 0 1 5.66 0h6.27a5 5 0 0 1 3.9-3.9v-6.27a3 3 0 0 1 0-5.66V52H36.17zM0 31.93v-9.78a5 5 0 0 1 3.8.72l4.43-4.43a3 3 0 1 1 1.42 1.41L5.2 24.28a5 5 0 0 1 0 5.52l4.44 4.43a3 3 0 1 1-1.42 1.42L3.8 31.2a5 5 0 0 1-3.8.72zm52-14.1a3 3 0 0 1 0-5.66V5.9A5 5 0 0 1 48.1 2h-6.27a3 3 0 0 1-5.66-2H52v17.83zm0 14.1a4.97 4.97 0 0 1-1.72-.72l-4.43 4.44a3 3 0 1 1-1.41-1.42l4.43-4.43a5 5 0 0 1 0-5.52l-4.43-4.43a3 3 0 1 1 1.41-1.41l4.43 4.43c.53-.35 1.12-.6 1.72-.72v9.78zM22.15 0h9.78a5 5 0 0 1-.72 3.8l4.44 4.43a3 3 0 1 1-1.42 1.42L29.8 5.2a5 5 0 0 1-5.52 0l-4.43 4.44a3 3 0 1 1-1.41-1.42l4.43-4.43a5 5 0 0 1-.72-3.8zm0 52c.13-.6.37-1.19.72-1.72l-4.43-4.43a3 3 0 1 1 1.41-1.41l4.43 4.43a5 5 0 0 1 5.52 0l4.43-4.43a3 3 0 1 1 1.42 1.41l-4.44 4.43c.36.53.6 1.12.72 1.72h-9.78zm9.75-24a5 5 0 0 1-3.9 3.9v6.27a3 3 0 1 1-2 0V31.9a5 5 0 0 1-3.9-3.9h-6.27a3 3 0 1 1 0-2h6.27a5 5 0 0 1 3.9-3.9v-6.27a3 3 0 1 1 2 0v6.27a5 5 0 0 1 3.9 3.9h6.27a3 3 0 1 1 0 2H31.9z'%3E%3C/path%3E%3C/svg%3E");
 }
 
+
+
+/*button*/
+
+.btn-base {
+    @apply px-4 py-1 rounded-md flex justify-center items-center font-roboto tracking-wider max-w-max
+}
+
+.btn-xs {
+   @apply btn-base text-[0.8em]
+}
+.btn-sm {
+    @apply btn-base text-[1em]
+}
+.btn-md {
+    @apply btn-base text-[1.1em]
+}
+.btn-lg {
+    @apply btn-base text-[1.2em]
+}
+.btn-xl {
+    @apply btn-base text-[1.3em]
+}
+
+.primary {
+    @apply bg-gradient-to-r from-[#0052cc] to-[#1a75ff] hover:from-[#1a75ff] hover:to-[#0052cc] text-white
+}
+.secondary {
+    @apply bg-gradient-to-r from-[#4d4d4d] to-[#737373] hover:from-[#737373] hover:to-[#4d4d4d] text-white
+}
+.success {
+    @apply bg-gradient-to-r from-[#00994d] to-[#00e673] hover:from-[#00e673] hover:to-[#00994d] text-white
+}
+.danger {
+    @apply bg-gradient-to-r from-[#e60000] to-[#ff1a1a] hover:from-[#ff1a1a] hover:to-[#e60000] text-white
+}
+.info {
+    @apply bg-gradient-to-r from-[#148c9f] to-[#16a0b6] hover:from-[#16a0b6] hover:to-[#148c9f] text-white
+}
+.warning {
+    @apply bg-gradient-to-r from-[#e6ac00] to-[#ffbf00] hover:from-[#ffbf00] hover:to-[#e6ac00] text-black
+}
+.light {
+    @apply bg-gradient-to-r from-[#f2f2f2] to-[#e6e6e6] hover:from-[#e6e6e6] hover:to-[#f2f2f2] text-black
+}
+.dark {
+    @apply bg-black text-white
+}
+
+
+
+
