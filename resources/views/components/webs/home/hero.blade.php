@@ -226,7 +226,7 @@
     </div>
 </div>
 
-<div class="w-3/4 mx-auto py-24">
+<div class="w-3/4 h-screen mx-auto py-24">
     <h2 class=" w-9/12 md:text-4xl text-2xl font-asul font-semibold tracking-wide leading-[1.4] sm:py-9 ">
         Experience Effortless GST Compliance
         with Invoicing Software
@@ -236,7 +236,7 @@
         <div class="w-4/12 grid gap-y-6 text-md font-semibold font-roboto tracking-wider">
             <div>
                 <button
-                    class="card-button active w-52 py-4 flex items-center gap-2 justify-center shadow-md shadow-gray-400 rounded-xl"
+                    class="card-button active w-52 py-4 flex items-center gap-2 justify-center shadow-md shadow-gray-400 rounded-xl text-[#F7C028]"
                     onclick="showCard('card1')">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="currentColor" class="size-6">
@@ -287,103 +287,112 @@
         </div>
 
         <!-- Tab Content -->
-        <div class="bg-slate-100 hover:bg-[#3DC1F0] hover:text-white duration-300 rounded-xl hover:shadow-md hover:shadow-gray-400 font-roboto tracking-wider font-semibold">
-            <div id="card1" class="h-96 card-content active flex-col flex justify-evenly items-center">
-                <div class="flex gap-3 px-5">
-                    <img alt="Easy GST Return Filing" class="w-1/2 h-56 rounded-xl" src="../../../../images/gst-filing.webp">
-                    <div class="gst-feature-description-text w-1/2 flex-col flex justify-center items-center">
+        <div
+            class="bg-slate-100 hover:bg-[#3DC1F0] hover:text-white duration-300 rounded-xl hover:shadow-md hover:shadow-gray-400 font-roboto text-sm tracking-wider font-semibold">
+            <div id="card1" class="h-96 card-content active flex justify-evenly items-center p-5">
+                <img alt="Easy GST Return Filing" class="w-2/3 h-auto rounded-xl"
+                     src="../../../../images/gst-filing.webp">
+                <div class="w-1/3 flex-col flex items-center gap-y-12 px-5">
+                    <div class="gst-feature-description-text flex-col flex justify-center items-center">
                         Export your GSTR1 data in a simple format (JSON) and easily file your GST returns.
                         Also, get GSTR-2 and GSTR-3B reports that would help you/your CAs in easy GST tax filing.
                     </div>
-                </div>
-                <button>
-                    <a href="#"
-                       class="relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-indigo-600 border-2 border-indigo-600 rounded-full hover:text-white group hover:bg-gray-50">
+                    <button>
+                        <a href="#"
+                           class="relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-indigo-600 border-2 border-indigo-600 rounded-full hover:text-white group hover:bg-gray-50">
                         <span
                             class="absolute left-0 block w-full h-0 transition-all bg-indigo-600 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
-                        <span
-                            class="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
+                            <span
+                                class="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg"><path
                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </span>
-                        <span class="relative">Get Started Now</span>
-                    </a>
-                </button>
+                            <span class="relative">Get Started Now</span>
+                        </a>
+                    </button>
+                </div>
+            </div>
+            <div id="card2" class="h-96 card-content hidden  flex justify-evenly items-center gap-x-6 p-5">
+                <img alt="Easy GST Return Filing" class="w-2/3 h-auto rounded-xl"
+                     src="../../../../images/e-invoicing.webp">
+                <div class="w-1/3 flex-col flex items-center gap-y-12">
+                    <div class="gst-feature-description-text flex-col flex justify-center items-center">
+                        Effortlessly generate e-Invoices in a single click, with automatic GSTR1 reconciliation, and
+                        conveniently cancel e-Invoices directly through e-invoicing software.
+                    </div>
+                    <button>
+                        <a href="#"
+                           class="relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-indigo-600 border-2 border-indigo-600 rounded-full hover:text-white group hover:bg-gray-50">
+                        <span
+                            class="absolute left-0 block w-full h-0 transition-all bg-indigo-600 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
+                            <span
+                                class="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg"><path
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </span>
+                            <span class="relative">Get Started Now</span>
+                        </a>
+                    </button>
+                </div>
+            </div>
+            <div id="card3" class="h-96 card-content hidden flex justify-evenly items-center p-5">
+                <div class="w-2/3 flex-col flex justify-center items-center">
+                    <img alt="Easy GST Return Filing" class="w-[27rem] h-auto rounded-xl overflow-y-hidden "
+                         src="../../../../images/e-way-billing.jpg"></div>
+                <div class="w-1/3 flex-col flex items-center gap-y-12">
+                    <div class="gst-feature-description-text flex-col flex justify-center items-center">
+                        Easily generate and download e-way bills in less than 30 seconds. 25+ smart error validations
+                        for
+                        error-free e-way billing. Generate e-invoices and e-way bills simultaneously.
+                    </div>
+                    <button>
+                        <a href="#"
+                           class="relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-indigo-600 border-2 border-indigo-600 rounded-full hover:text-white group hover:bg-gray-50">
+                        <span
+                            class="absolute left-0 block w-full h-0 transition-all bg-indigo-600 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
+                            <span
+                                class="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg"><path
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </span>
+                            <span class="relative">Get Started Now</span>
+                        </a>
+                    </button>
+                </div>
             </div>
 
-            <div id="card2" class="card-content hidden ">
-                <img alt="Easy GST Return Filing" class="gst-imgage "
-                     src="../../../../images/e-invoicing.webp">
-                <div
-                    class="gst-feature-description-text">
-                    Effortlessly generate e-Invoices in a single click, with automatic GSTR1 reconciliation, and
-                    conveniently cancel e-Invoices directly through e-invoicing software.
-                </div>
-                <button>
-                    <a href="#"
-                       class="relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-indigo-600 border-2 border-indigo-600 rounded-full hover:text-white group hover:bg-gray-50">
+            <div id="card4" class="h-96 card-content hidden flex justify-evenly gap-x-6 items-center p-5">
+                <img alt="Easy GST Return Filing" class="w-2/3 h-auto rounded-xl"
+                     src="../../../../images/data-export.webp">
+                <div class="w-1/3 flex-col flex gap-y-12">
+                    <div class="gst-feature-description-text flex-col flex justify-center items-center">
+                        Export your business data to Tally with our free billing software. No more manual entries for
+                        your
+                        CA. Save your time, ensure accuracy and streamline your accounting process.
+                    </div>
+                    <button>
+                        <a href="#"
+                           class="relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-indigo-600 border-2 border-indigo-600 rounded-full hover:text-white group hover:bg-gray-50">
                         <span
                             class="absolute left-0 block w-full h-0 transition-all bg-indigo-600 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
-                        <span
-                            class="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
+                            <span
+                                class="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg"><path
                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </span>
-                        <span class="relative">Get Started Now</span>
-                    </a>
-                </button>
-            </div>
-            <div id="card3" class="card-content hidden ">
-                <img alt="Easy GST Return Filing" class="gst-imgage "
-                     src="../../../../images/e-way-billing.jpg">
-                <div
-                    class="gst-feature-description-text ">
-                    Easily generate and download e-way bills in less than 30 seconds. 25+ smart error validations for
-                    error-free e-way billing. Generate e-invoices and e-way bills simultaneously.
+                            <span class="relative">Get Started Now</span>
+                        </a>
+                    </button>
                 </div>
-                <button>
-                    <a href="#"
-                       class="relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-indigo-600 border-2 border-indigo-600 rounded-full hover:text-white group hover:bg-gray-50">
-                        <span
-                            class="absolute left-0 block w-full h-0 transition-all bg-indigo-600 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
-                        <span
-                            class="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg"><path
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </span>
-                        <span class="relative">Get Started Now</span>
-                    </a>
-                </button>
-            </div>
-            <div id="card4" class="card-content hidden">
-                <img data-src="/static-assets/images/landing-page-v2/gst-filing.webp" alt="Easy GST Return Filing"
-                     class="gst-imgage " src="../../../../images/data-export.webp">
-                <div
-                    class="gst-feature-description-text">
-                    Export your business data to Tally with our free billing software. No more manual entries for your
-                    CA. Save your time, ensure accuracy and streamline your accounting process.
-                </div>
-                <button>
-                    <a href="#"
-                       class="relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-indigo-600 border-2 border-indigo-600 rounded-full hover:text-white group hover:bg-gray-50">
-                        <span
-                            class="absolute left-0 block w-full h-0 transition-all bg-indigo-600 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
-                        <span
-                            class="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg"><path
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </span>
-                        <span class="relative">Get Started Now</span>
-                    </a>
-                </button>
+
             </div>
         </div>
         <div class="mt-10">
@@ -466,3 +475,5 @@
         showTab('tab1');
     </script>
 </div>
+
+
