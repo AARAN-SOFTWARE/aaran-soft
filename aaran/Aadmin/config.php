@@ -19,4 +19,13 @@ return [
     'unitsDefault' => env('UNITS', '2'),
 
     'brand' => env('BRAND', 'AARAN'),
+
+    'main_menu' => [
+        ['menu' => 'Home', 'link' => 'home'],
+        ['menu' => 'Gallery', 'link' => 'gallery'],
+        ['menu' => 'News', 'link' => 'news'],
+        ['menu' => 'Blog', 'link' => 'feed'],
+        ['menu' => 'About', 'link' => 'sportAbout'],
+        ['menu' => 'Contact', 'link' => 'sportContact'],
+    ]
 ];

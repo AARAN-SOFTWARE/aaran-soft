@@ -180,7 +180,7 @@ class S00_MigrationSeeder extends Seeder
             RefactorMigrationTable::clear('2024_03_01_001005_create_mailids_table');
         }
 
-        if (!DbMigration::hasShareTrades()) {
+        if (!DbMigration::hasShareMarket()) {
             RefactorMigrationTable::clear('2024_03_01_001006_create_share_trades_table');
             RefactorMigrationTable::clear('2024_03_01_001006_create_stock_trades_table');
         }

@@ -66,7 +66,7 @@ return [
         DbMigration::todoList(),
         DbMigration::magalir(),
         DbMigration::demo(),
-        DbMigration::shareTrades(),
+        DbMigration::shareMarket(),
         DbMigration::mailids(),
         DbMigration::cashBook(),
         DbMigration::developer(),

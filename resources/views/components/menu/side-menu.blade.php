@@ -29,9 +29,9 @@
                 <x-menu.sub.books/>
             @endif
 
-                @if(Aaran\Aadmin\Src\MainMenu::hasSpotMyNumber())
-                    <x-menu.sub.SpotMyNumber/>
-                @endif
+            @if(Aaran\Aadmin\Src\MainMenu::hasSpotMyNumber())
+                <x-menu.sub.SpotMyNumber/>
+            @endif
 
             @if(Aaran\Aadmin\Src\MainMenu::hasWelfare())
                 <x-menu.sub.welfare/>
@@ -88,6 +88,10 @@
 
             @if(Aaran\Aadmin\Src\MainMenu::hasSports())
                 <x-menu.sub.sports/>
+            @endif
+
+            @if(Aaran\Aadmin\Src\MainMenu::hasSharesMarket())
+                <x-menu.sub.shares/>
             @endif
             <x-menu.sub.logout/>
 

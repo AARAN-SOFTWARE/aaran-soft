@@ -23,30 +23,16 @@
             <!--main menu ---------------------------------------------------------------------------------------------->
             <div class="hidden md:block ">
                 <ul class="flex space-x-8 ">
-                    <li>
-                        <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
-                           href="{{route('home')}}">Home</a>
-                    </li>
-                    <li>
-                        <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
-                           href="{{route('gallery')}}">Gallery</a>
-                    </li>
-                    <li>
-                        <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
-                           href="{{route('news')}}">News</a>
-                    </li>
-                    <li>
-                        <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
-                           href="{{route('feed')}}">Blog</a>
-                    </li>
-                    <li>
-                        <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
-                           href="{{route('sportContact')}}">Contact</a>
-                    </li>
-                    <li>
-                        <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
-                           href="{{route('sportAbout')}}">About Us</a>
-                    </li>
+
+
+                    @foreach(config('aadmin.main_menu') as $row)
+                        <li>
+                            <a class="text-lg font-sans font-bold hover:tracking-wider text-black px-2 hover:border-b-4 py-1 hover:border-blue-400 transition-all duration-600"
+                               href="{{route($row['link'])}}">{{$row['menu']}}</a>
+                        </li>
+
+                    @endforeach
+
                 </ul>
             </div>
 
@@ -110,30 +96,39 @@
         <div :class="{'block': open, 'hidden': ! open}"
              class="hidden sm:hidden transform transition duration-800 ease-in-out w-1/2 text-center ml-auto mr-0 bg-gray-800 rounded-lg ">
             <ul class="mt-4 space-y-4">
-                <li>
-                    <a class="hover:underline font-serif block px-4 py-2 text-white "
-                       href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li>
-                    <a class="hover:underline font-serif block px-4 py-2 text-white "
-                       href="{{route('gallery')}}">Gallery</a>
-                </li>
-                <li>
-                    <a class="hover:underline font-serif block px-4 py-2 text-white "
-                       href="{{route('news')}}">News</a>
-                </li>
-                <li>
-                    <a class="hover:underline font-serif block px-4 py-2 text-white "
-                       href="{{route('feed')}}">Blog</a>
-                </li>
-                <li>
-                    <a class="hover:underline font-serif block px-4 py-2 text-white "
-                       href="{{route('sportContact')}}">Contact</a>
-                </li>
-                <li>
-                    <a class="hover:underline font-serif block px-4 py-2 text-white "
-                       href="{{route('sportAbout')}}">About Us</a>
-                </li>
+
+                @foreach(config('aadmin.main_menu') as $row)
+                    <li>
+                        <a class="hover:underline font-serif block px-4 py-2 text-white"
+                           href="{{route($row['link'])}}">{{$row['menu']}}</a>
+                    </li>
+
+                @endforeach
+
+{{--                <li>--}}
+{{--                    <a class="hover:underline font-serif block px-4 py-2 text-white "--}}
+{{--                       href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a class="hover:underline font-serif block px-4 py-2 text-white "--}}
+{{--                       href="{{route('gallery')}}">Gallery</a>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a class="hover:underline font-serif block px-4 py-2 text-white "--}}
+{{--                       href="{{route('news')}}">News</a>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a class="hover:underline font-serif block px-4 py-2 text-white "--}}
+{{--                       href="{{route('feed')}}">Blog</a>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a class="hover:underline font-serif block px-4 py-2 text-white "--}}
+{{--                       href="{{route('sportContact')}}">Contact</a>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a class="hover:underline font-serif block px-4 py-2 text-white "--}}
+{{--                       href="{{route('sportAbout')}}">About Us</a>--}}
+{{--                </li>--}}
 
 
                 @if (Route::has('login'))
