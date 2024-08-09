@@ -2,6 +2,7 @@
     <x-slot name="header">Stock Details</x-slot>
 
     <x-forms.m-panel>
+
         <!-- Top Controls --------------------------------------------------------------------------------------------->
         <x-forms.top-controls :show-filters="$showFilters"/>
 
@@ -14,11 +15,11 @@
             <x-slot name="table_header">
                 <x-table.header-serial wire:click.prevent="sortBy('vname')"/>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Date</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Ltp</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Changes</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Change %</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Volume</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Open</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Close</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>High</x-table.header-text>
-                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Low</x-table.header-text>
+                <x-table.header-text wire:click.prevent="sortBy('vname')" center>Open Interest</x-table.header-text>
                 <x-table.header-text wire:click.prevent="sortBy('vname')" center>Trend</x-table.header-text>
                 <x-table.header-action/>
             </x-slot>
@@ -37,25 +38,31 @@
                             </button>
                         </x-table.cell-text>
 
+
+                        <x-table.cell-text center>
+                            {{ $row->ltp+0 }}
+                        </x-table.cell-text>
+
+
+                        <x-table.cell-text center>
+                            {{ $row->chg+0 }}
+                        </x-table.cell-text>
+
+
+                        <x-table.cell-text center>
+                            {{ $row->chg_percent+0 }}
+                        </x-table.cell-text>
+
+
                         <x-table.cell-text center>
                             {{ $row->volume+0 }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text center>
-                            {{ $row->open+0 }}
-                        </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            {{ $row->close+0 }}
+                            {{ $row->open_interest+0 }}
                         </x-table.cell-text>
 
-                        <x-table.cell-text center>
-                            {{ $row->high+0 }}
-                        </x-table.cell-text>
-
-                        <x-table.cell-text center>
-                            {{ $row->low+0 }}
-                        </x-table.cell-text>
 
                         <x-table.cell-text center>
                             {{ $row->trend }}
@@ -66,41 +73,128 @@
 
                     @if($showDetailsId === $row->id )
                         @if($showDetails)
-                            <x-table.row>
-                                <x-table.cell-text center>
-                                    {{ $index + 1 }}
-                                </x-table.cell-text>
 
-                                <x-table.cell-text center>
-                                    {{ date('d-m-Y', strtotime($row->vdate)) }}
-                                </x-table.cell-text>
+                            <tr>
+                                <th colspan="9">
+                                    <div x-data @click.away="@this.set('showDetails', false)">
+                                    <div class="w-full">
+                                        <x-tabs.tab-panel>
 
-                                <x-table.cell-text center>
-                                    {{ $row->volume+0 }}
-                                </x-table.cell-text>
 
-                                <x-table.cell-text center>
-                                    {{ $row->open+0 }}
-                                </x-table.cell-text>
+                                            <x-slot name="tabs">
+                                                <x-tabs.tab>Market</x-tabs.tab>
+                                                <x-tabs.tab>Pivots</x-tabs.tab>
+                                            </x-slot>
 
-                                <x-table.cell-text center>
-                                    {{ $row->close+0 }}
-                                </x-table.cell-text>
+                                            <x-slot name="content">
 
-                                <x-table.cell-text center>
-                                    {{ $row->high+0 }}
-                                </x-table.cell-text>
+                                                <x-tabs.content>
+                                                    <div
+                                                        class="grid grid-cols-2 gap-3 w-full divide-y divide-green-300">
 
-                                <x-table.cell-text center>
-                                    {{ $row->low+0 }}
-                                </x-table.cell-text>
+                                                        <div
+                                                            class="w-1/2 flex justify-between border-t border-green-300">
+                                                            <span class="flex justify-end w-full">Open</span>
+                                                            <span class="w-full">{{$row->open}}</span>
+                                                        </div>
 
-                                <x-table.cell-text center>
-                                    {{ $row->trend }}
-                                </x-table.cell-text>
+                                                        <div class="w-1/2 flex justify-between">
+                                                            <span class="flex justify-end w-full">Prev Close</span>
+                                                            <span class="w-full">{{$row->close}}</span>
+                                                        </div>
 
-                                <x-table.cell-action id="{{$row->id}}"/>
-                            </x-table.row>
+                                                        <div class="w-1/2 flex justify-between">
+                                                            <span class="flex justify-end w-full">Today-High</span>
+                                                            <span class="w-full">{{$row->high}}</span>
+                                                        </div>
+
+                                                        <div class="w-1/2 flex justify-between">
+                                                            <span class="flex justify-end w-full">Today-Low</span>
+                                                            <span class="w-full">{{$row->low}}</span>
+                                                        </div>
+
+                                                        <div class="w-1/2 flex justify-between">
+                                                            <span class="flex justify-end w-full">52 Week-High</span>
+                                                            <span class="w-full">{{$row->high_52}}</span>
+                                                        </div>
+
+                                                        <div class="w-1/2 flex justify-between">
+                                                            <span class="flex justify-end w-full">52 Week-Low</span>
+                                                            <span class="w-full">{{$row->low_52}}</span>
+                                                        </div>
+
+                                                        <div class="w-1/2 flex justify-between">
+                                                            <span class="flex justify-end w-full">All Time-High</span>
+                                                            <span class="w-full">{{$row->all_high}}</span>
+                                                        </div>
+
+                                                        <div class="w-1/2 flex justify-between">
+                                                            <span class="flex justify-end w-full">All Time-Low</span>
+                                                            <span class="w-full">{{$row->all_low}}</span>
+                                                        </div>
+
+                                                    </div>
+                                                </x-tabs.content>
+
+                                                <x-tabs.content>
+                                                    <div
+                                                        class="grid grid-cols-3 gap-3 w-full divide-y divide-green-300">
+
+                                                        <div class="flex justify-between border-t border-green-300">
+                                                            <span class="flex justify-end w-full">R1</span>
+                                                            <span class="w-full">{{$row->r1}}</span>
+                                                        </div>
+
+                                                        <div>&nbsp;</div>
+
+                                                        <div class="flex justify-between">
+                                                            <span class="flex justify-end w-full">S1</span>
+                                                            <span class="w-full">{{$row->s1}}</span>
+                                                        </div>
+
+                                                        <div class="flex justify-between">
+                                                            <span class="flex justify-end w-full">R2</span>
+                                                            <span class="w-full">{{$row->r2}}</span>
+                                                        </div>
+
+                                                        <div class="flex justify-between">
+                                                            <span class="flex justify-end w-full">Pivot</span>
+                                                            <span class="w-full">{{$row->pivot}}</span>
+                                                        </div>
+
+                                                        <div class="flex justify-between">
+                                                            <span class="flex justify-end w-full">S2</span>
+                                                            <span class="w-full">{{$row->s2}}</span>
+                                                        </div>
+
+                                                        <div class="flex justify-between">
+                                                            <span class="flex justify-end w-full">R3</span>
+                                                            <span class="w-full">{{$row->r3}}</span>
+                                                        </div>
+
+                                                        <div>&nbsp;</div>
+
+                                                        <div class="flex justify-between">
+                                                            <span class="flex justify-end w-full">S3</span>
+                                                            <span class="w-full">{{$row->s3}}</span>
+                                                        </div>
+
+                                                    </div>
+                                                </x-tabs.content>
+
+                                            </x-slot>
+
+                                        </x-tabs.tab-panel>
+                                    </div>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th colspan="9" class="bg-green-800">
+
+                                </th>
+                            </tr>
+
                         @endif
                     @endif
 
@@ -189,12 +283,9 @@
                     <option value="SideWise">SideWay</option>
                 </x-input.model-select>
 
-                {{--                <x-radio.radio value="up"/>--}}
-
             </div>
 
         </x-forms.create>
-
 
     </x-forms.m-panel>
 </div>
