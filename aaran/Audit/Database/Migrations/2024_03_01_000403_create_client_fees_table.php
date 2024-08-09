@@ -12,7 +12,7 @@ return new class extends Migration {
             Schema::create('client_fees', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('client_id')->references('id')->on('clients')->onDelete('cascade');
-                $table->string('month')->nullable();
+                $table->decimal('month')->nullable();
                 $table->string('year')->nullable();
                 $table->string('invoice_no')->nullable();
                 $table->string('invoice_date')->nullable();

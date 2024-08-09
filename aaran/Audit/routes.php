@@ -12,6 +12,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('clientFees', App\Livewire\Audit\ClientFee\Index::class)->name('clientFees');
     Route::get('clientFees/{id}/report', App\Livewire\Audit\ClientFee\Report::class)->name('clientFees.report');
+    Route::get('clientFees/{id?}/{year?}/print', App\Http\Controllers\ClientFeesReportController::class)->name('clientFees.print');
 
     Route::get('clientBanks', App\Livewire\Audit\ClientBank\Index::class)->name('clientBanks');
     Route::get('clientBanks/{id}/show', App\Livewire\Audit\ClientBank\Show::class)->name('clientBanks.show');
