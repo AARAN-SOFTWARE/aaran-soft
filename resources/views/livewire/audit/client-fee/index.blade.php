@@ -60,7 +60,7 @@
 
                         <x-table.cell-text>
                             <a href="{{route('clientFees.report',[$row->client_id])}}">
-                            {{ $row->client->vname }}</a>
+                                {{ $row->client->vname }}</a>
                         </x-table.cell-text>
 
                         <x-table.cell-text>
@@ -133,13 +133,15 @@
         <!-- Create Form ---------------------------------------------------------------------------------------------->
 
         <x-forms.create :id="$vid">
-            <x-input.model-text wire:model="invoice_no" autofocus :label="'invoice_no'"/>
-            <x-input.model-text wire:model="invoice_date" type="date" :label="'invoice_date'"/>
-            <x-input.model-text wire:model="taxable" :label="'taxable'"/>
-            <x-input.model-text wire:model="gst" :label="'gst'"/>
-            <x-input.model-text wire:model="receipt" :label="'receipt'"/>
-            <x-input.model-text wire:model="receipt_date" type="date" :label="'receipt_date'"/>
-            <x-input.model-text wire:model="receipt_ref" :label="'receipt_ref'"/>
+            <div class="flex flex-col gap-5">
+                <x-input.model-text wire:model="invoice_no" autofocus :label="'invoice_no'"/>
+                <x-input.model-text wire:model="invoice_date" type="date" :label="'invoice_date'"/>
+                <x-input.model-text wire:model="taxable" :label="'taxable'"/>
+                <x-input.model-text wire:model="gst" :label="'gst'"/>
+                <x-input.model-text wire:model="receipt" :label="'receipt'"/>
+                <x-input.model-text wire:model="receipt_date" type="date" :label="'receipt_date'"/>
+                <x-input.model-text wire:model="receipt_ref" :label="'receipt_ref'"/>
+            </div>
         </x-forms.create>
 
         <x-button.primary wire:click="generate">Generate</x-button.primary>
