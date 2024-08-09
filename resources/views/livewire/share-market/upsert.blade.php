@@ -4,6 +4,11 @@
     <x-forms.m-panel>
         <!-- Top Controls --------------------------------------------------------------------------------------------->
         <x-forms.top-controls :show-filters="$showFilters"/>
+
+        <div class="text-3xl font-semibold text-pink-600 tracking-widest w-full">
+            {{$stock->vname}} -[{{$stock->symbol}}]
+        </div>
+
         <!-- Header --------------------------------------------------------------------------------------------------->
         <x-forms.table :list="$list">
             <x-slot name="table_header">
@@ -21,14 +26,15 @@
             <!-- Table Body ------------------------------------------------------------------------------------------->
             <x-slot name="table_body">
                 @forelse ($list as $index =>  $row)
-
                     <x-table.row>
                         <x-table.cell-text center>
                             {{ $index + 1 }}
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
-                            {{ date('d-m-Y', strtotime($row->vdate)) }}
+                            <button wire:click="showDetailsRow({{$row->id}})">
+                                {{ date('d-m-Y', strtotime($row->vdate)) }}
+                            </button>
                         </x-table.cell-text>
 
                         <x-table.cell-text center>
@@ -58,6 +64,46 @@
                         <x-table.cell-action id="{{$row->id}}"/>
                     </x-table.row>
 
+                    @if($showDetailsId === $row->id )
+                        @if($showDetails)
+                            <x-table.row>
+                                <x-table.cell-text center>
+                                    {{ $index + 1 }}
+                                </x-table.cell-text>
+
+                                <x-table.cell-text center>
+                                    {{ date('d-m-Y', strtotime($row->vdate)) }}
+                                </x-table.cell-text>
+
+                                <x-table.cell-text center>
+                                    {{ $row->volume+0 }}
+                                </x-table.cell-text>
+
+                                <x-table.cell-text center>
+                                    {{ $row->open+0 }}
+                                </x-table.cell-text>
+
+                                <x-table.cell-text center>
+                                    {{ $row->close+0 }}
+                                </x-table.cell-text>
+
+                                <x-table.cell-text center>
+                                    {{ $row->high+0 }}
+                                </x-table.cell-text>
+
+                                <x-table.cell-text center>
+                                    {{ $row->low+0 }}
+                                </x-table.cell-text>
+
+                                <x-table.cell-text center>
+                                    {{ $row->trend }}
+                                </x-table.cell-text>
+
+                                <x-table.cell-action id="{{$row->id}}"/>
+                            </x-table.row>
+                        @endif
+                    @endif
+
                 @empty
                     <x-table.empty/>
                 @endforelse
@@ -76,10 +122,10 @@
             <div class="flex flex-col gap-3 w-full">
 
                 <div class="flex flex-row gap-3 w-full">
-                <div class="text-3xl font-semibold text-amber-600 tracking-widest w-full">
-                    {{$stock->vname}}-{{$stock->symbol}}
-                </div>
-                <x-input.model-date wire:model="vdate" :label="'Date'"/>
+                    <div class="text-3xl font-semibold text-pink-600 py-2 tracking-widest w-full">
+                        {{$stock->vname}}-{{$stock->symbol}}
+                    </div>
+                    <x-input.model-date wire:model="vdate" :label="'Date'"/>
                 </div>
 
                 <x-tabs.tab-panel>
@@ -143,7 +189,7 @@
                     <option value="SideWise">SideWay</option>
                 </x-input.model-select>
 
-{{--                <x-radio.radio value="up"/>--}}
+                {{--                <x-radio.radio value="up"/>--}}
 
             </div>
 

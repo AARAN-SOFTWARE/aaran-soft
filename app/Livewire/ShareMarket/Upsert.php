@@ -11,6 +11,7 @@ use Livewire\Component;
 class Upsert extends Component
 {
     use CommonTrait;
+
     #region[Properties]
     public $stock_id;
     public $vdate;
@@ -38,6 +39,9 @@ class Upsert extends Component
 
     public $stock;
 
+    public bool $showDetails = false;
+    public mixed $showDetailsId;
+
     #endregion
 
     #region[mount]
@@ -47,7 +51,7 @@ class Upsert extends Component
 
         $this->stock_id = $id;
 
-        $this->vdate=Carbon::now()->format('Y-m-d');
+        $this->vdate = Carbon::now()->format('Y-m-d');
     }
     #endregion
 
@@ -58,28 +62,28 @@ class Upsert extends Component
             if ($this->vid == "") {
                 StockDetail::create([
                     'stock_id' => $this->stock->id,
-                    'vdate'=>$this->vdate,
-                    'ltp'=>$this->ltp?:0,
-                    'chg'=>$this->chg?:0,
-                    'chg_percent'=>$this->chg_percent?:0,
-                    'volume'=>$this->volume?:0,
-                    'open_interest'=>$this->open_interest?:0,
-                    'open'=>$this->open?:0,
-                    'close'=>$this->close?:0,
-                    'high'=>$this->high?:0,
-                    'low'=>$this->low?:0,
-                    'high_52'=>$this->high_52?:0,
-                    'low_52'=>$this->low_52?:0,
-                    'all_high'=>$this->all_high?:0,
-                    'all_low'=>$this->all_low?:0,
-                    'pivot'=>$this->pivot,
-                    'r1'=>$this->r1?:0,
-                    'r2'=>$this->r2?:0,
-                    'r3'=>$this->r3?:0,
-                    's1'=>$this->s1?:0,
-                    's2'=>$this->s2?:0,
-                    's3'=>$this->s3?:0,
-                    'trend'=>$this->trend,
+                    'vdate' => $this->vdate,
+                    'ltp' => $this->ltp ?: 0,
+                    'chg' => $this->chg ?: 0,
+                    'chg_percent' => $this->chg_percent ?: 0,
+                    'volume' => $this->volume ?: 0,
+                    'open_interest' => $this->open_interest ?: 0,
+                    'open' => $this->open ?: 0,
+                    'close' => $this->close ?: 0,
+                    'high' => $this->high ?: 0,
+                    'low' => $this->low ?: 0,
+                    'high_52' => $this->high_52 ?: 0,
+                    'low_52' => $this->low_52 ?: 0,
+                    'all_high' => $this->all_high ?: 0,
+                    'all_low' => $this->all_low ?: 0,
+                    'pivot' => $this->pivot,
+                    'r1' => $this->r1 ?: 0,
+                    'r2' => $this->r2 ?: 0,
+                    'r3' => $this->r3 ?: 0,
+                    's1' => $this->s1 ?: 0,
+                    's2' => $this->s2 ?: 0,
+                    's3' => $this->s3 ?: 0,
+                    'trend' => $this->trend,
                     'active_id' => $this->active_id,
                 ]);
                 $message = "Saved";
@@ -127,26 +131,26 @@ class Upsert extends Component
             $this->vid = $obj->id;
             $this->stock_id = $obj->stock_id;
             $this->vdate = $obj->vdate;
-            $this->ltp = $obj->ltp+0;
-            $this->chg = $obj->chg+0;
-            $this->chg_percent = $obj->chg_percent+0;
-            $this->volume = $obj->volume+0;
-            $this->open_interest = $obj->open_interest+0;
-            $this->open = $obj->open+0;
-            $this->close = $obj->close+0;
-            $this->high = $obj->high+0;
-            $this->low = $obj->low+0;
-            $this->high_52 = $obj->high_52+0;
-            $this->low_52 = $obj->low_52+0;
-            $this->all_high = $obj->all_high+0;
-            $this->all_low = $obj->all_low+0;
+            $this->ltp = $obj->ltp + 0;
+            $this->chg = $obj->chg + 0;
+            $this->chg_percent = $obj->chg_percent + 0;
+            $this->volume = $obj->volume + 0;
+            $this->open_interest = $obj->open_interest + 0;
+            $this->open = $obj->open + 0;
+            $this->close = $obj->close + 0;
+            $this->high = $obj->high + 0;
+            $this->low = $obj->low + 0;
+            $this->high_52 = $obj->high_52 + 0;
+            $this->low_52 = $obj->low_52 + 0;
+            $this->all_high = $obj->all_high + 0;
+            $this->all_low = $obj->all_low + 0;
             $this->pivot = $obj->pivot;
-            $this->r1 = $obj->r1+0;
-            $this->r2 = $obj->r2+0;
-            $this->r3 = $obj->r3+0;
-            $this->s1 = $obj->s1+0;
-            $this->s2 = $obj->s2+0;
-            $this->s3 = $obj->s3+0;
+            $this->r1 = $obj->r1 + 0;
+            $this->r2 = $obj->r2 + 0;
+            $this->r3 = $obj->r3 + 0;
+            $this->s1 = $obj->s1 + 0;
+            $this->s2 = $obj->s2 + 0;
+            $this->s3 = $obj->s3 + 0;
             $this->trend = $obj->trend;
             $this->active_id = $obj->active_id;
             return $obj;
@@ -156,32 +160,32 @@ class Upsert extends Component
     #endregion
 
     #region[clearFields]
-    public function clearFields():void
+    public function clearFields(): void
     {
-        $this->vid='';
-        $this->vdate=Carbon::now()->format('Y-m-d');
-        $this->ltp='';
-        $this->chg='';
-        $this->chg_percent='';
-        $this->volume='';
-        $this->open_interest='';
-        $this->open='';
-        $this->close='';
-        $this->high='';
-        $this->low='';
-        $this->high_52='';
-        $this->low_52='';
-        $this->all_high='';
-        $this->all_low='';
-        $this->pivot='';
-        $this->r1='';
-        $this->r2='';
-        $this->r3='';
-        $this->s1='';
-        $this->s2='';
-        $this->s3='';
-        $this->trend='';
-        $this->active_id=1;
+        $this->vid = '';
+        $this->vdate = Carbon::now()->format('Y-m-d');
+        $this->ltp = '';
+        $this->chg = '';
+        $this->chg_percent = '';
+        $this->volume = '';
+        $this->open_interest = '';
+        $this->open = '';
+        $this->close = '';
+        $this->high = '';
+        $this->low = '';
+        $this->high_52 = '';
+        $this->low_52 = '';
+        $this->all_high = '';
+        $this->all_low = '';
+        $this->pivot = '';
+        $this->r1 = '';
+        $this->r2 = '';
+        $this->r3 = '';
+        $this->s1 = '';
+        $this->s2 = '';
+        $this->s3 = '';
+        $this->trend = '';
+        $this->active_id = 1;
 
     }
     #endregion
@@ -189,7 +193,7 @@ class Upsert extends Component
     #region[getList]
     public function getList()
     {
-        $this->sortField='vdate';
+        $this->sortField = 'vdate';
         return StockDetail::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->where('stock_id', '=', $this->stock->id)
@@ -198,11 +202,21 @@ class Upsert extends Component
     }
     #endregion
 
+    #region[Show Details]
+    public function showDetailsRow($id): void
+    {
+        $this->showDetails = !$this->showDetails;
+
+        $this->showDetailsId = $id;
+    }
+    #endregion
+
     #region[render]
     public function reRender(): void
     {
         $this->render()->render();
     }
+
     public function render()
     {
         return view('livewire.share-market.upsert')->with([
