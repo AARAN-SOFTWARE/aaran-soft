@@ -32,4 +32,6 @@ return [
 
     Aaran\ShareMarket\Providers\ShareMarketServiceProvider::class,
 
+    //MasterGstApi Provider
+    Aaran\MasterGst\Providers\MasterGstServiceProvider::class,
 ];

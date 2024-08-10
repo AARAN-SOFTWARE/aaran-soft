@@ -320,6 +320,19 @@ class DbMigration
 
     #endregion
 
+    #region[GstApi]
+    public static function hasGstApi(): bool
+    {
+        return static::enabled(static::gstApi());
+    }
+
+    public static function gstApi(): string
+    {
+        return 'gstApi';
+    }
+
+    #endregion
+
     #region[No Of Roll]
     public static function hasNoOfRoll(): bool
     {

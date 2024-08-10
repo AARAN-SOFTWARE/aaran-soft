@@ -76,6 +76,9 @@ return [
         DbMigration::webs(),
         DbMigration::sports(),
         DbMigration::spotMyNumber(),
+
+        //Master Gst Api
+        DbMigration::gstApi(),
     ]
 
 
