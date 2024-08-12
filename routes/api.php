@@ -16,6 +16,9 @@ Route::get('/user', function (Request $request) {
 Route::get('/gst',[\App\Http\Controllers\Gst\masterGst::class,'authenticate']);
 Route::get('/details',[\App\Http\Controllers\Gst\masterGst::class,'gstDetails']);
 Route::get('/irn',[\App\Http\Controllers\Gst\masterGst::class,'getIrn']);
+Route::get('/irn-cancel',[\App\Http\Controllers\Gst\masterGst::class,'getIrnCancel']);
+Route::get('/ewayBill',[\App\Http\Controllers\Gst\masterGst::class,'getEwayBill']);
+Route::get('/ewayDetails',[\App\Http\Controllers\Gst\masterGst::class,'getEwayDetails']);
 
 
 Route::get('user/{id}', [ApiController::class, 'user']);

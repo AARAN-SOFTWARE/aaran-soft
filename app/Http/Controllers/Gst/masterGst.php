@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Gst;
 
+use Aaran\MasterGst\Models\MasterGstEway;
+use Aaran\MasterGst\Models\MasterGstIrn;
 use Aaran\MasterGst\Models\MasterGstToken;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,9 +13,9 @@ use Illuminate\Support\Facades\Log;
 
 class masterGst extends Controller
 {
-    protected $auth_token='';
+    protected $auth_token = '';
 
-    public function authenticate(Request $request=null)
+    public function authenticate(Request $request = null)
     {
         try {
             $response = Http::withHeaders([
@@ -30,16 +32,17 @@ class masterGst extends Controller
             if ($response->successful()) {
                 $data = $response->json();
                 session()->put('auth_token', $data['data']['AuthToken']);
-                $this->auth_token = MasterGstToken::where('token',session()->get('auth_token'))->first();
-                if (isset($this->auth_token)){
-                    $obj=MasterGstToken::find($this->auth_token->id);
+                $this->auth_token = MasterGstToken::where('token', session()->get('auth_token'))->first();
+                if (isset($this->auth_token)) {
+                    $obj = MasterGstToken::find($this->auth_token->id);
                     $obj->token = $data['data']['AuthToken'];
                     $obj->expires_at = $data['data']['TokenExpiry'];
                     $obj->save();
-                }else{
+                } else {
                     MasterGstToken::create([
-                        'token'=>$data['data']['AuthToken'],
-                        'expires_at'=>$data['data']['TokenExpiry'],
+                        'token' => $data['data']['AuthToken'],
+                        'expires_at' => $data['data']['TokenExpiry'],
+                        'user_id' => 1,
                     ]);
                 }
 
@@ -49,21 +52,22 @@ class masterGst extends Controller
                     return response()->json(['error' => 'Failed to decode JSON data.'], 500);
                 }
             } else {
-                return response()->json(['error' => 'Request failed with status code: ' . $response->status()], $response->status());
+                return response()->json(['error' => 'Request failed with status code: '.$response->status()],
+                    $response->status());
             }
         } catch (\Exception $e) {
-            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
+            return response()->json(['error' => 'An error occurred: '.$e->getMessage()], 500);
         }
     }
 
 
     public function gstDetails(Request $request)
     {
-        $obj=MasterGstToken::firstorfail();
-        if (isset($obj)){
+        $obj = MasterGstToken::firstorfail();
+        if (isset($obj)) {
             if (Carbon::now()->format('y-m-d H:i:s') < $obj->expires_at) {
                 $token = $obj->token;
-            }else{
+            } else {
                 $this->authenticate();
                 $token = session()->get('auth_token');
             }
@@ -105,11 +109,11 @@ class masterGst extends Controller
 
         $randomletter = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz123456789"), 0, $length);
 
-        $obj=MasterGstToken::firstorfail();
-        if (isset($obj)){
+        $obj = MasterGstToken::firstorfail();
+        if (isset($obj)) {
             if (Carbon::now()->format('y-m-d H:i:s') < $obj->expires_at) {
                 $token = $obj->token;
-            }else{
+            } else {
                 $this->authenticate();
                 $token = session()->get('auth_token');
             }
@@ -308,6 +312,14 @@ class masterGst extends Controller
 
 
             if ($response->successful()) {
+                $data = $response->json();
+                MasterGstIrn::create([
+                    'ackno' => $data['data']['AckNo'],
+                    'ackdt' => $data['data']['AckDt'],
+                    'irn' => $data['data']['Irn'],
+                    'signed_invoice' => $data['data']['SignedInvoice'],
+                    'signed_qrcode' => $data['data']['SignedQRCode'],
+                ]);
                 return response()->json($response->json());
             } else {
                 Log::error('API Request Failed', [
@@ -326,9 +338,179 @@ class masterGst extends Controller
         }
     }
 
-    public function getEinvoiceDetails(Request $request)
+    public function getIrnCancel(Request $request)
     {
 
+        $obj = MasterGstToken::firstorfail();
+        if (isset($obj)) {
+            if (Carbon::now()->format('y-m-d H:i:s') < $obj->expires_at) {
+                $token = $obj->token;
+            } else {
+                $this->authenticate();
+                $token = session()->get('auth_token');
+            }
+        }
+
+        $irn_data = MasterGstIrn::find(3);
+        $jsonData = [
+            "Irn" => $irn_data->irn,
+            "CnlRsn" => "1",
+            "CnlRem" => "Wrong entry"
+        ];
+        try {
+            $response = Http::withHeaders([
+                'ip_address' => '103.231.117.198',
+                'client_id' => '7428e4e3-3dc4-45dd-a09d-78e70267dc7b',
+                'client_secret' => '79a7b613-cf8f-466f-944f-28b9c429544d',
+                'username' => 'mastergst',
+                'auth-token' => $token,
+                'gstin' => '29AABCT1332L000',
+                'Content-Type' => 'application/json',
+            ])->post('https://api.mastergst.com/einvoice/type/CANCEL/version/V1_03?email=aaranoffice%40gmail.com',
+                $jsonData);
+
+
+            if ($response->successful()) {
+//                $data = $response->json();
+                return response()->json($response->json());
+            } else {
+                Log::error('API Request Failed', [
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                    'headers' => $response->headers(),
+                ]);
+                return response()->json([
+                    'error' => 'Request failed with status code: '.$response->status(),
+                    'message' => $response->body(),
+                ], $response->status());
+            }
+        } catch (\Exception $e) {
+            Log::error('An error occurred while fetching IRN', ['exception' => $e->getMessage()]);
+            return response()->json(['error' => 'An error occurred: '.$e->getMessage()], 500);
+        }
+
+    }
+
+    public function getEwayBill(Request $request)
+    {
+        $obj = MasterGstToken::firstorfail();
+        if (isset($obj)) {
+            if (Carbon::now()->format('y-m-d H:i:s') < $obj->expires_at) {
+                $token = $obj->token;
+            } else {
+                $this->authenticate();
+                $token = session()->get('auth_token');
+            }
+        }
+
+        $irn_data = MasterGstIrn::find(6);
+        $jsonData = [
+
+            "Irn" => $irn_data->irn,
+            "Distance" => 100,
+            "TransMode" => "1",
+            "TransId" => "12AWGPV7107B1Z1",
+            "TransName" => "trans name",
+            "TransDocDt" => date('d/m/Y', strtotime($irn_data->ackdt)),
+            "TransDocNo" => "TRAN/DOC/11",
+            "VehNo" => "KA12ER1234",
+            "VehType" => "R",
+            "ExpShipDtls" => [
+                "Addr1" => "7th block, kuvempu layout",
+                "Addr2" => "kuvempu layout",
+                "Loc" => "Banagalore",
+                "Pin" => 562160,
+                "Stcd" => "29"
+            ],
+            "DispDtls" => [
+                "Nm" => "ABC company pvt ltd",
+                "Addr1" => "7th block, kuvempu layout",
+                "Addr2" => "kuvempu layout",
+                "Loc" => "Banagalore",
+                "Pin" => 562160,
+                "Stcd" => "29"
+            ],
+        ];
+        try {
+            $response = Http::withHeaders([
+                'ip_address' => '103.231.117.198',
+                'client_id' => '7428e4e3-3dc4-45dd-a09d-78e70267dc7b',
+                'client_secret' => '79a7b613-cf8f-466f-944f-28b9c429544d',
+                'username' => 'mastergst',
+                'auth-token' => $token,
+                'gstin' => '29AABCT1332L000',
+                'Content-Type' => 'application/json',
+            ])->post('https://api.mastergst.com/einvoice/type/GENERATE_EWAYBILL/version/V1_03?email=aaranoffice%40gmail.com',
+                $jsonData);
+
+
+            if ($response->successful()) {
+                $data = $response->json();
+                MasterGstEway::create([
+                    'ewbno'=>$data['data']['EwbNo'],
+                    'ewbdt'=>$data['data']['EwbDt'],
+                    'ewbvalidtill'=>$data['data']['EwbValidTill'],
+                ]);
+                return response()->json($response->json());
+            } else {
+                Log::error('API Request Failed', [
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                    'headers' => $response->headers(),
+                ]);
+                return response()->json([
+                    'error' => 'Request failed with status code: '.$response->status(),
+                    'message' => $response->body(),
+                ], $response->status());
+            }
+        } catch (\Exception $e) {
+            Log::error('An error occurred while fetching IRN', ['exception' => $e->getMessage()]);
+            return response()->json(['error' => 'An error occurred: '.$e->getMessage()], 500);
+        }
+
+    }
+
+
+    public function getEwayDetails()
+    {
+        $obj = MasterGstToken::firstorfail();
+        if (isset($obj)) {
+            if (Carbon::now()->format('y-m-d H:i:s') < $obj->expires_at) {
+                $token = $obj->token;
+            } else {
+                $this->authenticate();
+                $token = session()->get('auth_token');
+            }
+        }
+
+        $irn_data = MasterGstIrn::find(5);
+        try {
+            $response = Http::withHeaders([
+                'ip_address' => '103.231.117.198',
+                'client_id' => '7428e4e3-3dc4-45dd-a09d-78e70267dc7b',
+                'client_secret' => '79a7b613-cf8f-466f-944f-28b9c429544d',
+                'username' => 'mastergst',
+                'auth-token' => $token,
+                'gstin' => '29AABCT1332L000',
+            ])->get('https://api.mastergst.com/einvoice/type/GETEWAYBILLIRN/version/V1_03', [
+                'param1' => $irn_data->irn,
+                'supplier_gstn'=>'29AABCT1332L000',
+                'email' => 'aaranoffice@gmail.com',
+            ]);
+            if ($response->successful()) {
+                $data = $response->json();
+                if ($data !== null) {
+                    return $data;
+                } else {
+                    return response()->json(['error' => 'Failed to decode JSON data.'], 500);
+                }
+
+            } else {
+                echo "Request failed with status code: ".$response->status();
+            }
+        } catch (\Exception $e) {
+            echo "An error occurred: ".$e->getMessage();
+        }
     }
 
 
