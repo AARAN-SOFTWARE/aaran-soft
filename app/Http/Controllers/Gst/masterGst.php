@@ -31,8 +31,8 @@ class masterGst extends Controller
 
             if ($response->successful()) {
                 $data = $response->json();
-                session()->put('auth_token', $data['data']['AuthToken']);
-                $this->auth_token = MasterGstToken::where('token', session()->get('auth_token'))->first();
+                session()->put('gst_auth_token', $data['data']['AuthToken']);
+                $this->auth_token = MasterGstToken::where('token', session()->get('gst_auth_token'))->first();
                 if (isset($this->auth_token)) {
                     $obj = MasterGstToken::find($this->auth_token->id);
                     $obj->token = $data['data']['AuthToken'];
@@ -69,7 +69,7 @@ class masterGst extends Controller
                 $token = $obj->token;
             } else {
                 $this->authenticate();
-                $token = session()->get('auth_token');
+                $token = session()->get('gst_auth_token');
             }
         }
 
@@ -115,7 +115,7 @@ class masterGst extends Controller
                 $token = $obj->token;
             } else {
                 $this->authenticate();
-                $token = session()->get('auth_token');
+                $token = session()->get('gst_auth_token');
             }
         }
 
@@ -124,9 +124,6 @@ class masterGst extends Controller
             "TranDtls" => [
                 "TaxSch" => "GST",
                 "SupTyp" => "B2B",
-                "RegRev" => "N",
-                "EcmGstin" => null,
-                "IgstOnIntra" => "N"
             ],
             "DocDtls" => [
                 "Typ" => "INV",
@@ -136,42 +133,31 @@ class masterGst extends Controller
             "SellerDtls" => [
                 "Gstin" => "29AABCT1332L000",
                 "LglNm" => "ABC company pvt ltd",
-                "TrdNm" => "NIC Industries",
                 "Addr1" => "5th block, kuvempu layout",
-                "Addr2" => "kuvempu layout",
                 "Loc" => "GANDHINAGAR",
                 "Pin" => 560001,
                 "Stcd" => "29",
-                "Ph" => "9000000000",
-                "Em" => "abc@gmail.com"
+
             ],
             "BuyerDtls" => [
                 "Gstin" => "29AWGPV7107B1Z1",
                 "LglNm" => "XYZ company pvt ltd",
-                "TrdNm" => "XYZ Industries",
                 "Pos" => "37",
                 "Addr1" => "7th block, kuvempu layout",
-                "Addr2" => "kuvempu layout",
                 "Loc" => "GANDHINAGAR",
-                "Pin" => 560004,
+                "Pin" => 560001,
                 "Stcd" => "29",
-                "Ph" => "9000000000",
-                "Em" => "abc@gmail.com"
             ],
             "DispDtls" => [
                 "Nm" => "ABC company pvt ltd",
                 "Addr1" => "7th block, kuvempu layout",
-                "Addr2" => "kuvempu layout",
                 "Loc" => "Banagalore",
                 "Pin" => 518360,
                 "Stcd" => "37"
             ],
             "ShipDtls" => [
-                "Gstin" => "29AWGPV7107B1Z1",
                 "LglNm" => "CBE company pvt ltd",
-                "TrdNm" => "kuvempu layout",
                 "Addr1" => "7th block, kuvempu layout",
-                "Addr2" => "kuvempu layout",
                 "Loc" => "Banagalore",
                 "Pin" => 518360,
                 "Stcd" => "37"
@@ -180,16 +166,11 @@ class masterGst extends Controller
                 [
                     "SlNo" => "1",
                     "IsServc" => "N",
-                    "PrdDesc" => "Rice",
                     "HsnCd" => "1001",
-                    "Barcde" => "123456",
                     "BchDtls" => [
                         "Nm" => "123456",
-                        "Expdt" => "01/08/2020",
-                        "wrDt" => "01/09/2020"
                     ],
                     "Qty" => 100.345,
-                    "FreeQty" => 10,
                     "Unit" => "NOS",
                     "UnitPrice" => 99.545,
                     "TotAmt" => 9988.84,
@@ -208,15 +189,7 @@ class masterGst extends Controller
                     "StateCesNonAdvlAmt" => 5,
                     "OthChrg" => 10,
                     "TotItemVal" => 12897.7,
-                    "OrdLineRef" => "3256",
-                    "OrgCntry" => "AG",
-                    "PrdSlNo" => "12345",
-                    "AttribDtls" => [
-                        [
-                            "Nm" => "Rice",
-                            "Val" => "10000"
-                        ]
-                    ]
+
                 ]
             ],
             "ValDtls" => [
@@ -231,22 +204,9 @@ class masterGst extends Controller
                 "RndOffAmt" => 0.3,
                 "TotInvVal" => 12908,
                 "TotInvValFc" => 12897.7
-            ],
-            "PayDtls" => [
-                "Nm" => "ABCDE",
-                "Accdet" => "5697389713210",
-                "Mode" => "Cash",
-                "Fininsbr" => "SBIN11000",
-                "Payterm" => "100",
-                "Payinstr" => "Gift",
-                "Crtrn" => "test",
-                "Dirdr" => "test",
-                "Crday" => 100,
-                "Paidamt" => 10000,
-                "Paymtdue" => 5000
+
             ],
             "RefDtls" => [
-                "InvRm" => "TEST",
                 "DocPerdDtls" => [
                     "InvStDt" => "01/08/2020",
                     "InvEndDt" => "01/09/2020"
@@ -255,41 +215,13 @@ class masterGst extends Controller
                     [
                         "InvNo" => "DOC/002",
                         "InvDt" => "01/08/2020",
-                        "OthRefNo" => "123456"
                     ]
                 ],
-                "ContrDtls" => [
-                    [
-                        "RecAdvRefr" => "DOC/002",
-                        "RecAdvDt" => "01/08/2020",
-                        "Tendrefr" => "Abc001",
-                        "Contrrefr" => "Co123",
-                        "Extrefr" => "Yo456",
-                        "Projrefr" => "Doc-456",
-                        "Porefr" => "Doc-789",
-                        "PoRefDt" => "01/08/2020"
-                    ]
-                ]
-            ],
-            "AddlDocDtls" => [
-                [
-                    "Url" => "https://einv-apisandbox.nic.in",
-                    "Docs" => "Test Doc",
-                    "Info" => "Document Test"
-                ]
-            ],
-            "ExpDtls" => [
-                "ShipBNo" => "A-248",
-                "ShipBDt" => "01/08/2020",
-                "Port" => "INABG1",
-                "RefClm" => "N",
-                "ForCur" => "AED",
-                "CntCode" => "AE"
             ],
             "EwbDtls" => [
                 "Transid" => "12AWGPV7107B1Z1",
                 "Transname" => "XYZ EXPORTS",
-                "Distance" => 100,
+                "Distance" => 0,
                 "Transdocno" => "DOC01",
                 "TransdocDt" => "01/08/2020",
                 "Vehno" => "ka123456",
@@ -309,7 +241,6 @@ class masterGst extends Controller
                 'Content-Type' => 'application/json',
             ])->post('https://api.mastergst.com/einvoice/type/GENERATE/version/V1_03?email=aaranoffice%40gmail.com',
                 $jsonData);
-
 
             if ($response->successful()) {
                 $data = $response->json();
@@ -347,7 +278,7 @@ class masterGst extends Controller
                 $token = $obj->token;
             } else {
                 $this->authenticate();
-                $token = session()->get('auth_token');
+                $token = session()->get('gst_auth_token');
             }
         }
 
@@ -399,11 +330,11 @@ class masterGst extends Controller
                 $token = $obj->token;
             } else {
                 $this->authenticate();
-                $token = session()->get('auth_token');
+                $token = session()->get('gst_auth_token');
             }
         }
 
-        $irn_data = MasterGstIrn::find(6);
+        $irn_data = MasterGstIrn::find(7);
         $jsonData = [
 
             "Irn" => $irn_data->irn,
@@ -479,7 +410,7 @@ class masterGst extends Controller
                 $token = $obj->token;
             } else {
                 $this->authenticate();
-                $token = session()->get('auth_token');
+                $token = session()->get('gst_auth_token');
             }
         }
 

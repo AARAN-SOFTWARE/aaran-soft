@@ -14,9 +14,12 @@ use Aaran\Master\Models\Contact_detail;
 use Aaran\Master\Models\Order;
 use Aaran\Master\Models\Product;
 use Aaran\Master\Models\Style;
+use Aaran\MasterGst\Models\MasterGstToken;
+use App\Http\Controllers\Gst\masterGst;
 use App\Livewire\Trait\CommonTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\On;
@@ -26,6 +29,7 @@ use Livewire\Component;
 class Upsert extends Component
 {
     use CommonTrait;
+    public $gstApi=masterGst::class;
 
     #region[Properties]
 
@@ -797,6 +801,53 @@ class Upsert extends Component
 
     #endregion
 
+    #region[authenticate]
+    public function authenticate(Request $request = null)
+    {
+        try {
+            $response = Http::withHeaders([
+                'username' => 'mastergst',
+                'password' => 'Malli#123',
+                'ip_address' => '103.231.117.198',
+                'client_id' => '7428e4e3-3dc4-45dd-a09d-78e70267dc7b',
+                'client_secret' => '79a7b613-cf8f-466f-944f-28b9c429544d',
+                'gstin' => '29AABCT1332L000',
+            ])->get('https://api.mastergst.com/einvoice/authenticate', [
+                'email' => 'aaranoffice@gmail.com',
+            ]);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                session()->put('gst_auth_token', $data['data']['AuthToken']);
+                $auth_token = MasterGstToken::where('token', session()->get('gst_auth_token'))->first();
+                if (isset($auth_token)) {
+                    $obj = MasterGstToken::find($auth_token->id);
+                    $obj->token = $data['data']['AuthToken'];
+                    $obj->expires_at = $data['data']['TokenExpiry'];
+                    $obj->save();
+                } else {
+                    MasterGstToken::create([
+                        'token' => $data['data']['AuthToken'],
+                        'expires_at' => $data['data']['TokenExpiry'],
+                        'user_id' => 1,
+                    ]);
+                }
+
+                if ($data !== null) {
+                    return $data;
+                } else {
+                    return response()->json(['error' => 'Failed to decode JSON data.'], 500);
+                }
+            } else {
+                return response()->json(['error' => 'Request failed with status code: '.$response->status()],
+                    $response->status());
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred: '.$e->getMessage()], 500);
+        }
+    }
+    #endregion
+
     #region[Save]
     public function save(): void
     {
@@ -837,6 +888,7 @@ class Upsert extends Component
                         'saleItem'=>json_encode($this->itemList),
                     ]);
 //                    $this->toApi($data);
+                    $this->authenticate();
                     $message = "Saved";
                     $this->getRoute();
 
